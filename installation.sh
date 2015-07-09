@@ -3,6 +3,7 @@
 #!/usr/bin/sh
 
 npm install
+pip install
 ./manage.py makemigrations
 ./manage.py migrate
 ./manage.py bower install
