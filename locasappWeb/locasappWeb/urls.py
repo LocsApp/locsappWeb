@@ -16,8 +16,10 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from API.views import *
+from API.urls import *
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^api/v1/$', include(api_patterns)),
     url(r'^.*$', docAPIView.as_view(), name="index"),
 ]
