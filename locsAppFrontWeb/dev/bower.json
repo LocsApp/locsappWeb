@@ -1,0 +1,16 @@
+{
+  "name": "LocsAppFront",
+
+  "description": "It installs dependency for the project LocsApp",
+
+  "dependencies": {
+    "angular-ui-bootstrap-bower": "latest",
+    "angularjs": "latest",
+    "angular-route": "latest",
+    "angular-cookies": "latest",
+    "angular-animate": "latest",
+    "ng-file-upload": "latest",
+    "angular-mocks": "latest",
+    "bootstrap": "latest"
+  }
+}
