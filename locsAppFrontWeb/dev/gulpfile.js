@@ -50,7 +50,7 @@ gulp.task('watch', function () {
 
     gulp.watch('./static/stylesheets/*.scss', ['css']);
     gulp.watch(['./static/js/*.src.js'], ['js']);
-    gulp.watch('./templates/*.jade', ['templates']);
+    gulp.watch('./static/templates/*.jade', ['templates']);
 
 
 });

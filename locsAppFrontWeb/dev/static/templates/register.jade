@@ -1,5 +1,80 @@
-h1 Register
-h1 Register
-h1 Register
-h1 Register
-h1 Register
+.container
+    .row
+        .col-xs-12.col-sm-8.col-md-6.col-sm-offset-2.col-md-offset-3
+            form(role='form' ng-submit='register')
+                h2
+                    | Please Sign Up
+                    small It's free and always will be.
+                hr.colorgraph
+                .row
+                    .col-xs-12.col-sm-6.col-md-6
+                        .form-group
+                            input#first_name.form-control.input-lg(type='text', name='first_name', placeholder='First Name' ng-model='first_name')
+                    .col-xs-12.col-sm-6.col-md-6
+                        .form-group
+                            input#last_name.form-control.input-lg(type='text', name='last_name', placeholder='Last Name' ng-model='last_name')
+                .form-group
+                    input#display_name.form-control.input-lg(type='text', name='username', placeholder='username' ng-model='username')
+                .form-group
+                    input#display_name.form-control.input-lg(type='text', name='display_name', placeholder='Birthday')
+
+                .form-group
+                    input#display_name.form-control.input-lg(type='password', name='password', placeholder='password' ng-model='password')
+
+                .form-group
+                    input#display_name.form-control.input-lg(type='password', name='confirm_password', placeholder='confirm_password' ng-model='confirm_password')
+
+                .form-group
+                    input#display_name.form-control.input-lg(type='text', name='phone_number', placeholder='phone_number' ng-model='phone_number')
+
+                .form-group
+                    input#email.form-control.input-lg(type='email', name='email', placeholder='Email Address' ng-model='email')
+
+                .form-group
+                    input#email.form-control.input-lg(type='email', name='confirm_email', placeholder='Email Address confirm' ng-model='confirm_email')
+
+
+                .row
+                    .col-xs-4.col-sm-3.col-md-3
+                        span.button-checkbox
+                            button.btn(type='button', data-color='info', tabindex='7') I Agree
+                            input#t_and_c.hidden(type='checkbox', name='t_and_c', value='1')
+                    .col-xs-8.col-sm-9.col-md-9
+                        | By clicking
+                        strong.label.label-primary Register
+                        | , you agree to the
+                        a(href='#', data-toggle='modal', data-target='#t_and_c_m') Terms and Conditions
+                        |  set out by this site, including our Cookie Use.
+                hr.colorgraph
+                .row
+                    .col-xs-12.col-md-6
+                        input.btn.btn-primary.btn-block.btn-lg(type='submit', value='Register', tabindex='7' ng-click='test42')
+                    .col-xs-12.col-md-6
+                        a.btn.btn-success.btn-block.btn-lg(href='#') Sign In
+    // Modal
+    #t_and_c_m.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+        .modal-dialog.modal-lg
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+                    h4#myModalLabel.modal-title Terms & Conditions
+                .modal-body
+                    p
+                        | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.
+                    p
+                        | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.
+                    p
+                        | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.
+                    p
+                        | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.
+                    p
+                        | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.
+                    p
+                        | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.
+                    p
+                        | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.
+                .modal-footer
+                    button.btn.btn-primary(type='button', data-dismiss='modal') I Agree
+            // /.modal-content
+        // /.modal-dialog
+    // /.modal

@@ -5,8 +5,6 @@
 
     'use strict';
 
-    console.log("LocsAppRROUTES");
-
     angular.module(NAME_PROJECT + 'Routes')
         .config(config);
 
@@ -16,8 +14,8 @@
         $routeProvider
 
             .when('/register', {
-                //controller: 'RegistController',
-                //controllerAs: 'RegisterCtrl',
+                controller: 'UserRegisterController',
+                controllerAs: 'UserRegisterCtrl',
                 templateUrl: '/prod/static/templates/register.html'
             })
 

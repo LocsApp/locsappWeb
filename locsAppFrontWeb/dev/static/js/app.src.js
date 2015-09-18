@@ -8,7 +8,7 @@
     angular.module(NAME_PROJECT, [
         NAME_PROJECT + 'Routes',
         //NAME_PROJECT + 'Config',
-        //NAME_PROJECT + 'User'
+        NAME_PROJECT + 'User'
         ])
         .run(run);
 
