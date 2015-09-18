@@ -4,6 +4,8 @@ from . import views
 # End points for the user
 user_patterns = [
 	url(r'^id/(?P<id>[0-9]+)$', views.getUserById),
+	url(r'^subscribe$', views.postSubscribeNewUser),
+	url(r'^delete$', views.postDeleteUserById),
 ]
 
 # General urls for the api
