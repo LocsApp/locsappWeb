@@ -1,5 +1,40 @@
-<h1>TEST</h1>
-<h1>TEST</h1>
-<h1>TEST</h1>
-<h1>TEST</h1>
-<h1>TEST</h1>
+<!DOCTYPE html>
+<html ng-app="locsApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <base href="/">
+
+</head>
+
+<header>
+
+</header>
+
+<body>
+
+<div ng-view="">
+
+</div>
+
+</body>
+
+<footer>
+
+</footer>
+
+<script type="text/javascript">
+    const NAME_PROJECT = "locsApp";
+</script>
+
+<script src="dev/bower_components/angular/angular.min.js" type="text/javascript"></script>
+<script src="dev/bower_components/angular-route/angular-route.min.js" type="text/javascript"></script>
+<script src="prod/static/js/app.min.js" type="text/javascript"></script>
+<script src="prod/static/js/locsAppConfig.min.js" type="text/javascript"></script>
+<script src="prod/static/js/locsAppRoutes.min.js" type="text/javascript"></script>
+
+<!-- User module -->
+<script src="prod/static/js/user/user.module.min.js" type="text/javascript"></script>
+<script src="prod/static/js/user/register/register.controller.min.js" type="text/javascript"></script>
+
+</html>
