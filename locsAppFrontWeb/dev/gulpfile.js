@@ -5,26 +5,21 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),     // Minification/Obfuscation des JS
     plumber = require('gulp-plumber'),    // Ne pas s'arrêter en cas d'erreurs
     livereload = require('gulp-livereload');
-
 jade = require("gulp-jade");
-
-gulp.task('sometask', function () {
-});
-gulp.task('default', ['sometask']);
 
 
 gulp.task('css', function () {
-    return gulp.src('./static/stylesheets/sass/*.scss')    // Prend en entrée les fichiers *.scss
+    return gulp.src('./static/stylesheets/*.scss')    // Prend en entrée les fichiers *.scss
         .pipe(plumber())
         .pipe(sass())                      // Compile les fichiers
         .pipe(minifyCss())                 // Minifie le CSS qui a été généré
-        .pipe(gulp.dest('../prod/static/css/'))  // Sauvegarde le tout dans /src/style
+        .pipe(gulp.dest('../prod/static/stylesheets/'))  // Sauvegarde le tout dans /src/style
         .pipe(livereload());
 });
 
 
-gulp.task('js-uglify', function () {
-    return gulp.src(['./static/js/*.src.js'])    // Prend en entrée les fichiers *.src.js
+gulp.task('js', function () {
+    return gulp.src(['./static/js/*.src.js', './static/js/**/**/*.src.js'])    // Prend en entrée les fichiers *.src.js
         .pipe(plumber())
         .pipe(rename(function (path) {
             // Il y a différentes méthodes pour renommer les fichiers
@@ -32,12 +27,12 @@ gulp.task('js-uglify', function () {
             path.basename = path.basename.replace(".src", ".min");
         }))
         .pipe(uglify())
-        .pipe(gulp.dest('./static/js/minify/'))
+        .pipe(gulp.dest('../prod/static/js/'))
         .pipe(livereload());
 });
 
 
-gulp.task('templates-angular', function () {
+gulp.task('templates', function () {
     var YOUR_LOCALS = {};
 
     gulp.src(['./static/templates/*.jade'])
@@ -45,7 +40,7 @@ gulp.task('templates-angular', function () {
         .pipe(jade({
             locals: YOUR_LOCALS
         }))
-        .pipe(gulp.dest('./static/templates/html'))
+        .pipe(gulp.dest('../prod/static/templates/'))
         .pipe(livereload());
 });
 
@@ -53,10 +48,9 @@ gulp.task('watch', function () {
     livereload({start: true});
     livereload.listen();
 
-    gulp.watch('./static/stylesheets/sass/*.scss', ['css']);
-    gulp.watch(['./static/js/*.src.js'], ['js-uglify']);
-    gulp.watch('./templates/*.jade', ['templates-django']);
-    gulp.watch(['./static/templates/*.jade'], ['templates-angular']);
+    gulp.watch('./static/stylesheets/*.scss', ['css']);
+    gulp.watch(['./static/js/*.src.js'], ['js']);
+    gulp.watch('./static/templates/*.jade', ['templates']);
 
 
 });
