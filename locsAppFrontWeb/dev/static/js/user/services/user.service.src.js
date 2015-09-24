@@ -10,15 +10,30 @@
     function User($http) {
 
         var User = {
-            register: register
+            register: register,
+            login: login,
+            getUser: getUser
         };
 
 
+
         function register(username) {
-            return $http.get('/', {
+            return $http.post('/', {
                 username: username
             });
         }
+
+        function login(username, password) {
+            return $http.post('/login', {
+                username: username,
+                password: password
+            })
+        }
+
+        function getUser(username) {
+            return $http.get('/user' + username);
+        }
+
 
         return User;
 

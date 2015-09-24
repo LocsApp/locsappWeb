@@ -8,8 +8,8 @@
 
     angular.module(NAME_PROJECT,
         [
-            //'locsAppConfig',
             NAME_PROJECT + 'Routes',
+           // 'locsAppConfig',
             NAME_PROJECT + 'User',
         ])
 
@@ -25,6 +25,6 @@
 
 
     angular.module(NAME_PROJECT + 'Routes', ['ngRoute']);
-    //  angular.module('locsAppConfig', []);
+   ///  angular.module('locsAppConfig', []);
 
 })();
