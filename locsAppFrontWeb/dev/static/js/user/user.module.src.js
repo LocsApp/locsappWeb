@@ -7,9 +7,11 @@
     'use strict';
 
     angular.module('locsAppUser', [
-        'locsAppUserControllers'
+        'locsAppUserControllers',
+        'locsAppUserServices'
     ]);
 
     angular.module('locsAppUserControllers', []);
+    angular.module('locsAppUserServices', []);
 
 })();
