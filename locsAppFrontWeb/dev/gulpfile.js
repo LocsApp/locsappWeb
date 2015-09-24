@@ -44,22 +44,13 @@ gulp.task('templates', function () {
         .pipe(livereload());
 });
 
-gulp.task('watch', function () {
-    livereload({start: true});
-    livereload.listen();
-
-    gulp.watch('./static/stylesheets/*.scss', ['css']);
-    gulp.watch(['./static/js/*.src.js'], ['js']);
-    gulp.watch('./static/templates/*.jade', ['templates']);
-
-
-});
 
 gulp.task('default', function() {
     livereload({start: true});
     livereload.listen();
 
     gulp.watch('./static/stylesheets/*.scss', ['css']);
-    gulp.watch(['./static/js/*.src.js'], ['js']);
+    gulp.watch(['./static/js/*.src.js', './static/js/**/**/*.src.js'], ['js']);
     gulp.watch('./static/templates/*.jade', ['templates']);
 });
+
