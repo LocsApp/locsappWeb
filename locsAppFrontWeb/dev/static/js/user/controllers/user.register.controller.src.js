@@ -8,15 +8,19 @@
 
     function RegisterController($scope, User) {
 
-        User.register($scope.username).then(registerSuccessFn, registerErrorFn);
+        $scope.register = function () {
 
-        function registerSuccessFn(data, status, headers, config) {
-            console.debug("Success");
-        }
+            User.register($scope.username).then(registerSuccessFn, registerErrorFn);
 
-        function registerErrorFn(data, status, headers, config) {
-            console.error('Failure register error');
-        }
+            function registerSuccessFn(data, status, headers, config) {
+                console.debug("Success");
+            }
+
+            function registerErrorFn(data, status, headers, config) {
+                console.error('Failure register error');
+            }
+        };
+
     }
 
 })();
