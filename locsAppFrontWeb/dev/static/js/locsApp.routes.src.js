@@ -6,7 +6,7 @@
 
     'use strict';
 
-    angular.module('locsAppRoutes')
+    angular.module(NAME_PROJECT + 'Routes')
         .config(config);
 
     config.$inject = ['$routeProvider'];

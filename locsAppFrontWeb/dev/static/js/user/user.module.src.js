@@ -6,12 +6,12 @@
 
     'use strict';
 
-    angular.module('locsAppUser', [
-        'locsAppUserControllers',
-        'locsAppUserServices'
+    angular.module(NAME_PROJECT + 'User', [
+        NAME_PROJECT + 'UserControllers',
+        NAME_PROJECT + 'UserServices'
     ]);
 
-    angular.module('locsAppUserControllers', []);
-    angular.module('locsAppUserServices', []);
+    angular.module(NAME_PROJECT + 'UserControllers', []);
+    angular.module(NAME_PROJECT + 'UserServices', []);
 
 })();

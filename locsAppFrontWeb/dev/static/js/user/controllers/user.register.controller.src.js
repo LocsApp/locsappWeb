@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('locsAppUserControllers')
+    angular.module(NAME_PROJECT + 'UserControllers')
         .controller('RegisterController', RegisterController);
 
     RegisterController.$inject = ['$scope', 'User'];

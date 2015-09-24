@@ -6,15 +6,15 @@
 
     'use strict';
 
-    angular.module('locsApp',
+    angular.module(NAME_PROJECT,
         [
             //'locsAppConfig',
-            'locsAppRoutes',
-            'locsAppUser',
+            NAME_PROJECT + 'Routes',
+            NAME_PROJECT + 'User',
         ]);
 
 
-    angular.module('locsAppRoutes', ['ngRoute']);
+    angular.module(NAME_PROJECT + 'Routes', ['ngRoute']);
   //  angular.module('locsAppConfig', []);
 
 })();

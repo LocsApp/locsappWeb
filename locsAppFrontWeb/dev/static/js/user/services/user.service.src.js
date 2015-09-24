@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('locsAppUserServices')
+        .module(NAME_PROJECT + 'UserServices')
         .factory('User', User);
     User.$inject = ['$http'];
 
