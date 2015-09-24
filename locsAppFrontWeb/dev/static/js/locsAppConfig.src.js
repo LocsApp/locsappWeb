@@ -1,13 +1,13 @@
 /**
- * Created by sylflo on 9/17/15.
+ * Created by sylflo on 9/24/15.
  */
-(function () {
+(function(){
 
 
     'use strict';
 
 
-    angular.module(NAME_PROJECT + 'Config')
+    angular.module('locsAppConfig')
         .config(config);
 
     config.$inject = ['$locationProvider'];
