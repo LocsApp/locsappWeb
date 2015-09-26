@@ -1,5 +1,14 @@
+#Prod are generate by gulp
 locsAppFrontWeb/prod
+
+#Just ran bower install
 locsAppFrontWeb/dev/bower_components
-locasappWeb/.idea/
+
+#Install the node module for gulp and http-server
 locsAppFrontWeb/dev/node_modules/
+
+#Ide
+locsAppFrontWeb/.idea/
+locsAppFrontWeb/.idea/workspace.xml
+locasappWeb/.idea/
 .idea/    
