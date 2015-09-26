@@ -104,14 +104,25 @@ WSGI_APPLICATION = 'locasappWeb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'locsapp',
+#        'USER' : 'locsapp',
+#        'PASSWORD' : 'Topkek',
+#        'HOST' : 'localhost',
+#        'PORT' : '',
+#    }
+#}
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'locsapp',
-        'USER' : 'locsapp',
-        'PASSWORD' : 'Topkek',
-        'HOST' : 'localhost',
-        'PORT' : '',
+        'NAME': os.environ['DB_NAME'],
+        'USER': os.environ['DB_USER'],
+        'PASSWORD': os.environ['DB_PASS'],
+        'HOST': os.environ['DB_SERVICE'],
+        'PORT': os.environ['DB_PORT']
     }
 }
 
