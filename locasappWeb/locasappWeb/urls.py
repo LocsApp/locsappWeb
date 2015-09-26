@@ -23,5 +23,5 @@ urlpatterns = [
     # Url including the API end-points
     url(r'^api/v1/', include(api_patterns)),
     # Home page presenting the doc for the API
-    url(r'^.*$', docAPIView.as_view(), name="index"),
+    url(r'^/$', docAPIView.as_view(), name="index"),
 ]

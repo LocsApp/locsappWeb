@@ -23,32 +23,27 @@ class docAPIView(TemplateView):
 """
 	GET END-POINTS
 """
-# Gets a user by its id
-def getUserById(request, id):
-	return (JsonResponse({"id" : id}))
 
 """
 	POST END-POINTS
 """
 
-# Subscribe a new user
-@csrf_exempt
-def postSubscribeNewUser(request):
-	users_collection = db_locsapp['users']
-	new_user = {}
-	answer = json.loads(request.body.decode('utf-8'))
-	new_user["gender"] = answer["gender"]
-	users_collection.insert_one(new_user)
-	"""
-	except:
-		return (HttpResponse("400 Bad Request"))
-	"""
-	return (HttpResponse("200 OK"))
+""" Articles """
 
-# Deletes a user with the given id
+# Creates a new article
 @csrf_exempt
-def postDeleteUserById(request):
-	users_collection = db_locsapp['users']
-	answer = json.loads(request.body.decode('utf-8'))
-	users_collection.remove({"_id" : ObjectId(answer["id"])})
-	return (HttpResponse("200 OK"))
+def postNewArticle(request):
+	if (request.body):
+		answer = json.loads(request.body.decode('utf8'))
+		print(answer)
+		return(HttpResponse("200 OK"))
+	else:
+		return (HttpResponse("400 BAD REQUEST"))
+
+"""
+	PUT END-POINTS
+"""
+
+"""
+	DELETE END-POINTS
+"""
