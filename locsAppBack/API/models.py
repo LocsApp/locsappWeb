@@ -69,16 +69,15 @@ class Account(AbstractBaseUser):
 
     """
     email = models.EmailField(unique=True)
-    username = models.CharField(max_length=255, unique=True)
-    name_enterprise = models.CharField(max_length=255)
+    username = models.CharField(max_length=20,unique=True)
+    
+    birthdate = models.DateTimeField(default=False)
     phone = models.CharField(max_length=10)
-    address = models.TextField(null=True, default=None)
-    end_subscription = models.DateTimeField(default=None, blank=True, null=True)
+    living_address = models.TextField(null=True, default=None)
+    billing_address = models.TextField(null=True, default=None)
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-
-    is_breakage = models.BooleanField(default=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -87,8 +86,8 @@ class Account(AbstractBaseUser):
     objects = AccountManager()
     object = AccountManager()
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email', 'birthdate', 'phone', 'living_address']
 
     def __unicode__(self):
         return self.email

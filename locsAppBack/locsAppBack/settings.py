@@ -28,7 +28,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 #Django allauth different form
-ACCOUNT_SIGNUP_FORM_CLASS = 'locsAppBack.API.forms.SignupForm'
+ACCOUNT_SIGNUP_FORM_CLASS = 'API.forms.SignupForm'
+
+#Different user model
+AUTH_USER_MODEL = 'API.Account'
 
 # Allows all the domains to make requets on API
 

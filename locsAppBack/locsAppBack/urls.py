@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^api/v1/', include(api_patterns)),
     # Home page presenting the doc for the API
     #Authentication for restframework
-     url(r'^api/authentication/', include(router.urls)),
+    url(r'^api/authentication/', include(router.urls)),
 
-    url(r'^/$', docAPIView.as_view(), name="index"),
+    url(r'^.*$', docAPIView.as_view(), name="index"),
 ]
