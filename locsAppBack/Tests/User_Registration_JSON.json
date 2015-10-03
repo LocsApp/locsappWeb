@@ -1,0 +1,15 @@
+{
+    "username": "test",
+    "first_name": "Coco",
+    "password1": "Topkek1",
+    "phone": "0676793674",
+    "living_address": "11 rue des keks",
+    "email" : "oulok@kek.fr",
+    "last_name": "Kekman",
+    "is_active": "True",
+    "password2": "Topkek1",
+    "billing_address": "11 rue des keks",
+    "birthdate": "1990-08-22 11:05:08",
+    "is_admin": "False",
+    "created_at": "2009-08-22 11:05:08"
+}
