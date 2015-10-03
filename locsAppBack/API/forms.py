@@ -21,5 +21,4 @@ class SignupForm(forms.Form):
         user.living_address = self.cleaned_data['living_address']
         user.billing_address = self.cleaned_data['billing_address']
         user.is_active = self.cleaned_data['is_active']
-        #user.is_admin = self.cleaned_data['is_admin']
         user.save()
