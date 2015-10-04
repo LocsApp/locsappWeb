@@ -59,8 +59,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.twitter',
     'rest_auth',
     'rest_auth.registration',
-    'API',
-    'authentication',	
+    'API'
 )
 
 SITE_ID = 42
@@ -141,7 +140,9 @@ DATABASES = {
     }
 }
 
-
+REST_FRAMEWORK = {
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

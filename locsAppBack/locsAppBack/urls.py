@@ -17,19 +17,10 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from API.views import *
 from API.urls import *
-from rest_framework_nested import routers
-from authentication.views import AccountViewSet
-
-router = routers.SimpleRouter()
-router.register(r'accounts', AccountViewSet)
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     # Url including the API end-points
     url(r'^api/v1/', include(api_patterns)),
-    # Home page presenting the doc for the API
-    #Authentication for restframework
-    url(r'^api/authentication/', include(router.urls)),
-
     url(r'^.*$', docAPIView.as_view(), name="index"),
 ]
