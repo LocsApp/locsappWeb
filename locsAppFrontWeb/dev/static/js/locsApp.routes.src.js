@@ -6,22 +6,27 @@
 
     'use strict';
 
+    /* Module creation */
+    angular.module(NAME_PROJECT + 'Routes', ['ngRoute', 'ui.router']);
+
+    /* Instanciation of module  NAME_PROJECT + 'Routes'. Binding the config function to the module*/
     angular.module(NAME_PROJECT + 'Routes')
         .config(config);
 
-    config.$inject = ['$routeProvider'];
+    /* Injection of the needed vars for ui-router */
+    config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
-    function config($routeProvider) {
-        $routeProvider
+    /* Configuration of ui-router */
+    function config($stateProvider, $urlRouterProvider) {
+        //Redirects to /home otherwise
+        $urlRouterProvider.otherwise('/home');
 
-            .when('/register', {
-                controller: 'RegisterController',
-                // controllerAs: 'vm',
-                templateUrl: '/prod/static/templates/register.html'
-            })
-
-
-            .otherwise('/');
+        $stateProvider
+        //home partial view
+        .state('home', {
+            url: '/home',
+            templateUrl: '/prod/static/templates/partial-home.html'
+        })
     }
 
 

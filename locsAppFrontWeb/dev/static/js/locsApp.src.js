@@ -23,8 +23,6 @@
         $http.defaults.xsrfCookieName = 'csrftoken';
     };
 
-
-    angular.module(NAME_PROJECT + 'Routes', ['ngRoute']);
    ///  angular.module('locsAppConfig', []);
 
 })();
