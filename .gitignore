@@ -5,7 +5,7 @@
 locsAppFrontWeb/prod
 
 #Just ran bower install
-locsAppFrontWeb/dev/bower_components
+#locsAppFrontWeb/dev/bower_components
 
 #Install the node module for gulp and http-server
 locsAppFrontWeb/dev/node_modules/
