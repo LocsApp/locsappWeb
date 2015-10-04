@@ -18,10 +18,10 @@
         .config(configHTML5mode);
 
     /* Injection of the needed vars for ui-router */
-    configUirouter.$inject = ['$stateProvider', '$urlRouterProvider'];
+    configUirouter.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
 
     /* Configuration of ui-router */
-    function configUirouter($stateProvider, $urlRouterProvider) {
+    function configUirouter($stateProvider, $urlRouterProvider, $locationProvider) {
         //Redirects to /home otherwise
         $urlRouterProvider.otherwise('/home');
 
@@ -30,6 +30,12 @@
         .state('home', {
             url: '/home',
             templateUrl: '/prod/static/templates/partial-home.html'
+        })
+        
+        //user registration view
+        .state('registration', {
+            url: '/register',
+            templateUrl: '/prod/static/templates/register.html'
         })
     }
 
