@@ -60,6 +60,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.twitter',
     'rest_auth',
     'rest_auth.registration',
+    'rest_framework_swagger',
     'API'
 )
 
