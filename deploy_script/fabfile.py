@@ -27,7 +27,7 @@ def deploy(branch='master', remote='origin'):
     # execute toutes les commandes dans ce dossier
     with cd(REMOTE_WORKING_DIR):
         # excute toutes les commandes avec celle-ci avant
-        with prefix('workon virtualenv'):
+        with prefix('workon locsAppBack'):
             pull(branch, remote, False)
             run("./manage.py collectstatic --noinput")
 	    run("./manage.py makemigrations")
