@@ -25,6 +25,7 @@ def sync(branch='master', remote='origin', runlocal=True):
     push(branch, remote, runlocal)
  
 def deploy(branch='master', remote='origin'):
+    git push(branch, remote, runlocal)
     # execute toutes les commandes dans ce dossier
     with cd(REMOTE_WORKING_DIR):
         # excute toutes les commandes avec celle-ci avant
