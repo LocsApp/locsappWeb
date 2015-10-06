@@ -30,5 +30,5 @@ def deploy(branch='master', remote='origin'):
     with cd(REMOTE_WORKING_DIR):
         # excute toutes les commandes avec celle-ci avant
         pull(branch, remote, False)
-        run("/var/www/locsappWeb/deploy_script/init_django_for_prod.sh")
+        run("/var/www/locsapp.sylflo.fr/locsappWeb/deploy_script/init_django_for_prod.sh")
 
