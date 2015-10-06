@@ -4,7 +4,7 @@ import os
 REMOTE_WORKING_DIR = '/var/www/locsappWeb/locsAppBack'
 
 env.hosts = ['sylflo.fr']
-env.user = locs_app
+env.user = 'locs_app'
  
 def push(branch='master', remote='origin', runlocal=True):
     if runlocal:
