@@ -1,7 +1,7 @@
 from fabric.api import local, run, cd, env, prefix
 import os
 
-REMOTE_WORKING_DIR = '/var/www/locsappWeb/locsAppBack'
+REMOTE_WORKING_DIR = '/var/www/locsapp.sylflo.fr/locsappWeb'
 
 env.hosts = ['sylflo.fr']
 env.user = 'locs_app'
