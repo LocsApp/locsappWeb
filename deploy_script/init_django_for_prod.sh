@@ -8,5 +8,5 @@ python  /var/www/locsapp.sylflo.fr/locsappWeb/locsAppBack/manage.py migrate
 cd /var/www/locsapp.sylflo.fr/locsappWeb/locsAppFrontWeb/dev/
 npm install
 /var/www/locsapp.sylflo.fr/locsappWeb/locsAppFrontWeb/dev/launch_all_gulp.sh
-sudo /etc/init.d/nginx nginx restart
+sudo /etc/init.d/nginx  restart
 
