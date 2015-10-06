@@ -1,9 +1,10 @@
 from fabric.api import local, run, cd, env, prefix
- 
-REMOTE_WORKING_DIR = '/var/www/locsappWeb'
- 
-env.hosts = ['/var/www/locsappWeb/']
-env.user = 'sylflo'
+import os
+
+REMOTE_WORKING_DIR = '/var/www/locsappWeb/locsAppBack'
+
+env.hosts = ['sylflo.fr']
+env.user = os.environ['USER']
  
 def push(branch='master', remote='origin', runlocal=True):
     if runlocal:
@@ -27,9 +28,6 @@ def deploy(branch='master', remote='origin'):
     # execute toutes les commandes dans ce dossier
     with cd(REMOTE_WORKING_DIR):
         # excute toutes les commandes avec celle-ci avant
-        with prefix('workon locsAppBack'):
-            pull(branch, remote, False)
-            run("./manage.py collectstatic --noinput")
-	    run("./manage.py makemigrations")
-	    run("./manage.py migrate")
-            #run("supervisorctl -c settings/prod_supervisor.ini restart all")
+        pull(branch, remote, False)
+        run("/var/www/locsappWeb/deploy_script/init_django_for_prod.sh")
+
