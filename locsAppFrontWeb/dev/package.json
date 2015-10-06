@@ -1,0 +1,20 @@
+{
+  "name": "LocsApp-Gulp",
+  "version": "1.0.0",
+
+  "dependencies": {
+	"gulp": "3.9.0",
+	"gulp-rename": "latest",
+	"gulp-uglify": "latest",
+	"gulp-minify": "latest",
+	"gulp-sass": "latest",
+	"gulp-plumber": "latest",
+	"gulp-livereload": "latest",
+	"gulp-jade": "latest",
+	"gulp-minify-css": "latest"
+  },
+
+  "author": "Team LocsApp",
+  "license": "MIT"
+}
+
