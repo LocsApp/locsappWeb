@@ -10,19 +10,15 @@ class SignupForm(forms.Form):
     billing_address = forms.CharField(max_length=300)
     logo_url = forms.CharField(max_length=255)
 
-    is_active = forms.BooleanField()
-    #is_admin = forms.BooleanField()
-
-    #created_at = forms.CharField(max_length=30)
+    is_active = forms.CharField()
 
     def signup(self, request, user):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
-        #user.email = self.cleaned_data['email']
         user.birthdate = self.cleaned_data['birthdate']
         user.phone = self.cleaned_data['phone']
         user.living_address = self.cleaned_data['living_address']
         user.billing_address = self.cleaned_data['billing_address']
-        user.logo_url = self.cleaned_data['logo_url']
+        user.logo_url = self.cleaned_data['logo_url']   
         user.is_active = self.cleaned_data['is_active']
         user.save()

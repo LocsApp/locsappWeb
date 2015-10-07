@@ -75,10 +75,10 @@ class Account(AbstractBaseUser):
     phone = models.CharField(max_length=10)
     living_address = models.TextField(null=True, default=None)
     billing_address = models.TextField(null=True, default=None)
-    logo_url = models.CharField(max_length=255)
+    logo_url = models.CharField(max_length=255, null=True)
 
-    is_active = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=False)
+    is_active = models.CharField(max_length=10)
+    is_admin = models.CharField(max_length=10, default="False")
 
     created_at = models.DateTimeField(auto_now_add=True)
 

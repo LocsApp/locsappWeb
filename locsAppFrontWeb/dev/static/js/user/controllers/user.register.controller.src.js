@@ -17,6 +17,7 @@
             }
 
             function registerErrorFn(data, status, headers, config) {
+                console.log(data);
                 console.error('Failure register error');
             }
         };

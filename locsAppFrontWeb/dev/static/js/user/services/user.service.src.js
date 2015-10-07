@@ -18,8 +18,7 @@
 
 
         function register(user) {
-            console.log(user);
-            return $http.post(URL_API + '/api/v1/rest-auth/registration/', {
+            var answer = JSON.stringify({
                 username: user.username,
                 email : user.email,
                 first_name : user.first_name,
@@ -29,9 +28,12 @@
                 living_address : user.living_address,
                 billing_address : user.billing_address,
                 phone : user.phone,
-                logo_url : '/kek/',
-                is_active : false
+                birthdate : user.birthdate,
+                logo_url : "/kek/",
+                is_active : "False"
             });
+            console.log(answer);
+            return $http.post(URL_API + '/api/v1/rest-auth/registration/', answer);
         }
 
         function login(username, password) {
