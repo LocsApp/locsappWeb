@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import socket
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -112,29 +113,6 @@ WSGI_APPLICATION = 'locsAppBack.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': 'locsapp',
-#        'USER' : 'locsapp',
-#        'PASSWORD' : 'Topkek',
-#        'HOST' : 'localhost',
-#        'PORT' : '',
-#    }
-#}
-
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': os.environ['DB_NAME'],
-#        'USER': os.environ['DB_USER'],
-#        'PASSWORD': os.environ['DB_PASS'],
-#        'HOST': os.environ['DB_SERVICE'],
-#        'PORT': os.environ['DB_PORT']
-#    }
-#}
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -148,15 +126,12 @@ REST_FRAMEWORK = {
 
 #Jenkins
 PROJECT_APPS = (
-'API',
+    'API',
 )
 
 JENKINS_TASKS = (
     'django_jenkins.tasks.run_pep8',
     'django_jenkins.tasks.run_pyflakes',
-    #'django_jenkins.tasks.run_jslint',
-    #'django_jenkins.tasks.run_csslint',    
-    #'django_jenkins.tasks.run_sloccount'
 )
 
 # Internationalization
@@ -183,6 +158,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
 
+<<<<<<< HEAD
 SWAGGER_SETTINGS = {
     'exclude_namespaces': [],
     'api_version': '0.1',
@@ -217,3 +193,22 @@ SWAGGER_SETTINGS = {
     },
     'doc_expansion': 'none',
 }
+=======
+if socket.gethostname() == "sylflo.fr":
+    DEBUG = TEMPLATE_DEBUG = False
+    ALLOWED_HOSTS = ["couture.sylflo.fr", ".sylflo.fr", "sylflo.fr"]
+    ADMINS = (
+	('Sylvain Chateau', 'dev.chateau@gmail.com'),
+    )
+    DATABASES = {
+        'default':
+            {'ENGINE': 'django.db.backends.postgresql_psycopg2',
+             'NAME': u'locsApp',
+             'HOST': u'localhost',
+             'USER': 'locsApp',
+             'PASSWORD': '}{4KkAf7',
+             'PORT': ''}
+    }
+
+
+>>>>>>> dd4e958cd6e862de4d8d30573416e609a32d7671
