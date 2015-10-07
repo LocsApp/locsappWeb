@@ -170,6 +170,6 @@ if socket.gethostname() == "sylflo.fr":
              'NAME': u'locs_app',
              'HOST': u'localhost',
              'USER': 'locs_app',
-             'PASSWORD': 'sqUfpEY-3eyw2{KN',
+             'PASSWORD': '}{4KkAf7',
              'PORT': ''}
     }
