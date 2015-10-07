@@ -9,41 +9,41 @@
                 .row
                     .col-xs-12.col-sm-6.col-md-6
                         .form-group
-                            input#first_name.form-control.input-lg(type='text', name='first_name', placeholder='First Name' ng-model='user_register.first_name')
+                            input#first_name.form-control.input-lg(type='text', name='first_name', placeholder='First Name' ng-model='user_register.first_name' required)
                     .col-xs-12.col-sm-6.col-md-6
                         .form-group
-                            input#last_name.form-control.input-lg(type='text', name='last_name', placeholder='Last Name' ng-model='user_register.last_name')
+                            input#last_name.form-control.input-lg(type='text', name='last_name', placeholder='Last Name' ng-model='user_register.last_name' required)
                 .form-group
-                    input#display_name.form-control.input-lg(type='text', name='username', placeholder='username' ng-model='user_register.username')
+                    input#display_name.form-control.input-lg(type='text', name='username', placeholder='username' ng-model='user_register.username' required)
                 .form-group
-                    input#display_name.form-control.input-lg(type='text', name='display_name', placeholder='Living address' ng-model='user_register.living_address')
+                    input#display_name.form-control.input-lg(type='text', name='display_name', placeholder='Living address' ng-model='user_register.living_address' required)
 
                 .form-group
-                    input#display_name.form-control.input-lg(type='text', name='display_name', placeholder='Billing address' ng-model='user_register.billing_address')
+                    input#display_name.form-control.input-lg(type='text', name='display_name', placeholder='Billing address' ng-model='user_register.billing_address' required)
 
                 .form-group
-                    input#display_name.form-control.input-lg(type='text', name='display_name', placeholder='Phone number' ng-model='user_register.phone')
+                    input#display_name.form-control.input-lg(type='text', name='display_name', placeholder='Phone number' ng-model='user_register.phone' required)
 
                 .form-group
-                    input#display_name.form-control.input-lg(type='password', name='password', placeholder='password' ng-model='user_register.password1')
+                    input#display_name.form-control.input-lg(type='password', name='password', placeholder='password' ng-model='user_register.password1' required)
 
                 .form-group
-                    input#display_name.form-control.input-lg(type='password', name='confirm_password', placeholder='confirm_password' ng-model='user_register.password2')
+                    input#display_name.form-control.input-lg(type='password', name='confirm_password', placeholder='confirm_password' ng-model='user_register.password2' required)
 
                 .form-group
-                    input#display_name.form-control.input-lg(type='text', name='phone_number', placeholder='phone_number' ng-model='user_register.phone_number')
+                    input#display_name.form-control.input-lg(type='text', name='phone_number', placeholder='phone_number' ng-model='user_register.phone_number' required)
 
                 .form-group
-                    input#email.form-control.input-lg(type='email', name='email', placeholder='Email Address' ng-model='user_register.email')
+                    input#email.form-control.input-lg(type='email', name='email', placeholder='Email Address' ng-model='user_register.email' required)
 
                 .form-group
-                    input#email.form-control.input-lg(type='email', name='confirm_email', placeholder='Email Address confirm' ng-model='user_register.confirm_email')
+                    input#email.form-control.input-lg(type='email', name='confirm_email', placeholder='Email Address confirm' ng-model='user_register.confirm_email' required)
 
 
                 hr.colorgraph
                 .row
                     .col-xs-12.col-md-6
-                        input.btn.btn-primary.btn-block.btn-lg(type='submit', value='Register', tabindex='7' ng-click='test42')
+                        input.btn.btn-primary.btn-block.btn-lg(type='submit', value='Register', tabindex='7')
     // Modal
     #t_and_c_m.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
         .modal-dialog.modal-lg

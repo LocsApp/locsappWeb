@@ -19,7 +19,7 @@
 
         function register(user) {
             console.log(user);
-            return $http.post('/', {
+            return $http.post(URL_API + '/api/v1/rest-auth/registration/', {
                 username: user.username,
                 email : user.email,
                 first_name : user.first_name,
