@@ -159,12 +159,11 @@ EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
 
 if socket.gethostname() == "sylflo.fr":
-    i = 0
-    #DEBUG = TEMPLATE_DEBUG = False
-    #ALLOWED_HOSTS = ["couture.sylflo.fr", ".sylflo.fr", "sylflo.fr"]
-    #ADMINS = (
-    #	('Sylvain Chateau', 'dev.chateau@gmail.com'),
-    #)
+    DEBUG = TEMPLATE_DEBUG = False
+    ALLOWED_HOSTS = ["couture.sylflo.fr", ".sylflo.fr", "sylflo.fr"]
+    ADMINS = (
+    	('Sylvain Chateau', 'dev.chateau@gmail.com'),
+    )
     #DATABASES = {
     #    'default':
     #        {'ENGINE': 'django.db.backends.postgresql_psycopg2',
