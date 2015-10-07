@@ -18,6 +18,7 @@ def pull(branch='master', remote='origin', runlocal=True):
     if runlocal:
         local("git pull %s %s" % (remote, branch))
     else:
+	run("git checkout")
         run("git pull %s %s" % (remote, branch))
  
 def sync(branch='master', remote='origin', runlocal=True):
