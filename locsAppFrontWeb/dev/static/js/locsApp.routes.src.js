@@ -35,7 +35,8 @@
         //user registration view
         .state('registration', {
             url: '/register',
-            templateUrl: '/prod/static/templates/register.html'
+            templateUrl: '/prod/static/templates/register.html',
+            controller : 'RegisterController'
         })
     }
 

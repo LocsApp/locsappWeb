@@ -10,7 +10,7 @@
 
         $scope.register = function () {
 
-            User.register($scope.username).then(registerSuccessFn, registerErrorFn);
+            User.register($scope.user_register).then(registerSuccessFn, registerErrorFn);
 
             function registerSuccessFn(data, status, headers, config) {
                 console.debug("Success");

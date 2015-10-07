@@ -9,29 +9,35 @@
                 .row
                     .col-xs-12.col-sm-6.col-md-6
                         .form-group
-                            input#first_name.form-control.input-lg(type='text', name='first_name', placeholder='First Name' ng-model='first_name')
+                            input#first_name.form-control.input-lg(type='text', name='first_name', placeholder='First Name' ng-model='user_register.first_name')
                     .col-xs-12.col-sm-6.col-md-6
                         .form-group
-                            input#last_name.form-control.input-lg(type='text', name='last_name', placeholder='Last Name' ng-model='last_name')
+                            input#last_name.form-control.input-lg(type='text', name='last_name', placeholder='Last Name' ng-model='user_register.last_name')
                 .form-group
-                    input#display_name.form-control.input-lg(type='text', name='username', placeholder='username' ng-model='username')
+                    input#display_name.form-control.input-lg(type='text', name='username', placeholder='username' ng-model='user_register.username')
                 .form-group
-                    input#display_name.form-control.input-lg(type='text', name='display_name', placeholder='Birthday')
+                    input#display_name.form-control.input-lg(type='text', name='display_name', placeholder='Living address' ng-model='user_register.living_address')
 
                 .form-group
-                    input#display_name.form-control.input-lg(type='password', name='password', placeholder='password' ng-model='password')
+                    input#display_name.form-control.input-lg(type='text', name='display_name', placeholder='Billing address' ng-model='user_register.billing_address')
 
                 .form-group
-                    input#display_name.form-control.input-lg(type='password', name='confirm_password', placeholder='confirm_password' ng-model='confirm_password')
+                    input#display_name.form-control.input-lg(type='text', name='display_name', placeholder='Phone number' ng-model='user_register.phone')
 
                 .form-group
-                    input#display_name.form-control.input-lg(type='text', name='phone_number', placeholder='phone_number' ng-model='phone_number')
+                    input#display_name.form-control.input-lg(type='password', name='password', placeholder='password' ng-model='user_register.password1')
 
                 .form-group
-                    input#email.form-control.input-lg(type='email', name='email', placeholder='Email Address' ng-model='email')
+                    input#display_name.form-control.input-lg(type='password', name='confirm_password', placeholder='confirm_password' ng-model='user_register.password2')
 
                 .form-group
-                    input#email.form-control.input-lg(type='email', name='confirm_email', placeholder='Email Address confirm' ng-model='confirm_email')
+                    input#display_name.form-control.input-lg(type='text', name='phone_number', placeholder='phone_number' ng-model='user_register.phone_number')
+
+                .form-group
+                    input#email.form-control.input-lg(type='email', name='email', placeholder='Email Address' ng-model='user_register.email')
+
+                .form-group
+                    input#email.form-control.input-lg(type='email', name='confirm_email', placeholder='Email Address confirm' ng-model='user_register.confirm_email')
 
 
                 hr.colorgraph

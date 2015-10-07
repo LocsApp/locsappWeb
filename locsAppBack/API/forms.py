@@ -8,6 +8,7 @@ class SignupForm(forms.Form):
     phone = forms.CharField(max_length=10)
     living_address = forms.CharField(max_length=300)
     billing_address = forms.CharField(max_length=300)
+    logo_url = forms.CharField(max_length=255)
 
     is_active = forms.BooleanField()
     #is_admin = forms.BooleanField()
@@ -22,5 +23,6 @@ class SignupForm(forms.Form):
         user.phone = self.cleaned_data['phone']
         user.living_address = self.cleaned_data['living_address']
         user.billing_address = self.cleaned_data['billing_address']
+        user.logo_url = self.cleaned_data['logo_url']
         user.is_active = self.cleaned_data['is_active']
         user.save()
