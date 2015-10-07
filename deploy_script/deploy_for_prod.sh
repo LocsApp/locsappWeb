@@ -1,6 +1,8 @@
 #!/bin/sh
 
 cd /var/www/locsapp.sylflo.fr/locsappWeb
+eval `ssh-agent`
+ssh-add /var/lib/jenkins/.ssh/locsAppGitHub_rsa
 git checkout .
 git pull
 
