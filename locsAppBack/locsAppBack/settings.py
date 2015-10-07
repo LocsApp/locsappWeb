@@ -162,14 +162,14 @@ if socket.gethostname() == "sylflo.fr":
     DEBUG = TEMPLATE_DEBUG = False
     ALLOWED_HOSTS = ["couture.sylflo.fr", ".sylflo.fr", "sylflo.fr"]
     ADMINS = (
-	('Sylvain Chateau', 'dev.chateau@gmail.com'),
+    	('Sylvain Chateau', 'dev.chateau@gmail.com'),
     )
-    DATABASES = {
-        'default':
-            {'ENGINE': 'django.db.backends.postgresql_psycopg2',
-             'NAME': u'locsApp',
-             'HOST': u'localhost',
-             'USER': 'locsApp',
-             'PASSWORD': '}{4KkAf7',
-             'PORT': ''}
-    }
+    #DATABASES = {
+    #    'default':
+    #        {'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #         'NAME': u'locs_app',
+    #         'HOST': u'localhost',
+    #         'USER': 'locs_app',
+    #         'PASSWORD': '}{4KkAf7',
+    #         'PORT': ''}
+    #}
