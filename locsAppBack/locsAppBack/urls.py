@@ -22,7 +22,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     # Url including the API end-points
     url(r'^api/v1/', include(api_patterns)),
-    # Rest swagger doc
-    url(r'^docs/', include('rest_framework_swagger.urls')),
     url(r'^.*$', docAPIView.as_view(), name="index"),
 ]
