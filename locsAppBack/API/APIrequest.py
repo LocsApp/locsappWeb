@@ -19,7 +19,10 @@ class APIRequestMongo:
 			temp_options = fields[key].split(",")
 			if (temp_options[0] == "text"):
 				if (len(answer[key]) > int(temp_options[1]) or len(answer[key]) <= 0):
-					error_fields[key] = "The text must not be empty and must be inferior or equal to " + temp_options[1]
+					error_fields[key] = "The text must not be empty and the length must be inferior or equal to" + temp_options[1]
+			elif (temp_options[0] == "integer"):
+				if (type(answer[key]) != type(1)):
+					error_fields[key] = "The field must be an integer"
 			temp_options = []
 		return (error_fields)
 
