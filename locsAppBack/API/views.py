@@ -39,8 +39,8 @@ class docAPIView(TemplateView):
 # Creates a new article
 @csrf_exempt
 def postNewArticle(request):
-	fields_definition = {"name", "tiny_logo_url", "big_logo_url",
-	 "description", "id_author", "date_created", "id_type"}
+	fields_definition = ["name", "tiny_logo_url", "big_logo_url",
+	 "description", "id_author", "date_created", "id_type"]
 
 	return APIrequests.forgeAPIrequestCreatePOST(request, fields_definition, db_locsapp["articles"])
 
