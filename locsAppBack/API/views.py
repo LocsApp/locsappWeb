@@ -12,6 +12,12 @@ from bson.objectid import ObjectId
 #JSON import
 import json
 
+#APIrequestForgery class
+from .APIrequest import *
+
+#Instanciation of the APIRequest class
+APIrequests = APIRequestMongo()
+
 # Connects to the db and creates a MongoClient instance
 mongodb_client = MongoClient('localhost', 27017)
 db_locsapp = mongodb_client['locsapp']
@@ -33,12 +39,11 @@ class docAPIView(TemplateView):
 # Creates a new article
 @csrf_exempt
 def postNewArticle(request):
-	if (request.body):
-		answer = json.loads(request.body.decode('utf8'))
-		print(answer)
-		return(HttpResponse("200 OK"))
-	else:
-		return (HttpResponse("400 BAD REQUEST"))
+	fields_definition = {"name", "tiny_logo_url", "big_logo_url",
+	 "description", "id_author", "date_created", "id_type"}
+
+	return APIrequests.forgeAPIrequestCreatePOST(request, fields_definition, db_locsapp["articles"])
+
 
 """
 	PUT END-POINTS
