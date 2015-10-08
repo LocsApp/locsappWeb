@@ -42,7 +42,7 @@ def postNewArticle(request):
 	fields_definition = ["name", "tiny_logo_url", "big_logo_url",
 	 "description", "id_author", "date_created", "id_type"]
 
-	return APIrequests.forgeAPIrequestCreatePOST(request, fields_definition, db_locsapp["articles"])
+	return APIrequests.forgeAPIrequestCreate("POST", request, fields_definition, db_locsapp["articles"])
 
 
 """

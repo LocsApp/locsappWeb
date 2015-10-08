@@ -9,8 +9,8 @@ import json
 class APIRequestMongo:
 
 	#creates a Create API POST
-	def forgeAPIrequestCreatePOST(self, request, fields, collection):
-		if (request.method == "POST"):
+	def forgeAPIrequestCreate(self, method, request, fields, collection):
+		if (request.method == method):
 			if (request.body):
 				answer = json.loads(request.body.decode('utf8'))
 				error_keys = {}
