@@ -8,6 +8,21 @@ import json
 
 class APIRequestMongo:
 
+	"""
+	verifies is the fields are correct:
+	text, <number> : verify if the text is small enough
+	integer : verify that it is an integer
+	"""
+	def verifyErrorsInFields(self, fields, answer):
+		error_fields = {}
+		for key in fields:
+			temp_options = fields[key].split(",")
+			if (temp_options[0] == "text"):
+				if (len(answer[key]) > int(temp_options[1]) or len(answer[key]) <= 0):
+					error_fields[key] = "The text must not be empty and must be inferior or equal to " + temp_options[1]
+			temp_options = []
+		return (error_fields)
+
 	#creates a Create API POST
 	def forgeAPIrequestCreate(self, method, request, fields, collection):
 		if (request.method == method):
@@ -17,6 +32,9 @@ class APIRequestMongo:
 				for key in fields:
 					if key not in answer:
 						error_keys[key] = "This key is required"
+				if (error_keys != {}):
+					return (JsonResponse(error_keys))
+				error_keys = self.verifyErrorsInFields(fields, answer)
 				if (error_keys != {}):
 					return (JsonResponse(error_keys))
 				return(HttpResponse("200 OK"))
