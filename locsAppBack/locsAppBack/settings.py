@@ -30,6 +30,8 @@ ALLOWED_HOSTS = []
 
 #Django allauth different form
 ACCOUNT_SIGNUP_FORM_CLASS = 'API.forms.SignupForm'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
 #Different user model
 AUTH_USER_MODEL = 'API.Account'
@@ -155,8 +157,11 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 #Email config
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 1025
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'locsapp.eip@gmail.com'
+EMAIL_HOST_PASSWORD = 'Totofaitdubateau'
 
 if socket.gethostname() == "sylflo.fr":
     DEBUG = TEMPLATE_DEBUG = False
