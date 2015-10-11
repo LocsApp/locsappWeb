@@ -4,6 +4,7 @@ from django.views.generic.base import TemplateView
 from django.http import JsonResponse
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponseRedirect
 
 #Pymongo imports
 from pymongo import MongoClient
