@@ -33,7 +33,7 @@ Pour lancer le serveur une fois que vous êtes dans l'env virtuel faites
 ```
 
 La documentation de l'API se trouve ici: (elle sera remplacé par swagger d'ici un certain temps
-["http://127.0.0.1:8000/doc"](http://127.0.0.1:8000/doc)
+[http://127.0.0.1:8000/doc](http://127.0.0.1:8000/doc)
 
 ## Partie frontend
 
@@ -51,4 +51,4 @@ Lancez `http-server` à la racine du fichier `index.html`
 http-server ./locsAppFrontWeb/ -a 127.0.0.1 -p 8080
 ```
 
-Rendez-vous sur la page d'accueil du site : ["http://127.0.0.1:8080/doc"](http://127.0.0.1:8080/)
+Rendez-vous sur la page d'accueil du site : [http://127.0.0.1:8080/doc](http://127.0.0.1:8080/)
