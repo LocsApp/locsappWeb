@@ -1,7 +1,11 @@
 # locsappWeb
 
+## Preface
+
 Le projet fonctionne en CI pour le voir merci d'aller a l'URL suivante:
 http://jenkins.sylflo.fr/job/LocsApp
+
+## Partie backend
 
 Pour lancer le serveur 
 1.  installer virtualenwrapper
@@ -29,4 +33,22 @@ Pour lancer le serveur une fois que vous êtes dans l'env virtuel faites
 ```
 
 La documentation de l'API se trouve ici: (elle sera remplacé par swagger d'ici un certain temps
-locahost:8000/doc
+["http://127.0.0.1:8000/doc"](http://127.0.0.1:8000/doc)
+
+## Partie frontend
+
+Installez `npm`
+
+Installez `http-server` (serveur en nodejs léger)
+
+```
+sudo npm install http-server -g
+```
+
+Lancez `http-server` à la racine du fichier `index.html`
+
+```
+http-server ./locsAppFrontWeb/ -a 127.0.0.1 -p 8080
+```
+
+Rendez-vous sur la page d'accueil du site : ["http://127.0.0.1:8080/doc"](http://127.0.0.1:8080/)
