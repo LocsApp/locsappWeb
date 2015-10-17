@@ -38,6 +38,13 @@
             templateUrl: '/prod/static/templates/register.html',
             controller : 'RegisterController'
         })
+
+        //user sign-in view
+        .state('sign-in', {
+            url: '/sign-in',
+            templateUrl: '/prod/static/templates/sign-in.html',
+            controller : 'RegisterController'
+        })
     }
 
     /* Injection of the needed vars for html5mode */
