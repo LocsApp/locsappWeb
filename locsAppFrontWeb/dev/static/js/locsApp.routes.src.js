@@ -29,7 +29,7 @@
         //home partial view
         .state('home', {
             url: '/home',
-            templateUrl: '/prod/static/templates/partial-home.html'
+            templateUrl: '/prod/static/templates/home-guest.html'
         })
         
         //user registration view
