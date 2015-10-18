@@ -65,7 +65,7 @@
         .state('sign-in', {
             url: '/sign-in',
             templateUrl: '/prod/static/templates/sign-in.html',
-            controller : 'RegisterController'
+            controller : 'LoginController'
         })
     }
 

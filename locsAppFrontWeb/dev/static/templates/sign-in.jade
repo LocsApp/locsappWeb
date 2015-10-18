@@ -7,17 +7,17 @@ include ./partial-navbar-guest.jade
             h3.panel-title Sign In
           |                     
           .panel-body
-            form(role='form')
+            form(role='form' ng-submit="login()")
               fieldset
                 .form-group
-                  input.form-control(placeholder='E-mail', name='email', type='email', autofocus='')
+                  input.form-control(placeholder='Username', name='username', type='username', autofocus='', ng-model='user_login_credentials.username')
                 |                                 
                 .form-group
-                  input.form-control(placeholder='Password', name='password', type='password', value='')
+                  input.form-control(placeholder='Password', name='password', type='password', value='', ng-model='user_login_credentials.password')
                 |                                 
                 .checkbox
                   label
                     input(name='remember', type='checkbox', value='Remember Me')
                     | Remember Me
                 // Change this to a button or input when using this as a form
-                a.btn.btn-sm.btn-success(href='javascript:;') Login
+                input.btn.btn-sm.btn-success(type='submit', id="submit", value='Login')

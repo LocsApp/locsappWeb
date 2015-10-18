@@ -34,10 +34,10 @@
             return $http.post(URL_API + '/api/v1/rest-auth/registration/', answer);
         }
 
-        function login(username, password) {
+        function login(credentials) {
             return $http.post(URL_API + '/api/v1/rest-auth/login/', {
-                username: username,
-                password: password
+                username: credentials.username,
+                password: credentials.password
             })
         }
 
