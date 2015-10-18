@@ -12,7 +12,7 @@
         var User = {
             register: register,
             login: login,
-            getUser: getUser
+            profile: profile
         };
 
         function register(user) {
@@ -41,15 +41,10 @@
             })
         }
 
-        function getUser(username) {
-            return $http.get('/user' + username);
+        function profile() {
+            return $http.get(URL_API + '/api/v1/rest-auth/user');
         }
 
-
         return User;
-
-
     }
-
-
 })();

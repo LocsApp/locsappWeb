@@ -33,24 +33,18 @@
         //parent home view
         .state('home', {
             url: '/home',
-            templateUrl: '/prod/static/templates/home-guest.html',
-        })
-
-        //child loged in home view
-        .state('home.connected', {
-            url: '',
-            templateUrl: '/prod/static/templates/home-user.html',
+            templateUrl: '/prod/static/templates/home-connected.html',
             data : {
                 permissions: {
                     except : ['guest'],
-                    redirectTo: 'home.guest'
+                    redirectTo: 'home-guest'
                 }
             }
         })
 
-        //parent guest home view
-        .state('home.guest', {
-            url: '',
+        //child guest home view
+        .state('home-guest', {
+            url: '/home',
             templateUrl: '/prod/static/templates/home-guest.html',
         })
 
