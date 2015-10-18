@@ -30,7 +30,8 @@
 
             function profileSuccess(data, status, headers, config) {
                 console.log("in");
-                if (!data.role)
+                console.log(data);
+                if (!data.data.role)
                     deferred.resolve();
                 else
                     deferred.reject();
@@ -38,7 +39,7 @@
 
             function profileError(data, status, headers, config) {
                 console.log("out")
-                deferred.reject();
+                deferred.resolve();
             }
             return (deferred.promise);
         });

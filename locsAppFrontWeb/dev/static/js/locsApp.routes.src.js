@@ -33,7 +33,7 @@
         //parent home view
         .state('home', {
             url: '/home',
-            templateUrl: '/prod/static/templates/home-connected.html',
+            templateUrl: '/prod/static/templates/home-user.html',
             data : {
                 permissions: {
                     except : ['guest'],
@@ -60,6 +60,13 @@
             url: '/sign-in',
             templateUrl: '/prod/static/templates/sign-in.html',
             controller : 'LoginController'
+        })
+
+        //user sign-in view
+        .state('logout', {
+            url: '/logout',
+            templateUrl: '/prod/static/templates/home-user.html',
+            controller : 'LogoutController'
         })
     }
 

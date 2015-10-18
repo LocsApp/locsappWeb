@@ -9,16 +9,16 @@
     function LoginController($scope, User, $sessionStorage) {
     	$scope.login = function() {
 
-    		User.login($scope.user_login_credentials).then(registerSuccessFn, registerErrorFn);
+    		User.login($scope.user_login_credentials).then(loginSuccessFn, loginErrorFn);
 
-            function registerSuccessFn(data, status, headers, config) {
+            function loginSuccessFn(data, status, headers, config) {
                 console.debug("Success");
                 console.log(data);
                 $sessionStorage.token = data.data["key"];
                 console.log($sessionStorage);
             }
 
-            function registerErrorFn(data, status, headers, config) {
+            function loginErrorFn(data, status, headers, config) {
                 console.log(data);
                 console.error('Failure register error');
             }

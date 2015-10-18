@@ -5,13 +5,14 @@
     angular
         .module(NAME_PROJECT + 'UserServices')
         .factory('User', User);
-    User.$inject = ['$http'];
+    User.$inject = ['$http', '$sessionStorage'];
 
-    function User($http) {
+    function User($http, $sessionStorage) {
 
         var User = {
             register: register,
             login: login,
+            logout : logout,
             profile: profile
         };
 
@@ -41,8 +42,20 @@
             })
         }
 
+        function logout() {
+            return $http({
+                headers : {"Authorization" : 'Token ' + $sessionStorage.token},
+                method : 'POST',
+                url : URL_API + '/api/v1/rest-auth/logout/'
+            });
+        }
+
         function profile() {
-            return $http.get(URL_API + '/api/v1/rest-auth/user');
+            return $http({
+                headers : {"Authorization" : 'Token ' + $sessionStorage.token},
+                method : 'GET',
+                url : URL_API + '/api/v1/rest-auth/user/'
+            });
         }
 
         return User;
