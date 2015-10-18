@@ -13,6 +13,7 @@
             console.debug("Success");
             console.log(data);
             delete $sessionStorage.token;
+            $state.go("home");
         }
 
         function logoutErrorFn(data, status, headers, config) {
