@@ -7,7 +7,7 @@
     'use strict';
 
     /* Module creation */
-    angular.module(NAME_PROJECT + 'Routes', ['ngRoute', 'ui.router']);
+    angular.module(NAME_PROJECT + 'Routes', ['ngRoute', 'ui.router', 'permission']);
 
     /* Instanciation of module  NAME_PROJECT + 'Routes'. Binding the config  ui-router function to the module */
     angular.module(NAME_PROJECT + 'Routes')
@@ -22,16 +22,38 @@
 
     /* Configuration of ui-router */
     function configUirouter($stateProvider, $urlRouterProvider, $locationProvider) {
+
         //Redirects to /home otherwise
-        $urlRouterProvider.otherwise('/home');
+        $urlRouterProvider.otherwise( function($injector) {
+            var $state = $injector.get("$state");
+            $state.go('home');
+        });
 
         $stateProvider
-        //home partial view
+        //parent home view
         .state('home', {
             url: '/home',
-            templateUrl: '/prod/static/templates/home-guest.html'
+            templateUrl: '/prod/static/templates/home-guest.html',
         })
-        
+
+        //child loged in home view
+        .state('home.connected', {
+            url: '',
+            templateUrl: '/prod/static/templates/home-user.html',
+            data : {
+                permissions: {
+                    except : ['guest'],
+                    redirectTo: 'home.guest'
+                }
+            }
+        })
+
+        //parent guest home view
+        .state('home.guest', {
+            url: '',
+            templateUrl: '/prod/static/templates/home-guest.html',
+        })
+
         //user registration view
         .state('registration', {
             url: '/register',

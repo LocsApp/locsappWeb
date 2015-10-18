@@ -11,6 +11,8 @@
     "angular-animate": "latest",
     "ng-file-upload": "latest",
     "angular-mocks": "latest",
-    "bootstrap": "latest"
+      "bootstrap": "latest",
+      "angular-permission" : "latest",
+      "ngstorage" : "latest"
   }
 }

@@ -15,8 +15,6 @@
             getUser: getUser
         };
 
-
-
         function register(user) {
             var answer = JSON.stringify({
                 username: user.username,
@@ -30,14 +28,14 @@
                 phone : user.phone,
                 birthdate : user.birthdate,
                 logo_url : "/kek/",
-                is_active : "False"
+                is_active : "True"
             });
             console.log(answer);
             return $http.post(URL_API + '/api/v1/rest-auth/registration/', answer);
         }
 
         function login(username, password) {
-            return $http.post('/login', {
+            return $http.post(URL_API + '/api/v1/rest-auth/login/', {
                 username: username,
                 password: password
             })

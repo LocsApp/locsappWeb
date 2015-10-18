@@ -70,15 +70,17 @@ class Account(AbstractBaseUser):
     """
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=20,unique=True)
-    
-    birthdate = models.CharField(max_length=30, default=False)
+
+    first_name = models.CharField(max_length=30, default=None)
+    last_name = models.CharField(max_length=30, default=None)   
+    birthdate = models.CharField(max_length=30)
     phone = models.CharField(max_length=10)
     living_address = models.TextField(null=True, default=None)
     billing_address = models.TextField(null=True, default=None)
     logo_url = models.CharField(max_length=255, null=True)
 
     is_active = models.CharField(max_length=10)
-    is_admin = models.CharField(max_length=10, default="False")
+    role = models.CharField(max_length=10, default="user")
 
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -98,19 +100,6 @@ class Account(AbstractBaseUser):
 
     def get_short_name(self):
         return self.username
-
-    @property
-    def is_staff(self):
-        return self.is_admin
-
-    def has_perm(self, perm, obj=None):
-        return self.is_admin
-
-    def has_perm(self, perm, obj=None):
-        return self.is_admin
-
-    def has_module_perms(self, app_label):
-        return self.is_admin
 
     #def objects(self):
     #    return "toto"

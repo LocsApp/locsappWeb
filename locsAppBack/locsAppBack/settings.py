@@ -20,6 +20,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
+#Removes django session login
+REST_SESSION_LOGIN = False
+
+#Aks for the old password when changing passwords
+OLD_PASSWORD_FIELD_ENABLED = True
+
+#Custom serializer for user details
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER' : 'API.serializers.UserDetailsSerializer'
+}
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '0#bk$^5fieu@defbgkbxaadd*5y940w-k$jwf!-8=pg)hz085$'
 
@@ -126,7 +136,12 @@ DATABASES = {
 }
 
 REST_FRAMEWORK = {
-    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    )
 }
 
 #Jenkins
