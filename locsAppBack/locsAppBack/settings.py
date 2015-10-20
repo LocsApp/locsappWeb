@@ -183,7 +183,7 @@ EMAIL_HOST_PASSWORD = 'Totofaitdubateau'
 
 if socket.gethostname() == "sylflo.fr":
     DEBUG = TEMPLATE_DEBUG = False
-    ALLOWED_HOSTS = ["couture.sylflo.fr", ".sylflo.fr", "sylflo.fr"]
+    ALLOWED_HOSTS = ["locsapp.sylflo.fr", ".sylflo.fr", "sylflo.fr"]
     ADMINS = (
     	('Sylvain Chateau', 'dev.chateau@gmail.com'),
     )
