@@ -8,7 +8,7 @@ git pull
 
 source /var/lib/jenkins/.virtualenvs/locsApp/bin/activate   
 pip install -r /var/www/locsapp.sylflo.fr/locsappWeb/locsAppBack/requirements.txt
-mkidr /var/www/locsapp.sylflo.fr/locsappWeb/locsAppBack/static_root
+mkdir /var/www/locsapp.sylflo.fr/locsappWeb/locsAppBack/static_root
 python  /var/www/locsapp.sylflo.fr/locsappWeb/locsAppBack/manage.py collectstatic --noinput
 python  /var/www/locsapp.sylflo.fr/locsappWeb/locsAppBack/manage.py makemigrations
 python  /var/www/locsapp.sylflo.fr/locsappWeb/locsAppBack/manage.py migrate
