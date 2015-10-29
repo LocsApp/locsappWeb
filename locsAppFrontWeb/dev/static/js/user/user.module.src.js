@@ -12,6 +12,6 @@
     ]);
 
     angular.module(NAME_PROJECT + 'UserControllers', ['ngStorage']);
-    angular.module(NAME_PROJECT + 'UserServices', []);
+    angular.module(NAME_PROJECT + 'UserServices', ['ngCookies']);
 
 })();

@@ -1,7 +1,3 @@
-/**
- * Created by sylflo on 7/10/15.
- */
-
 (function () {
 
     'use strict';
@@ -62,7 +58,7 @@
             controller : 'LoginController'
         })
 
-        //user sign-in view
+        //user logout view
         .state('logout', {
             url: '/logout',
             templateUrl: '/prod/static/templates/home-user.html',
