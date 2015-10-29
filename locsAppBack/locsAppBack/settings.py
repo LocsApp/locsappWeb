@@ -172,7 +172,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = os.path.join(BASE_DIR, "static_root")
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
 
 #Email config
 EMAIL_USE_TLS = True
@@ -183,7 +190,7 @@ EMAIL_HOST_PASSWORD = 'Totofaitdubateau'
 
 if socket.gethostname() == "sylflo.fr":
     DEBUG = TEMPLATE_DEBUG = False
-    ALLOWED_HOSTS = ["couture.sylflo.fr", ".sylflo.fr", "sylflo.fr"]
+    ALLOWED_HOSTS = ["locsapp.sylflo.fr", ".sylflo.fr", "sylflo.fr"]
     ADMINS = (
     	('Sylvain Chateau', 'dev.chateau@gmail.com'),
     )
