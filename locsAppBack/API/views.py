@@ -58,3 +58,8 @@ def postNewArticle(request):
 """
 	DELETE END-POINTS
 """
+
+@csrf_exempt
+def deleteArticle(request):
+	fields_definition = ["name", "id"]
+	return APIrequests.forgeAPIrequestDelete(request, fields_definition, db_locsapp["articles"])

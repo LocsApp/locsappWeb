@@ -7,8 +7,15 @@ from django.views.generic.base import RedirectView
 
 from allauth.account.views import confirm_email
 
+"""
+@apiDefine UserObjectRegisterDefine
+
+@apiParam {String} username Username of the user
+"""
+
 article_patterns = [
 	url(r'^create/$', views.postNewArticle),
+	url(r'^delete/$', views.deleteArticle),
 ]
 
 # General urls for the api

@@ -4,9 +4,9 @@
     angular.module(NAME_PROJECT + 'UserControllers')
         .controller('RegisterController', RegisterController);
 
-    RegisterController.$inject = ['$scope', 'User'];
+    RegisterController.$inject = ['$scope', 'User', '$state'];
 
-    function RegisterController($scope, User) {
+    function RegisterController($scope, User, $state) {
 
         $scope.register = function () {
 
@@ -14,6 +14,7 @@
 
             function registerSuccessFn(data, status, headers, config) {
                 console.debug("Success");
+                $state.go("home");
             }
 
             function registerErrorFn(data, status, headers, config) {

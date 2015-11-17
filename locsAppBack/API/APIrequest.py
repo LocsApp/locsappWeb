@@ -45,3 +45,10 @@ class APIRequestMongo:
 				return (HttpResponse("400 BAD REQUEST"))
 		else :
 			return (HttpResponse("405 METHOD NOT ALLOWED"))
+
+	#creates a API DELETE Endpoint
+	def forgeAPIrequestDelete(self, request, fields, collection):
+		if (request.method == "DELETE"):
+			return (HttpResponse("200 OK"))
+		else:
+			return (HttpResponse("401 Unauthorized"))

@@ -1,4 +1,5 @@
-"""locasappWeb URL Configuration
+"""
+locasappWeb URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.8/topics/http/urls/
@@ -13,13 +14,16 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
+
+from django.conf import settings
+from django.conf.urls.static import static
+from django.views.generic import TemplateView
 from django.conf.urls import include, url
 from django.contrib import admin
 from API.views import *
 from API.urls import *
 
 urlpatterns = [
-    url(r'^', include('django.contrib.auth.urls')),
     url(r'^admin/', include(admin.site.urls)),
     # Url including the API end-points
     url(r'^api/v1/', include(api_patterns)),
