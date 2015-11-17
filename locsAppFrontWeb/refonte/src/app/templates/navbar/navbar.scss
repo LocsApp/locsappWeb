@@ -1,0 +1,13 @@
+.locsapp-navbar-gt-sm {
+
+	.locsapp-navbar-icons-gt-sm {
+		width: 48px;
+		height: 48px;
+	}
+
+	.locsapp-navbar-last-icon-gt-sm {
+		@extend .locsapp-navbar-icons-gt-sm;
+		margin-right: 20px;
+	}
+
+}
