@@ -2,20 +2,23 @@
   'use strict';
 
   angular
-    .module('refonte')
-    .config(routerConfig);
+	.module('locsapp')
+	.config(routerConfig);
 
   /** @ngInject */
   function routerConfig($stateProvider, $urlRouterProvider) {
-    $stateProvider
-      .state('home', {
-        url: '/',
-        templateUrl: 'app/main/main.html',
-        controller: 'MainController',
-        controllerAs: 'main'
-      });
+	$stateProvider
+		.state('main', {
+			url: '/',
+			templateUrl: 'app/main/main.html',
+			controller: 'MainController',
+			controllerAs: 'main'
+		});
 
-    $urlRouterProvider.otherwise('/');
+	$urlRouterProvider.otherwise( function($injector) {
+		var $state = $injector.get("$state");
+		$state.go('main');
+	});
   }
 
 })();

@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('refonte')
+    .module('locsapp')
     .config(config);
 
   /** @ngInject */
