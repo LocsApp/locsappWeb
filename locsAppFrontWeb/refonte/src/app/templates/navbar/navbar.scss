@@ -1,7 +1,9 @@
+@import "../../theme.scss";
+
 .locsapp-navbar-gt-sm {
 
 	&:not(.md-menu-toolbar) { 
-		background: #C10000;
+		background: $navbar-background;
 	};
 
 	.locsapp-navbar-icons-gt-sm {
