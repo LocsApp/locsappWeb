@@ -2,20 +2,24 @@
   'use strict';
 
   angular
-    .module('locsapp')
-    .config(config);
+	.module('locsapp')
+	.config(config);
 
   /** @ngInject */
-  function config($logProvider, toastrConfig) {
-    // Enable log
-    $logProvider.debugEnabled(true);
+  function config($logProvider, toastrConfig, $locationProvider) {
+	// Enable log
+	$logProvider.debugEnabled(true);
 
-    // Set options third-party lib
-    toastrConfig.allowHtml = true;
-    toastrConfig.timeOut = 3000;
-    toastrConfig.positionClass = 'toast-top-right';
-    toastrConfig.preventDuplicates = true;
-    toastrConfig.progressBar = true;
+	// Set options third-party lib
+	toastrConfig.allowHtml = true;
+	toastrConfig.timeOut = 3000;
+	toastrConfig.positionClass = 'toast-top-right';
+	toastrConfig.preventDuplicates = true;
+	toastrConfig.progressBar = true;
+
+	//Configuring of html5 routes
+	$locationProvider.html5Mode(true);
+	$locationProvider.hashPrefix('!');
   }
 
 })();
