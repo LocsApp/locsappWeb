@@ -5,6 +5,6 @@
   .module("LocsappControllers", []);
 
   angular
-    .module('locsapp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ngResource', 'ui.router', 'ngMaterial', 'toastr', 'LocsappControllers']);
+    .module('locsapp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ngResource', 'ui.router', 'ngMaterial', 'toastr', 'ngMdIcons', 'LocsappControllers']);
 
 })();
