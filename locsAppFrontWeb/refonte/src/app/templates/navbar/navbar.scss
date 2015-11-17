@@ -1,13 +1,18 @@
 .locsapp-navbar-gt-sm {
 
+	&:not(.md-menu-toolbar) { 
+		background: #C10000;
+	};
+
 	.locsapp-navbar-icons-gt-sm {
 		width: 48px;
 		height: 48px;
-	}
+		cursor: pointer;
+	};
 
 	.locsapp-navbar-last-icon-gt-sm {
 		@extend .locsapp-navbar-icons-gt-sm;
 		margin-right: 20px;
-	}
+	};
 
 }
