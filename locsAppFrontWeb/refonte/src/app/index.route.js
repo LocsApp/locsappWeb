@@ -19,6 +19,13 @@
 			url: '',
 			parent: 'main',
 			templateUrl: 'app/templates/home/home.html'
+		})
+		.state('main.register', {
+			url: 'register',
+			parent: 'main',
+			templateUrl: 'app/templates/register/register.html',
+			controller: 'RegisterController',
+			controllerAs: 'register'
 		});
 
 	$urlRouterProvider.otherwise(function($injector) {

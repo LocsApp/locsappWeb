@@ -16,7 +16,8 @@
 		'ngMaterial', 
 		'toastr', 
 		'ngMdIcons', 
-		'anim-in-out', 
+		'anim-in-out',
+		'permission',
 		'LocsappControllers']);
 
 })();

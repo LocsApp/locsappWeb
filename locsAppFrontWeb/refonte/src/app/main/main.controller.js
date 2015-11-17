@@ -6,8 +6,8 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, toastr) {
-    var vm = this;
+  function MainController() {
+    //var vm = this;
 
   }
 })();

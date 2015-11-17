@@ -2,13 +2,15 @@
   'use strict';
 
   angular
-    .module('locsapp')
-    .run(runBlock);
+	.module('locsapp')
+	.run(runBlock);
 
   /** @ngInject */
-  function runBlock($log) {
+  function runBlock($http) {
 
-    $log.debug('runBlock end');
+	//Automatize send of Csrf token
+	$http.defaults.xsrfHeaderName = 'X-CSRFToken';
+	$http.defaults.xsrfCookieName = 'csrftoken';
   }
 
 })();

@@ -3,10 +3,10 @@
 
   angular
     .module('LocsappControllers')
-    .controller('NavBarController', NavBarController);
+    .controller('RegisterController', RegisterController);
 
   /** @ngInject */
-  function NavBarController() {
+  function RegisterController() {
     //var vm = this;
 
 
