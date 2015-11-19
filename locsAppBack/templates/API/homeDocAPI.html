@@ -1,4 +1,7 @@
 <h1>Locsapp API V1 Documentation :</h1>
+</br>
+<strong>Free-access endpoints</strong>
+</br>
 <p>POST : /api/v1/rest-auth/registration/ - Subscribe a new user</p>
 <ul>
 	<li>email - EmailField</li>
@@ -6,3 +9,12 @@
 	<li>password1 - CharField</li>
 	<li>password2 - CharField</li>
 </ul>
+<p>POST : /api/v1/rest-auth/login/ - Log a user in</p>
+<ul>
+	<li>username - CharField</li>
+	<li>password - CharField</li>
+</ul>
+</br>
+<strong>Authorization Header required</strong>
+<p>POST : /api/v1/rest-auth/logout/ - Logout a User</p>
+<p>GET : /api/v1/rest-auth/user/ - Request the user profile</p>
