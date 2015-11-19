@@ -21,6 +21,7 @@
 		'ngMdIcons', 
 		'anim-in-out',
 		'permission',
+		'validation.match',
 		'LocsappServices',
 		'LocsappControllers']);
 
