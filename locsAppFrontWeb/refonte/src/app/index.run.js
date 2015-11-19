@@ -6,11 +6,10 @@
 	.run(runBlock);
 
   /** @ngInject */
-  function runBlock($http) {
-
-	//Automatize send of Csrf token
-	$http.defaults.xsrfHeaderName = 'X-CSRFToken';
-	$http.defaults.xsrfCookieName = 'csrftoken';
+  function runBlock($http, $cookies) {
+    //Automatize send of Csrf token
+    $http.defaults.xsrfHeaderName = 'X-CSRFToken';
+    $http.defaults.xsrfCookieName = 'csrftoken';
   }
 
 })();

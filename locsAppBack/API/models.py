@@ -29,15 +29,15 @@ class Account(AbstractBaseUser):
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=20,unique=True)
 
-    first_name = models.CharField(max_length=30, default=None)
-    last_name = models.CharField(max_length=30, default=None)   
-    birthdate = models.CharField(max_length=30)
-    phone = models.CharField(max_length=10)
+    first_name = models.CharField(max_length=30, default=None, null=True)
+    last_name = models.CharField(max_length=30, default=None, null=True)   
+    birthdate = models.CharField(max_length=30, null=True)
+    phone = models.CharField(max_length=10, null=True)
     living_address = models.TextField(null=True, default=None)
     billing_address = models.TextField(null=True, default=None)
     logo_url = models.CharField(max_length=255, null=True)
 
-    is_active = models.CharField(max_length=10)
+    is_active = models.CharField(max_length=10, default=True)
     role = models.CharField(max_length=10, default="user")
 
     created_at = models.DateTimeField(auto_now_add=True)
