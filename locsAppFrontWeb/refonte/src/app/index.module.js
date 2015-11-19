@@ -22,6 +22,7 @@
 		'anim-in-out',
 		'permission',
 		'validation.match',
+		'ngStorage',
 		'LocsappServices',
 		'LocsappControllers']);
 

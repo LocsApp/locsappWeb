@@ -6,29 +6,31 @@
     .controller('LoginController', LoginController);
 
   /** @ngInject */
-  function LoginController($scope, UsersService, toastr, $log) {
+  function LoginController($scope, UsersService, toastr, $sessionStorage, $localStorage, $state, $log) {
     var vm = this;
 
     vm.submit = function() {
 		UsersService
-			.register
-			.save({"username" : $scope.username, "password1" : $scope.password, "password2" : $scope.password, "email" : $scope.email})
+			.login
+			.save({"username" : $scope.username, "password" : $scope.password})
 			.$promise
 			.then(vm.userRegisteredSuccess, vm.userRegisteredFailure);
     }
 
-	vm.userRegisteredSuccess = function () {
-		toastr.success('Congratulations on registrating to Locsapp! Now please check your email to confirm your email address :)', 'One last Step !');
+	vm.userRegisteredSuccess = function (data) {
+		$log.log(data);
+		if ($scope.remember_me == true)
+			$localStorage.key = data["key"];
+		else
+			$sessionStorage.key = data["key"];
+		$state.go("main.homepage");
 	};
 
 	vm.userRegisteredFailure = function (data) {
 		$log.log(data.data);
 		var errorMsg = "This is odd...";
-		if (data.data.username[0].indexOf("taken") > -1)
-			errorMsg = "The username is already taken...";
-		if (data.data.email[0].indexOf("already") > -1)
-			errorMsg = "The email is already taken...";
-		toastr.error('Seems like something went wrong with your registration :( ' + errorMsg, 'Woops...');
+		if (data.data.non_field_errors)
+		toastr.error("We couldn't log you in with these infos..." , 'Woops...');
 	};
 
   }
