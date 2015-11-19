@@ -3,10 +3,10 @@
 
   angular
     .module('LocsappControllers')
-    .controller('RegisterController', RegisterController);
+    .controller('LoginController', LoginController);
 
   /** @ngInject */
-  function RegisterController($scope, UsersService, toastr, $log) {
+  function LoginController($scope, UsersService, toastr, $log) {
     var vm = this;
 
     vm.submit = function() {

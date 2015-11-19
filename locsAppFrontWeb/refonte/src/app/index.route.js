@@ -24,8 +24,8 @@
 			url: 'login',
 			parent: 'main',
 			templateUrl: 'app/templates/login/login.html',
-			controller: 'RegisterController',
-			controllerAs: 'register'
+			controller: 'LoginController',
+			controllerAs: 'login'
 		})
 		.state('main.register', {
 			url: 'register',
