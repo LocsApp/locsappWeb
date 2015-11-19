@@ -20,6 +20,13 @@
 			parent: 'main',
 			templateUrl: 'app/templates/home/home.html'
 		})
+		.state('main.login', {
+			url: 'login',
+			parent: 'main',
+			templateUrl: 'app/templates/login/login.html',
+			controller: 'RegisterController',
+			controllerAs: 'register'
+		})
 		.state('main.register', {
 			url: 'register',
 			parent: 'main',
