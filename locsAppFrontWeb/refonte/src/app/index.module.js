@@ -5,6 +5,9 @@
   .module("LocsappControllers", []);
 
   angular
+  .module("LocsappServices", []);
+
+  angular
 	.module('locsapp', ['ngAnimate',
 		'ngCookies',
 		'ngTouch', 
@@ -18,6 +21,7 @@
 		'ngMdIcons', 
 		'anim-in-out',
 		'permission',
+		'LocsappServices',
 		'LocsappControllers']);
 
 })();
