@@ -44,7 +44,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 #Django allauth different form
-ACCOUNT_SIGNUP_FORM_CLASS = 'API.forms.SignupForm'
+#ACCOUNT_SIGNUP_FORM_CLASS = 'API.forms.SignupForm'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
