@@ -28,9 +28,9 @@ div(flex="none").body-register-md
 					div(ng-message="match") Emails must match.
 			md-input-container
 				ng-md-icon(icon="vpn_key").body-register-container-md
-				input(placeholder="Password" type="password" name="password" required ng-model="password" maxlength="30" minlength="3").body-register-container-md
+				input(placeholder="Password" type="password" name="password" required ng-model="password" maxlength="30" minlength="6").body-register-container-md
 				div(ng-messages="registerForm.password.$error" ng-if="registerForm.password.$dirty")
 					div(ng-message="required") This is required.
-					div(ng-message="minlength") The password must be longer than 3 characters.
+					div(ng-message="minlength") The password must be longer than 6 characters.
 					div(ng-message="maxlength") The password must be shorter than 20 characters.
 			md-button.md-raised Register
