@@ -25,14 +25,26 @@
 			parent: 'main',
 			templateUrl: 'app/templates/login/login.html',
 			controller: 'LoginController',
-			controllerAs: 'login'
+			controllerAs: 'login',
+            data: {
+                permissions: {
+                  only: ['guest'],
+                  redirectTo: 'main.homepage'
+                }
+            }
 		})
 		.state('main.register', {
 			url: 'register',
 			parent: 'main',
 			templateUrl: 'app/templates/register/register.html',
 			controller: 'RegisterController',
-			controllerAs: 'register'
+			controllerAs: 'register',
+            data: {
+                permissions: {
+                  only: ['guest'],
+                  redirectTo: 'main.homepage'
+                }
+            }
 		});
 
 	$urlRouterProvider.otherwise(function($injector) {
