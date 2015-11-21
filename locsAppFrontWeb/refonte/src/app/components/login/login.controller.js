@@ -14,10 +14,10 @@
 			.login
 			.save({"username" : $scope.username, "password" : $scope.password})
 			.$promise
-			.then(vm.userRegisteredSuccess, vm.userRegisteredFailure);
+			.then(vm.userLoggedinSuccess, vm.userLoggedinFailure);
     }
 
-	vm.userRegisteredSuccess = function (data) {
+	vm.userLoggedinSuccess = function (data) {
 		$log.log(data);
 		if ($scope.remember_me == true)
 			$localStorage.key = data["key"];
@@ -26,7 +26,7 @@
 		$state.go("main.homepage");
 	};
 
-	vm.userRegisteredFailure = function (data) {
+	vm.userLoggedinFailure = function (data) {
 		$log.log(data.data);
 		if (data.data.non_field_errors)
 			toastr.error("We couldn't log you in with these infos..." , 'Woops...');

@@ -11,7 +11,8 @@
         var service = {
             register : $resource(URL_API + 'api/v1/rest-auth/registration/'),
             login : $resource(URL_API + 'api/v1/rest-auth/login/'),
-            profile_check : $resource(URL_API +  '/api/v1/rest-auth/user/'),
+            logout : $resource(URL_API + 'api/v1/rest-auth/logout/'),
+            profile_check : $resource(URL_API +  'api/v1/rest-auth/user/'),
             is_authenticated : is_authenticated
         };
 

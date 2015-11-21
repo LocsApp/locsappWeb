@@ -26,12 +26,24 @@
 			templateUrl: 'app/templates/login/login.html',
 			controller: 'LoginController',
 			controllerAs: 'login',
-            data: {
-                permissions: {
-                  only: ['guest'],
-                  redirectTo: 'main.homepage'
-                }
-            }
+			data: {
+				permissions: {
+					only: ['guest'],
+					redirectTo: 'main.homepage'
+				}
+			}
+		})
+		.state('main.logout', {
+			url: 'logout',
+			parent: 'main',
+			controller: 'LogoutController',
+			controllerAs: 'logout',
+			data: {
+				permissions: {
+					except: ['guest'],
+					redirectTo: 'main.homepage'
+				}
+			}
 		})
 		.state('main.register', {
 			url: 'register',
@@ -39,12 +51,12 @@
 			templateUrl: 'app/templates/register/register.html',
 			controller: 'RegisterController',
 			controllerAs: 'register',
-            data: {
-                permissions: {
-                  only: ['guest'],
-                  redirectTo: 'main.homepage'
-                }
-            }
+			data: {
+				permissions: {
+					only: ['guest'],
+					redirectTo: 'main.homepage'
+				}
+			}
 		});
 
 	$urlRouterProvider.otherwise(function($injector) {
