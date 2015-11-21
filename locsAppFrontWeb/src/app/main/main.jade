@@ -1,0 +1,5 @@
+div(ng-controller="NavBarController as navbar")
+	div(layout="column").flex
+		include ../templates/navbar/navbar.jade
+	section(layout="column", layout-fill).scope-child
+		div.ui-view(class="anim-in-out anim-slide-below-fade" data-anim-speed="300")

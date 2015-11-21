@@ -1,0 +1,7 @@
+@import "../../theme.scss";
+
+.login-body {
+	md-checkbox.md-checked .md-icon {
+ 		background-color:  $checkBox;
+	}
+}
