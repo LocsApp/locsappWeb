@@ -1,6 +1,28 @@
 (function() {
   'use strict';
 
+angular
+	.module('locsapp')
+	.factory('TokenAuthInterceptor', TokenAuthInterceptor);
+  
+  TokenAuthInterceptor.$inject = ['$sessionStorage', '$localStorage', '$q'];
+
+  function TokenAuthInterceptor($sessionStorage, $localStorage, $q) {
+	return {
+		request: function(config) {
+			config.headers = config.headers || {};
+			if ($localStorage.key)
+				config.headers.Authorization = 'Token ' + $localStorage.key;
+			else if ($sessionStorage.key)
+				config.headers.Authorization = 'Token ' + $sessionStorage.key;
+			return config || $q.when(config);
+		},
+		response: function(response) {
+			return response || $q.when(response);
+		}
+	};
+  }
+
   angular
 	.module('locsapp')
 	.config(config);
@@ -23,6 +45,9 @@
 	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 	$httpProvider.defaults.xsrfCookieName = 'csrftoken';
 	$httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+
+	//Call of TokenAuthInterceptor for Authorization header sending automation
+	$httpProvider.interceptors.push('TokenAuthInterceptor');
 
 	//Prevent resource from stripping the / on requests (Django stuff)
 	$resourceProvider.defaults.stripTrailingSlashes = false;

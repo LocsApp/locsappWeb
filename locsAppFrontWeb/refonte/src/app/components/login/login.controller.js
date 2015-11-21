@@ -28,9 +28,8 @@
 
 	vm.userRegisteredFailure = function (data) {
 		$log.log(data.data);
-		var errorMsg = "This is odd...";
 		if (data.data.non_field_errors)
-		toastr.error("We couldn't log you in with these infos..." , 'Woops...');
+			toastr.error("We couldn't log you in with these infos..." , 'Woops...');
 	};
 
   }
