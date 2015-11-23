@@ -21,3 +21,6 @@ locsAppBack/reports/
 
 #Sublime project files
 locsapp.sublime*
+
+#db.sqlite3 of doom
+locsAppBack/db.sqlite3
