@@ -21,7 +21,7 @@
 			.$promise
 			.then(profileSuccess, profileError);
 
-		function profileSuccess(data) {
+		function profileSuccess() {
 			$log.log("in");
 			deferred.reject();
 		}
