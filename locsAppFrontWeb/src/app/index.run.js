@@ -22,7 +22,6 @@
 			.then(profileSuccess, profileError);
 
 		function profileSuccess(data) {
-			$log.log(data);
 			$log.log("in");
 			deferred.reject();
 		}
