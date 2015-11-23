@@ -45,6 +45,19 @@
 				}
 			}
 		})
+		.state('main.user_profile', {
+			url: 'profile',
+			parent: 'main',
+			controller: 'ProfileController',
+			controllerAs: 'profile',
+			templateUrl : 'app/templates/userProfile/user_profile.html',
+			data: {
+				permissions: {
+					except: ['guest'],
+					redirectTo: 'main.homepage'
+				}
+			}
+		})		
 		.state('main.register', {
 			url: 'register',
 			parent: 'main',
