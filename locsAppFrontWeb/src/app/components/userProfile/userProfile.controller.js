@@ -24,6 +24,7 @@
 		toastr.error("This is odd...", "Woops...");
 	}
 
+	/*Adds a new scope to share, and goes to profile_management*/
 	vm.goToParameters = function() {
 		ScopesService
 		.set("user_infos", vm.user);

@@ -1,8 +1,26 @@
+.user_profile_parameters {
+	height: 100%;
+}
+
 .user_profile_parameters_menu {
 	width : 200px;
+
+	md-card {
+		margin-right : 0px;
+	}
 
 	h3 {
 		text-align : center;
 		margin : auto;
+	}
+}
+
+.user_profile_parameters_content {
+	
+	height: 100%;
+	margin-left: 0px;
+
+	md-card {
+		margin-left : 0px;
 	}
 }

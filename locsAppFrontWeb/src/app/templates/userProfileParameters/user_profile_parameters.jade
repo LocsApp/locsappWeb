@@ -1,5 +1,15 @@
-section(layout="column", layout-align="start start" layout-margin)
-	md-list(flex="none").user_profile_parameters_menu
-		md-card
-			md-list-item.md-1-line
-				h3 Informations
+div.user_profile_parameters
+	section(layout="row", layout-align="start start" layout-margin)
+		div(flex="none").user_profile_parameters_menu
+			md-card
+				md-list
+					md-list-item.md-1-line
+						h3 Informations
+					md-divider
+					md-list-item.md-1-line
+						h3 Emails
+					md-divider
+					md-list-item.md-1-line
+						h3 Change Password
+		md-card(flex).user_profile_parameters_content
+			h2 Username
