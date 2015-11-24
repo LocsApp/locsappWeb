@@ -57,7 +57,20 @@
 					redirectTo: 'main.homepage'
 				}
 			}
-		})		
+		})
+		.state('main.profile_management', {
+			url: 'profile-parameters',
+			parent: 'main',
+			controller: 'ProfileParamsController',
+			controllerAs: 'profileParams',
+			templateUrl : 'app/templates/userProfileParameters/user_profile_parameters.html',
+			data: {
+				permissions: {
+					except: ['guest'],
+					redirectTo: 'main.homepage'
+				}
+			}
+		})
 		.state('main.register', {
 			url: 'register',
 			parent: 'main',
