@@ -18,6 +18,12 @@
 		vm.user = data;
 	}
 
+	/*Failure callback of profile_check*/
+	vm.GetInfosUserFailure = function(data) {
+		$log.log(data);
+		toastr.error("This is odd...", "Woops...");
+	}
+
 	vm.goToParameters = function() {
 		ScopesService
 		.set("user_infos", vm.user);
