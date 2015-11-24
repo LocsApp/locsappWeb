@@ -6,7 +6,7 @@
 	.controller('ProfileParamsController', ProfileParamsController);
 
   /** @ngInject */
-  function ProfileParamsController($scope, $log, ScopesService, UsersService) {
+  function ProfileParamsController($scope, $log, ScopesService, UsersService, toastr) {
 		var vm = this;
 
 		/*vars initilization*/
