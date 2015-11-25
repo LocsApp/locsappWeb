@@ -3,15 +3,15 @@
 }
 
 .user_profile_parameters_menu {
-	width : 200px;
+	width: 200px;
 
 	md-card {
-		margin-right : 0px;
+		margin-right: 0px;
 	}
 
 	h3 {
-		text-align : center;
-		margin : auto;
+		text-align: center;
+		margin: auto;
 	}
 }
 
@@ -19,8 +19,13 @@
 	
 	height: 100%;
 	margin-left: 0px;
+	background-color: #A6A6A6;
 
-	md-card {
-		margin-left : 0px;
+	h2 {
+		margin: 10px auto;
+	}
+
+	md-card-content {
+		background-color : #FFFFFF;
 	}
 }

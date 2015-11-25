@@ -11,4 +11,11 @@ section(layout="row", layout-align="start start" layout-margin)
 				md-list-item(ng-click="").md-1-line
 					h3 Change Password
 	md-card(flex).user_profile_parameters_content
-		h2 Username
+		h2 General Informations
+		md-card-content
+			p
+				strong Username :
+				span {{ }} {{ profileParams.user.username }}
+			p
+				strong Email :
+				span{{ }} {{ profileParams.user.email }}
