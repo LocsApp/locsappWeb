@@ -6,7 +6,6 @@ from . import views
 from django.views.generic.base import RedirectView
 
 from allauth.account.views import confirm_email
-from rest_framework_nested import routers
 
 
 """
@@ -14,7 +13,6 @@ from rest_framework_nested import routers
 
 @apiParam {String} username Username of the user
 """
-
 
 article_patterns = [
     url(r'^create/$', views.postNewArticle),
