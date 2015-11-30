@@ -17,5 +17,9 @@ section(layout="row", layout-align="start start" layout-margin)
 				strong Username :
 				span {{ }} {{ profileParams.user.username }}
 			p
+				strong Registered on :
+				span {{ }} {{ profileParams.user.registered_date | date : 'medium' : timezone }}
+			p
 				strong Email :
 				span{{ }} {{ profileParams.user.email }}
+			
