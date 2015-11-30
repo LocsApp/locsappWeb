@@ -1,6 +1,24 @@
-<span ng-if="!field" class="user_profile_parameters_no_info">{{ }} No given info</span>
-<span>
-	<ng-md-icon icon="mode_edit" class="user_profile_parameters_edit_mode">
-		<md-tooltip md-direction="right">Edit</md-tooltip>
+<span ng-if="edition">
+	<input class="md-input" autofocus="true" aria-label="first_name field" ng-model="field" style="max-width:100px; border-top: none; border-right: none; border-left: none; background: transparent; margin-bottom: -7px; font-family:inherit;" />
+	<ng-md-icon icon="cancel" class="user_profile_parameters_edit_mode" ng-click="fallbackField(); changeEdition();">
+		<md-tooltip md-direction="bottom">
+			Cancel
+		</md-tooltip>
 	</ng-md-icon>
+	<ng-md-icon icon="check" class="user_profile_parameters_edit_mode" ng-click="updateBackupField(field); changeEdition();">
+		<md-tooltip md-direction="bottom">
+			Save
+		</md-tooltip>
+	</ng-md-icon>
+</span>
+<span ng-if="!edition">
+	<span ng-if="!field" class="user_profile_parameters_no_info">{{ }} No given info</span>
+	<span ng-if="field">{{ }} {{ field }}</span>
+	<span>
+		<ng-md-icon icon="mode_edit" class="user_profile_parameters_edit_mode" ng-click="changeEdition();">
+			<md-tooltip md-direction="right">
+				Edit
+			</md-tooltip>
+		</ng-md-icon>
+	</span>
 </span>
