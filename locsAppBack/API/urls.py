@@ -14,6 +14,7 @@ from allauth.account.views import confirm_email
 @apiParam {String} username Username of the user
 """
 
+
 article_patterns = [
     url(r'^create/$', views.postNewArticle),
     url(r'^delete/$', views.deleteArticle),
@@ -27,6 +28,5 @@ api_patterns = [
         name="account_email_verification_sent"),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls'), name='registrationUser'),
     url(r'^verify-email/(?P<key>\w+)/$', confirm_email, name="account_confirm_email"),
-    url(r'^api/v1/', include(router.urls)),
 
 ]
