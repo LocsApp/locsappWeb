@@ -10,7 +10,7 @@
 		var directive = {};
 
 		directive.restrict = 'E';
-		directive.template = '<span ng-if="!field" class="user_profile_parameters_no_info">{{ }} No given info</span><span><ng-md-icon icon="mode_edit" class="user_profile_parameters_edit_mode"></ng-md-icon></span>'
+		directive.templateUrl = 'app/components/editableField/editableField.tmpl.html';
 		directive.scope = {
 			field : "=field"
 		};
