@@ -1,6 +1,9 @@
 # Django imports
 from django.shortcuts import render
+from django.contrib.auth import get_user_model
 from django.views.generic.base import TemplateView
+from rest_framework import permissions, viewsets
+from .serializers import UserPutSerializer
 from django.http import JsonResponse
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -60,6 +63,15 @@ def postNewArticle(request):
 """
     PUT END-POINTS
 """
+
+
+class UserViewset(viewsets.ModelViewSet):
+    lookup_field = 'username'
+    queryset = get_user_model().objects.order_by('username')
+    serializer_class = UserPutSerializer
+
+    def perform_create(self, serializer):
+        pass
 
 """
     DELETE END-POINTS
