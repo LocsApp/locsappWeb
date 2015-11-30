@@ -21,19 +21,16 @@ section(layout="row", layout-align="start start" layout-margin)
 				span {{ }} {{ profileParams.user.registered_date | date : 'medium' : timezone }}
 			p
 				strong Email :
-				span{{ }} {{ profileParams.user.email }}
+				span {{ }} {{ profileParams.user.email }}
 		h2 Personal Informations
 		md-card-content
 			p
 				strong First Name :
-				span(ng-if="profileParams.user.first_name") {{ }} profileParams.user.first_name
-				span(ng-if="!profileParams.user.first_name").user_profile_parameters_no_info {{ }} No given info 
+				editable-field(field="profileParams.user.first_name" edition="first_name_edition")
 			p
 				strong Last Name :
-				span(ng-if="profileParams.user.last_name") {{ }} profileParams.user.last_name
-				span(ng-if="!profileParams.user.last_name").user_profile_parameters_no_info {{ }} No given info 
+				editable-field(field="profileParams.user.last_name" edition="last_name_edition")
 			p
 				strong Birthdate :
-				span(ng-if="profileParams.user.birthdate") {{ }} profileParams.user.birthdate
-				span(ng-if="!profileParams.user.birthdate").user_profile_parameters_no_info {{ }} No given info 
+				editable-field(field="profileParams.user.birthdate" edition="birthdate_edition")
 			

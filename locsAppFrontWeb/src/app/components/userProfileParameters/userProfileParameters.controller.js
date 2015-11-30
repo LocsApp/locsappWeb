@@ -9,6 +9,7 @@
   function ProfileParamsController($scope, $log, ScopesService, UsersService, toastr) {
 		var vm = this;
 
+		vm.first_name_edition = false;
 		/*vars initilization*/
 		vm.user = ScopesService.get("user_infos");
 
