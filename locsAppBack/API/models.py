@@ -37,8 +37,8 @@ class Account(AbstractBaseUser):
     billing_address = models.TextField(null=True, default=None)
     logo_url = models.CharField(max_length=255, null=True)
 
-    registered_date = models.DateTimeField(default=timezone.now);
-    last_activity_date = models.DateTimeField(null=True);
+    registered_date = models.DateTimeField(default=timezone.now)
+    last_activity_date = models.DateTimeField(null=True)
 
     is_active = models.CharField(max_length=10, default=True)
     role = models.CharField(max_length=10, default="user")
