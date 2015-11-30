@@ -16,7 +16,7 @@
 
 			scope.$watch('field', function(newValue) {
 				if (newValue)
-					scope.validation({field: scope.field});
+					scope.validation();
 			});
 
 			scope.changeEdition = function () {

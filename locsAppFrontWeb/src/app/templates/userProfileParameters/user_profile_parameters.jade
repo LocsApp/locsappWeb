@@ -31,8 +31,12 @@ section(layout="row", layout-align="start start" layout-margin)
 				 validation="profileParams.updateFieldUser(profileParams.user.first_name, 'first_name');")
 			p
 				strong Last Name :
-				editable-field(field="profileParams.user.last_name" edition="profileParams.last_name_edition")
+				editable-field(field="profileParams.user.last_name",
+				 edition="profileParams.last_name_edition",
+				 validation="profileParams.updateFieldUser(profileParams.user.last_name, 'last_name');")
 			p
 				strong Birthdate :
-				editable-field(field="profileParams.user.birthdate" edition="profileParams.birthdate_edition")
+				editable-field(field="profileParams.user.birthdate",
+				 edition="profileParams.birthdate_edition",
+				 validation="profileParams.updateFieldUser(profileParams.user.birthdate, 'birthdate');")
 			
