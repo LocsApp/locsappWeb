@@ -6,7 +6,7 @@
 	.run(runBlock);
 
   /** @ngInject */
-  function runBlock($http, Permission, UsersService, $q, $sessionStorage, $localStorage, $log) {
+  function runBlock($http, Permission, UsersService, $q, $sessionStorage, $localStorage, $log, toastr) {
 	//Automatize send of Csrf token
 	$http.defaults.xsrfHeaderName = 'X-CSRFToken';
 	$http.defaults.xsrfCookieName = 'csrftoken';
@@ -27,6 +27,16 @@
 		}
 
 		function profileError() {
+			if ($localStorage.key)
+			{
+				toastr("The server disconnected you.", "Please login again");
+				delete $localStorage.key
+			}
+			if ($sessionStorage.key)
+			{
+				toastr("The server disconnected you.", "Please login again");
+				delete $sessionStorage.key
+			}
 			$log.log("out");
 			deferred.resolve();
 		}
