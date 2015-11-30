@@ -3,6 +3,7 @@ from django.db import models
 from django.core.mail import EmailMessage
 from django.utils import timezone
 
+
 class AccountManager(BaseUserManager):
 
     def create_user(self, email, password=None, **kwargs):
@@ -24,6 +25,7 @@ class AccountManager(BaseUserManager):
         account = self.create_user(email, password, **kwargs)
         account.save()
         return account
+
 
 class Account(AbstractBaseUser):
     email = models.EmailField(unique=True)
