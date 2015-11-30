@@ -34,4 +34,9 @@
 	.user_profile_parameters_no_info {
 		color: $noInfo;
 	}
+
+	.user_profile_parameters_edit_mode {
+		margin-top: -7px;
+		cursor: pointer;
+	}
 }

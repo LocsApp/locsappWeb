@@ -8,6 +8,9 @@
   .module("LocsappServices", []);
 
   angular
+  .module("LocsappDirectives", []);
+
+  angular
 	.module('locsapp', ['ngAnimate',
 		'ngCookies',
 		'ngTouch', 
@@ -23,6 +26,7 @@
 		'permission',
 		'validation.match',
 		'ngStorage',
+		'LocsappDirectives',
 		'LocsappServices',
 		'LocsappControllers']);
 
