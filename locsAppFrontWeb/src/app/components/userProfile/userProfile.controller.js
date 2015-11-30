@@ -37,10 +37,5 @@
 	.get({})
 	.$promise
 	.then(vm.GetInfosUserSuccess, vm.GetInfosUserFailure);
-
-	/*Sends the new field to update the user informations*/
-	vm.updateFieldUser = function() {
-		$log.log("in function");
-	};
   }
 })();
