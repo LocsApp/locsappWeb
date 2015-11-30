@@ -1,3 +1,5 @@
+@import "../../theme.scss";
+
 .user_profile_parameters {
 	height: 100%;
 }
@@ -19,13 +21,17 @@
 	
 	height: 100%;
 	margin-left: 0px;
-	background-color: #A6A6A6;
+	background-color: $headerContainer;
 
 	h2 {
 		margin: 10px auto;
 	}
 
 	md-card-content {
-		background-color : #FFFFFF;
+		background-color : $bodyContainer;
+	}
+
+	.user_profile_parameters_no_info {
+		color: $noInfo;
 	}
 }
