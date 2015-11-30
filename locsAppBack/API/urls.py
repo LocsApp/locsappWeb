@@ -15,8 +15,6 @@ from rest_framework_nested import routers
 @apiParam {String} username Username of the user
 """
 
-router = routers.SimpleRouter()
-router.register(r'accounts', views.UserViewset)
 
 article_patterns = [
     url(r'^create/$', views.postNewArticle),
