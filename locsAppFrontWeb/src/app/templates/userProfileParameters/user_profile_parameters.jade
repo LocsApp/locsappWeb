@@ -25,12 +25,15 @@ section(layout="row", layout-align="start start" layout-margin)
 		h2 Personal Informations
 		md-card-content
 			p
-				strong First Name :
-				editable-field(field="profileParams.user.first_name" edition="first_name_edition")
+				strong(ng-click="profileParams.updateFieldUser();") First Name :
+				editable-field(field="profileParams.user.first_name",
+				 edition="profileParams.first_name_edition",
+				 fieldname="first_name",
+				 validation="profileParams.updateFieldUser(profileParams.user.first_name, 'first_name');")
 			p
 				strong Last Name :
-				editable-field(field="profileParams.user.last_name" edition="last_name_edition")
+				editable-field(field="profileParams.user.last_name" edition="profileParams.last_name_edition")
 			p
 				strong Birthdate :
-				editable-field(field="profileParams.user.birthdate" edition="birthdate_edition")
+				editable-field(field="profileParams.user.birthdate" edition="profileParams.birthdate_edition")
 			
