@@ -37,7 +37,7 @@
 					toastr.error("We couldn't log you in with these infos..." , 'Woops...');
 		}
 		else
-			toastr.error("This the server isn't answering...", "Woops...");
+			toastr.error("The server isn't answering...", "Woops...");
 	};
 
   }
