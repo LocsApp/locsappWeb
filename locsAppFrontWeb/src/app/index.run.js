@@ -29,12 +29,12 @@
 		function profileError() {
 			if ($localStorage.key)
 			{
-				toastr("The server disconnected you.", "Please login again");
+				toastr.error("The server disconnected you.", "Please login again");
 				delete $localStorage.key
 			}
 			if ($sessionStorage.key)
 			{
-				toastr("The server disconnected you.", "Please login again");
+				toastr.error("The server disconnected you.", "Please login again");
 				delete $sessionStorage.key
 			}
 			$log.log("out");
