@@ -6,7 +6,7 @@
 	.directive('editableField', editableField);
 
 	/** @ngInject */
-	function editableField($parse)
+	function editableField()
 	{
 		var directive = {};
 
