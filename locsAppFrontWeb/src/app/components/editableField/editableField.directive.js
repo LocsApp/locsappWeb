@@ -34,7 +34,6 @@
 		}
 		directive.scope = {
 			field : "=field",
-			fieldname : "=fieldname",
 			field_backup : "=field",
 			edition: "=edition",
 			validation: '&validation'
