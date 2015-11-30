@@ -3,6 +3,7 @@ from django.db import models
 from django.core.mail import EmailMessage
 from django.utils import timezone
 
+
 class AccountManager(BaseUserManager):
 
     def create_user(self, email, password=None, **kwargs):
@@ -25,6 +26,7 @@ class AccountManager(BaseUserManager):
         account.save()
         return account
 
+
 class Account(AbstractBaseUser):
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=20,unique=True)
@@ -37,8 +39,8 @@ class Account(AbstractBaseUser):
     billing_address = models.TextField(null=True, default=None)
     logo_url = models.CharField(max_length=255, null=True)
 
-    registered_date = models.DateTimeField(default=timezone.now);
-    last_activity_date = models.DateTimeField(null=True);
+    registered_date = models.DateTimeField(default=timezone.now)
+    last_activity_date = models.DateTimeField(null=True)
 
     is_active = models.CharField(max_length=10, default=True)
     role = models.CharField(max_length=10, default="user")
