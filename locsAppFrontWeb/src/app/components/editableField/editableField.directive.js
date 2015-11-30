@@ -6,18 +6,18 @@
 	.directive('editableField', editableField);
 
 	/** @ngInject */
-	function editableField($parse, $log)
+	function editableField($parse)
 	{
 		var directive = {};
 
 		directive.restrict = 'EA';
 		directive.templateUrl = 'app/components/editableField/editableField.tmpl.html';
-		directive.link =  function(scope, elems, attrs) {
+		directive.link =  function(scope) {
 
-			scope.$watch('field', function(newValue, oldValue) {
+			scope.$watch('field', function(newValue) {
 				if (newValue)
 					scope.validation({field: scope.field});
-			})
+			});
 
 			scope.changeEdition = function () {
 				scope.edition = !scope.edition;
