@@ -57,14 +57,33 @@ class AccountTestCase(APITestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(Account.objects.count(), 0)
 
-    def test_missing_password(self):
+    def test_missing_the_two_password(self):
         """
         Ensures we send an error when password is missing for register
         """
-        data = {"username": "test", "email": "toto@hotmail.fr"}
+        data = {"email": "toto@hotmail.fr", "username": "toto"}
         response = self.client.post(self.url, data, format='json')
         self.assertEqual(response.status_code, 400)
         self.assertEqual(Account.objects.count(), 0)
 
+    def test_missing_password2(self):
+        """
+        Ensures we send an error when password is missing for register
+        """
+        data = {"email": "toto@hotmail.fr", "username": "toto", "password1": "toto42"}
+        response = self.client.post(self.url, data, format='json')
+        self.assertEqual({'password2': ['This field is required.']}, response.data)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(Account.objects.count(), 0)
+
+    def test_missing_password1(self):
+        """
+        Ensures we send an error when password is missing for register
+        """
+        data = {"email": "toto@hotmail.fr", "username": "toto", "password2": "toto42"}
+        response = self.client.post(self.url, data, format='json')
+        self.assertEqual({'password1': ['This field is required.']}, response.data)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(Account.objects.count(), 0)
 
 
