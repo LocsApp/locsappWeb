@@ -11,7 +11,7 @@ from API.models import Account
 # "billing_address": "11 rue des keks", "birthdate": "1990-08-22 11:05:08",
 #        "living_address": "11 rue des keks"}
 
-class AccountTestCase(APITestCase):
+class AccountRegisterTestCase(APITestCase):
     def setUp(self):
         self.url = 'http://127.0.0.1:8000/api/v1/rest-auth/registration/'
 
@@ -86,4 +86,42 @@ class AccountTestCase(APITestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(Account.objects.count(), 0)
 
+    def test_missing_password1(self):
+        """
+        Ensures we send an error when password is missing for register
+        """
+        data = {"email": "toto@hotmail.fr", "username": "toto", "password2": "toto42"}
+        response = self.client.post(self.url, data, format='json')
+        self.assertEqual({'password1': ['This field is required.']}, response.data)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(Account.objects.count(), 0)
 
+    def test_password_too_short_with_two_password(self):
+        """
+        Ensures we send an error when password is too short for register and when we have the two password
+        """
+        data = {"email": "toto@hotmail.fr", "username": "toto", "password1": "toto", "password2": "toto"}
+        response = self.client.post(self.url, data, format='json')
+        self.assertEqual({'password1': ['Password must be a minimum of 6 characters.']}, response.data)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(Account.objects.count(), 0)
+
+    def test_password_too_short_with_password1(self):
+        """
+        Ensures we send an error when password is too short for register and when we have the two password
+        """
+        data = {"email": "toto@hotmail.fr", "username": "toto", "password1": "toto", "password2": "toto42"}
+        response = self.client.post(self.url, data, format='json')
+        self.assertEqual({'password1': ['Password must be a minimum of 6 characters.']}, response.data)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(Account.objects.count(), 0)
+
+    def test_password_different(self):
+        """
+        Ensures we send an error when password are different for register
+        """
+        data = {"email": "toto@hotmail.fr", "username": "toto", "password1": "toto42", "password2": "toto4"}
+        response = self.client.post(self.url, data, format='json')
+        self.assertEqual( {'__all__': ['You must type the same password each time.']}, response.data)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(Account.objects.count(), 0)
