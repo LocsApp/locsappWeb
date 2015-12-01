@@ -26,7 +26,7 @@
 			deferred.reject();
 		}
 
-		function profileError() {
+		function profileError(data) {
 			if ($localStorage.key)
 			{
 				toastr.error("The server disconnected you.", "Please login again");
@@ -37,6 +37,7 @@
 				toastr.error("The server disconnected you.", "Please login again");
 				delete $sessionStorage.key
 			}
+			$log.log(data);
 			$log.log("out");
 			deferred.resolve();
 		}

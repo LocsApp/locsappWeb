@@ -22,7 +22,7 @@
 	};
 
 	vm.userRegisteredFailure = function (data) {
-		$log.log(data.data);
+		$log.log(data);
 		var errorMsg = "This is odd...";
 		if (data.data.username[0].indexOf("taken") > -1)
 			errorMsg = "The username is already taken...";
