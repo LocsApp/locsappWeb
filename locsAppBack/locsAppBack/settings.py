@@ -32,7 +32,7 @@ REST_SESSION_LOGIN = False
 # Aks for the old password when changing passwords
 OLD_PASSWORD_FIELD_ENABLED = True
 
-#Custom serializer for user details
+# Custom serializer for user details
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'API.serializers.UserDetailsSerializer'
 }
@@ -135,20 +135,21 @@ WSGI_APPLICATION = 'locsAppBack.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-DATABASES = {
-    #'default': {
-    #    'ENGINE': 'django.db.backends.sqlite3',
-    #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    #}
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': u'locsapp',
-        'HOST': u'localhost',
-        'USER': 'locsapp',
-        'PASSWORD': 'locsapp',
-        'PORT': ''
+if socket.gethostname() != "sylflo.fr":
+    DATABASES = {
+        #'default': {
+        #    'ENGINE': 'django.db.backends.sqlite3',
+        #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        #}
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': u'locsapp',
+            'HOST': u'localhost',
+            'USER': 'locsapp',
+            'PASSWORD': 'locsapp',
+            'PORT': ''
+        }
     }
-}
 
 REST_FRAMEWORK = {
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
@@ -210,12 +211,12 @@ if socket.gethostname() == "sylflo.fr":
     ADMINS = (
         ('Sylvain Chateau', 'dev.chateau@gmail.com'),
     )
-    #DATABASES = {
-    #    'default':
-    #        {'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #         'NAME': u'locs_app',
-    #         'HOST': u'localhost',
-    #         'USER': 'locs_app',
-    #         'PASSWORD': '}{4KkAf7',
-    #         'PORT': ''}
-    #}
+    DATABASES = {
+        'default':
+            {'ENGINE': 'django.db.backends.postgresql_psycopg2',
+             'NAME': u'locs_app',
+             'HOST': u'localhost',
+             'USER': 'locs_app',
+             'PASSWORD': '}{4KkAf7',
+             'PORT': ''}
+    }
