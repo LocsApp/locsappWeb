@@ -31,10 +31,12 @@
 		if (data.data)
 		{
 			if (data.data.non_field_errors)
-				if (data.data.non_field_errors[0].indexOf("not verified"))
+			{
+				if (data.data.non_field_errors[0].indexOf("not verified") > -1)
 					toastr.error("Please verify your email." , 'Woops...');
 				else
 					toastr.error("We couldn't log you in with these infos..." , 'Woops...');
+			}
 		}
 		else
 			toastr.error("The server isn't answering...", "Woops...");
