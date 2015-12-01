@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 from django.core.mail import EmailMessage
 from django.utils import timezone
-
+from django.contrib.postgres.fields import ArrayField
 
 class AccountManager(BaseUserManager):
 
@@ -28,15 +28,15 @@ class AccountManager(BaseUserManager):
 
 
 class Account(AbstractBaseUser):
-    email = models.EmailField(unique=True)
+    email = ArrayField(models.EmailField(unique=True))
     username = models.CharField(max_length=20,unique=True)
 
     first_name = models.CharField(max_length=30, default=None, null=True)
     last_name = models.CharField(max_length=30, default=None, null=True)   
     birthdate = models.CharField(max_length=30, null=True)
     phone = models.CharField(max_length=10, null=True)
-    living_address = models.TextField(null=True, default=None)
-    billing_address = models.TextField(null=True, default=None)
+    living_address = ArrayField(models.TextField(null=True, default=None))
+    billing_address = ArrayField(models.TextField(null=True, default=None))
     logo_url = models.CharField(max_length=255, null=True)
 
     registered_date = models.DateTimeField(default=timezone.now)
