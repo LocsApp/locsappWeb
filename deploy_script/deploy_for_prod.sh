@@ -14,6 +14,6 @@ python  /var/www/locsapp.sylflo.fr/locsappWeb/locsAppBack/manage.py migrate
 cd /var/www/locsapp.sylflo.fr/locsappWeb/locsAppFrontWeb/
 npm install
 bower install
-/var/www/locsapp.sylflo.fr/locsappWeb/locsAppFrontWeb/dev/launch_all_gulp.sh
+gulp build
 sudo /etc/init.d/nginx  restart
 
