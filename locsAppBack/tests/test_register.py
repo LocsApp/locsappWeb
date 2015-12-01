@@ -8,7 +8,7 @@ from API.models import Account
 
 # data = {"username": "test", "password1": "Topkek1", "password2": "Topkek1", "email": "mamamia@gmail.co",
 # "phone": "0676283782", "is_active": "True", "last_name": "Kekman", "first_name": "Coco",
-#        "billing_address": "11 rue des keks", "birthdate": "1990-08-22 11:05:08",
+# "billing_address": "11 rue des keks", "birthdate": "1990-08-22 11:05:08",
 #        "living_address": "11 rue des keks"}
 
 class AccountTestCase(APITestCase):
@@ -29,11 +29,31 @@ class AccountTestCase(APITestCase):
 
     def test_missing_username(self):
         """
-        Ensures we send an error when password is missing for register
+        Ensures we send an error when username is missing for register
         """
-        data = {"email": "toto@hotmail.fr", "password1": "toto42", "password2":"toto42"}
+        data = {"email": "toto@hotmail.fr", "password1": "toto42", "password2": "toto42"}
         response = self.client.post(self.url, data, format='json')
         self.assertEqual({'username': ['This field is required.']}, response.data)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(Account.objects.count(), 0)
+
+    def test_missing_email(self):
+        """
+        Ensures we send an error when email is missing for register
+        """
+        data = {"username": "toto", "password1": "toto42", "password2": "toto42"}
+        response = self.client.post(self.url, data, format='json')
+        self.assertEqual({'email': ['This field is required.']}, response.data)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(Account.objects.count(), 0)
+
+    def test_missing_email(self):
+        """
+        Ensures we send an error when email is not valid for register
+        """
+        data = {"email": "toto", "username": "toto", "password1": "toto42", "password2": "toto42"}
+        response = self.client.post(self.url, data, format='json')
+        self.assertEqual({'email': ['Enter a valid email address.']}, response.data)
         self.assertEqual(response.status_code, 400)
         self.assertEqual(Account.objects.count(), 0)
 
