@@ -32,6 +32,12 @@
 			.get({})
 			.$promise
 			.then(vm.GetInfosUserSuccess, vm.GetInfosUserFailure);
+
+		/*Sends the new field to update the user informations*/
+		vm.updateFieldUser = function(field, field_name) {
+			$log.log(field);
+			$log.log("Field name = "+field_name);
+		};
 	}
 
 })();

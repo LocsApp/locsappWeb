@@ -5,6 +5,7 @@
 	.module('LocsappDirectives')
 	.directive('editableField', editableField);
 
+	/** @ngInject */
 	function editableField()
 	{
 		var directive = {};
@@ -12,6 +13,12 @@
 		directive.restrict = 'EA';
 		directive.templateUrl = 'app/components/editableField/editableField.tmpl.html';
 		directive.link =  function(scope) {
+
+			scope.$watch('field', function(newValue) {
+				if (newValue)
+					scope.validation();
+			});
+
 			scope.changeEdition = function () {
 				scope.edition = !scope.edition;
 			};
@@ -28,7 +35,8 @@
 		directive.scope = {
 			field : "=field",
 			field_backup : "=field",
-			edition: "=edition"
+			edition: "=edition",
+			validation: '&validation'
 		};
 
 		return directive;
