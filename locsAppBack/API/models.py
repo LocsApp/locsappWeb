@@ -28,21 +28,23 @@ class AccountManager(BaseUserManager):
 
 
 class Account(AbstractBaseUser):
-    email = ArrayField(models.EmailField(unique=True))
+    email = models.EmailField(unique=True)
     username = models.CharField(max_length=20,unique=True)
+
+    secondary_emails = ArrayField(models.EmailField(unique=True), size=5, null=True)
 
     first_name = models.CharField(max_length=30, default=None, null=True)
     last_name = models.CharField(max_length=30, default=None, null=True)   
     birthdate = models.CharField(max_length=30, null=True)
     phone = models.CharField(max_length=10, null=True)
-    living_address = ArrayField(models.TextField(null=True, default=None))
-    billing_address = ArrayField(models.TextField(null=True, default=None))
+    living_address = ArrayField(models.TextField(null=True, default=None), null=True)
+    billing_address = ArrayField(models.TextField(null=True, default=None), null=True)
     logo_url = models.CharField(max_length=255, null=True)
 
     registered_date = models.DateTimeField(default=timezone.now)
     last_activity_date = models.DateTimeField(null=True)
 
-    is_active = models.CharField(max_length=10, default=True)
+    is_active = models.BooleanField(default=True)
     role = models.CharField(max_length=10, default="user")
 
     created_at = models.DateTimeField(auto_now_add=True)
