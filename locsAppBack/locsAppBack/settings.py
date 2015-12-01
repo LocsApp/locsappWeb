@@ -14,26 +14,27 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 import socket
 from os import path
+
 PROJECT_ROOT = path.dirname(path.abspath(__file__))
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # For APIDOC
-MEDIA_ROOT = path.join(PROJECT_ROOT,'templates/api_doc/src')
-MEDIA_URL  = '/templates/api_doc/src/'
+MEDIA_ROOT = path.join(PROJECT_ROOT, 'templates/api_doc/src')
+MEDIA_URL = '/templates/api_doc/src/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
-#Removes django session login
+# Removes django session login
 REST_SESSION_LOGIN = False
 
-#Aks for the old password when changing passwords
+# Aks for the old password when changing passwords
 OLD_PASSWORD_FIELD_ENABLED = True
 
 #Custom serializer for user details
 REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER' : 'API.serializers.UserDetailsSerializer'
+    'USER_DETAILS_SERIALIZER': 'API.serializers.UserDetailsSerializer'
 }
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '0#bk$^5fieu@defbgkbxaadd*5y940w-k$jwf!-8=pg)hz085$'
@@ -135,9 +136,17 @@ WSGI_APPLICATION = 'locsAppBack.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
+    #'default': {
+    #    'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    #}
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': u'locsapp',
+        'HOST': u'localhost',
+        'USER': 'locsapp',
+        'PASSWORD': 'locsapp',
+        'PORT': ''
     }
 }
 
@@ -199,7 +208,7 @@ if socket.gethostname() == "sylflo.fr":
     DEBUG = TEMPLATE_DEBUG = False
     ALLOWED_HOSTS = ["locsapp.sylflo.fr", ".sylflo.fr", "sylflo.fr"]
     ADMINS = (
-    	('Sylvain Chateau', 'dev.chateau@gmail.com'),
+        ('Sylvain Chateau', 'dev.chateau@gmail.com'),
     )
     #DATABASES = {
     #    'default':
