@@ -10,42 +10,4 @@ section(layout="row", layout-align="start start" layout-margin)
 				md-divider
 				md-list-item(ng-click="").md-1-line
 					h3 Change Password
-	md-card(flex).user_profile_parameters_content
-		h2 General Informations
-		md-card-content
-			p
-				strong Username :
-				span {{ }} {{ profileParams.user.username }}
-			p
-				strong Registered on :
-				span {{ }} {{ profileParams.user.registered_date | date : 'medium' : timezone }}
-			p
-				strong Email :
-				span {{ }} {{ profileParams.user.email }}
-				ng-md-icon(icon="info").user_profile_parameters_info_icon
-					md-tooltip(md-direction="right").
-						This is your primary email.
-						To change it go into the "Emails" Tab.
-		h2 Personal Informations
-		md-card-content
-			p
-				strong First Name :
-				editable-field(field="profileParams.user.first_name",
-				 edition="profileParams.first_name_edition",
-				 validation="profileParams.updateFieldUser(profileParams.user.first_name, 'first_name');")
-			p
-				strong Last Name :
-				editable-field(field="profileParams.user.last_name",
-				 edition="profileParams.last_name_edition",
-				 validation="profileParams.updateFieldUser(profileParams.user.last_name, 'last_name');")
-			p
-				strong Birthdate :
-				editable-field(field="profileParams.user.birthdate",
-				 edition="profileParams.birthdate_edition",
-				 validation="profileParams.updateFieldUser(profileParams.user.birthdate, 'birthdate');")
-			p
-				strong Phone :
-				editable-field(field="profileParams.user.phone",
-				 edition="profileParams.phone_edition",
-				 validation="profileParams.updateFieldUser(profileParams.user.phone, 'phone');")
-			
+	md-card(ui-view="" flex class="anim-in-out anim-slide-left" data-anim-speed="300").user_profile_parameters_content
