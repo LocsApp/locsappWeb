@@ -9,6 +9,7 @@
   function LoginController($scope, UsersService, toastr, $sessionStorage, $localStorage, $state, $log) {
     var vm = this;
 
+    /*Log in the user*/
     vm.submit = function() {
 		UsersService
 			.login
@@ -17,6 +18,7 @@
 			.then(vm.userLoggedinSuccess, vm.userLoggedinFailure);
     }
 
+    /*Success callback for login*/
 	vm.userLoggedinSuccess = function (data) {
 		$log.log(data);
 		if ($scope.remember_me == true)
@@ -26,6 +28,7 @@
 		$state.go("main.homepage");
 	};
 
+	/*Success callback for login*/
 	vm.userLoggedinFailure = function (data) {
 		$log.log(data.data);
 		if (data.data)
