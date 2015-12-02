@@ -9,6 +9,9 @@
 
 	md-list {
 		padding: 0px;
+		md-list-item button.md-button:hover:not([disabled]) {
+			background-color : inherit;
+		}
 	}
 
 	md-card {
@@ -20,6 +23,10 @@
 		text-align: center;
 		margin: auto;
 	}
+}
+
+.user_profile_parameters_menu_tab_selected {
+	background-color : $selectedTab;
 }
 
 .user_profile_parameters_content {

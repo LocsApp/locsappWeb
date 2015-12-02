@@ -61,9 +61,9 @@
 		.state('main.profile_management', {
 			url: 'profile-parameters',
 			parent: 'main',
-			redirectTo: 'main.profile_management.default',
 			controller: 'ProfileParamsController',
 			controllerAs: 'profileParams',
+			redirectTo: 'main.profile_management.default',
 			templateUrl : 'app/templates/userProfileParameters/user_profile_parameters.html',
 			data: {
 				permissions: {
@@ -74,10 +74,28 @@
 		})
 		.state('main.profile_management.default', {
 			url: '/informations',
-			parent: 'main.profile_management',
-			controller: 'ProfileParamsController',
-			controllerAs: 'profileParams',
 			templateUrl : 'app/templates/userProfileParameters/Menu_Tabs/user_profile_parameters_informations.html',
+			data: {
+				permissions: {
+					except: ['guest'],
+					redirectTo: 'main.homepage'
+				}
+			}
+		})
+		.state('main.profile_management.emails', {
+			url: '/emails',
+			templateUrl : 'app/templates/userProfileParameters/Menu_Tabs/user_profile_parameters_emails.html',
+			data: {
+				permissions: {
+					except: ['guest'],
+					redirectTo: 'main.homepage'
+				}
+			}
+		})
+		.state('main.profile_management.change_password', {
+			url: '/change-password',
+			parent: 'main.profile_management',
+			templateUrl : 'app/templates/userProfileParameters/Menu_Tabs/user_profile_parameters_change_password.html',
 			data: {
 				permissions: {
 					except: ['guest'],
