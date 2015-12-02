@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.contrib.postgres.fields import ArrayField
 from rest_framework import serializers
 
+
 class AccountManager(BaseUserManager):
 
     def create_user(self, email, password=None, **kwargs):
@@ -35,7 +36,7 @@ class Account(AbstractBaseUser):
     secondary_emails = ArrayField(models.EmailField(), null=True)
 
     first_name = models.CharField(max_length=30, default=None, null=True)
-    last_name = models.CharField(max_length=30, default=None, null=True)   
+    last_name = models.CharField(max_length=30, default=None, null=True)
     birthdate = models.CharField(max_length=30, null=True)
     phone = models.CharField(max_length=10, null=True)
     living_address = ArrayField(models.TextField(null=True, default=None), null=True)
@@ -49,6 +50,7 @@ class Account(AbstractBaseUser):
     role = models.CharField(max_length=10, default="user")
 
     created_at = models.DateTimeField(auto_now_add=True)
+    is_admin = models.BooleanField(default=False)
 
 
 
@@ -60,3 +62,23 @@ class Account(AbstractBaseUser):
 
     def __unicode__(self):
         return self.email
+
+    def get_full_name(self):
+        return self.first_name
+
+    def get_short_name(self):
+        return self.last_name
+
+    @property
+    def is_superuser(self):
+        return self.is_admin
+
+    @property
+    def is_staff(self):
+        return self.is_admin
+
+    def has_perm(self, perm, obj=None):
+        return self.is_admin
+
+    def has_module_perms(self, app_label):
+        return self.is_admin
