@@ -1,10 +1,10 @@
 md-card
 	md-list
-		md-list-item(ng-click="profileParams.goToParamPage('main.profile_management.default');").md-1-line
+		md-list-item(ng-click="profileParams.goToParamPage('main.profile_management.default', 0);" ng-class="{user_profile_parameters_menu_tab_selected : profileParams.tabSelected[0]}").md-1-line
 			h3 Informations
 		md-divider
 		md-list-item(ng-click="").md-1-line
 			h3 Emails
 		md-divider
-		md-list-item(ng-click="profileParams.goToParamPage('main.profile_management.change_password');").md-1-line
+		md-list-item(ng-click="profileParams.goToParamPage('main.profile_management.change_password', 2);" ng-class="{user_profile_parameters_menu_tab_selected : profileParams.tabSelected[2]}").md-1-line
 			h3 Change Password

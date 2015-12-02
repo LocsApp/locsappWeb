@@ -22,6 +22,10 @@
 	}
 }
 
+.user_profile_parameters_menu_tab_selected {
+	background-color : $selectedTab;
+}
+
 .user_profile_parameters_content {
 	
 	height: 100%;

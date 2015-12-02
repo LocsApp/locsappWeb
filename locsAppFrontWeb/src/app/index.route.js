@@ -82,6 +82,16 @@
 				}
 			}
 		})
+		.state('main.profile_management.emails', {
+			url: '/emails',
+			templateUrl : 'app/templates/userProfileParameters/Menu_Tabs/user_profile_parameters_emails.html',
+			data: {
+				permissions: {
+					except: ['guest'],
+					redirectTo: 'main.homepage'
+				}
+			}
+		})
 		.state('main.profile_management.change_password', {
 			url: '/change-password',
 			parent: 'main.profile_management',
