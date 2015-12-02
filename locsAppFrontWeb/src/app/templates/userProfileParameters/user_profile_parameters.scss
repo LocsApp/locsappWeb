@@ -9,6 +9,9 @@
 
 	md-list {
 		padding: 0px;
+		md-list-item button.md-button:hover:not([disabled]) {
+			background-color : inherit;
+		}
 	}
 
 	md-card {
