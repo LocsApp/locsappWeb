@@ -30,8 +30,8 @@ class AccountManager(BaseUserManager):
 
 
 class Account(AbstractBaseUser):
-    email = models.EmailField(unique=True)
-    username = models.CharField(max_length=20, unique=True)
+    email = models.EmailField(unique=True, blank=False)
+    username = models.CharField(max_length=20, unique=True, blank=False)
 
     secondary_emails = ArrayField(models.EmailField(), null=True)
 

@@ -138,7 +138,7 @@ if socket.gethostname() != "sylflo.fr":
     DATABASES = {
         # 'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
-        #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         #}
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -179,7 +179,7 @@ SOCIALACCOUNT_PROVIDERS = \
                  'updated_time'],
              'EXCHANGE_TOKEN': True,
              'LOCALE_FUNC': 'path.to.callable',
-             'VERIFIED_EMAIL': False,
+             'VERIFIED_EMAIL': True,
              'VERSION': 'v2.5'
          },
      'google':
@@ -187,12 +187,11 @@ SOCIALACCOUNT_PROVIDERS = \
           'AUTH_PARAMS': {'access_type': 'online'}}
      }
 
-
 SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
 SOCIALACCOUNT_EMAIL_REQUIRED = False
 SOCIALACCOUNT_QUERY_EMAIL = True
 
-#  - set it to True if you want to have old password verification on password change enpoint (default: False)
+# - set it to True if you want to have old password verification on password change enpoint (default: False)
 OLD_PASSWORD_FIELD_ENABLED = True
 # Keep the user logged after the password has changed
 LOGOUT_ON_PASSWORD_CHANGE = False
