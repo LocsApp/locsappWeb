@@ -32,7 +32,7 @@ class Account(AbstractBaseUser):
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=20, unique=True)
 
-    secondary_emails = ArrayField(models.EmailField(unique=True), null=True)
+    secondary_emails = ArrayField(models.EmailField(), null=True)
 
     first_name = models.CharField(max_length=30, default=None, null=True)
     last_name = models.CharField(max_length=30, default=None, null=True)   
