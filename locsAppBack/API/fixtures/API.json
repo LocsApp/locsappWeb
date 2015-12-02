@@ -1,0 +1,26 @@
+[
+  {
+    "fields": {
+      "role": "user",
+      "is_admin": true,
+      "billing_address": "[\"sgsgs\", \"sdgd\"]",
+      "email": "dev.chateau@gmail.com",
+      "registered_date": "2015-12-02T06:37:22.644Z",
+      "password": "pbkdf2_sha256$20000$AYfu6niWvOI8$UU6ufs5tULWJYxbSbFbdVj1SqfSbjic41mz4c9PGZH8=",
+      "phone": null,
+      "secondary_emails": "[]",
+      "username": "sylflo",
+      "logo_url": null,
+      "last_activity_date": null,
+      "created_at": "2015-12-02T06:37:22.661Z",
+      "first_name": null,
+      "is_active": true,
+      "last_login": null,
+      "birthdate": null,
+      "last_name": null,
+      "living_address": "[\"toto\", \"sdsg\", \"[sfdjgfpsojhs\", \"sdgsgdsgs\"]"
+    },
+    "model": "API.account",
+    "pk": 1
+  }
+]
