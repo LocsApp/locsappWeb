@@ -22,6 +22,10 @@ section(layout="row", layout-align="start start" layout-margin)
 			p
 				strong Email :
 				span {{ }} {{ profileParams.user.email }}
+				ng-md-icon(icon="info").user_profile_parameters_info_icon
+					md-tooltip(md-direction="right").
+						This is your primary email.
+						To change it go into the "Emails" Tab.
 		h2 Personal Informations
 		md-card-content
 			p

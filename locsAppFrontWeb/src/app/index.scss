@@ -97,6 +97,28 @@ section.jumbotron {
   top: 65px;
 }
 
+//Responsive md-tooltips
+md-tooltip {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  .md-background {
+    border-radius: inherit;
+  }
+  .md-content {
+    height: auto;
+    width: auto;
+    white-space: initial;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  md-tooltip .md-content {
+    font-size: 14px;
+    height: auto;
+    width: auto;
+    max-width: 250px;
+  }
+}
+
 /**
  *  Do not remove the comment below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically

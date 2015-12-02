@@ -39,4 +39,9 @@
 		margin-top: -7px;
 		cursor: pointer;
 	}
+
+	.user_profile_parameters_info_icon {
+		@extend .user_profile_parameters_edit_mode;
+		cursor: help;
+	}
 }
