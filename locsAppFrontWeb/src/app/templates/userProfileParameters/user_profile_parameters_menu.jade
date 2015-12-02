@@ -1,0 +1,10 @@
+md-card
+	md-list
+		md-list-item(ng-click="main.check()").md-1-line
+			h3(ng-click="profileParams.check()") Informations
+		md-divider
+		md-list-item(ng-click="").md-1-line
+			h3 Emails
+		md-divider
+		md-list-item(ui-sref="main.profile_management.change_password").md-1-line
+			h3 Change Password

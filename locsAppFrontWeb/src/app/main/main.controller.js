@@ -2,13 +2,13 @@
   'use strict';
 
   angular
-    .module('locsapp')
-    .controller('MainController', MainController);
+	.module('locsapp')
+	.controller('MainController', MainController);
 
   /** @ngInject */
   function MainController(UsersService) {
-    var vm = this;
+	var vm = this;
 
-    vm.is_authenticated = UsersService.is_authenticated;
+	vm.is_authenticated = UsersService.is_authenticated;
   }
 })();
