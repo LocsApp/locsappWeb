@@ -6,6 +6,9 @@ from django.http import JsonResponse
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect
+from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
+from rest_auth.registration.views import SocialLoginView
+
 
 # Pymongo imports
 from pymongo import MongoClient
@@ -30,6 +33,14 @@ db_locsapp = mongodb_client['locsapp']
 class docAPIView(TemplateView):
     template_name = "API/homeDocAPI.html"
 
+
+"""
+    SOCIAL NETWORK END-POINTS
+"""
+
+
+class FacebookLogin(SocialLoginView):
+    adapter_class = FacebookOAuth2Adapter
 
 """
     GET END-POINTS
