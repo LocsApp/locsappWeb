@@ -9,6 +9,7 @@
   function RegisterController($scope, UsersService, toastr, $log) {
     var vm = this;
 
+    /*Creates the new user*/
     vm.submit = function() {
 		UsersService
 			.register
@@ -17,10 +18,12 @@
 			.then(vm.userRegisteredSuccess, vm.userRegisteredFailure);
     }
 
+    /*Success callback for register*/
 	vm.userRegisteredSuccess = function () {
 		toastr.success('Congratulations on registrating to Locsapp! Now please check your email to confirm your email address :)', 'One last Step !');
 	};
 
+	/*Failure callback for register*/
 	vm.userRegisteredFailure = function (data) {
 		$log.log(data);
 		var errorMsg = "This is odd...";
