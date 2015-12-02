@@ -214,9 +214,9 @@ if socket.gethostname() == "sylflo.fr":
     DATABASES = {
         'default':
             {'ENGINE': 'django.db.backends.postgresql_psycopg2',
-             'NAME': u'locs_app',
+             'NAME': u'locsapp',
              'HOST': u'localhost',
-             'USER': 'locs_app',
+             'USER': 'locsapp',
              'PASSWORD': '}{4KkAf7',
              'PORT': ''}
     }
