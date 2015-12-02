@@ -26,6 +26,7 @@
 		'permission',
 		'validation.match',
 		'ngStorage',
+		'angular-loading-bar',
 		'LocsappDirectives',
 		'LocsappServices',
 		'LocsappControllers']);

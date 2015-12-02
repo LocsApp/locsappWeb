@@ -6,6 +6,7 @@
 // endbower
 
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,700,700italic,400italic);
+@import 'theme.scss';
 
 @font-face {
   font-family: 'Material Icons';
@@ -88,6 +89,11 @@ section.jumbotron {
       width: 100px;
     }
   }
+}
+
+#loading-bar .bar {
+  position: absolute;
+  top: 65px;
 }
 
 /**

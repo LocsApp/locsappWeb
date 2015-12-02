@@ -28,7 +28,7 @@ angular
 	.config(config);
 
   /** @ngInject */
-  function config($logProvider, toastrConfig, $locationProvider, $httpProvider, $resourceProvider) {
+  function config($logProvider, toastrConfig, $locationProvider, $httpProvider, $resourceProvider, cfpLoadingBarProvider) {
 	// Enable log
 	$logProvider.debugEnabled(true);
 
@@ -51,6 +51,11 @@ angular
 
 	//Prevent resource from stripping the / on requests (Django stuff)
 	$resourceProvider.defaults.stripTrailingSlashes = false;
+
+	//Sets the angular-loading-bar settings
+	cfpLoadingBarProvider.selector = '#loading-bar-container';
+	cfpLoadingBarProvider.includeSpinner = false;
+
   }
 
 })();
