@@ -6,7 +6,7 @@
 	.controller('ProfileParamsController', ProfileParamsController);
 
   /** @ngInject */
-  function ProfileParamsController($scope, $log, ScopesService, UsersService, toastr) {
+  function ProfileParamsController($scope, $log, ScopesService, UsersService, toastr, $state) {
 		var vm = this;
 
 		vm.first_name_edition = false;
@@ -37,6 +37,12 @@
 		vm.updateFieldUser = function(field, field_name) {
 			$log.log(field);
 			$log.log("Field name = "+field_name);
+		};
+
+		/*Changed state to stateName, here child state of user profile parameters*/
+		vm.goToParamPage = function(stateName)
+		{
+			$state.go(stateName);
 		};
 	}
 

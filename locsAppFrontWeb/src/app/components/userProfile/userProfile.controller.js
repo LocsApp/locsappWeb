@@ -37,6 +37,5 @@
 	.get({})
 	.$promise
 	.then(vm.GetInfosUserSuccess, vm.GetInfosUserFailure);
-
   }
 })();
