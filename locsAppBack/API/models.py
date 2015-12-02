@@ -3,6 +3,7 @@ from django.db import models
 from django.core.mail import EmailMessage
 from django.utils import timezone
 from django.contrib.postgres.fields import ArrayField
+from rest_framework import serializers
 
 class AccountManager(BaseUserManager):
 
@@ -31,13 +32,15 @@ class Account(AbstractBaseUser):
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=20,unique=True)
 
-    secondary_emails = ArrayField(models.EmailField(unique=True), size=5, null=True)
+    #score = ArrayField()
+    secondary_emails = ArrayField(models.EmailField(unique=True), null=True)
+    scores = ArrayField(models.IntegerField(), null=True)
 
     first_name = models.CharField(max_length=30, default=None, null=True)
     last_name = models.CharField(max_length=30, default=None, null=True)   
     birthdate = models.CharField(max_length=30, null=True)
     phone = models.CharField(max_length=10, null=True)
-    living_address = ArrayField(models.TextField(null=True, default=None), null=True)
+    living_address = ArrayField(models.CharField(null=True, default=None, max_length=255), null=True)
     billing_address = ArrayField(models.TextField(null=True, default=None), null=True)
     logo_url = models.CharField(max_length=255, null=True)
 
