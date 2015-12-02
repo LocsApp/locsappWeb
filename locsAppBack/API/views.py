@@ -43,6 +43,9 @@ class docAPIView(TemplateView):
 class FacebookLogin(SocialLoginView):
     adapter_class = FacebookOAuth2Adapter
 
+    #def post(self, request, *args, **kwargs):
+    #    return 42
+
 
 class GoogleLogin(SocialLoginView):
     adapter_class = GoogleOAuth2Adapter

@@ -187,9 +187,15 @@ SOCIALACCOUNT_PROVIDERS = \
           'AUTH_PARAMS': {'access_type': 'online'}}
      }
 
+
 SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
 SOCIALACCOUNT_EMAIL_REQUIRED = False
 SOCIALACCOUNT_QUERY_EMAIL = True
+
+#  - set it to True if you want to have old password verification on password change enpoint (default: False)
+OLD_PASSWORD_FIELD_ENABLED = True
+# Keep the user logged after the password has changed
+LOGOUT_ON_PASSWORD_CHANGE = False
 
 # Jenkins
 PROJECT_APPS = (
