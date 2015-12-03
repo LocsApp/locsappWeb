@@ -69,6 +69,8 @@ class AddNewLivingAddressUser(APIView):
                             "postal_code" not in request.data["living_address"][1] or\
                             "city" not in request.data["living_address"][1]):
                             return Response({"Error" : "Address collection is not correctly formatted."}, status=401)
+                        else:
+                            request.data["living_address"][1] = json.dumps(request.data["living_address"][1])
                     else:
                         return Response({"Error" : "Addresses must be a collection of data"}, status=401)
                     current_user = User.objects.get(pk=user_pk)
@@ -82,8 +84,8 @@ class AddNewLivingAddressUser(APIView):
                             current_user.living_address.append(request.data["living_address"])
                         current_user.save()
                         serializer = UserDetailsSerializer(current_user)
-                        json = serializer.data
-                        return(Response(json))
+                        jsonData = serializer.data
+                        return(Response(jsonData))
                 else:
                     return Response({"Error" : "The key 'living_address' must have two slots, the first for the alias and the second for the address"}, status=401)
             else:

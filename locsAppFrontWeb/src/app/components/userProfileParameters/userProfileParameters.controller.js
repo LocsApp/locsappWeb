@@ -17,10 +17,29 @@
 		"main.profile_management.change_password"];
 		vm.tabSelected[vm.stateNameToTabDef.map(function(x) {return x;}).indexOf($state.current.name)] = true;
 
+		/*Parses the strings address in living_address and billing_address to JSON objects*/
+		vm.parseAddressToJson = function () {
+			var i = 0;
+			var temp = null;
+
+			for(i=0; i < vm.user.living_address.length; i++)
+			{
+				$log.log(vm.user.living_address[i][1]);
+				temp = JSON.parse(vm.user.living_address[i][1]);
+				vm.user.living_address[i][1] = temp;
+			}
+			for(i=0; i < vm.user.billing_address.length; i++)
+			{
+				temp = JSON.parse(vm.user.billing_address[i][1]);
+				vm.user.billing_address[i][1] = JSON.parse(vm.user.living_address[i][1]);
+			}			
+		};
+
 		/*Success callback of profile_check*/
 		vm.GetInfosUserSuccess = function(data) {
 			$log.log(data);
 			vm.user = data;
+			vm.parseAddressToJson();
 		};
 
 		/*Failure callback of profile_check*/
@@ -36,6 +55,8 @@
 			.get({})
 			.$promise
 			.then(vm.GetInfosUserSuccess, vm.GetInfosUserFailure);
+		else
+			vm.parseAddressToJson();
 
 		/*Sends the new field to update the user informations*/
 		vm.updateFieldUser = function(field, field_name) {
