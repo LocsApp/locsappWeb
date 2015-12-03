@@ -52,7 +52,11 @@ class AddNewLivingAddressUser(APIView):
                 return Response({"Unauthorized" : "You have no access to this data."}, status=403)
         else:
             return Response({"Unauthorized" : "You need to be connected."}, status=403)
-        print (request.body)
+        if("living_address" in request.data):
+            print(request.data)
+        else:
+            return Response({"Error" : "There must be a key 'living_address' present in the document"}, status=401)
+
         return Response({"message" : "Nice"})
 
 
