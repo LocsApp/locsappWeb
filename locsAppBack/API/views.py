@@ -13,9 +13,14 @@ from rest_framework.views import APIView
 from rest_framework.decorators import  permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.renderers import JSONRenderer
+from rest_framework import serializers, exceptions
 
 # User model
 from django.contrib.auth import get_user_model
+
+# User serializer
+from .serializers import UserDetailsSerializer
 
 # Pymongo imports
 from pymongo import MongoClient
@@ -53,10 +58,26 @@ class AddNewLivingAddressUser(APIView):
         else:
             return Response({"Unauthorized" : "You need to be connected."}, status=403)
         if("living_address" in request.data):
-            print(request.data)
+            if (type(request.data["living_address"]) is list):
+                if (len(request.data["living_address"]) == 2):
+                    if (len(request.data["living_address"][0]) > 20):
+                        return Response({"Error" : "Aliases must be smaller than 20 characters"}, status=401)
+                    current_user = User.objects.get(pk=user_pk)
+                    if (current_user.living_address is None or len(current_user.living_address) < 5):
+                        if (current_user.living_address is None):
+                            current_user.living_address = request.data["living_address"]
+                        else:
+                            current_user.living_address.append(request.data["living_address"])
+                        current_user.save()
+                        serializer = UserDetailsSerializer(current_user)
+                        json = JSONRenderer.render(serializer.data)
+                        return(Response(json))
+                else:
+                    return Response({"Error" : "The key 'living_address' must have two slots, the first for the alias and the second for the address"}, status=401)
+            else:
+                return Response({"Error" : "The key 'living_address' must be a list."}, status=401)
         else:
-            return Response({"Error" : "There must be a key 'living_address' present in the document"}, status=401)
-
+            return Response({"Error" : "There must be a key 'living_address' present in the document."}, status=401)
         return Response({"message" : "Nice"})
 
 
