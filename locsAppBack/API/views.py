@@ -44,7 +44,7 @@ class AddNewLivingAddressUser(APIView):
     def post(self, request, user_pk):
         User = get_user_model()
         print (request.body)
-        return JsonResponse({message : "Nice"})
+        return JsonResponse({"message" : "Nice"})
 
 
 """
