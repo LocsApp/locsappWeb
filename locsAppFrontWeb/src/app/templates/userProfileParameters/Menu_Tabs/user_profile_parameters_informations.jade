@@ -35,3 +35,17 @@ md-card-content
 		editable-field(field="profileParams.user.phone",
 		 edition="profileParams.phone_edition",
 		 validation="profileParams.updateFieldUser(profileParams.user.phone, 'phone');")
+h2 Addresses
+md-card-content.user_profile_parameters_addresses
+	md-card
+		md-toolbar
+			div.md-toolbar-tools
+				span Living Addresses (0 / 5)
+				span.flex
+				ng-md-icon(icon="add").user_profile_parameters_add_address_icon
+					md-tooltip(md-direction="bottom").
+						Add an address
+			md-content
+				md-list
+					md-list-item
+						span.user_profile_parameters_no_address No given living address

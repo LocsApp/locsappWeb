@@ -56,4 +56,19 @@
 		@extend .user_profile_parameters_edit_mode;
 		cursor: help;
 	}
+
+	.user_profile_parameters_addresses {
+		md-toolbar:not(.md-menu-toolbar) {
+			background-color: $headerSubContainers;
+		}
+
+		.user_profile_parameters_add_address_icon {
+			cursor: pointer;
+		}
+
+		.user_profile_parameters_no_address {
+			@extend .user_profile_parameters_no_info;
+			margin: 0px auto;
+		}
+	}
 }
