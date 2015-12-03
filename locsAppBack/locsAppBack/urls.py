@@ -24,8 +24,9 @@ from API.views import *
 from API.urls import *
 
 urlpatterns = [
+    url(r'^', include('django.contrib.auth.urls')),
     url(r'^admin/', include(admin.site.urls)),
     # Url including the API end-points
     url(r'^api/v1/', include(api_patterns)),
-    url(r'^.*$', docAPIView.as_view(), name="index"),
+    #url(r'^.*$', docAPIView.as_view(), name="index"),
 ]

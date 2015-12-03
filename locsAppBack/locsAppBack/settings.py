@@ -104,6 +104,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 # Application definition
 
 INSTALLED_APPS = (
+    'API',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -124,7 +125,6 @@ INSTALLED_APPS = (
     'rest_auth',
     'rest_auth.registration',
     'rest_framework_swagger',
-    'API',
     'tests'
 )
 
@@ -181,7 +181,7 @@ if socket.gethostname() != "sylflo.fr":
         # 'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        #}
+        # }
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': u'locsapp',
