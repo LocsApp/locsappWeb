@@ -22,17 +22,22 @@
 			var i = 0;
 			var temp = null;
 
-			for(i=0; i < vm.user.living_address.length; i++)
+			if (vm.user.living_address != null)
 			{
-				$log.log(vm.user.living_address[i][1]);
-				temp = JSON.parse(vm.user.living_address[i][1]);
-				vm.user.living_address[i][1] = temp;
+				for(i=0; i < vm.user.living_address.length; i++)
+				{
+					temp = angular.fromJson(vm.user.living_address[i][1]);
+					vm.user.living_address[i][1] = temp;
+				}
 			}
-			for(i=0; i < vm.user.billing_address.length; i++)
+			if (vm.user.billing_address != null)
 			{
-				temp = JSON.parse(vm.user.billing_address[i][1]);
-				vm.user.billing_address[i][1] = JSON.parse(vm.user.living_address[i][1]);
-			}			
+				for(i=0; i < vm.user.billing_address.length; i++)
+				{
+					temp = angular.fromJson(vm.user.billing_address[i][1]);
+					vm.user.billing_address[i][1] = temp;
+				}
+			}
 		};
 
 		/*Success callback of profile_check*/
