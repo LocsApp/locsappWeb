@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers, exceptions
 from django.contrib.auth.forms import SetPasswordForm
 from django.conf import settings
+from django.core.mail import send_mail
 
 
 class UserDetailsSerializer(serializers.ModelSerializer):
@@ -11,14 +12,14 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         billing_address = serializers.ListField(serializers.ListField(child=serializers.CharField()))
         secondary_emails = serializers.ListField(serializers.ListField(child=serializers.CharField()))
 
-        fields = ('username', 'email', 'secondary_emails', 'first_name', 'last_name', 'birthdate', 'phone', 'living_address',
-                  'registered_date', 'last_activity_date', 'billing_address', 'logo_url', "is_active", "role")
+        fields = (
+        'username', 'email', 'secondary_emails', 'first_name', 'last_name', 'birthdate', 'phone', 'living_address',
+        'registered_date', 'last_activity_date', 'billing_address', 'logo_url', "is_active", "role")
         read_only_fields = ('username', 'role', 'email', 'registered_date', 'last_activity_date', 'logo_url',
                             'is_active')
 
 
 class PasswordChangeSerializer(serializers.Serializer):
-
     old_password = serializers.CharField(max_length=128)
     new_password1 = serializers.CharField(max_length=128)
     new_password2 = serializers.CharField(max_length=128)
@@ -55,15 +56,17 @@ class PasswordChangeSerializer(serializers.Serializer):
         self.set_password_form = self.set_password_form_class(
             user=self.user, data=attrs
         )
-        user = get_user_model().objects.get(username=self.request.user)
-        print("user = ", user.email)
         if not self.set_password_form.is_valid():
             raise serializers.ValidationError(self.set_password_form.errors)
 
+        user = get_user_model().objects.get(username=self.user)
+        send_mail('Change password', 'Your changed the password of your account ' + self.user.username + '',
+                  settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
         return attrs
 
     def save(self):
         self.set_password_form.save()
         if not self.logout_on_password_change:
             from django.contrib.auth import update_session_auth_hash
+
             update_session_auth_hash(self.request, self.user)
