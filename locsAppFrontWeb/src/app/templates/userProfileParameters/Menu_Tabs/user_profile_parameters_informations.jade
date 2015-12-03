@@ -40,7 +40,8 @@ md-card-content.user_profile_parameters_addresses
 	md-card
 		md-toolbar
 			div.md-toolbar-tools
-				span Living Addresses ({{ profileParams.user.living_address.length }} / 5)
+				span(ng-if="!profileParams.user.living_address.length") Living Addresses (0 / 5)
+				span(ng-if="profileParams.user.living_address.length") Living Addresses ({{ profileParams.user.living_address.length }} / 5)
 				span.flex
 				ng-md-icon(icon="add" ng-click="profileParams.addLivingAddressDialog($event)").user_profile_parameters_add_address_icon
 					md-tooltip(md-direction="bottom").
