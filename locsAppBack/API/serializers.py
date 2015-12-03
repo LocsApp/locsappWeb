@@ -55,9 +55,11 @@ class PasswordChangeSerializer(serializers.Serializer):
         self.set_password_form = self.set_password_form_class(
             user=self.user, data=attrs
         )
-
+        user = get_user_model().objects.get(username=self.request.user)
+        print("user = ", user.email)
         if not self.set_password_form.is_valid():
             raise serializers.ValidationError(self.set_password_form.errors)
+
         return attrs
 
     def save(self):
