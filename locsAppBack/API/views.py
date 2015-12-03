@@ -10,6 +10,9 @@ from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from rest_auth.registration.views import SocialLoginView
 from rest_framework.views import APIView
+from rest_framework.decorators import  permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 # User model
 from django.contrib.auth import get_user_model
@@ -40,11 +43,17 @@ class docAPIView(TemplateView):
 """
     USER PROFILE END-POINTS
 """
+@permission_classes((IsAuthenticated, ))
 class AddNewLivingAddressUser(APIView):
     def post(self, request, user_pk):
         User = get_user_model()
+        if (self.request.user.pk):
+            if (int(user_pk) != int(self.request.user.pk)):
+                return Response({"Unauthorized" : "You have no access to this data."}, status=403)
+        else:
+            return Response({"Unauthorized" : "You need to be connected."}, status=403)
         print (request.body)
-        return JsonResponse({"message" : "Nice"})
+        return Response({"message" : "Nice"})
 
 
 """
