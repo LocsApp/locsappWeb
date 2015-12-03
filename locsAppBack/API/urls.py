@@ -20,6 +20,10 @@ article_patterns = [
     url(r'^delete/$', views.deleteArticle),
 ]
 
+user_patterns = [
+    url(r'^(?P<user_pk>[0-9]+)/living_addresses/$', views.AddNewLivingAddressUser.as_view())
+]
+
 # General urls for the api
 api_patterns = [
     url(r'^rest-auth/facebook/$', views.FacebookLogin.as_view()),
@@ -31,5 +35,5 @@ api_patterns = [
         name="account_email_verification_sent"),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls'), name='registrationUser'),
     url(r'^verify-email/(?P<key>\w+)/$', confirm_email, name="account_confirm_email"),
-
+    url(r'^user/', include(user_patterns))
 ]
