@@ -72,3 +72,9 @@
 		}
 	}
 }
+
+.user_profile_parameters_address_add_dialogs {
+	md-toolbar:not(.md-menu-toolbar) {
+		background-color: $headerSubContainers;
+	}
+}

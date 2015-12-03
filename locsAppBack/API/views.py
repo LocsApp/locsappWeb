@@ -65,12 +65,15 @@ class AddNewLivingAddressUser(APIView):
                     current_user = User.objects.get(pk=user_pk)
                     if (current_user.living_address is None or len(current_user.living_address) < 5):
                         if (current_user.living_address is None):
-                            current_user.living_address = request.data["living_address"]
+                            current_user.living_address = [request.data["living_address"]]
                         else:
+                            for address in current_user.living_address:
+                                if (address[0] == request.data["living_address"][0] or address[1] == request.data["living_address"][1]):
+                                    return Response({"Error" : "The alias or the address already exists"}, status=401)
                             current_user.living_address.append(request.data["living_address"])
                         current_user.save()
                         serializer = UserDetailsSerializer(current_user)
-                        json = JSONRenderer.render(serializer.data)
+                        json = serializer.data
                         return(Response(json))
                 else:
                     return Response({"Error" : "The key 'living_address' must have two slots, the first for the alias and the second for the address"}, status=401)
