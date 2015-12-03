@@ -104,7 +104,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 # Application definition
 
 INSTALLED_APPS = (
-    'API',
+    #'API',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -125,7 +125,8 @@ INSTALLED_APPS = (
     'rest_auth',
     'rest_auth.registration',
     'rest_framework_swagger',
-    'tests'
+    'tests',
+    'API'
 )
 
 SITE_ID = 42
