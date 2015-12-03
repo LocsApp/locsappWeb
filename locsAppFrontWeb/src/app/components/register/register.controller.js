@@ -26,11 +26,14 @@
 	/*Failure callback for register*/
 	vm.userRegisteredFailure = function (data) {
 		$log.log(data);
-		var errorMsg = "This is odd...";
-		if (data.data.username[0].indexOf("taken") > -1)
-			errorMsg = "The username is already taken...";
-		if (data.data.email[0].indexOf("already") > -1)
-			errorMsg = "The email is already taken...";
+		var errorMsg = "The server didn't comply...";
+		if (data.data)
+		{
+			if (data.data.username[0].indexOf("taken") > -1)
+				errorMsg = "The username is already taken...";
+			if (data.data.email[0].indexOf("already") > -1)
+				errorMsg = "The email is already taken...";
+		}
 		toastr.error('Seems like something went wrong with your registration :( ' + errorMsg, 'Woops...');
 	};
 
