@@ -9,7 +9,6 @@
   function ProfileParamsController($scope, $log, ScopesService, UsersService, toastr, $state, $mdDialog, $document) {
 		var vm = this;
 
-		vm.first_name_edition = false;
 		/*vars initilization*/
 		vm.user = ScopesService.get("user_infos");
 		vm.tabSelected = [false, false, false, false, false, false];
