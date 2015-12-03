@@ -67,7 +67,7 @@ class AddNewLivingAddressUser(APIView):
                             "last_name" not in request.data["living_address"][1] or\
                             "address" not in request.data["living_address"][1] or\
                             "postal_code" not in request.data["living_address"][1] or\
-                            "city_name" not in request.data["living_address"][1]):
+                            "city" not in request.data["living_address"][1]):
                             return Response({"Error" : "Address collection is not correctly formatted."}, status=401)
                     else:
                         return Response({"Error" : "Addresses must be a collection of data"}, status=401)
