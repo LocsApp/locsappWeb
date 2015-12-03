@@ -33,15 +33,15 @@ class Account(AbstractBaseUser):
     email = models.EmailField(unique=True, blank=False)
     username = models.CharField(max_length=20, unique=True, blank=False)
 
-    secondary_emails = ArrayField(models.EmailField(), null=True)
+    secondary_emails = ArrayField(models.EmailField(unique=False), null=True)
 
     first_name = models.CharField(max_length=30, default=None, null=True)
     last_name = models.CharField(max_length=30, default=None, null=True)
     birthdate = models.CharField(max_length=30, null=True)
 
     phone = models.CharField(max_length=10, null=True)
-    living_address = ArrayField(models.TextField(null=True, default=None), null=True)
-    billing_address = ArrayField(models.TextField(null=True, default=None), null=True)
+    living_address = ArrayField(ArrayField(models.TextField(null=True, default=None), null=True), null=True)
+    billing_address = ArrayField(ArrayField(models.TextField(null=True, default=None), null=True), null=True)
     logo_url = models.CharField(max_length=255, null=True)
 
     registered_date = models.DateTimeField(default=timezone.now)
