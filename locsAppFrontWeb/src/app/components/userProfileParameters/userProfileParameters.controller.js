@@ -55,11 +55,11 @@
 		** Dialogs Definitions
 		*/
 		/*Add a living address dialog*/
-		vm.addLivingAddressDialog = function() {
+		vm.addLivingAddressDialog = function(event) {
 			$mdDialog.show({
 				controller : vm.addLivingAddressController,
 				controllerAs : 'addIngredient',
-				templateUrl: 'app/templates/dialogTemplates/ingredientAddRecipe.tmpl.html',
+				templateUrl: 'app/templates/dialogTemplates/addLivingAddress.tmpl.html',
 				parent: angular.element($document.body),
 				targetEvent: event,
 				clickOutsideToClose:true

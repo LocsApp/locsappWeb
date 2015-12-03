@@ -49,7 +49,7 @@ md-card-content.user_profile_parameters_addresses
 				md-list(ng-if="!profileParams.user.living_address")
 					md-list-item
 						span.user_profile_parameters_no_address No given living address
-				md-list(ng-if="profileParams.user.living_address")
+				md-list(ng-if="profileParams.user.living_address" ng-click="profileParams.addLivingAddressDialog($event)")
 					md-list-item(ng-repeat="address in profileParams.user.living_address" )
 						span {{ address[0] }}
 						md-divider(ng-if="!$last")
