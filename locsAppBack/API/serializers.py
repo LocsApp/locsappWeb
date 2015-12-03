@@ -6,8 +6,8 @@ class UserDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         living_address = serializers.ListField(child=serializers.CharField())
-        billing_address = serializers.ListField(child=serializers.CharField())
-        secondary_emails = serializers.ListField(child=serializers.EmailField())
+        billing_address = serializers.ListField(serializers.ListField(child=serializers.CharField()))
+        secondary_emails = serializers.ListField(serializers.ListField(child=serializers.CharField()))
 
         fields = ('username', 'email', 'secondary_emails', 'first_name', 'last_name', 'birthdate', 'phone', 'living_address',
                   'registered_date', 'last_activity_date', 'billing_address', 'logo_url', "is_active", "role")
