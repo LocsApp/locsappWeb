@@ -52,6 +52,47 @@ ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "http://127.0.0.1:8080"
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Locsapp]"
 
+SOCIALACCOUNT_EMAIL_VERIFICATION = "mandatory"
+SOCIALACCOUNT_EMAIL_REQUIRED = True
+# SOCIAL_ACCOUNT_EMAIL_REQUIRED if set to true with got an error
+SOCIALACCOUNT_QUERY_EMAIL = True
+
+# - set it to True if you want to have old password verification on password change enpoint (default: False)
+OLD_PASSWORD_FIELD_ENABLED = True
+# Keep the user logged after the password has changed
+LOGOUT_ON_PASSWORD_CHANGE = False
+
+SOCIALACCOUNT_PROVIDERS = \
+    {'facebook':
+         {
+             'METHOD': 'oauth2',
+             'SCOPE': ['email', 'public_profile', 'user_friends'],
+             'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+             'FIELDS': [
+                 'id',
+                 'email',
+                 'name',
+                 'birthday',
+                 'first_name',
+                 'last_name',
+                 'verified',
+                 'locale',
+                 'timezone',
+                 'link',
+                 'gender',
+                 'updated_time'],
+             'EXCHANGE_TOKEN': True,
+             'LOCALE_FUNC': 'path.to.callable',
+             'VERIFIED_EMAIL': False,
+             'VERSION': 'v2.5'
+         },
+     'google':
+         {'SCOPE': ['profile', 'email'],
+          'AUTH_PARAMS': {'access_type': 'online'}}
+     }
+
+
+
 # Different user model
 AUTH_USER_MODEL = 'API.Account'
 
@@ -158,43 +199,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     )
 }
-
-SOCIALACCOUNT_PROVIDERS = \
-    {'facebook':
-         {
-             'METHOD': 'oauth2',
-             'SCOPE': ['email', 'public_profile', 'user_friends'],
-             'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
-             'FIELDS': [
-                 'id',
-                 'email',
-                 'name',
-                 'first_name',
-                 'last_name',
-                 'verified',
-                 'locale',
-                 'timezone',
-                 'link',
-                 'gender',
-                 'updated_time'],
-             'EXCHANGE_TOKEN': True,
-             'LOCALE_FUNC': 'path.to.callable',
-             'VERIFIED_EMAIL': True,
-             'VERSION': 'v2.5'
-         },
-     'google':
-         {'SCOPE': ['profile', 'email'],
-          'AUTH_PARAMS': {'access_type': 'online'}}
-     }
-
-SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
-SOCIALACCOUNT_EMAIL_REQUIRED = False
-SOCIALACCOUNT_QUERY_EMAIL = True
-
-# - set it to True if you want to have old password verification on password change enpoint (default: False)
-OLD_PASSWORD_FIELD_ENABLED = True
-# Keep the user logged after the password has changed
-LOGOUT_ON_PASSWORD_CHANGE = False
 
 # Jenkins
 PROJECT_APPS = (
