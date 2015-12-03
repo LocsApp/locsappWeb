@@ -9,7 +9,10 @@ from django.http import HttpResponseRedirect
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from rest_auth.registration.views import SocialLoginView
+from rest_framework.views import APIView
 
+# User model
+from django.contrib.auth import get_user_model
 
 # Pymongo imports
 from pymongo import MongoClient
@@ -33,6 +36,15 @@ db_locsapp = mongodb_client['locsapp']
 
 class docAPIView(TemplateView):
     template_name = "API/homeDocAPI.html"
+
+"""
+    USER PROFILE END-POINTS
+"""
+class AddNewLivingAddressUser(APIView):
+    def post(self, request, user_pk):
+        User = get_user_model()
+        print (request.body)
+        return JsonResponse({message : "Nice"})
 
 
 """
