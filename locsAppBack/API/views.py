@@ -62,6 +62,15 @@ class AddNewLivingAddressUser(APIView):
                 if (len(request.data["living_address"]) == 2):
                     if (len(request.data["living_address"][0]) > 20):
                         return Response({"Error" : "Aliases must be smaller than 20 characters"}, status=401)
+                    if (type(request.data["living_address"][1]) is dict):
+                        if ("first_name" not in request.data["living_address"][1] or\
+                            "last_name" not in request.data["living_address"][1] or\
+                            "address" not in request.data["living_address"][1] or\
+                            "postal_code" not in request.data["living_address"][1] or\
+                            "city" not in request.data["living_address"][1]):
+                            return Response({"Error" : "Address collection is not correctly formatted."}, status=401)
+                    else:
+                        return Response({"Error" : "Addresses must be a collection of data"}, status=401)
                     current_user = User.objects.get(pk=user_pk)
                     if (current_user.living_address is None or len(current_user.living_address) < 5):
                         if (current_user.living_address is None):

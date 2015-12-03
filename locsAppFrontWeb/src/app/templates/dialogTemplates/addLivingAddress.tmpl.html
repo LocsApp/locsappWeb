@@ -1,3 +1,20 @@
 <md-content class="user_profile_parameters_address_add_dialogs">
-	<md-toolbar>Add an address</md-toolbar>
+	<md-toolbar>
+		<span class="user_profile_parameters_address_add_dialogs_header">Add an address</span>
+	</md-toolbar>
+	<md-content>
+		<form name="addLivingAddress">
+			<md-input-container>
+				<label>Alias</label>
+				<input ng-model="alias"></input>
+			</md-input-container>
+			<md-input-container>
+				<label>Address</label>
+				<textarea ng-model="address"></textarea>
+			</md-input-container>
+			<section layout="row", layout-align="center center">
+				<md-button class="md-raised" type="submit"> Add </md-button>
+			</section>
+		</form>
+	</md-content>
 </md-content>
