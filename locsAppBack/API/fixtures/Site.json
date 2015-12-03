@@ -1,0 +1,42 @@
+[
+  {
+    "fields": {
+      "name": "example.com",
+      "domain": "example.com"
+    },
+    "pk": 42,
+    "model": "sites.site"
+  },
+  {
+    "fields": {
+      "name": "Locsapp",
+      "domain": "locsapp"
+    },
+    "pk": 43,
+    "model": "sites.site"
+  },
+  {
+    "fields": {
+      "name": "localhost",
+      "domain": "127.0.0.1"
+    },
+    "pk": 44,
+    "model": "sites.site"
+  },
+  {
+    "fields": {
+      "name": "localhost 8000",
+      "domain": "localhost:8000"
+    },
+    "pk": 45,
+    "model": "sites.site"
+  },
+  {
+    "fields": {
+      "name": "127.0.0.1 8000",
+      "domain": "127.0.0.1:8000"
+    },
+    "pk": 46,
+    "model": "sites.site"
+  }
+]

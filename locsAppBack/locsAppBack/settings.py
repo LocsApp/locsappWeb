@@ -45,14 +45,55 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Django allauth different form
-#ACCOUNT_SIGNUP_FORM_CLASS = 'API.forms.SignupForm'
+# ACCOUNT_SIGNUP_FORM_CLASS = 'API.forms.SignupForm'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "http://127.0.0.1:8080"
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Locsapp]"
 
-#Different user model
+SOCIALACCOUNT_EMAIL_VERIFICATION = "mandatory"
+SOCIALACCOUNT_EMAIL_REQUIRED = True
+# SOCIAL_ACCOUNT_EMAIL_REQUIRED if set to true with got an error
+SOCIALACCOUNT_QUERY_EMAIL = True
+
+# - set it to True if you want to have old password verification on password change enpoint (default: False)
+OLD_PASSWORD_FIELD_ENABLED = True
+# Keep the user logged after the password has changed
+LOGOUT_ON_PASSWORD_CHANGE = False
+
+SOCIALACCOUNT_PROVIDERS = \
+    {'facebook':
+         {
+             'METHOD': 'oauth2',
+             'SCOPE': ['email', 'public_profile', 'user_friends'],
+             'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+             'FIELDS': [
+                 'id',
+                 'email',
+                 'name',
+                 'birthday',
+                 'first_name',
+                 'last_name',
+                 'verified',
+                 'locale',
+                 'timezone',
+                 'link',
+                 'gender',
+                 'updated_time'],
+             'EXCHANGE_TOKEN': True,
+             'LOCALE_FUNC': 'path.to.callable',
+             'VERIFIED_EMAIL': False,
+             'VERSION': 'v2.5'
+         },
+     'google':
+         {'SCOPE': ['profile', 'email'],
+          'AUTH_PARAMS': {'access_type': 'online'}}
+     }
+
+
+
+# Different user model
 AUTH_USER_MODEL = 'API.Account'
 
 # Allows all the domains to make requets on API
@@ -78,7 +119,6 @@ INSTALLED_APPS = (
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.tumblr',
     'allauth.socialaccount.providers.twitter',
     'rest_auth',
     'rest_auth.registration',
@@ -137,9 +177,9 @@ WSGI_APPLICATION = 'locsAppBack.wsgi.application'
 
 if socket.gethostname() != "sylflo.fr":
     DATABASES = {
-        #'default': {
-        #    'ENGINE': 'django.db.backends.sqlite3',
-        #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'default': {
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         #}
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -160,33 +200,7 @@ REST_FRAMEWORK = {
     )
 }
 
-SOCIALACCOUNT_PROVIDERS = \
-    {'facebook':
-         {'METHOD': 'oauth2',
-          'SCOPE': ['email', 'public_profile', 'user_friends'],
-          'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
-          'FIELDS': [
-              'id',
-              'email',
-              'name',
-              'first_name',
-              'last_name',
-              'verified',
-              'locale',
-              'timezone',
-              'link',
-              'gender',
-              'updated_time'],
-          'EXCHANGE_TOKEN': True,
-          'LOCALE_FUNC': 'path.to.callable',
-          'VERIFIED_EMAIL': False,
-          'VERSION': 'v2.5'}}
-
-SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
-SOCIALACCOUNT_EMAIL_REQUIRED = False
-SOCIALACCOUNT_QUERY_EMAIL = True
-
-#Jenkins
+# Jenkins
 PROJECT_APPS = (
     'API',
 )
@@ -217,14 +231,14 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static_root")
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
-    #os.path.join(BASE_DIR, "templates/api_doc/src")
+    # os.path.join(BASE_DIR, "templates/api_doc/src")
 )
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-#Email config
+# Email config
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
