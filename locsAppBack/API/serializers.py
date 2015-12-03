@@ -3,6 +3,11 @@ from rest_framework import serializers, exceptions
 from django.contrib.auth.forms import SetPasswordForm
 from django.conf import settings
 from django.core.mail import send_mail
+from django.contrib.auth.forms import PasswordResetForm
+from django.utils.translation import ugettext_lazy as _
+
+
+UserModel = get_user_model()
 
 
 class UserDetailsSerializer(serializers.ModelSerializer):
@@ -70,3 +75,34 @@ class PasswordChangeSerializer(serializers.Serializer):
             from django.contrib.auth import update_session_auth_hash
 
             update_session_auth_hash(self.request, self.user)
+
+
+class PasswordResetSerializer(serializers.Serializer):
+
+    """
+    Serializer for requesting a password reset e-mail.
+    """
+
+    email = serializers.EmailField()
+
+    password_reset_form_class = PasswordResetForm
+
+    def validate_email(self, value):
+        self.reset_form = self.password_reset_form_class(data=self.initial_data)
+        if not self.reset_form.is_valid():
+            raise serializers.ValidationError(_('Error'))
+
+        if not UserModel.objects.filter(email=value).exists():
+            raise serializers.ValidationError(_('Invalid e-mail address'))
+
+        return value
+
+    def save(self):
+        request = self.context.get('request')
+        # Set some values to trigger the send_email method.
+        opts = {
+            'use_https': request.is_secure(),
+            'from_email': getattr(settings, 'DEFAULT_FROM_EMAIL'),
+            'request': request,
+        }
+        self.reset_form.save(**opts)

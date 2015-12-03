@@ -36,6 +36,7 @@ OLD_PASSWORD_FIELD_ENABLED = True
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'API.serializers.UserDetailsSerializer',
     'PASSWORD_CHANGE_SERIALIZER': 'API.serializers.PasswordChangeSerializer',
+    'PASSWORD_RESET_SERIALIZER': 'API.serializers.PasswordResetSerializer'
 }
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '0#bk$^5fieu@defbgkbxaadd*5y940w-k$jwf!-8=pg)hz085$'
