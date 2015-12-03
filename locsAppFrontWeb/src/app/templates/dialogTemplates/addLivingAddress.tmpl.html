@@ -3,7 +3,7 @@
 		<span class="user_profile_parameters_address_add_dialogs_header">Add an address</span>
 	</md-toolbar>
 	<md-content>
-		<form name="addLivingAddressForm">
+		<form name="addLivingAddressForm" novalidate ng-submit="addLivingAddressForm.$valid && submit()">
 			<md-input-container>
 				<label>Alias</label>
 				<input ng-model="alias" name="alias" required md-maxlength="50" minlength="3"></input>
