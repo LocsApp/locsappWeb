@@ -19,6 +19,7 @@ from allauth import app_settings
 class DefaultSocialAccountAdapter(object):
 
     def pre_social_login(self, request, sociallogin):
+        print("pre_social_login")
         """
         Invoked just after a user successfully authenticates via a
         social provider, but before the login is actually processed
@@ -39,6 +40,8 @@ class DefaultSocialAccountAdapter(object):
                              error=None,
                              exception=None,
                              extra_context=None):
+        print("authentication_error")
+
         """
         Invoked when there is an error in the authentication cycle. In this
         case, pre_social_login will not be reached.
@@ -52,6 +55,8 @@ class DefaultSocialAccountAdapter(object):
         """
         Instantiates a new User instance.
         """
+        print("new user")
+
         return get_account_adapter().new_user(request)
 
     def save_user(self, request, sociallogin, form=None):
@@ -59,6 +64,8 @@ class DefaultSocialAccountAdapter(object):
         Saves a newly signed up social login. In case of auto-signup,
         the signup form is not available.
         """
+        print("save_user")
+
         u = sociallogin.user
         u.set_unusable_password()
         if form:
@@ -85,6 +92,8 @@ class DefaultSocialAccountAdapter(object):
         free. For example, verifying whether or not the username
         already exists, is not a responsibility.
         """
+        print("populate_user")
+
         username = data.get('username')
         first_name = data.get('first_name')
         last_name = data.get('last_name')
@@ -103,6 +112,9 @@ class DefaultSocialAccountAdapter(object):
         Returns the default URL to redirect to after successfully
         connecting a social account.
         """
+        print("get_connect_redirect_url")
+
+
         assert request.user.is_authenticated()
         url = reverse('socialaccount_connections')
         return url
@@ -112,6 +124,8 @@ class DefaultSocialAccountAdapter(object):
         Validate whether or not the socialaccount account can be
         safely disconnected.
         """
+        print("validate_disconnect")
+
         if len(accounts) == 1:
             # No usable password would render the local account unusable
             if not account.user.has_usable_password():
@@ -126,6 +140,8 @@ class DefaultSocialAccountAdapter(object):
                                             " e-mail address."))
 
     def is_auto_signup_allowed(self, request, sociallogin):
+        print("is_auto_signup_allowed")
+
         # If email is specified, check for duplicate and if so, no auto signup.
         auto_signup = app_settings.AUTO_SIGNUP
         if auto_signup:
@@ -160,6 +176,8 @@ class DefaultSocialAccountAdapter(object):
         Next to simply returning True/False you can also intervene the
         regular flow by raising an ImmediateHttpResponse
         """
+        print("is_open_for_signup")
+
         return get_account_adapter().is_open_for_signup(request)
 
 
