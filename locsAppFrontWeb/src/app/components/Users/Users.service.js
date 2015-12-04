@@ -14,6 +14,7 @@
             logout : $resource(URL_API + 'api/v1/rest-auth/logout/'),
             profile_check : $resource(URL_API +  'api/v1/rest-auth/user/'),
             living_addresses : $resource(URL_API + 'api/v1/user/:id/living_addresses/', {id : "@user_id"}),
+            living_addresses_delete : $resource(URL_API + 'api/v1/user/:id/living_addresses/delete/', {id : "@user_id"}),
             is_authenticated : is_authenticated
         };
 

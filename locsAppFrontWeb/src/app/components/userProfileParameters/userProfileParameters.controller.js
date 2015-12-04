@@ -86,7 +86,7 @@
 				controller : vm.addLivingAddressController,
 				controllerAs : 'addLivingAddress',
 				templateUrl: 'app/templates/dialogTemplates/addLivingAddress.tmpl.html',
-				locals : {user : vm.user, parseAddressToJson : vm.parseAddressToJson},
+				locals : {user : vm.user},
 				bindToController: true,
 				parent: angular.element($document.body),
 				targetEvent: event,
@@ -108,6 +108,20 @@
 			});
 		};
 
+		/*Add a delete address dialog*/
+		vm.deleteAddressDialog = function(event, address) {
+			$mdDialog.show({
+				controller : vm.deleteAddressController,
+				controllerAs : 'deleteAddress',
+				templateUrl: 'app/templates/dialogTemplates/deleteAddress.tmpl.html',
+				locals : {user_id: vm.user.id, address : address},
+				bindToController: true,
+				parent: angular.element($document.body),
+				targetEvent: event,
+				clickOutsideToClose:true
+			}).then(function(data) { vm.user = data });
+		};
+
 		/*
 		** Dialogs Controllers
 		*/
@@ -115,11 +129,35 @@
 		vm.addLivingAddressController = function($mdDialog) {
 			var vm = this;
 
+			/*Parses the strings address in living_address and billing_address to JSON objects*/
+			vm.parseAddressToJson = function () {
+				var i = 0;
+				var temp = null;
+
+				if (vm.user.living_address != null)
+				{
+					for(i=0; i < vm.user.living_address.length; i++)
+					{
+						temp = angular.fromJson(vm.user.living_address[i][1]);
+						vm.user.living_address[i][1] = temp;
+					}
+				}
+				if (vm.user.billing_address != null)
+				{
+					for(i=0; i < vm.user.billing_address.length; i++)
+					{
+						temp = angular.fromJson(vm.user.billing_address[i][1]);
+						vm.user.billing_address[i][1] = temp;
+					}
+				}
+			};
+
 			/*Success callback of living_address*/
 			vm.GetLivingAddressUserSuccess = function(data) {
 				$log.log(data);
 				vm.user = data;
 				vm.parseAddressToJson();
+				$log.log(vm.user)
 				toastr.success("The new living address has been successfully added.", "Success");
 				vm.hide();
 			};
@@ -127,7 +165,7 @@
 			/*Failure callback of living_address*/
 			vm.GetLivingAddressFailure = function(data) {
 				$log.log(data);
-				toastr.error("This is odd...", "Woops...");
+				toastr.error(data.data.Error, "Woops...");
 			};
 
 			/*Submits the form data from the dialog to the API*/
@@ -152,6 +190,7 @@
 			}
 
 			vm.hide = function() {
+
 				$mdDialog.hide(vm.user);
 			}
 		};
@@ -163,7 +202,64 @@
 			vm.hide = function() {
 				$mdDialog.hide();
 			}
-		}
+		};
+
+		/*deleteAddressDialog Controller*/
+		vm.deleteAddressController = function($mdDialog) {
+			var vm = this;
+
+			/*Parses the strings address in living_address and billing_address to JSON objects*/
+			vm.parseAddressToJson = function () {
+				var i = 0;
+				var temp = null;
+
+				if (vm.user.living_address != null)
+				{
+					for(i=0; i < vm.user.living_address.length; i++)
+					{
+						temp = angular.fromJson(vm.user.living_address[i][1]);
+						vm.user.living_address[i][1] = temp;
+					}
+				}
+				if (vm.user.billing_address != null)
+				{
+					for(i=0; i < vm.user.billing_address.length; i++)
+					{
+						temp = angular.fromJson(vm.user.billing_address[i][1]);
+						vm.user.billing_address[i][1] = temp;
+					}
+				}
+			};
+
+			/*Success callback of living_address*/
+			vm.GetLivingAddressUserSuccess = function(data) {
+				$log.log(data);
+				vm.user = data;
+				vm.parseAddressToJson();
+				toastr.success("The new living address has been successfully added.", "Success");
+				vm.hide();
+			};
+
+			/*Failure callback of living_address*/
+			vm.GetLivingAddressFailure = function(data) {
+				$log.log(data);
+				toastr.error("This is odd...", "Woops...");
+			};
+
+			vm.accepted = function() {
+				var data_send = {"user_id" : vm.user_id, "living_address" : vm.address};
+
+				UsersService
+				.living_addresses_delete
+				.save(data_send)
+				.$promise
+				.then(vm.GetLivingAddressUserSuccess, vm.GetLivingAddressFailure);	
+			}
+
+			vm.hide = function() {
+				$mdDialog.hide(vm.user);
+			}
+		};
 	}
 
 })();

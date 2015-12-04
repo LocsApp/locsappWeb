@@ -90,6 +90,10 @@
 			.user_profile_parameters_addresses_delete {
 				color: $deleteIcon;
 			}
+
+			.user_profile_parameters_addresses_alias_delete {
+				@extend .user_profile_parameters_addresses_delete;
+			}
 		}
 	}
 }
