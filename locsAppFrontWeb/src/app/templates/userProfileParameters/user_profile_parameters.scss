@@ -86,6 +86,10 @@
 					background : $selectedTab;
 				}
 			}
+
+			.user_profile_parameters_addresses_delete {
+				color: $deleteIcon;
+			}
 		}
 	}
 }

@@ -53,4 +53,6 @@ md-card-content.user_profile_parameters_addresses
 				md-list(ng-if="profileParams.user.living_address").user_profile_parameters_addresses_lists
 					md-list-item(ng-repeat="address in profileParams.user.living_address" ng-click="profileParams.showAddressDialog($event, address);")
 						span {{ address[0] }}
+						span
+							ng-md-icon(icon="delete").md-secondary.user_profile_parameters_addresses_delete
 						md-divider(ng-if="!$last")
