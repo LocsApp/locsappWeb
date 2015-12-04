@@ -13,7 +13,7 @@ from allauth.account.adapter import get_adapter as get_account_adapter
 from allauth.account import app_settings as account_settings
 from allauth.account.app_settings import EmailVerificationMethod
 
-from allauth import app_settings
+from allauth.socialaccount import app_settings
 
 
 class DefaultSocialAccountAdapter(object):
