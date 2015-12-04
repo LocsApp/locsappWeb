@@ -47,7 +47,7 @@ md-card-content.user_profile_parameters_addresses
 					md-tooltip(md-direction="bottom").
 						Add an address
 			md-content
-				md-list(ng-if="!profileParams.user.living_address")
+				md-list(ng-if="!profileParams.user.living_address || profileParams.user.living_address.length == 0")
 					md-list-item
 						span.user_profile_parameters_no_address No given living address
 				md-list(ng-if="profileParams.user.living_address").user_profile_parameters_addresses_lists
