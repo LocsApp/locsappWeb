@@ -59,6 +59,12 @@ SOCIALACCOUNT_EMAIL_REQUIRED = True
 # SOCIAL_ACCOUNT_EMAIL_REQUIRED if set to true with got an error
 SOCIALACCOUNT_QUERY_EMAIL = True
 
+"""
+Attempt to bypass the signup form by using fields (e.g. username, email) retrieved from the social account provider.
+ If a conflict arises due to a duplicate e-mail address the signup form will still kick in.
+"""
+#SOCIALACCOUNT_AUTO_SIGNUP = False
+
 # - set it to True if you want to have old password verification on password change enpoint (default: False)
 OLD_PASSWORD_FIELD_ENABLED = True
 # Keep the user logged after the password has changed
