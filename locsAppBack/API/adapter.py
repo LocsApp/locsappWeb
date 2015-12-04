@@ -55,7 +55,8 @@ class DefaultSocialAccountAdapter(object):
         """
         Instantiates a new User instance.
         """
-        print("new user")
+        name_function = "new_user "
+        print(name_function, "socialogin ", sociallogin)
 
         return get_account_adapter().new_user(request)
 
@@ -92,7 +93,9 @@ class DefaultSocialAccountAdapter(object):
         free. For example, verifying whether or not the username
         already exists, is not a responsibility.
         """
-        print("populate_user")
+        name_function = "populate_user "
+        print(name_function, "data ", data)
+        print(name_function, "sociallogin ", sociallogin)
 
         username = data.get('username')
         first_name = data.get('first_name')
