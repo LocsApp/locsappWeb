@@ -94,6 +94,20 @@
 			}).then(function(data) { vm.user = data });
 		};
 
+		/*Add a show address dialog*/
+		vm.showAddressDialog = function(event, address) {
+			$mdDialog.show({
+				controller : vm.showAddressController,
+				controllerAs : 'showAddress',
+				templateUrl: 'app/templates/dialogTemplates/showAddress.tmpl.html',
+				locals : {address : address},
+				bindToController: true,
+				parent: angular.element($document.body),
+				targetEvent: event,
+				clickOutsideToClose:true
+			});
+		};
+
 		/*
 		** Dialogs Controllers
 		*/
@@ -141,6 +155,15 @@
 				$mdDialog.hide(vm.user);
 			}
 		};
+
+		/*showAddressDialog Controller*/
+		vm.showAddressController = function($mdDialog) {
+			var vm = this;
+
+			vm.hide = function() {
+				$mdDialog.hide();
+			}
+		}
 	}
 
 })();
