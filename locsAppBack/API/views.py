@@ -93,7 +93,17 @@ class livingAddressUser(APIView):
         else:
             return Response({"Error" : "There must be a key 'living_address' present in the document."}, status=401)
         return Response({"message" : "Nice"})
-
+    
+    def get(self, request, user_pk):
+        User = get_user_model()
+        if (self.request.user.pk):
+            if (int(user_pk) != int(self.request.user.pk)):
+                return Response({"Unauthorized" : "You have no access to this data."}, status=403)
+        else:
+            return Response({"Unauthorized" : "You need to be connected."}, status=403)
+        current_user = User.objects.get(pk=user_pk)
+        living_addresses = current_user.living_address
+        return (Response(living_addresses))  
 
 """
     SOCIAL NETWORK END-POINTS
