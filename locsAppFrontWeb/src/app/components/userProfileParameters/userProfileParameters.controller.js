@@ -84,20 +84,62 @@
 		vm.addLivingAddressDialog = function(event) {
 			$mdDialog.show({
 				controller : vm.addLivingAddressController,
-				controllerAs : 'addIngredient',
+				controllerAs : 'addLivingAddress',
 				templateUrl: 'app/templates/dialogTemplates/addLivingAddress.tmpl.html',
+				locals : {user : vm.user, parseAddressToJson : vm.parseAddressToJson},
+				bindToController: true,
 				parent: angular.element($document.body),
 				targetEvent: event,
 				clickOutsideToClose:true
-			});
+			}).then(function(data) { vm.user = data });
 		};
 
 		/*
 		** Dialogs Controllers
 		*/
 		/*addLivingAddressDialog Controller*/
-		vm.addLivingAddressController = function() {
+		vm.addLivingAddressController = function($mdDialog) {
+			var vm = this;
 
+			/*Success callback of living_address*/
+			vm.GetLivingAddressUserSuccess = function(data) {
+				$log.log(data);
+				vm.user = data;
+				vm.parseAddressToJson();
+				toastr.success("The new living address has been successfully added.", "Success");
+				vm.hide();
+			};
+
+			/*Failure callback of living_address*/
+			vm.GetLivingAddressFailure = function(data) {
+				$log.log(data);
+				toastr.error("This is odd...", "Woops...");
+			};
+
+			/*Submits the form data from the dialog to the API*/
+			vm.submit = function() {
+				var data = [];
+
+				var address = {
+					first_name : vm.first_name,
+					last_name : vm.last_name,
+					address : vm.address,
+					postal_code : vm.postal_code,
+					city : vm.city
+				};
+				data.push(vm.alias);
+				data.push(address);
+				var data_send = {"user_id" : vm.user.id, "living_address" : data};
+				UsersService
+				.living_addresses
+				.save(data_send)
+				.$promise
+				.then(vm.GetLivingAddressUserSuccess, vm.GetLivingAddressFailure);
+			}
+
+			vm.hide = function() {
+				$mdDialog.hide(vm.user);
+			}
 		};
 	}
 
