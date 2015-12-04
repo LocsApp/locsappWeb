@@ -21,7 +21,7 @@ article_patterns = [
 ]
 
 user_patterns = [
-    url(r'^(?P<user_pk>[0-9]+)/living_addresses/$', views.AddNewLivingAddressUser.as_view())
+    url(r'^(?P<user_pk>[0-9]+)/living_addresses/$', views.livingAddressUser.as_view())
 ]
 
 # General urls for the api

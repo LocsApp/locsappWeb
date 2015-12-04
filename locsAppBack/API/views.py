@@ -49,7 +49,7 @@ class docAPIView(TemplateView):
     USER PROFILE END-POINTS
 """
 @permission_classes((IsAuthenticated, ))
-class AddNewLivingAddressUser(APIView):
+class livingAddressUser(APIView):
     def post(self, request, user_pk):
         User = get_user_model()
         if (self.request.user.pk):
