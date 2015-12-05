@@ -17,7 +17,10 @@
 			/*When scope.field is changed, calls the validation callback*/
 			scope.$watch('field', function(newValue) {
 				if (newValue)
+				{
+					scope.loaded = true;
 					scope.validation();
+				}
 			});
 
 			/*Sets the edition mode*/
@@ -39,6 +42,7 @@
 		directive.scope = {
 			field : "=field",
 			field_backup : "=field",
+			loaded : "=loaded",
 			edition: "=edition",
 			validation: '&validation'
 		};

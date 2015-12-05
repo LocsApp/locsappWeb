@@ -18,21 +18,25 @@ md-card-content
 	p
 		strong First Name :
 		editable-field(field="profileParams.user.first_name",
+		 loaded="profileParams.user.loaded",
 		 edition="profileParams.first_name_edition",
 		 validation="profileParams.updateFieldUser(profileParams.user.first_name, 'first_name');")
 	p
 		strong Last Name :
 		editable-field(field="profileParams.user.last_name",
+		 loaded="profileParams.user.loaded"
 		 edition="profileParams.last_name_edition",
 		 validation="profileParams.updateFieldUser(profileParams.user.last_name, 'last_name');")
 	p
 		strong Birthdate :
 		editable-field(field="profileParams.user.birthdate",
+		 loaded="profileParams.user.loaded",
 		 edition="profileParams.birthdate_edition",
 		 validation="profileParams.updateFieldUser(profileParams.user.birthdate, 'birthdate');")
 	p
 		strong Phone :
 		editable-field(field="profileParams.user.phone",
+		 loaded="profileParams.user.loaded",
 		 edition="profileParams.phone_edition",
 		 validation="profileParams.updateFieldUser(profileParams.user.phone, 'phone');")
 h2 Addresses

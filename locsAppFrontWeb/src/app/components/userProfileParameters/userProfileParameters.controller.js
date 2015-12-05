@@ -40,10 +40,19 @@
 			}
 		};
 
-		/*Success callback of profile_check*/
+		/*Success callback of profile_check update*/
+		vm.GetInfosPutUserSuccess = function(data) {
+			vm.user = data;
+			vm.user.loaded = true;
+			vm.parseAddressToJson();
+			toastr.success("The field has been correctly updated", "Success");
+		};
+
+		/*Success callback of profile_check get*/
 		vm.GetInfosUserSuccess = function(data) {
 			$log.log(data);
 			vm.user = data;
+			vm.user.loaded = false;
 			vm.parseAddressToJson();
 		};
 
@@ -65,8 +74,15 @@
 
 		/*Sends the new field to update the user informations*/
 		vm.updateFieldUser = function(field, field_name) {
-			$log.log(field);
-			$log.log("Field name = "+field_name);
+			$log.log(vm.user.loaded);
+			var data = {};
+			data[field_name] = field;
+			if (vm.user.loaded)
+				UsersService
+					.profile_check
+					.update(data)
+					.$promise
+					.then(vm.GetInfosPutUserSuccess, vm.GetInfosUserFailure);
 		};
 
 		/*Changed state to stateName, here child state of user profile parameters*/
