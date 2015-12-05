@@ -150,7 +150,111 @@ class livingAddressUserDelete(APIView):
                 return Response({"Error" : "The key 'living_address' must be a list."}, status=401)
         else:
             return Response({"Error" : "There must be a key 'living_address' present in the document."}, status=401)
-        return Response({"message" : "Nice"}) 
+        return Response({"message" : "Nice"})
+
+@permission_classes((IsAuthenticated, ))
+class billingAddressUser(APIView):
+    def post(self, request, user_pk):
+        User = get_user_model()
+        if (self.request.user.pk):
+            if (int(user_pk) != int(self.request.user.pk)):
+                return Response({"Unauthorized" : "You have no access to this data."}, status=403)
+        else:
+            return Response({"Unauthorized" : "You need to be connected."}, status=403)
+        if("billing_address" in request.data):
+            if (type(request.data["billing_address"]) is list):
+                if (len(request.data["billing_address"]) == 2):
+                    if (len(request.data["billing_address"][0]) > 20):
+                        return Response({"Error" : "Aliases must be smaller than 20 characters"}, status=401)
+                    if (type(request.data["billing_address"][1]) is dict):
+                        if ("first_name" not in request.data["billing_address"][1] or\
+                            "last_name" not in request.data["billing_address"][1] or\
+                            "address" not in request.data["billing_address"][1] or\
+                            "postal_code" not in request.data["billing_address"][1] or\
+                            "city" not in request.data["billing_address"][1]):
+                            return Response({"Error" : "Address collection is not correctly formatted."}, status=401)
+                        else:
+                            request.data["billing_address"][1] = json.dumps(request.data["billing_address"][1])
+                    else:
+                        return Response({"Error" : "Addresses must be a collection of data"}, status=401)
+                    current_user = User.objects.get(pk=user_pk)
+                    if (current_user.billing_address is None or len(current_user.billing_address) < 5):
+                        if (current_user.billing_address is None):
+                            current_user.billing_address = [request.data["billing_address"]]
+                        else:
+                            for address in current_user.billing_address:
+                                if (address[0] == request.data["billing_address"][0] or address[1] == request.data["billing_address"][1]):
+                                    return Response({"Error" : "The alias or the address already exists"}, status=401)
+                            current_user.billing_address.append(request.data["billing_address"])
+                        current_user.save()
+                        serializer = UserDetailsSerializer(current_user)
+                        jsonData = serializer.data
+                        return(Response(jsonData))
+                    else:
+                        return Response({"Error" : "The user already has 5 billing addresses"}, status=401)
+                else:
+                    return Response({"Error" : "The key 'billing_address' must have two slots, the first for the alias and the second for the address"}, status=401)
+            else:
+                return Response({"Error" : "The key 'billing_address' must be a list."}, status=401)
+        else:
+            return Response({"Error" : "There must be a key 'billing_address' present in the document."}, status=401)
+        return Response({"message" : "Nice"})
+    
+    def get(self, request, user_pk):
+        User = get_user_model()
+        if (self.request.user.pk):
+            if (int(user_pk) != int(self.request.user.pk)):
+                return Response({"Unauthorized" : "You have no access to this data."}, status=403)
+        else:
+            return Response({"Unauthorized" : "You need to be connected."}, status=403)
+        current_user = User.objects.get(pk=user_pk)
+        billing_addresses = current_user.billing_address
+        return (Response(billing_addresses))
+
+@permission_classes((IsAuthenticated, ))
+class billingAddressUserDelete(APIView):
+    def post(self, request, user_pk):
+        User = get_user_model()
+        if (self.request.user.pk):
+            if (int(user_pk) != int(self.request.user.pk)):
+                return Response({"Unauthorized" : "You have no access to this data."}, status=403)
+        else:
+            return Response({"Unauthorized" : "You need to be connected."}, status=403)
+        if("billing_address" in request.data):
+            if (type(request.data["billing_address"]) is list):
+                if (len(request.data["billing_address"]) == 2):
+                    if (len(request.data["billing_address"][0]) > 20):
+                        return Response({"Error" : "Aliases must be smaller than 20 characters"}, status=401)
+                    if (type(request.data["billing_address"][1]) is dict):
+                        if ("first_name" not in request.data["billing_address"][1] or\
+                            "last_name" not in request.data["billing_address"][1] or\
+                            "address" not in request.data["billing_address"][1] or\
+                            "postal_code" not in request.data["billing_address"][1] or\
+                            "city" not in request.data["billing_address"][1]):
+                            return Response({"Error" : "Address collection is not correctly formatted."}, status=401)
+                        else:
+                            request.data["billing_address"][1] = json.dumps(request.data["billing_address"][1])
+                    else:
+                        return Response({"Error" : "Addresses must be a collection of data"}, status=401)
+                    current_user = User.objects.get(pk=user_pk)
+                    if (current_user.billing_address is not None):
+                        for i, address in enumerate(current_user.billing_address):
+                            if (address[0] == request.data["billing_address"][0]):       
+                                current_user.billing_address.pop(i)
+                                current_user.save()
+                                serializer = UserDetailsSerializer(current_user)
+                                jsonData = serializer.data
+                                return (Response(jsonData))
+                        return Response({"Error" : "The alias wasn't found in the user's living addresses"}, status=401)
+                    else:
+                        return Response({"Error" : "The user has no billing address."}, status=401)
+                else:
+                    return Response({"Error" : "The key 'billing_address' must have two slots, the first for the alias and the second for the address"}, status=401)
+            else:
+                return Response({"Error" : "The key 'billing_address' must be a list."}, status=401)
+        else:
+            return Response({"Error" : "There must be a key 'billing_address' present in the document."}, status=401)
+        return Response({"message" : "Nice"})
 
 """
     SOCIAL NETWORK END-POINTS

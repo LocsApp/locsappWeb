@@ -43,7 +43,7 @@ md-card-content.user_profile_parameters_addresses
 				span(ng-if="!profileParams.user.living_address.length") Living Addresses (0 / 5)
 				span(ng-if="profileParams.user.living_address.length") Living Addresses ({{ profileParams.user.living_address.length }} / 5)
 				span.flex
-				ng-md-icon(aria-label="add icon" icon="add" ng-click="profileParams.addLivingAddressDialog($event)").user_profile_parameters_add_address_icon
+				ng-md-icon(aria-label="add icon" icon="add" ng-click="profileParams.addAddressDialog($event, 0)").user_profile_parameters_add_address_icon
 					md-tooltip(md-direction="bottom").
 						Add an address
 			md-content
@@ -54,5 +54,24 @@ md-card-content.user_profile_parameters_addresses
 					md-list-item(ng-repeat="address in profileParams.user.living_address" ng-click="profileParams.showAddressDialog($event, address);")
 						span {{ address[0] }}
 						span
-							ng-md-icon(aria-label="delete icon" icon="delete" ng-click="profileParams.deleteAddressDialog($event, address);").md-secondary.user_profile_parameters_addresses_delete
+							ng-md-icon(aria-label="delete icon" icon="delete" ng-click="profileParams.deleteAddressDialog($event, address, 0);").md-secondary.user_profile_parameters_addresses_delete
+						md-divider(ng-if="!$last")
+	md-card
+		md-toolbar
+			div.md-toolbar-tools
+				span(ng-if="!profileParams.user.billing_address.length") Billing Addresses (0 / 5)
+				span(ng-if="profileParams.user.billing_address.length") Billing Addresses ({{ profileParams.user.billing_address.length }} / 5)
+				span.flex
+				ng-md-icon(aria-label="add icon" icon="add" ng-click="profileParams.addAddressDialog($event, 1)").user_profile_parameters_add_address_icon
+					md-tooltip(md-direction="bottom").
+						Add an address
+			md-content
+				md-list(ng-if="!profileParams.user.billing_address || profileParams.user.billing_address.length == 0")
+					md-list-item
+						span.user_profile_parameters_no_address No given billing address
+				md-list(ng-if="profileParams.user.billing_address").user_profile_parameters_addresses_lists
+					md-list-item(ng-repeat="address in profileParams.user.billing_address" ng-click="profileParams.showAddressDialog($event, address);")
+						span {{ address[0] }}
+						span
+							ng-md-icon(aria-label="delete icon" icon="delete" ng-click="profileParams.deleteAddressDialog($event, address, 1);").md-secondary.user_profile_parameters_addresses_delete
 						md-divider(ng-if="!$last")

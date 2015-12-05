@@ -80,18 +80,30 @@
 		/*
 		** Dialogs Definitions
 		*/
-		/*Add a living address dialog*/
-		vm.addLivingAddressDialog = function(event) {
-			$mdDialog.show({
-				controller : vm.addLivingAddressController,
-				controllerAs : 'addLivingAddress',
-				templateUrl: 'app/templates/dialogTemplates/addLivingAddress.tmpl.html',
-				locals : {user : vm.user},
-				bindToController: true,
-				parent: angular.element($document.body),
-				targetEvent: event,
-				clickOutsideToClose:true
-			}).then(function(data) { vm.user = data });
+		/*Add an address dialog*/
+		vm.addAddressDialog = function(event, type) {
+			if (type == 0)
+				$mdDialog.show({
+					controller : vm.addAddressController,
+					controllerAs : 'addAddress',
+					templateUrl: 'app/templates/dialogTemplates/addAddress.tmpl.html',
+					locals : {user : vm.user, type : type},
+					bindToController: true,
+					parent: angular.element($document.body),
+					targetEvent: event,
+					clickOutsideToClose:true
+				}).then(function(data) { vm.user = data });
+			else if (type == 1)
+				$mdDialog.show({
+					controller : vm.addAddressController,
+					controllerAs : 'addAddress',
+					templateUrl: 'app/templates/dialogTemplates/addAddress.tmpl.html',
+					locals : {user : vm.user, type : type},
+					bindToController: true,
+					parent: angular.element($document.body),
+					targetEvent: event,
+					clickOutsideToClose:true
+				}).then(function(data) { vm.user = data });				
 		};
 
 		/*Add a show address dialog*/
@@ -109,12 +121,12 @@
 		};
 
 		/*Add a delete address dialog*/
-		vm.deleteAddressDialog = function(event, address) {
+		vm.deleteAddressDialog = function(event, address, type) {
 			$mdDialog.show({
 				controller : vm.deleteAddressController,
 				controllerAs : 'deleteAddress',
 				templateUrl: 'app/templates/dialogTemplates/deleteAddress.tmpl.html',
-				locals : {user_id: vm.user.id, address : address},
+				locals : {user_id: vm.user.id, address : address, type: type},
 				bindToController: true,
 				parent: angular.element($document.body),
 				targetEvent: event,
@@ -125,8 +137,8 @@
 		/*
 		** Dialogs Controllers
 		*/
-		/*addLivingAddressDialog Controller*/
-		vm.addLivingAddressController = function($mdDialog) {
+		/*addAddressDialog Controller*/
+		vm.addAddressController = function($mdDialog) {
 			var vm = this;
 
 			/*Parses the strings address in living_address and billing_address to JSON objects*/
@@ -152,18 +164,21 @@
 				}
 			};
 
-			/*Success callback of living_address*/
-			vm.GetLivingAddressUserSuccess = function(data) {
+			/*Success callback of the ressource callback*/
+			vm.GetAddressUserSuccess = function(data) {
 				$log.log(data);
 				vm.user = data;
 				vm.parseAddressToJson();
 				$log.log(vm.user)
-				toastr.success("The new living address has been successfully added.", "Success");
+				if (vm.type == 0)
+					toastr.success("The new living address has been successfully added.", "Success");
+				else if (vm.type == 1)
+					toastr.success("The new billing address has been successfully added.", "Success");
 				vm.hide();
 			};
 
-			/*Failure callback of living_address*/
-			vm.GetLivingAddressFailure = function(data) {
+			/*Failure callback of the ressource callback*/
+			vm.GetLivingFailure = function(data) {
 				$log.log(data);
 				toastr.error(data.data.Error, "Woops...");
 			};
@@ -181,18 +196,32 @@
 				};
 				data.push(vm.alias);
 				data.push(address);
-				var data_send = {"user_id" : vm.user.id, "living_address" : data};
-				UsersService
-				.living_addresses
-				.save(data_send)
-				.$promise
-				.then(vm.GetLivingAddressUserSuccess, vm.GetLivingAddressFailure);
-			}
+				var data_send = {};
+				if (vm.type == 0)
+				{
+					data_send = {"user_id" : vm.user.id, "living_address" : data};
+					UsersService
+						.living_addresses
+						.save(data_send)
+						.$promise
+						.then(vm.GetAddressUserSuccess, vm.GetAddressFailure);
+				}
+				else if (vm.type == 1)
+				{
+					data_send = {"user_id" : vm.user.id, "billing_address" : data};
+					UsersService
+						.billing_addresses
+						.save(data_send)
+						.$promise
+						.then(vm.GetAddressUserSuccess, vm.GetAddressFailure);
+				}
+
+			};
 
 			vm.hide = function() {
 
 				$mdDialog.hide(vm.user);
-			}
+			};
 		};
 
 		/*showAddressDialog Controller*/
@@ -201,7 +230,7 @@
 
 			vm.hide = function() {
 				$mdDialog.hide();
-			}
+			};
 		};
 
 		/*deleteAddressDialog Controller*/
@@ -231,34 +260,47 @@
 				}
 			};
 
-			/*Success callback of living_address*/
-			vm.GetLivingAddressUserSuccess = function(data) {
+			/*Success callback of the ressource callback*/
+			vm.GetAddressUserSuccess = function(data) {
 				$log.log(data);
 				vm.user = data;
 				vm.parseAddressToJson();
-				toastr.success("The new living address has been successfully added.", "Success");
+				toastr.success("The address has been successfully deleted.", "Success");
 				vm.hide();
 			};
 
-			/*Failure callback of living_address*/
-			vm.GetLivingAddressFailure = function(data) {
+			/*Failure callback of the ressource callback*/
+			vm.GetAddressFailure = function(data) {
 				$log.log(data);
 				toastr.error("This is odd...", "Woops...");
 			};
 
 			vm.accepted = function() {
-				var data_send = {"user_id" : vm.user_id, "living_address" : vm.address};
+				var data_send = {};
 
-				UsersService
-				.living_addresses_delete
-				.save(data_send)
-				.$promise
-				.then(vm.GetLivingAddressUserSuccess, vm.GetLivingAddressFailure);	
-			}
+				if (vm.type == 0)
+				{
+					data_send = {"user_id" : vm.user_id, "living_address" : vm.address};
+					UsersService
+					.living_addresses_delete
+					.save(data_send)
+					.$promise
+					.then(vm.GetAddressUserSuccess, vm.GetAddressFailure);
+				}
+				else if (vm.type == 1)
+				{
+					data_send = {"user_id" : vm.user_id, "billing_address" : vm.address};
+					UsersService
+						.billing_addresses_delete
+						.save(data_send)
+						.$promise
+						.then(vm.GetAddressUserSuccess, vm.GetAddressFailure);
+				}
+			};
 
 			vm.hide = function() {
 				$mdDialog.hide(vm.user);
-			}
+			};
 		};
 	}
 
