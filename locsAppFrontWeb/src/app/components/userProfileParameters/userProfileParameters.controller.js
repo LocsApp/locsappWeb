@@ -82,28 +82,16 @@
 		*/
 		/*Add an address dialog*/
 		vm.addAddressDialog = function(event, type) {
-			if (type == 0)
-				$mdDialog.show({
-					controller : vm.addAddressController,
-					controllerAs : 'addAddress',
-					templateUrl: 'app/templates/dialogTemplates/addAddress.tmpl.html',
-					locals : {user : vm.user, type : type, states : $scope.states},
-					bindToController: true,
-					parent: angular.element($document.body),
-					targetEvent: event,
-					clickOutsideToClose:true
-				}).then(function(data) { vm.user = data });
-			else if (type == 1)
-				$mdDialog.show({
-					controller : vm.addAddressController,
-					controllerAs : 'addAddress',
-					templateUrl: 'app/templates/dialogTemplates/addAddress.tmpl.html',
-					locals : {user : vm.user, type : type, states : $scope.states},
-					bindToController: true,
-					parent: angular.element($document.body),
-					targetEvent: event,
-					clickOutsideToClose:true
-				}).then(function(data) { vm.user = data });				
+			$mdDialog.show({
+				controller : vm.addAddressController,
+				controllerAs : 'addAddress',
+				templateUrl: 'app/templates/dialogTemplates/addAddress.tmpl.html',
+				locals : {user : vm.user, type : type, states : $scope.states},
+				bindToController: true,
+				parent: angular.element($document.body),
+				targetEvent: event,
+				clickOutsideToClose:true
+			}).then(function(data) { vm.user = data });			
 		};
 
 		/*Add a show address dialog*/
@@ -173,18 +161,22 @@
 				vm.user = data;
 				vm.parseAddressToJson();
 				$log.log(vm.user)
-				if (vm.add_to_other)
+				if (vm.add_to_other && vm.count == 1)
 					toastr.success("The new addresses have been successfully added.", "Success");
-				else if (vm.type == 0)
+				else if (vm.type == 0 && vm.count == 0)
 					toastr.success("The new living address has been successfully added.", "Success");
-				else if (vm.type == 1)
+				else if (vm.type == 1 && vm.count == 0)
 					toastr.success("The new billing address has been successfully added.", "Success");
 				if (!vm.add_to_other)
 					vm.hide();
 				else
 				{
-					if (vm.count == 1)
+					if (vm.count != 0)
+					{
 						vm.hide();
+						return ;
+					}
+					$log.log("In it "+ vm.count);
 					vm.count++;
 					var dataAddress = [];
 
@@ -229,7 +221,7 @@
 				data.push(vm.alias);
 				data.push(address);
 				var data_send = {};
-				if (vm.type == 0 || vm.add_to_other)
+				if (vm.type == 0 || vm.add_to_other && vm.count == 0)
 				{
 					data_send = {"user_id" : vm.user.id, "living_address" : data};
 					UsersService
@@ -238,7 +230,7 @@
 						.$promise
 						.then(vm.GetAddressUserSuccess, vm.GetAddressUserFailure);
 				}
-				else if (vm.type == 1)
+				else if (vm.type == 1 && vm.count == 0)
 				{
 					data_send = {"user_id" : vm.user.id, "billing_address" : data};
 					UsersService
