@@ -17,7 +17,7 @@
 		"main.profile_management.change_password"];
 		vm.tabSelected[vm.stateNameToTabDef.map(function(x) {return x;}).indexOf($state.current.name)] = true;
 
-		/*Parses the strings address in living_address and billing_address to JSON objects*/
+		/*Parses the strings addresses in living_address and billing_address to JSON objects*/
 		vm.parseAddressToJson = function () {
 			var i = 0;
 			var temp = null;
@@ -60,6 +60,25 @@
 			toastr.error("This is odd...", "Woops...");
 		};
 
+		/*Success callback of change_password*/
+		vm.ChangePasswordSuccess = function(data) {
+			$log.log(data);
+			toastr.success(data.success, "Success");
+		};
+
+		/*Failure callback of change_password*/
+		vm.ChangePasswordFailure = function(data) {
+			var error = "This is odd...";
+			$log.log(data);
+			if (data.data.old_password)
+				error = "The old password typed in is invalid."
+			else if (data.data.new_password1)
+				error = data.data.new_password1;
+			else if (data.data.new_password2)
+				error = data.data.new_password2;
+			toastr.error(error, "Woops...");
+		};
+
 		//If the user comes doesn't come from the profile page, retrieves the infos
 		if(!vm.user)
 			UsersService
@@ -88,6 +107,16 @@
 			vm.tabSelected[tabNumber] = true;
 			$state.go(stateName);
 		};
+
+		/*Changed the password of the user*/
+		vm.change_password = function()
+		{
+			UsersService
+				.change_password
+				.save({old_password : vm.old_password, new_password1 : vm.new_password1, new_password2 : vm.new_password2})
+				.$promise
+				.then(vm.ChangePasswordSuccess, vm.ChangePasswordFailure);			
+		}
 
 		/*
 		** Dialogs Definitions
@@ -233,6 +262,7 @@
 				data.push(vm.alias);
 				data.push(address);
 				var data_send = {};
+				/* type == 0 living_address || vm.add_to_other == type0 && type1 */
 				if (vm.type == 0 || vm.add_to_other && vm.count == 0)
 				{
 					data_send = {"user_id" : vm.user.id, "living_address" : data};
@@ -242,6 +272,7 @@
 						.$promise
 						.then(vm.GetAddressUserSuccess, vm.GetAddressUserFailure);
 				}
+				/* type == 1 billing_address */
 				else if (vm.type == 1 && vm.count == 0)
 				{
 					data_send = {"user_id" : vm.user.id, "billing_address" : data};
@@ -316,6 +347,7 @@
 			vm.accepted = function() {
 				var data_send = {};
 
+				/* type == 0 living_address */
 				if (vm.type == 0)
 				{
 					data_send = {"user_id" : vm.user_id, "living_address" : vm.address};
@@ -325,6 +357,7 @@
 					.$promise
 					.then(vm.GetAddressUserSuccess, vm.GetAddressUserFailure);
 				}
+				/* type == 1 billing_address */
 				else if (vm.type == 1)
 				{
 					data_send = {"user_id" : vm.user_id, "billing_address" : vm.address};
