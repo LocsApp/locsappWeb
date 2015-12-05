@@ -63,6 +63,12 @@
 				</md-input-container>
 			</section>
 			<section layout="row", layout-align="center center">
+				<span ng-if="addAddress.type == 0">
+					<md-checkbox ng-model="addAddress.add_to_other" > Also add it to the billing addresses </md-button>
+				</span>
+				<md-checkbox ng-model="addAddress.add_to_other" ng-if="addAddress.type == 1"> Also add it to the living addresses </md-button>
+			</section>
+			<section layout="row", layout-align="center center">
 				<md-button class="md-raised" type="submit"> Add </md-button>
 			</section>
 		</form>

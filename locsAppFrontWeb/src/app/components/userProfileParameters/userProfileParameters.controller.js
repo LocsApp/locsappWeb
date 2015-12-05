@@ -87,7 +87,7 @@
 					controller : vm.addAddressController,
 					controllerAs : 'addAddress',
 					templateUrl: 'app/templates/dialogTemplates/addAddress.tmpl.html',
-					locals : {user : vm.user, type : type},
+					locals : {user : vm.user, type : type, states : $scope.states},
 					bindToController: true,
 					parent: angular.element($document.body),
 					targetEvent: event,
@@ -98,7 +98,7 @@
 					controller : vm.addAddressController,
 					controllerAs : 'addAddress',
 					templateUrl: 'app/templates/dialogTemplates/addAddress.tmpl.html',
-					locals : {user : vm.user, type : type},
+					locals : {user : vm.user, type : type, states : $scope.states},
 					bindToController: true,
 					parent: angular.element($document.body),
 					targetEvent: event,
@@ -141,6 +141,10 @@
 		vm.addAddressController = function($mdDialog) {
 			var vm = this;
 
+			/*initialize vars*/
+			vm.add_to_other = false;
+			vm.count = 0;
+
 			/*Parses the strings address in living_address and billing_address to JSON objects*/
 			vm.parseAddressToJson = function () {
 				var i = 0;
@@ -166,21 +170,49 @@
 
 			/*Success callback of the ressource callback*/
 			vm.GetAddressUserSuccess = function(data) {
-				$log.log(data);
 				vm.user = data;
 				vm.parseAddressToJson();
 				$log.log(vm.user)
-				if (vm.type == 0)
+				if (vm.add_to_other)
+					toastr.success("The new addresses have been successfully added.", "Success");
+				else if (vm.type == 0)
 					toastr.success("The new living address has been successfully added.", "Success");
 				else if (vm.type == 1)
 					toastr.success("The new billing address has been successfully added.", "Success");
-				vm.hide();
+				if (!vm.add_to_other)
+					vm.hide();
+				else
+				{
+					if (vm.count == 1)
+						vm.hide();
+					vm.count++;
+					var dataAddress = [];
+
+					var address = {
+						first_name : vm.first_name,
+						last_name : vm.last_name,
+						address : vm.address,
+						postal_code : vm.postal_code,
+						city : vm.city
+					};
+					dataAddress.push(vm.alias);
+					dataAddress.push(address);
+					var data_send = {};
+					data_send = {"user_id" : vm.user.id, "billing_address" : dataAddress};
+					UsersService
+						.billing_addresses
+						.save(data_send)
+						.$promise
+						.then(vm.GetAddressUserSuccess, vm.GetAddressUserFailure);
+				}
 			};
 
 			/*Failure callback of the ressource callback*/
-			vm.GetLivingFailure = function(data) {
+			vm.GetAddressUserFailure = function(data) {
 				$log.log(data);
 				toastr.error(data.data.Error, "Woops...");
+				if (vm.count == 1)
+					vm.hide();
 			};
 
 			/*Submits the form data from the dialog to the API*/
@@ -197,14 +229,14 @@
 				data.push(vm.alias);
 				data.push(address);
 				var data_send = {};
-				if (vm.type == 0)
+				if (vm.type == 0 || vm.add_to_other)
 				{
 					data_send = {"user_id" : vm.user.id, "living_address" : data};
 					UsersService
 						.living_addresses
 						.save(data_send)
 						.$promise
-						.then(vm.GetAddressUserSuccess, vm.GetAddressFailure);
+						.then(vm.GetAddressUserSuccess, vm.GetAddressUserFailure);
 				}
 				else if (vm.type == 1)
 				{
@@ -213,11 +245,12 @@
 						.billing_addresses
 						.save(data_send)
 						.$promise
-						.then(vm.GetAddressUserSuccess, vm.GetAddressFailure);
+						.then(vm.GetAddressUserSuccess, vm.GetAddressUserFailure);
 				}
 
 			};
 
+			/*Hide callback for $mdDialog*/
 			vm.hide = function() {
 
 				$mdDialog.hide(vm.user);
@@ -270,11 +303,12 @@
 			};
 
 			/*Failure callback of the ressource callback*/
-			vm.GetAddressFailure = function(data) {
+			vm.GetAddressUserFailure = function(data) {
 				$log.log(data);
 				toastr.error("This is odd...", "Woops...");
 			};
 
+			/*The user clicked on the Yes button*/
 			vm.accepted = function() {
 				var data_send = {};
 
@@ -285,7 +319,7 @@
 					.living_addresses_delete
 					.save(data_send)
 					.$promise
-					.then(vm.GetAddressUserSuccess, vm.GetAddressFailure);
+					.then(vm.GetAddressUserSuccess, vm.GetAddressUserFailure);
 				}
 				else if (vm.type == 1)
 				{
@@ -294,10 +328,11 @@
 						.billing_addresses_delete
 						.save(data_send)
 						.$promise
-						.then(vm.GetAddressUserSuccess, vm.GetAddressFailure);
+						.then(vm.GetAddressUserSuccess, vm.GetAddressUserFailure);
 				}
 			};
 
+			/*Hide callback for $mdDialog*/
 			vm.hide = function() {
 				$mdDialog.hide(vm.user);
 			};
