@@ -54,10 +54,18 @@ ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "http://127.0.0.1:8080"
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Locsapp]"
 
+#SOCIALACCOUNT_ADAPTER = 'API.adapter.DefaultSocialAccountAdapter'
+#SOCIALACCOUNT_AUTO_SIGNUP =
 SOCIALACCOUNT_EMAIL_VERIFICATION = "mandatory"
 SOCIALACCOUNT_EMAIL_REQUIRED = True
 # SOCIAL_ACCOUNT_EMAIL_REQUIRED if set to true with got an error
 SOCIALACCOUNT_QUERY_EMAIL = True
+
+"""
+Attempt to bypass the signup form by using fields (e.g. username, email) retrieved from the social account provider.
+ If a conflict arises due to a duplicate e-mail address the signup form will still kick in.
+"""
+#SOCIALACCOUNT_AUTO_SIGNUP = False
 
 # - set it to True if you want to have old password verification on password change enpoint (default: False)
 OLD_PASSWORD_FIELD_ENABLED = True
@@ -251,7 +259,7 @@ EMAIL_HOST_PASSWORD = 'Totofaitdubateau'
 
 if socket.gethostname() == "sylflo.fr":
     DEBUG = TEMPLATE_DEBUG = False
-    ALLOWED_HOSTS = ["locsapp.sylflo.fr", ".sylflo.fr", "sylflo.fr"]
+    ALLOWED_HOSTS = ["locsapp.sylflo.fr", ".sylflo.fr", "sylflo.fr", "5.135.163.38"]
     ADMINS = (
         ('Sylvain Chateau', 'dev.chateau@gmail.com'),
     )

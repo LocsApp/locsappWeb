@@ -6,7 +6,6 @@ from django.core.mail import send_mail
 from django.contrib.auth.forms import PasswordResetForm
 from django.utils.translation import ugettext_lazy as _
 
-
 UserModel = get_user_model()
 
 
@@ -18,8 +17,9 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         secondary_emails = serializers.ListField(serializers.ListField(child=serializers.CharField()))
 
         fields = (
-        'id' ,'username', 'email', 'secondary_emails', 'first_name', 'last_name', 'birthdate', 'phone', 'living_address',
-        'registered_date', 'last_activity_date', 'billing_address', 'logo_url', "is_active", "role")
+            'id', 'username', 'email', 'secondary_emails', 'first_name', 'last_name', 'birthdate', 'phone',
+            'living_address',
+            'registered_date', 'last_activity_date', 'billing_address', 'logo_url', "is_active", "role")
         read_only_fields = ('id', 'username', 'role', 'email', 'registered_date', 'last_activity_date', 'logo_url',
                             'is_active')
 
@@ -78,7 +78,6 @@ class PasswordChangeSerializer(serializers.Serializer):
 
 
 class PasswordResetSerializer(serializers.Serializer):
-
     """
     Serializer for requesting a password reset e-mail.
     """
