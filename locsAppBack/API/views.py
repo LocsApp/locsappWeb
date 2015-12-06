@@ -39,6 +39,8 @@ APIrequests = APIRequestMongo()
 mongodb_client = MongoClient('localhost', 27017)
 db_locsapp = mongodb_client['locsapp']
 
+from django.core.validators import validate_email
+
 # Template for the doc on the homepage of the API
 
 
@@ -48,6 +50,20 @@ class docAPIView(TemplateView):
 """
     USER PROFILE END-POINTS
 """
+
+@permission_classes((IsAuthenticated, ))
+class addEmailUser(APIView):
+    def post(self, request):
+        if ("new_email" not in request.data or len(request.data["new_email"]) == 0):
+            return Response({"Error" : "There must be a field 'new_email' present in the document."}, status=401)
+        try:
+            validate_email(request.data["new_email"])
+        except:
+            return Response({"Error" : "Please provide a correct email address."})
+        print (request.user.add_email_address(request, request.data["new_email"], False))
+        return Response({"message" : "A confimation email has been sent"})
+
+
 @permission_classes((IsAuthenticated, ))
 class livingAddressUser(APIView):
     def post(self, request, user_pk):

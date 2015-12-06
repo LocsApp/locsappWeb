@@ -6,7 +6,7 @@
 	.directive('editableField', editableField);
 
 	/** @ngInject */
-	function editableField($log)
+	function editableField()
 	{
 		var directive = {};
 

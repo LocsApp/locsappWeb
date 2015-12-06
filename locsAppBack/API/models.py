@@ -4,7 +4,10 @@ from django.core.mail import EmailMessage
 from django.utils import timezone
 from django.contrib.postgres.fields import ArrayField
 from rest_framework import serializers
-
+from allauth.account.models import EmailAddress
+from allauth.account.signals import email_confirmed, email_confirmation_sent
+from django.dispatch import receiver
+from allauth.account.utils import send_email_confirmation
 
 class AccountManager(BaseUserManager):
     def create_user(self, email, password=None, **kwargs):
@@ -82,3 +85,20 @@ class Account(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return self.is_admin
+
+    def add_email_address(self, request, new_email, reconfirm):
+        # Add a new email address for the user, and send email confirmation.
+        # Old email will remain the primary until the new one is confirmed
+        email = EmailAddress.objects.get(email="julian.caille64@gmail.com")
+        print(email.verified)
+        EmailAddress.objects.get(email="julian.caille64@gmail.com").delete()
+        return EmailAddress.objects.add_email(request, self, new_email, confirm=True)
+
+@receiver(email_confirmed)
+def update_user_email(sender, request, email_address, **kwargs):
+    print(sender)
+    print(email_address)
+
+@receiver(email_confirmation_sent)
+def email_confimation_sent(confirmation, **kwargs):
+    print(confirmation)

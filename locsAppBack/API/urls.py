@@ -21,6 +21,7 @@ article_patterns = [
 ]
 
 user_patterns = [
+    url(r'^add-email/$', views.addEmailUser.as_view()),
     url(r'^(?P<user_pk>[0-9]+)/living_addresses/$', views.livingAddressUser.as_view()),
     url(r'^(?P<user_pk>[0-9]+)/living_addresses/delete/$', views.livingAddressUserDelete.as_view()),
     url(r'^(?P<user_pk>[0-9]+)/billing_addresses/$', views.billingAddressUser.as_view()),
