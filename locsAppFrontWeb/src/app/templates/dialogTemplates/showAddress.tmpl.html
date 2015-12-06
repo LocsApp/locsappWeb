@@ -1,0 +1,33 @@
+<md-content class="user_profile_parameters_address_add_dialogs">
+	<md-toolbar>
+		<span class="user_profile_parameters_address_add_dialogs_header">{{ showAddress.address[0] }}</span>
+	</md-toolbar>
+	<md-content flex="none" style="max-width: 300px;">
+		<section layout="row" layout-align="center center space-between" layout-margin>
+			<div layout="column" layout-align="center center">
+				<md-content style="max-width:100px; word-wrap: break-word;"><strong>First name</strong></md-content>
+				<md-content style="max-width:100px; word-wrap: break-word;">{{ showAddress.address[1].first_name }}</md-content>
+			</div>
+			<span flex></span>
+			<div layout="column" layout-align="center center">
+				<md-content style="max-width:100px; word-wrap: break-word;"><strong>Last name</strong></md-content>
+				<md-content style="max-width:100px; word-wrap: break-word;">{{ showAddress.address[1].last_name }}</md-content>
+			</div>
+		</section>
+		<section layout="column" layout-align="center center" layout-margin>
+			<div><strong>Address</strong></div>
+			<md-content style="max-width:290px; word-wrap: break-word;">{{ showAddress.address[1].address }}</md-content>
+		</section>
+		<section layout="row" layout-align="center center space-between" layout-margin>
+			<div layout="column" layout-align="center center">
+				<md-content><strong>Postal Code</strong></md-content>
+				<md-content>{{ showAddress.address[1].postal_code }}</md-content>
+			</div>
+			<span flex></span>
+			<div layout="column" layout-align="center center">
+				<md-content><strong>City</strong></md-content>
+				<md-content style="max-width:100px; word-wrap: break-word;">{{ showAddress.address[1].city }}</md-content>
+			</div>
+		</section>		
+	</md-content>
+</md-content>
