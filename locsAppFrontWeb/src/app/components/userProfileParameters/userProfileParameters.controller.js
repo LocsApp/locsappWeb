@@ -184,7 +184,11 @@
 				parent: angular.element($document.body),
 				targetEvent: event,
 				clickOutsideToClose:true
-			}).then(function(data) { vm.user = data });
+			}).then(function(data) {  
+				if (data==false)
+					return;
+				else
+					vm.user = data });
 		};
 
 		/*
@@ -403,6 +407,9 @@
 		vm.deleteAddressController = function($mdDialog) {
 			var vm = this;
 
+			/*init vars*/
+			vm.not_accepted = true;
+
 			/*Parses the strings address in living_address and billing_address to JSON objects*/
 			vm.parseAddressToJson = function () {
 				var i = 0;
@@ -445,6 +452,7 @@
 			vm.accepted = function() {
 				var data_send = {};
 
+				vm.not_accepted = false;
 				/* type == 0 living_address */
 				if (vm.type == 0)
 				{
@@ -469,6 +477,8 @@
 
 			/*Hide callback for $mdDialog*/
 			vm.hide = function() {
+				if (vm.not_accepted)
+					$mdDialog.hide(false);
 				$mdDialog.hide(vm.user);
 			};
 		};
