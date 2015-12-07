@@ -90,30 +90,26 @@ class Account(AbstractBaseUser):
         return self.is_admin
 
     def add_email_address(self, request, new_email, reconfirm):
-        # Add a new email address for the user, and send email confirmation.
         try :
             email = EmailAddress.objects.get(email=new_email)
         except:
-            try:
-                EmailAddress.objects.get(email="julian.caille64@gmail.com").delete()
-            except:
-                pass
             email = EmailAddress.objects.add_email(request, self, new_email, confirm=True)
             if (self.secondary_emails == None):
                 self.secondary_emails = [[email.email, "false"]]
             else:
                 self.secondary_emails.push([[email.email, "false"]])
-            self.save()
+            self.save(update_fields=['secondary_emails'])
             return ({"message" : "Confirmation email sent!"})
+        EmailAddress.objects.get(email=new_email).delete()
+        email = EmailAddress.objects.add_email(request, self, new_email, confirm=True)
         if (email.user_id != self.pk):
             return ({"message" : "This email is already used by another user."})
-        EmailAddress.objects.add_email(request, self, new_email, confirm=True)
         if (self.secondary_emails == None):
             self.secondary_emails = [[email.email, "false"]]
         else:
-            self.secondary_emails.push([[email.email, "false"]])
-        self.save()
-        return ({"message" : "Confirmation email sent!"})
+            self.secondary_emails.append([email.email, "false"])
+        self.save(update_fields=['secondary_emails'])
+        return ({"message" : "Reconfirmation email sent!"})
 
 @receiver(email_confirmed)
 def update_user_email(sender, request, email_address, **kwargs):

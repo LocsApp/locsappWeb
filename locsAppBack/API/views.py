@@ -62,13 +62,14 @@ class addEmailUser(APIView):
             return Response({"Error" : "Please provide a correct email address."})
         if (request.data["new_email"] == request.user.email):
             return Response({"Error" : "This is your primary email address."})
-        for email_obj in request.user.secondary_emails:
-            if (email_obj[0] == request.data["new_email"]):
-                if (email_obj[1] == "true"):
-                    return Response({"Error" : "You already confirmed that email."})
-                break
-        if (len(request.user.secondary_emails) == 5):
-            return Response({"Error" : "Sorry, you can't add more than 5 emails."})
+        if (request.user.secondary_emails is not None):
+            for email_obj in request.user.secondary_emails:
+                if (email_obj[0] == request.data["new_email"]):
+                    if (email_obj[1] == "true"):
+                        return Response({"Error" : "You already confirmed that email."})
+                    break
+            if (len(request.user.secondary_emails) == 5):
+                return Response({"Error" : "Sorry, you can't add more than 5 emails."})
         answer =  request.user.add_email_address(request, request.data["new_email"], False)
         return Response(answer)
 
