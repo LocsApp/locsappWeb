@@ -60,8 +60,8 @@ class addEmailUser(APIView):
             validate_email(request.data["new_email"])
         except:
             return Response({"Error" : "Please provide a correct email address."})
-        print (request.user.add_email_address(request, request.data["new_email"], False))
-        return Response({"message" : "A confimation email has been sent"})
+        answer =  request.user.add_email_address(request, request.data["new_email"], False)
+        return Response(answer)
 
 
 @permission_classes((IsAuthenticated, ))

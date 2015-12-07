@@ -89,8 +89,11 @@ class Account(AbstractBaseUser):
     def add_email_address(self, request, new_email, reconfirm):
         # Add a new email address for the user, and send email confirmation.
         # Old email will remain the primary until the new one is confirmed
-        email = EmailAddress.objects.get(email="julian.caille64@gmail.com")
-        print(email.verified)
+        try :
+            email = EmailAddress.objects.get(email=new_email)
+        except:
+            return ({"message" : "The email doesn't exist yet."})
+        return ({"message" : "The email exists."})
         EmailAddress.objects.get(email="julian.caille64@gmail.com").delete()
         return EmailAddress.objects.add_email(request, self, new_email, confirm=True)
 
