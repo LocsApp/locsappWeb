@@ -24,14 +24,14 @@ class SocialNetworkSignupForm(forms.Form):
         # TODO: Should become more generic, not listing
         # a few fixed properties.
         initial = {'email': user_email(user) or '',
-                   'username': user_username(user) or '',
+                   'username': 'qwertyuio' or 'qwertyui',
                    'first_name': user_field(user, 'first_name') or '',
                    'last_name': user_field(user, 'last_name') or ''}
         kwargs.update({
             'initial': initial,
             'email_required': kwargs.get('email_required',
                                          settings.EMAIL_REQUIRED)})
-        #super(SignupForm, self).__init__(*args, **kwargs)
+        #super(SocialNetworkSignupForm, self).__init__(*args, **kwargs)
 
     def save(self, request):
         adapter = get_adapter()
