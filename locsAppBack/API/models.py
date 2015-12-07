@@ -106,6 +106,21 @@ class Account(AbstractBaseUser):
         email = EmailAddress.objects.add_email(request, self, new_email, confirm=True)
         return ({"message" : "Reconfirmation email sent!"})
 
+    def delete_email_address(self, request, email):
+        try :
+            email = EmailAddress.objects.get(email=email)
+        except:
+            return({"Error" : "This email doesn't exist."})
+        if (email.user_id != self.pk):
+            return ({"Error" : "This email is already used by another user."})
+        for i, email_obj in enumerate(self.secondary_emails):
+            if (email_obj[0] == email):
+                self.secondary_emails.pop(i)
+                EmailAddress.objects.get(email=new_email).delete()
+                self.save(update_fields=['secondary_emails'])
+                return ({"message" : "Email succesfully deleted"})
+        return ({"Error" : "The email wasn't found in the secondary emails."})
+
 @receiver(email_confirmed)
 def update_user_email(sender, request, email_address, **kwargs):
     User = get_user_model()

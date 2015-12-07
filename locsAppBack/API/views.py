@@ -52,6 +52,20 @@ class docAPIView(TemplateView):
 """
 
 @permission_classes((IsAuthenticated, ))
+class deleteEmailUser(APIView):
+    def post(self, request):
+        if ("email" not in request.data or len(request.data["email"]) == 0):
+            return Response({"Error" : "There must be a field 'email' present in the document."}, status=401)    
+        answer = request.user.add_email_address(request, request.data["email"])
+        if ("Error" in answer):
+            return Response(answer, status=401)
+        User = get_user_model()
+        current_user = User.objects.get(pk=self.request.user.pk)
+        serializer = UserDetailsSerializer(current_user)
+        dataSerialized = serializer.data
+        return Response(dataSerialized)
+
+@permission_classes((IsAuthenticated, ))
 class addEmailUser(APIView):
     def post(self, request):
         if ("new_email" not in request.data or len(request.data["new_email"]) == 0):
