@@ -108,6 +108,16 @@
 			$state.go(stateName);
 		};
 
+		/*Sets the primary email of the user to the email given in parameter*/
+		vm.setEmailAsPrimary = function(new_email)
+		{
+			UsersService
+			.set_primary_email
+			.save({'email' : new_email})
+			.$promise
+			.then(vm.GetInfosPutUserSuccess, vm.GetInfosUserFailure);
+		}
+
 		/*Changed the password of the user*/
 		vm.change_password = function()
 		{

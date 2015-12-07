@@ -90,7 +90,9 @@ class setEmailAsPrimary(APIView):
                         email_obj[0] = current_user.email
                         current_user.email = temp
                         current_user.save()
-                        return (Response({"message" : "Primary email changed successfully."}))
+                        serializer = UserDetailsSerializer(current_user)
+                        dataSerialized = serializer.data
+                        return (Response(dataSerialized))
             return (Response({"Error" : "You don't have this secondary email."}))
         return (Response({"Error" : "You don't have any secondary email."}))
 
