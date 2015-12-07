@@ -100,15 +100,21 @@ class Account(AbstractBaseUser):
             except:
                 pass
             email = EmailAddress.objects.add_email(request, self, new_email, confirm=True)
-            print (self.secondary_emails)
+            if (self.secondary_emails == None):
+                self.secondary_emails = [[email.email, "false"]]
+            else:
+                self.secondary_emails.push([[email.email, "false"]])
+            self.save()
             return ({"message" : "Confirmation email sent!"})
-        print(vars(email))
-        EmailAddress.objects.get(email="julian.caille64@gmail.com").delete()
+        if (email.user_if != self.pk):
+            return ({"message" : "This email is already used by another user."})
         EmailAddress.objects.add_email(request, self, new_email, confirm=True)
         if (self.secondary_emails == None):
             self.secondary_emails = [[email.email, "false"]]
-            self.save()
-        return ({"message" : "The email exists."})
+        else:
+            self.secondary_emails.push([[email.email, "false"]])
+        self.save()
+        return ({"message" : "Confirmation email sent!"})
 
 @receiver(email_confirmed)
 def update_user_email(sender, request, email_address, **kwargs):

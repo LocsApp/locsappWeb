@@ -29,8 +29,9 @@
 		var errorMsg = "The server didn't comply...";
 		if (data.data)
 		{
-			if (data.data.username[0].indexOf("taken") > -1)
-				errorMsg = "The username is already taken...";
+			if (data.data.username)
+				if (data.data.username[0].indexOf("taken") > -1)
+					errorMsg = "The username is already taken...";
 			if (data.data.email[0].indexOf("already") > -1)
 				errorMsg = "The email is already taken...";
 		}
