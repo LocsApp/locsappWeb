@@ -24,6 +24,7 @@ from API.views import *
 from API.urls import *
 
 urlpatterns = [
+     url(r'^accounts-social-network/', include('allauth.socialaccount.urls')),
     url(r'^', include('django.contrib.auth.urls')),
     url(r'^admin/', include(admin.site.urls)),
     # Url including the API end-points
