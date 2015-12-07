@@ -22,7 +22,7 @@ md-card-content.user_profile_parameters_addresses
 						span {{ email[0] }}
 						span(ng-if="email[1] == 'false'")
 							span.user_profile_parameters_email_not_confirmed Not confirmed
-							span.user_profile_parameters_email_confirmed_set_option Resend confirmation
+							span(ng-click="profileParams.resendConfirmationEmail(email[0])").user_profile_parameters_email_confirmed_set_option Resend confirmation
 						span(ng-if="email[1] == 'true'")
 							span.user_profile_parameters_email_confirmed Confirmed
 							span(ng-click="profileParams.setEmailAsPrimary(email[0]);").user_profile_parameters_email_confirmed_set_option Set as primary

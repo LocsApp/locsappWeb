@@ -79,6 +79,16 @@
 			toastr.error(error, "Woops...");
 		};
 
+		/* Success callback of add_secondary_email*/
+		vm.GetResendConfirmationEmailSuccess = function(data) {
+			toastr.success(data.message, "Success");
+		};
+
+		/* Failure callback of add_secondary_email*/
+		vm.GetResendConfirmationEmailFailure = function(data) {
+			toastr.error(data.Error, "Woops...");
+		};
+
 		//If the user comes doesn't come from the profile page, retrieves the infos
 		if(!vm.user)
 			UsersService
@@ -116,6 +126,16 @@
 			.save({'email' : new_email})
 			.$promise
 			.then(vm.GetInfosPutUserSuccess, vm.GetInfosUserFailure);
+		}
+
+		/*Resend a confirmation link on the email*/
+		vm.resendConfirmationEmail = function(email)
+		{
+			UsersService
+				.add_secondary_email
+				.save({"new_email" : email})
+				.$promise
+				.then(vm.GetResendConfirmationEmailSuccess, vm.GetResendConfirmationEmailFailure);
 		}
 
 		/*Changed the password of the user*/
