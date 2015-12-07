@@ -59,6 +59,26 @@
 
 
 	.user_profile_parameters_addresses {
+
+		.user_profile_parameters_email_confirmed {
+			font-size: medium;
+			margin-left: 10px;
+			color: $emailConfirmed;
+		}
+
+		.user_profile_parameters_email_confirmed_set_option {
+			font-size: medium;
+			cursor: pointer;
+			text-decoration: underline;
+			margin-left: 10px;
+		}
+
+		.user_profile_parameters_email_not_confirmed {
+			font-size: medium;
+			margin-left: 10px;
+			color: $emailNotConfirmed;
+		}
+
 		md-toolbar:not(.md-menu-toolbar) {
 			background-color: $headerSubContainers;
 		}

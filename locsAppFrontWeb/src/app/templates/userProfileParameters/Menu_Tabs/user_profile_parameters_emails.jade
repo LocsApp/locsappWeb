@@ -1,0 +1,32 @@
+h2 General Informations
+md-card-content
+	p
+		strong Primary email :
+		span {{ }} {{ profileParams.user.email }}
+md-card-content.user_profile_parameters_addresses
+	md-card
+		md-toolbar
+			div.md-toolbar-tools
+				span(ng-if="!profileParams.user.secondary_emails.length") Secondary Emails (0 / 5)
+				span(ng-if="profileParams.user.secondary_emails.length") Secondary Emails ({{ profileParams.user.secondary_emails.length }} / 5)
+				span.flex
+				ng-md-icon(aria-label="add icon" icon="add" ng-click="profileParams.addEmailDialog($event, 0)").user_profile_parameters_add_address_icon
+					md-tooltip(md-direction="bottom").
+						Add a secondary email
+			md-content
+				md-list(ng-if="!profileParams.user.secondary_emails || profileParams.user.secondary_emails.length == 0")
+					md-list-item
+						span.user_profile_parameters_no_address No given secondary email address
+				md-list(ng-if="profileParams.user.secondary_emails").user_profile_parameters_addresses_lists
+					md-list-item(ng-repeat="email in profileParams.user.secondary_emails")
+						span {{ email[0] }}
+						span(ng-if="email[1] == 'false'")
+							span.user_profile_parameters_email_not_confirmed Not confirmed
+							span.user_profile_parameters_email_confirmed_set_option Resend confirmation
+						span(ng-if="email[1] == 'true'")
+							span.user_profile_parameters_email_confirmed Confirmed
+							span.user_profile_parameters_email_confirmed_set_option Set as primary
+
+						span
+							ng-md-icon(aria-label="delete icon" icon="delete" ng-click="profileParams.deleteEmailDialog($event, email);").md-secondary.user_profile_parameters_addresses_delete
+						md-divider(ng-if="!$last")
