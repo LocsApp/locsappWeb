@@ -28,5 +28,5 @@ md-card-content.user_profile_parameters_addresses
 							span(ng-click="profileParams.setEmailAsPrimary(email[0]);").user_profile_parameters_email_confirmed_set_option Set as primary
 
 						span
-							ng-md-icon(aria-label="delete icon" icon="delete" ng-click="profileParams.deleteEmailDialog($event, email);").md-secondary.user_profile_parameters_addresses_delete
+							ng-md-icon(aria-label="delete icon" icon="delete" ng-click="profileParams.deleteEmailDialog($event, email);" style="cursor: pointer;").md-secondary.user_profile_parameters_addresses_delete
 						md-divider(ng-if="!$last")

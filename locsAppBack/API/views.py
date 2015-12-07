@@ -56,7 +56,7 @@ class deleteEmailUser(APIView):
     def post(self, request):
         if ("email" not in request.data or len(request.data["email"]) == 0):
             return Response({"Error" : "There must be a field 'email' present in the document."}, status=401)    
-        answer = request.user.add_email_address(request, request.data["email"])
+        answer = request.user.delete_email_address(request, request.data["email"])
         if ("Error" in answer):
             return Response(answer, status=401)
         User = get_user_model()

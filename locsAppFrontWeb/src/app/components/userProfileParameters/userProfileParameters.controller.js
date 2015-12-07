@@ -191,6 +191,24 @@
 					vm.user = data });
 		};
 
+		/*Add a delete email dialog*/
+		vm.deleteEmailDialog = function(event, email) {
+			$mdDialog.show({
+				controller : vm.deleteEmailController,
+				controllerAs : 'deleteEmail',
+				templateUrl: 'app/templates/dialogTemplates/deleteEmail.tmpl.html',
+				locals : {email : email},
+				bindToController: true,
+				parent: angular.element($document.body),
+				targetEvent: event,
+				clickOutsideToClose:true
+			}).then(function(data) {  
+				if (data==false)
+					return;
+				else
+					vm.user = data });
+		};
+
 		/*
 		** Dialogs Controllers
 		*/
@@ -481,6 +499,69 @@
 					$mdDialog.hide(false);
 				$mdDialog.hide(vm.user);
 			};
+		};
+
+		/*deleteEmailDialog Controller*/
+		vm.deleteEmailController = function($mdDialog) {
+			var vm = this;
+
+			/*init vars*/
+			vm.not_accepted = true;
+
+			/*Parses the strings address in living_address and billing_address to JSON objects*/
+			vm.parseAddressToJson = function () {
+				var i = 0;
+				var temp = null;
+
+				if (vm.user.living_address != null)
+				{
+					for(i=0; i < vm.user.living_address.length; i++)
+					{
+						temp = angular.fromJson(vm.user.living_address[i][1]);
+						vm.user.living_address[i][1] = temp;
+					}
+				}
+				if (vm.user.billing_address != null)
+				{
+					for(i=0; i < vm.user.billing_address.length; i++)
+					{
+						temp = angular.fromJson(vm.user.billing_address[i][1]);
+						vm.user.billing_address[i][1] = temp;
+					}
+				}
+			};
+
+			/*Success callback of the ressource callback*/
+			vm.GetEmailUserSuccess = function(data) {
+				$log.log(data);
+				vm.user = data;
+				vm.parseAddressToJson();
+				toastr.success("The address has been successfully deleted.", "Success");
+				vm.hide();
+			};
+
+			/*Failure callback of the ressource callback*/
+			vm.GetEmailUserFailure = function(data) {
+				vm.not_accepted = true;
+				$log.log(data);
+				toastr.error(data.Error, "Woops...");
+			};
+
+			vm.accepted = function() {
+				vm.not_accepted = false;
+				UsersService
+				.delete_email
+				.save({"email" : vm.email[0]})
+				.$promise
+				.then(vm.GetEmailUserSuccess, vm.GetEmailUserFailure);
+			}
+
+			/*Hide callback for $mdDialog*/
+			vm.hide = function() {
+				if (vm.not_accepted)
+					$mdDialog.hide(false);
+				$mdDialog.hide(vm.user);
+			};			
 		};
 	}
 
