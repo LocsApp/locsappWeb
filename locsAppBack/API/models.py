@@ -8,6 +8,8 @@ from allauth.account.models import EmailAddress
 from allauth.account.signals import email_confirmed, email_confirmation_sent
 from django.dispatch import receiver
 from allauth.account.utils import send_email_confirmation
+# User model
+from django.contrib.auth import get_user_model
 
 class AccountManager(BaseUserManager):
     def create_user(self, email, password=None, **kwargs):
@@ -110,7 +112,13 @@ class Account(AbstractBaseUser):
 
 @receiver(email_confirmed)
 def update_user_email(sender, request, email_address, **kwargs):
-    print(vars(email_address))
+    User = get_user_model()
+    user = User.object.get(pk=email_address.user_id)
+    for email_obj in user.secondary_emails:
+        if (email_address.email == email_obj[0]):
+            email_obj[1] = "true"
+            user.save()
+            break
 
 @receiver(email_confirmation_sent)
 def email_confimation_sent(confirmation, **kwargs):
