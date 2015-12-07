@@ -10,7 +10,7 @@ md-card-content.user_profile_parameters_addresses
 				span(ng-if="!profileParams.user.secondary_emails.length") Secondary Emails (0 / 5)
 				span(ng-if="profileParams.user.secondary_emails.length") Secondary Emails ({{ profileParams.user.secondary_emails.length }} / 5)
 				span.flex
-				ng-md-icon(aria-label="add icon" icon="add" ng-click="profileParams.addEmailDialog($event, 0)").user_profile_parameters_add_address_icon
+				ng-md-icon(aria-label="add icon" icon="add" ng-click="profileParams.addEmailDialog($event)").user_profile_parameters_add_address_icon
 					md-tooltip(md-direction="bottom").
 						Add a secondary email
 			md-content

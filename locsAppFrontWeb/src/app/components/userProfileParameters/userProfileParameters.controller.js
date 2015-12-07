@@ -131,6 +131,20 @@
 		/*
 		** Dialogs Definitions
 		*/
+		/*Add an email dialog*/
+		vm.addEmailDialog = function(event) {
+			$mdDialog.show({
+				controller : vm.addEmailController,
+				controllerAs : 'addEmail',
+				templateUrl: 'app/templates/dialogTemplates/addEmail.tmpl.html',
+				locals : {user : vm.user},
+				bindToController: true,
+				parent: angular.element($document.body),
+				targetEvent: event,
+				clickOutsideToClose:true
+			}).then(function(data) { vm.user = data });	
+		};
+
 		/*Add an address dialog*/
 		vm.addAddressDialog = function(event, type) {
 			$mdDialog.show({
@@ -176,6 +190,80 @@
 		/*
 		** Dialogs Controllers
 		*/
+		/*addEmailDialog controller*/
+		vm.addEmailController = function($mdDialog) {
+			var vm = this;
+
+			/*initialize vars*/
+			vm.loader = false;
+
+			/*Parses the strings address in living_address and billing_address to JSON objects*/
+			vm.parseAddressToJson = function () {
+				var i = 0;
+				var temp = null;
+
+				if (vm.user.living_address != null)
+				{
+					for(i=0; i < vm.user.living_address.length; i++)
+					{
+						temp = angular.fromJson(vm.user.living_address[i][1]);
+						vm.user.living_address[i][1] = temp;
+					}
+				}
+				if (vm.user.billing_address != null)
+				{
+					for(i=0; i < vm.user.billing_address.length; i++)
+					{
+						temp = angular.fromJson(vm.user.billing_address[i][1]);
+						vm.user.billing_address[i][1] = temp;
+					}
+				}
+			};
+
+			/*Success callback for profile_check*/
+			vm.GetUserInfosSuccess = function(data) {
+				vm.user = data;
+				vm.parseAddressToJson();
+				vm.hide();
+			}
+
+			/*Failure callback for profile_check*/
+			vm.GetUserInfosFailure = function() {
+				toastr.error("This is odd...", "Woops...");
+			}
+
+			/*Success callback for add_secondary_email*/
+			vm.GetAddSecondaryEmailSuccess = function(data) {
+				toastr.success(data.message, "Success");
+				UsersService
+					.profile_check
+					.get({})
+					.$promise
+					.then(vm.GetUserInfosSuccess, vm.GetUserInfosFailure);			
+			}
+
+			/*Failure callback for add_secondary_email*/
+			vm.GetAddSecondaryEmailFailure = function(data) {
+				toastr.error(data.error, "Woops...");
+			}		
+
+			/*Submits the form data from the dialog to the API*/
+			vm.submit = function() {
+				vm.loader = true;
+				UsersService
+				.add_secondary_email
+				.save({"new_email" : vm.email})
+				.$promise
+				.then(vm.GetAddSecondaryEmailSuccess, vm.GetAddSecondaryEmailFailure)
+			}
+
+			/*Hide callback for $mdDialog*/
+			vm.hide = function() {
+
+				$mdDialog.hide(vm.user);
+			};						
+		}
+
 		/*addAddressDialog Controller*/
 		vm.addAddressController = function($mdDialog) {
 			var vm = this;

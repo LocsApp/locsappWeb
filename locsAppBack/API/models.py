@@ -100,15 +100,10 @@ class Account(AbstractBaseUser):
                 self.secondary_emails.push([[email.email, "false"]])
             self.save(update_fields=['secondary_emails'])
             return ({"message" : "Confirmation email sent!"})
+        if (email.user_id != self.pk):
+            return ({"Error" : "This email is already used by another user."})
         EmailAddress.objects.get(email=new_email).delete()
         email = EmailAddress.objects.add_email(request, self, new_email, confirm=True)
-        if (email.user_id != self.pk):
-            return ({"message" : "This email is already used by another user."})
-        if (self.secondary_emails == None):
-            self.secondary_emails = [[email.email, "false"]]
-        else:
-            self.secondary_emails.append([email.email, "false"])
-        self.save(update_fields=['secondary_emails'])
         return ({"message" : "Reconfirmation email sent!"})
 
 @receiver(email_confirmed)

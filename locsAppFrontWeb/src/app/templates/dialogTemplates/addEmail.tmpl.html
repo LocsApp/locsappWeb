@@ -1,0 +1,20 @@
+<md-content class="user_profile_parameters_address_add_dialogs">
+	<md-toolbar>
+		<span class="user_profile_parameters_address_add_dialogs_header">Add an email</span>
+	</md-toolbar>
+	<section layout="column", layout-align="center center">
+		<form name="addEmailForm" ng-submit="addEmailForm.$valid && addEmail.submit()">
+				<md-input-container>
+					<label> Email </label>
+					<input name="email" ng-model="addEmail.email" required type="email"></input>
+					<div ng-messages="addEmailForm.email.$error" ng-if='!addEmailForm.email.$pristine'>
+						<div ng-message="required">This is required.</div>
+					</div>
+				</md-input-container>
+				<section layout="column", layout-align="center center">
+					<md-button class="md-raised" ng-if="!addEmail.loader">Add</md-button>
+					<md-progress-circular md-diameter="30px" md-mode="indeterminate" ng-if="addEmail.loader"></md-progress-circular>
+				</section>
+		</form>
+	</section>
+</md-content

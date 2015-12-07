@@ -18,6 +18,7 @@
             living_addresses_delete : $resource(URL_API + 'api/v1/user/:id/living_addresses/delete/', {id : "@user_id"}),
             billing_addresses : $resource(URL_API + 'api/v1/user/:id/billing_addresses/', {id : "@user_id"}),
             billing_addresses_delete : $resource(URL_API + 'api/v1/user/:id/billing_addresses/delete/', {id : "@user_id"}),
+            add_secondary_email : $resource(URL_API +  'api/v1/user/add-email/'),
             set_primary_email : $resource(URL_API +  'api/v1/user/set-primary-email/'),
             is_authenticated : is_authenticated
         };
