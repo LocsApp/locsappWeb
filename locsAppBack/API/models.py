@@ -35,7 +35,8 @@ class Account(AbstractBaseUser):
     email = models.EmailField(unique=True, blank=False)
     username = models.CharField(max_length=20, unique=True, blank=False)
 
-    secondary_emails = ArrayField(models.EmailField(unique=False), null=True)
+    secondary_emails = ArrayField(ArrayField(models.TextField(null=True, default=None), null=True, size=2), null=True,
+                                size=5)
 
     first_name = models.CharField(max_length=30, default=None, null=True)
     last_name = models.CharField(max_length=30, default=None, null=True)
@@ -92,15 +93,24 @@ class Account(AbstractBaseUser):
         try :
             email = EmailAddress.objects.get(email=new_email)
         except:
-            return ({"message" : "The email doesn't exist yet."})
-        return ({"message" : "The email exists."})
+            try:
+                EmailAddress.objects.get(email="julian.caille64@gmail.com").delete()
+            except:
+                pass
+            email = EmailAddress.objects.add_email(request, self, new_email, confirm=True)
+            print (self.secondary_emails)
+            return ({"message" : "Confirmation email sent!"})
+        print(vars(email))
         EmailAddress.objects.get(email="julian.caille64@gmail.com").delete()
-        return EmailAddress.objects.add_email(request, self, new_email, confirm=True)
+        EmailAddress.objects.add_email(request, self, new_email, confirm=True)
+        if (self.secondary_emails == None):
+            self.secondary_emails = [[email.email, "false"]]
+            self.save()
+        return ({"message" : "The email exists."})
 
 @receiver(email_confirmed)
 def update_user_email(sender, request, email_address, **kwargs):
-    print(sender)
-    print(email_address)
+    print(vars(email_address))
 
 @receiver(email_confirmation_sent)
 def email_confimation_sent(confirmation, **kwargs):
