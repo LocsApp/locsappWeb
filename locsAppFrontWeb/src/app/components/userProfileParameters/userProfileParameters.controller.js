@@ -286,7 +286,8 @@
 
 			/*Failure callback for add_secondary_email*/
 			vm.GetAddSecondaryEmailFailure = function(data) {
-				toastr.error(data.error, "Woops...");
+				$log.log(data);
+				toastr.error(data.Error, "Woops...");
 			}		
 
 			/*Submits the form data from the dialog to the API*/

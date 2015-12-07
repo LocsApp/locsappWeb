@@ -10,11 +10,14 @@ UserModel = get_user_model()
 
 
 class UserDetailsSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = get_user_model()
         living_address = serializers.ListField(child=serializers.CharField())
-        billing_address = serializers.ListField(serializers.ListField(child=serializers.CharField()))
-        secondary_emails = serializers.ListField(serializers.ListField(child=serializers.CharField()))
+        billing_address = serializers.ListField(
+            serializers.ListField(child=serializers.CharField()))
+        secondary_emails = serializers.ListField(
+            serializers.ListField(child=serializers.CharField()))
 
         fields = (
             'id', 'username', 'email', 'secondary_emails', 'first_name', 'last_name', 'birthdate', 'phone',
@@ -87,7 +90,8 @@ class PasswordResetSerializer(serializers.Serializer):
     password_reset_form_class = PasswordResetForm
 
     def validate_email(self, value):
-        self.reset_form = self.password_reset_form_class(data=self.initial_data)
+        self.reset_form = self.password_reset_form_class(
+            data=self.initial_data)
         if not self.reset_form.is_valid():
             raise serializers.ValidationError(_('Error'))
 

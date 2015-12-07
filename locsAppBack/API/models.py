@@ -11,7 +11,9 @@ from allauth.account.utils import send_email_confirmation
 # User model
 from django.contrib.auth import get_user_model
 
+
 class AccountManager(BaseUserManager):
+
     def create_user(self, email, password=None, **kwargs):
         if not email:
             raise ValueError('Users must have a valid email address')
@@ -38,7 +40,7 @@ class Account(AbstractBaseUser):
     username = models.CharField(max_length=20, unique=True, blank=False)
 
     secondary_emails = ArrayField(ArrayField(models.TextField(null=True, default=None), null=True, size=2), null=True,
-                                size=5)
+                                  size=5)
 
     first_name = models.CharField(max_length=30, default=None, null=True)
     last_name = models.CharField(max_length=30, default=None, null=True)
@@ -90,48 +92,52 @@ class Account(AbstractBaseUser):
         return self.is_admin
 
     def add_email_address(self, request, new_email, reconfirm):
-        try :
+        try:
             email = EmailAddress.objects.get(email=new_email)
         except:
-            email = EmailAddress.objects.add_email(request, self, new_email, confirm=True)
-            if (self.secondary_emails == None):
+            email = EmailAddress.objects.add_email(
+                request, self, new_email, confirm=True)
+            if (self.secondary_emails is None):
                 self.secondary_emails = [[email.email, "false"]]
             else:
-                self.secondary_emails.push([[email.email, "false"]])
+                self.secondary_emails.append([email.email, "false"])
             self.save(update_fields=['secondary_emails'])
-            return ({"message" : "Confirmation email sent!"})
+            return ({"message": "Confirmation email sent!"})
         if (email.user_id != self.pk):
-            return ({"Error" : "This email is already used by another user."})
+            return ({"Error": "This email is already used by another user."})
         EmailAddress.objects.get(email=new_email).delete()
-        email = EmailAddress.objects.add_email(request, self, new_email, confirm=True)
-        return ({"message" : "Reconfirmation email sent!"})
+        email = EmailAddress.objects.add_email(
+            request, self, new_email, confirm=True)
+        return ({"message": "Reconfirmation email sent!"})
 
     def delete_email_address(self, request, email_data):
-        try :
+        try:
             email = EmailAddress.objects.get(email=email_data)
         except:
-            return({"Error" : "This email doesn't exist."})
+            return({"Error": "This email doesn't exist."})
         if (email.user_id != self.pk):
-            return ({"Error" : "This email is already used by another user."})
+            return ({"Error": "This email is already used by another user."})
         for i, email_obj in enumerate(self.secondary_emails):
             if (email_obj[0] == email_data):
                 self.secondary_emails.pop(i)
                 EmailAddress.objects.get(email=email_data).delete()
                 self.save(update_fields=['secondary_emails'])
-                return ({"message" : "Email succesfully deleted"})
-        return ({"Error" : "The email wasn't found in the secondary emails."})
+                return ({"message": "Email succesfully deleted"})
+        return ({"Error": "The email wasn't found in the secondary emails."})
+
 
 @receiver(email_confirmed)
 def update_user_email(sender, request, email_address, **kwargs):
     User = get_user_model()
     user = User.object.get(pk=email_address.user_id)
-    if (user.secondary_emails == None):
+    if (user.secondary_emails is None):
         return
     for email_obj in user.secondary_emails:
         if (email_address.email == email_obj[0]):
             email_obj[1] = "true"
             user.save()
             break
+
 
 @receiver(email_confirmation_sent)
 def email_confimation_sent(confirmation, **kwargs):
