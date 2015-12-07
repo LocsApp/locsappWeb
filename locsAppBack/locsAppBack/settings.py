@@ -56,6 +56,7 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Locsapp]"
 
 SOCIALACCOUNT_ADAPTER = 'API.adapter.DefaultSocialAccountAdapter'
 SOCIALACCOUNT_AUTO_SIGNUP = False
+SOCIALACCOUNT_FORMS = {'signup': 'API.forms.SocialNetworkSignupForm'}
 SOCIALACCOUNT_EMAIL_VERIFICATION = "mandatory"
 SOCIALACCOUNT_EMAIL_REQUIRED = True
 SOCIALACCOUNT_QUERY_EMAIL = True
@@ -64,7 +65,6 @@ SOCIALACCOUNT_QUERY_EMAIL = True
 Attempt to bypass the signup form by using fields (e.g. username, email) retrieved from the social account provider.
  If a conflict arises due to a duplicate e-mail address the signup form will still kick in.
 """
-#SOCIALACCOUNT_AUTO_SIGNUP = False
 
 # - set it to True if you want to have old password verification on password change enpoint (default: False)
 OLD_PASSWORD_FIELD_ENABLED = True
