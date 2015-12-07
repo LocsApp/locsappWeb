@@ -73,6 +73,26 @@ class addEmailUser(APIView):
         answer =  request.user.add_email_address(request, request.data["new_email"], False)
         return Response(answer)
 
+@permission_classes((IsAuthenticated, ))
+class setEmailAsPrimary(APIView):
+    def post(self, request):
+        if ("email" not in request.data or len(request.data["email"]) == 0):
+            return Response({"Error" : "There must be a field 'email' present in the document."}, status=401)
+        if (request.user.secondary_emails is not None):
+            User = get_user_model()
+            current_user = User.objects.get(pk=self.request.user.pk)
+            for email_obj in current_user.secondary_emails:
+                if (email_obj[0] == request.data["email"]):
+                    if (email_obj[1] == "false"):
+                        return (Response({"Error" : "This secondary email isn't verified."}))
+                    else:
+                        temp = email_obj[0]
+                        email_obj[0] = current_user.email
+                        current_user.email = temp
+                        current_user.save()
+                        return (Response({"message" : "Primary email changed successfully."}))
+            return (Response({"Error" : "You don't have this secondary email."}))
+        return (Response({"Error" : "You don't have any secondary email."}))
 
 @permission_classes((IsAuthenticated, ))
 class livingAddressUser(APIView):
