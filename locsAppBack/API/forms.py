@@ -1,6 +1,5 @@
 from django import forms
 from django.contrib.postgres.fields import ArrayField
-from allauth.account.forms import BaseSignupForm
 from django.utils.translation import ugettext_lazy as _
 
 from allauth.account.utils import (user_username, user_email,
