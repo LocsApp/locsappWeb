@@ -51,6 +51,7 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe(cssFilter)
     .pipe($.sourcemaps.init())
     .pipe($.replace('../../bower_components/material-design-iconfont/iconfont/', '../fonts/'))
+    .pipe($.replace('../../bower_components/roboto-slab-fontface-bower/fonts', '../fonts'))
     .pipe($.minifyCss({ processImport: false }))
     .pipe($.sourcemaps.write('maps'))
     .pipe(cssFilter.restore)
