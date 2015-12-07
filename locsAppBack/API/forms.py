@@ -32,7 +32,7 @@ class SocialNetworkSignupForm(forms.Form):
             'initial': initial,
             'email_required': kwargs.get('email_required',
                                          settings.EMAIL_REQUIRED)})
-        super(SignupForm, self).__init__(*args, **kwargs)
+        #super(SignupForm, self).__init__(*args, **kwargs)
 
     def save(self, request):
         adapter = get_adapter()
