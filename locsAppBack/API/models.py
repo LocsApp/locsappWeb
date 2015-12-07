@@ -91,7 +91,6 @@ class Account(AbstractBaseUser):
 
     def add_email_address(self, request, new_email, reconfirm):
         # Add a new email address for the user, and send email confirmation.
-        # Old email will remain the primary until the new one is confirmed
         try :
             email = EmailAddress.objects.get(email=new_email)
         except:
@@ -106,7 +105,7 @@ class Account(AbstractBaseUser):
                 self.secondary_emails.push([[email.email, "false"]])
             self.save()
             return ({"message" : "Confirmation email sent!"})
-        if (email.user_if != self.pk):
+        if (email.user_id != self.pk):
             return ({"message" : "This email is already used by another user."})
         EmailAddress.objects.add_email(request, self, new_email, confirm=True)
         if (self.secondary_emails == None):
@@ -120,6 +119,8 @@ class Account(AbstractBaseUser):
 def update_user_email(sender, request, email_address, **kwargs):
     User = get_user_model()
     user = User.object.get(pk=email_address.user_id)
+    if (user.secondary_emails == None):
+        return
     for email_obj in user.secondary_emails:
         if (email_address.email == email_obj[0]):
             email_obj[1] = "true"
