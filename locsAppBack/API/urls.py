@@ -48,5 +48,13 @@ api_patterns = [
         name='registrationUser'),
     url(r'^verify-email/(?P<key>\w+)/$',
         confirm_email, name="account_confirm_email"),
+    url(r'^failed-verified-email/$',
+        RedirectView.as_view(url='http://127.0.0.1:8080/failed-verified-email',
+                             permanent=False),
+        name="account_login"),
+    url(r'^failed-verified-email/$',
+        RedirectView.as_view(url='http://127.0.0.1:8080/failed-verified-email',
+                             permanent=False),
+        name="account_signup"),
     url(r'^user/', include(user_patterns))
 ]
