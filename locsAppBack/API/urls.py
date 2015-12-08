@@ -41,7 +41,7 @@ api_patterns = [
 
     url(r'^articles/', include(article_patterns)),
     url(r'^rest-auth/', include('rest_auth.urls')),
-    url(r'^email-sent/', RedirectView.as_view(url='http://127.0.0.1:8080/', permanent=False),
+    url(r'^email-sent/', RedirectView.as_view(url='http://127.0.0.1:3000/', permanent=False),
         name="account_email_verification_sent"),
     url(r'^rest-auth/registration/',
         include('rest_auth.registration.urls'),
@@ -49,11 +49,11 @@ api_patterns = [
     url(r'^verify-email/(?P<key>\w+)/$',
         confirm_email, name="account_confirm_email"),
     url(r'^failed-verified-email/$',
-        RedirectView.as_view(url='http://127.0.0.1:8080/failed-verified-email',
+        RedirectView.as_view(url='http://127.0.0.1:3000/failed-verified-email',
                              permanent=False),
         name="account_login"),
     url(r'^failed-verified-email/$',
-        RedirectView.as_view(url='http://127.0.0.1:8080/failed-verified-email',
+        RedirectView.as_view(url='http://127.0.0.1:3000/failed-verified-email',
                              permanent=False),
         name="account_signup"),
     url(r'^user/', include(user_patterns))
