@@ -119,6 +119,15 @@
 }
 
 .user_profile_parameters_address_add_dialogs {
+	md-checkbox.md-default-theme.md-checked, md-checkbox.md-checked .md-ink-ripple, md-icon {
+ 		background-color: $checkBox;
+	}
+
+	md-checkbox.md-default-theme.md-checked, md-checkbox.md-checked .md-icon {
+ 		background: $checkBox;
+ 		background-color: $checkBox;		
+	}
+
 	md-toolbar:not(.md-menu-toolbar) {
 		background-color: $headerSubContainers;
 	}

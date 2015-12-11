@@ -47,19 +47,23 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Django allauth different form
-ACCOUNT_SIGNUP_FORM_CLASS = 'API.forms.SignupForm'
+#ACCOUNT_SIGNUP_FORM_CLASS = 'API.forms.SignupForm'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
-ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "http://127.0.0.1:8080"
+ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "http://127.0.0.1:3000"
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Locsapp]"
 
 #SOCIALACCOUNT_ADAPTER = 'API.adapter.DefaultSocialAccountAdapter'
-SOCIALACCOUNT_AUTO_SIGNUP = False
-SOCIALACCOUNT_FORMS = {'signup': 'API.forms.SocialNetworkSignupForm'}
-SOCIALACCOUNT_EMAIL_VERIFICATION = "mandatory"
-SOCIALACCOUNT_EMAIL_REQUIRED = True
-SOCIALACCOUNT_QUERY_EMAIL = True
+
+#SOCIALACCOUNT_AUTO_SIGNUP = False
+#SOCIALACCOUNT_FORMS = {'signup': 'API.forms.SocialNetworkSignupForm'}
+
+# SOCIALACCOUNT_AUTO_SIGNUP =
+
+#SOCIALACCOUNT_EMAIL_VERIFICATION = "mandatory"
+#SOCIALACCOUNT_EMAIL_REQUIRED = True
+#SOCIALACCOUNT_QUERY_EMAIL = True
 
 """
 Attempt to bypass the signup form by using fields (e.g. username, email) retrieved from the social account provider.
@@ -73,33 +77,32 @@ LOGOUT_ON_PASSWORD_CHANGE = False
 
 SOCIALACCOUNT_PROVIDERS = \
     {'facebook':
-         {
-             'METHOD': 'oauth2',
-             'SCOPE': ['email', 'public_profile', 'user_friends'],
-             'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
-             'FIELDS': [
-                 'id',
-                 'email',
-                 'name',
-                 'birthday',
-                 'first_name',
-                 'last_name',
-                 'verified',
-                 'locale',
-                 'timezone',
-                 'link',
-                 'gender',
-                 'updated_time'],
-             'EXCHANGE_TOKEN': True,
-             'LOCALE_FUNC': 'path.to.callable',
-             'VERIFIED_EMAIL': False,
-             'VERSION': 'v2.5'
-         },
+     {
+         'METHOD': 'oauth2',
+         'SCOPE': ['email', 'public_profile', 'user_friends'],
+         'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+         'FIELDS': [
+             'id',
+             'email',
+             'name',
+             'birthday',
+             'first_name',
+             'last_name',
+             'verified',
+             'locale',
+             'timezone',
+             'link',
+             'gender',
+             'updated_time'],
+         'EXCHANGE_TOKEN': True,
+         'LOCALE_FUNC': 'path.to.callable',
+         'VERIFIED_EMAIL': False,
+         'VERSION': 'v2.5'
+     },
      'google':
          {'SCOPE': ['profile', 'email'],
           'AUTH_PARAMS': {'access_type': 'online'}}
      }
-
 
 
 # Different user model
@@ -258,7 +261,11 @@ EMAIL_HOST_PASSWORD = 'Totofaitdubateau'
 
 if socket.gethostname() == "sylflo.fr":
     DEBUG = TEMPLATE_DEBUG = False
-    ALLOWED_HOSTS = ["locsapp.sylflo.fr", ".sylflo.fr", "sylflo.fr", "5.135.163.38"]
+    ALLOWED_HOSTS = [
+        "locsapp.sylflo.fr",
+        ".sylflo.fr",
+        "sylflo.fr",
+        "5.135.163.38"]
     ADMINS = (
         ('Sylvain Chateau', 'dev.chateau@gmail.com'),
     )
