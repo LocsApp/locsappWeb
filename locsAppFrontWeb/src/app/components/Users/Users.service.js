@@ -21,6 +21,7 @@
             add_secondary_email : $resource(URL_API +  'api/v1/user/add-email/'),
             set_primary_email : $resource(URL_API +  'api/v1/user/set-primary-email/'),
             delete_email : $resource(URL_API +  'api/v1/user/delete-email/'),
+            verify_email : $resource(URL_API + 'api/v1/verify-email/:key/', {key : '@key'}),
             is_authenticated : is_authenticated
         };
 

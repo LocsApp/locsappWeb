@@ -20,6 +20,12 @@
 			parent: 'main',
 			templateUrl: 'app/templates/home/home.html'
 		})
+		.state('main.verify-email', {
+			url: 'verify-email/:key',
+			parent: 'main',
+			controller: 'VerifyEmailController',
+			controllerAs: 'verifyEmail'
+		})		
 		.state('main.login', {
 			url: 'login',
 			parent: 'main',
