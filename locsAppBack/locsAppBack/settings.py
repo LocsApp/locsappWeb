@@ -48,6 +48,7 @@ ALLOWED_HOSTS = []
 
 # Django allauth different form
 #ACCOUNT_SIGNUP_FORM_CLASS = 'API.forms.SignupForm'
+ACCOUNT_ADAPTER = 'API.adapter.DefaultAccountAdapterCustom'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
@@ -256,7 +257,10 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'locsapp.eip@gmail.com'
 EMAIL_HOST_PASSWORD = 'Totofaitdubateau'
 
+URL_FRONT = 'http://127.0.0.1:3000/'
+
 if socket.gethostname() == "sylflo.fr":
+    URL_FRONT = 'http://locsapp.sylflo.fr/'
     DEBUG = TEMPLATE_DEBUG = False
     ALLOWED_HOSTS = [
         "locsapp.sylflo.fr",
