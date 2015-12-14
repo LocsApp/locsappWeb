@@ -45,6 +45,7 @@ class Account(AbstractBaseUser):
     first_name = models.CharField(max_length=30, default=None, null=True)
     last_name = models.CharField(max_length=30, default=None, null=True)
     birthdate = models.CharField(max_length=30, null=True)
+    gender = models.CharField(max_length=30, null=True)
 
     phone = models.CharField(max_length=10, null=True)
     living_address = ArrayField(ArrayField(models.TextField(null=True, default=None), null=True, size=2), null=True,

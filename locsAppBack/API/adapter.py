@@ -69,6 +69,7 @@ class DefaultSocialAccountAdapter(object):
 
         u = sociallogin.user
         u.set_unusable_password()
+        print("save user form = ", form)
         if form:
             get_account_adapter().save_user(request, u, form)
         else:
@@ -96,6 +97,8 @@ class DefaultSocialAccountAdapter(object):
         name_function = "populate_user "
         print(name_function, "data ", data)
         print(name_function, "sociallogin ", sociallogin)
+        print(name_function, "gender ", data.get('gender'))
+        print(name_function, "gender ", data.get('birthday'))
 
         username = data.get('username')
         first_name = data.get('first_name')
