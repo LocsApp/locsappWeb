@@ -14,6 +14,27 @@ from allauth.account import app_settings as account_settings
 from allauth.account.app_settings import EmailVerificationMethod
 
 from allauth.socialaccount import app_settings
+from allauth.account.signals import user_signed_up, user_logged_in
+
+from django.dispatch import receiver
+
+
+@receiver(user_signed_up)
+def on_user_signed_up(request, user, sociallogin=None, **kwargs):
+
+    print("ON USER SIGNED UPPPPPPPPPPPP")
+    if sociallogin:
+
+        if sociallogin.account.provider == 'facebook':
+            name = sociallogin.account.extra_data['name']
+            user.email = sociallogin.account.extra_data['email']
+            user.save()
+            if sociallogin.account.extra_data['gender'] == 'male':
+                gender = 'M'
+            elif sociallogin.account.extra_data['gender'] == 'female':
+                gender = 'F'
+            print("gender = ", gender)
+            #user.create_profile(fullname=name, gender=gender)
 
 
 class DefaultSocialAccountAdapter(object):
