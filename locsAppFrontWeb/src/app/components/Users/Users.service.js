@@ -22,6 +22,7 @@
             set_primary_email : $resource(URL_API +  'api/v1/user/set-primary-email/'),
             delete_email : $resource(URL_API +  'api/v1/user/delete-email/'),
             verify_email : $resource(URL_API + 'api/v1/verify-email/:key/', {key : '@key'}),
+            password_reset : $resource(URL_API + 'api/v1/rest-auth/password/reset/'),
             is_authenticated : is_authenticated
         };
 

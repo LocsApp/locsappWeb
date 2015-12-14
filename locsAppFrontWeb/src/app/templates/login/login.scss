@@ -4,4 +4,9 @@
 	md-checkbox.md-checked .md-icon {
  		background-color:  $checkBox;
 	}
+
+	.login-forgot-password {
+		text-decoration: underline;
+		cursor: pointer;
+	}
 }

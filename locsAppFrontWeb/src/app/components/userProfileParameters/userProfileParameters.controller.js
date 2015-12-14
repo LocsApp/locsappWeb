@@ -302,7 +302,6 @@
 
 			/*Hide callback for $mdDialog*/
 			vm.hide = function() {
-
 				$mdDialog.hide(vm.user);
 			};						
 		}

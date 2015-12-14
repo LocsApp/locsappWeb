@@ -14,7 +14,7 @@
 			$state.go("main.homepage");
 		};
 
-		vm.VerifyEmailFailure = function (data, status, header, config, statusText) {
+		vm.VerifyEmailFailure = function () {
 			toastr.error("We couldn't verify your email..." , 'Woops...');
 		};
 
