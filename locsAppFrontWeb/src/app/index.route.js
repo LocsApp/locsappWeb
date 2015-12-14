@@ -25,7 +25,20 @@
 			parent: 'main',
 			controller: 'VerifyEmailController',
 			controllerAs: 'verifyEmail'
-		})		
+		})
+		.state('main.password-reset', {
+			url: 'password-reset/:uid/:token',
+			parent: 'main',
+			templateUrl: 'app/templates/passwordReset/passwordReset.html',
+			controller: 'PasswordResetController',
+			controllerAs: 'passwordReset',
+			data: {
+				permissions: {
+					only: ['guest'],
+					redirectTo: 'main.homepage'
+				}
+			}
+		})	
 		.state('main.login', {
 			url: 'login',
 			parent: 'main',
