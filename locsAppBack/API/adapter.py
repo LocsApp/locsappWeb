@@ -5,8 +5,8 @@ from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
 
 from allauth.utils import (import_attribute,
-                     email_address_exists,
-                     valid_email_or_none)
+                           email_address_exists,
+                           valid_email_or_none)
 from allauth.account.utils import user_email, user_username, user_field
 from allauth.account.models import EmailAddress
 from allauth.account.adapter import get_adapter as get_account_adapter
@@ -16,6 +16,9 @@ from rest_framework.response import Response
 import json
 
 from allauth.socialaccount import app_settings
+from allauth.account.adapter import DefaultAccountAdapter
+
+from django.conf import settings
 from allauth.account.signals import user_signed_up, user_logged_in
 
 from django.dispatch import receiver
@@ -38,6 +41,16 @@ def on_user_signed_up(request, user, sociallogin=None, **kwargs):
             if sociallogin.account.extra_data['birthday']:
                 user.birthdate = sociallogin.account.extra_data['birthday']
             user.save()
+
+
+
+class DefaultAccountAdapterCustom(DefaultAccountAdapter):
+
+    def send_mail(self, template_prefix, email, context):
+        context['activate_url'] = settings.URL_FRONT + \
+            'verify-email/' + context['key']
+        msg = self.render_mail(template_prefix, email, context)
+        msg.send()
 
 
 class DefaultSocialAccountAdapter(object):

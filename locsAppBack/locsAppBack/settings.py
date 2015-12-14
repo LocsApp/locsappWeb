@@ -48,10 +48,12 @@ ALLOWED_HOSTS = []
 
 # Django allauth different form
 #ACCOUNT_SIGNUP_FORM_CLASS = 'API.forms.UserSignupForm'
+
+#ACCOUNT_SIGNUP_FORM_CLASS = 'API.forms.SignupForm'
+ACCOUNT_ADAPTER = 'API.adapter.DefaultAccountAdapterCustom'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
-ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "http://127.0.0.1:3000"
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Locsapp]"
 
 SOCIALACCOUNT_ADAPTER = 'API.adapter.DefaultSocialAccountAdapter'
@@ -60,9 +62,9 @@ SOCIALACCOUNT_ADAPTER = 'API.adapter.DefaultSocialAccountAdapter'
 
 # SOCIALACCOUNT_AUTO_SIGNUP =
 
-# SOCIALACCOUNT_EMAIL_VERIFICATION = "mandatory"
-# SOCIALACCOUNT_EMAIL_REQUIRED = True
-# SOCIALACCOUNT_QUERY_EMAIL = True
+SOCIALACCOUNT_EMAIL_VERIFICATION = "mandatory"
+SOCIALACCOUNT_EMAIL_REQUIRED = True
+SOCIALACCOUNT_QUERY_EMAIL = True
 
 """
 Attempt to bypass the signup form by using fields (e.g. username, email) retrieved from the social account provider.
@@ -255,7 +257,10 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'locsapp.eip@gmail.com'
 EMAIL_HOST_PASSWORD = 'Totofaitdubateau'
 
+URL_FRONT = 'http://127.0.0.1:3000/'
+
 if socket.gethostname() == "sylflo.fr":
+    URL_FRONT = 'http://locsapp.sylflo.fr/'
     DEBUG = TEMPLATE_DEBUG = False
     ALLOWED_HOSTS = [
         "locsapp.sylflo.fr",
