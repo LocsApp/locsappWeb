@@ -20,10 +20,13 @@ from allauth.account.signals import user_signed_up, user_logged_in
 
 from django.dispatch import receiver
 from pprint import pprint
+from django.http import JsonResponse
 
 
 @receiver(user_signed_up)
 def on_user_signed_up(request, user, sociallogin=None, **kwargs):
+    user = None
+    return JsonResponse({'foo':'bar'})
 
     if sociallogin:
         content = json.loads(request._post['_content'])

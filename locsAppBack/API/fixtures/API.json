@@ -3,7 +3,7 @@
     "fields": {
       "role": "user",
       "is_admin": true,
-      "email": "dev.chateau@gmail.com",
+      "email": "zestefruit@hotmail.fr",
       "registered_date": "2015-12-02T06:37:22.644Z",
       "password": "pbkdf2_sha256$20000$AYfu6niWvOI8$UU6ufs5tULWJYxbSbFbdVj1SqfSbjic41mz4c9PGZH8=",
       "phone": null,
