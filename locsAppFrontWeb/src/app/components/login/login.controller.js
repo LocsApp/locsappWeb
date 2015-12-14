@@ -73,7 +73,7 @@
 
 		/*password_reset success callback*/
 		vm.resetPasswordFailure = function (data) {
-			toastr.error(data.email, "Woops...");
+			toastr.error(data.data.email[0], "Woops...");
 			vm.loader = false;
 			vm.hide();
 		}	
