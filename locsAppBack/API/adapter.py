@@ -28,8 +28,6 @@ from django.http import JsonResponse
 
 @receiver(user_signed_up)
 def on_user_signed_up(request, user, sociallogin=None, **kwargs):
-    #user = None
-    #return JsonResponse({'foo':'bar'})
 
     if sociallogin:
         content = json.loads(request._post['_content'])
