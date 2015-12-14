@@ -5,7 +5,7 @@
 		.controller('VerifyEmailController', VerifyEmailController);
 
 	/** @ngInject */
-	function VerifyEmailController($state, $stateParams, $sessionStorage, $localStorage, $log, toastr, UsersService)
+	function VerifyEmailController($state, $stateParams, $log, toastr, $http, URL_API)
 	{
 		var vm = this;
 
@@ -14,15 +14,13 @@
 			$state.go("main.homepage");
 		};
 
-		vm.VerifyEmailFailure = function () {
+		vm.VerifyEmailFailure = function (data, status, header, config, statusText) {
 			toastr.error("We couldn't verify your email..." , 'Woops...');
 		};
 
-		UsersService
-			.verify_email
-			.get({key : $stateParams.key})
-			.$promise
-			.then(vm.VerifyEmailSuccess, vm.VerifyEmailFailure);
+		$http
+			.get(URL_API + 'api/v1/verify-email/'+ $stateParams.key + '/')
+			.then(vm.VerifyEmailFailure, vm.VerifyEmailSuccess);
 	}
 
 })();
