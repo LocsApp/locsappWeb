@@ -45,7 +45,7 @@ l'adresse mail utilisateur sera automatiquement vérifié.
 de faire la connexion par ce réseau social.
 
 Par contre si vous ne travaillez pas en localhost. 
-* Il faut soit que vous modifiez les fixtures et relancer la commande ./manage.py loaddata API.
+*  Il faut soit que vous modifiez les fixtures et relancer la commande ./manage.py loaddata API.
 ```
 {
     "fields": {
