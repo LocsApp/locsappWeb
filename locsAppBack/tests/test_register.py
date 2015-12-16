@@ -47,7 +47,7 @@ class AccountRegisterTestCase(APITestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(Account.objects.count(), 0)
 
-    def test_missing_email(self):
+    def test_not_valid_email(self):
         """
         Ensures we send an error when email is not valid for register
         """

@@ -47,12 +47,6 @@ class Account(AbstractBaseUser):
     birthdate = models.CharField(max_length=30, null=True)
     gender = models.CharField(max_length=30, null=True)
 
-    """
-    0 is not social network us
-    1 is Facebook
-    """
-    social_network_use = models.SmallIntegerField(default=0, null=True)
-
     phone = models.CharField(max_length=10, null=True)
     living_address = ArrayField(ArrayField(models.TextField(null=True, default=None), null=True, size=2), null=True,
                                 size=5)
