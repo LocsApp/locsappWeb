@@ -57,8 +57,8 @@ Par contre si vous ne travaillez pas en localhost.
     "model": "sites.site"
   },
 ```
-*  Ou alors il faut vous connecter à l'admin django
-sur /admin.
+*  Ou alors il faut vous connecter à l'admin django sur /admin. En ajoutant votre nom de domaine dans le modèle Sites. Et ensuite
+en le rajoutant dans le modèle Social Application. 
 
 
 La documentation de l'API se trouve ici: (elle sera remplacé par swagger d'ici un certain temps
