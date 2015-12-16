@@ -65,7 +65,8 @@
       "provider": "facebook",
       "name": "Facebook",
       "client_id": "1011661268854723",
-      "secret": "9602b9db936cecf6bd7e4ef8e998567c"
+      "secret": "9602b9db936cecf6bd7e4ef8e998567c",
+      "sites": [42,43,44,45,46]
     },
     "model": "socialaccount.socialapp",
     "pk": "1"
