@@ -44,8 +44,19 @@ l'adresse mail utilisateur sera automatiquement vérifié.
 * Elle va aussi créer un "modèle" de l'application Facebook ce qui vous permettra
 de faire la connexion par ce réseau social.
 
-Par contre si vous ne travaillez pas en localhost. Il faut soit que vous modifiez les fixtures
-et relancer la commande *./manage.py loaddata API*. Ou alors il faut vous connecter à l'admin django
+Par contre si vous ne travaillez pas en localhost. 
+* Il faut soit que vous modifiez les fixtures et relancer la commande *./manage.py loaddata API*.
+```
+{
+    "fields": {
+      "name": "nom pour cette entité",
+      "domain": "nom.domaine"
+    },
+    "pk": 70,
+    "model": "sites.site"
+  },
+```
+*  Ou alors il faut vous connecter à l'admin django
 sur /admin.
 
 
