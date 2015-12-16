@@ -57,12 +57,12 @@ Par contre si vous ne travaillez pas en localhost.
     "model": "sites.site"
   },
 ```
-*  Ou alors il faut vous connecter à l'admin django sur /admin. En ajoutant votre nom de domaine dans le modèle Sites. Et ensuite
+*  Ou alors il faut vous connecter à l'admin django sur [localhost:8000/admin](localhost:8000/admin). En ajoutant votre nom de domaine dans le modèle Sites. Et ensuite
 en le rajoutant dans le modèle Social Application. 
 
 
-La documentation de l'API se trouve ici: (elle sera remplacé par swagger d'ici un certain temps
-[http://127.0.0.1:8000/doc](http://127.0.0.1:8000/doc)
+La documentation de l'API se trouve ici: (veuillez y accéder en navigation privé svp)
+[http://locsapp-doc.sylflo.fr/#/](http://locsapp-doc.sylflo.fr/#/)
 
 ## Partie frontend
 
