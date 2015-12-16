@@ -9,11 +9,11 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
 			ng-md-icon(icon="notifications_none", size="48", ng-click="navbar.openNotificationsMenu($mdOpenMenu, $event);").locsapp-navbar-icons-gt-sm
 			md-menu-content(width="4").locsapp-navbar-notifications-container
 				md-list-item(layout="row", layout-align="start start")
-					md-content.flex Hello and welcome to Locsapp! It seems like you didn't set your first name and last name. Click me to set them!
+					md-content.flex.locsapp-navbar-notifications-content-first Hello and welcome to Locsapp! It seems like you didn't set your first name and last name. Click me to set them!
 					ng-md-icon(icon="highlight_remove").locsapp-navbar-notifications-drop-icon
 				md-divider
 				md-list-item(layout="row", layout-align="start start")
-					md-content.flex Hello and welcome to Locsapp! It seems like you didn't set your first name and last name. Click me to set them!
+					md-content.flex.locsapp-navbar-notifications-content-last Hello and welcome to Locsapp! It seems like you didn't set your first name and last name. Click me to set them!
 					ng-md-icon(icon="highlight_remove").locsapp-navbar-notifications-drop-icon
 		ng-md-icon(icon="account_box", size="48", ui-sref="main.user_profile").locsapp-navbar-last-icon-gt-sm
 		ng-md-icon(icon="logout", size="48", ui-sref="main.logout").locsapp-navbar-last-icon-gt-sm
