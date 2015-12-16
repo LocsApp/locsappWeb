@@ -7,7 +7,7 @@
       "registered_date": "2015-12-02T06:37:22.644Z",
       "password": "pbkdf2_sha256$20000$AYfu6niWvOI8$UU6ufs5tULWJYxbSbFbdVj1SqfSbjic41mz4c9PGZH8=",
       "phone": null,
-      "username": "sylflo",
+      "username": "toto",
       "logo_url": null,
       "last_activity_date": null,
       "created_at": "2015-12-02T06:37:22.661Z",
@@ -19,5 +19,55 @@
     },
     "model": "API.account",
     "pk": 1
+  },
+  {
+    "fields": {
+      "name": "example.com",
+      "domain": "example.com"
+    },
+    "pk": 42,
+    "model": "sites.site"
+  },
+  {
+    "fields": {
+      "name": "Locsapp",
+      "domain": "locsapp"
+    },
+    "pk": 43,
+    "model": "sites.site"
+  },
+  {
+    "fields": {
+      "name": "localhost",
+      "domain": "127.0.0.1"
+    },
+    "pk": 44,
+    "model": "sites.site"
+  },
+  {
+    "fields": {
+      "name": "localhost 8000",
+      "domain": "localhost:8000"
+    },
+    "pk": 45,
+    "model": "sites.site"
+  },
+  {
+    "fields": {
+      "name": "127.0.0.1 8000",
+      "domain": "127.0.0.1:8000"
+    },
+    "pk": 46,
+    "model": "sites.site"
+  },
+  {
+    "fields": {
+      "provider": "facebook",
+      "name": "Facebook",
+      "client_id": "1011661268854723",
+      "secret": "9602b9db936cecf6bd7e4ef8e998567c"
+    },
+    "model": "socialaccount.socialapp",
+    "pk": "1"
   }
 ]
