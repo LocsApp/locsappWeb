@@ -17,7 +17,7 @@ class AccountRegisterTestCase(APITestCase):
 
     def test_account_not_valid(self):
         """
-        Ensures we can create a new account object.
+        Ensures we can create a new invalid account object.
         """
         self.create_user()
         data = {"username": "test", "password": "toto42"}
@@ -26,4 +26,15 @@ class AccountRegisterTestCase(APITestCase):
         self.assertEqual(Account.objects.count(), 1)
         self.assertEqual(response.data, {'non_field_errors': ['E-mail is not verified.']})
         self.assertEqual(Account.objects.get().username, 'test')
-        #sself.assertEqual(Account.objects.get().email, 'toto@hotmail.fr')
+
+    def test_account_valid(self):
+        """
+        Ensures we can create a new valid account object.
+        """
+        self.create_user()
+        data = {"username": "test", "password": "toto42"}
+        response = self.client.post(self.login_url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(Account.objects.count(), 1)
+        self.assertEqual(response.data, {'non_field_errors': ['E-mail is not verified.']})
+        self.assertEqual(Account.objects.get().username, 'test')

@@ -12,11 +12,33 @@ from allauth.account.models import EmailAddress
 from allauth.account.adapter import get_adapter as get_account_adapter
 from allauth.account import app_settings as account_settings
 from allauth.account.app_settings import EmailVerificationMethod
+from rest_framework.response import Response
+import json
 
 from allauth.socialaccount import app_settings
 from allauth.account.adapter import DefaultAccountAdapter
 
 from django.conf import settings
+from allauth.account.signals import user_signed_up, user_logged_in
+
+from django.dispatch import receiver
+from pprint import pprint
+from django.http import JsonResponse
+
+
+@receiver(user_signed_up)
+def on_user_signed_up(request, user, sociallogin=None, **kwargs):
+
+    if sociallogin:
+        content = json.loads(request._post['_content'])
+        if sociallogin.account.provider == 'facebook':
+            user.email = sociallogin.account.extra_data['email']
+            user.username = content['username']
+            if sociallogin.account.extra_data['gender']:
+                user.gender = sociallogin.account.extra_data['gender']
+            if sociallogin.account.extra_data['birthday']:
+                user.birthdate = sociallogin.account.extra_data['birthday']
+            user.save()
 
 
 class DefaultAccountAdapterCustom(DefaultAccountAdapter):
@@ -31,7 +53,6 @@ class DefaultAccountAdapterCustom(DefaultAccountAdapter):
 class DefaultSocialAccountAdapter(object):
 
     def pre_social_login(self, request, sociallogin):
-        print("pre_social_login")
         """
         Invoked just after a user successfully authenticates via a
         social provider, but before the login is actually processed
@@ -52,8 +73,6 @@ class DefaultSocialAccountAdapter(object):
                              error=None,
                              exception=None,
                              extra_context=None):
-        print("authentication_error")
-
         """
         Invoked when there is an error in the authentication cycle. In this
         case, pre_social_login will not be reached.
@@ -77,8 +96,6 @@ class DefaultSocialAccountAdapter(object):
         Saves a newly signed up social login. In case of auto-signup,
         the signup form is not available.
         """
-        print("save_user")
-
         u = sociallogin.user
         u.set_unusable_password()
         if form:
@@ -105,10 +122,6 @@ class DefaultSocialAccountAdapter(object):
         free. For example, verifying whether or not the username
         already exists, is not a responsibility.
         """
-        name_function = "populate_user "
-        print(name_function, "data ", data)
-        print(name_function, "sociallogin ", sociallogin)
-
         username = data.get('username')
         first_name = data.get('first_name')
         last_name = data.get('last_name')
@@ -127,8 +140,6 @@ class DefaultSocialAccountAdapter(object):
         Returns the default URL to redirect to after successfully
         connecting a social account.
         """
-        print("get_connect_redirect_url")
-
         assert request.user.is_authenticated()
         url = reverse('socialaccount_connections')
         return url
@@ -138,8 +149,6 @@ class DefaultSocialAccountAdapter(object):
         Validate whether or not the socialaccount account can be
         safely disconnected.
         """
-        print("validate_disconnect")
-
         if len(accounts) == 1:
             # No usable password would render the local account unusable
             if not account.user.has_usable_password():
@@ -154,8 +163,6 @@ class DefaultSocialAccountAdapter(object):
                                             " e-mail address."))
 
     def is_auto_signup_allowed(self, request, sociallogin):
-        print("is_auto_signup_allowed")
-
         # If email is specified, check for duplicate and if so, no auto signup.
         auto_signup = app_settings.AUTO_SIGNUP
         if auto_signup:
@@ -190,8 +197,6 @@ class DefaultSocialAccountAdapter(object):
         Next to simply returning True/False you can also intervene the
         regular flow by raising an ImmediateHttpResponse
         """
-        print("is_open_for_signup")
-
         return get_account_adapter().is_open_for_signup(request)
 
 

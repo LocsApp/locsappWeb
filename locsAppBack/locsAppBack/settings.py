@@ -47,6 +47,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Django allauth different form
+#ACCOUNT_SIGNUP_FORM_CLASS = 'API.forms.UserSignupForm'
+
 #ACCOUNT_SIGNUP_FORM_CLASS = 'API.forms.SignupForm'
 ACCOUNT_ADAPTER = 'API.adapter.DefaultAccountAdapterCustom'
 ACCOUNT_EMAIL_REQUIRED = True
@@ -54,18 +56,20 @@ ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Locsapp]"
 
-#SOCIALACCOUNT_ADAPTER = 'API.adapter.DefaultSocialAccountAdapter'
+SOCIALACCOUNT_ADAPTER = 'API.adapter.DefaultSocialAccountAdapter'
+#SOCIALACCOUNT_AUTO_SIGNUP = False
+#SOCIALACCOUNT_FORMS = {'signup': 'API.forms.SocialNetworkSignupForm'}
+
 # SOCIALACCOUNT_AUTO_SIGNUP =
+
 SOCIALACCOUNT_EMAIL_VERIFICATION = "mandatory"
 SOCIALACCOUNT_EMAIL_REQUIRED = True
-# SOCIAL_ACCOUNT_EMAIL_REQUIRED if set to true with got an error
 SOCIALACCOUNT_QUERY_EMAIL = True
 
 """
 Attempt to bypass the signup form by using fields (e.g. username, email) retrieved from the social account provider.
  If a conflict arises due to a duplicate e-mail address the signup form will still kick in.
 """
-#SOCIALACCOUNT_AUTO_SIGNUP = False
 
 # - set it to True if you want to have old password verification on password change enpoint (default: False)
 OLD_PASSWORD_FIELD_ENABLED = True
@@ -74,33 +78,33 @@ LOGOUT_ON_PASSWORD_CHANGE = False
 
 SOCIALACCOUNT_PROVIDERS = \
     {'facebook':
-     {
-         'METHOD': 'oauth2',
-         'SCOPE': ['email', 'public_profile', 'user_friends'],
-         'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
-         'FIELDS': [
-             'id',
-             'email',
-             'name',
-             'birthday',
-             'first_name',
-             'last_name',
-             'verified',
-             'locale',
-             'timezone',
-             'link',
-             'gender',
-             'updated_time'],
-         'EXCHANGE_TOKEN': True,
-         'LOCALE_FUNC': 'path.to.callable',
-         'VERIFIED_EMAIL': False,
-         'VERSION': 'v2.5'
-     },
-     'google':
-         {'SCOPE': ['profile', 'email'],
-          'AUTH_PARAMS': {'access_type': 'online'}}
-     }
-
+        {
+            'METHOD': 'oauth2',
+            'SCOPE': ['email', 'public_profile', 'user_friends'],
+            'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+            'FIELDS': [
+                'id',
+                'email',
+                'name',
+                'birthday',
+                'gender',
+                #'user_friends',
+                'first_name',
+                'last_name',
+                'verified',
+                'locale',
+                'timezone',
+                'link',
+                'updated_time'],
+            'EXCHANGE_TOKEN': True,
+            'LOCALE_FUNC': 'path.to.callable',
+            'VERIFIED_EMAIL': False,
+            'VERSION': 'v2.5'
+        },
+        'google':
+            {'SCOPE': ['profile', 'email'],
+             'AUTH_PARAMS': {'access_type': 'online'}}
+    }
 
 # Different user model
 AUTH_USER_MODEL = 'API.Account'
@@ -112,7 +116,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 # Application definition
 
 INSTALLED_APPS = (
-    #'API',
+    # 'API',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -171,7 +175,6 @@ TEMPLATES = [
     },
 ]
 
-
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
@@ -181,7 +184,6 @@ AUTHENTICATION_BACKENDS = (
 )
 
 WSGI_APPLICATION = 'locsAppBack.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
@@ -233,7 +235,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
