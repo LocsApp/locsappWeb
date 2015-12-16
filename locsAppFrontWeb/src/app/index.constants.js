@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-if (window.location.host.match(/sylflo\.fr/))
+if (window.location.host.match(/locsapp\.sylflo\.fr/))
 {
 	angular
 	.module("LocsappServices")
