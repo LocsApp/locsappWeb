@@ -18,3 +18,101 @@
 	};
 
 }
+
+.locsapp-navbar-notifications-container	 > * {
+    -moz-transition: none;
+    -webkit-transition: none;
+    -o-transition: color 0 ease-in;
+    transition: none !important;
+}
+
+.locsapp-navbar-notifications-container {
+
+	padding: 0px;
+	max-width:300px; 
+	line-break: loose;
+
+	ng-md-icon {
+		cursor: pointer;
+	}
+
+	md-toolbar {
+		.md-toolbar-tools {
+			font-size: 17px;
+			letter-spacing: 0.005em;
+			box-sizing: border-box;
+			font-weight: 400;
+			display: flex;
+			align-items: center;
+			flex-direction: row;
+			width: 100%;
+			height: auto;
+			max-height: 64px;
+			padding: 5px 5px;
+			margin: 0px;
+		}
+		min-height: auto;
+
+		.last-icon {
+			margin-right: 5px;
+		}
+	}
+
+	md-content {
+		padding-left: 5px;
+	}
+
+	md-list-item {
+		cursor: pointer;
+		padding-right: 5px;
+		padding-left: 0px;
+
+		&:hover {
+			.locsapp-navbar-notifications-drop-icon {
+				color: $dropIcon;
+				visibility: visible;
+			}
+		}
+
+		&:hover:not(.locsapp-navbar-notifications-new) {
+			background-color: rgba(0, 0, 0, 0.05);
+			md-content {
+				background-color: rgba(0, 0, 0, 0);
+			}
+		}
+	}
+
+	.locsapp-navbar-notifications-new {
+		background-color: rgba(0, 0, 0, 0.3);
+		md-content {
+			background-color: rgba(0, 0, 0, 0);
+		}
+	}
+
+	.locsapp-navbar-notifications-left-icon {
+		margin: auto 5px;
+	}
+
+	.locsapp-navbar-notifications-content-first {
+		padding-bottom : 5px;
+	}
+
+	.locsapp-navbar-notifications-content {
+		padding-top : 5px;
+		padding-bottom : 5px;
+	}
+
+	.locsapp-navbar-notifications-content-last {
+		padding-top : 5px;
+	}
+
+	.locsapp-navbar-notifications-drop-icon {
+		margin: 0px;
+		color: $noInfo;
+		visibility: hidden;
+
+		&:hover {
+			color: $iconHover !important;
+		}
+	}
+}
