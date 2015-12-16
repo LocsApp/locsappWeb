@@ -5,13 +5,15 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
 		ng-md-icon(icon="login", size="48", ui-sref="main.login").locsapp-navbar-icons-gt-sm
 		ng-md-icon(icon="person_add", size="48", ui-sref="main.register").locsapp-navbar-last-icon-gt-sm
 	span(ng-if="main.is_authenticated()")
-		md-menu(md-position-mode="target-right target").locsapp-navbar-notifications
+		md-menu(md-position-mode="target-right target")
 			ng-md-icon(icon="notifications_none", size="48", ng-click="navbar.openNotificationsMenu($mdOpenMenu, $event);").locsapp-navbar-icons-gt-sm
 			md-menu-content(width="4").locsapp-navbar-notifications-container
-				md-list-item
-					md-content Hello and welcome to Locsapp! It seems like you didn't set your first name and last name. Click me to set them!
+				md-list-item(layout="row", layout-align="start start")
+					md-content.flex Hello and welcome to Locsapp! It seems like you didn't set your first name and last name. Click me to set them!
+					ng-md-icon(icon="highlight_remove").locsapp-navbar-notifications-drop-icon
 				md-divider
-				md-list-item
-					md-content Second
+				md-list-item(layout="row", layout-align="start start")
+					md-content.flex Hello and welcome to Locsapp! It seems like you didn't set your first name and last name. Click me to set them!
+					ng-md-icon(icon="highlight_remove").locsapp-navbar-notifications-drop-icon
 		ng-md-icon(icon="account_box", size="48", ui-sref="main.user_profile").locsapp-navbar-last-icon-gt-sm
 		ng-md-icon(icon="logout", size="48", ui-sref="main.logout").locsapp-navbar-last-icon-gt-sm

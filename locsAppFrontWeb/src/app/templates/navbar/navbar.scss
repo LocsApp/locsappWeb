@@ -20,6 +20,32 @@
 }
 
 .locsapp-navbar-notifications-container {
+	padding: 0px;
 	max-width:300px; 
 	line-break: loose;
+
+	md-content {
+		padding-left: 5px;
+	}
+
+	md-list-item {
+		cursor: pointer;
+		padding-right: 5px;
+		padding-left: 0px;
+
+		&:hover {
+			.locsapp-navbar-notifications-drop-icon {
+				visibility: visible;
+			}
+			md-content {
+				background-color: rgba(0, 0, 0, 0.1);
+			}
+		}
+	}
+
+	.locsapp-navbar-notifications-drop-icon {
+		margin: 0px;
+		color: $noInfo;
+		visibility: hidden;
+	}
 }
