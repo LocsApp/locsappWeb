@@ -1,6 +1,3 @@
-__author__ = 'sylflo'
-
-from django.core.urlresolvers import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 from API.models import Account
@@ -10,10 +7,18 @@ from API.models import Account
 # "phone": "0676283782", "is_active": "True", "last_name": "Kekman", "first_name": "Coco",
 # "billing_address": "11 rue des keks", "birthdate": "1990-08-22 11:05:08",
 #        "living_address": "11 rue des keks"}
+"""
+Register with Facebook
+"""
+
 
 class AccountRegisterTestCase(APITestCase):
     def setUp(self):
         self.url = 'http://127.0.0.1:8000/api/v1/rest-auth/registration/'
+
+    def create_user(self):
+        data = {"username": "test", "email": "toto@hotmail.fr", "password1": "toto42", "password2": "toto42"}
+        self.client.post(self.url, data, format='json')
 
     def test_create_account(self):
         """
@@ -122,6 +127,28 @@ class AccountRegisterTestCase(APITestCase):
         """
         data = {"email": "toto@hotmail.fr", "username": "toto", "password1": "toto42", "password2": "toto4"}
         response = self.client.post(self.url, data, format='json')
-        self.assertEqual( {'__all__': ['You must type the same password each time.']}, response.data)
+        self.assertEqual({'__all__': ['You must type the same password each time.']}, response.data)
         self.assertEqual(response.status_code, 400)
         self.assertEqual(Account.objects.count(), 0)
+
+    def test_username_exist(self):
+        """
+        Ensures username are uniaue
+        """
+        self.create_user()
+        data = {"email": "test@hotmail.fr", "username": "test", "password1": "toto42", "password2": "toto42"}
+        response = self.client.post(self.url, data, format='json')
+        self.assertEqual({'username': ['This username is already taken. Please choose another.']}, response.data)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(Account.objects.count(), 1)
+
+    def test_email_exist(self):
+        """
+        Ensures username are uniaue
+        """
+        self.create_user()
+        data = {"email": "toto@hotmail.fr", "username": "toto", "password1": "toto42", "password2": "toto42"}
+        response = self.client.post(self.url, data, format='json')
+        self.assertEqual({'email': ['A user is already registered with this e-mail address.']}, response.data)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(Account.objects.count(), 1)
