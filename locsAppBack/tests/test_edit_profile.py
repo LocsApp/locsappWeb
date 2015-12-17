@@ -1,0 +1,44 @@
+from rest_framework import status
+from rest_framework.test import APITestCase, APIClient
+from API.models import Account
+
+
+class AccountEditProfileTestCase(APITestCase):
+
+    fixtures = ('test_edit_profile',)
+
+    def setUp(self):
+        self.url_user = "http://127.0.01:8000/api/v1/rest-auth/user/"
+        self.url_register = "http://127.0.0.1:8000/api/v1/rest-auth/registration/"
+        self.url_login = "http://localhost:8000/api/v1/rest-auth/login/"
+
+    def login_user(self):
+        data = {"username": "locsapp", "password": "toto42"}
+        response = self.client.post(self.url_login, data, format='json')
+        return response.data['key']
+
+    def test_edit_basic(self):
+        """
+        Ensure we can edit the basics information in the user profile
+        """
+        key = self.login_user()
+        data = {"username": "toto", "email": "tutu@hotmail.fr", "first_name": "LocsApp", "last_name": "Last name",
+                "birthdate": "1990/11/16", "logo_url": "avatar.jpg", "is_active": "false", "role": "admin",
+                "secondary_emails:": ["toto", "toto@hotmmail.fr"], "registered_date": "2014/07/15",
+                "last_activity_date": "2014/08/25"}
+        header = {'HTTP_AUTHORIZATION': 'Token {}'.format(key)}
+        response = self.client.put(self.url_user, data, **header)
+
+        self.assertNotEqual(response.data['username'], "toto")
+        self.assertNotEqual(response.data['email'], "tutu@hotmail.fr")
+        self.assertEqual(response.data['first_name'], "LocsApp")
+        self.assertEqual(response.data['last_name'], "Last name")
+        self.assertEqual(response.data['birthdate'], "1990/11/16")
+        self.assertNotEqual(response.data['logo_url'], "avatar.jpg")
+        self.assertNotEqual(response.data['is_active'], False)
+        self.assertNotEqual(response.data['role'], "admin")
+        self.assertNotEqual(response.data['secondary_emails'], ["toto", "toto@hotmmail.fr"])
+        self.assertNotEqual(response.data['registered_date'], "2014/07/15")
+        self.assertNotEqual(response.data['last_activity_date'], "2014/08/25")
+
+        self.assertEqual(response.status_code, 200)

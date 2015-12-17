@@ -8,7 +8,7 @@ from API.models import Account
 # "billing_address": "11 rue des keks", "birthdate": "1990-08-22 11:05:08",
 #        "living_address": "11 rue des keks"}
 """
-Register with Facebook
+Check username lenght and validity model
 """
 
 

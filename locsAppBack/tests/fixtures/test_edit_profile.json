@@ -1,0 +1,37 @@
+[
+  {
+    "fields": {
+      "role": "user",
+      "is_admin": true,
+      "email": "locsapp-test@outlook.com",
+      "secondary_emails": null,
+      "billing_address": null,
+      "living_address": null,
+      "registered_date": "2015-12-02T06:37:22.644Z",
+      "password": "pbkdf2_sha256$20000$AYfu6niWvOI8$UU6ufs5tULWJYxbSbFbdVj1SqfSbjic41mz4c9PGZH8=",
+      "phone": null,
+      "username": "locsapp",
+      "logo_url": null,
+      "last_activity_date": null,
+      "created_at": "2015-12-02T06:37:22.661Z",
+      "first_name": null,
+      "is_active": true,
+      "last_login": null,
+      "birthdate": null,
+      "last_name": null
+    },
+    "model": "API.account",
+    "pk": 42
+  },
+
+  {
+    "fields": {
+      "user": 42,
+      "email": "locsapp-test@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 42
+  }
+]
