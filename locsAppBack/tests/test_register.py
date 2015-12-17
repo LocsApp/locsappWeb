@@ -21,7 +21,7 @@ class AccountRegisterTestCase(APITestCase):
 
     def create_user(self):
         data = {"username": "test", "email": "toto@hotmail.fr", "password1": "toto42", "password2": "toto42"}
-        self.client.post(self.register_url, data, format='json')
+        self.client.post(self.url, data, format='json')
 
     def test_create_account(self):
         """
@@ -130,6 +130,17 @@ class AccountRegisterTestCase(APITestCase):
         """
         data = {"email": "toto@hotmail.fr", "username": "toto", "password1": "toto42", "password2": "toto4"}
         response = self.client.post(self.url, data, format='json')
-        self.assertEqual( {'__all__': ['You must type the same password each time.']}, response.data)
+        self.assertEqual({'__all__': ['You must type the same password each time.']}, response.data)
         self.assertEqual(response.status_code, 400)
         self.assertEqual(Account.objects.count(), 0)
+
+    def test_username_exist(self):
+        """
+        Ensures username are uniaue
+        """
+        self.create_user()
+        data = {"email": "test@hotmail.fr", "username": "test", "password1": "toto42", "password2": "toto42"}
+        response = self.client.post(self.url, data, format='json')
+        self.assertEqual({'username': ['This username is already taken. Please choose another.']}, response.data)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(Account.objects.count(), 1)
