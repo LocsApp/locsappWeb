@@ -144,3 +144,15 @@ class AccountRegisterTestCase(APITestCase):
         self.assertEqual({'username': ['This username is already taken. Please choose another.']}, response.data)
         self.assertEqual(response.status_code, 400)
         self.assertEqual(Account.objects.count(), 1)
+
+    def test_email_exist(self):
+        """
+        Ensures username are uniaue
+        """
+        self.create_user()
+        data = {"email": "toto@hotmail.fr", "username": "toto", "password1": "toto42", "password2": "toto42"}
+        response = self.client.post(self.url, data, format='json')
+        print(response.data)
+        self.assertEqual({'username': ['This username is already taken. Please choose another.']}, response.data)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(Account.objects.count(), 1)
