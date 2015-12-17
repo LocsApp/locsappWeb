@@ -20,5 +20,7 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
 							md-content.flex.locsapp-navbar-notifications-content {{ notification.content }}
 							ng-md-icon(icon="highlight_remove").locsapp-navbar-notifications-drop-icon
 					md-divider(ng-if="!$last")
+				md-list-item(ng-if="!navbar.notifications()")
+					md-content You have no notifications.
 		ng-md-icon(icon="account_box", size="48", ui-sref="main.user_profile").locsapp-navbar-last-icon-gt-sm
 		ng-md-icon(icon="logout", size="48", ui-sref="main.logout").locsapp-navbar-last-icon-gt-sm

@@ -456,7 +456,6 @@ def notificationsUser(request, user_pk):
         for notification in notifications_user:
             notification = parseObjectIdToStr(notification)
             notifications["notifications"].append(notification)
-        print (notifications)
         return (JsonResponse(notifications, safe=True))
     else:
         return (JsonResponse(
