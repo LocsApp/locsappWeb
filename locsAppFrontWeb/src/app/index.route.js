@@ -18,13 +18,25 @@
 		.state('main.homepage', {
 			url: '',
 			parent: 'main',
-			templateUrl: 'app/templates/home/home.html'
+			templateUrl: 'app/templates/home/home.html',
+			data: {
+				permissions: {
+					only: ['guest', 'user'],
+					redirectTo: 'main.homepage'
+				}
+			}
 		})
 		.state('main.verify-email', {
 			url: 'verify-email/:key',
 			parent: 'main',
 			controller: 'VerifyEmailController',
-			controllerAs: 'verifyEmail'
+			controllerAs: 'verifyEmail',
+			data: {
+				permissions: {
+					only: ['guest', 'user'],
+					redirectTo: 'main.homepage'
+				}
+			}
 		})
 		.state('main.password-reset', {
 			url: 'password-reset/:uid/:token',
@@ -59,7 +71,7 @@
 			controllerAs: 'logout',
 			data: {
 				permissions: {
-					except: ['guest'],
+					only: ['user'],
 					redirectTo: 'main.homepage'
 				}
 			}
@@ -72,7 +84,7 @@
 			templateUrl : 'app/templates/userProfile/user_profile.html',
 			data: {
 				permissions: {
-					except: ['guest'],
+					only: ['user'],
 					redirectTo: 'main.homepage'
 				}
 			}
@@ -86,7 +98,7 @@
 			templateUrl : 'app/templates/userProfileParameters/user_profile_parameters.html',
 			data: {
 				permissions: {
-					except: ['guest'],
+					only: ['user'],
 					redirectTo: 'main.homepage'
 				}
 			}
@@ -96,7 +108,7 @@
 			templateUrl : 'app/templates/userProfileParameters/Menu_Tabs/user_profile_parameters_informations.html',
 			data: {
 				permissions: {
-					except: ['guest'],
+					only: ['user'],
 					redirectTo: 'main.homepage'
 				}
 			}
@@ -106,7 +118,7 @@
 			templateUrl : 'app/templates/userProfileParameters/Menu_Tabs/user_profile_parameters_emails.html',
 			data: {
 				permissions: {
-					except: ['guest'],
+					only: ['user'],
 					redirectTo: 'main.homepage'
 				}
 			}
@@ -117,7 +129,7 @@
 			templateUrl : 'app/templates/userProfileParameters/Menu_Tabs/user_profile_parameters_change_password.html',
 			data: {
 				permissions: {
-					except: ['guest'],
+					only: ['user'],
 					redirectTo: 'main.homepage'
 				}
 			}
@@ -130,7 +142,7 @@
 			controllerAs: 'register',
 			data: {
 				permissions: {
-					only: ['guest'],
+					only: ['user'],
 					redirectTo: 'main.homepage'
 				}
 			}

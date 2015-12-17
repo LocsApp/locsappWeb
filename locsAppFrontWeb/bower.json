@@ -24,7 +24,8 @@
     "angular-validation-match": "~1.6.0",
     "ngstorage": "~0.3.10",
     "angular-loading-bar": "~0.8.0",
-    "roboto-slab-fontface-bower": "roboto-slab-fontface#*"
+    "roboto-slab-fontface-bower": "roboto-slab-fontface#*",
+    "ng-webworker": "~0.2.2"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.2"

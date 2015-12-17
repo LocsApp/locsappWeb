@@ -22,20 +22,6 @@
 	//Destruction and memory release of the rootScopeOnStateChangeStart
 	$rootScope.$on('$destroy', rootScopeOnStateChangeStart);
 
-
-	//Checks if the user has infos in storage and if so, gets notifications on angular init
-	if ($localStorage.key && $localStorage.id)
-	{
-		if (Object.getOwnPropertyNames(NotificationsService.getListeners()).length == 0)
-			NotificationsService.addListener("user", URL_API + "api/v1/notifications/" + $localStorage.id);
-	}
-	else if ($sessionStorage.key && $sessionStorage.id)
-	{
-		if (Object.getOwnPropertyNames(NotificationsService.getListeners()).length == 0)
-			NotificationsService.addListener("user", URL_API + "api/v1/notifications/" + $sessionStorage.id);
-		$log.log("HELLO")
-	}
-
 	//Defining of guest role for permissions
 	Permission.defineRole("guest", function () {
 		var deferred = $q.defer();
@@ -67,6 +53,43 @@
 			deferred.resolve();
 		}
 
+		return (deferred.promise);
+	});
+
+	//Defining of user role for permissions
+	Permission.defineRole("user", function () {
+		var deferred = $q.defer();
+
+		UsersService
+			.profile_check
+			.get({})
+			.$promise
+			.then(profileSuccess, profileError);
+
+		function profileSuccess() {
+			//Checks if a listener is set, if not, set one
+			if (Object.getOwnPropertyNames(NotificationsService.getListeners()).length == 0)
+				NotificationsService.addListener("user", URL_API + "api/v1/notifications/" + $sessionStorage.id);
+			$log.log(NotificationsService.getListeners());
+			$log.log("in");			
+			deferred.resolve();
+		}
+
+		function profileError(data) {
+			if ($localStorage.key)
+			{
+				toastr.error("The server disconnected you.", "Please login again");
+				delete $localStorage.key
+			}
+			if ($sessionStorage.key)
+			{
+				toastr.error("The server disconnected you.", "Please login again");
+				delete $sessionStorage.key
+			}
+			$log.log(data);
+			$log.log("out");
+			deferred.reject();
+		}
 		return (deferred.promise);
 	});
   }
