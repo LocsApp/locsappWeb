@@ -9,7 +9,7 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
 			ng-md-icon(icon="notifications_none", size="48", md-menu-origin, ng-click="navbar.openNotificationsMenu($mdOpenMenu, $event);").locsapp-navbar-icons-gt-sm
 			md-menu-content(width="4").locsapp-navbar-notifications-container
 				md-toolbar(layout="row", layout-align="space-between center")
-					span.md-toolbar-tools 1 New Notification
+					span.md-toolbar-tools {{ navbar.notifications().length }} Notifications
 					ng-md-icon(icon="settings").locsapp-navbar-notifications-toolbar-icon
 					ng-md-icon(icon="notifications_none")
 					ng-md-icon(icon="notifications_off")
@@ -22,7 +22,7 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
 								ng-md-icon(icon="highlight_remove").locsapp-navbar-notifications-drop-icon
 								ng-md-icon(icon="notifications_none").locsapp-navbar-notifications-drop-icon
 					md-divider(ng-if="!$last")
-				md-list-item(ng-if="!navbar.notifications()")
+				md-list-item(ng-if="navbar.notifications().length != 1")
 					md-content You have no notifications.
 		ng-md-icon(icon="account_box", size="48", ui-sref="main.user_profile").locsapp-navbar-last-icon-gt-sm
 		ng-md-icon(icon="logout", size="48", ui-sref="main.logout").locsapp-navbar-last-icon-gt-sm
