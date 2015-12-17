@@ -52,7 +52,7 @@ class APIRequestMongo:
                 if (error_keys != {}):
                     return (JsonResponse(error_keys))
                 collection.insert_one(answer)
-                return(JsonResponse({"error": "200 OK"}, status=200))
+                return(JsonResponse({"message": "Notification created!"}, status=200))
             else:
                 return (JsonResponse({"error": "400 BAD REQUEST"}, status=400))
         else:
