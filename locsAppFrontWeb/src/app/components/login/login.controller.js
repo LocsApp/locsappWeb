@@ -2,30 +2,47 @@
   'use strict';
 
   angular
-    .module('LocsappControllers')
-    .controller('LoginController', LoginController);
+	.module('LocsappControllers')
+	.controller('LoginController', LoginController);
 
   /** @ngInject */
   function LoginController($scope, UsersService, toastr, $sessionStorage, $localStorage, $state, $log, $mdDialog, $document) {
-    var vm = this;
+	var vm = this;
 
-    /*Log in the user*/
-    vm.submit = function() {
+	/*Log in the user*/
+	vm.submit = function() {
 		UsersService
 			.login
 			.save({"username" : $scope.username, "password" : $scope.password})
 			.$promise
 			.then(vm.userLoggedinSuccess, vm.userLoggedinFailure);
-    }
+	}
 
-    /*Success callback for login*/
+	/*Success callback for profile_check*/
+	vm.userProfileGetSuccess = function(data) {
+		if ($scope.remember_me == true)
+			$localStorage.id = data["id"];
+		else
+			$sessionStorage.id = data["id"];
+	$state.go("main.homepage");
+	}
+
+	vm.userProfileGetFailure = function() {
+		toastr.error("An error occured while retrieving your data...", "Woops...")
+	}
+
+	/*Success callback for login*/
 	vm.userLoggedinSuccess = function (data) {
 		$log.log(data);
 		if ($scope.remember_me == true)
 			$localStorage.key = data["key"];
 		else
 			$sessionStorage.key = data["key"];
-		$state.go("main.homepage");
+		UsersService
+		.profile_check
+		.get({})
+		.$promise
+		.then(vm.userProfileGetSuccess, vm.userProfileGetFailure);
 	};
 
 	/*Success callback for login*/
