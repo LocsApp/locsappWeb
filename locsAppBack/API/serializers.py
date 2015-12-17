@@ -61,6 +61,8 @@ class PasswordChangeSerializer(serializers.Serializer):
         return value
 
     def validate(self, attrs):
+        if len(attrs['new_password1']) < 6 or len(attrs['new_password2']) < 6:
+            raise serializers.ValidationError("Password must be a minimum of 6 characters.")
         self.set_password_form = self.set_password_form_class(
             user=self.user, data=attrs
         )

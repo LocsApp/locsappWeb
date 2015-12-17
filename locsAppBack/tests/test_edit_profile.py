@@ -64,6 +64,40 @@ class AccountEditProfileTestCase(APITestCase):
         self.assertTrue(response.data['key'])
         self.assertEqual(response.status_code, 200)
 
+    def test_change_password_not_the_same(self):
+        """
+        Ensure there is an error when putting diffrent password
+        """
+        key = self.login_user()
+        data = {"old_password": "toto42", "new_password1": "locsapp", "new_password2": "locsapp42"}
+        header = {'HTTP_AUTHORIZATION': 'Token {}'.format(key)}
+        response = self.client.post(self.url_change_password, data, **header)
+        self.assertEqual({'new_password2': ["The two password fields didn't match."]}, response.data)
+        self.assertEqual(response.status_code, 400)
+
+    def test_change_password_wrong(self):
+        """
+        Ensure there is an error if the user post a wrong actual password
+        """
+        key = self.login_user()
+        data = {"old_password": "locsapp", "new_password1": "locsapp", "new_password2": "locsapp"}
+        header = {'HTTP_AUTHORIZATION': 'Token {}'.format(key)}
+        response = self.client.post(self.url_change_password, data, **header)
+        self.assertEqual({'old_password': ['Invalid password']}, response.data)
+        self.assertEqual(response.status_code, 400)
+
+    def test_change_password_too_small(self):
+        """
+        Ensure there is an error when the new password is too small
+        """
+        key = self.login_user()
+        data = {"old_password": "toto42", "new_password1": "toto", "new_password2": "toto"}
+        header = {'HTTP_AUTHORIZATION': 'Token {}'.format(key)}
+        response = self.client.post(self.url_change_password, data, **header)
+        self.assertEqual({'non_field_errors': ['Password must be a minimum of 6 characters.']}, response.data)
+        self.assertEqual(response.status_code, 400)
+
+
 
 
 
