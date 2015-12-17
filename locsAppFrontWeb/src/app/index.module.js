@@ -26,6 +26,7 @@
 		'permission',
 		'validation.match',
 		'ngStorage',
+		'ngWebworker',
 		'angular-loading-bar',
 		'LocsappDirectives',
 		'LocsappServices',
