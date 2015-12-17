@@ -408,6 +408,11 @@ class billingAddressUserDelete(APIView):
                 {"Error": "There must be a key 'billing_address' present in the document."}, status=401)
         return Response({"message": "Nice"})
 
+
+def notificationsUser(request):
+    return(JsonResponse({"error": "200 OK"}, status=200))
+
+
 """
     SOCIAL NETWORK END-POINTS
 """
