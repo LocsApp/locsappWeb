@@ -32,7 +32,7 @@
             if (listeners != {})
             {
                 $resource(listeners[name_listener])
-                    .query({})
+                    .get({})
                     .$promise
                     .then(function (data) {
                          notifications["notifications"] = data.notifications;
