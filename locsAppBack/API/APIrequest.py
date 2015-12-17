@@ -15,7 +15,8 @@ class APIRequestMongo:
     """
     verifies is the fields are correct:
     text, <number> : verify if the text is small enough
-    integer : verify that it is an integer
+    integer : verify that it is an integer,
+    boolean : verify that it is a boolean
     """
 
     def verifyErrorsInFields(self, fields, answer):
@@ -30,6 +31,9 @@ class APIRequestMongo:
             elif (temp_options[0] == "integer"):
                 if (not isinstance(answer[key], type(1))):
                     error_fields[key] = "The field must be an integer"
+            elif (temp_options[0] == "boolean"):
+                if (not isinstance(answer[key], type(True))):
+                    error_fields[key] = "The field must be a boolean"
             temp_options = []
         return (error_fields)
 

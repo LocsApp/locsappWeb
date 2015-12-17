@@ -409,8 +409,31 @@ class billingAddressUserDelete(APIView):
         return Response({"message": "Nice"})
 
 
-def notificationsUser(request):
-    return(JsonResponse({"error": "200 OK"}, status=200))
+@csrf_exempt
+def notificationsUser(request, user_pk):
+    fields_definition = \
+        {"type": "text, 30",
+         "content": "text, 300",
+         "state_url": "text, 50",
+         "read": "boolean",
+         "visible": "boolean",
+         "user_id": "integer"}
+
+    """
+    if (request.user.pk):
+        if (int(user_pk) != int(request.user.pk)):
+            return JsonResponse(
+                {"Unauthorized": "You have no access to this data."}, status=403)
+    else:
+        return JsonResponse(
+            {"Unauthorized": "You need to be connected."}, status=403)
+    """
+    if (request.method == "POST"):
+        return APIrequests.forgeAPIrequestCreate(
+            "POST", request, fields_definition, db_locsapp["notifications_users"])
+    else:
+        return (JsonResponse(
+            {"error": "405 METHOD NOT ALLOWED"}, status=405))
 
 
 """
