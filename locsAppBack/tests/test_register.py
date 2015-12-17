@@ -1,4 +1,3 @@
-from django.core.urlresolvers import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 from API.models import Account
@@ -9,8 +8,6 @@ from API.models import Account
 # "billing_address": "11 rue des keks", "birthdate": "1990-08-22 11:05:08",
 #        "living_address": "11 rue des keks"}
 """
-Check there is no two username
-Check there is no two email
 Register with Facebook
 """
 
