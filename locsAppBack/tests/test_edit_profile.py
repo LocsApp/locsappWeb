@@ -22,9 +22,23 @@ class AccountEditProfileTestCase(APITestCase):
         Ensure we can edit the basics information in the user profile
         """
         key = self.login_user()
-        data = {"first_name": "LocsApp"}
+        data = {"username": "toto", "email": "tutu@hotmail.fr", "first_name": "LocsApp", "last_name": "Last name",
+                "birthdate": "1990/11/16", "logo_url": "avatar.jpg", "is_active": "false", "role": "admin",
+                "secondary_emails:": ["toto", "toto@hotmmail.fr"], "registered_date": "2014/07/15",
+                "last_activity_date": "2014/08/25"}
         header = {'HTTP_AUTHORIZATION': 'Token {}'.format(key)}
-        response = self.client.put(self.url_user, {"first_name": "toto"}, **header)
-        """client.credentials(HTTP_AUTHORIZATION='Token ' + key)
-        response = self.client.get(self.url_user, data, format='json')"""
-        print(response.data)
+        response = self.client.put(self.url_user, data, **header)
+
+        self.assertNotEqual(response.data['username'], "toto")
+        self.assertNotEqual(response.data['email'], "tutu@hotmail.fr")
+        self.assertEqual(response.data['first_name'], "LocsApp")
+        self.assertEqual(response.data['last_name'], "Last name")
+        self.assertEqual(response.data['birthdate'], "1990/11/16")
+        self.assertNotEqual(response.data['logo_url'], "avatar.jpg")
+        self.assertNotEqual(response.data['is_active'], False)
+        self.assertNotEqual(response.data['role'], "admin")
+        self.assertNotEqual(response.data['secondary_emails'], ["toto", "toto@hotmmail.fr"])
+        self.assertNotEqual(response.data['registered_date'], "2014/07/15")
+        self.assertNotEqual(response.data['last_activity_date'], "2014/08/25")
+
+        self.assertEqual(response.status_code, 200)
