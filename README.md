@@ -32,8 +32,37 @@ Pour lancer le serveur une fois que vous êtes dans l'env virtuel faites
 ./manage.py runserver
 ```
 
-La documentation de l'API se trouve ici: (elle sera remplacé par swagger d'ici un certain temps
-[http://127.0.0.1:8000/doc](http://127.0.0.1:8000/doc)
+**Nouvelle étape**
+Lancer la commande suivante
+```
+./manage.py loaddata API
+```
+Cette commande va faire deux choses importantes:
+
+* Elle va créer un utilisateur s'appelant locsapp avec le mot de passe toto42,
+l'adresse mail utilisateur sera automatiquement vérifié.
+* Elle va aussi créer un "modèle" de l'application Facebook ce qui vous permettra
+de faire la connexion par ce réseau social.
+
+Par contre si vous ne travaillez pas en localhost. 
+
+* Il faut soit que vous modifiez les fixtures et relancer la commande ./manage.py loaddata API.
+```
+{
+    "fields": {
+      "name": "nom pour cette entité",
+      "domain": "nom.domaine"
+    },
+    "pk": 70,
+    "model": "sites.site"
+  },
+```
+*  Ou alors il faut vous connecter à l'admin django sur [localhost:8000/admin](localhost:8000/admin). En ajoutant votre nom de domaine dans le modèle Sites. Et ensuite
+en le rajoutant dans le modèle Social Application. 
+
+
+La documentation de l'API se trouve ici: (veuillez y accéder en navigation privé svp)
+[http://locsapp-doc.sylflo.fr/#/](http://locsapp-doc.sylflo.fr/#/)
 
 ## Partie frontend
 
