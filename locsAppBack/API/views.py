@@ -44,6 +44,24 @@ db_locsapp = mongodb_client['locsapp']
 
 from django.core.validators import validate_email
 
+import json
+from bson import ObjectId
+
+
+def parseObjectIdToStr(dictionary):
+    for key in dictionary:
+        if (isinstance(dictionary[key], ObjectId)):
+            dictionary[key] = str(dictionary[key])
+    return (dictionary)
+
+
+class JSONEncoder(json.JSONEncoder):
+
+    def default(self, o):
+        if isinstance(o, ObjectId):
+            return str(o)
+        return json.JSONEncoder.default(self, o)
+
 # Template for the doc on the homepage of the API
 
 
@@ -431,6 +449,15 @@ def notificationsUser(request, user_pk):
     if (request.method == "POST"):
         return APIrequests.forgeAPIrequestCreate(
             "POST", request, fields_definition, db_locsapp["notifications_users"])
+    elif (request.method == "GET"):
+        notifications_user = db_locsapp[
+            "notifications_users"].find({"user_id": int(user_pk)})
+        notifications = {"notifications": []}
+        for notification in notifications_user:
+            notification = parseObjectIdToStr(notification)
+            notifications["notifications"].append(notification)
+        print (notifications)
+        return (JsonResponse(notifications, safe=True))
     else:
         return (JsonResponse(
             {"error": "405 METHOD NOT ALLOWED"}, status=405))
