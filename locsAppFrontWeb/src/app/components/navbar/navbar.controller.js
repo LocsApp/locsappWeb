@@ -6,7 +6,7 @@
 	.controller('NavBarController', NavBarController);
 
   /** @ngInject */
-  function NavBarController(NotificationsService) {
+  function NavBarController(NotificationsService, $state) {
 	var vm = this;
 
 	/*Notifications of the user*/
@@ -16,5 +16,10 @@
 	vm.openNotificationsMenu = function($mdOpenMenu, event) {
 		$mdOpenMenu(event);
 	};
+
+	/*Goes to the state parameter*/
+	vm.goToState = function(state_name) {
+		$state.go(state_name);
+	}
   }
 })();

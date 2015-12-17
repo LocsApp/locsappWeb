@@ -16,9 +16,11 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
 					ng-md-icon(icon="delete").last-icon
 				span(ng-repeat="notification in navbar.notifications()")
 					md-list-item(layout="row", layout-align="start start", ng-class="{'locsapp-navbar-notifications-new' : !notification.read}")
-							ng-md-icon(icon="info").locsapp-navbar-notifications-left-icon.md-menu-align-target
-							md-content.flex.locsapp-navbar-notifications-content {{ notification.content }}
-							ng-md-icon(icon="highlight_remove").locsapp-navbar-notifications-drop-icon
+							ng-md-icon(icon="{{ notification.type }}").locsapp-navbar-notifications-left-icon.md-menu-align-target
+							md-content(ng-click="navbar.goToState(notification.state_url);").flex.locsapp-navbar-notifications-content {{ notification.content }}
+							section(layout="column", layout-align="start start")
+								ng-md-icon(icon="highlight_remove").locsapp-navbar-notifications-drop-icon
+								ng-md-icon(icon="notifications_none").locsapp-navbar-notifications-drop-icon
 					md-divider(ng-if="!$last")
 				md-list-item(ng-if="!navbar.notifications()")
 					md-content You have no notifications.
