@@ -28,6 +28,7 @@
 		'ngStorage',
 		'ngWebworker',
 		'angular-loading-bar',
+		'angularMoment',
 		'LocsappDirectives',
 		'LocsappServices',
 		'LocsappControllers']);
