@@ -10,6 +10,9 @@ import json
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
+import pytz
+from datetime import datetime
+
 
 class APIRequestMongo:
 
@@ -43,6 +46,8 @@ class APIRequestMongo:
             elif (temp_options[0] == "boolean"):
                 if (not isinstance(answer[key], type(True))):
                     error_fields[key] = "The field must be a boolean"
+            elif (temp_options[0] == "date_default"):
+                answer[key] = datetime.now(pytz.utc)
             temp_options = []
         return (error_fields)
 
@@ -53,7 +58,8 @@ class APIRequestMongo:
                 answer = json.loads(request.body.decode('utf8'))
                 error_keys = {}
                 for key in fields:
-                    if key not in answer:
+                    if key not in answer and "default" not in fields[
+                            key].split("_"):
                         error_keys[key] = "This key is required"
                 if (error_keys != {}):
                     return (JsonResponse(error_keys, status=401))

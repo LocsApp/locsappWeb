@@ -428,7 +428,8 @@ def notificationsUser(request, user_pk):
          "state_url": "text, 50",
          "read": "boolean",
          "visible": "boolean",
-         "user_id": "integer"}
+         "user_id": "integer",
+         "date": "date_default"}
 
     """
     if (request.user.pk):
