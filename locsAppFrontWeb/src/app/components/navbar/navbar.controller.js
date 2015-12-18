@@ -20,6 +20,11 @@
 	/*Goes to the state parameter*/
 	vm.goToState = function(state_name) {
 		$state.go(state_name);
-	}
+	};
+
+	/*Sets the notification to read true*/
+	vm.notificationRead = function(notification) {
+		NotificationsService.notificationRead(notification);
+	};
   }
 })();

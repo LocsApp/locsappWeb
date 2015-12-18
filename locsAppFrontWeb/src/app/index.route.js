@@ -142,7 +142,7 @@
 			controllerAs: 'register',
 			data: {
 				permissions: {
-					only: ['user'],
+					only: ['guest'],
 					redirectTo: 'main.homepage'
 				}
 			}

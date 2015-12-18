@@ -6,7 +6,7 @@
         .factory('NotificationsService', NotificationsService);
 
     /** @ngInject */
-    function NotificationsService($resource, $log) {
+    function NotificationsService($resource, $log, URL_API) {
 
         var listeners = {};
         var notifications = {"notifications" : []};
@@ -15,7 +15,8 @@
             addListener : addListener,
             getListeners : getListeners,
             stimulateListener : stimulateListener,
-            getNotifications : getNotifications
+            getNotifications : getNotifications,
+            notificationRead : notificationRead
         };
 
         return service;
@@ -46,6 +47,21 @@
 
         function getNotifications() {
             return (notifications["notifications"]);
+        }
+
+        function notificationRead(notification) {
+            if (notification.read == true)
+                return (false);
+             $resource(URL_API +  'api/v1/notifications/'+ notification._id + '/', null, {'update' : {method: 'PUT'}})
+                .update({"read" : true})
+                .$promise
+                .then(function () {
+                    stimulateListener("user");
+                },
+                function (data) {
+                    $log.log("Error !");
+                    $log.log(data);
+                });       
         }
     }
 })();
