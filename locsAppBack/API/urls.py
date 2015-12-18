@@ -7,7 +7,6 @@ from django.views.generic.base import RedirectView
 
 from allauth.account.views import confirm_email
 
-
 """
 @apiDefine UserObjectRegisterDefine
 
@@ -18,6 +17,12 @@ from allauth.account.views import confirm_email
 article_patterns = [
     url(r'^create/$', views.postNewArticle),
     url(r'^delete/$', views.deleteArticle),
+]
+
+notifications_patterns = [
+    url(
+        r'^(?P<notification_pk>[a-f\d]{24})/$',
+        views.notificationAlone),
 ]
 
 user_patterns = [
@@ -58,5 +63,6 @@ api_patterns = [
         RedirectView.as_view(url='http://127.0.0.1:3000/failed-verified-email',
                              permanent=False),
         name="account_signup"),
-    url(r'^user/', include(user_patterns))
+    url(r'^user/', include(user_patterns)),
+    url(r'^notifications/', include(notifications_patterns))
 ]

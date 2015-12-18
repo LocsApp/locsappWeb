@@ -9,7 +9,8 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
 			ng-md-icon(icon="notifications_none", size="48", md-menu-origin, ng-click="navbar.openNotificationsMenu($mdOpenMenu, $event);").locsapp-navbar-icons-gt-sm
 			md-menu-content(width="4").locsapp-navbar-notifications-container
 				md-toolbar(layout="row", layout-align="space-between center")
-					span.md-toolbar-tools {{ navbar.notifications().length }} Notifications
+					span(ng-if="navbar.notifications().length < 2").md-toolbar-tools {{ navbar.notifications().length }} Notification
+					span(ng-if="navbar.notifications().length > 1").md-toolbar-tools {{ navbar.notifications().length }} Notifications
 					ng-md-icon(icon="settings").locsapp-navbar-notifications-toolbar-icon
 					ng-md-icon(icon="notifications_none")
 					ng-md-icon(icon="notifications_off")

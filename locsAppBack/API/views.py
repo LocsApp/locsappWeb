@@ -49,6 +49,8 @@ from bson import ObjectId
 
 
 def parseObjectIdToStr(dictionary):
+    if (dictionary is None):
+        return (None)
     for key in dictionary:
         if (isinstance(dictionary[key], ObjectId)):
             dictionary[key] = str(dictionary[key])
@@ -69,7 +71,7 @@ class docAPIView(TemplateView):
     template_name = "API/homeDocAPI.html"
 
 """
-    USER PROFILE END-POINTS
+    USER PROFILE ENDPOINTS
 """
 
 
@@ -461,9 +463,25 @@ def notificationsUser(request, user_pk):
         return (JsonResponse(
             {"error": "405 METHOD NOT ALLOWED"}, status=405))
 
+"""
+    NOTIFICATIONS ENDPOINTS
+"""
+
+
+@csrf_exempt
+def notificationAlone(request, notification_pk):
+    if (request.method == "GET"):
+        notification = db_locsapp["notifications_users"].find_one(
+            {"_id": ObjectId(notification_pk)})
+        answer = parseObjectIdToStr(notification)
+        if (answer is not None):
+            return (JsonResponse(answer, safe=True))
+        else:
+            return (JsonResponse({"error": "Id not found."}, status=404))
+
 
 """
-    SOCIAL NETWORK END-POINTS
+    SOCIAL NETWORK ENDPOINTS
 """
 
 
