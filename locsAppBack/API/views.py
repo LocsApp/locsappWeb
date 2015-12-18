@@ -48,15 +48,6 @@ import json
 from bson import ObjectId
 
 
-def parseObjectIdToStr(dictionary):
-    if (dictionary is None):
-        return (None)
-    for key in dictionary:
-        if (isinstance(dictionary[key], ObjectId)):
-            dictionary[key] = str(dictionary[key])
-    return (dictionary)
-
-
 class JSONEncoder(json.JSONEncoder):
 
     def default(self, o):
@@ -456,7 +447,7 @@ def notificationsUser(request, user_pk):
             "notifications_users"].find({"user_id": int(user_pk)})
         notifications = {"notifications": []}
         for notification in notifications_user:
-            notification = parseObjectIdToStr(notification)
+            notification = APIrequests.parseObjectIdToStr(notification)
             notifications["notifications"].append(notification)
         return (JsonResponse(notifications, safe=True))
     else:
@@ -470,15 +461,25 @@ def notificationsUser(request, user_pk):
 
 @csrf_exempt
 def notificationAlone(request, notification_pk):
+    fields_definition_put = \
+        {"type": "text, 30",
+         "content": "text, 300",
+         "state_url": "text, 50",
+         "read": "boolean",
+         "visible": "boolean",
+         "user_id": "integer"}
+
     if (request.method == "GET"):
         notification = db_locsapp["notifications_users"].find_one(
             {"_id": ObjectId(notification_pk)})
-        answer = parseObjectIdToStr(notification)
+        answer = APIrequests.parseObjectIdToStr(notification)
         if (answer is not None):
             return (JsonResponse(answer, safe=True))
         else:
             return (JsonResponse({"error": "Id not found."}, status=404))
-
+    if (request.method == "PUT"):
+        return APIrequests.forgeAPIrequestPut(
+            request, notification_pk, fields_definition_put, db_locsapp["notifications_users"])
 
 """
     SOCIAL NETWORK ENDPOINTS

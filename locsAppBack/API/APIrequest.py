@@ -8,6 +8,7 @@ import json
 
 # Pymongo imports
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 
 
 class APIRequestMongo:
@@ -18,6 +19,14 @@ class APIRequestMongo:
     integer : verify that it is an integer,
     boolean : verify that it is a boolean
     """
+
+    def parseObjectIdToStr(self, dictionary):
+        if (dictionary is None):
+            return (None)
+        for key in dictionary:
+            if (isinstance(dictionary[key], ObjectId)):
+                dictionary[key] = str(dictionary[key])
+        return (dictionary)
 
     def verifyErrorsInFields(self, fields, answer):
         error_fields = {}
@@ -47,17 +56,42 @@ class APIRequestMongo:
                     if key not in answer:
                         error_keys[key] = "This key is required"
                 if (error_keys != {}):
-                    return (JsonResponse(error_keys))
+                    return (JsonResponse(error_keys, status=401))
                 error_keys = self.verifyErrorsInFields(fields, answer)
                 if (error_keys != {}):
-                    return (JsonResponse(error_keys))
+                    return (JsonResponse(error_keys, status=401))
                 collection.insert_one(answer)
-                return(JsonResponse({"message": "Notification created!"}, status=200))
+                return(JsonResponse({"message": "Object created!"}, status=200))
             else:
                 return (JsonResponse({"error": "400 BAD REQUEST"}, status=400))
         else:
             return (JsonResponse(
                     {"error": "405 METHOD NOT ALLOWED"}, status=405))
+
+    # creates a API PUT
+    def forgeAPIrequestPut(self, request, id, fields, collection):
+        if (request.body):
+            answer = json.loads(request.body.decode('utf8'))
+            error_keys = {}
+            new_fields = {}
+            for key in answer:
+                if key not in fields:
+                    error_keys[key] = "The key " + \
+                        str(key) + " is not authorized"
+                else:
+                    new_fields[key] = fields[key]
+            if (error_keys != {}):
+                return (JsonResponse(error_keys, status=401))
+            error_keys = self.verifyErrorsInFields(new_fields, answer)
+            if (error_keys != {}):
+                return (JsonResponse(error_keys, status=401))
+            object = collection.update_one(
+                {"_id": ObjectId(id)}, {"$set": answer})
+            if (object.raw_result['updatedExisting'] is False):
+                return(JsonResponse({"error": "Id not found!"}, status=404))
+            return(JsonResponse({"message": "Object updated!"}, status=200))
+        else:
+            return (JsonResponse({"error": "400 BAD REQUEST"}, status=400))
 
     # creates a API DELETE Endpoint
     def forgeAPIrequestDelete(self, request, fields, collection):
