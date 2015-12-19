@@ -5,7 +5,7 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
 		ng-md-icon(icon="login", size="48", ui-sref="main.login").locsapp-navbar-icons-gt-sm
 		ng-md-icon(icon="person_add", size="48", ui-sref="main.register").locsapp-navbar-last-icon-gt-sm
 	span(ng-if="main.is_authenticated()")
-		md-menu(md-position-mode="target target" md-offset="56")
+		md-menu(md-position-mode="target target" md-offset="57")
 			div(ng-click="navbar.openNotificationsMenu($mdOpenMenu, $event);").locsapp-navbar-icons-gt-sm.locsapp-navbar-container-icon-notifications
 				ng-md-icon(icon="notifications", size="48", md-menu-origin ng-if="navbar.notifications().length > 1")
 				ng-md-icon(icon="notifications_none", size="48", md-menu-origin ng-if="navbar.notifications().length == 0")
