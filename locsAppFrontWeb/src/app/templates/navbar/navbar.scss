@@ -26,6 +26,26 @@
     transition: none !important;
 }
 
+.locsapp-navbar-container-icon-notifications {
+	display: inline-block;
+	position: relative;
+	top: -10px;
+}
+
+.locsapp-navbar-icon-number-notification-container {
+	position: absolute;
+	top: 0px;
+	left: 25px;
+}
+
+.locsapp-navbar-icon-number-notification {
+	border-radius: 10px;
+	background-color: $iconNotification;
+	padding: 5px;
+	font-size: 12px;
+	vertical-align: middle;
+}
+
 .locsapp-navbar-notifications-container {
 
 	padding: 0px;
@@ -91,6 +111,7 @@
 
 	.locsapp-navbar-notifications-left-icon {
 		margin: auto 5px;
+		fill: $iconNotification;
 	}
 
 	.locsapp-navbar-notifications-date {

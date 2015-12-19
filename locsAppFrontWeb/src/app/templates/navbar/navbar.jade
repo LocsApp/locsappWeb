@@ -6,7 +6,12 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
 		ng-md-icon(icon="person_add", size="48", ui-sref="main.register").locsapp-navbar-last-icon-gt-sm
 	span(ng-if="main.is_authenticated()")
 		md-menu(md-position-mode="target target" md-offset="56")
-			ng-md-icon(icon="notifications_none", size="48", md-menu-origin, ng-click="navbar.openNotificationsMenu($mdOpenMenu, $event);").locsapp-navbar-icons-gt-sm
+			div(ng-click="navbar.openNotificationsMenu($mdOpenMenu, $event);").locsapp-navbar-icons-gt-sm.locsapp-navbar-container-icon-notifications
+				ng-md-icon(icon="notifications", size="48", md-menu-origin ng-if="navbar.notifications().length > 1")
+				ng-md-icon(icon="notifications_none", size="48", md-menu-origin ng-if="navbar.notifications().length == 0")
+				div(style="position: relative;" ng-if="navbar.notifications().length > 1")
+					div.locsapp-navbar-icon-number-notification-container
+						span.locsapp-navbar-icon-number-notification {{ navbar.notifications().length }}
 			md-menu-content(width="4").locsapp-navbar-notifications-container
 				md-toolbar(layout="row", layout-align="space-between center")
 					span(ng-if="navbar.notifications().length < 2").md-toolbar-tools {{ navbar.notifications().length }} Notification
@@ -20,7 +25,7 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
 							ng-md-icon(icon="{{ notification.type }}").locsapp-navbar-notifications-left-icon.md-menu-align-target
 							md-content(ng-click="navbar.goToState(notification.state_url);", md-prevent-menu-close).flex.locsapp-navbar-notifications-content
 								div(am-time-ago="notification.date").locsapp-navbar-notifications-date
-								div {{ notification.content }}
+								div(ng-bind-html="notification.content")
 							section(layout="column", layout-align="start start")
 								ng-md-icon(icon="highlight_remove").locsapp-navbar-notifications-drop-icon
 								ng-md-icon(icon="notifications_none" md-prevent-menu-close ng-click="navbar.notificationRead(notification);").locsapp-navbar-notifications-drop-icon
