@@ -20,7 +20,8 @@ class APIRequestMongo:
     verifies is the fields are correct:
     text, <number> : verify if the text is small enough
     integer : verify that it is an integer,
-    boolean : verify that it is a boolean
+    boolean : verify that it is a boolean,
+    date_default: adds a default timezone date
     """
 
     def parseObjectIdToStr(self, dictionary):
