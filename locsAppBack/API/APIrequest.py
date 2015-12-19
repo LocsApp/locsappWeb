@@ -70,7 +70,7 @@ class APIRequestMongo:
                 collection.insert_one(answer)
                 return(JsonResponse({"message": "Object created!"}, status=200))
             else:
-                return (JsonResponse({"error": "400 BAD REQUEST"}, status=400))
+                return (JsonResponse({"Error": "400 BAD REQUEST"}, status=400))
         else:
             return (JsonResponse(
                     {"error": "405 METHOD NOT ALLOWED"}, status=405))
@@ -95,10 +95,10 @@ class APIRequestMongo:
             object = collection.update_one(
                 {"_id": ObjectId(id)}, {"$set": answer})
             if (object.raw_result['updatedExisting'] is False):
-                return(JsonResponse({"error": "Id not found!"}, status=404))
+                return(JsonResponse({"Error": "Id not found!"}, status=404))
             return(JsonResponse({"message": "Object updated!"}, status=200))
         else:
-            return (JsonResponse({"error": "400 BAD REQUEST"}, status=400))
+            return (JsonResponse({"Error": "400 BAD REQUEST"}, status=400))
 
     # creates a API DELETE Endpoint
     def forgeAPIrequestDelete(self, request, fields, collection):

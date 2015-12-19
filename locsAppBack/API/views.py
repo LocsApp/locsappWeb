@@ -453,7 +453,7 @@ def notificationsUser(request, user_pk):
         return (JsonResponse(notifications, safe=True))
     else:
         return (JsonResponse(
-            {"error": "405 METHOD NOT ALLOWED"}, status=405))
+            {"Error": "405 METHOD NOT ALLOWED"}, status=405))
 
 """
     NOTIFICATIONS ENDPOINTS
@@ -477,12 +477,12 @@ def notificationAlone(request, notification_pk):
         if (answer is not None):
             return (JsonResponse(answer, safe=True))
         else:
-            return (JsonResponse({"error": "Id not found."}, status=404))
+            return (JsonResponse({"Error": "Id not found."}, status=404))
     elif (request.method == "PUT"):
         return APIrequests.forgeAPIrequestPut(
             request, notification_pk, fields_definition_put, db_locsapp["notifications_users"])
     else:
-        return (JsonResponse({"error": "Method not allowed!"}, status=405))
+        return (JsonResponse({"Error": "Method not allowed!"}, status=405))
 
 """
     SOCIAL NETWORK ENDPOINTS
