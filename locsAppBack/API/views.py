@@ -133,7 +133,7 @@ class setEmailAsPrimary(APIView):
                 if (email_obj[0] == request.data["email"]):
                     if (email_obj[1] == "false"):
                         return (
-                            Response({"Error": "This secondary email isn't verified."}))
+                            Response({"Error": "This secondary email isn't verified."}, status=401))
                     else:
                         temp = email_obj[0]
                         email_obj[0] = current_user.email
@@ -143,8 +143,9 @@ class setEmailAsPrimary(APIView):
                         dataSerialized = serializer.data
                         return (Response(dataSerialized))
             return (
-                Response({"Error": "You don't have this secondary email."}))
-        return (Response({"Error": "You don't have any secondary email."}))
+                Response({"Error": "You don't have this secondary email."}, status=401))
+        return (
+            Response({"Error": "You don't have any secondary email."}, status=401))
 
 
 @permission_classes((IsAuthenticated, ))
