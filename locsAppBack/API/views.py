@@ -81,6 +81,8 @@ class deleteEmailUser(APIView):
         current_user = User.objects.get(pk=self.request.user.pk)
         serializer = UserDetailsSerializer(current_user)
         dataSerialized = serializer.data
+        if ("Error" in answer):
+            return (Response(answer, status=401))
         return Response(dataSerialized)
 
 
@@ -96,21 +98,24 @@ class addEmailUser(APIView):
             validate_email(request.data["new_email"])
         except:
             return Response(
-                {"Error": "Please provide a correct email address."})
+                {"Error": "Please provide a correct email address."}, status=401)
         if (request.data["new_email"] == request.user.email):
-            return Response({"Error": "This is your primary email address."})
+            return Response(
+                {"Error": "This is your primary email address."}, status=401)
         if (request.user.secondary_emails is not None):
             for email_obj in request.user.secondary_emails:
                 if (email_obj[0] == request.data["new_email"]):
                     if (email_obj[1] == "true"):
                         return Response(
-                            {"Error": "You already confirmed that email."})
+                            {"Error": "You already confirmed that email."}, status=401)
                     break
             if (len(request.user.secondary_emails) == 5):
                 return Response(
-                    {"Error": "Sorry, you can't add more than 5 emails."})
+                    {"Error": "Sorry, you can't add more than 5 emails."}, status=401)
         answer = request.user.add_email_address(
             request, request.data["new_email"], False)
+        if ("Error" in answer):
+            return (Response(answer, status=401))
         return Response(answer)
 
 
