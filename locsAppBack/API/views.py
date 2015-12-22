@@ -453,7 +453,7 @@ def notificationsUser(request, user_pk):
         notifications_user = db_locsapp[
             "notifications_users"].find({"user_id": int(user_pk), "visible": True}).sort("date", -1)
         notifications_metadata = {"new": db_locsapp[
-            "notifications_users"].find({"user_id": int(user_pk), "read": False}).count()}
+            "notifications_users"].find({"user_id": int(user_pk), "read": False, "visible": True}).count()}
         notifications_metadata["total"] = db_locsapp[
             "notifications_users"].find({"user_id": int(user_pk), "visible": True}).count()
         notifications = {

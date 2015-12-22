@@ -142,4 +142,8 @@
 			color: $iconHover !important;
 		}
 	}
+
+	.ng-hide-add {
+		animation: fadeOutLeft 0.5s;
+	}
 }

@@ -6,7 +6,7 @@
 	.controller('NavBarController', NavBarController);
 
   /** @ngInject */
-  function NavBarController(NotificationsService, $state, $log) {
+  function NavBarController(NotificationsService, $state) {
 	var vm = this;
 
 	/*Notifications of the user*/
@@ -25,6 +25,11 @@
 	/*Sets the notification to read true*/
 	vm.notificationRead = function(notification) {
 		NotificationsService.notificationRead(notification);
+	};
+
+	/*"Deletes" the notifications*/
+	vm.notificationDelete = function(notification) {
+		NotificationsService.notificationDelete(notification);
 	};
   }
 })();

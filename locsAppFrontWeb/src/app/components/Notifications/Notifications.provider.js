@@ -16,7 +16,8 @@
             getListeners : getListeners,
             stimulateListener : stimulateListener,
             getNotifications : getNotifications,
-            notificationRead : notificationRead
+            notificationRead : notificationRead,
+            notificationDelete : notificationDelete
         };
 
         return service;
@@ -58,6 +59,24 @@
                 .$promise
                 .then(function () {
                     stimulateListener("user");
+                },
+                function (data) {
+                    $log.log("Error !");
+                    $log.log(data);
+                });       
+        }
+
+        function notificationDelete(notification) {
+            if (notification.visible == false)
+                return (false);
+             $resource(URL_API +  'api/v1/notifications/'+ notification._id + '/', null, {'update' : {method: 'PUT'}})
+                .update({"visible" : false})
+                .$promise
+                .then(function () {
+                    notification.visible = false;
+                    if (notification.read == false)
+                        notifications.metadatas.new -= 1;
+                    notifications.metadatas.total -= 1;
                 },
                 function (data) {
                     $log.log("Error !");
