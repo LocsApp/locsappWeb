@@ -7,20 +7,20 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
 	span(ng-if="main.is_authenticated()")
 		md-menu(md-position-mode="target target" md-offset="57")
 			div(ng-click="navbar.openNotificationsMenu($mdOpenMenu, $event);").locsapp-navbar-icons-gt-sm.locsapp-navbar-container-icon-notifications
-				ng-md-icon(icon="notifications", size="48", md-menu-origin ng-if="navbar.notifications().length > 1")
-				ng-md-icon(icon="notifications_none", size="48", md-menu-origin ng-if="navbar.notifications().length == 0")
-				div(style="position: relative;" ng-if="navbar.notifications().length > 1")
+				ng-md-icon(icon="notifications", size="48", md-menu-origin ng-if="navbar.notifications().metadatas.total > 1")
+				ng-md-icon(icon="notifications_none", size="48", md-menu-origin ng-if="navbar.notifications().metadatas.total == 0")
+				div(style="position: relative;" ng-if="navbar.notifications().metadatas.new > 0")
 					div.locsapp-navbar-icon-number-notification-container
-						span.locsapp-navbar-icon-number-notification {{ navbar.notifications().length }}
+						span.locsapp-navbar-icon-number-notification {{ navbar.notifications().metadatas.new}}
 			md-menu-content(width="4").locsapp-navbar-notifications-container
 				md-toolbar(layout="row", layout-align="space-between center")
-					span(ng-if="navbar.notifications().length < 2").md-toolbar-tools {{ navbar.notifications().length }} Notification
-					span(ng-if="navbar.notifications().length > 1").md-toolbar-tools {{ navbar.notifications().length }} Notifications
+					span(ng-if="navbar.notifications().metadatas.total < 2").md-toolbar-tools {{ navbar.notifications().metadatas.total }} Notification
+					span(ng-if="navbar.notifications().metadatas.total > 1").md-toolbar-tools {{ navbar.notifications().metadatas.total }} Notifications
 					ng-md-icon(icon="settings").locsapp-navbar-notifications-toolbar-icon
 					ng-md-icon(icon="notifications_none")
 					ng-md-icon(icon="notifications_off")
 					ng-md-icon(icon="delete").last-icon
-				span(ng-repeat="notification in navbar.notifications()")
+				span(ng-repeat="notification in navbar.notifications().notifications")
 					md-list-item(layout="row", layout-align="start start", ng-class="{'locsapp-navbar-notifications-new' : !notification.read}")
 							ng-md-icon(icon="{{ notification.type }}").locsapp-navbar-notifications-left-icon.md-menu-align-target
 							md-content(ng-click="navbar.goToState(notification.state_url);", md-prevent-menu-close).flex.locsapp-navbar-notifications-content

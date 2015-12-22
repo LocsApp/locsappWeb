@@ -6,7 +6,7 @@
 	.controller('NavBarController', NavBarController);
 
   /** @ngInject */
-  function NavBarController(NotificationsService, $state) {
+  function NavBarController(NotificationsService, $state, $log) {
 	var vm = this;
 
 	/*Notifications of the user*/
