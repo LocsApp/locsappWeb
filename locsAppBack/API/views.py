@@ -451,7 +451,7 @@ def notificationsUser(request, user_pk):
             "POST", request, fields_definition, db_locsapp["notifications_users"])
     elif (request.method == "GET"):
         notifications_user = db_locsapp[
-            "notifications_users"].find({"user_id": int(user_pk), "visible": True})
+            "notifications_users"].find({"user_id": int(user_pk), "visible": True}).sort("date", -1)
         notifications_metadata = {"new": db_locsapp[
             "notifications_users"].find({"user_id": int(user_pk), "read": False}).count()}
         notifications_metadata["total"] = db_locsapp[

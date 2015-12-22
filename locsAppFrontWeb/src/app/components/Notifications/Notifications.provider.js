@@ -38,7 +38,6 @@
                     .then(function (data) {
                          notifications["notifications"] = data.notifications;
                          notifications["metadatas"] = data.metadatas;
-                         $log.log(notifications);
                     },
                     function (data) {
                         $log.log("Error !");
