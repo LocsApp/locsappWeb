@@ -29,6 +29,7 @@
 		'ngWebworker',
 		'angular-loading-bar',
 		'angularMoment',
+		'perfect_scrollbar',
 		'LocsappDirectives',
 		'LocsappServices',
 		'LocsappControllers']);

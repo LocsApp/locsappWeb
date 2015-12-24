@@ -46,6 +46,14 @@
 	vertical-align: middle;
 }
 
+.locsapp-notifications-scroller {
+    //white-space: pre-line;
+    //height: 250px;
+    overflow-y: hidden;
+    position: relative;
+}
+
+
 .locsapp-navbar-notifications-container {
 
 	padding: 0px;
@@ -102,6 +110,10 @@
 		}
 	}
 
+	.locsapp-navbar-notifications-body-container {
+		height: 250px;
+	}
+
 	.locsapp-navbar-notifications-new {
 		background-color: rgba(0, 0, 0, 0.3);
 		md-content {
@@ -135,6 +147,7 @@
 
 	.locsapp-navbar-notifications-drop-icon {
 		margin: 0px;
+		margin-right: 5px;
 		color: $noInfo;
 		visibility: hidden;
 
