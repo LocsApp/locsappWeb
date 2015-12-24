@@ -20,7 +20,7 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
 					ng-md-icon(icon="notifications_none")
 					ng-md-icon(icon="notifications_off")
 					ng-md-icon(icon="delete").last-icon
-				perfect-scrollbar(wheel-propagation="true" wheel-speed="2" min-scrollbar-length="5" refresh-on-change="navbar.notifications().notifications").locsapp-notifications-scroller
+				perfect-scrollbar(wheel-propagation="true" wheel-speed="1" min-scrollbar-length="5" refresh-on-change="navbar.notifications().notifications" on-scroll="navbar.scrollBottom(scrollTop, scrollHeight);").locsapp-notifications-scroller
 					span(ng-repeat="notification in navbar.notifications().notifications")
 						md-list-item(layout="row", layout-align="start start", ng-class="{'locsapp-navbar-notifications-new' : !notification.read}", ng-hide="!notification.visible")
 								ng-md-icon(icon="{{ notification.type }}").locsapp-navbar-notifications-left-icon.md-menu-align-target
@@ -31,6 +31,8 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
 									ng-md-icon(icon="highlight_remove" md-prevent-menu-close ng-click="navbar.notificationDelete(notification);").locsapp-navbar-notifications-drop-icon
 									ng-md-icon(icon="notifications_none" md-prevent-menu-close ng-click="navbar.notificationRead(notification);").locsapp-navbar-notifications-drop-icon
 						md-divider(ng-if="!$last")
+					div(ng-if="navbar.loader").locsapp-navbar-notifications-load-more
+						md-progress-circular(md-mode="indeterminate" md-diameter="20").locsapp-navbar-notifications-load-more
 				md-list-item(ng-if="navbar.notifications().metadatas.total < 1")
 					md-content You have no notifications.
 		ng-md-icon(icon="account_box", size="48", ui-sref="main.user_profile").locsapp-navbar-last-icon-gt-sm

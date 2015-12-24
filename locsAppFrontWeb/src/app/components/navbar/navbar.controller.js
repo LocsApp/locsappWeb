@@ -6,8 +6,11 @@
 	.controller('NavBarController', NavBarController);
 
   /** @ngInject */
-  function NavBarController(NotificationsService, $state) {
+  function NavBarController(NotificationsService, $state, $log) {
 	var vm = this;
+
+	/* Init vars */
+	vm.loader = false;
 
 	/*Notifications of the user*/
 	vm.notifications = NotificationsService.getNotifications;
@@ -31,5 +34,11 @@
 	vm.notificationDelete = function(notification) {
 		NotificationsService.notificationDelete(notification);
 	};
+
+	vm.scrollBottom = function(scrollTop, scrollHeight) {
+		if (scrollTop == scrollHeight && !vm.loader)
+			$log.log(scrollHeight);
+			//vm.loader = true;
+	}
   }
 })();
