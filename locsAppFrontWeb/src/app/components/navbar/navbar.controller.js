@@ -10,7 +10,8 @@
 	var vm = this;
 
 	/* Init vars */
-	vm.loader = false;
+	vm.loader = NotificationsService.fetchingNotifications;
+	vm.page_notifications = 1;
 
 	/*Notifications of the user*/
 	vm.notifications = NotificationsService.getNotifications;
@@ -37,9 +38,11 @@
 
 	/*Loads more notifications when scroll is at the bottom*/
 	vm.lazyLoadNotifications = function(scrollTop, scrollHeight) {
-		if (scrollTop == scrollHeight && !vm.loader)
+		if (scrollTop == scrollHeight && !vm.loader())
+		{
+			NotificationsService.appendNewNotifications("user");
 			$log.log(scrollHeight);
-			//vm.loader = true;
+		}
 	}
   }
 })();

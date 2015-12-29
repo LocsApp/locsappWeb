@@ -75,7 +75,7 @@
 		function profileSuccess() {
 			//Checks if a listener is set, if not, set one
 			if (Object.getOwnPropertyNames(NotificationsService.getListeners()).length == 0)
-				NotificationsService.addListener("user", URL_API + "api/v1/user/"+ $sessionStorage.id +"/notifications/");
+				NotificationsService.addListener("user", URL_API + "api/v1/search/notifications/"+ $sessionStorage.id +"/");
 			//stimulates the listener to retrieve the notifications for the user
 			NotificationsService.stimulateListener("user");
 			deferred.resolve();

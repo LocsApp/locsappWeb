@@ -10,6 +10,7 @@
 
         var listeners = {};
         var notifications = {"notifications" : []};
+        var number_items = {items : 6, page : 1, loader : false};
 
         var service = {
             addListener : addListener,
@@ -18,7 +19,8 @@
             appendNewNotifications : appendNewNotifications,
             getNotifications : getNotifications,
             notificationRead : notificationRead,
-            notificationDelete : notificationDelete
+            notificationDelete : notificationDelete,
+            fetchingNotifications : fetchingNotifications
         };
 
         return service;
@@ -34,8 +36,9 @@
         function stimulateListener(name_listener) {
             if (listeners != {})
             {
+                number_items.page = 1;
                 $resource(listeners[name_listener])
-                    .get({})
+                    .save({"page" : 1, "number_items" : number_items.items})
                     .$promise
                     .then(function (data) {
                          notifications["notifications"] = data.notifications;
@@ -51,18 +54,25 @@
         function appendNewNotifications(name_listener) {
             if (listeners != {})
             {
+                if ((number_items.page - 1) * number_items > notifications["metadatas"].total)
+                    return (false);
+                number_items.page += 1;
+                number_items.loader = true;
                 $resource(listeners[name_listener])
-                    .get({})
+                    .save({"page" : number_items.page, "number_items" : number_items.items})
                     .$promise
                     .then(function (data) {
                          for (var i = 0; i < data.notifications.length; i++)
                             notifications["notifications"].push(data.notifications[i]);
                          notifications["metadatas"] = data.metadatas;
+                         number_items.loader = false;
                     },
                     function (data) {
                         $log.log("Error !");
                         $log.log(data);
+                        number_items.loader = false;
                     });
+                return (true);
             }          
         }
 
@@ -77,7 +87,8 @@
                 .update({"read" : true})
                 .$promise
                 .then(function () {
-                    stimulateListener("user");
+                    notification.read = true;
+                    notifications.metadatas.new -=1;
                 },
                 function (data) {
                     $log.log("Error !");
@@ -101,6 +112,10 @@
                     $log.log("Error !");
                     $log.log(data);
                 });       
+        }
+
+        function fetchingNotifications() {
+            return (number_items.loader);
         }
     }
 })();

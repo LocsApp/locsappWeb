@@ -24,7 +24,7 @@ md-menu(md-position-mode="target target" md-offset="57")
 							ng-md-icon(icon="highlight_remove" md-prevent-menu-close ng-click="navbar.notificationDelete(notification);").locsapp-navbar-notifications-drop-icon
 							ng-md-icon(icon="notifications_none" md-prevent-menu-close ng-click="navbar.notificationRead(notification);").locsapp-navbar-notifications-drop-icon
 				md-divider(ng-if="!$last")
-			div(ng-if="navbar.loader").locsapp-navbar-notifications-load-more
+			div(ng-if="navbar.loader()").locsapp-navbar-notifications-load-more
 				md-progress-circular(md-mode="indeterminate" md-diameter="20").locsapp-navbar-notifications-load-more
 		md-list-item(ng-if="navbar.notifications().metadatas.total < 1")
 			md-content You have no notifications.
