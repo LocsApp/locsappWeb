@@ -15,6 +15,7 @@
             addListener : addListener,
             getListeners : getListeners,
             stimulateListener : stimulateListener,
+            appendNewNotifications : appendNewNotifications,
             getNotifications : getNotifications,
             notificationRead : notificationRead,
             notificationDelete : notificationDelete
@@ -45,6 +46,24 @@
                         $log.log(data);
                     });
             }
+        }
+
+        function appendNewNotifications(name_listener) {
+            if (listeners != {})
+            {
+                $resource(listeners[name_listener])
+                    .get({})
+                    .$promise
+                    .then(function (data) {
+                         for (var i = 0; i < data.notifications.length; i++)
+                            notifications["notifications"].push(data.notifications[i]);
+                         notifications["metadatas"] = data.metadatas;
+                    },
+                    function (data) {
+                        $log.log("Error !");
+                        $log.log(data);
+                    });
+            }          
         }
 
         function getNotifications() {
