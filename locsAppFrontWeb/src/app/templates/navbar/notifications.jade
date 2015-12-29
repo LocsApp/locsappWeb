@@ -17,7 +17,7 @@ md-menu(md-position-mode="target target" md-offset="57")
 			span(ng-repeat="notification in navbar.notifications().notifications")
 				md-list-item(layout="row", layout-align="start start", ng-class="{'locsapp-navbar-notifications-new' : !notification.read}", ng-hide="!notification.visible")
 						ng-md-icon(icon="{{ notification.type }}").locsapp-navbar-notifications-left-icon.md-menu-align-target
-						md-content(ng-click="navbar.goToState(notification.state_url);", md-prevent-menu-close).flex.locsapp-navbar-notifications-content
+						md-content(ng-click="navbar.goToState(notification.state_url); navbar.notificationRead(notification);", md-prevent-menu-close).flex.locsapp-navbar-notifications-content
 							div(am-time-ago="notification.date").locsapp-navbar-notifications-date
 							div(ng-bind-html="notification.content")
 						section(layout="column", layout-align="start start")
