@@ -35,7 +35,8 @@
 		NotificationsService.notificationDelete(notification);
 	};
 
-	vm.scrollBottom = function(scrollTop, scrollHeight) {
+	/*Loads more notifications when scroll is at the bottom*/
+	vm.lazyLoadNotifications = function(scrollTop, scrollHeight) {
 		if (scrollTop == scrollHeight && !vm.loader)
 			$log.log(scrollHeight);
 			//vm.loader = true;
