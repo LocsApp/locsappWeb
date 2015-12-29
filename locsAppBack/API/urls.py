@@ -19,6 +19,11 @@ article_patterns = [
     url(r'^delete/$', views.deleteArticle),
 ]
 
+search_patterns = [
+    url(r'^notifications/(?P<user_pk>[0-9]+)/$',
+        views.searchNotificationsUser)
+]
+
 notifications_patterns = [
     url(
         r'^(?P<notification_pk>[a-f\d]{24})/$',
@@ -64,5 +69,6 @@ api_patterns = [
                              permanent=False),
         name="account_signup"),
     url(r'^user/', include(user_patterns)),
-    url(r'^notifications/', include(notifications_patterns))
+    url(r'^notifications/', include(notifications_patterns)),
+    url(r'^search/', include(search_patterns))
 ]
