@@ -506,6 +506,14 @@ def notificationsUser(request, user_pk):
             notification = APIrequests.parseObjectIdToStr(notification)
             notifications["notifications"].append(notification)
         return (JsonResponse(notifications, safe=True))
+    elif (request.method == "DELETE"):
+        nb_deleted = db_locsapp["notifications_users"].update_many(
+            {'user_id': int(user_pk)}, {"$set": {"visible": False}})
+        if (nb_deleted.modified_count <= 0):
+            return (JsonResponse(
+                {"Warning": "No notification has been deleted. Reason : No notifications were available."}))
+        return (JsonResponse(
+            {"message": "Notifications successfully deleted!", "nb_deleted": nb_deleted.modified_count}))
     else:
         return (JsonResponse(
             {"Error": "405 METHOD NOT ALLOWED"}, status=405))
