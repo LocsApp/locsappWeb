@@ -470,6 +470,31 @@ def searchNotificationsUser(request, user_pk):
 
 
 @csrf_exempt
+def notificationsUserAllRead(request, user_pk):
+    """
+    if (request.user.pk):
+        if (int(user_pk) != int(request.user.pk)):
+            return JsonResponse(
+                {"Unauthorized": "You have no access to this data."}, status=403)
+    else:
+        return JsonResponse(
+            {"Unauthorized": "You need to be connected."}, status=403)
+    """
+
+    if (request.method == "GET"):
+        nb_modified = db_locsapp["notifications_users"].update_many(
+            {'user_id': int(user_pk)}, {"$set": {"read": True}})
+        if (nb_modified.modified_count <= 0):
+            return (JsonResponse(
+                {"Warning": "No notification has been modified. Reason : No notifications were available."}))
+        return (JsonResponse(
+            {"message": "Notifications successfully updated!", "nb_modified": nb_modified.modified_count}))
+    else:
+        return (JsonResponse(
+            {"Error": "405 METHOD NOT ALLOWED"}, status=405))
+
+
+@csrf_exempt
 def notificationsUser(request, user_pk):
     fields_definition = \
         {"type": "text, 30",

@@ -44,6 +44,8 @@ user_patterns = [
         views.billingAddressUserDelete.as_view()),
     url(r'^(?P<user_pk>[0-9]+)/notifications/$',
         views.notificationsUser),
+    url(r'^(?P<user_pk>[0-9]+)/notifications/read-all/$',
+        views.notificationsUserAllRead)
 ]
 
 # General urls for the api
