@@ -3,6 +3,7 @@ from django.conf.urls import include, url
 from rest_framework.authtoken.views import obtain_auth_token
 # importing local views
 from . import views
+from . import articles
 from django.views.generic.base import RedirectView
 
 from allauth.account.views import confirm_email
@@ -15,8 +16,7 @@ from allauth.account.views import confirm_email
 
 
 article_patterns = [
-    url(r'^create/$', views.postNewArticle),
-    url(r'^delete/$', views.deleteArticle),
+    url(r'^create/$', articles.postNewArticle)
 ]
 
 search_patterns = [
