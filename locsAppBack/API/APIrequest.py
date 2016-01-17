@@ -22,6 +22,8 @@ class APIRequestMongo:
     integer : verify that it is an integer,
     boolean : verify that it is a boolean,
     date_default: adds a default timezone date
+
+    Feeds the default arguments (indicated by "|")
     """
 
     def parseObjectIdToStr(self, dictionary):
@@ -39,7 +41,9 @@ class APIRequestMongo:
                 answer[key] = fields[key].split("|")[1]
             temp_options = fields[key].split("|")[0].split(",")
             if (temp_options[0] == "text"):
-                if (len(answer[key]) > int(temp_options[1])
+                if (not isinstance(answer[key], type("kek"))):
+                    error_fields[key] = "It must be a string"
+                elif (len(answer[key]) > int(temp_options[1])
                         or len(answer[key]) <= 0):
                     error_fields[
                         key] = "The text must not be empty and the length must be inferior or equal to" + temp_options[1]
