@@ -35,7 +35,9 @@ class APIRequestMongo:
     def verifyErrorsInFields(self, fields, answer):
         error_fields = {}
         for key in fields:
-            temp_options = fields[key].split(",")
+            if (len(fields[key].split("|")) == 2 and key not in answer):
+                answer[key] = fields[key].split("|")[1]
+            temp_options = fields[key].split("|")[0].split(",")
             if (temp_options[0] == "text"):
                 if (len(answer[key]) > int(temp_options[1])
                         or len(answer[key]) <= 0):
@@ -60,7 +62,7 @@ class APIRequestMongo:
                 error_keys = {}
                 for key in fields:
                     if key not in answer and "default" not in fields[
-                            key].split("_"):
+                            key].split("_") and len(fields[key].split("|")) <= 1:
                         error_keys[key] = "This key is required"
                 if (error_keys != {}):
                     return (JsonResponse(error_keys, status=401))
