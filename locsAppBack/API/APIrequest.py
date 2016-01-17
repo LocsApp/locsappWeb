@@ -34,10 +34,11 @@ class APIRequestMongo:
                 dictionary[key] = str(dictionary[key])
         return (dictionary)
 
-    def verifyErrorsInFields(self, fields, answer):
+    def verifyErrorsInFields(self, fields, answer, creation=True):
         error_fields = {}
         for key in fields:
-            if (len(fields[key].split("|")) == 2 and key not in answer):
+            if (len(fields[key].split("|")) ==
+                    2 and key not in answer and creation is True):
                 answer[key] = fields[key].split("|")[1]
             temp_options = fields[key].split("|")[0].split(",")
             if (temp_options[0] == "text"):
