@@ -21,6 +21,7 @@
             notificationRead : notificationRead,
             notificationReadAll : notificationReadAll,
             notificationDelete : notificationDelete,
+            notificationDeleteAll : notificationDeleteAll,
             fetchingNotifications : fetchingNotifications
         };
 
@@ -111,6 +112,10 @@
                 $log.log("Error !");
                 $log.log(data);               
             })
+        }
+
+        function notificationDeleteAll() {
+            
         }
 
         function notificationDelete(notification) {
