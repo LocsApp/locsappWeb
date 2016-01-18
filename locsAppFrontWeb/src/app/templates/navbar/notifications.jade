@@ -10,7 +10,7 @@ md-menu(md-position-mode="target target" md-offset="57")
 			span(ng-if="navbar.notifications().metadatas.total < 2").md-toolbar-tools {{ navbar.notifications().metadatas.total }} Notification
 			span(ng-if="navbar.notifications().metadatas.total > 1").md-toolbar-tools {{ navbar.notifications().metadatas.total }} Notifications
 			ng-md-icon(icon="settings").locsapp-navbar-notifications-toolbar-icon
-			ng-md-icon(icon="notifications_none")
+			ng-md-icon(icon="notifications_none" ng-click="navbar.notificationReadAll()", md-prevent-menu-close)
 			ng-md-icon(icon="notifications_off")
 			ng-md-icon(icon="delete").last-icon
 		perfect-scrollbar(wheel-propagation="true" wheel-speed="1" min-scrollbar-length="5" on-scroll="navbar.lazyLoadNotifications(scrollTop, scrollHeight);").locsapp-notifications-scroller

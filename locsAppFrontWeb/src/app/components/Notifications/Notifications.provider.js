@@ -19,6 +19,7 @@
             appendNewNotifications : appendNewNotifications,
             getNotifications : getNotifications,
             notificationRead : notificationRead,
+            notificationReadAll : notificationReadAll,
             notificationDelete : notificationDelete,
             fetchingNotifications : fetchingNotifications
         };
@@ -94,6 +95,22 @@
                     $log.log("Error !");
                     $log.log(data);
                 });       
+        }
+
+        function notificationReadAll(name_listener) {
+            $resource(listeners[name_listener] + "read-all/")
+            .get()
+            .$promise
+            .then(function() {
+                $log.log("Success !");
+                for (var i = 0; i < notifications["notifications"].length; i++)
+                    notifications["notifications"][i].read = true;
+                notifications["metadatas"].new = 0;
+            },
+            function(data) {
+                $log.log("Error !");
+                $log.log(data);               
+            })
         }
 
         function notificationDelete(notification) {

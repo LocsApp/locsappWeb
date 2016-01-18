@@ -23,7 +23,9 @@ article_patterns = [
 
 search_patterns = [
     url(r'^notifications/(?P<user_pk>[0-9]+)/$',
-        views.searchNotificationsUser)
+        views.searchNotificationsUser),
+    url(r'^notifications/(?P<user_pk>[0-9]+)/read-all/$',
+        views.notificationsUserAllRead)
 ]
 
 notifications_patterns = [
@@ -45,9 +47,7 @@ user_patterns = [
     url(r'^(?P<user_pk>[0-9]+)/billing_addresses/delete/$',
         views.billingAddressUserDelete.as_view()),
     url(r'^(?P<user_pk>[0-9]+)/notifications/$',
-        views.notificationsUser),
-    url(r'^(?P<user_pk>[0-9]+)/notifications/read-all/$',
-        views.notificationsUserAllRead)
+        views.notificationsUser)
 ]
 
 # General urls for the api

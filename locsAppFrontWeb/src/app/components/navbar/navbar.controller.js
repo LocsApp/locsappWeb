@@ -31,6 +31,13 @@
 		NotificationsService.notificationRead(notification);
 	};
 
+	/*Sets all the notifications to read true*/
+	vm.notificationReadAll = function() {
+		NotificationsService.notificationReadAll("user");
+		for (var i = 0; i < vm.notifications().length; i++)
+			vm.notifications()[i].read = true;
+	};	
+
 	/*"Deletes" the notifications*/
 	vm.notificationDelete = function(notification) {
 		NotificationsService.notificationDelete(notification);
