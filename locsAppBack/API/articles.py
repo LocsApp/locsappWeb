@@ -27,8 +27,11 @@ def postNewArticle(request):
          "pictures": "array",
          "informations": "dict"}
 
-    return APIrequests.forgeAPIrequestCreate(
-        "POST", request, fields_definition, db_locsapp["articles"])
+    if (request.method == "POST"):
+        return APIrequests.forgeAPIrequestCreate(
+            "POST", request, fields_definition, db_locsapp["articles"])
+    else:
+        return (JsonResponse({"Error": "Method not allowed!"}, status=405))
 
 # Updates an article
 
@@ -48,5 +51,7 @@ def articleAlone(request, article_pk):
          "informations": "dict"}
 
     if (request.method == "PUT"):
-        return APIrequests.forgeAPIrequestCreate(
+        return APIrequests.forgeAPIrequestPut(
             request, article_pk, fields_definition_put, db_locsapp["articles"])
+    else:
+        return (JsonResponse({"Error": "Method not allowed!"}, status=405))
