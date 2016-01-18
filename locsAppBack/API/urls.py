@@ -16,7 +16,9 @@ from allauth.account.views import confirm_email
 
 
 article_patterns = [
-    url(r'^create/$', articles.postNewArticle)
+    url(r'^create/$', articles.postNewArticle),
+    url(r'^(?P<article_pk>[a-f\d]{24})/$',
+        articles.articleAlone),
 ]
 
 search_patterns = [

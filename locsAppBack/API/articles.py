@@ -29,3 +29,24 @@ def postNewArticle(request):
 
     return APIrequests.forgeAPIrequestCreate(
         "POST", request, fields_definition, db_locsapp["articles"])
+
+# Updates an article
+
+
+@csrf_exempt
+def articleAlone(request, article_pk):
+    fields_definition_put = \
+        {"name": "text, 30",
+         "tiny_logo_url": "text, 255",
+         "big_logo_url": "text, 255",
+         "description": "text, 500",
+         "id_author": "integer",
+         "date_created": "date",
+         "id_type": "id",
+         "comments": "array",
+         "pictures": "array",
+         "informations": "dict"}
+
+    if (request.method == "PUT"):
+        return APIrequests.forgeAPIrequestCreate(
+            request, article_pk, fields_definition_put, db_locsapp["articles"])
