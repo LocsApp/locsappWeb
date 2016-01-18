@@ -22,7 +22,10 @@ def postNewArticle(request):
          "description": "text, 500",
          "id_author": "integer",
          "date_created": "date_default",
-         "id_type": "integer"}
+         "id_type": "id",
+         "comments": "array",
+         "pictures": "array",
+         "informations": "dict"}
 
     return APIrequests.forgeAPIrequestCreate(
         "POST", request, fields_definition, db_locsapp["articles"])

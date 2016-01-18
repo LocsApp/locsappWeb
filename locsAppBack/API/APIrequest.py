@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 # JSON import
 import json
+import bson
 
 # Pymongo imports
 from pymongo import MongoClient
@@ -21,6 +22,9 @@ class APIRequestMongo:
     text, <number> : verify if the text is small enough
     integer : verify that it is an integer,
     boolean : verify that it is a boolean,
+    array : verifies if it is an array,
+    dict : verifies if it is a dict,
+    id : verifies if it is a mongo id,
     date_default: adds a default timezone date
 
     Feeds the default arguments (indicated by "|")
@@ -56,6 +60,16 @@ class APIRequestMongo:
                     error_fields[key] = "The field must be a boolean"
             elif (temp_options[0] == "date_default"):
                 answer[key] = datetime.now(pytz.utc)
+            elif (temp_options[0] == "array"):
+                if (not isinstance(answer[key], type([]))):
+                    error_fields[key] = "The field must be a list"
+            elif (temp_options[0] == "dict"):
+                if (not isinstance(answer[key], type({}))):
+                    error_fields[key] = "The field must be a dictionnary"
+            elif (temp_options[0] == "id"):
+                if (bson.objectid.ObjectId.is_valid(answer[key]) == False):
+                    error_fields[key] = "The field must be a MongoDB ID"
+
             temp_options = []
         return (error_fields)
 
