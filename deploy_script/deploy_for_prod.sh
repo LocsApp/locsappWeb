@@ -15,5 +15,6 @@ cd /var/www/locsapp.sylflo.fr/locsappWeb/locsAppFrontWeb/
 npm install
 bower install
 gulp build
+gulp config-hostname --env="production"
 sudo /etc/init.d/nginx  restart
 

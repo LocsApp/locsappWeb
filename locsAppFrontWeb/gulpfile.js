@@ -9,6 +9,23 @@
 var gulp = require('gulp');
 var wrench = require('wrench');
 
+var ngConstant = require('gulp-ng-constant');
+var argv = require('yargs').argv;
+var environment = argv.env || 'server';
+var rename = require("gulp-rename");
+
+
+gulp.task('config-hostname', function () {
+  gulp.src('src/app/config-' + environment + '.json')
+    .pipe(ngConstant({
+      name: 'LocsappServices',
+      dest: 'config.js',
+      merge: true
+    }))
+    .pipe(rename("index.constants.js"))
+    .pipe(gulp.dest('src/app/'));
+});
+
 /**
  *  This will load all js or coffee files in the gulp directory
  *  in order to load all gulp tasks
