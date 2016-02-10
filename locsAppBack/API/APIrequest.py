@@ -31,8 +31,8 @@ class APIRequestMongo:
     """
 
     def parseObjectIdToStr(self, dictionary):
-        if (dictionary is None):
-            return (None)
+        if dictionary is None:
+            return None
         for key in dictionary:
             if (isinstance(dictionary[key], ObjectId)):
                 dictionary[key] = str(dictionary[key])
