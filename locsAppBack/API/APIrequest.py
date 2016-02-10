@@ -45,8 +45,8 @@ class APIRequestMongo:
                     2 and key not in answer and creation is True):
                 answer[key] = fields[key].split("|")[1]
             temp_options = fields[key].split("|")[0].split(",")
-            if (temp_options[0] == "text"):
-                if (not isinstance(answer[key], type("kek"))):
+            if temp_options[0] == "text":
+                if not isinstance(answer[key], type("kek")):
                     error_fields[key] = "It must be a string"
                 elif (len(answer[key]) > int(temp_options[1])
                         or len(answer[key]) <= 0):
