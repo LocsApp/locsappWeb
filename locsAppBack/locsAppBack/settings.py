@@ -261,7 +261,7 @@ URL_FRONT = 'http://127.0.0.1:3000/'
 
 if socket.gethostname() == "sylflo.fr":
     URL_FRONT = 'http://locsapp.sylflo.fr/'
-    DEBUG = TEMPLATE_DEBUG = False
+    DEBUG = TEMPLATE_DEBUG = True
     ALLOWED_HOSTS = [
         "locsapp.sylflo.fr",
         ".sylflo.fr",
