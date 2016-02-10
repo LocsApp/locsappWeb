@@ -34,9 +34,9 @@ class APIRequestMongo:
         if dictionary is None:
             return None
         for key in dictionary:
-            if (isinstance(dictionary[key], ObjectId)):
+            if isinstance(dictionary[key], ObjectId):
                 dictionary[key] = str(dictionary[key])
-        return (dictionary)
+        return dictionary
 
     def verifyErrorsInFields(self, fields, answer, creation=True):
         error_fields = {}
