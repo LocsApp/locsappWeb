@@ -261,7 +261,7 @@ URL_FRONT = 'http://127.0.0.1:3000/'
 
 if socket.gethostname() == "sylflo.fr":
     URL_FRONT = 'http://locsapp.sylflo.fr/'
-    DEBUG = TEMPLATE_DEBUG = False
+    DEBUG = TEMPLATE_DEBUG = True
 
     REST_FRAMEWORK = {
         'TEST_REQUEST_DEFAULT_FORMAT': 'json',
@@ -269,9 +269,9 @@ if socket.gethostname() == "sylflo.fr":
             'rest_framework.authentication.SessionAuthentication',
             'rest_framework.authentication.TokenAuthentication',
         ),
-        'DEFAULT_RENDERER_CLASSES': (
-            'rest_framework.renderers.JSONRenderer',
-        )
+        #'DEFAULT_RENDERER_CLASSES': (
+        #    'rest_framework.renderers.JSONRenderer',
+        #)
     }
 
     ALLOWED_HOSTS = [
