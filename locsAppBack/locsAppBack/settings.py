@@ -128,6 +128,7 @@ INSTALLED_APPS = (
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
+    'robots',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
