@@ -14,7 +14,10 @@
 			$state.go("main.homepage");
 		};
 
-		vm.VerifyEmailFailure = function () {
+		vm.VerifyEmailFailure = function (data) {
+			$log.log("BEGIN EMAIL DATA ERROR")
+			$log.log(data);
+			$log.log("END EMAIL DATA ERROR")
 			toastr.error("We couldn't verify your email..." , 'Woops...');
 		};
 
