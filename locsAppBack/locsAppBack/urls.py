@@ -23,12 +23,16 @@ from django.contrib import admin
 from API.views import *
 from API.urls import *
 
+from django.http import HttpResponse
+
 urlpatterns = [
-     url(r'^accounts-social-network/', include('allauth.socialaccount.urls')),
+    url(r'^accounts-social-network/', include('allauth.socialaccount.urls')),
     url(r'^', include('django.contrib.auth.urls')),
     url(r'^admin/', include(admin.site.urls)),
     # Url including the API end-points
+    url(r'^robots\.txt$', include('robots.urls')),
 
     url(r'^api/v1/', include(api_patterns)),
-    #url(r'^.*$', docAPIView.as_view(), name="index"),
+    #url(r'^robots\.txt$', include('robots.urls')),
+        # url(r'^.*$', docAPIView.as_view(), name="index"),
 ]

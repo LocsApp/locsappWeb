@@ -47,9 +47,9 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Django allauth different form
-#ACCOUNT_SIGNUP_FORM_CLASS = 'API.forms.UserSignupForm'
+# ACCOUNT_SIGNUP_FORM_CLASS = 'API.forms.UserSignupForm'
 
-#ACCOUNT_SIGNUP_FORM_CLASS = 'API.forms.SignupForm'
+# ACCOUNT_SIGNUP_FORM_CLASS = 'API.forms.SignupForm'
 ACCOUNT_ADAPTER = 'API.adapter.DefaultAccountAdapterCustom'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
@@ -57,8 +57,8 @@ ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Locsapp]"
 
 SOCIALACCOUNT_ADAPTER = 'API.adapter.DefaultSocialAccountAdapter'
-#SOCIALACCOUNT_AUTO_SIGNUP = False
-#SOCIALACCOUNT_FORMS = {'signup': 'API.forms.SocialNetworkSignupForm'}
+# SOCIALACCOUNT_AUTO_SIGNUP = False
+# SOCIALACCOUNT_FORMS = {'signup': 'API.forms.SocialNetworkSignupForm'}
 
 # SOCIALACCOUNT_AUTO_SIGNUP =
 
@@ -88,7 +88,7 @@ SOCIALACCOUNT_PROVIDERS = \
                 'name',
                 'birthday',
                 'gender',
-                #'user_friends',
+                # 'user_friends',
                 'first_name',
                 'last_name',
                 'verified',
@@ -128,6 +128,7 @@ INSTALLED_APPS = (
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
+    'robots',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -207,7 +208,7 @@ if socket.gethostname() != "sylflo.fr":
 REST_FRAMEWORK = {
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     )
@@ -261,7 +262,19 @@ URL_FRONT = 'http://127.0.0.1:3000/'
 
 if socket.gethostname() == "sylflo.fr":
     URL_FRONT = 'http://locsapp.sylflo.fr/'
-    DEBUG = TEMPLATE_DEBUG = False
+    DEBUG = TEMPLATE_DEBUG = True
+
+    REST_FRAMEWORK = {
+        'TEST_REQUEST_DEFAULT_FORMAT': 'json',
+        'DEFAULT_AUTHENTICATION_CLASSES': (
+            'rest_framework.authentication.SessionAuthentication',
+            'rest_framework.authentication.TokenAuthentication',
+        ),
+        #'DEFAULT_RENDERER_CLASSES': (
+        #    'rest_framework.renderers.JSONRenderer',
+        #)
+    }
+
     ALLOWED_HOSTS = [
         "locsapp.sylflo.fr",
         ".sylflo.fr",

@@ -31,12 +31,12 @@ class APIRequestMongo:
     """
 
     def parseObjectIdToStr(self, dictionary):
-        if (dictionary is None):
-            return (None)
+        if dictionary is None:
+            return None
         for key in dictionary:
-            if (isinstance(dictionary[key], ObjectId)):
+            if isinstance(dictionary[key], ObjectId):
                 dictionary[key] = str(dictionary[key])
-        return (dictionary)
+        return dictionary
 
     def verifyErrorsInFields(self, fields, answer, creation=True):
         error_fields = {}
@@ -45,8 +45,8 @@ class APIRequestMongo:
                     2 and key not in answer and creation is True):
                 answer[key] = fields[key].split("|")[1]
             temp_options = fields[key].split("|")[0].split(",")
-            if (temp_options[0] == "text"):
-                if (not isinstance(answer[key], type("kek"))):
+            if temp_options[0] == "text":
+                if not isinstance(answer[key], type("kek")):
                     error_fields[key] = "It must be a string"
                 elif (len(answer[key]) > int(temp_options[1])
                         or len(answer[key]) <= 0):
