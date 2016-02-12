@@ -152,6 +152,7 @@
 		** Dialogs Definitions
 		*/
 		/*Add an email dialog*/
+		/** @ngInject */
 		vm.addEmailDialog = function(event) {
 			$mdDialog.show({
 				controller : vm.addEmailController,
@@ -166,6 +167,7 @@
 		};
 
 		/*Add an address dialog*/
+		/** @ngInject */
 		vm.addAddressDialog = function(event, type) {
 			$mdDialog.show({
 				controller : vm.addAddressController,
@@ -180,6 +182,7 @@
 		};
 
 		/*Add a show address dialog*/
+		/** @ngInject */
 		vm.showAddressDialog = function(event, address) {
 			$mdDialog.show({
 				controller : vm.showAddressController,
@@ -194,6 +197,7 @@
 		};
 
 		/*Add a delete address dialog*/
+		/** @ngInject */
 		vm.deleteAddressDialog = function(event, address, type) {
 			$mdDialog.show({
 				controller : vm.deleteAddressController,
@@ -212,6 +216,7 @@
 		};
 
 		/*Add a delete email dialog*/
+		/** @ngInject */
 		vm.deleteEmailDialog = function(event, email) {
 			$mdDialog.show({
 				controller : vm.deleteEmailController,
@@ -233,6 +238,7 @@
 		** Dialogs Controllers
 		*/
 		/*addEmailDialog controller*/
+		/** @ngInject */
 		vm.addEmailController = function($mdDialog) {
 			var vm = this;
 
@@ -307,6 +313,7 @@
 		}
 
 		/*addAddressDialog Controller*/
+		/** @ngInject */
 		vm.addAddressController = function($mdDialog) {
 			var vm = this;
 
@@ -433,6 +440,7 @@
 		};
 
 		/*showAddressDialog Controller*/
+		/** @ngInject */
 		vm.showAddressController = function($mdDialog) {
 			var vm = this;
 
@@ -442,6 +450,7 @@
 		};
 
 		/*deleteAddressDialog Controller*/
+		/** @ngInject */
 		vm.deleteAddressController = function($mdDialog) {
 			var vm = this;
 
@@ -522,6 +531,7 @@
 		};
 
 		/*deleteEmailDialog Controller*/
+		/** @ngInject */
 		vm.deleteEmailController = function($mdDialog) {
 			var vm = this;
 

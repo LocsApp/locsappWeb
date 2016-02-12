@@ -5,6 +5,7 @@
 	.module('LocsappControllers')
 	.controller('LoginController', LoginController);
 
+
   /** @ngInject */
   function LoginController($scope, UsersService, toastr, $sessionStorage, $localStorage, $state, $log, $mdDialog, $document) {
 	var vm = this;
@@ -63,6 +64,7 @@
 	};
 
 	/*Creates a dialog to ask for a password reset*/
+	/** @ngInject */
 	vm.forgotPasswordDialog = function (event) {
 		$mdDialog.show({
 			controller : vm.forgotPasswordController,
@@ -75,6 +77,7 @@
 	};
 
 	/*Controller for forgotPasswordDialog*/
+	/** @ngInject */
 	vm.forgotPasswordController = function ($mdDialog) {
 		var vm = this;
 
@@ -90,6 +93,7 @@
 
 		/*password_reset success callback*/
 		vm.resetPasswordFailure = function (data) {
+			$log.log(data);
 			toastr.error(data.data.email[0], "Woops...");
 			vm.loader = false;
 			vm.hide();
