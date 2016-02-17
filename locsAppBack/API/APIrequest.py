@@ -25,7 +25,7 @@ class APIRequestMongo:
     array : verifies if it is an array,
     dict : verifies if it is a dict,
     id : verifies if it is a mongo id,
-    date_default: adds a default timezone date
+    date_default: adds a default timezone date (today's date)
 
     Feeds the default arguments (indicated by "|")
     """
@@ -41,10 +41,16 @@ class APIRequestMongo:
     def verifyErrorsInFields(self, fields, answer, creation=True):
         error_fields = {}
         for key in fields:
+            # Parsing of default values
+            fields[key] = fields[key].replace(" ", "")
+            temp_options = fields[key].split("|")[0].split(",")
             if (len(fields[key].split("|")) ==
                     2 and key not in answer and creation is True):
-                answer[key] = fields[key].split("|")[1]
-            temp_options = fields[key].split("|")[0].split(",")
+                if (temp_options[0] == "integer"):
+                    answer[key] = int(fields[key].split("|")[1])
+                else:
+                    answer[key] = fields[key].split("|")[1]
+            # Verification of input values
             if temp_options[0] == "text":
                 if not isinstance(answer[key], type("kek")):
                     error_fields[key] = "It must be a string"
