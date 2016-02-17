@@ -46,7 +46,7 @@ class APIRequestMongo:
             temp_options = fields[key].split("|")[0].split(",")
             if (len(fields[key].split("|")) ==
                     2 and key not in answer and creation is True):
-                if (temp_options[0] == "integer"):
+                if temp_options[0] == "integer":
                     answer[key] = int(fields[key].split("|")[1])
                 else:
                     answer[key] = fields[key].split("|")[1]
@@ -58,26 +58,26 @@ class APIRequestMongo:
                         or len(answer[key]) <= 0):
                     error_fields[
                         key] = "The text must not be empty and the length must be inferior or equal to" + temp_options[1]
-            elif (temp_options[0] == "integer"):
-                if (not isinstance(answer[key], type(1))):
+            elif temp_options[0] == "integer":
+                if not isinstance(answer[key], type(1)):
                     error_fields[key] = "The field must be an integer"
-            elif (temp_options[0] == "boolean"):
-                if (not isinstance(answer[key], type(True))):
+            elif temp_options[0] == "boolean":
+                if not isinstance(answer[key], type(True)):
                     error_fields[key] = "The field must be a boolean"
-            elif (temp_options[0] == "date_default"):
+            elif temp_options[0] == "date_default":
                 answer[key] = datetime.now(pytz.utc)
-            elif (temp_options[0] == "array"):
-                if (not isinstance(answer[key], type([]))):
+            elif temp_options[0] == "array":
+                if not isinstance(answer[key], type([])):
                     error_fields[key] = "The field must be a list"
-            elif (temp_options[0] == "dict"):
-                if (not isinstance(answer[key], type({}))):
+            elif temp_options[0] == "dict":
+                if not isinstance(answer[key], type({})):
                     error_fields[key] = "The field must be a dictionnary"
-            elif (temp_options[0] == "id"):
-                if (bson.objectid.ObjectId.is_valid(answer[key]) == False):
+            elif temp_options[0] == "id":
+                if bson.objectid.ObjectId.is_valid(answer[key]) == False:
                     error_fields[key] = "The field must be a MongoDB ID"
 
             temp_options = []
-        return (error_fields)
+        return error_fields
 
     # creates a Create API POST
     def forgeAPIrequestCreate(self, method, request, fields, collection):
