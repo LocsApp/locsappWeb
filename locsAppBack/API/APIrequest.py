@@ -26,6 +26,7 @@ class APIRequestMongo:
     dict : verifies if it is a dict,
     id : verifies if it is a mongo id,
     date_default: adds a default timezone date (today's date)
+    integer_protected: integer protected and only can be affected by default value
 
     Feeds the default arguments (indicated by "|")
     """
@@ -41,9 +42,13 @@ class APIRequestMongo:
     def verifyErrorsInFields(self, fields, answer, creation=True):
         error_fields = {}
         for key in fields:
-            # Parsing of default values
             fields[key] = fields[key].replace(" ", "")
             temp_options = fields[key].split("|")[0].split(",")
+            # Verification of protected values
+            if (temp_options[0] == "integer_protected"):
+                if key in answer:
+                    error_fields[key] = "This field is protected"
+            # Parsing of default values
             if (len(fields[key].split("|")) ==
                     2 and key not in answer and creation is True):
                 if (temp_options[0] == "integer"):
