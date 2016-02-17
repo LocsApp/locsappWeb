@@ -75,23 +75,23 @@ class APIRequestMongo:
 
     # creates a Create API POST
     def forgeAPIrequestCreate(self, method, request, fields, collection):
-        if (request.method == "POST"):
-            if (request.body):
+        if request.method == "POST":
+            if request.body:
                 answer = json.loads(request.body.decode('utf8'))
                 error_keys = {}
                 for key in fields:
                     if key not in answer and "default" not in fields[
                             key].split("_") and len(fields[key].split("|")) <= 1:
                         error_keys[key] = "This key is required"
-                if (error_keys != {}):
-                    return (JsonResponse(error_keys, status=401))
+                if error_keys != {}:
+                    return JsonResponse(error_keys, status=401)
                 error_keys = self.verifyErrorsInFields(fields, answer)
-                if (error_keys != {}):
-                    return (JsonResponse(error_keys, status=401))
+                if error_keys != {}:
+                    return JsonResponse(error_keys, status=401)
                 collection.insert_one(answer)
-                return(JsonResponse({"message": "Object created!"}, status=200))
+                return JsonResponse({"message": "Object created!"}, status=200)
             else:
-                return (JsonResponse({"Error": "400 BAD REQUEST"}, status=400))
+                return JsonResponse({"Error": "400 BAD REQUEST"}, status=400)
         else:
             return (JsonResponse(
                     {"error": "405 METHOD NOT ALLOWED"}, status=405))

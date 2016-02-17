@@ -3,6 +3,11 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from .views import db_locsapp
 from .views import APIrequests
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.views import APIView
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+
 
 import json
 from bson import ObjectId
@@ -14,7 +19,10 @@ from bson import ObjectId
 
 
 @csrf_exempt
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
 def postNewArticle(request):
+    print("User = ", request.user.pk)
     fields_definition = \
         {"name": "text, 30",
          "tiny_logo_url": "text, 255 | http://127.0.0.1:8000/media/pictures/tiny_pictures/articles/dummy.png",
@@ -27,11 +35,11 @@ def postNewArticle(request):
          "pictures": "array",
          "informations": "dict"}
 
-    if (request.method == "POST"):
+    if request.method == "POST":
         return APIrequests.forgeAPIrequestCreate(
             "POST", request, fields_definition, db_locsapp["articles"])
     else:
-        return (JsonResponse({"Error": "Method not allowed!"}, status=405))
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
 # Updates an article
 
