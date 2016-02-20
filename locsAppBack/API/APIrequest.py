@@ -17,6 +17,60 @@ from datetime import datetime
 
 class APIRequestMongo:
 
+    def __init__(self, db):
+        self.grammar = [
+            "_type",
+            "_default",
+            "_length",
+            "_protected",
+            "_required",
+            "_min",
+            "_max"]
+        self.db = db
+
+    """
+    This method is intern to the class and should not be invoked outside it.
+    It checks a key looking at its pattern describe in the model.
+    """
+
+    def _fieldModelValidation(
+            self, attribute, model_attribute, error_fields, key):
+        if (bson.objectid.ObjectId.is_valid(attribute) == True and
+                bson.objectid.ObjectId.is_valid(model_attribute) == True):
+            return (True)
+        elif (not isinstance(attribute, type(model_attribute))):
+            print("ERROR : " + str(attribute))
+            error_fields[key] = "This field must be a " + \
+                str(type(model_attribute).__name__)
+            return (False)
+        return (True)
+
+    """
+    This method created a POST endpoint for a mongo API
+    """
+
+    def POST(self, request, model, collection_name):
+        if (request.body):
+            body = json.loads(request.body.decode('utf8'))
+            keys_error = {}
+            for key in body:
+                if key not in model and not any(
+                        key in s for s in self.grammar):
+                    keys_error[key] = "This key is not authorized."
+                else:
+                    self._fieldModelValidation(
+                        body[key], model[key], keys_error, key)
+                    model.pop(key, None)
+            if model != {}:
+                missing_keys = {}
+                for key in model:
+                    missing_keys[key] = "This key is missing"
+            if keys_error != {}:
+                keys_error.update(missing_keys)
+                return (JsonResponse(keys_error, status=401))
+            return (JsonResponse(
+                {"message": "All went flawlessly!"}, status=200))
+
     """
     verifies is the fields are correct:
     text, <number> : verify if the text is small enough
@@ -26,6 +80,7 @@ class APIRequestMongo:
     dict : verifies if it is a dict,
     id : verifies if it is a mongo id,
     date_default: adds a default timezone date (today's date)
+    integer_protected: integer protected and only can be affected by default value
 
     Feeds the default arguments (indicated by "|")
     """
@@ -41,9 +96,13 @@ class APIRequestMongo:
     def verifyErrorsInFields(self, fields, answer, creation=True):
         error_fields = {}
         for key in fields:
-            # Parsing of default values
             fields[key] = fields[key].replace(" ", "")
             temp_options = fields[key].split("|")[0].split(",")
+            # Verification of protected values
+            if (temp_options[0] == "integer_protected"):
+                if key in answer:
+                    error_fields[key] = "This field is protected"
+            # Parsing of default values
             if (len(fields[key].split("|")) ==
                     2 and key not in answer and creation is True):
                 if temp_options[0] == "integer":
