@@ -145,8 +145,8 @@
 				.change_password
 				.save({old_password : vm.old_password, new_password1 : vm.new_password1, new_password2 : vm.new_password2})
 				.$promise
-				.then(vm.ChangePasswordSuccess, vm.ChangePasswordFailure);			
-		}
+				.then(vm.ChangePasswordSuccess, vm.ChangePasswordFailure);
+		};
 
 		/*
 		** Dialogs Definitions
@@ -163,7 +163,7 @@
 				parent: angular.element($document.body),
 				targetEvent: event,
 				clickOutsideToClose:true
-			}).then(function(data) { vm.user = data });	
+			}).then(function(data) { vm.user = data });
 		};
 
 		/*Add an address dialog*/
@@ -178,7 +178,7 @@
 				parent: angular.element($document.body),
 				targetEvent: event,
 				clickOutsideToClose:true
-			}).then(function(data) { vm.user = data });			
+			}).then(function(data) { vm.user = data });
 		};
 
 		/*Add a show address dialog*/
@@ -208,7 +208,7 @@
 				parent: angular.element($document.body),
 				targetEvent: event,
 				clickOutsideToClose:true
-			}).then(function(data) {  
+			}).then(function(data) {
 				if (data==false)
 					return;
 				else
@@ -227,7 +227,7 @@
 				parent: angular.element($document.body),
 				targetEvent: event,
 				clickOutsideToClose:true
-			}).then(function(data) {  
+			}).then(function(data) {
 				if (data==false)
 					return;
 				else
@@ -287,14 +287,14 @@
 					.profile_check
 					.get({})
 					.$promise
-					.then(vm.GetUserInfosSuccess, vm.GetUserInfosFailure);			
+					.then(vm.GetUserInfosSuccess, vm.GetUserInfosFailure);
 			}
 
 			/*Failure callback for add_secondary_email*/
 			vm.GetAddSecondaryEmailFailure = function(data) {
 				$log.log(data);
 				toastr.error(data.Error, "Woops...");
-			}		
+			}
 
 			/*Submits the form data from the dialog to the API*/
 			vm.submit = function() {
@@ -309,7 +309,7 @@
 			/*Hide callback for $mdDialog*/
 			vm.hide = function() {
 				$mdDialog.hide(vm.user);
-			};						
+			};
 		}
 
 		/*addAddressDialog Controller*/
@@ -591,7 +591,7 @@
 				if (vm.not_accepted)
 					$mdDialog.hide(false);
 				$mdDialog.hide(vm.user);
-			};			
+			};
 		};
 	}
 

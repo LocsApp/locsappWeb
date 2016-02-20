@@ -1,19 +1,19 @@
-<md-content class="user_profile_parameters_address_add_dialogs">
+<md-content class="register_facebook_username_add_dialogs">
 	<md-toolbar>
-		<span class="user_profile_parameters_address_add_dialogs_header">Add an email</span>
+		<span class="register_facebook_username_add_dialogs_header">Enter an username</span>
 	</md-toolbar>
 	<section layout="column", layout-align="center center">
-		<form name="addEmailForm" ng-submit="addEmailForm.$valid && addEmail.submit()">
+		<form name="addUsernameForm" ng-submit="addUsernameForm.$valid && addUsername.submit()">
 				<md-input-container>
-					<label> Email </label>
-					<input name="email" ng-model="addEmail.email" required type="email">
-					<div ng-messages="addEmailForm.email.$error" ng-if='!addEmailForm.email.$pristine'>
+					<label> Username </label>
+					<input name="username" ng-model="addUsername.username" required type="text">
+					<div ng-messages="addUsernameForm.username.$error" ng-if='!addUsernameForm.username.$pristine'>
 						<div ng-message="required">This is required.</div>
 					</div>
 				</md-input-container>
 				<section layout="column", layout-align="center center">
-					<md-button class="md-raised" ng-if="!addEmail.loader">Add</md-button>
-					<md-progress-circular md-diameter="30px" md-mode="indeterminate" ng-if="addEmail.loader"></md-progress-circular>
+					<md-button class="md-raised" ng-if="!addUsername.loader">Add</md-button>
+					<md-progress-circular md-diameter="30px" md-mode="indeterminate" ng-if="addUsername.loader"></md-progress-circular>
 				</section>
 		</form>
 	</section>

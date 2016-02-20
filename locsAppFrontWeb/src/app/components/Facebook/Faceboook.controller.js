@@ -17,7 +17,7 @@ new_user  socialogin  <allauth.socialaccount.models.SocialLogin object at 0x7f33
     .controller('FacebookController', FacebookController);
 
   /** @ngInject */
-  function FacebookController($scope, $log, ezfb, UsersService, $mdDialog) {
+  function FacebookController($scope, $log, ezfb, UsersService, $mdDialog, $document) {
 
     var vm = this;
 
@@ -48,6 +48,7 @@ new_user  socialogin  <allauth.socialaccount.models.SocialLogin object at 0x7f33
 
     vm.userLoggedinSuccess = function (data) {
       $log.log("Succes ", data);
+      vm.addEmailDialog();
     };
 
      vm.userLoggedinFailure = function (data) {
@@ -60,7 +61,19 @@ new_user  socialogin  <allauth.socialaccount.models.SocialLogin object at 0x7f33
 
 
 
-
+  /* Dialog for set an username */
+    /** @ngInject */
+		vm.addEmailDialog = function(event) {
+			$mdDialog.show({
+				controller : vm.addUsernameController,
+				controllerAs : 'addUsername',
+				templateUrl: 'app/templates/dialogTemplates/addUsername.tmpl.html',
+				locals : {user : vm.user},
+				bindToController: true,
+				parent: angular.element($document.body),
+				clickOutsideToClose:true
+			}).then(function(data) { vm.user = data });
+		};
 
 
 
