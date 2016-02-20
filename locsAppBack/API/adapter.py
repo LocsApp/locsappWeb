@@ -29,16 +29,15 @@ from django.http import JsonResponse
 @receiver(user_signed_up)
 def on_user_signed_up(request, user, sociallogin=None, **kwargs):
 
-    if sociallogin:
-        content = json.loads(request._post['_content'])
-        if sociallogin.account.provider == 'facebook':
-            user.email = sociallogin.account.extra_data['email']
-            user.username = content['username']
-            if sociallogin.account.extra_data['gender']:
-                user.gender = sociallogin.account.extra_data['gender']
-            if sociallogin.account.extra_data['birthday']:
-                user.birthdate = sociallogin.account.extra_data['birthday']
-            user.save()
+    if sociallogin and sociallogin.account.provider == 'facebook':
+        #print(sociallogin.account.extra_data)
+        user.username = ""
+        user.email = sociallogin.account.extra_data['email']
+        if sociallogin.account.extra_data['gender']:
+            user.gender = sociallogin.account.extra_data['gender']
+        #if sociallogin.account.extra_data['birthday']:
+        #    user.birthdate = sociallogin.account.extra_data['birthday']
+        user.save()
 
 
 class DefaultAccountAdapterCustom(DefaultAccountAdapter):

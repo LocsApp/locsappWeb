@@ -4,13 +4,20 @@
 
 (function () {
 
+  /* With API
+  * {'username': 'tutulutu', 'access_token': 'CAACEdEose0cBALACdjsETh89HbFCYZC148bwyFPsZBpcOx6fwUAU7VLi1gpP700XTyBoE6CWOi1sNvUeixWfApbOzf3U9BQaUJdq1QfpqTghRtxJ0ZCAVUWiM1rLpkTtkMLMrMssT1u770h59E42BzI5CfktxV0RoddN8vAM3Kmx24sBVpFNZANETa1Sz1hS6Cc0nIZCzkEa3ap3y7qNl', 'code': '1011661268854723'}
+new_user  socialogin  <allauth.socialaccount.models.SocialLogin object at 0x7f3348295320>
+
+  *
+  * */
+
   'use strict';
 
   angular.module('Facebook')
     .controller('FacebookController', FacebookController);
 
   /** @ngInject */
-  function FacebookController($scope, $log, ezfb) {
+  function FacebookController($scope, $log, ezfb, UsersService) {
 
     var vm = this;
 
@@ -26,11 +33,27 @@
          * no manual $scope.$apply, I got that handled
          */
         if (res.authResponse) {
-          $log.log("Loggin ok ", res.authResponse);
-          updateLoginStatus(updateApiMe);
+          $log.log("Loggin ok ", res.authResponse.accessToken);
+       UsersService
+          .facebook
+          .save({"access_token": res.authResponse.accessToken,
+            "code": "1011675122186671"/*,
+            "username": "tutulutu"*/})
+          .$promise
+          .then(vm.userLoggedinSuccess, vm.userLoggedinFailure);
+          //updateLoginStatus(updateApiMe);
         }
       }, {scope: 'email,user_likes'});
     };
+
+    vm.userLoggedinSuccess = function (data) {
+      $log.log("Succes ", data);
+    };
+
+     vm.userLoggedinFailure = function (data) {
+      $log.log("Failure ", data);
+    };
+
 
     vm.logout = function () {
       /**
@@ -42,32 +65,7 @@
       });
     };
 
-    vm.share = function () {
-      ezfb.ui(
-        {
-          method: 'feed',
-          name: 'angular-easyfb API demo',
-          picture: 'http://plnkr.co/img/plunker.png',
-          link: 'http://plnkr.co/edit/qclqht?p=preview',
-          description: 'angular-easyfb is an AngularJS module wrapping Facebook SDK.' +
-          ' Facebook integration in AngularJS made easy!' +
-          ' Please try it and feel free to give feedbacks.'
-        }/*,
-        function (res) {
-          // res: FB.ui response
-        }*/
-      );
-    };
 
-    /**
-     * For generating better looking JSON results
-     */
-    /*var autoToJSON = ['loginStatus', 'apiMe'];
-    angular.forEach(autoToJSON, function (varName) {
-      $scope.$watch(varName, function (val) {
-        vm[varName + 'JSON'] = JSON.stringify(val, null, 2);
-      }, true);
-    });*/
 
     /**
      * Update loginStatus result
@@ -84,7 +82,7 @@
      * Update api('/me') result
      */
     function updateApiMe() {
-      ezfb.api('/me', function (res) {
+      ezfb.api('/me?fields=id,name,birthday', function (res) {
         vm.apiMe = res;
       });
     }

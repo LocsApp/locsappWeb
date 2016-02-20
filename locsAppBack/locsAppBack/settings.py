@@ -62,9 +62,9 @@ SOCIALACCOUNT_ADAPTER = 'API.adapter.DefaultSocialAccountAdapter'
 
 # SOCIALACCOUNT_AUTO_SIGNUP =
 
-SOCIALACCOUNT_EMAIL_VERIFICATION = "mandatory"
+#SOCIALACCOUNT_EMAIL_VERIFICATION = "mandatory"
 SOCIALACCOUNT_EMAIL_REQUIRED = True
-SOCIALACCOUNT_QUERY_EMAIL = True
+#SOCIALACCOUNT_QUERY_EMAIL = True
 
 """
 Attempt to bypass the signup form by using fields (e.g. username, email) retrieved from the social account provider.
@@ -80,7 +80,7 @@ SOCIALACCOUNT_PROVIDERS = \
     {'facebook':
         {
             'METHOD': 'oauth2',
-            'SCOPE': ['email', 'public_profile', 'user_friends'],
+            'SCOPE': ['email', 'public_profile', 'user_friends', 'user_birthday'],
             'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
             'FIELDS': [
                 'id',
@@ -100,10 +100,7 @@ SOCIALACCOUNT_PROVIDERS = \
             'LOCALE_FUNC': 'path.to.callable',
             'VERIFIED_EMAIL': False,
             'VERSION': 'v2.5'
-        },
-        'google':
-            {'SCOPE': ['profile', 'email'],
-             'AUTH_PARAMS': {'access_type': 'online'}}
+        }
     }
 
 # Different user model

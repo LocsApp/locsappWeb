@@ -1,23 +1,13 @@
 # Django imports
-from django.shortcuts import render
-from django.contrib.auth import get_user_model
+
 from django.views.generic.base import TemplateView
-from django.http import JsonResponse
-from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponseRedirect
-from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
-#from rest_auth.registration.views import SocialLoginView
+
 from rest_framework.views import APIView
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.renderers import JSONRenderer
-from rest_framework import serializers, exceptions
-from rest_auth.views import LoginView
-#from rest_auth.registration.serializers import SocialLoginSerializer
-from .social_auth_serializer import SocialLoginSerializer
+from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
+from rest_auth.registration.views import SocialLoginView
 
 # User model
 from django.contrib.auth import get_user_model
@@ -46,6 +36,10 @@ from django.core.validators import validate_email
 
 import json
 from bson import ObjectId
+
+
+class FacebookLogin(SocialLoginView):
+    adapter_class = FacebookOAuth2Adapter
 
 
 class JSONEncoder(json.JSONEncoder):
@@ -577,34 +571,8 @@ def notificationAlone(request, notification_pk):
 """
 
 
-class SocialLoginView(LoginView):
-    """
-    class used for social authentications
-    example usage for facebook with access_token
-    -------------
-    from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-    class FacebookLogin(SocialLoginView):
-        adapter_class = FacebookOAuth2Adapter
-    -------------
-    example usage for facebook with code
-    -------------
-    from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-    from allauth.socialaccount.providers.oauth2.client import OAuth2Client
-    class FacebookLogin(SocialLoginView):
-        adapter_class = FacebookOAuth2Adapter
-         client_class = OAuth2Client
-         callback_url = 'localhost:8000'
-    -------------
-    """
-    serializer_class = SocialLoginSerializer
 
 
-class FacebookLogin(SocialLoginView):
-    adapter_class = FacebookOAuth2Adapter
-
-
-class GoogleLogin(SocialLoginView):
-    adapter_class = GoogleOAuth2Adapter
 
 
 """

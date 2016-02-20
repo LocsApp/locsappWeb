@@ -52,8 +52,8 @@ user_patterns = [
 
 # General urls for the api
 api_patterns = [
-    url(r'^rest-auth/facebook/$', views.FacebookLogin.as_view()),
-    url(r'^rest-auth/google/$', views.GoogleLogin.as_view()),
+
+    url(r'^rest-auth/facebook/', views.FacebookLogin.as_view(), name='fb_login'),
 
     url(r'^articles/', include(article_patterns)),
     url(r'^rest-auth/', include('rest_auth.urls')),

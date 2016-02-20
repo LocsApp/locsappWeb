@@ -24,6 +24,7 @@
             verify_email : $resource(URL_API + 'api/v1/verify-email/:key/', {key : '@key'}),
             password_reset : $resource(URL_API + 'api/v1/rest-auth/password/reset/'),
             password_reset_confirm : $resource(URL_API + 'api/v1/rest-auth/password/reset/confirm/'),
+            facebook: $resource(URL_API + 'api/v1/rest-auth/facebook/'),
             is_authenticated : is_authenticated
         };
 
