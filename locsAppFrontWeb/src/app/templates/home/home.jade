@@ -1,1 +1,19 @@
 h1 Welcome to Locsapp !
+
+div(ng-controller='FacebookController as FB')
+  a(href='https://github.com/pc035860/angular-easyfb')
+    img(style='position: absolute; top: 0; right: 0; border: 0;', src='https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png', alt='Fork me on GitHub')
+  .container
+    h2 angular-easyfb API demo
+    div
+      button.btn.btn-primary(ng-click='FB.login()', ng-disabled="FB.loginStatus.status == 'connected'") Connect with Facebook
+      button.btn.btn-danger(ng-click='FB.logout()', ng-disabled="!FB.loginStatus || FB.loginStatus.status != 'connected'") Logout
+      button.btn.btn-success(ng-click='FB.share()') FB.ui
+    br
+    .row
+      .col-md-6
+        h4.text-info $FB.loginStatus()
+        .code-block(hljs='', source='loginStatusJSON')
+      .col-md-6
+        h4.text-info $FB.api('/me')
+        .code-block(hljs='', source='apiMeJSON')

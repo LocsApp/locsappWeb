@@ -11,6 +11,9 @@
   .module("LocsappDirectives", []);
 
   angular
+    .module("Facebook", []);
+
+  angular
 	.module('locsapp', ['ngAnimate',
 		'ngCookies',
 		'ngTouch',
