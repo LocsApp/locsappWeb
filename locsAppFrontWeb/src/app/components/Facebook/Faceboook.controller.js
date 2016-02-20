@@ -17,7 +17,7 @@ new_user  socialogin  <allauth.socialaccount.models.SocialLogin object at 0x7f33
     .controller('FacebookController', FacebookController);
 
   /** @ngInject */
-  function FacebookController($scope, $log, ezfb, UsersService) {
+  function FacebookController($scope, $log, ezfb, UsersService, $mdDialog) {
 
     var vm = this;
 
@@ -53,6 +53,32 @@ new_user  socialogin  <allauth.socialaccount.models.SocialLogin object at 0x7f33
      vm.userLoggedinFailure = function (data) {
       $log.log("Failure ", data);
     };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     vm.logout = function () {
