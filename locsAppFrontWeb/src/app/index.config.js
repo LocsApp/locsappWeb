@@ -4,7 +4,7 @@
 angular
 	.module('locsapp')
 	.factory('TokenAuthInterceptor', TokenAuthInterceptor);
-  
+
   TokenAuthInterceptor.$inject = ['$sessionStorage', '$localStorage', '$q'];
 
   function TokenAuthInterceptor($sessionStorage, $localStorage, $q) {
@@ -28,7 +28,7 @@ angular
 	.config(config);
 
   /** @ngInject */
-  function config($logProvider, toastrConfig, $locationProvider, $httpProvider, $resourceProvider, cfpLoadingBarProvider) {
+  function config($logProvider, toastrConfig, $locationProvider, $httpProvider, $resourceProvider, cfpLoadingBarProvider, ezfbProvider) {
 	// Enable log
 	$logProvider.debugEnabled(true);
 
@@ -55,6 +55,20 @@ angular
 	//Sets the angular-loading-bar settings
 	cfpLoadingBarProvider.selector = '#loading-bar-container';
 	cfpLoadingBarProvider.includeSpinner = false;
+
+  //Sets the Facebook local
+  ezfbProvider.setLocale('fr_FR');
+
+
+   ezfbProvider.setInitParams({
+    // This is my FB app id for plunker demo app
+    appId: '1011661268854723',
+
+    // Module default is `v2.4`.
+    // If you want to use Facebook platform `v2.3`, you'll have to add the following parameter.
+    // https://developers.facebook.com/docs/javascript/reference/FB.init
+    version: 'v2.5'
+  });
 
   }
 
