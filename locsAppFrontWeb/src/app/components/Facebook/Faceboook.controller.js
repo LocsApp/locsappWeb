@@ -43,8 +43,8 @@
     vm.userLoggedinSuccess = function (data) {
       $log.log("Succes Facedebook register", data);
       vm.token = data.key;
-      $scope.token = data.key;
-      vm.addEmailDialog();
+      console.log("Before pass it ", vm.token);
+      vm.changeUsernameDialog(vm.token);
     };
 
     vm.userLoggedinFailure = function (data) {
@@ -54,12 +54,12 @@
 
     /* Dialog for set an username */
     /** @ngInject */
-    vm.addEmailDialog = function (event) {
+    vm.changeUsernameDialog = function (event, token) {
       $mdDialog.show({
         controller: vm.addUsernameController,
         controllerAs: 'addUsername',
         templateUrl: 'app/templates/dialogTemplates/addUsername.tmpl.html',
-        locals: {user: vm.user},
+        locals: {token: token},
         bindToController: true,
         parent: angular.element($document.body),
         clickOutsideToClose: false,
@@ -73,7 +73,7 @@
     /*
      ** Dialogs Controllers
      */
-    /*addEmailDialog controller*/
+    /*changeUsernameDialog controller*/
     /** @ngInject */
     vm.addUsernameController = function () {
       var vm = this;
@@ -101,12 +101,12 @@
       vm.submit = function () {
         vm.loader = true;
 
-        $log.log("toto submit ", $scope.token);
+        $log.log("toto submit ", token);
 
         $resource(URL_API + 'api/v1/auth/change-username/', {}, {post: {
             method: "POST",
             isArray: false,
-            headers: {'Authorization': 'Token ' + $scope.token}}
+            headers: {'Authorization': 'Token ' + token}}
         }).post({"username": vm.username});
 
         //  UsersService.change_username.post({"username": vm.username, "token": $scope.token})
