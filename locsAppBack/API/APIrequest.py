@@ -33,9 +33,16 @@ class APIRequestMongo:
     It checks a key looking at its pattern describe in the model.
     """
 
-    def _fieldModelValidation(self, attribute, model_attribute):
-        if attribute:
-            continue
+    def _fieldModelValidation(
+            self, attribute, model_attribute, error_fields, key):
+        if (bson.objectid.ObjectId.is_valid(attribute) == True and
+                bson.objectid.ObjectId.is_valid(model_attribute) == True):
+            return (True)
+        elif (not isinstance(type(attribute), model_attribute)):
+            print("ERROR : " + str(attribute))
+            error_fields[key] = "This field is a " + str(model_attribute)
+            return (False)
+        return (True)
 
     """
     This method created a POST endpoint for a mongo API
@@ -48,9 +55,18 @@ class APIRequestMongo:
             for key in body:
                 if key not in model and key not in self.grammar:
                     keys_error[key] = "This key is not authorized."
-
+                self._fieldModelValidation(
+                    body[key], model[key], error_fields, key)
+                model.pop(key, None)
+            if model != {}:
+                missing_keys = {}
+                for key in model:
+                    missing_keys[key] = "This key is missing"
             if keys_error != {}:
+                keys_error.update(missing_keys)
                 return (JsonResponse(keys_error, status=401))
+            return (JsonResponse(
+                {"message": "All went flawlessly!"}, status=200))
 
     """
     verifies is the fields are correct:
