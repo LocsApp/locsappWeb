@@ -14,6 +14,7 @@ from allauth.account import app_settings as account_settings
 from allauth.account.app_settings import EmailVerificationMethod
 from rest_framework.response import Response
 import json
+from django.http import HttpResponse
 
 from allauth.socialaccount import app_settings
 from allauth.account.adapter import DefaultAccountAdapter
@@ -30,7 +31,6 @@ from django.http import JsonResponse
 def on_user_signed_up(request, user, sociallogin=None, **kwargs):
 
     if sociallogin and sociallogin.account.provider == 'facebook':
-        #print(sociallogin.account.extra_data)
         user.username = ""
         user.email = sociallogin.account.extra_data['email']
         if sociallogin.account.extra_data['gender']:
@@ -64,6 +64,8 @@ class DefaultSocialAccountAdapter(object):
         e.g. the flow from within a signal handler is bad -- multiple
         handlers may be active and are executed in undetermined order.
         """
+
+
         pass
 
     def authentication_error(self,
@@ -85,8 +87,6 @@ class DefaultSocialAccountAdapter(object):
         """
         Instantiates a new User instance.
         """
-        name_function = "new_user "
-        print(name_function, "socialogin ", sociallogin)
 
         return get_account_adapter().new_user(request)
 
