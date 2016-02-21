@@ -29,6 +29,15 @@ class APIRequestMongo:
         self.db = db
 
     """
+    This method is intern to the class and should not be invoked outside it.
+    It checks a key looking at its pattern describe in the model.
+    """
+
+    def _fieldModelValidation(self, attribute, model_attribute):
+        if attribute:
+            continue
+
+    """
     This method created a POST endpoint for a mongo API
     """
 
@@ -37,8 +46,9 @@ class APIRequestMongo:
             body = json.loads(request.body.decode('utf8'))
             keys_error = {}
             for key in body:
-                if key not in model:
+                if key not in model and key not in self.grammar:
                     keys_error[key] = "This key is not authorized."
+
             if keys_error != {}:
                 return (JsonResponse(keys_error, status=401))
 
