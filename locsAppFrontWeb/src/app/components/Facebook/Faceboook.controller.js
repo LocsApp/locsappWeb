@@ -10,7 +10,7 @@
     .controller('FacebookController', FacebookController);
 
   /** @ngInject */
-  function FacebookController($scope, $log, ezfb, UsersService, $mdDialog, $document, toastr, $resource, URL_API) {
+  function FacebookController($scope, $log, ezfb, UsersService, $mdDialog, $document, toastr, $resource, URL_API, $state) {
 
     var vm = this;
 
@@ -42,7 +42,15 @@
 
     vm.userLoggedinSuccess = function (data) {
       vm.token = data.key;
-      vm.changeUsernameDialog();
+
+      //Faire un call avec la key et verifie la presecne d un username
+
+
+      $log.log("username = ", vm.username);
+      if (vm.username != undefined)
+        toastr.success("You already got an usernmae", "User");
+      else
+        vm.changeUsernameDialog();
     };
 
     vm.userLoggedinFailure = function (data) {
@@ -92,6 +100,8 @@
         $log.log(data);
         toastr.success("You've got a new username", "Woops...");
         vm.loader = false;
+        $state.go('main.login');
+       	$mdDialog.hide();
 
       };
 
@@ -101,11 +111,12 @@
         vm.loader = true;
 
 
-
-        $resource(URL_API + 'api/v1/auth/change-username/', {}, {post: {
+        $resource(URL_API + 'api/v1/auth/change-username/', {}, {
+          post: {
             method: "POST",
             isArray: false,
-            headers: {'Authorization': 'Token ' + vm.token}}
+            headers: {'Authorization': 'Token ' + vm.token}
+          }
         }).post({"username": vm.username})
           .$promise
           .then(vm.ChangeUsernameSuccess, vm.ChangeUsernameFailure);
