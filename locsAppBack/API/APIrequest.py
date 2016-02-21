@@ -107,6 +107,7 @@ class APIRequestMongo:
             keys_error.update(missing_keys)
             if keys_error:
                 return (JsonResponse(keys_error, status=401))
+            self.db[collection_name].insert_one(document)
             return (JsonResponse(
                 {"message": success_message}, status=200))
 
