@@ -96,9 +96,9 @@
         $log.log(data);
         toastr.success(data.message, "Success");
         vm.loader = false;
-        $state.go('main.login');
+        /*$state.go('main.login');
         $mdDialog.hide();
-
+*/
 
       };
 
@@ -156,66 +156,7 @@
       });
     }*/
 
-    /*Success callback for login*/
-    vm.userLoggedinSuccess = function (data) {
-      $log.log(data);
-      if ($scope.remember_me == true)
-        $localStorage.key = data["key"];
-      else
-        $sessionStorage.key = data["key"];
-      UsersService
-        .profile_check
-        .get({})
-        .$promise
-        .then(vm.userProfileGetSuccess, vm.userProfileGetFailure);
-    };
 
-    /*Success callback for login*/
-    vm.userLoggedinFailure = function (data) {
-      $log.log(data.data);
-      if (data.data) {
-        if (data.data.non_field_errors) {
-          if (data.data.non_field_errors[0].indexOf("not verified") > -1)
-            toastr.error("Please verify your email.", 'Woops...');
-          else
-            toastr.error("We couldn't log you in with these infos...", 'Woops...');
-        }
-      }
-      else
-        toastr.error("The server isn't answering...", "Woops...");
-    };
-
-    vm.userProfileGetFailure = function () {
-      toastr.error("An error occured while retrieving your data...", "Woops...")
-    };
-
-    /*Success callback for login*/
-    vm.userLoggedinSuccess = function (data) {
-      $log.log(data);
-      if ($scope.remember_me == true)
-        $localStorage.key = data["key"];
-      else
-        $sessionStorage.key = data["key"];
-      UsersService
-        .profile_check
-        .get({})
-        .$promise
-        .then(vm.userProfileGetSuccess, vm.userProfileGetFailure);
-    };
-
-
-    /*Success callback for profile_check*/
-    vm.userProfileGetSuccess = function (data) {
-      if ($scope.remember_me == true)
-        $localStorage.id = data["id"];
-      else
-        $sessionStorage.id = data["id"];
-      $state.go("main.homepage");
-    };
-
-    vm.userProfileGetFailure = function () {
-      toastr.error("An error occured while retrieving your data...", "Woops...")
-    };
 
   }
 
