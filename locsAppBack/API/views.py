@@ -74,7 +74,6 @@ class ChangeUsername(APIView):
             new_user = Account.object.get(pk=request.user.pk)
             new_user.username = request.data["username"]
             new_user.save()
-            #Delete token
             try:
                 request.user.auth_token.delete()
             except (AttributeError, ObjectDoesNotExist):

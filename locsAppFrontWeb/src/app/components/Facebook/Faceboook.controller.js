@@ -62,7 +62,8 @@
         locals: {user: vm.user},
         bindToController: true,
         parent: angular.element($document.body),
-        clickOutsideToClose: true
+        clickOutsideToClose: false,
+        targetEvent: event
       }).then(function (data) {
         vm.user = data
       });
@@ -74,7 +75,7 @@
      */
     /*addEmailDialog controller*/
     /** @ngInject */
-    vm.addUsernameController = function ($mdDialog) {
+    vm.addUsernameController = function () {
       var vm = this;
 
       /*initialize vars*/
@@ -100,7 +101,7 @@
       vm.submit = function () {
         vm.loader = true;
 
-        console.log("toto submit ", $scope.token);
+        $log.log("toto submit ", $scope.token);
 
         $resource(URL_API + 'api/v1/auth/change-username/', {}, {post: {
             method: "POST",
