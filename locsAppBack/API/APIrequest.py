@@ -37,9 +37,25 @@ class APIRequestMongo:
             self, attribute, model_attribute, error_fields, key):
         modelType = None
         if (isinstance(model_attribute, type({}))):
-            if (not isinstance(model_attribute, type({}))
-                    and not isinstance(model_attribute, type([]))):
+            if ("_type" in model_attribute and not isinstance(model_attribute[
+                    "_type"], type({})) and not isinstance(model_attribute["_type"], type([]))):
                 modelType = model_attribute["_type"]
+            elif ("_type" in model_attribute and isinstance(model_attribute["_type"], type([]))):
+                if (not isinstance(attribute, (type([])))):
+                    error_fields[key] = "This field must be an array"
+                    return (False)
+                else:
+                    for subObject in attribute:
+                        return self._fieldModelValidation(
+                            subObject, model_attribute["_type"][0], error_fields, key + ".subfield")
+        elif (isinstance(model_attribute, type([]))):
+            if (not isinstance(attribute, (type([])))):
+                error_fields[key] = "This field must be an array"
+                return (False)
+            else:
+                for subObject in attribute:
+                    return self._fieldModelValidation(
+                        subObject, model_attribute[0], error_fields, key + ".subfield")
         else:
             modelType = model_attribute
         if (bson.objectid.ObjectId.is_valid(attribute) == True and
@@ -47,8 +63,7 @@ class APIRequestMongo:
             return (True)
         elif (not isinstance(attribute, modelType)):
             print("ERROR : " + str(attribute))
-            error_fields[key] = "This field must be a " + \
-                type(modelType).__name__
+            error_fields[key] = "This field must be a " + modelType.__name__
             return (False)
         return (True)
 
