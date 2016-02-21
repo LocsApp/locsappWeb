@@ -38,9 +38,10 @@ class APIRequestMongo:
         if (bson.objectid.ObjectId.is_valid(attribute) == True and
                 bson.objectid.ObjectId.is_valid(model_attribute) == True):
             return (True)
-        elif (not isinstance(type(attribute), model_attribute)):
+        elif (not isinstance(attribute, type(model_attribute))):
             print("ERROR : " + str(attribute))
-            error_fields[key] = "This field is a " + str(model_attribute)
+            error_fields[key] = "This field must be a " + \
+                str(type(model_attribute).__name__)
             return (False)
         return (True)
 
@@ -55,9 +56,10 @@ class APIRequestMongo:
             for key in body:
                 if key not in model and key not in self.grammar:
                     keys_error[key] = "This key is not authorized."
-                self._fieldModelValidation(
-                    body[key], model[key], error_fields, key)
-                model.pop(key, None)
+                else:
+                    self._fieldModelValidation(
+                        body[key], model[key], keys_error, key)
+                    model.pop(key, None)
             if model != {}:
                 missing_keys = {}
                 for key in model:
