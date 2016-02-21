@@ -1,12 +1,18 @@
 @import "../../theme.scss";
 
 .login-body {
-	md-checkbox.md-checked .md-icon {
- 		background-color:  $checkBox;
-	}
+  md-checkbox.md-checked .md-icon {
+    background-color: $checkBox;
+  }
 
-	.login-forgot-password {
-		text-decoration: underline;
-		cursor: pointer;
-	}
+  .login-forgot-password {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .facebook, .md-button.facebook:hover {
+    background-color: rgba(59, 89, 152, 1);
+    color: white;
+  }
+
 }

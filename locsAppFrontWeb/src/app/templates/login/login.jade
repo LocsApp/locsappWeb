@@ -1,26 +1,27 @@
 md-content
-	div(layout="column", layout-fill).flex
-		div.flex
-			div(layout="column" flex layout-align="start center")
-				div(flex="none")
-					h1 Login
-				div(flex="none").login-body
-					form(name="loginForm" novalidate ng-submit="loginForm.$valid && login.submit()")
-						section(layout="column", layout-align="start center", layout-margin)
-							md-input-container
-								ng-md-icon(icon="mood").
-								input(placeholder="Username" required name="username" ng-model="username" maxlength="20" minlength="3").body-register-container-md
-								div(ng-messages="loginForm.username.$error" ng-if='!loginForm.username.$pristine')
-									div(ng-message="required") This is required.
-									div(ng-message="minlength") The username must be longer than 3 characters.
-									div(ng-message="md-maxlength") The username must be shorter than 20 characters.
-							md-input-container
-								ng-md-icon(icon="vpn_key")
-								input(placeholder="Password" type="password" name="password" required ng-model="password" maxlength="30" minlength="6").body-register-container-md
-								div(ng-messages="loginForm.password.$error" ng-if="loginForm.password.$dirty")
-									div(ng-message="required") This is required.
-									div(ng-message="minlength") The password must be longer than 6 characters.
-									div(ng-message="maxlength") The password must be shorter than 20 characters.
-							md-checkbox(ng-model="remember_me") Remember me
-							span(ng-click="login.forgotPasswordDialog($event)").login-forgot-password Forgot your password ?
-							md-button.md-raised Login
+  div(layout="column", layout-fill).flex
+    div.flex
+      div(layout="column" flex layout-align="start center")
+        div(flex="none")
+          h1 Login
+        div(flex="none").login-body
+          form(name="loginForm" novalidate ng-submit="loginForm.$valid && login.submit()")
+            section(layout="column", layout-align="start center", layout-margin)
+              md-input-container
+                ng-md-icon(icon="mood").
+                input(placeholder="Username" required name="username" ng-model="username" maxlength="20" minlength="3").body-register-container-md
+                div(ng-messages="loginForm.username.$error" ng-if='!loginForm.username.$pristine')
+                  div(ng-message="required") This is required.
+                  div(ng-message="minlength") The username must be longer than 3 characters.
+                  div(ng-message="md-maxlength") The username must be shorter than 20 characters.
+              md-input-container
+                ng-md-icon(icon="vpn_key")
+                input(placeholder="Password" type="password" name="password" required ng-model="password" maxlength="30" minlength="6").body-register-container-md
+                div(ng-messages="loginForm.password.$error" ng-if="loginForm.password.$dirty")
+                  div(ng-message="required") This is required.
+                  div(ng-message="minlength") The password must be longer than 6 characters.
+                  div(ng-message="maxlength") The password must be shorter than 20 characters.
+              md-checkbox(ng-model="remember_me") Remember me
+              span(ng-click="login.forgotPasswordDialog($event)").login-forgot-password Forgot your password ?
+              md-button.md-raised Login
+              md-button.md-raised.facebook(ng-click='login.loginFacebook()') Login with Facebook

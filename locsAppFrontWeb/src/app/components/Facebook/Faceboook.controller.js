@@ -37,7 +37,7 @@
             .then(vm.userLoggedinSuccess, vm.userLoggedinFailure);
           //updateLoginStatus(updateApiMe);
         }
-      }, {scope: 'email,user_likes'});
+      }, {scope: 'email,user_likes,user_birthday'});
     };
 
     vm.userLoggedinSuccess = function (data) {
@@ -101,8 +101,8 @@
         $log.log(data);
         toastr.success(data.message, "Success");
         vm.loader = false;
-       // $state.go('main.login');
-       	//$mdDialog.hide();
+        $state.go('main.login');
+        $mdDialog.hide();
 
       };
 
