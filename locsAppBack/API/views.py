@@ -6,9 +6,12 @@ from rest_framework.views import APIView
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from rest_auth.registration.views import SocialLoginView
 from .models import Account
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth import logout
 
 # User model
 from django.contrib.auth import get_user_model
@@ -72,6 +75,12 @@ class ChangeUsername(APIView):
             new_user.username = request.data["username"]
             new_user.save()
             #Delete token
+            try:
+                request.user.auth_token.delete()
+            except (AttributeError, ObjectDoesNotExist):
+                pass
+
+            logout(request)
             return (JsonResponse(
                 {"message": "You username is " + new_user.username}, status=206))
 
