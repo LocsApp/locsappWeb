@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from rest_auth.registration.views import SocialLoginView
+from .models import Account
 
 # User model
 from django.contrib.auth import get_user_model
@@ -58,6 +59,25 @@ class docAPIView(TemplateView):
 """
     USER PROFILE ENDPOINTS
 """
+
+
+@permission_classes((IsAuthenticated,))
+class ChangeUsername(APIView):
+
+    def post(self, request):
+        print("ChangeUsername ", request.data["username"])
+        print("ChangeUsername ", request.user)
+        if request.user.username == "":
+            new_user = Account.object.get(pk=request.user.pk)
+            new_user.username = request.data["username"]
+            new_user.save()
+            return (JsonResponse(
+                {"message": "You username is " + new_user.username}, status=206))
+
+        else:
+            return (JsonResponse(
+                {"message": "Error you already got an username"}, status=405))
+
 
 
 @permission_classes((IsAuthenticated, ))
