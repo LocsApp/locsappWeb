@@ -35,5 +35,5 @@ div(flex="none").body-register-md
           div(ng-message="maxlength") The password must be shorter than 20 characters.
       md-button.md-raised Register
       div(ng-controller='FacebookController as FB')
-        md-button.md-raised.facebook(ng-click='FB.login()', ng-disabled="FB.loginStatus.status == 'connected'") Register with Facebook
-        button.btn.btn-danger(ng-click='FB.logout()', ng-disabled="!FB.loginStatus || FB.loginStatus.status != 'connected'") Logout
+        md-button.md-raised.facebook(ng-click='FB.login()') Register with Facebook
+        //button.btn.btn-danger(ng-click='FB.logout()') Logout
