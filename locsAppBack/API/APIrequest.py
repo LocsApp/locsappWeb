@@ -35,13 +35,20 @@ class APIRequestMongo:
 
     def _fieldModelValidation(
             self, attribute, model_attribute, error_fields, key):
+        modelType = None
+        if (isinstance(model_attribute, type({}))):
+            if (not isinstance(model_attribute, type({}))
+                    and not isinstance(model_attribute, type([]))):
+                modelType = model_attribute["_type"]
+        else:
+            modelType = model_attribute
         if (bson.objectid.ObjectId.is_valid(attribute) == True and
-                bson.objectid.ObjectId.is_valid(model_attribute) == True):
+                bson.objectid.ObjectId.is_valid(modelType) == True):
             return (True)
-        elif (not isinstance(attribute, type(model_attribute))):
+        elif (not isinstance(attribute, modelType)):
             print("ERROR : " + str(attribute))
             error_fields[key] = "This field must be a " + \
-                str(type(model_attribute).__name__)
+                type(modelType).__name__
             return (False)
         return (True)
 
@@ -54,19 +61,18 @@ class APIRequestMongo:
             body = json.loads(request.body.decode('utf8'))
             keys_error = {}
             for key in body:
-                if key not in model and not any(
-                        key in s for s in self.grammar):
+                if key not in model:
                     keys_error[key] = "This key is not authorized."
                 else:
                     self._fieldModelValidation(
                         body[key], model[key], keys_error, key)
                     model.pop(key, None)
-            if model != {}:
+            if model:
                 missing_keys = {}
                 for key in model:
                     missing_keys[key] = "This key is missing"
-            if keys_error != {}:
-                keys_error.update(missing_keys)
+            keys_error.update(missing_keys)
+            if keys_error:
                 return (JsonResponse(keys_error, status=401))
             return (JsonResponse(
                 {"message": "All went flawlessly!"}, status=200))
