@@ -71,8 +71,10 @@ class ChangeUsername(APIView):
             new_user = Account.object.get(pk=request.user.pk)
             new_user.username = request.data["username"]
             new_user.save()
+            #Delete token
             return (JsonResponse(
                 {"message": "You username is " + new_user.username}, status=206))
+
 
         else:
             return (JsonResponse(

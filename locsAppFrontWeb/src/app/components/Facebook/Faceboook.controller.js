@@ -4,20 +4,13 @@
 
 (function () {
 
-  /* With API
-  * {'username': 'tutulutu', 'access_token': 'CAACEdEose0cBALACdjsETh89HbFCYZC148bwyFPsZBpcOx6fwUAU7VLi1gpP700XTyBoE6CWOi1sNvUeixWfApbOzf3U9BQaUJdq1QfpqTghRtxJ0ZCAVUWiM1rLpkTtkMLMrMssT1u770h59E42BzI5CfktxV0RoddN8vAM3Kmx24sBVpFNZANETa1Sz1hS6Cc0nIZCzkEa3ap3y7qNl', 'code': '1011661268854723'}
-new_user  socialogin  <allauth.socialaccount.models.SocialLogin object at 0x7f3348295320>
-
-  *
-  * */
-
   'use strict';
 
   angular.module('Facebook')
     .controller('FacebookController', FacebookController);
 
   /** @ngInject */
-  function FacebookController($scope, $log, ezfb, UsersService, $mdDialog, $document) {
+  function FacebookController($scope, $log, ezfb, UsersService, $mdDialog, $document, toastr, $resource, URL_API) {
 
     var vm = this;
 
@@ -34,64 +27,93 @@ new_user  socialogin  <allauth.socialaccount.models.SocialLogin object at 0x7f33
          */
         if (res.authResponse) {
           $log.log("Loggin ok ", res.authResponse.accessToken);
-       UsersService
-          .facebook
-          .save({"access_token": res.authResponse.accessToken,
-            "code": "1011675122186671"/*,
-            "username": "tutulutu"*/})
-          .$promise
-          .then(vm.userLoggedinSuccess, vm.userLoggedinFailure);
+          UsersService
+            .facebook
+            .save({
+              "access_token": res.authResponse.accessToken,
+              "code": "1011675122186671"
+            })
+            .$promise
+            .then(vm.userLoggedinSuccess, vm.userLoggedinFailure);
           //updateLoginStatus(updateApiMe);
         }
       }, {scope: 'email,user_likes'});
     };
 
     vm.userLoggedinSuccess = function (data) {
-      $log.log("Succes ", data);
+      $log.log("Succes Facedebook register", data);
+      vm.token = data.key;
+      $scope.token = data.key;
       vm.addEmailDialog();
     };
 
-     vm.userLoggedinFailure = function (data) {
+    vm.userLoggedinFailure = function (data) {
       $log.log("Failure ", data);
     };
 
 
-
-
-
-
-
-  /* Dialog for set an username */
+    /* Dialog for set an username */
     /** @ngInject */
-		vm.addEmailDialog = function(event) {
-			$mdDialog.show({
-				controller : vm.addUsernameController,
-				controllerAs : 'addUsername',
-				templateUrl: 'app/templates/dialogTemplates/addUsername.tmpl.html',
-				locals : {user : vm.user},
-				bindToController: true,
-				parent: angular.element($document.body),
-				clickOutsideToClose:true
-			}).then(function(data) { vm.user = data });
-		};
+    vm.addEmailDialog = function (event) {
+      $mdDialog.show({
+        controller: vm.addUsernameController,
+        controllerAs: 'addUsername',
+        templateUrl: 'app/templates/dialogTemplates/addUsername.tmpl.html',
+        locals: {user: vm.user},
+        bindToController: true,
+        parent: angular.element($document.body),
+        clickOutsideToClose: true
+      }).then(function (data) {
+        vm.user = data
+      });
+    };
 
 
+    /*
+     ** Dialogs Controllers
+     */
+    /*addEmailDialog controller*/
+    /** @ngInject */
+    vm.addUsernameController = function ($mdDialog) {
+      var vm = this;
+
+      /*initialize vars*/
+      vm.loader = false;
 
 
+      /*Failure callback of the ressource callback*/
+      vm.ChangeUsernameFailure = function (data) {
+        $log.log(data);
+        toastr.error(data.data.Error, "Woops...");
+
+      };
+
+      /*Success callback of the ressource callback*/
+      vm.ChangeUsernameSuccess = function (data) {
+        $log.log(data);
+        toastr.success("You've got a new username", "Woops...");
+
+      };
 
 
+      /*Submits the form data from the dialog to the API*/
+      vm.submit = function () {
+        vm.loader = true;
+
+        console.log("toto submit ", $scope.token);
+
+        $resource(URL_API + 'api/v1/auth/change-username/', {}, {post: {
+            method: "POST",
+            isArray: false,
+            headers: {'Authorization': 'Token ' + $scope.token}}
+        }).post({"username": vm.username});
+
+        //  UsersService.change_username.post({"username": vm.username, "token": $scope.token})
+
+      };
 
 
-
-
-
-
-
-
-
-
-
-
+    };
 
 
     vm.logout = function () {
@@ -103,7 +125,6 @@ new_user  socialogin  <allauth.socialaccount.models.SocialLogin object at 0x7f33
         updateLoginStatus(updateApiMe);
       });
     };
-
 
 
     /**
