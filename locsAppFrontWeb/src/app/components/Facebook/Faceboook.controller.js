@@ -84,13 +84,14 @@
       vm.ChangeUsernameFailure = function (data) {
         $log.log(data);
         toastr.error(data.data.Error, "Woops...");
-
+        vm.loader = false;
       };
 
       /*Success callback of the ressource callback*/
       vm.ChangeUsernameSuccess = function (data) {
         $log.log(data);
         toastr.success("You've got a new username", "Woops...");
+        vm.loader = false;
 
       };
 
@@ -105,7 +106,9 @@
             method: "POST",
             isArray: false,
             headers: {'Authorization': 'Token ' + vm.token}}
-        }).post({"username": vm.username});
+        }).post({"username": vm.username})
+          .$promise
+          .then(vm.ChangeUsernameSuccess, vm.ChangeUsernameFailure);
 
         //  UsersService.change_username.post({"username": vm.username, "token": $scope.token})
 
