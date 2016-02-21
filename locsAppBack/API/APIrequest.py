@@ -68,6 +68,20 @@ class APIRequestMongo:
         return (True)
 
     """
+    This checks for primary keys, if not existing, if there is a default or if it is required.
+    """
+
+    def _fieldDefaultNotRequired(self, document, model_attribute, key):
+        if (isinstance(model_attribute, type({}))):
+            if ("_required" in model_attribute):
+                if (not model_attribute["_required"]):
+                    return (True)
+            if ("_default" in model_attribute):
+                document[key] = model_attribute["_default"]
+                return (True)
+        return (False)
+
+    """
     This method created a POST endpoint for a mongo API
     """
 
@@ -75,17 +89,21 @@ class APIRequestMongo:
         if (request.body):
             body = json.loads(request.body.decode('utf8'))
             keys_error = {}
+            document = {}
             for key in body:
                 if key not in model:
                     keys_error[key] = "This key is not authorized."
                 else:
                     self._fieldModelValidation(
                         body[key], model[key], keys_error, key)
+                    document[key] = body[key]
                     model.pop(key, None)
             if model:
                 missing_keys = {}
                 for key in model:
-                    missing_keys[key] = "This key is missing"
+                    if not self._fieldDefaultNotRequired(
+                            document, model[key], key):
+                        missing_keys[key] = "This key is missing"
             keys_error.update(missing_keys)
             if keys_error:
                 return (JsonResponse(keys_error, status=401))
