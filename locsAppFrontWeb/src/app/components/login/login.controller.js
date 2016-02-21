@@ -122,7 +122,6 @@
          * no manual $scope.$apply, I got that handled
          */
         if (res.authResponse) {
-          $log.log("Loggin ok ", res.authResponse.accessToken);
           UsersService
             .facebook
             .save({
@@ -131,7 +130,6 @@
             })
             .$promise
             .then(vm.userLoggedinSuccess, vm.userLoggedinFailure);
-          //updateLoginStatus(updateApiMe);
         }
       }, {scope: 'email,user_likes'});
 
