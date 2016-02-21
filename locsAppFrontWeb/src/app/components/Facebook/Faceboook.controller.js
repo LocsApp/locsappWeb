@@ -2,6 +2,8 @@
  * Created by sylflo on 2/20/16.
  */
 
+// Log after adding the username
+
 (function () {
 
   'use strict';
@@ -14,16 +16,14 @@
 
     var vm = this;
 
-  //  updateLoginStatus(updateApiMe);
+    //  updateLoginStatus(updateApiMe);
 
     vm.login = function () {
       /**
        * Calling FB.login with required permissions specified
        * https://developers.facebook.com/docs/reference/javascript/FB.login/v2.0
        */
-
       vm.callApiFacebook(vm.userFacebookLoggedinSuccess, vm.userFacebookLoggedinFailure);
-
     };
 
     vm.userFacebookLoggedinSuccess = function (data) {
@@ -31,21 +31,21 @@
       $log.log("username = ", vm.username);
 
 
-        $resource(URL_API + 'api/v1/rest-auth/user/', {}, {
-          get: {
-            method: "GET",
-            isArray: false,
-            headers: {'Authorization': 'Token ' + vm.token}
-          }
-        }).get()
-          .$promise
-          .then(vm.checkUsernameExistSuccess, vm.checkUsernameExistFailure);
+      $resource(URL_API + 'api/v1/rest-auth/user/', {}, {
+        get: {
+          method: "GET",
+          isArray: false,
+          headers: {'Authorization': 'Token ' + vm.token}
+        }
+      }).get()
+        .$promise
+        .then(vm.checkUsernameExistSuccess, vm.checkUsernameExistFailure);
 
       //vm.changeUsernameDialog();
     };
 
-    vm.checkUsernameExistSuccess = function(data) {
-      $log.log("TEST SUccess", data);
+    vm.checkUsernameExistSuccess = function (data) {
+      //$log.log("TEST SUccess", data);
       if (data.username) {
 
         vm.callApiFacebook(vm.userLoggedinSuccess, vm.userLoggedinFailure);
@@ -54,8 +54,8 @@
 
     };
 
-    vm.checkUsernameExistFailure = function(data) {
-      $log.log("Test FAILURE");
+    vm.checkUsernameExistFailure = function (data) {
+      //$log.log("Test FAILURE");
       //On a forcement un user associe (on a cree des qu on log avec Facebook) donc on lance la dialogue pour change l username
       vm.changeUsernameDialog();
 
@@ -111,9 +111,27 @@
         $log.log(data);
         toastr.success(data.message, "Success");
         vm.loader = false;
-        /*$state.go('main.login');
         $mdDialog.hide();
-*/
+
+         ezfb.login(function (res) {
+        /**
+         * no manual $scope.$apply, I got that handled
+         */
+        if (res.authResponse) {
+          $log.log("Loggin changeUsername ok ", res.authResponse.accessToken);
+          UsersService
+            .facebook
+            .save({
+              "access_token": res.authResponse.accessToken,
+              "code": "1011675122186671"
+            })
+            .$promise
+            .then(vm.userLoggedinSuccess, vm.userLoggedinFailure);
+          //updateLoginStatus(updateApiMe);
+        }
+      }, {scope: 'email,user_likes,user_birthday'});
+
+
 
       };
 
@@ -137,41 +155,7 @@
 
       };
 
-
-    };
-
-
-/*
-    vm.logout = function () {
-
-      ezfb.logout(function () {
-        updateLoginStatus(updateApiMe);
-      });
-    };
-*/
-
-
-    /**
-     * Update loginStatus result
-     */
-   /* function updateLoginStatus(more) {
-      ezfb.getLoginStatus(function (res) {
-        vm.loginStatus = res;
-
-        (more || angular.noop)();
-      });
-    }*/
-
-    /**
-     * Update api('/me') result
-     */
-/*    function updateApiMe() {
-      ezfb.api('/me?fields=id,name,birthday', function (res) {
-        vm.apiMe = res;
-      });
-    }*/
-
-     /*Success callback for login*/
+       /*Success callback for login*/
     vm.userLoggedinSuccess = function (data) {
       $log.log("USERLOGGEINDSUCCESS ", data);
       if ($scope.remember_me == true)
@@ -200,7 +184,7 @@
         toastr.error("The server isn't answering...", "Woops...");
     };
 
-      /*Success callback for profile_check*/
+    /*Success callback for profile_check*/
     vm.userProfileGetSuccess = function (data) {
       if ($scope.remember_me == true)
         $localStorage.id = data["id"];
@@ -214,7 +198,55 @@
     };
 
 
-    vm.callApiFacebook = function(FnSuccess, FnFailure) {
+    };
+
+/*End ChangeUsernameController */
+
+
+    /*Success callback for login*/
+    vm.userLoggedinSuccess = function (data) {
+      $log.log("USERLOGGEINDSUCCESS ", data);
+      if ($scope.remember_me == true)
+        $localStorage.key = data["key"];
+      else
+        $sessionStorage.key = data["key"];
+      UsersService
+        .profile_check
+        .get({})
+        .$promise
+        .then(vm.userProfileGetSuccess, vm.userProfileGetFailure);
+    };
+
+    /*Failure callback for login*/
+    vm.userLoggedinFailure = function (data) {
+      $log.log(data.data);
+      if (data.data) {
+        if (data.data.non_field_errors) {
+          if (data.data.non_field_errors[0].indexOf("not verified") > -1)
+            toastr.error("Please verify your email.", 'Woops...');
+          else
+            toastr.error("We couldn't log you in with these infos...", 'Woops...');
+        }
+      }
+      else
+        toastr.error("The server isn't answering...", "Woops...");
+    };
+
+    /*Success callback for profile_check*/
+    vm.userProfileGetSuccess = function (data) {
+      if ($scope.remember_me == true)
+        $localStorage.id = data["id"];
+      else
+        $sessionStorage.id = data["id"];
+      $state.go("main.homepage");
+    };
+
+    vm.userProfileGetFailure = function () {
+      toastr.error("An error occured while retrieving your data...", "Woops...")
+    };
+
+
+    vm.callApiFacebook = function (FnSuccess, FnFailure) {
       ezfb.login(function (res) {
         /**
          * no manual $scope.$apply, I got that handled
