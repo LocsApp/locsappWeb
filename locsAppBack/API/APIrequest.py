@@ -54,7 +54,8 @@ class APIRequestMongo:
             body = json.loads(request.body.decode('utf8'))
             keys_error = {}
             for key in body:
-                if key not in model and key not in self.grammar:
+                if key not in model and not any(
+                        key in s for s in self.grammar):
                     keys_error[key] = "This key is not authorized."
                 else:
                     self._fieldModelValidation(
