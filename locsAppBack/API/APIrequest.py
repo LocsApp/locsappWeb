@@ -65,11 +65,20 @@ class APIRequestMongo:
             print("ERROR : " + str(attribute))
             error_fields[key] = "This field must be a " + modelType.__name__
             return (False)
-        if (isinstance(modelType, type({})) and "_length" in modelType):
-            if (len(str(attribute)) > modelType["_length"]):
-                error_fields[key] = "The length must not exceed " + \
-                    str(modelType["_length"]) + " characters."
-                return (False)
+        if (isinstance(modelType, type({}))):
+            if ("_length" in modelType):
+                if (len(str(attribute)) > modelType["_length"]):
+                    error_fields[key] = "The length must not exceed " + \
+                        str(modelType["_length"]) + " characters."
+                    return (False)
+            if ("_min" in modelType):
+                if (attribute < modelType["_min"]):
+                    error_fields[
+                        key] = "The value must ge greater than " + str(modelType["_min"])
+            if ("_max" in modelType):
+                if (attribute > modelType["_max"]):
+                    error_fields[
+                        key] = "The value must ge lower than " + str(modelType["_min"])
         return (True)
 
     """
