@@ -99,7 +99,8 @@ def postNewArticle(request):
     }
 
     if request.method == "POST":
-        return APIrequests.POST(request, model, "articles")
+        return APIrequests.POST(
+            request, model, "articles", "The article has been successfully created!")
         '''
         return APIrequests.forgeAPIrequestCreate(
             "POST", request, fields_definition, db_locsapp["articles"])

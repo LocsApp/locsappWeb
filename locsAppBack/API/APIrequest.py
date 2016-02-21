@@ -85,7 +85,7 @@ class APIRequestMongo:
     This method created a POST endpoint for a mongo API
     """
 
-    def POST(self, request, model, collection_name):
+    def POST(self, request, model, collection_name, success_message):
         if (request.body):
             body = json.loads(request.body.decode('utf8'))
             keys_error = {}
@@ -108,7 +108,7 @@ class APIRequestMongo:
             if keys_error:
                 return (JsonResponse(keys_error, status=401))
             return (JsonResponse(
-                {"message": "All went flawlessly!"}, status=200))
+                {"message": success_message}, status=200))
 
     """
     verifies is the fields are correct:
