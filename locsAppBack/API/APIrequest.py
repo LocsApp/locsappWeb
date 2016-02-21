@@ -17,6 +17,31 @@ from datetime import datetime
 
 class APIRequestMongo:
 
+    def __init__(self, db):
+        self.grammar = [
+            "_type",
+            "_default",
+            "_length",
+            "_protected",
+            "_required",
+            "_min",
+            "_max"]
+        self.db = db
+
+    """
+    This method created a POST endpoint for a mongo API
+    """
+
+    def POST(self, request, model, collection_name):
+        if (request.body):
+            body = json.loads(request.body.decode('utf8'))
+            keys_error = {}
+            for key in body:
+                if key not in model:
+                    keys_error[key] = "This key is not authorized."
+            if keys_error != {}:
+                return (JsonResponse(keys_error, status=401))
+
     """
     verifies is the fields are correct:
     text, <number> : verify if the text is small enough
