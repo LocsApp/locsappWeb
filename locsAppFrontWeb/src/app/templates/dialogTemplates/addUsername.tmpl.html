@@ -6,9 +6,11 @@
 		<form name="addUsernameForm" ng-submit="addUsernameForm.$valid && addUsername.submit()">
 				<md-input-container>
 					<label> Username </label>
-					<input name="username" ng-model="addUsername.username" required type="text">
+					<input name="username" ng-model="addUsername.username" required type="text" maxlength="20" minlength="3">
 					<div ng-messages="addUsernameForm.username.$error" ng-if='!addUsernameForm.username.$pristine'>
 						<div ng-message="required">This is required.</div>
+            <div ng-message="minlength"> The username must be longer than 3 characters.</div>
+            <div ng-message="md-maxlength"> The username must be shorter than 20 characters.</div>
 					</div>
 				</md-input-container>
 				<section layout="column", layout-align="center center">

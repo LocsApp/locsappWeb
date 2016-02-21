@@ -47,10 +47,8 @@
 
 
       $log.log("username = ", vm.username);
-      if (vm.username != undefined)
-        toastr.success("You already got an usernmae", "User");
-      else
-        vm.changeUsernameDialog();
+
+      vm.changeUsernameDialog();
     };
 
     vm.userLoggedinFailure = function (data) {
@@ -91,17 +89,20 @@
       /*Failure callback of the ressource callback*/
       vm.ChangeUsernameFailure = function (data) {
         $log.log(data);
-        toastr.error(data.data.Error, "Woops...");
+        if (data.data.detail)
+          toastr.error(data.data.detail, "Woops...");
+        else
+          toastr.error(data.data.message, "Woops...");
         vm.loader = false;
       };
 
       /*Success callback of the ressource callback*/
       vm.ChangeUsernameSuccess = function (data) {
         $log.log(data);
-        toastr.success("You've got a new username", "Woops...");
+        toastr.success(data.message, "Success");
         vm.loader = false;
-        $state.go('main.login');
-       	$mdDialog.hide();
+       // $state.go('main.login');
+       	//$mdDialog.hide();
 
       };
 
