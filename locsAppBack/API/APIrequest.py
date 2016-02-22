@@ -59,7 +59,7 @@ class APIRequestMongo:
         else:
             modelType = model_attribute
         if (bson.objectid.ObjectId.is_valid(attribute) == True and
-                bson.objectid.ObjectId.is_valid(modelType) == True):
+                bson.objectid.ObjectId.is_valid(str(modelType)) == True):
             return (True)
         elif (not isinstance(attribute, modelType)):
             print("ERROR : " + str(attribute))

@@ -39,32 +39,35 @@ def postNewArticle(request):
             "_default": "http://default.png/",
             "_length": 100
         },
-        "url_pictures": [str],
+        "url_pictures": {
+            "_type": [str],
+            "_required": False
+        },
         "comments": {
-            "_type": [ObjectId],
+            "_type": [ObjectId()],
             "_required": False
         },
-        "gender": ObjectId,
-        "base_category": ObjectId,
-        "sub_category": ObjectId,
+        "gender": ObjectId(),
+        "base_category": ObjectId(),
+        "sub_category": ObjectId(),
         "tags": {
-            "_type": [ObjectId],
+            "_type": [ObjectId()],
             "_required": False
         },
-        "size": ObjectId,
-        "payment_methods": ObjectId,
-        "brand": ObjectId,
-        "clothe_condition": ObjectId,
+        "size": ObjectId(),
+        "payment_methods": ObjectId(),
+        "brand": ObjectId(),
+        "clothe_condition": ObjectId(),
         "description": {
             "_type": str,
             "_default": "This article has no description",
             "_length": 500
         },
-        "availibity_start": {
+        "availibility_start": {
             "_type": str,
             "_length": 50
         },
-        "availibity_end": {
+        "availibility_end": {
             "_type": str,
             "_length": 50
         },
@@ -77,15 +80,15 @@ def postNewArticle(request):
             "_type": str,
             "_required": False
         },
-        "location": ObjectId,
+        "location": ObjectId(),
         "price": {
             "_type": float,
             "_max": 500,
             "_min": 0
         },
-        "color": ObjectId,
+        "color": ObjectId(),
         "demands": {
-            "_type": [ObjectId],
+            "_type": [ObjectId()],
             "_required": False
         },
         "id_renter": {
@@ -93,7 +96,7 @@ def postNewArticle(request):
             "_required": False
         },
         "article_state": {
-            "_type": ObjectId,
+            "_type": ObjectId(),
             "_protected": True
         }
     }
