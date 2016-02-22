@@ -1,7 +1,7 @@
 md-menu(md-position-mode="target target" md-offset="57")
 	div(ng-click="navbar.openNotificationsMenu($mdOpenMenu, $event);").locsapp-navbar-icons-gt-sm.locsapp-navbar-container-icon-notifications
 		ng-md-icon(icon="notifications", size="48", md-menu-origin ng-if="navbar.notifications().metadatas.total >= 1")
-		ng-md-icon(icon="notifications_none", size="48", md-menu-origin ng-if="navbar.notifications().metadatas.total == 0")
+		ng-md-icon(icon="notifications_none", size="48", md-menu-origin ng-if="navbar.notifications().metadatas.total == 0 || !navbar.notifications().metadatas")
 		div(style="position: relative;" ng-if="navbar.notifications().metadatas.new > 0")
 			div.locsapp-navbar-icon-number-notification-container
 				span.locsapp-navbar-icon-number-notification {{ navbar.notifications().metadatas.new}}
