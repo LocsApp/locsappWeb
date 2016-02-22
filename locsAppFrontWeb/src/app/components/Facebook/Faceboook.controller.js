@@ -57,7 +57,7 @@
 
     };
 
-    vm.checkUsernameExistFailure = function (data) {
+    vm.checkUsernameExistFailure = function () {
       $log.log("Test FAILURE");
       //On a forcement un user associe (on a cree des qu on log avec Facebook) donc on lance la dialogue pour change l username
       vm.changeUsernameDialog();
