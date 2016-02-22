@@ -61,6 +61,17 @@ Par contre si vous ne travaillez pas en localhost.
 en le rajoutant dans le modèle Social Application. 
 
 
+**Partie MongodB**
+
+Il est nécessaire d'avoir des docuements déjà présent pour le bon fonctionnement du backEnd. Pour cela nous avons exporté des documents.
+La marche à suivre est la suivante
+
+1. Se déplacer dans le dosier locsAppBack/API/fixtures/locsapp-mongo-2016-02-22T17-18-30
+2. Lancer la commande ``` mongorestore -d locsapp ./ ```
+
+Une fois ceci-fait vos documents ont été importé dans la db mongo locsapp
+
+
 La documentation de l'API se trouve ici: (veuillez y accéder en navigation privé svp)
 [http://locsapp-doc.sylflo.fr/#/](http://locsapp-doc.sylflo.fr/#/)
 
