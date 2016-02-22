@@ -12,7 +12,7 @@
     .controller('FacebookController', FacebookController);
 
   /** @ngInject */
-  function FacebookController($scope, $log, ezfb, UsersService, $mdDialog, $document, toastr, $resource, URL_API, $state, $sessionStorage) {
+  function FacebookController($scope, $log, ezfb, UsersService, $mdDialog, $document, toastr, $resource, URL_API, $state, $sessionStorage, $localStorage) {
 
     var vm = this;
 
@@ -45,17 +45,20 @@
     };
 
     vm.checkUsernameExistSuccess = function (data) {
-      //$log.log("TEST SUccess", data);
+      $log.log("TEST SUccess", data);
       if (data.username) {
 
         vm.callApiFacebook(vm.userLoggedinSuccess, vm.userLoggedinFailure);
 
       }
+      else {
+        vm.changeUsernameDialog();
+      }
 
     };
 
     vm.checkUsernameExistFailure = function (data) {
-      //$log.log("Test FAILURE");
+      $log.log("Test FAILURE");
       //On a forcement un user associe (on a cree des qu on log avec Facebook) donc on lance la dialogue pour change l username
       vm.changeUsernameDialog();
 
