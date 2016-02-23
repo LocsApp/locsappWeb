@@ -14,9 +14,7 @@ class CheckUsernameExistMiddleware(object):
         return None
 
     def process_response(self, request, response):
-
-        print(self.view_name)
-        if self.view_name == "API.views.ChangeUsername" and request.user.is_anonymous(
+        if hasattr(self, "view_name") and self.view_name == "API.views.ChangeUsername" and request.user.is_anonymous(
         ) == False and request.user.username == "":
             response.status_code = 499
             response.content = JsonResponse({'message': 'Username empty'})

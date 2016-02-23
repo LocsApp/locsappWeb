@@ -96,8 +96,7 @@ def postNewArticle(request):
             "_required": False
         },
         "article_state": {
-            "_type": ObjectId(),
-            "_protected": True
+            "_type": ObjectId()
         }
     }
 
