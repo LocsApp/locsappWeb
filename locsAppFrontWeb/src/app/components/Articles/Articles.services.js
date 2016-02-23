@@ -6,6 +6,7 @@
     .module('LocsappServices')
     .factory('ArticleServices', ArticleServices);
 
+  /** @ngInject */
   function ArticleServices($log, $resource, URL_API, $sessionStorage, $localStorage) {
 
     var service = {

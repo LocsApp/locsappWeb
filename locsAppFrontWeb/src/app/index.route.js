@@ -151,8 +151,8 @@
       url: 'article/:id',
       parent: 'main',
       templateUrl: 'app/templates/article/article.html',
-      controller: 'ShowArticleController',
-      controllerAs: 'showArticle'
+      controller: 'ArticleShowController',
+      controllerAs: 'articleShow'
     });
 
 	$urlRouterProvider.otherwise(function($injector) {
