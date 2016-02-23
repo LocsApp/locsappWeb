@@ -7,7 +7,7 @@
     .controller('ArticleShowController', ArticleShowController);
 
   /** @ngInject */
-  function ArticleShowController($log) {
+  function ArticleShowController() {
     //var vm = this;
 
    // $log.log("In controller Article");
