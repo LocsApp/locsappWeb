@@ -50,7 +50,7 @@
 					redirectTo: 'main.homepage'
 				}
 			}
-		})	
+		})
 		.state('main.login', {
 			url: 'login',
 			parent: 'main',
@@ -146,7 +146,14 @@
 					redirectTo: 'main.homepage'
 				}
 			}
-		});
+		})
+    .state('main.article', {
+      url: 'article/:id',
+      parent: 'main',
+      templateUrl: 'app/templates/article/article.html',
+      controller: 'ArticleController',
+      controllerAs: 'article'
+    });
 
 	$urlRouterProvider.otherwise(function($injector) {
 		var $state = $injector.get("$state");
