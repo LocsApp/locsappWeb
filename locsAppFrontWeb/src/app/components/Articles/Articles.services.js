@@ -11,7 +11,7 @@
 
     var service = {
 
-
+      getArticle: $resource(URL_API + 'api/v1/rest-auth/registration/'),
       is_authenticated : is_authenticated
     };
 
