@@ -7,10 +7,15 @@
     .controller('ArticleShowController', ArticleShowController);
 
   /** @ngInject */
-  function ArticleShowController() {
-    //var vm = this;
+  function ArticleShowController($log) {
+    var vm = this;
 
    // $log.log("In controller Article");
+
+
+    vm.showImageGalery = function(index) {
+      $log.log(index);
+    }
   }
 
 })();

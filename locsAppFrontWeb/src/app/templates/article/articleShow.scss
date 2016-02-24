@@ -1,6 +1,24 @@
 
-.article-show ng-md-icon {
-  height: 40px ;
-  width: 20px;
-  margin-top: -2px;
+.article-show {
+
+  ng-md-icon {
+    height: 40px;
+    width: 20px;
+    margin-top: -2px;
+  }
+
+  .description {
+    text-align: justify;
+  }
+
+  .grid-gallery {
+   // width: auto;
+   // height: 100px;
+
+    img {
+      width: auto;
+      height: 300px;
+      cursor: pointer;
+    }
+  }
 }
