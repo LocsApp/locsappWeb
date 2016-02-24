@@ -25,12 +25,14 @@
       });
     };
 
-    vm.showImageCarouselController = function () {
-      $log.log("IN image show Image Gallery");
+    vm.showImageCarouselController = function (index) {
 
       var vm = this;
 
-      vm.currentIndex = 0;
+      $log.log("IN image show Image Gallery", index);
+
+
+      vm.currentIndex = index;
       vm.slides = [
         {
           image: 'http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg',
