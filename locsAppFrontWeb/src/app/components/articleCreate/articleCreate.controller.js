@@ -10,5 +10,6 @@
 	var vm = this;
 
 	vm.value = 0;
+	vm.stepTwoComplete = 0;
   }
 })();
