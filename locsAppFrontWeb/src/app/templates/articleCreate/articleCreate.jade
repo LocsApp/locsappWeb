@@ -1,0 +1,17 @@
+div(layout="row", layout-align="center center", layout-margin)
+	h2 Welcome to the article creation
+div(layout="row", layout-align="center center", layout-margin).article-create
+	div.ng-cloak.flex
+		md-content
+			md-tabs(md-center-tabs).md-dynamic-height.md-border-bottom
+				div(ng-repeat="stepComplete in articleCreate.stepsComplete track by $index")
+					md-tab(ng-attr-ng-disabled="!stepComplete")
+						md-tab-label
+							div(layout="none", layout-align="start center")
+								div.flex
+									ng-md-icon(icon="{{articleCreate.stepsNames[$index]}}", size="64", ng-class="{'icon-progress-completed': stepComplete, 'icon-progress': !stepComplete}")
+								div(ng-if="!$last").flex
+									md-progress-linear(md-mode="determinate", ng-value="articleCreate.stepsComplete[$index + 1]").icon-bar-progress
+						md-tab-body
+							md-content
+								h1 kek
