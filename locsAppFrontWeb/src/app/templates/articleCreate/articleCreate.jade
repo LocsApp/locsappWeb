@@ -4,61 +4,14 @@ div(layout="row", layout-align="center center", layout-margin).article-create
 	div.ng-cloak.flex
 		md-content
 			md-tabs(md-center-tabs).md-dynamic-height.md-border-bottom
-				md-tab
-					md-tab-label
-						div(layout="none", layout-align="start center")
-							div.flex
-								ng-md-icon(icon="squared_one", size="64").icon-progress-completed
-							div.flex
-								md-progress-linear(md-mode="determinate", ng-value="articleCreate.value").icon-bar-progress
-					md-tab-body
-						md-content
-							h1 kek
-				md-tab(ng-click="articleCreate.value = 100",  ng-disabled="!articleCreate.stepTwoComplete")
-					md-tab-label
-						div(layout="none", layout-align="start center")
-							div(flex="none")
-								ng-md-icon(icon="squared_two", size="64", ng-class="{'icon-progress-completed': articleCreate.stepTwoComplete, 'icon-progress': !articleCreate.stepTwoComplete}")
-							div(flex)
-								md-progress-linear(md-mode="determinate", ng-value="articleCreate.stepTwoComplete").icon-bar-progress
-					md-tab-body
-						md-content
-							h1 kek
-				md-tab(ng-click="articleCreate.stepTwoComplete = 100",  ng-disabled="!articleCreate.stepTwoComplete")
-					md-tab-label
-						div(layout="none", layout-align="start center")
-							div(flex="none")
-								ng-md-icon(icon="squared_three", size="64", ng-class="{'icon-progress-completed': articleCreate.stepTwoComplete, 'icon-progress': !articleCreate.stepTwoComplete}")
-							div(flex)
-								md-progress-linear(md-mode="determinate", value="0").icon-bar-progress
-					md-tab-body
-						md-content
-							h1 kek
-				md-tab(ng-click="articleCreate.stepTwoComplete = 100",  ng-disabled="!articleCreate.stepTwoComplete")
-					md-tab-label
-						div(layout="none", layout-align="start center")
-							div(flex="none")
-								ng-md-icon(icon="squared_four", size="64", ng-class="{'icon-progress-completed': articleCreate.stepTwoComplete, 'icon-progress': !articleCreate.stepTwoComplete}")
-							div(flex)
-								md-progress-linear(md-mode="determinate", value="0").icon-bar-progress
-					md-tab-body
-						md-content
-							h1 kek
-				md-tab(ng-click="articleCreate.stepTwoComplete = 100",  ng-disabled="!articleCreate.stepTwoComplete")
-					md-tab-label
-						div(layout="none", layout-align="start center")
-							div(flex="none")
-								ng-md-icon(icon="squared_five", size="64", ng-class="{'icon-progress-completed': articleCreate.stepTwoComplete, 'icon-progress': !articleCreate.stepTwoComplete}")
-							div(flex)
-								md-progress-linear(md-mode="determinate", value="0").icon-bar-progress
-					md-tab-body
-						md-content
-							h1 kek
-				md-tab(ng-click="articleCreate.stepTwoComplete = 100",  ng-disabled="!articleCreate.stepTwoComplete")
-					md-tab-label
-						div(layout="none", layout-align="start center")
-							div(flex="none")
-								ng-md-icon(icon="squared_six", size="64", ng-class="{'icon-progress-completed': articleCreate.stepTwoComplete, 'icon-progress': !articleCreate.stepTwoComplete}")
-					md-tab-body
-						md-content
-							h1 kek
+				div(ng-repeat="stepComplete in articleCreate.stepsComplete track by $index")
+					md-tab(ng-attr-ng-disabled="!stepComplete")
+						md-tab-label
+							div(layout="none", layout-align="start center")
+								div.flex
+									ng-md-icon(icon="{{articleCreate.stepsNames[$index]}}", size="64", ng-class="{'icon-progress-completed': stepComplete, 'icon-progress': !stepComplete}")
+								div(ng-if="!$last").flex
+									md-progress-linear(md-mode="determinate", ng-value="articleCreate.stepsComplete[$index + 1]").icon-bar-progress
+						md-tab-body
+							md-content
+								h1 kek
