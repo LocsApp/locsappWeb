@@ -1,0 +1,42 @@
+@import "../../theme.scss";
+
+.article-create {
+
+	md-tabs-canvas {
+		height: 100px;
+	}
+
+	md-pagination-wrapper {
+		height: 100px;
+	}
+
+	md-tab-item {
+		padding: 0px;
+	}
+
+	md-ink-bar {
+		width:64px;
+		background-color:$progressBar;
+	}
+
+	.icon-progress {
+		height: 64px;
+		width: 64px;
+	}
+
+	.icon-progress-completed {
+		@extend .icon-progress;
+		fill: $progressIcon;
+	}
+
+	.icon-bar-progress {
+		width: 100px;
+		color: $progressBar;
+		background-color: $progressBar;
+	}
+
+	md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {
+		background-color: $progressBar;
+	}
+
+}

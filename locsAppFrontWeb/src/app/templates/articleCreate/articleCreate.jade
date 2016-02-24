@@ -1,12 +1,32 @@
 div(layout="row", layout-align="center center", layout-margin)
 	h2 Welcome to the article creation
-div(layout="row", layout-align="start center", layout-margin)
+div(layout="row", layout-align="center center", layout-margin).article-create
 	div.ng-cloak.flex
 		md-content
-			md-tabs.md-dynamic-height.md-border-bottom
+			md-tabs(md-center-tabs).md-dynamic-height.md-border-bottom
 				md-tab
 					md-tab-label
-						h3 KEK
+						div(layout="none", layout-align="start center")
+							div.flex
+								ng-md-icon(icon="squared_one", size="64").icon-progress-completed
+							div.flex
+								md-progress-linear(md-mode="determinate", ng-value="articleCreate.value").icon-bar-progress
+					md-tab-body
+						md-content
+							h1 kek
+				md-tab(ng-click="articleCreate.value = 100")
+					md-tab-label
+						div(layout="none", layout-align="start center")
+							div(flex="none")
+								ng-md-icon(icon="squared_two", size="64").icon-progress
+							div(flex)
+								md-progress-linear(md-mode="determinate", value="0").icon-bar-progress
+					md-tab-body
+						md-content
+							h1 kek
+				md-tab
+					md-tab-label
+						ng-md-icon(icon="squared_three", size="64").icon-progress
 					md-tab-body
 						md-content
 							h1 kek

@@ -9,5 +9,6 @@
   function ArticleCreateController($log) {
 	var vm = this;
 
+	vm.value = 0;
   }
 })();
