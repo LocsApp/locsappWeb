@@ -33,72 +33,76 @@
     height: auto;
   }
 
-
-
-
   /*---------------------------------------------------------
 NAV
 ---------------------------------------------------------*/
   .nav {
-  text-align: center;
-  display: block;
-  position: absolute;
-  z-index: 1002;
-  left: 0;
-  bottom: -4px;
-  right: 0;
-  height: 48px;
-}
-
-  .nav .wrapper {
-    margin: 0 auto;
-    width: 100%;
-    padding: 1em 0 .8em;
-  }
-
-  .nav ul {
-    margin: 0;
-    width: 100%;
-  }
-
-  .nav .dot, .nav .dot a {
-    display: inline-block;
-    zoom: 1;
-  }
-
-  .dots .dot {
-    position: relative;
-    margin: 0 8px;
-    width: 12px;
-    height: 12px;
-  }
-
-  .dots .dot a {
+    text-align: center;
+    display: block;
     position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 6px;
-    height: 6px;
-    text-indent: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    background: #FFF;
-    border: 1px solid transparent;
-    outline: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-    -webkit-transition: background-color 0.25s, border-color 0.25s;
-    -moz-transition: background-color 0.25s, border-color 0.25s;
-    transition: background-color 0.25s, border-color 0.25s;
-  }
+    z-index: 1002;
+    left: 0;
+    bottom: -4px;
+    right: 0;
+    height: 48px;
 
-  .dots .dot a.active {
-    border-color: #FFF;
-    background-color: transparent;
+    .wrapper {
+      margin: 0 auto;
+      width: 100%;
+      padding: 1em 0 .8em;
+    }
+
+    ul {
+      margin: 0;
+      width: 100%;
+    }
+
+    .dot, .dot a {
+      display: inline-block;
+      zoom: 1;
+    }
+
+    .dots {
+
+      padding-left: 0;
+
+      .dot {
+        position: relative;
+        margin: 0 8px;
+        width: 12px;
+        height: 12px;
+
+        a {
+          position: absolute;
+          top: 2px;
+          left: 2px;
+          width: 6px;
+          height: 6px;
+          text-indent: 100%;
+          white-space: nowrap;
+          overflow: hidden;
+          background: #FFF;
+          border: 1px solid transparent;
+          outline: none;
+          -webkit-box-shadow: none;
+          -moz-box-shadow: none;
+          box-shadow: none;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          border-radius: 50%;
+          -webkit-transition: background-color 0.25s, border-color 0.25s;
+          -moz-transition: background-color 0.25s, border-color 0.25s;
+          transition: background-color 0.25s, border-color 0.25s;
+
+          .active {
+            border-color: #FFF;
+            background-color: transparent;
+          }
+        }
+      }
+
+    }
+
   }
 
 }
