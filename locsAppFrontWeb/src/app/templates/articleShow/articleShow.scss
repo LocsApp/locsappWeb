@@ -118,32 +118,30 @@ NAV
     outline: none;
     cursor: pointer;
     background: url(http://onehungrymind.com/demos/slider/assets/img/blank.gif) no-repeat;
+
+    &.prev {
+      opacity: 0.2;
+      left: 20px;
+      background-image: url(http://onehungrymind.com/demos/slider/assets/img/paddle_prev_999.png);
+      transition: 0.2s linear all;
+
+      &:hover {
+        opacity: 1;
+        background-image: url(http://onehungrymind.com/demos/slider/assets/img/paddle_prev_fff.png);
+      }
+    }
+
+    &.next {
+      opacity: 0.2;
+      right: 20px;
+      background-image: url(http://onehungrymind.com/demos/slider/assets/img/paddle_next_999.png);
+      transition: 0.2s linear all;
+
+      &:hover {
+        opacity: 1;
+        background-image: url(http://onehungrymind.com/demos/slider/assets/img/paddle_next_fff.png);
+      }
+    }
+  }
+
 }
-
-.arrow.prev {
-    opacity: 0.2;
-    left: 20px;
-    background-image: url(http://onehungrymind.com/demos/slider/assets/img/paddle_prev_999.png);
-    transition: 0.2s linear all;
-}
-
-.arrow.next {
-    opacity: 0.2;
-    right: 20px;
-    background-image: url(http://onehungrymind.com/demos/slider/assets/img/paddle_next_999.png);
-    transition: 0.2s linear all;
-}
-
-.arrow.prev:hover {
-    opacity: 1;
-    background-image: url(http://onehungrymind.com/demos/slider/assets/img/paddle_prev_fff.png);
-}
-
-.arrow.next:hover {
-    opacity: 1;
-    background-image: url(http://onehungrymind.com/demos/slider/assets/img/paddle_next_fff.png);
-}
-
-
-}
-
