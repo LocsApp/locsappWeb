@@ -147,7 +147,7 @@
 				}
 			}
 		})
-    .state('main.article', {
+    .state('main.articleShow', {
       url: 'article/:id',
       parent: 'main',
       templateUrl: 'app/templates/article/articleShow.html',
