@@ -94,7 +94,7 @@ NAV
           -moz-transition: background-color 0.25s, border-color 0.25s;
           transition: background-color 0.25s, border-color 0.25s;
 
-          .active {
+          &.active {
             border-color: #FFF;
             background-color: transparent;
           }
