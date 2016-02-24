@@ -49,7 +49,7 @@
         {
           image: 'http://cdn.shopify.com/s/files/1/0293/9277/products/Fashion_Nova_-_01-21-16-410_large.JPG?v=1453489020',
           description: 'Image 05'
-        },
+        }
       ];
 
       vm.setCurrentSlideIndex = function (index) {
