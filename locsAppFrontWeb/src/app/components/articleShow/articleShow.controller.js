@@ -7,14 +7,25 @@
     .controller('ArticleShowController', ArticleShowController);
 
   /** @ngInject */
-  function ArticleShowController($log) {
+  function ArticleShowController($log, $mdDialog, $document) {
     var vm = this;
 
-   // $log.log("In controller Article");
+    // $log.log("In controller Article");
 
 
-    vm.showImageGalery = function(index) {
-      $log.log(index);
+    vm.clickImageGallery = function (event, index) {
+      $mdDialog.show({
+        controller: vm.showImageCarouselController,
+        controllerAs: 'showImageCarousel',
+        templateUrl: 'app/templates/dialogTemplates/articleImageCarousel.tmpl.html',
+        parent: angular.element($document.body),
+        targetEvent: event,
+        clickOutsideToClose: true
+      });
+    };
+
+    vm.showImageCarouselController = function() {
+      $log.log("IN image show Image Gallery")
     }
   }
 
