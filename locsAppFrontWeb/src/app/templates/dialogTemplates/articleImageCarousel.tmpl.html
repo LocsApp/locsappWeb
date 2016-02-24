@@ -1,39 +1,41 @@
-<!--<ul rn-carousel class="image">
-  <li ng-repeat="image in sportImages">
-    <div class="layer">
-      <img src="http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg">
-      <img src="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516">
-      <img src="http://cdn.shopify.com/s/files/1/0293/9277/products/Fashion_Nova_-_01-21-16-410_large.JPG?v=1453489020">
-    </div>
-  </li>
-</ul>-->
-
-
 <md-content class="user_profile_parameters_address_add_dialogs">
-	<md-toolbar>
-		<span class="user_profile_parameters_address_add_dialogs_header">Article Image Galery</span>
-	</md-toolbar>
+  <md-toolbar>
+    <span class="user_profile_parameters_address_add_dialogs_header">Article Image Galery</span>
+  </md-toolbar>
+  <section layout="column" layout-align="center center">
 
-  <ul rn-carousel class="image">
-  <li>slide #1</li>
-  <li>slide #2</li>
-  <li>slide #3</li>
-</ul>
+    <div class="container slider">
 
-	<!--<section layout="column", layout-align="center center">
-		<form name="forgotPasswordForm" ng-submit="forgotPasswordForm.$valid && forgotPassword.submit()">
-				<md-input-container>
-					<label> Email </label>
-					<input name="email" ng-model="forgotPassword.email" required type="email">
-					<div ng-messages="forgotPasswordForm.email.$error" ng-if='!forgotPasswordForm.email.$pristine'>
-						<div ng-message="required">This is required.</div>
-					</div>
-				</md-input-container>
-				<section layout="column", layout-align="center center">
-					<md-button type="submit" class="md-raised" ng-if="!forgotPassword.loader">Reset</md-button>
-					<md-progress-circular md-diameter="30px" md-mode="indeterminate" ng-if="forgotPassword.loader"></md-progress-circular>
-				</section>
-		</form>
-	</section>-->
+      <div ng-repeat="slide in showImageCarousel.slides">
+        <img class="slide"
+             ng-hide="!showImageCarousel.isCurrentSlideIndex($index)"
+             ng-src="{{slide.image}}">
+      </div>
+
+      <nav class="nav">
+        <div class="wrapper">
+          <ul class="dots">
+            <li class="dot" ng-repeat="slide in showImageCarousel.slides">
+              <a href="#" ng-class="{'active':showImageCarousel.isCurrentSlideIndex($index)}"
+                 ng-click="showImageCarousel.setCurrentSlideIndex($index);">{{slide.description}}</a></li>
+          </ul>
+        </div>
+      </nav>
+
+    </div>
+
+    <!--<form name="forgotPasswordForm" ng-submit="forgotPasswordForm.$valid && forgotPassword.submit()">
+								<md-input-container>
+										<label> Email </label>
+										<input name="email" ng-model="forgotPassword.email" required type="email">
+										<div ng-messages="forgotPasswordForm.email.$error" ng-if='!forgotPasswordForm.email.$pristine'>
+												<div ng-message="required">This is required.</div>
+										</div>
+								</md-input-container>
+								<section layout="column", layout-align="center center">
+										<md-button type="submit" class="md-raised" ng-if="!forgotPassword.loader">Reset</md-button>
+										<md-progress-circular md-diameter="30px" md-mode="indeterminate" ng-if="forgotPassword.loader"></md-progress-circular>
+								</section>
+				</form>-->
+  </section>
 </md-content>
-
