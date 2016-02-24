@@ -10,7 +10,7 @@
   function ArticleShowController($log, $mdDialog, $document) {
     var vm = this;
 
-    // $log.log("In controller Article");
+    $log.log("In controller Article");
 
 
     vm.clickImageGallery = function (event, index) {

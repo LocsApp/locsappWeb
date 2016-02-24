@@ -34,6 +34,7 @@
 		'angularMoment',
 		'perfect_scrollbar',
     'ezfb',
+    'angular-carousel',
     'Facebook',
 		'LocsappDirectives',
 		'LocsappServices',
