@@ -153,6 +153,19 @@
       templateUrl: 'app/templates/article/articleShow.html',
       controller: 'ArticleShowController',
       controllerAs: 'articleShow'
+    })
+    .state('main.article_create', {
+      url: 'create-article/',
+      parent: 'main',
+      templateUrl: 'app/templates/articleCreate/articleCreate.html',
+      controller: 'ArticleCreateController',
+      controllerAs: 'articleCreate',
+      data: {
+			permissions: {
+				only: ['guest', 'user'],
+				redirectTo: 'main.homepage'
+			}
+		}
     });
 
 	$urlRouterProvider.otherwise(function($injector) {
