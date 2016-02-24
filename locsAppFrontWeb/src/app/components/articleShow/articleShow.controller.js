@@ -19,6 +19,7 @@
         controllerAs: 'showImageCarousel',
         templateUrl: 'app/templates/dialogTemplates/articleImageCarousel.tmpl.html',
         parent: angular.element($document.body),
+        locals: {index: index},
         targetEvent: event,
         clickOutsideToClose: true
       });
