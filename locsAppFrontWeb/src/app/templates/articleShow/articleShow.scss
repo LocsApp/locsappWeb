@@ -145,3 +145,18 @@ NAV
   }
 
 }
+
+/* Animation CSS */
+.ng-hide-add, .ng-hide-remove {
+    -webkit-animation: bounceIn 1s;
+    -moz-animation: bounceIn 1s;
+    -ms-animation: bounceIn 1s;
+    animation: bounceIn 1s;
+}
+
+.ng-hide {
+-webkit-animation: bounceOut 1s;
+    -moz-animation: bounceOut 1s;
+    -ms-animation: bounceOut 1s;
+    animation: bounceOut 1s;
+}

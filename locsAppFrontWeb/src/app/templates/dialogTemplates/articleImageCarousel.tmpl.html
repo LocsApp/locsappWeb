@@ -7,7 +7,7 @@
     <div class="container slider">
 
       <div ng-repeat="slide in showImageCarousel.slides track by $index">
-        <img class="slide"
+        <img class="slide slide-animation"
              ng-hide="!showImageCarousel.isCurrentSlideIndex($index)"
              ng-src="{{slide}}">
 
