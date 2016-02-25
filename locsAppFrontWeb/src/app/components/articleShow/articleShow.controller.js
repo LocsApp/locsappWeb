@@ -12,19 +12,21 @@
 
     $log.log("In controller Article 42");
 
-    ArticleService
-      .getArticle
-      .get({id: "56cb41c0421aa91298799892"})
-      .$promise
-      .then(vm.GetInfoArticleSuccess, vm.getInfoArticleFailure);
-
-    vm.GetInfoArticleSuccess = function (data) {
+     vm.GetInfoArticleSuccess = function (data) {
       $log.log("data = ", data);
     };
 
     vm.getInfoArticleFailure = function (data) {
       $log.error("error", data)
     };
+
+    ArticleService
+      .getArticle
+      .get({id: "56cb41c0421aa91298799892"})
+      .$promise
+      .then(vm.GetInfoArticleSuccess, vm.getInfoArticleFailure);
+
+
 
 
     vm.clickImageGallery = function (event, index) {
