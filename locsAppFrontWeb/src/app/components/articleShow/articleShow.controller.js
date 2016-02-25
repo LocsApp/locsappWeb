@@ -10,7 +10,7 @@
   function ArticleShowController($log, $mdDialog, $document, ArticleService) {
     var vm = this;
 
-    $log.log("In controller Article");
+    $log.log("In controller Article 42");
 
     ArticleService
       .getArticle
