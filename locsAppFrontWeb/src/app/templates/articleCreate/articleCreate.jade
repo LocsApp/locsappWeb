@@ -13,5 +13,5 @@ div(layout="row", layout-align="center center", layout-margin).article-create
 								div(ng-if="!$last").flex
 									md-progress-linear(md-mode="determinate", ng-value="articleCreate.progressBars[$index]").icon-bar-progress
 						md-tab-body
-							md-content(ng-if="$index + 1 == articleCreate.stepFocus").body-steps
+							md-content(ng-if="$index + 1 == articleCreate.stepFocus", layout="column", layout-align="center center").body-steps
 								include ./steps/step1.jade

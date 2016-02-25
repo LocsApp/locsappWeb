@@ -41,6 +41,12 @@
 	}
 
 	.body-steps {
+		padding:5px;
+		width: 100%;
+		md-card {
+			margin-top:30px;
+			max-width: 900px;
+		}
 		.body-title-step {
 			background-color: $headerSubContainers;
 			h3 {
