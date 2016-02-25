@@ -40,4 +40,13 @@
 		background-color: $progressBar;
 	}
 
+	.body-steps {
+		.body-title-step {
+			background-color: $headerSubContainers;
+			h3 {
+				color: $bodyContainer;
+			}
+		}
+	}
+
 }
