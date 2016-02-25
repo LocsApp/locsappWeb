@@ -6,10 +6,10 @@
     width: 20px;
     margin-top: -2px;
   }
-
+/*
   .description {
     text-align: justify;
-  }
+  }*/
 
   .grid-gallery {
     // width: auto;
@@ -149,33 +149,17 @@ NAV
 /* Animation CSS */
 
 .ng-hide-add, .ng-hide-remove {
-  /*-webkit-animation: slideOutLeft1s;
+  -webkit-animation: slideOutLeft1s;
   -moz-animation: slideOutLeft 1s;
   -ms-animation: slideOutLeft 1s;
-  animation: slideOutLeft 1s;*/
+  animation: slideOutLeft 1s;
 }
 
 .ng-hide {
- /* -webkit-animation: slideOutLeft 1s;
+  -webkit-animation: slideOutLeft 1s;
   -moz-animation: slideOutLeft 1s;
   -ms-animation: slideOutLeft 1s;
-  animation: slideOutLeft 1s;*/
+  animation: slideOutLeft 1s;
+  display: none;
 }
 
-/*
-.slide.ng-hide-add,
-.slide.ng-hide-remove {
-  -webkit-transition: all linear 0.5s;
-  -moz-transition: all linear 0.5s;
-  -o-transition: all linear 0.5s;
-  transition: all linear 0.5s;
-  display: block!important;
-}
-.slide.ng-hide-add.ng-hide-add-active,
-.slide.ng-hide-remove {
-  opacity: 0;
-}
-.slide.ng-hide-add,
-.slide.ng-hide-remove.ng-hide-remove-active {
-  opacity: 1;
-}*/
