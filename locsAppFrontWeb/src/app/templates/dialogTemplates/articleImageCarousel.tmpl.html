@@ -4,9 +4,9 @@
   </md-toolbar>-->
   <section layout="row">
 
-    <div class="container slider">
+    <div class="container slider" layout="row">
 
-      <div ng-repeat="slide in showImageCarousel.slides track by $index">
+      <div ng-repeat="slide in showImageCarousel.slides track by $index" class="">
         <img class="slide slide-animation"
              ng-hide="!showImageCarousel.isCurrentSlideIndex($index)"
              ng-src="{{slide}}">
