@@ -7,6 +7,12 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from bson import ObjectId
+from bson import Binary, Code
+from bson.json_util import dumps
+from bson import json_util
+from django.http import HttpResponse
+
 
 
 import json
@@ -137,7 +143,7 @@ def articleAlone(request, article_pk):
 @csrf_exempt
 def getArticle(request, article_pk):
     if request.method == "GET":
-        i = 0
-        return JsonResponse({"Success": "Bonjour"});
+        article = db_locsapp["articles"].find_one({"_id": ObjectId(article_pk)})
+        return HttpResponse(json.dumps(article, sort_keys=True, indent=4, default=json_util.default))
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
