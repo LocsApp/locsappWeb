@@ -14,7 +14,6 @@ from bson import json_util
 from django.http import HttpResponse
 
 
-
 import json
 from bson import ObjectId
 
@@ -34,7 +33,10 @@ from datetime import datetime
 @permission_classes((IsAuthenticated,))
 def postNewArticle(request):
     model = {
-        "title": str,
+        "title": {
+            "_type": str,
+            "_length": 50
+        },
         "id_author": {
             "_type": int,
             "_default": request.user.pk,
@@ -143,7 +145,9 @@ def articleAlone(request, article_pk):
 @csrf_exempt
 def getArticle(request, article_pk):
     if request.method == "GET":
-        article = db_locsapp["articles"].find_one({"_id": ObjectId(article_pk)})
-        return HttpResponse(json.dumps(article, sort_keys=True, indent=4, default=json_util.default))
+        article = db_locsapp["articles"].find_one(
+            {"_id": ObjectId(article_pk)})
+        return HttpResponse(json.dumps(
+            article, sort_keys=True, indent=4, default=json_util.default))
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
