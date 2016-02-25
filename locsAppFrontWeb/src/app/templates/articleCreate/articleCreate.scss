@@ -53,6 +53,16 @@
 				color: $bodyContainer;
 			}
 		}
+
+		.input-centered {
+			label {
+				margin: auto;
+			}
+		}
+
+		.input-title {
+			width: 375px;
+		}
 	}
 
 }
