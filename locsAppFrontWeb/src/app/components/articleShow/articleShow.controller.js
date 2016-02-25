@@ -7,8 +7,11 @@
     .controller('ArticleShowController', ArticleShowController);
 
   /** @ngInject */
-  function ArticleShowController($log, $mdDialog, $document, ArticleService) {
+  function ArticleShowController($log, $mdDialog, $document, ArticleService, $stateParams) {
     var vm = this;
+    vm.url_pictures = [];
+
+    $log.log("route params = ", $stateParams.id);
 
 
     vm.GetInfoArticleSuccess = function (data) {
@@ -21,18 +24,17 @@
         'http://cdn.shopify.com/s/files/1/0293/9277/products/Fashion_Nova_-_01-21-16-410_large.JPG?v=1453489020'
       ];
 
-
-
-
     };
 
     vm.getInfoArticleFailure = function (data) {
       $log.error("error", data)
     };
 
+    //"56cb41c0421aa91298799892"
+    //$stateParams.id
     ArticleService
       .getArticle
-      .get({id: "56cb41c0421aa91298799892"})
+      .get({id: $stateParams.id})
       .$promise
       .then(vm.GetInfoArticleSuccess, vm.getInfoArticleFailure);
 
