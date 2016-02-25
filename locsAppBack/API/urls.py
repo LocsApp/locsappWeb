@@ -19,6 +19,9 @@ article_patterns = [
     url(r'^create/$', articles.postNewArticle),
     url(r'^(?P<article_pk>[a-f\d]{24})/$',
         articles.articleAlone),
+    url(r'^get/(?P<article_pk>[a-f\d]{24})/$',
+        articles.getArticle),
+
 ]
 
 search_patterns = [

@@ -132,3 +132,12 @@ def articleAlone(request, article_pk):
             request, article_pk, fields_definition_put, db_locsapp["articles"])
     else:
         return (JsonResponse({"Error": "Method not allowed!"}, status=405))
+
+
+@csrf_exempt
+def getArticle(request, article_pk):
+    if request.method == "GET":
+        i = 0
+        return JsonResponse({"Success": "Bonjour"});
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
