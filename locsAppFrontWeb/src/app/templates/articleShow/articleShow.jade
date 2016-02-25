@@ -5,7 +5,7 @@ div(class="article-show" )
     div(flex="33" style="background-color: blue")
       img(src="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516")
     div(flex="33"  style="background-color: yellow; text-align:center;")
-      p Robe bleu<br> toto (10)
+      p Robe bleu<br> toto (10) {{articleShow.url_pictures[0]}} end
         ng-md-icon(icon="star_rate" size="40")
         ng-md-icon(icon="star_rate" size="40")
         ng-md-icon(icon="star_rate" size="40")
@@ -18,16 +18,16 @@ div(class="article-show" )
 
   div.grid-gallery(layout='row' layout-align='center')
     div(style='background-color:orange;')
-      img(ng-click="articleShow.clickImageGallery($event, 0)" src="http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg")
-      img(ng-click="articleShow.clickImageGallery($event, 1)" src="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516")
-      img(ng-click="articleShow.clickImageGallery($event, 2)" src="http://cdn.shopify.com/s/files/1/0293/9277/products/Fashion_Nova_-_01-21-16-410_large.JPG?v=1453489020")
+      img(ng-click="articleShow.clickImageGallery($event, 0, articleShow.url_pictures)" src="http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg")
+      img(ng-click="articleShow.clickImageGallery($event, 1, articleShow.url_pictures)" src="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516")
+      img(ng-click="articleShow.clickImageGallery($event, 2, articleShow.url_pictures)" src="http://cdn.shopify.com/s/files/1/0293/9277/products/Fashion_Nova_-_01-21-16-410_large.JPG?v=1453489020")
 
   //Si index % 3 == 0 on ajout une nouvelle grid
   div.grid-gallery(layout='row' layout-align='center')
     div(style='background-color:orange;')
-      img(ng-click="articleShow.clickImageGallery($event, 3)" src="http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg")
-      img(ng-click="articleShow.clickImageGallery($event, 4)" src="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516")
-      img(ng-click="articleShow.clickImageGallery($event, 5)" src="http://cdn.shopify.com/s/files/1/0293/9277/products/Fashion_Nova_-_01-21-16-410_large.JPG?v=1453489020")
+      img(ng-click="articleShow.clickImageGallery($event, 3, articleShow.url_pictures)" src="http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg")
+      img(ng-click="articleShow.clickImageGallery($event, 4, articleShow.url_pictures)" src="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516")
+      img(ng-click="articleShow.clickImageGallery($event, 5, articleShow.url_pictures)" src="http://cdn.shopify.com/s/files/1/0293/9277/products/Fashion_Nova_-_01-21-16-410_large.JPG?v=1453489020")
 
 
   div(layout='row' layout-align='center')
