@@ -7,10 +7,24 @@
     .controller('ArticleShowController', ArticleShowController);
 
   /** @ngInject */
-  function ArticleShowController($log, $mdDialog, $document) {
+  function ArticleShowController($log, $mdDialog, $document, ArticleService) {
     var vm = this;
 
     $log.log("In controller Article");
+
+    ArticleService
+      .getArticle
+      .get({id: "56cb41c0421aa91298799892"})
+      .$promise
+      .then(vm.GetInfoArticleSuccess, vm.getInfoArticleFailure);
+
+    vm.GetInfoArticleSuccess = function (data) {
+      $log.log("data = ", data);
+    };
+
+    vm.getInfoArticleFailure = function (data) {
+      $log.error("error", data)
+    };
 
 
     vm.clickImageGallery = function (event, index) {
@@ -69,7 +83,6 @@
       vm.nextSlide = function () {
         vm.currentIndex = (vm.currentIndex > 0) ? --vm.currentIndex : vm.slides.length - 1;
       };
-
 
 
     }
