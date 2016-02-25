@@ -1,20 +1,43 @@
-<md-content class="user_profile_parameters_address_add_dialogs">
-	<md-toolbar>
-		<span class="user_profile_parameters_address_add_dialogs_header">Article Image Galery</span>
-	</md-toolbar>
-	<section layout="column", layout-align="center center">
-		<form name="forgotPasswordForm" ng-submit="forgotPasswordForm.$valid && forgotPassword.submit()">
-				<md-input-container>
-					<label> Email </label>
-					<input name="email" ng-model="forgotPassword.email" required type="email">
-					<div ng-messages="forgotPasswordForm.email.$error" ng-if='!forgotPasswordForm.email.$pristine'>
-						<div ng-message="required">This is required.</div>
-					</div>
-				</md-input-container>
-				<section layout="column", layout-align="center center">
-					<md-button type="submit" class="md-raised" ng-if="!forgotPassword.loader">Reset</md-button>
-					<md-progress-circular md-diameter="30px" md-mode="indeterminate" ng-if="forgotPassword.loader"></md-progress-circular>
-				</section>
-		</form>
-	</section>
+<md-content class="article-show-slider">
+  <!--<md-toolbar>
+    <span class="article-show-slider-header">Article Image Galery</span>
+  </md-toolbar>-->
+  <section layout="row">
+
+    <div class="container slider">
+
+      <div ng-repeat="slide in showImageCarousel.slides">
+        <img class="slide"
+             ng-hide="!showImageCarousel.isCurrentSlideIndex($index)"
+             ng-src="{{slide.image}}">
+      </div>
+
+      <a class="arrow prev" href="#" ng-click="showImageCarousel.nextSlide()"></a>
+      <a class="arrow next" href="#" ng-click="showImageCarousel.prevSlide()"></a>
+      <nav class="nav">
+        <div class="wrapper">
+          <ul class="dots">
+            <li class="dot" ng-repeat="slide in showImageCarousel.slides">
+              <a href="#" ng-class="{'active':showImageCarousel.isCurrentSlideIndex($index)}"
+                 ng-click="showImageCarousel.setCurrentSlideIndex($index);">{{slide.description}}</a></li>
+          </ul>
+        </div>
+      </nav>
+
+    </div>
+
+    <!--<form name="forgotPasswordForm" ng-submit="forgotPasswordForm.$valid && forgotPassword.submit()">
+								<md-input-container>
+										<label> Email </label>
+										<input name="email" ng-model="forgotPassword.email" required type="email">
+										<div ng-messages="forgotPasswordForm.email.$error" ng-if='!forgotPasswordForm.email.$pristine'>
+												<div ng-message="required">This is required.</div>
+										</div>
+								</md-input-container>
+								<section layout="column", layout-align="center center">
+										<md-button type="submit" class="md-raised" ng-if="!forgotPassword.loader">Reset</md-button>
+										<md-progress-circular md-diameter="30px" md-mode="indeterminate" ng-if="forgotPassword.loader"></md-progress-circular>
+								</section>
+				</form>-->
+  </section>
 </md-content>

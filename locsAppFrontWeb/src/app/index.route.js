@@ -150,7 +150,7 @@
     .state('main.articleShow', {
       url: 'article/:id',
       parent: 'main',
-      templateUrl: 'app/templates/article/articleShow.html',
+      templateUrl: 'app/templates/articleShow/articleShow.html',
       controller: 'ArticleShowController',
       controllerAs: 'articleShow'
     })

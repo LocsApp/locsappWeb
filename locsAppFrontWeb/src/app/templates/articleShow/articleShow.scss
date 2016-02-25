@@ -12,8 +12,8 @@
   }
 
   .grid-gallery {
-   // width: auto;
-   // height: 100px;
+    // width: auto;
+    // height: 100px;
 
     img {
       width: auto;
@@ -21,4 +21,127 @@
       cursor: pointer;
     }
   }
+}
+
+/*Slider Css */
+.article-show-slider {
+
+  overflow-x: hidden;
+
+  img {
+    width: 450px;
+    height: auto;
+  }
+
+  /*---------------------------------------------------------
+NAV
+---------------------------------------------------------*/
+  .nav {
+    text-align: center;
+    display: block;
+    position: absolute;
+    z-index: 1002;
+    left: 0;
+    bottom: -4px;
+    right: 0;
+    height: 48px;
+
+    .wrapper {
+      margin: 0 auto;
+      width: 100%;
+      padding: 1em 0 .8em;
+    }
+
+    ul {
+      margin: 0;
+      width: 100%;
+    }
+
+    .dot, .dot a {
+      display: inline-block;
+      zoom: 1;
+    }
+
+    .dots {
+
+      padding-left: 0;
+
+      .dot {
+        position: relative;
+        margin: 0 8px;
+        width: 12px;
+        height: 12px;
+
+        a {
+          position: absolute;
+          top: 2px;
+          left: 2px;
+          width: 6px;
+          height: 6px;
+          text-indent: 100%;
+          white-space: nowrap;
+          overflow: hidden;
+          background: #FFF;
+          border: 1px solid transparent;
+          outline: none;
+          -webkit-box-shadow: none;
+          -moz-box-shadow: none;
+          box-shadow: none;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          border-radius: 50%;
+          -webkit-transition: background-color 0.25s, border-color 0.25s;
+          -moz-transition: background-color 0.25s, border-color 0.25s;
+          transition: background-color 0.25s, border-color 0.25s;
+
+          &.active {
+            border-color: #FFF;
+            background-color: transparent;
+          }
+        }
+      }
+
+    }
+
+  }
+
+  /* Arrow nav */
+
+  .arrow {
+    position: absolute;
+    z-index: 1002;
+    display: block;
+    top: 50%;
+    margin-top: -35px;
+    width: 36px;
+    height: 71px;
+    outline: none;
+    cursor: pointer;
+    background: url(http://onehungrymind.com/demos/slider/assets/img/blank.gif) no-repeat;
+
+    &.prev {
+      opacity: 0.2;
+      left: 20px;
+      background-image: url(http://onehungrymind.com/demos/slider/assets/img/paddle_prev_999.png);
+      transition: 0.2s linear all;
+
+      &:hover {
+        opacity: 1;
+        background-image: url(http://onehungrymind.com/demos/slider/assets/img/paddle_prev_fff.png);
+      }
+    }
+
+    &.next {
+      opacity: 0.2;
+      right: 20px;
+      background-image: url(http://onehungrymind.com/demos/slider/assets/img/paddle_next_999.png);
+      transition: 0.2s linear all;
+
+      &:hover {
+        opacity: 1;
+        background-image: url(http://onehungrymind.com/demos/slider/assets/img/paddle_next_fff.png);
+      }
+    }
+  }
+
 }
