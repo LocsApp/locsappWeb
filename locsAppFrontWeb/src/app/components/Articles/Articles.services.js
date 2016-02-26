@@ -10,9 +10,10 @@
   function ArticleService($log, $resource, URL_API, $sessionStorage, $localStorage) {
 
     var service = {
+
+      getArticle: $resource(URL_API + 'api/v1/articles/get/:id/', {id: "@article_id"}),
       getCategories: $resource(URL_API + 'api/v1/static-collections/base-categories/'),
       getSubCategories: $resource(URL_API + 'api/v1/static-collections/sub-categories/'),
-      getArticle: $resource(URL_API + 'api/v1/articles/get/:id/', {id: "@user_id"}),
       is_authenticated : is_authenticated
     };
 

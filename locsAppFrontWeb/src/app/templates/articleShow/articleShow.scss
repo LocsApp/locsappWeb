@@ -6,10 +6,10 @@
     width: 20px;
     margin-top: -2px;
   }
-/*
-  .description {
-    text-align: justify;
-  }*/
+
+    .description {
+      text-align: justify;
+    }
 
   .grid-gallery {
     // width: auto;
@@ -26,7 +26,9 @@
 /*Slider Css */
 .article-show-slider {
 
-  overflow-x: hidden;
+  width: 450px;
+
+  //overflow-x: hidden;
 
   img {
     width: 450px;
@@ -123,7 +125,7 @@ NAV
       opacity: 0.2;
       left: 20px;
       background-image: url(http://onehungrymind.com/demos/slider/assets/img/paddle_prev_999.png);
-      transition: 0.2s linear all;
+      transition: 0.0 .5s linear all;
 
       &:hover {
         opacity: 1;
@@ -135,7 +137,7 @@ NAV
       opacity: 0.2;
       right: 20px;
       background-image: url(http://onehungrymind.com/demos/slider/assets/img/paddle_next_999.png);
-      transition: 0.2s linear all;
+      transition: 0.0 .5s linear all;
 
       &:hover {
         opacity: 1;
@@ -148,18 +150,47 @@ NAV
 
 /* Animation CSS */
 
-.ng-hide-add, .ng-hide-remove {
-  -webkit-animation: slideOutLeft1s;
-  -moz-animation: slideOutLeft 1s;
-  -ms-animation: slideOutLeft 1s;
-  animation: slideOutLeft 1s;
+.slide-animation-right.ng-hide-add, .slide-animation-right.ng-hide-remove {
+  -webkit-animation: slideOutLeft 0.8s, fadeIn 0.8s;
+  -moz-animation: slideOutLeft 0.8s, fadeIn 0.8s;
+  -ms-animation: slideOutLeft 0.8 ss, fadeIn 0.8 ss;
+  animation: slideOutLeft 0.8s, fadeIn 0.8s;
 }
 
-.ng-hide {
-  -webkit-animation: slideOutLeft 1s;
-  -moz-animation: slideOutLeft 1s;
-  -ms-animation: slideOutLeft 1s;
-  animation: slideOutLeft 1s;
-  display: none;
+.slide-animation-right.ng-hide {
+  -webkit-animation: slideOutLeft 0.8s, fadeOut 0.8s;
+  -moz-animation: slideOutLeft 0.8s, fadeOut 0.8s;
+  -ms-animation: slideOutLeft 0.8s, fadeOut 0.8s;
+  animation: slideOutLeft 0.8s, fadeOut 0.8s;
+
+}
+
+.slide-animation-left.ng-hide-add, .slide-animation-left.ng-hide-remove {
+  -webkit-animation: slideInLeft 0.8s, fadeIn 0.8s;
+  -moz-animation: slideInLeft 0.8s, fadeIn .8s;
+  -ms-animation: slideInLeft 0.8s, fadeIn 0.8s;
+  animation: slideInLeft 0.8s, fadeIn 0.8s;
+}
+
+.slide-animation-left.ng-hide {
+  -webkit-animation: slideInLeft 0.8s, fadeOut 0.8s;
+  -moz-animation: slideInLeft 0.8s, fadeOut 0.8s;
+  -ms-animation: slideInLeft 0.8s, fadeOut 0.8s;
+  animation: slideInLeft 0.8s, fadeOut 0.8s;
+
+}
+
+.fade-animation.ng-hide-add, .fade-animation.ng-hide-remove {
+  -webkit-animation: fadeIn 0.8s;
+  -moz-animation:  fadeIn 0.8s;
+  -ms-animation: fadeIn 0.8s;
+  animation: fadeIn 0.8s;
+}
+
+.fade-animation.ng-hide {
+  -webkit-animation: fadeOut 0.4s;
+  -moz-animation:  fadeOut 0.4s;
+  -ms-animation: fadeOut 0.4s;
+  animation: fadeOut 0.4s;
 }
 

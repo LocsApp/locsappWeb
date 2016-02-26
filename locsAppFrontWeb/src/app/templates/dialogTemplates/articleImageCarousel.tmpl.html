@@ -7,15 +7,17 @@
     <div class="container slider" layout="row">
 
       <div ng-repeat="slide in showImageCarousel.slides track by $index" class="">
-        <img class="slide slide-animation"
+        <img ng-class="{slide: true, 'slide-animation-right': showImageCarousel.slideRight,
+         'slide-animation-left': showImageCarousel.slideLeft,
+         'fade-animation': showImageCarousel.fade}"
              ng-hide="!showImageCarousel.isCurrentSlideIndex($index)"
              ng-src="{{slide}}">
 
 
       </div>
 
-      <a class="arrow prev" href="#" ng-click="showImageCarousel.nextSlide()"></a>
-      <a class="arrow next" href="#" ng-click="showImageCarousel.prevSlide()"></a>
+      <a class="arrow next" href="#" ng-click="showImageCarousel.nextSlide()"></a>
+      <a class="arrow prev" href="#" ng-click="showImageCarousel.prevSlide()"></a>
       <nav class="nav">
         <div class="wrapper">
           <ul class="dots">
