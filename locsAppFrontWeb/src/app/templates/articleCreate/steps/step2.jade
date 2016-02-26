@@ -1,0 +1,12 @@
+md-card(layout-fill)
+	md-card-title(layout="row", layout-align="center center").body-title-step
+		md-card-title-text
+			h3 Characteristic of your article
+	md-card-content(layout="column", layout-align="center center")
+		form(name="articleFormStep2" novalidate ng-submit="articleFormStep2.$valid && articleCreate.nextStep(2)", layout="column", layout-align="center center")
+			p
+				md-title The gender of your article
+				span
+					ng-md-icon(icon="help", size="20")
+						md-tooltip(md-direction="right") This will be the title of your article. It will be displayed in the search, and will appear as the main sentence on top of your article's page
+		
