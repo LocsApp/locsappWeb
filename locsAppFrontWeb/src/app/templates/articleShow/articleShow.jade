@@ -33,13 +33,14 @@ div(class="article-show" )
   div(layout='row' layout-align='center')
     p(style='background-color:purple' flex="50").description At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repell
 
-
-  md-list
-    md-subheader.md-no-sticky title list
-    md-list-item(ng-repeat="comment in articleShow.comments")
-      img.md-avatar(ng-src="https://material.angularjs.org/latest/img/list/60.jpeg?0")
-      div.md-list-item-text(layout="column")
-        h3 {{comment.username_author}}
-        h4 {{comment.date_created}}
-        p {{comment.content}}
+  md-content
+    md-list
+      md-subheader.md-no-sticky
+      md-list-item.md-3-line(ng-repeat='comment in articleShow.comments')
+        img.md-avatar(ng-src='https://material.angularjs.org/latest/img/list/60.jpeg?0', alt='{{item.who}}')
+        .md-list-item-text(layout='column')
+          h3 {{ comment.username_author}}
+          h4 {{ comment.date_created }}
+          p {{ comment.content }}
+        md-divider
 
