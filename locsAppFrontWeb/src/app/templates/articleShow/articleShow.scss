@@ -158,19 +158,16 @@ NAV
 }
 
 .slideanimationright.ng-hide-add, .slideanimationright.ng-hide-remove {
-  /*-webkit-animation: slideOutLeft 0.5s,  bounceIn 1s;
-  -moz-animation: slideOutLeft 0.5s, bounceIn 1s;
-  -ms-animation: slideOutLeft 0.5s, bounceIn 1s;*/
-  //animation: slideOutLeft 0.5s, bounceIn 1s;
+  -webkit-animation: slideOutLeft 2s, fadeIn 2s;
+  -moz-animation: slideOutLeft 2s, fadeIn 2s;
+  -ms-animation: slideOutLeft 2s, fadeIn 2s;
   animation: slideOutLeft 2s, fadeIn 2s;
 }
 
 .slideanimationright.ng-hide {
- /* -webkit-animation: slideOutLeft 0.5s, bounceIn 1s;
-  -moz-animation: slideOutLeft 0.5s, bounceIn 1s;
-  -ms-animation: slideOutLeft 0.5s, bounceIn 1s;
-  animation: slideOutLeft 0.5s, bounceIn 1s;*/
- // animation: shrink 2s ease-out, pulsate 4s 2s infinite ease-in-out;
+  -webkit-animation:  slideOutLeft 2s, fadeOut 2s;
+  -moz-animation: slideOutLeft 2s, fadeOut 2s;
+  -ms-animation:  slideOutLeft 2s, fadeOut 2s;;
   animation: slideOutLeft 2s, fadeOut 2s;
 
 }
