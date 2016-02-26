@@ -29,3 +29,11 @@ def staticBaseCategories(request):
         return APIrequests.GET("base_categories")
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+@csrf_exempt
+def staticSubCategories(request):
+    if (request.method == "GET"):
+        return APIrequests.GET("sub_categories")
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)

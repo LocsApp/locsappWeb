@@ -22,7 +22,7 @@ md-card(layout-fill)
 						md-tooltip(md-direction="right") It will categorize your article to be found in one of the 3 main themes
 			md-input-container
 				md-select(ng-model="articleCreate.base_category", placeholder="Category")
-					md-option(ng-value="opt", ng-repeat="opt in articleCreate.categories") {{ opt }}
+					md-option(ng-value="opt._id", ng-repeat="opt in articleCreate.categories") {{ opt.name }}
 			p
 				md-title The sub-category
 				span
@@ -30,5 +30,5 @@ md-card(layout-fill)
 						md-tooltip(md-direction="right") It will help to precise the scope of your article
 			md-input-container
 				md-select(ng-model="articleCreate.article.sub_category", placeholder="Sub Category")
-					md-option(ng-value="opt", ng-repeat="opt in articleCreate.categories") {{ opt }}
+					md-option(ng-value="opt._id", ng-repeat="opt in articleCreate.subCategories") {{ opt.name }}
 			md-button.md-raised Next Step		

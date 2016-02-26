@@ -56,7 +56,8 @@ user_patterns = [
 
 # Static collections urls
 static_collections_patterns = [
-    url(r'^base-categories/$', static_collections.staticBaseCategories)
+    url(r'^base-categories/$', static_collections.staticBaseCategories),
+    url(r'^sub-categories/$', static_collections.staticSubCategories)
 ]
 
 # General urls for the api
