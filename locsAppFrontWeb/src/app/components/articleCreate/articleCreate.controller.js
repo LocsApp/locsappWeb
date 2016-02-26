@@ -6,7 +6,7 @@
 	.controller('ArticleCreateController', ArticleCreateController);
 
   /** @ngInject */
-  function ArticleCreateController($log, ArticleService, toastr) {
+  function ArticleCreateController($log, ArticleService, toastr, $scope, $timeout) {
 	var vm = this;
 
 	//steps vars
@@ -14,7 +14,7 @@
 	vm.stepsNames = ["squared_one", "squared_two", "squared_three", "squared_four", "squared_five", "squared_six"];
 	vm.stepsComplete = [1, 0, 0, 0, 0, 0];
 	vm.progressBars = [0, 0, 0, 0, 0, 0]
-	vm.stepFocus = 1;
+	vm.stepFocus = 0;
 
 	//article vars
 	vm.categories = null;
@@ -24,6 +24,16 @@
 	vm.article = {
 		"base_category" : ""
 	};
+
+	//Validates and changes to the next step
+	vm.nextStep = function(focus)
+	{
+		vm.stepsComplete[focus] = 1;
+		vm.progressBars[focus - 1] = 100;
+		$timeout(function() {
+			vm.stepFocus = focus;
+		}, 100);
+	}
 
 	//Static collection retrieval
 	vm.failedRetrieval = function(data)

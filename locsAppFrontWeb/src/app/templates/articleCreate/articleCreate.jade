@@ -3,7 +3,7 @@ div(layout="row", layout-align="center center", layout-margin)
 div(layout="row", layout-align="center center", layout-margin).article-create
 	div.ng-cloak.flex
 		md-content
-			md-tabs(md-center-tabs).md-dynamic-height.md-border-bottom
+			md-tabs(md-center-tabs, md-selected="articleCreate.stepFocus").md-dynamic-height.md-border-bottom
 				div(ng-repeat="stepComplete in articleCreate.stepsComplete track by $index")
 					md-tab(ng-attr-ng-disabled="!stepComplete")
 						md-tab-label
@@ -13,5 +13,7 @@ div(layout="row", layout-align="center center", layout-margin).article-create
 								div(ng-if="!$last").flex
 									md-progress-linear(md-mode="determinate", ng-value="articleCreate.progressBars[$index]").icon-bar-progress
 						md-tab-body
-							md-content(ng-if="$index + 1 == articleCreate.stepFocus", layout="column", layout-align="center center").body-steps
+							md-content(ng-if="articleCreate.stepFocus == 0", layout="column", layout-align="center center").body-steps
+								include ./steps/step1.jade
+							md-content(ng-if="articleCreate.stepFocus == 1", layout="column", layout-align="center center").body-steps
 								include ./steps/step1.jade
