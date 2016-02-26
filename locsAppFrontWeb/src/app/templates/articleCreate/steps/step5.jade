@@ -1,0 +1,7 @@
+md-card(layout-fill)
+	md-card-title(layout="row", layout-align="center center").body-title-step
+		md-card-title-text
+			h3 The modalities for the renter
+	md-card-content(layout="column", layout-align="center center")
+		form(name="articleFormStep5" novalidate ng-submit="articleFormStep5.$valid && articleCreate.nextStep(5)", layout="column", layout-align="center center")
+			md-button.md-raised Next Step

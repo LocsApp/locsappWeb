@@ -1,0 +1,18 @@
+md-card(layout-fill)
+	md-card-title(layout="row", layout-align="center center").body-title-step
+		md-card-title-text
+			h3 Description of your article
+	md-card-content(layout="column", layout-align="center center")
+		form(name="articleFormStep3" novalidate ng-submit="articleFormStep3.$valid && articleCreate.nextStep(3)", layout="column", layout-align="center center")
+			p
+				md-title The description of your article
+				span
+					ng-md-icon(icon="help", size="20")
+						md-tooltip(md-direction="right") This will be the description of your article, keep in mind that it will represent your article
+			md-input-container.input-centered
+				textarea(placeholder="Description" required name="description" ng-model="articleCreate.description" maxlength="5000" minlength="3").input-title
+				div(ng-messages="articleFormStep3.description.$error" ng-if='!articleFormStep3.description.$pristine')
+					div(ng-message="required") This is required.
+					div(ng-message="minlength") The description must be longer than 3 characters.
+					div(ng-message="md-maxlength") The description must be shorter than 5000 characters.
+			md-button.md-raised Next Step

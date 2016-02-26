@@ -1,0 +1,7 @@
+md-card(layout-fill)
+	md-card-title(layout="row", layout-align="center center").body-title-step
+		md-card-title-text
+			h3 The pictures of your article
+	md-card-content(layout="column", layout-align="center center")
+		form(name="articleFormStep4" novalidate ng-submit="articleFormStep4.$valid && articleCreate.nextStep(4)", layout="column", layout-align="center center")
+			md-button.md-raised Next Step
