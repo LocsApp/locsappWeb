@@ -6,10 +6,10 @@
     width: 20px;
     margin-top: -2px;
   }
-/*
-  .description {
-    text-align: justify;
-  }*/
+  /*
+    .description {
+      text-align: justify;
+    }*/
 
   .grid-gallery {
     // width: auto;
@@ -26,10 +26,7 @@
 /*Slider Css */
 .article-show-slider {
 
-
-
-    width: 450px;
-
+  width: 450px;
 
   //overflow-x: hidden;
 
@@ -128,7 +125,7 @@ NAV
       opacity: 0.2;
       left: 20px;
       background-image: url(http://onehungrymind.com/demos/slider/assets/img/paddle_prev_999.png);
-      transition: 0.0.5s linear all;
+      transition: 0.0 .5s linear all;
 
       &:hover {
         opacity: 1;
@@ -140,7 +137,7 @@ NAV
       opacity: 0.2;
       right: 20px;
       background-image: url(http://onehungrymind.com/demos/slider/assets/img/paddle_next_999.png);
-      transition: 0.0.5s linear all;
+      transition: 0.0 .5s linear all;
 
       &:hover {
         opacity: 1;
@@ -153,53 +150,42 @@ NAV
 
 /* Animation CSS */
 
-.toto {
-  display: none;
-}
-
-.slideanimationright.ng-hide-add, .slideanimationright.ng-hide-remove {
+.slide-animation-right.ng-hide-add, .slide-animation-right.ng-hide-remove {
   -webkit-animation: slideOutLeft 0.8s, fadeIn 0.8s;
   -moz-animation: slideOutLeft 0.8s, fadeIn 0.8s;
-  -ms-animation: slideOutLeft 0.8ss, fadeIn 0.8ss;
+  -ms-animation: slideOutLeft 0.8 ss, fadeIn 0.8 ss;
   animation: slideOutLeft 0.8s, fadeIn 0.8s;
 }
 
-.slideanimationright.ng-hide {
-  -webkit-animation:  slideOutLeft 0.8s, fadeOut 0.8s;
+.slide-animation-right.ng-hide {
+  -webkit-animation: slideOutLeft 0.8s, fadeOut 0.8s;
   -moz-animation: slideOutLeft 0.8s, fadeOut 0.8s;
-  -ms-animation:  slideOutLeft 0.8s, fadeOut 0.8s;
+  -ms-animation: slideOutLeft 0.8s, fadeOut 0.8s;
   animation: slideOutLeft 0.8s, fadeOut 0.8s;
 
 }
 
-
-.slideanimationleft.ng-hide-add, .slideanimationleft.ng-hide-remove {
+.slide-animation-left.ng-hide-add, .slide-animation-left.ng-hide-remove {
   -webkit-animation: slideInLeft 0.8s, fadeIn 0.8s;
-  -moz-animation:slideInLeft 0.8s, fadeIn0.8s;
+  -moz-animation: slideInLeft 0.8s, fadeIn .8s;
   -ms-animation: slideInLeft 0.8s, fadeIn 0.8s;
   animation: slideInLeft 0.8s, fadeIn 0.8s;
 }
 
-.slideanimationleft.ng-hide {
- -webkit-animation: slideInLeft 0.8s, fadeOut 0.8s;
-  -moz-animation:slideInLeft 0.8s, fadeOut 0.8s;
+.slide-animation-left.ng-hide {
+  -webkit-animation: slideInLeft 0.8s, fadeOut 0.8s;
+  -moz-animation: slideInLeft 0.8s, fadeOut 0.8s;
   -ms-animation: slideInLeft 0.8s, fadeOut 0.8s;
   animation: slideInLeft 0.8s, fadeOut 0.8s;
 
 }
 
-/*.fadeinanimation.ng-hide-add, .fadeinanimation.ng-hide-remove {
-  -webkit-animation: fadeIn 0.5s;
-  -moz-animation: fadeIn 0.5s;
-  -ms-animation: fadeIn 0.5s;
-  animation: fadeIn 0.5s;
+.fade-animation.ng-hide-add, .fade-animation.ng-hide-remove {
+  transition: all linear 0.5s;
+
 }
 
-.fadeinanimation.ng-hide {
-  -webkit-animation: fadeIn 0.5s;
-  -moz-animation: fadeIn 0.5s;
-  -ms-animation: fadeIn 0.5s;
-  animation: fadeIn 0.5s;
-
-}*/
+.fade-animation.ng-hide {
+  opacity: 0;
+}
 

@@ -7,7 +7,7 @@
     .controller('ArticleShowController', ArticleShowController);
 
   /** @ngInject */
-  function ArticleShowController($log, $mdDialog, $document, ArticleService, $stateParams) {
+  function ArticleShowController($log, $mdDialog, $document, ArticleService, $stateParams, $interval) {
     var vm = this;
 
     $log.log("route params = ", $stateParams.id);
@@ -56,6 +56,7 @@
 
       vm.slideRight = false;
       vm.slideLeft = false;
+      vm.fade = false;
       //$log.log("IN image show Image Gallery", index, slides[0]);
 
 
@@ -64,6 +65,9 @@
 
 
       vm.setCurrentSlideIndex = function (index) {
+        vm.fade = true;
+        vm.slideLeft = false;
+        vm.slideRight = false;
         vm.currentIndex = index;
       };
 
@@ -75,13 +79,22 @@
         vm.currentIndex = (vm.currentIndex > 0) ? --vm.currentIndex : vm.slides.length - 1;
         vm.slideLeft = true;
         vm.slideRight = false;
+        vm.fade = false;
       };
 
       vm.nextSlide = function () {
         vm.currentIndex = (vm.currentIndex < vm.slides.length - 1) ? ++vm.currentIndex : 0;
         vm.slideRight = true;
         vm.slideLeft = false;
+        vm.fade = false;
       };
+
+      vm.automaticNext = function () {
+        $log.log("Automatic next");
+        vm.nextSlide();
+      };
+
+      $interval(vm.automaticNext, 5000);
 
 
     }
