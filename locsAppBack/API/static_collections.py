@@ -37,3 +37,35 @@ def staticSubCategories(request):
         return APIrequests.GET("sub_categories")
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+@csrf_exempt
+def staticGenders(request):
+    if (request.method == "GET"):
+        return APIrequests.GET("genders")
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+@csrf_exempt
+def staticSize(request):
+    if (request.method == "GET"):
+        return APIrequests.GET("sizes")
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+@csrf_exempt
+def staticClotheColors(request):
+    if (request.method == "GET"):
+        return APIrequests.GET("clothe_colors")
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+@csrf_exempt
+def staticClotheStates(request):
+    if (request.method == "GET"):
+        return APIrequests.GET("clothe_states")
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)

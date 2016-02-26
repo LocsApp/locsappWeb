@@ -57,7 +57,11 @@ user_patterns = [
 # Static collections urls
 static_collections_patterns = [
     url(r'^base-categories/$', static_collections.staticBaseCategories),
-    url(r'^sub-categories/$', static_collections.staticSubCategories)
+    url(r'^sub-categories/$', static_collections.staticSubCategories),
+    url(r'^genders/$', static_collections.staticGenders),
+    url(r'^sizes/$', static_collections.staticSizes),
+    url(r'^clothe-colors/$', static_collections.staticClotheColors),
+    url(r'^clothe-states/$', static_collections.staticClotheColors)
 ]
 
 # General urls for the api
