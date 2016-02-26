@@ -12,9 +12,6 @@
 
     $log.log("route params = ", $stateParams.id);
 
-    var img_slide = angular.element( document.querySelector( '.slide' ) );
-
-
 
     vm.GetInfoArticleSuccess = function (data) {
       $log.log("data SUCCESS= ", data);
@@ -57,6 +54,8 @@
 
       var vm = this;
 
+      vm.slideRight = false;
+      vm.slideLeft = false;
       //$log.log("IN image show Image Gallery", index, slides[0]);
 
 
@@ -73,13 +72,15 @@
       };
 
       vm.prevSlide = function () {
-        vm.currentIndex = (vm.currentIndex < vm.slides.length - 1) ? ++vm.currentIndex : 0;
+        vm.currentIndex = (vm.currentIndex > 0) ? --vm.currentIndex : vm.slides.length - 1;
+        vm.slideLeft = true;
+        vm.slideRight = false;
       };
 
       vm.nextSlide = function () {
-        vm.currentIndex = (vm.currentIndex > 0) ? --vm.currentIndex : vm.slides.length - 1;
-        //img_slide.addClass('slide-animation-right');
-
+        vm.currentIndex = (vm.currentIndex < vm.slides.length - 1) ? ++vm.currentIndex : 0;
+        vm.slideRight = true;
+        vm.slideLeft = false;
       };
 
 

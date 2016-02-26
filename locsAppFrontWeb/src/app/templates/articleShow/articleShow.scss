@@ -153,34 +153,37 @@ NAV
 
 /* Animation CSS */
 
+.toto {
+  display: none;
+}
 
-.slide-animation-right.ng-hide-add, .slide-animation-right.ng-hide-remove {
+.slideanimationright.ng-hide-add, .slideanimationright.ng-hide-remove {
   -webkit-animation: slideOutLeft1s;
-  -moz-animation: slideOutLeft 1s;
-  -ms-animation: slideOutLeft 1s;
-  animation: slideOutLeft 1s;
+  -moz-animation: slideOutLeft 0.5s;
+  -ms-animation: slideOutLeft 0.5s;
+  animation: slideOutLeft 0.5s;
 }
 
-.slide-animation-right.ng-hide {
-  -webkit-animation: slideOutLeft 1s;
-  -moz-animation: slideOutLeft 1s;
-  -ms-animation: slideOutLeft 1s;
-  animation: slideOutLeft 1s;
+.slideanimationright.ng-hide {
+  -webkit-animation: slideOutLeft 0.5s;
+  -moz-animation: slideOutLeft 0.5s;
+  -ms-animation: slideOutLeft 0.5s;
+  animation: slideOutLeft 0.5s;
 
 }
 
 
-/*.slide-animation.ng-hide-add, .slide-animation.ng-hide-remove {
+.slideanimationleft.ng-hide-add, .slideanimationleft.ng-hide-remove {
   -webkit-animation: slideOutRight 1s;
   -moz-animation: slideOutRight 1s;
   -ms-animation: slideOutRight 1s;
   animation: slideOutRight 1s;
 }
 
-.slide-animation.ng-hide {
+.slideanimationleft.ng-hide {
   -webkit-animation: slideOutRight 1s;
   -moz-animation: slideOutRight 1s;
   -ms-animation: slideOutRight 1s;
   animation: slideOutRight 1s;
 
-}*/
+}
