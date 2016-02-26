@@ -19,6 +19,12 @@
 	//article vars
 	vm.categories = null;
 	vm.subCategories = null;
+	vm.genders = null;
+	vm.sizes = null;
+	vm.clothe_colors = null;
+	vm.clothe_states = null;
+	vm.payment_methods = null;
+	vm.description = null;
 
 	//user chose
 	vm.article = {
@@ -42,9 +48,49 @@
 		toastr.error("We couldn't retrieve some informations..." , 'Woops...');
 	}
 
+	vm.getClotheStates = function(data)
+	{
+		vm.clothe_states = data.clothe_states;
+	}
+
+	vm.getClotheColors = function(data)
+	{
+		vm.clothe_colors = data.clothe_colors;
+		ArticleService
+		.getClotheStates
+		.get()
+		.$promise
+		.then(vm.getClotheStates, vm.failedRetrieval);
+	}
+
+	vm.getSizes = function(data)
+	{
+		vm.sizes = data.sizes;
+		ArticleService
+		.getClotheColors
+		.get()
+		.$promise
+		.then(vm.getClotheColors, vm.failedRetrieval);
+	}
+
+	vm.getGenders = function(data)
+	{
+		vm.genders = data.genders;
+		ArticleService
+		.getSizes
+		.get()
+		.$promise
+		.then(vm.getSizes, vm.failedRetrieval);		
+	}
+
 	vm.getSubCategories = function(data)
 	{
 		vm.subCategories = data.sub_categories;
+		ArticleService
+		.getGenders
+		.get()
+		.$promise
+		.then(vm.getGenders, vm.failedRetrieval);		
 	}
 
 	vm.getCategories = function(data)

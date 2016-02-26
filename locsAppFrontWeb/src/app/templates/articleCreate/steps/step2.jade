@@ -11,9 +11,9 @@ md-card(layout-fill)
 						ng-md-icon(icon="help", size="20")
 							md-tooltip(md-direction="right") It defines for which gender the clothe is meant to be for
 					md-input-container
-						md-select(ng-model="articleCreate.base_category", name="base_category", placeholder="Gender", required)
-							md-option(ng-value="opt._id", ng-repeat="opt in articleCreate.categories") {{ opt.name }}
-						div(ng-messages="articleFormStep1.base_category.$error" ng-if='!articleFormStep1.base_category.$pristine')
+						md-select(ng-model="articleCreate.article.gender", name="gender", placeholder="Gender", required)
+							md-option(ng-value="opt._id", ng-repeat="opt in articleCreate.genders") {{ opt.name }}
+						div(ng-messages="articleFormStep1.gender.$error" ng-if='!articleFormStep1.gender.$pristine')
 							div(ng-message="required") This is required.
 				p.separate-aligned-blocks
 					md-title The size
@@ -21,9 +21,9 @@ md-card(layout-fill)
 						ng-md-icon(icon="help", size="20")
 							md-tooltip(md-direction="right") This is the size of your clothe
 					md-input-container
-						md-select(ng-model="articleCreate.base_category", name="base_category", placeholder="Size", required)
-							md-option(ng-value="opt._id", ng-repeat="opt in articleCreate.categories") {{ opt.name }}
-						div(ng-messages="articleFormStep1.base_category.$error" ng-if='!articleFormStep1.base_category.$pristine')
+						md-select(ng-model="articleCreate.article.size", name="size", placeholder="Size", required)
+							md-option(ng-value="opt._id", ng-repeat="opt in articleCreate.sizes") {{ opt.name }}
+						div(ng-messages="articleFormStep1.size.$error" ng-if='!articleFormStep1.size.$pristine')
 							div(ng-message="required") This is required.
 				p.separate-aligned-blocks
 					md-title Color
@@ -31,9 +31,9 @@ md-card(layout-fill)
 						ng-md-icon(icon="help", size="20")
 							md-tooltip(md-direction="right") Choose the main color of your clothe
 					md-input-container
-						md-select(ng-model="articleCreate.base_category", name="base_category", placeholder="Color", required)
-							md-option(ng-value="opt._id", ng-repeat="opt in articleCreate.categories") {{ opt.name }}
-						div(ng-messages="articleFormStep1.base_category.$error" ng-if='!articleFormStep1.base_category.$pristine')
+						md-select(ng-model="articleCreate.article.color", name="color", placeholder="Color", required)
+							md-option(ng-value="opt._id", ng-repeat="opt in articleCreate.clothe_colors") {{ opt.name }}
+						div(ng-messages="articleFormStep1.color.$error" ng-if='!articleFormStep1.color.$pristine')
 							div(ng-message="required") This is required.
 				p.separate-aligned-blocks
 					md-title The state
@@ -41,7 +41,7 @@ md-card(layout-fill)
 						ng-md-icon(icon="help", size="20")
 							md-tooltip(md-direction="right") Indicate in which state your clothe is
 					md-input-container
-						md-select(ng-model="articleCreate.base_category", name="base_category", placeholder="State", required)
-							md-option(ng-value="opt._id", ng-repeat="opt in articleCreate.categories") {{ opt.name }}
-						div(ng-messages="articleFormStep1.base_category.$error" ng-if='!articleFormStep1.base_category.$pristine')
+						md-select(ng-model="articleCreate.article.clothe_condition", name="state", placeholder="State", required)
+							md-option(ng-value="opt._id", ng-repeat="opt in articleCreate.clothe_states") {{ opt.name }}
+						div(ng-messages="articleFormStep1.state.$error" ng-if='!articleFormStep1.state.$pristine')
 							div(ng-message="required") This is required.
