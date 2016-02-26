@@ -158,32 +158,51 @@ NAV
 }
 
 .slideanimationright.ng-hide-add, .slideanimationright.ng-hide-remove {
-  -webkit-animation: slideOutLeft1s;
-  -moz-animation: slideOutLeft 0.5s;
-  -ms-animation: slideOutLeft 0.5s;
-  animation: slideOutLeft 0.5s;
+  /*-webkit-animation: slideOutLeft 0.5s,  bounceIn 1s;
+  -moz-animation: slideOutLeft 0.5s, bounceIn 1s;
+  -ms-animation: slideOutLeft 0.5s, bounceIn 1s;*/
+  //animation: slideOutLeft 0.5s, bounceIn 1s;
+  animation: slideOutLeft 2s, fadeIn 2s;
 }
 
 .slideanimationright.ng-hide {
-  -webkit-animation: slideOutLeft 0.5s;
-  -moz-animation: slideOutLeft 0.5s;
-  -ms-animation: slideOutLeft 0.5s;
-  animation: slideOutLeft 0.5s;
+ /* -webkit-animation: slideOutLeft 0.5s, bounceIn 1s;
+  -moz-animation: slideOutLeft 0.5s, bounceIn 1s;
+  -ms-animation: slideOutLeft 0.5s, bounceIn 1s;
+  animation: slideOutLeft 0.5s, bounceIn 1s;*/
+ // animation: shrink 2s ease-out, pulsate 4s 2s infinite ease-in-out;
+  animation: slideOutLeft 2s, fadeOut 2s;
 
 }
 
 
 .slideanimationleft.ng-hide-add, .slideanimationleft.ng-hide-remove {
-  -webkit-animation: slideOutRight 1s;
-  -moz-animation: slideOutRight 1s;
-  -ms-animation: slideOutRight 1s;
-  animation: slideOutRight 1s;
+  -webkit-animation: slideOutRight 1s, bounceIn 1s;
+  -moz-animation: slideOutRight 1s, bounceIn 1s;
+  -ms-animation: slideOutRight 1s, bounceIn 1s;
+  animation: slideOutRight 1s, bounceIn 1s;
 }
 
 .slideanimationleft.ng-hide {
-  -webkit-animation: slideOutRight 1s;
-  -moz-animation: slideOutRight 1s;
-  -ms-animation: slideOutRight 1s;
-  animation: slideOutRight 1s;
+  -webkit-animation: slideOutRight 1s, bounceIn 1s;
+  -moz-animation: slideOutRight 1s, bounceIn 1s;
+  -ms-animation: slideOutRight 1s, bounceIn 1s;
+  animation: slideOutRight 1s, bounceIn 1s;
 
 }
+
+/*.fadeinanimation.ng-hide-add, .fadeinanimation.ng-hide-remove {
+  -webkit-animation: fadeIn 1s;
+  -moz-animation: fadeIn 1s;
+  -ms-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+.fadeinanimation.ng-hide {
+  -webkit-animation: fadeIn 1s;
+  -moz-animation: fadeIn 1s;
+  -ms-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+
+}*/
+
