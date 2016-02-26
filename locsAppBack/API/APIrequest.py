@@ -13,6 +13,8 @@ from bson.objectid import ObjectId
 
 import pytz
 from datetime import datetime
+from bson import json_util
+from bson.json_util import dumps
 
 
 class APIRequestMongo:
@@ -106,7 +108,7 @@ class APIRequestMongo:
         return (False)
 
     """
-    This method created a POST endpoint for a mongo API
+    This method creates a POST endpoint for a mongo API
     """
 
     def POST(self, request, model, collection_name, success_message):
@@ -134,6 +136,23 @@ class APIRequestMongo:
             self.db[collection_name].insert_one(document)
             return (JsonResponse(
                 {"message": success_message}, status=200))
+
+    """
+    This method creates a GET endpoint for a mongo API
+
+    """
+
+    def GET(self, collection_name, id=None):
+        if (id is None):
+            documents = self.db[collection_name].find({})
+            answer = {collection_name: []}
+            for instance in documents:
+                answer[collection_name].append(
+                    self.parseObjectIdToStr(instance))
+        if (id):
+            answer = self.parseObjectIdToStr(
+                self.db[collection_name].find_one({"_id": id}))
+        return (JsonResponse(answer, status=200))
 
     """
     verifies is the fields are correct:

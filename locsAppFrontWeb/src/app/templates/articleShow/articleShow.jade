@@ -37,11 +37,19 @@ div(class="article-show" )
   md-content
     md-list
       md-subheader.md-no-sticky
-      md-list-item.md-3-line(ng-repeat='comment in articleShow.comments' layout-align='center' ng-show='comment.is_visible')
-        img.md-avatar(ng-src='https://material.angularjs.org/latest/img/list/60.jpeg?0', alt='{{comment.username_author}}')
+      md-list-item.md-3-line(ng-repeat='parentComment in articleShow.comments' layout-align='center' ng-show='parentComment.is_visible')
+        img.md-avatar(ng-src='https://material.angularjs.org/latest/img/list/60.jpeg?0', alt='{{parentComment.username_author}}')
         .md-list-item-text(layout='column')
-          h3 {{ comment.username_author}}
-          h4 {{ comment.date_created }}
-          p {{ comment.content }}
+          h3 {{ parentComment.username_author}}
+          h4 {{ parentComment.date_created }}
+          p {{ parentComment.content }}
+
+          md-list-item.md-3-line(ng-repeat='childComment in parentComment.childs' ng-show='childComment.is_visible')
+            img.md-avatar(ng-src='https://material.angularjs.org/latest/img/list/60.jpeg?0', alt='{{parentComment.username_author}}')
+            .md-list-item-text(layout='column')
+              h3 {{ parentComment.username_author}}
+              h4 {{ parentComment.date_created }}
+              p {{ parentComment.content }}
+
         md-divider
 

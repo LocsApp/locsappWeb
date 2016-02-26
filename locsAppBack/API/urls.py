@@ -4,6 +4,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 # importing local views
 from . import views
 from . import articles
+from . import static_collections
 from django.views.generic.base import RedirectView
 
 from allauth.account.views import confirm_email
@@ -53,6 +54,12 @@ user_patterns = [
         views.notificationsUser)
 ]
 
+# Static collections urls
+static_collections_patterns = [
+    url(r'^base-categories/$', static_collections.staticBaseCategories),
+    url(r'^sub-categories/$', static_collections.staticSubCategories)
+]
+
 # General urls for the api
 api_patterns = [
 
@@ -78,5 +85,7 @@ api_patterns = [
         name="account_signup"),
     url(r'^user/', include(user_patterns)),
     url(r'^notifications/', include(notifications_patterns)),
-    url(r'^search/', include(search_patterns))
+    url(r'^search/', include(search_patterns)),
+    url(r'^static-collections/',
+        include(static_collections_patterns))
 ]
