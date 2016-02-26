@@ -174,17 +174,17 @@ NAV
 
 
 .slideanimationleft.ng-hide-add, .slideanimationleft.ng-hide-remove {
-  -webkit-animation: slideInLeft 1.5s, fadeIn 1.5s;
-  -moz-animation:slideInLeft 1.5s, fadeIn1.5s;
-  -ms-animation: slideInLeft 1.5s, fadeIn 1.5s;
-  animation: slideInLeft 1.5s, fadeIn 1.5s;
+  -webkit-animation: slideInLeft 0.8s, fadeIn 0.8s;
+  -moz-animation:slideInLeft 0.8s, fadeIn0.8s;
+  -ms-animation: slideInLeft 0.8s, fadeIn 0.8s;
+  animation: slideInLeft 0.8s, fadeIn 0.8s;
 }
 
 .slideanimationleft.ng-hide {
- -webkit-animation: slideInLeft 1.5s, fadeOut 1.5s;
-  -moz-animation:slideInLeft 1.5s, fadeOut 1.5s;
-  -ms-animation: slideInLeft 1.5s, fadeOut 1.5s;
-  animation: slideInLeft 1.5s, fadeOut 1.5s;
+ -webkit-animation: slideInLeft 0.8s, fadeOut 0.8s;
+  -moz-animation:slideInLeft 0.8s, fadeOut 0.8s;
+  -ms-animation: slideInLeft 0.8s, fadeOut 0.8s;
+  animation: slideInLeft 0.8s, fadeOut 0.8s;
 
 }
 
