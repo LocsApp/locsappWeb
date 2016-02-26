@@ -15,3 +15,20 @@ md-card(layout-fill)
 					div(ng-message="required") This is required.
 					div(ng-message="minlength") The title must be longer than 3 characters.
 					div(ng-message="md-maxlength") The title must be shorter than 50 characters.
+			p
+				md-title The category
+				span
+					ng-md-icon(icon"help", size="20")
+						md-tooltip(md-direction="right") It will categorize your article to be found in one of the 3 main themes
+			md-input-container
+				md-select(ng-model="articleCreate.base_category", placeholder="Category")
+					md-option(ng-value="opt", ng-repeat="opt in articleCreate.categories") {{ opt }}
+			p
+				md-title The sub-category
+				span
+					ng-md-icon(icon"help", size="20")
+						md-tooltip(md-direction="right") It will help to precise the scope of your article
+			md-input-container
+				md-select(ng-model="articleCreate.article.sub_category", placeholder="Sub Category")
+					md-option(ng-value="opt", ng-repeat="opt in articleCreate.categories") {{ opt }}
+			md-button.md-raised Next Step		

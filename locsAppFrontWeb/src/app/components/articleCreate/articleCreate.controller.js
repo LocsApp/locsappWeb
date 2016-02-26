@@ -9,10 +9,19 @@
   function ArticleCreateController($log) {
 	var vm = this;
 
+	//steps vars
 	vm.value = 0;
 	vm.stepsNames = ["squared_one", "squared_two", "squared_three", "squared_four", "squared_five", "squared_six"];
 	vm.stepsComplete = [1, 0, 0, 0, 0, 0];
 	vm.progressBars = [0, 0, 0, 0, 0, 0]
 	vm.stepFocus = 1;
+
+	//article vars
+	vm.categories = ['test', 'lol', 'lil'];
+
+	//user chose
+	vm.article = {
+		"base_category" : ""
+	};
   }
 })();
