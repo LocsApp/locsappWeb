@@ -143,10 +143,15 @@ class APIRequestMongo:
     """
 
     def GET(self, collection_name, id=None):
-        documents = self.db[collection_name].find({})
-        answer = {collection_name: []}
-        for instance in documents:
-            answer[collection_name].append(self.parseObjectIdToStr(instance))
+        if (id is None):
+            documents = self.db[collection_name].find({})
+            answer = {collection_name: []}
+            for instance in documents:
+                answer[collection_name].append(
+                    self.parseObjectIdToStr(instance))
+        if (id):
+            answer = self.parseObjectIdToStr(
+                self.db[collection_name].find_one({"_id": id}))
         return (JsonResponse(answer, status=200))
 
     """
