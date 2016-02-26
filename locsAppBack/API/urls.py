@@ -61,7 +61,8 @@ static_collections_patterns = [
     url(r'^genders/$', static_collections.staticGenders),
     url(r'^sizes/$', static_collections.staticSizes),
     url(r'^clothe-colors/$', static_collections.staticClotheColors),
-    url(r'^clothe-states/$', static_collections.staticClotheColors)
+    url(r'^clothe-states/$', static_collections.staticClotheStates),
+    url(r'^payment-methods/$', static_collections.staticPaymentMethods)
 ]
 
 # General urls for the api

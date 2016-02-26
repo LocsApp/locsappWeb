@@ -69,3 +69,11 @@ def staticClotheStates(request):
         return APIrequests.GET("clothe_states")
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+@csrf_exempt
+def staticPaymentMethods(request):
+    if (request.method == "GET"):
+        return APIrequests.GET("payment_methods")
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
