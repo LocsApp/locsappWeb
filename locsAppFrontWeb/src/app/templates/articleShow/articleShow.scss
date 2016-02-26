@@ -26,6 +26,11 @@
 /*Slider Css */
 .article-show-slider {
 
+
+
+    width: 450px;
+
+
   overflow-x: hidden;
 
   img {
@@ -148,18 +153,34 @@ NAV
 
 /* Animation CSS */
 
-.ng-hide-add, .ng-hide-remove {
+
+.slide-animation-right.ng-hide-add, .slide-animation-right.ng-hide-remove {
   -webkit-animation: slideOutLeft1s;
   -moz-animation: slideOutLeft 1s;
   -ms-animation: slideOutLeft 1s;
   animation: slideOutLeft 1s;
 }
 
-.ng-hide {
+.slide-animation-right.ng-hide {
   -webkit-animation: slideOutLeft 1s;
   -moz-animation: slideOutLeft 1s;
   -ms-animation: slideOutLeft 1s;
   animation: slideOutLeft 1s;
-  display: none;
+
 }
 
+
+/*.slide-animation.ng-hide-add, .slide-animation.ng-hide-remove {
+  -webkit-animation: slideOutRight 1s;
+  -moz-animation: slideOutRight 1s;
+  -ms-animation: slideOutRight 1s;
+  animation: slideOutRight 1s;
+}
+
+.slide-animation.ng-hide {
+  -webkit-animation: slideOutRight 1s;
+  -moz-animation: slideOutRight 1s;
+  -ms-animation: slideOutRight 1s;
+  animation: slideOutRight 1s;
+
+}*/

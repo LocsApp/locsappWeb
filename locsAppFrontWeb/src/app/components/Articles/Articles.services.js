@@ -11,7 +11,7 @@
 
     var service = {
 
-      getArticle: $resource(URL_API + 'api/v1/articles/get/:id/', {id: "@user_id"}),
+      getArticle: $resource(URL_API + 'api/v1/articles/get/:id/', {id: "@article_id"}),
       is_authenticated : is_authenticated
     };
 

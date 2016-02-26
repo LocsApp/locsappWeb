@@ -9,13 +9,15 @@
   /** @ngInject */
   function ArticleShowController($log, $mdDialog, $document, ArticleService, $stateParams) {
     var vm = this;
-    vm.url_pictures = [];
 
     $log.log("route params = ", $stateParams.id);
 
+    var img_slide = angular.element( document.querySelector( '.slide' ) );
+
+
 
     vm.GetInfoArticleSuccess = function (data) {
-      $log.log("data = ", data);
+      $log.log("data SUCCESS= ", data);
       vm.url_pictures = ['http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg',
         'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516',
         'http://cdn.shopify.com/s/files/1/0293/9277/products/Fashion_Nova_-_01-21-16-410_large.JPG?v=1453489020',
@@ -55,7 +57,7 @@
 
       var vm = this;
 
-      $log.log("IN image show Image Gallery", index, slides);
+      //$log.log("IN image show Image Gallery", index, slides[0]);
 
 
       vm.slides = slides;
@@ -76,6 +78,8 @@
 
       vm.nextSlide = function () {
         vm.currentIndex = (vm.currentIndex > 0) ? --vm.currentIndex : vm.slides.length - 1;
+        //img_slide.addClass('slide-animation-right');
+
       };
 
 
