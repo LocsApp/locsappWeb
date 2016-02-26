@@ -14,6 +14,11 @@
       getArticle: $resource(URL_API + 'api/v1/articles/get/:id/', {id: "@article_id"}),
       getCategories: $resource(URL_API + 'api/v1/static-collections/base-categories/'),
       getSubCategories: $resource(URL_API + 'api/v1/static-collections/sub-categories/'),
+      getGenders: $resource(URL_API + 'api/v1/static-collections/genders/'),
+      getSizes: $resource(URL_API + 'api/v1/static-collections/sizes/'),
+      getClotheColors: $resource(URL_API + 'api/v1/static-collections/clothe-colors/'),
+      getClotheSizes: $resource(URL_API + 'api/v1/static-collections/clothe-sizes/'),
+      getPaymentMethods: $resource(URL_API + 'api/v1/static-collections/payment-methods/'),
       is_authenticated : is_authenticated
     };
 

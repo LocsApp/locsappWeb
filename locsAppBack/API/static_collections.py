@@ -48,7 +48,7 @@ def staticGenders(request):
 
 
 @csrf_exempt
-def staticSize(request):
+def staticSizes(request):
     if (request.method == "GET"):
         return APIrequests.GET("sizes")
     else:
