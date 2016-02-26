@@ -78,6 +78,7 @@
       };
 
       vm.setCurrentSlideIndex = function (index) {
+        $log.log("in setCurrentSlideindex");
         vm.fade = true;
         vm.slideLeft = false;
         vm.slideRight = false;
@@ -102,6 +103,7 @@
         vm.slideRight = true;
         vm.slideLeft = false;
         vm.fade = false;
+
         $interval.cancel(intervalNext);
       };
 

@@ -181,11 +181,16 @@ NAV
 }
 
 .fade-animation.ng-hide-add, .fade-animation.ng-hide-remove {
-  transition: all linear 0.5s;
-
+  -webkit-animation: fadeIn 0.8s;
+  -moz-animation:  fadeIn 0.8s;
+  -ms-animation: fadeIn 0.8s;
+  animation: fadeIn 0.8s;
 }
 
 .fade-animation.ng-hide {
-  opacity: 0;
+  -webkit-animation: fadeOut 0.4s;
+  -moz-animation:  fadeOut 0.4s;
+  -ms-animation: fadeOut 0.4s;
+  animation: fadeOut 0.4s;
 }
 
