@@ -96,7 +96,7 @@
           "childs": [],
           "last_versions": [],
           "flagged": null
-        },
+        }
 
       ]
 

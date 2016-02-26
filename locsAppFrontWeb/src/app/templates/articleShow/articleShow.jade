@@ -50,6 +50,10 @@ div(class="article-show" )
               h3 {{ parentComment.username_author}}
               h4 {{ parentComment.date_created }}
               p {{ parentComment.content }}
+            md-divider
 
         md-divider
+    md-input-container.md-block(flex-gt-sm='')
+      label Write your comments
+      input(ng-model='user.firstName')
 
