@@ -13,7 +13,7 @@ md-card(layout-fill)
 					md-input-container
 						md-select(ng-model="articleCreate.article.gender", name="gender", placeholder="Gender", required)
 							md-option(ng-value="opt._id", ng-repeat="opt in articleCreate.genders") {{ opt.name }}
-						div(ng-messages="articleFormStep1.gender.$error" ng-if='!articleFormStep1.gender.$pristine')
+						div(ng-messages="articleFormStep2.gender.$error" ng-if='!articleFormStep2.gender.$pristine')
 							div(ng-message="required") This is required.
 				p.separate-aligned-blocks
 					md-title The size
@@ -23,7 +23,7 @@ md-card(layout-fill)
 					md-input-container
 						md-select(ng-model="articleCreate.article.size", name="size", placeholder="Size", required)
 							md-option(ng-value="opt._id", ng-repeat="opt in articleCreate.sizes") {{ opt.name }}
-						div(ng-messages="articleFormStep1.size.$error" ng-if='!articleFormStep1.size.$pristine')
+						div(ng-messages="articleFormStep2.size.$error" ng-if='!articleFormStep2.size.$pristine')
 							div(ng-message="required") This is required.
 				p.separate-aligned-blocks
 					md-title Color
@@ -33,7 +33,7 @@ md-card(layout-fill)
 					md-input-container
 						md-select(ng-model="articleCreate.article.color", name="color", placeholder="Color", required)
 							md-option(ng-value="opt._id", ng-repeat="opt in articleCreate.clothe_colors") {{ opt.name }}
-						div(ng-messages="articleFormStep1.color.$error" ng-if='!articleFormStep1.color.$pristine')
+						div(ng-messages="articleFormStep2.color.$error" ng-if='!articleFormStep2.color.$pristine')
 							div(ng-message="required") This is required.
 				p.separate-aligned-blocks
 					md-title The state
@@ -43,5 +43,16 @@ md-card(layout-fill)
 					md-input-container
 						md-select(ng-model="articleCreate.article.clothe_condition", name="state", placeholder="State", required)
 							md-option(ng-value="opt._id", ng-repeat="opt in articleCreate.clothe_states") {{ opt.name }}
-						div(ng-messages="articleFormStep1.state.$error" ng-if='!articleFormStep1.state.$pristine')
+						div(ng-messages="articleFormStep2.state.$error" ng-if='!articleFormStep2.state.$pristine')
 							div(ng-message="required") This is required.
+			p
+				md-title The Brand
+				span
+					ng-md-icon(icon="help", size="20")
+						md-tooltip(md-direction="right") This is the brand of your clothe (you can put homemade if you made it yourself)
+				md-input-container
+					md-select(ng-model="articleCreate.article.brand", name="brand", placeholder="Brand", required)
+						md-option(ng-value="opt._id", ng-repeat="opt in articleCreate.brands") {{ opt.name }}
+					div(ng-messages="articleFormStep2.brand.$error" ng-if='!articleFormStep2.brand.$pristine')
+						div(ng-message="required") This is required.
+			md-button.md-raised Next Step
