@@ -63,11 +63,25 @@
       vm.slides = slides;
       vm.currentIndex = index;
 
+      vm.automaticNext = function () {
+        vm.currentIndex = (vm.currentIndex < vm.slides.length - 1) ? ++vm.currentIndex : 0;
+        vm.slideRight = true;
+        vm.slideLeft = false;
+        vm.fade = false;
+      };
+
+      var intervalNext = $interval(vm.automaticNext, 3000);
+
+
+      vm.cancel = function () {
+
+      };
 
       vm.setCurrentSlideIndex = function (index) {
         vm.fade = true;
         vm.slideLeft = false;
         vm.slideRight = false;
+        $interval.cancel(intervalNext);
         vm.currentIndex = index;
       };
 
@@ -80,6 +94,7 @@
         vm.slideLeft = true;
         vm.slideRight = false;
         vm.fade = false;
+        $interval.cancel(intervalNext);
       };
 
       vm.nextSlide = function () {
@@ -87,14 +102,8 @@
         vm.slideRight = true;
         vm.slideLeft = false;
         vm.fade = false;
+        $interval.cancel(intervalNext);
       };
-
-      vm.automaticNext = function () {
-        $log.log("Automatic next");
-        vm.nextSlide();
-      };
-
-      $interval(vm.automaticNext, 5000);
 
 
     }
