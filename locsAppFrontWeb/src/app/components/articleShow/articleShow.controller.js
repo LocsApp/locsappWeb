@@ -9,6 +9,7 @@
   /** @ngInject */
   function ArticleShowController($log, $mdDialog, $document, ArticleService, $stateParams, $interval) {
     var vm = this;
+    //vm.showChildComment = false;
     vm.test_test = ['un', 'deux', 'trois'];
      vm.url_pictures = ['http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg',
         'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516',

@@ -52,12 +52,12 @@ div(class="article-show" )
           p {{ parentComment.content }}
           p
             //a(href='#') reply
-            a(href='#' ng-hide="!parentComment.childs.length")  Show more
+            a(href='#' ng-if="parentComment.childs.length" ng-click="articleShow.showChildComment = !articleShow.showChildComment")  Show more
           md-input-container.md-block()
             label Write a new comment
             textarea(ng-model='articleShow.childNewComment.$index' input-comment="articleShow.submitComment(articleShow.parentNewComment)")
 
-          md-list-item.md-3-line(ng-repeat='childComment in parentComment.childs')
+          md-list-item.md-3-line(ng-repeat='childComment in parentComment.childs' ng-show='articleShow.showChildComment')
             img.md-avatar(ng-src='http://localhost:3000/assets/images/users/profile_picture/unknown-user.png', alt='{{parentComment.username_author}}')
             .md-list-item-text(layout='column')
               h3 {{ parentComment.username_author}}
