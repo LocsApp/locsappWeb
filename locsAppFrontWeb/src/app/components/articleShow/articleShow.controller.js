@@ -123,6 +123,12 @@
       .then(vm.GetInfoArticleSuccess, vm.getInfoArticleFailure);
 
 
+    vm.reply = function()
+    {
+      //Show the new input
+
+    };
+
     vm.clickImageGallery = function (event, index) {
       $mdDialog.show({
         controller: vm.showImageCarouselController,
