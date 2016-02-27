@@ -51,9 +51,9 @@ div(class="article-show" )
           h4 {{ parentComment.date_created }}
           p {{ parentComment.content }}
           p
-            //a(href='#') reply
+            a(href='#' ng-click="articleShow.replyComment = !articleShow.replyComment") reply
             a(href='#' ng-if="parentComment.childs.length" ng-click="articleShow.showChildComment = !articleShow.showChildComment")  Show more
-          md-input-container.md-block()
+          md-input-container.md-block(ng-show='articleShow.replyComment')
             label Write a new comment
             textarea(ng-model='articleShow.childNewComment.$index' input-comment="articleShow.submitComment(articleShow.parentNewComment)")
 
