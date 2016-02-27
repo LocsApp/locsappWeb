@@ -9,13 +9,21 @@
   /** @ngInject */
   function ArticleShowController($log, $mdDialog, $document, ArticleService, $stateParams, $interval) {
     var vm = this;
+    vm.test_test = ['un', 'deux', 'trois'];
+     vm.url_pictures = ['http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg',
+        'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516',
+        'http://cdn.shopify.com/s/files/1/0293/9277/products/Fashion_Nova_-_01-21-16-410_large.JPG?v=1453489020',
+        'http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg',
+        'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516',
+        'http://cdn.shopify.com/s/files/1/0293/9277/products/Fashion_Nova_-_01-21-16-410_large.JPG?v=1453489020'
+      ];
 
     $log.log("route params = ", $stateParams.id);
 
 
     vm.GetInfoArticleSuccess = function (data) {
       $log.log("data SUCCESS= ", data);
-      vm.url_pictures = ['http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg',
+      vm.urlpictures = ['http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg',
         'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516',
         'http://cdn.shopify.com/s/files/1/0293/9277/products/Fashion_Nova_-_01-21-16-410_large.JPG?v=1453489020',
         'http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg',
@@ -128,10 +136,10 @@
     };
 
 
-    vm.doSomething = function (comment) {
+    vm.submitComment = function (comment) {
       // SI on a clique sur shit on veut revenir a ligne
       //SINON on envoie le commentaire direcment1
-      $log.log("Send form", vm.parentNewComment);
+      $log.log("Send form", vm.parentNewComment, comment);
       //vm.parentNewComment += '\n toto';
     };
 
