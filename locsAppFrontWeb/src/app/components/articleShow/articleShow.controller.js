@@ -45,35 +45,35 @@
           "date_created": "fausse date",
           "date_modified": "fausse date",
           "childs": [
-               {
-          "_id": "56cb3cb1b2bc57ab2908e787",
-          "id_author": 42,
-          "username_author": "locsapp",
-          "content": "Je suis un com de test. 2",
-          "is_visible": true,
-          "date_created": "fausse date",
-          "date_modified": "fausse date",
-          "childs": [],
-          "last_versions": [],
-          "flagged": null
-        },
-         {
-          "_id": "56cb3cb1b2bc57ab2908e787",
-          "id_author": 42,
-          "username_author": "locsapp",
-          "content": "Je suis un com de test. 2",
-          "is_visible": true,
-          "date_created": "fausse date",
-          "date_modified": "fausse date",
-          "childs": [],
-          "last_versions": [],
-          "flagged": null
-        }
+            {
+              "_id": "56cb3cb1b2bc57ab2908e787",
+              "id_author": 42,
+              "username_author": "locsapp",
+              "content": "Je suis un com de test. 2",
+              "is_visible": true,
+              "date_created": "fausse date",
+              "date_modified": "fausse date",
+              "childs": [],
+              "last_versions": [],
+              "flagged": null
+            },
+            {
+              "_id": "56cb3cb1b2bc57ab2908e787",
+              "id_author": 42,
+              "username_author": "locsapp",
+              "content": "Je suis un com de test. 2",
+              "is_visible": true,
+              "date_created": "fausse date",
+              "date_modified": "fausse date",
+              "childs": [],
+              "last_versions": [],
+              "flagged": null
+            }
           ],
           "last_versions": [],
           "flagged": null
         },
-         {
+        {
           "_id": "56cb3cb1b2bc57ab2908e787",
           "id_author": 42,
           "username_author": "locsapp",
@@ -85,7 +85,7 @@
           "last_versions": [],
           "flagged": null
         },
-         {
+        {
           "_id": "56cb3cb1b2bc57ab2908e787",
           "id_author": 42,
           "username_author": "locsapp",
@@ -126,6 +126,15 @@
         clickOutsideToClose: true
       });
     };
+
+
+    vm.doSomething = function (comment) {
+      // SI on a clique sur shit on veut revenir a ligne
+      //SINON on envoie le commentaire direcment1
+      $log.log("Send form", vm.parentNewComment);
+      //vm.parentNewComment += '\n toto';
+    };
+
 
     vm.showImageCarouselController = function (index, slides) {
 

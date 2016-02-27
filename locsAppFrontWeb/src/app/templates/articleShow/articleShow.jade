@@ -53,7 +53,7 @@ div(class="article-show" )
             md-divider
 
         md-divider
-    md-input-container.md-block(flex-gt-sm='')
-      label Write your comments
-      input(ng-model='user.firstName')
+    md-input-container.md-block
+      label Write your comment
+      textarea(ng-model='articleShow.parentNewComment' input-comment="articleShow.doSomething(articleShow.parentNewComment)")
 
