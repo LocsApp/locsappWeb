@@ -1,11 +1,11 @@
 
 div(class="article-show")
-
-  div(layout="row" layout-sm="column")
-    div(flex-offset='20' flex='15')
+  //layout-md='column'
+  div(layout="row" layout-sm="column" layout-xs='column' layout-gt-xs='column' layout-md='column' )
+    div(flex-offset='20' flex-offset-md='0'  flex='15' )
       img(src="{{articleShow.url_thumbnail}}")
 
-    div(layout='column')
+    div(layout='column' flex='85')
       h1 {{articleShow.title}}
       span {{articleShow.username_author}}
         ng-md-icon(icon="star_rate" size="40")
@@ -14,7 +14,7 @@ div(class="article-show")
         ng-md-icon(icon="star_rate" size="40")
         ng-md-icon(icon="star_rate" size="40")
       div(layout='row' layout-sm="column")
-        md-card(class='about')
+        md-card(class='about' flex-offset='50')
           md-content
             //md-subheader.md-no-sticky About the clothe
             md-divider
@@ -49,10 +49,10 @@ div(class="article-show")
             //md-subheader.md-no-sticky About the clothe
             md-divider
             md-list-item.md-2-line
-                ng-md-icon(icon="person_outline")
-                div.md-list-item-text
-                  h3 SubCategory
-                  p {{articleShow.SubCategory}}
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 SubCategory
+                p {{articleShow.SubCategory}}
             md-divider
             md-list-item.md-2-line
               ng-md-icon(icon="person_outline")
@@ -66,8 +66,7 @@ div(class="article-show")
                 h3 State
                 p {{articleShow.state }}
             md-divider
-
-        md-card(class='about')
+        md-card(class='about' flex-offset='50')
           md-content
             //md-subheader.md-no-sticky About the clothe
             md-divider
@@ -124,13 +123,9 @@ div(class="article-show")
 
 
 
-    //div()
-      md-card
-        md-card-content this is a card
 
 
 
-  //div(ng-repeat='image in articleShow.url_pictures track by $index')
 
 
 
