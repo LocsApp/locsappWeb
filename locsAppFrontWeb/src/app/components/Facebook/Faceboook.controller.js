@@ -8,7 +8,8 @@
 
   'use strict';
 
-  angular.module('Facebook')
+  angular
+    .module('Facebook')
     .controller('FacebookController', FacebookController);
 
   /** @ngInject */
