@@ -14,6 +14,13 @@ div(class="article-show" )
     div(flex="33" style="background-color: red; text-align:right;")
       p three
 
+  //div(ng-repeat='image in articleShow.url_pictures track by $index')
+
+
+
+
+
+
 
 
   div.grid-gallery(layout='row' layout-align='center')
@@ -34,18 +41,24 @@ div(class="article-show" )
     p(style='background-color:purple' flex="50").description At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repell
 
 
-  md-content
+  md-content()
     md-list
       md-subheader.md-no-sticky
-      md-list-item.md-3-line(ng-repeat='parentComment in articleShow.comments' layout-align='center' ng-show='parentComment.is_visible')
-        img.md-avatar(ng-src='https://material.angularjs.org/latest/img/list/60.jpeg?0', alt='{{parentComment.username_author}}')
-        .md-list-item-text(layout='column')
+      md-list-item.md-3-line( ng-repeat='parentComment in articleShow.comments track by $index' layout-align='center')
+        img.md-avatar( ng-src='http://localhost:3000/assets/images/users/profile_picture/unknown-user.png', alt='{{parentComment.username_author}}')
+        .md-list-item-text( layout='column')
           h3 {{ parentComment.username_author}}
           h4 {{ parentComment.date_created }}
           p {{ parentComment.content }}
+          p
+            a(href='#' ng-click="articleShow.replyComment{{$index}} = !articleShow.replyComment{{$index}}") reply
+            a(href='#' ng-if="parentComment.childs.length" ng-click="articleShow.showChildComment{{$index}} = !articleShow.showChildComment{{$index}}")  Show more
+          md-input-container.md-block(ng-show='articleShow.replyComment{{$index}}')
+            label Write a new comment
+            textarea(ng-model='articleShow.childNewComment.$index' input-comment="articleShow.submitComment(articleShow.parentNewComment)")
 
-          md-list-item.md-3-line(ng-repeat='childComment in parentComment.childs' ng-show='childComment.is_visible')
-            img.md-avatar(ng-src='https://material.angularjs.org/latest/img/list/60.jpeg?0', alt='{{parentComment.username_author}}')
+          md-list-item.md-3-line(ng-repeat='childComment in parentComment.childs' ng-show='articleShow.showChildComment{{$index}}')
+            img.md-avatar(ng-src='http://localhost:3000/assets/images/users/profile_picture/unknown-user.png', alt='{{parentComment.username_author}}')
             .md-list-item-text(layout='column')
               h3 {{ parentComment.username_author}}
               h4 {{ parentComment.date_created }}
@@ -53,7 +66,7 @@ div(class="article-show" )
             md-divider
 
         md-divider
-    md-input-container.md-block(flex-gt-sm='')
-      label Write your comments
-      input(ng-model='user.firstName')
+    md-input-container.md-block
+      label Write a new comment
+      textarea(ng-model='articleShow.parentNewComment' input-comment="articleShow.submitComment(articleShow.parentNewComment)")
 
