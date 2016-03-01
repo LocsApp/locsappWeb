@@ -4,14 +4,20 @@ div(class="article-show" )
   div(layout='row' layout-align='space-between start')
     div(flex="33" layout="row" style="background-color: blue")
       img(src="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516")
-      h1 {{articleShow.title}}
+      div(layout='column')
+        h1 {{articleShow.title}}
+        span {{articleShow.username_author}}
+          ng-md-icon(icon="star_rate" size="40")
+          ng-md-icon(icon="star_rate" size="40")
+          ng-md-icon(icon="star_rate" size="40")
+          ng-md-icon(icon="star_rate" size="40")
+          ng-md-icon(icon="star_rate" size="40")
+          ng-md-icon(icon="star_rate" size="40")
     div(flex="33"  style="background-color: yellow; text-align:center;")
-        ng-md-icon(icon="star_rate" size="40")
-        ng-md-icon(icon="star_rate" size="40")
-        ng-md-icon(icon="star_rate" size="40")
-        ng-md-icon(icon="star_rate" size="40")
-        ng-md-icon(icon="star_rate" size="40")
+      p toto
+
     div(flex="33" style="background-color: red; text-align:right;")
+
       p three
 
   //div(ng-repeat='image in articleShow.url_pictures track by $index')
@@ -38,7 +44,7 @@ div(class="article-show" )
 
 
   div(layout='row' layout-align='center')
-    p(style='background-color:purple' flex="50").description {{articleShow.description}}
+    p(flex="50").description {{articleShow.description}}
 
 
   md-content()

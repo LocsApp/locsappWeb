@@ -19,6 +19,7 @@
       $log.log("data SUCCESS= ", data);
       vm.title = "Robe bleu";
       vm.id_author = "42";
+      vm.username_author = "author";
       vm.id = "145454e";
       vm.url_thumbnail = "http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516";
       vm.url_pictures = ['http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg',
@@ -125,6 +126,7 @@
       vm.state_renting = "askeur";
       vm.id_renter = "two_ask";
 
+      //request author profile to get his notation;
 
     };
 
