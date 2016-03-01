@@ -17,7 +17,7 @@
 
     vm.GetInfoArticleSuccess = function (data) {
       $log.log("data SUCCESS= ", data);
-      vm.title = "Robe bleu";
+      vm.title = "Robe bleu hermes excellente qualite";
       vm.id_author = "42";
       vm.username_author = "author";
       vm.id = "145454e";
