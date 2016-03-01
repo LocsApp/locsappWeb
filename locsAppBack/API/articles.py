@@ -69,7 +69,7 @@ def postNewArticle(request):
         "description": {
             "_type": str,
             "_default": "This article has no description",
-            "_length": 500
+            "_length": 5000
         },
         "availibility_start": {
             "_type": str,
