@@ -1,13 +1,23 @@
 
-div(class="article-show" )
+div(class="article-show")
 
-  div(layout='row' layout-align='space-around center')
-   div
-     img(src="{{articleShow.url_thumbnail}}")
-   div()
-      p center
+  div(layout="row" layout-sm="column")
     div()
-      p right
+      img(src="{{articleShow.url_thumbnail}}")
+
+    div()
+      h1 {{articleShow.title}}
+      span {{articleShow.username_author}}
+      ng-md-icon(icon="star_rate" size="40")
+      ng-md-icon(icon="star_rate" size="40")
+      ng-md-icon(icon="star_rate" size="40")
+      ng-md-icon(icon="star_rate" size="40")
+      ng-md-icon(icon="star_rate" size="40")
+
+    div()
+      md-card
+        md-card-content this is a card
+
 
 
   //div(ng-repeat='image in articleShow.url_pictures track by $index')
