@@ -33,8 +33,9 @@
 		'angular-loading-bar',
 		'angularMoment',
 		'perfect_scrollbar',
-    'ezfb',
-    'Facebook',
+		'ezfb',
+		'Facebook',
+		'textAngular',
 		'LocsappDirectives',
 		'LocsappServices',
 		'LocsappControllers']);

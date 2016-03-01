@@ -16,6 +16,9 @@
 	vm.progressBars = [0, 0, 0, 0, 0, 0]
 	vm.stepFocus = 0;
 
+	//Textangular
+	vm.toolbar=[['h1', 'h2', 'h3'],['p', 'bold', 'italics', 'underline'], ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'], ['undo', 'redo', 'clear']];
+
 	//article vars
 	vm.categories = null;
 	vm.subCategories = null;
