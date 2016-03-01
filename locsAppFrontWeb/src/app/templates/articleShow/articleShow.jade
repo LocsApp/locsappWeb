@@ -1,31 +1,14 @@
 
 div(class="article-show" )
 
-  div(layout='row' layout-align='space-around start')
-    div(flex="33" layout="row" style="background-color: blue")
-      img(src="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516")
-      div(layout='column')
-        h1 {{articleShow.title}}
-        span {{articleShow.username_author}}
-          ng-md-icon(icon="star_rate" size="40")
-          ng-md-icon(icon="star_rate" size="40")
-          ng-md-icon(icon="star_rate" size="40")
-          ng-md-icon(icon="star_rate" size="40")
-          ng-md-icon(icon="star_rate" size="40")
-          ng-md-icon(icon="star_rate" size="40")
-    div(flex="33"  style="background-color: yellow; ")
-      p toto
+  div(layout='row' layout-align='space-around center')
+   div
+     img(src="{{articleShow.url_thumbnail}}")
+   div()
+      p center
+    div()
+      p right
 
-    div(flex="33")
-      md-card(flex="33")
-        md-card-content
-          md-list
-            md-list-item.md-3-line
-              .md-list-item-text( layout='column')
-                h3 toto
-                h4 tutu
-                p titi
-      md-button Rent it
 
   //div(ng-repeat='image in articleShow.url_pictures track by $index')
 
