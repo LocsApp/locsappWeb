@@ -7,7 +7,7 @@
     .controller('ArticleShowController', ArticleShowController);
 
   /** @ngInject */
-  function ArticleShowController($log, $mdDialog, $document, ArticleService, $stateParams, $interval) {
+  function ArticleShowController($log, $mdDialog, $document, ArticleService, $stateParams, $interval, toastr) {
     var vm = this;
     //vm.showChildComment = false;
     vm.test_test = ['un', 'deux', 'trois'];
@@ -148,6 +148,10 @@
       //SINON on envoie le commentaire direcment1
       $log.log("Send form", vm.parentNewComment, comment);
       //vm.parentNewComment += '\n toto';
+      if (comment === "")
+        toastr.error("there is nothing in your comment", "Error");
+      else
+        toastr.success("comment sent", "Success!");
     };
 
 
