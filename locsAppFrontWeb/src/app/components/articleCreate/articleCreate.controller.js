@@ -12,9 +12,12 @@
 	//steps vars
 	vm.value = 0;
 	vm.stepsNames = ["squared_one", "squared_two", "squared_three", "squared_four", "squared_five", "squared_six"];
-	vm.stepsComplete = [1, 0, 0, 0, 0, 0];
+	vm.stepsComplete = [1, 1, 1, 1, 1, 1];
 	vm.progressBars = [0, 0, 0, 0, 0, 0]
 	vm.stepFocus = 0;
+
+	//Textangular
+	vm.toolbar=[['h1', 'h2', 'h3'],['p', 'bold', 'italics', 'underline'], ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'], ['undo', 'redo', 'clear']];
 
 	//article vars
 	vm.categories = null;
