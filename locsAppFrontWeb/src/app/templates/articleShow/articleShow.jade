@@ -1,7 +1,7 @@
 
 div(class="article-show")
   //layout-md='column'
-  div(layout="row")
+  div(layout="column" layout-gt-md='row')
     div(flex-offset='0' flex-offset-gt-md='20'  )
       img(src="{{articleShow.url_thumbnail}}")
 
@@ -14,7 +14,7 @@ div(class="article-show")
         ng-md-icon(icon="star_rate" size="40")
         ng-md-icon(icon="star_rate" size="40")
       div(layout='row' layout-sm="column")
-        md-card(class='about' flex-offset='50')
+        md-card(class='about')
           md-content
             //md-subheader.md-no-sticky About the clothe
             md-divider
@@ -66,7 +66,7 @@ div(class="article-show")
                 h3 State
                 p {{articleShow.state }}
             md-divider
-        md-card(class='about' flex-offset='50')
+        md-card(class='about')
           md-content
             //md-subheader.md-no-sticky About the clothe
             md-divider
