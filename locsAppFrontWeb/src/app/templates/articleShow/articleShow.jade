@@ -13,128 +13,120 @@ div(class="article-show")
         ng-md-icon(icon="star_rate" size="40")
         ng-md-icon(icon="star_rate" size="40")
         ng-md-icon(icon="star_rate" size="40")
-      div
-        div(layout='row' layout-sm="column")
-          md-card(class='about')
-            md-content
-              //md-subheader.md-no-sticky About the clothe
-              md-divider
+      div(layout='row' layout-sm="column")
+        md-card(class='about')
+          md-content
+            //md-subheader.md-no-sticky About the clothe
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 Main Category
+                p {{articleShow.BaseCategory }}
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 Gender
+                p {{articleShow.sexe}}
+
+            md-divider
               md-list-item.md-2-line
-                ng-md-icon(icon="person_outline")
+                ng-md-icon(icon="color_lens")
                 div.md-list-item-text
-                  h3 Main Category
-                  p {{articleShow.BaseCategory }}
-              md-divider
+                  h3 Color
+                  p {{articleShow.color }}
+
+            md-divider
               md-list-item.md-2-line
-                ng-md-icon(icon="person_outline")
+                ng-md-icon(icon="help")
                 div.md-list-item-text
-                  h3 Gender
-                  p {{articleShow.sexe}}
+                  h3 Brand
+                  p {{articleShow.brand }}
 
-              md-divider
-                md-list-item.md-2-line
-                  ng-md-icon(icon="color_lens")
-                  div.md-list-item-text
-                    h3 Color
-                    p {{articleShow.color }}
+        md-card(class='about')
+          md-content
+            //md-subheader.md-no-sticky About the clothe
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 SubCategory
+                p {{articleShow.SubCategory}}
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 Size
+                p {{articleShow.size }}
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 State
+                p {{articleShow.state }}
+            md-divider
+    div(layout='column' flex='85')
+      h1 {{articleShow.title}}
+      span {{articleShow.username_author}}
+        ng-md-icon(icon="star_rate" size="40")
+        ng-md-icon(icon="star_rate" size="40")
+        ng-md-icon(icon="star_rate" size="40")
+        ng-md-icon(icon="star_rate" size="40")
+        ng-md-icon(icon="star_rate" size="40")
+      div(layout='row' layout-sm="column")
+        md-card(class='about')
+          md-content
+            //md-subheader.md-no-sticky About the clothe
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 Main Category
+                p {{articleShow.BaseCategory }}
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 Gender
+                p {{articleShow.sexe}}
 
-              md-divider
-                md-list-item.md-2-line
-                  ng-md-icon(icon="help")
-                  div.md-list-item-text
-                    h3 Brand
-                    p {{articleShow.brand }}
-
-          md-card(class='about')
-            md-content
-              //md-subheader.md-no-sticky About the clothe
-              md-divider
+            md-divider
               md-list-item.md-2-line
-                ng-md-icon(icon="person_outline")
+                ng-md-icon(icon="color_lens")
                 div.md-list-item-text
-                  h3 SubCategory
-                  p {{articleShow.SubCategory}}
-              md-divider
+                  h3 Color
+                  p {{articleShow.color }}
+
+            md-divider
               md-list-item.md-2-line
-                ng-md-icon(icon="person_outline")
+                ng-md-icon(icon="help")
                 div.md-list-item-text
-                  h3 Size
-                  p {{articleShow.size }}
-              md-divider
-              md-list-item.md-2-line
-                ng-md-icon(icon="person_outline")
-                div.md-list-item-text
-                  h3 State
-                  p {{articleShow.state }}
-              md-divider
-          div(layout='row' flex-offset='20' layout-sm="column")
-            md-card(class='about' flex-offset='20')
-              md-content
-                //md-subheader.md-no-sticky About the clothe
-                md-divider
-                md-list-item.md-2-line
-                  ng-md-icon(icon="person_outline")
-                  div.md-list-item-text
-                    h3 Main Category
-                    p {{articleShow.BaseCategory }}
-                md-divider
-                md-list-item.md-2-line
-                  ng-md-icon(icon="person_outline")
-                  div.md-list-item-text
-                    h3 Gender
-                    p {{articleShow.sexe}}
+                  h3 Brand
+                  p {{articleShow.brand }}
 
-                md-divider
-                  md-list-item.md-2-line
-                    ng-md-icon(icon="color_lens")
-                    div.md-list-item-text
-                      h3 Color
-                      p {{articleShow.color }}
-
-                md-divider
-                  md-list-item.md-2-line
-                    ng-md-icon(icon="help")
-                    div.md-list-item-text
-                      h3 Brand
-                      p {{articleShow.brand }}
-
-            md-card(class='about')
-              md-content
-                //md-subheader.md-no-sticky About the clothe
-                md-divider
-                md-list-item.md-2-line
-                  ng-md-icon(icon="person_outline")
-                  div.md-list-item-text
-                    h3 SubCategory
-                    p {{articleShow.SubCategory}}
-                md-divider
-                md-list-item.md-2-line
-                  ng-md-icon(icon="person_outline")
-                  div.md-list-item-text
-                    h3 Size
-                    p {{articleShow.size }}
-                md-divider
-                md-list-item.md-2-line
-                  ng-md-icon(icon="person_outline")
-                  div.md-list-item-text
-                    h3 State
-                    p {{articleShow.state }}
-                md-divider
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        md-card(class='about')
+          md-content
+            //md-subheader.md-no-sticky About the clothe
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 SubCategory
+                p {{articleShow.SubCategory}}
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 Size
+                p {{articleShow.size }}
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 State
+                p {{articleShow.state }}
+            md-divider
 
   div.grid-gallery(layout='row' layout-align='center')
     div(style='background-color:orange;')
