@@ -4,4 +4,7 @@ md-card(layout-fill)
 			h3 The pictures of your article
 	md-card-content(layout="column", layout-align="center center")
 		form(name="articleFormStep4" novalidate ng-submit="articleFormStep4.$valid && articleCreate.nextStep(4)", layout="column", layout-align="center center")
+			img(ngf-src="articleCreate.pictures[0] || 'http://localhost:3000/assets/images/articles/default.jpg'" ngf-select ng-model="articleCreate.pictures[0]" name="file" ngf-pattern="'image/*'"
+	    							accept="image/*" ngf-max-size="20MB" ngf-min-height="100" 
+	    							ngf-resize="{width: 300, height: 300}")
 			md-button.md-raised Next Step

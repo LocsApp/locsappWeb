@@ -29,6 +29,7 @@
 	vm.payment_methods = null;
 	vm.description = null;
 	vm.brands = [{_id:"56cb3ef2b2bc57ab2908e6b2" ,name:"Home made"}]
+	vm.pictures = []
 
 	//user chose
 	vm.article = {
