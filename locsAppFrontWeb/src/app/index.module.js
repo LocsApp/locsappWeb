@@ -36,6 +36,7 @@
 		'ezfb',
 		'Facebook',
 		'textAngular',
+		'ngFileUpload',
 		'LocsappDirectives',
 		'LocsappServices',
 		'LocsappControllers']);
