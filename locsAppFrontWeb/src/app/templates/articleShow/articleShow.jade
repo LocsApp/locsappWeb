@@ -1,18 +1,134 @@
 
-div(class="article-show" )
+div(class="article-show")
 
-  div(layout='row' layout-align='space-between start')
-    div(flex="33" style="background-color: blue")
-      img(src="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516")
-    div(flex="33"  style="background-color: yellow; text-align:center;")
-      p Robe bleu<br> toto (10)
+  div(layout="row" layout-sm="column")
+    div(flex-offset='20' flex='15')
+      img(src="{{articleShow.url_thumbnail}}")
+
+    div(layout='column')
+      h1 {{articleShow.title}}
+      span {{articleShow.username_author}}
         ng-md-icon(icon="star_rate" size="40")
         ng-md-icon(icon="star_rate" size="40")
         ng-md-icon(icon="star_rate" size="40")
         ng-md-icon(icon="star_rate" size="40")
         ng-md-icon(icon="star_rate" size="40")
-    div(flex="33" style="background-color: red; text-align:right;")
-      p three
+      div(layout='row' layout-sm="column")
+        md-card(class='about')
+          md-content
+            //md-subheader.md-no-sticky About the clothe
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 Main Category
+                p {{articleShow.BaseCategory }}
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 Gender
+                p {{articleShow.sexe}}
+
+            md-divider
+              md-list-item.md-2-line
+                ng-md-icon(icon="color_lens")
+                div.md-list-item-text
+                  h3 Color
+                  p {{articleShow.color }}
+
+            md-divider
+              md-list-item.md-2-line
+                ng-md-icon(icon="help")
+                div.md-list-item-text
+                  h3 Brand
+                  p {{articleShow.brand }}
+
+        md-card(class='about')
+          md-content
+            //md-subheader.md-no-sticky About the clothe
+            md-divider
+            md-list-item.md-2-line
+                ng-md-icon(icon="person_outline")
+                div.md-list-item-text
+                  h3 SubCategory
+                  p {{articleShow.SubCategory}}
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 Size
+                p {{articleShow.size }}
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 State
+                p {{articleShow.state }}
+            md-divider
+
+        md-card(class='about')
+          md-content
+            //md-subheader.md-no-sticky About the clothe
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 Main Category
+                p {{articleShow.BaseCategory }}
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 Gender
+                p {{articleShow.sexe}}
+
+            md-divider
+              md-list-item.md-2-line
+                ng-md-icon(icon="color_lens")
+                div.md-list-item-text
+                  h3 Color
+                  p {{articleShow.color }}
+
+            md-divider
+              md-list-item.md-2-line
+                ng-md-icon(icon="help")
+                div.md-list-item-text
+                  h3 Brand
+                  p {{articleShow.brand }}
+
+        md-card(class='about')
+          md-content
+            //md-subheader.md-no-sticky About the clothe
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 SubCategory
+                p {{articleShow.SubCategory}}
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 Size
+                p {{articleShow.size }}
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 State
+                p {{articleShow.state }}
+            md-divider
+
+
+
+
+
+    //div()
+      md-card
+        md-card-content this is a card
+
+
 
   //div(ng-repeat='image in articleShow.url_pictures track by $index')
 
@@ -38,7 +154,8 @@ div(class="article-show" )
 
 
   div(layout='row' layout-align='center')
-    p(style='background-color:purple' flex="50").description At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repell
+    md-card(flex="50")
+      md-card-content.description {{articleShow.description}}
 
 
   md-content()
@@ -51,13 +168,15 @@ div(class="article-show" )
           h4 {{ parentComment.date_created }}
           p {{ parentComment.content }}
           p
-            a(href='#' ng-click="articleShow.replyComment{{$index}} = !articleShow.replyComment{{$index}}") reply
-            a(href='#' ng-if="parentComment.childs.length" ng-click="articleShow.showChildComment{{$index}} = !articleShow.showChildComment{{$index}}")  Show more
-          md-input-container.md-block(ng-show='articleShow.replyComment{{$index}}')
+            a(href='#' ng-click='articleShow.replyComment[$index] = !articleShow.replyComment[$index]') reply
+            a(href='#' ng-if="parentComment.childs.length" ng-hide='articleShow.showChildComment[$index]' ng-click="articleShow.showChildComment[$index] = !articleShow.showChildComment[$index]")  Show more
+            a(href='#' ng-if="parentComment.childs.length" ng-show='articleShow.showChildComment[$index]' ng-click="articleShow.showChildComment[$index] = !articleShow.showChildComment[$index]")  Show less
+
+          md-input-container.md-block(ng-show='articleShow.replyComment[$index]')
             label Write a new comment
             textarea(ng-model='articleShow.childNewComment.$index' input-comment="articleShow.submitComment(articleShow.parentNewComment)")
 
-          md-list-item.md-3-line(ng-repeat='childComment in parentComment.childs' ng-show='articleShow.showChildComment{{$index}}')
+          md-list-item.md-3-line(ng-repeat='childComment in parentComment.childs' ng-show='articleShow.showChildComment[$index]')
             img.md-avatar(ng-src='http://localhost:3000/assets/images/users/profile_picture/unknown-user.png', alt='{{parentComment.username_author}}')
             .md-list-item-text(layout='column')
               h3 {{ parentComment.username_author}}
