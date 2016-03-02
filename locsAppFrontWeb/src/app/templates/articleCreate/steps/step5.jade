@@ -4,4 +4,17 @@ md-card(layout-fill)
 			h3 The modalities for the renter
 	md-card-content(layout="column", layout-align="center center")
 		form(name="articleFormStep5" novalidate ng-submit="articleFormStep5.$valid && articleCreate.nextStep(5)", layout="column", layout-align="center center")
+			p
+				md-title The availibility date
+				span
+					ng-md-icon(icon="help", size="20")
+						md-tooltip(md-direction="right") This indicates when the clothe will be available
+			md-datepicker(ng-model="articleCreate.date_start", md-min-date="articleCreate.min_date")
+
+			p
+				md-title End of availibility date
+				span
+					ng-md-icon(icon="help", size="20")
+						md-tooltip(md-direction="right") This indicates when the clothe will not be available anymore
+			md-datepicker(ng-model="articleCreate.date_end", md-min-date="articleCreate.date_start")
 			md-button.md-raised Next Step
