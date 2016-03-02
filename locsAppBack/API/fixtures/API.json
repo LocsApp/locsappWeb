@@ -21,18 +21,18 @@
       "last_name": null
     },
     "model": "API.account",
-    "pk": 42
+    "pk": 1
   },
 
   {
     "fields": {
-      "user": 42,
+      "user": 1,
       "email": "locsapp-test@outlook.com",
       "verified": true,
       "primary": true
     },
     "model": "account.emailaddress",
-    "pk": 42
+    "pk": 1
   },
 
   {
