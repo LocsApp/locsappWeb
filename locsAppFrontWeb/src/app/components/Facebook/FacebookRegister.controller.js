@@ -56,7 +56,8 @@
       };
 
       vm.FaceBookRegisterErrorFn = function (data) {
-        $log.log("ERROR data " + data.data);
+        $log.log("ERROR data "  + data.data.message);
+        toastr.error('Seems like something went wrong with your registration :( ' + data.data.message, 'Woops...');
       };
 
       /* Submit the dialog form that ask a username */

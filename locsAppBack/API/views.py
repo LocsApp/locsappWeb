@@ -69,7 +69,7 @@ class FacebookRegister(APIView):
 				error += "Username needs to be at least 3 characters "
 
 			# We verify if there is no other user with this username
-			if Account.object.get(username=username):
+			if Account.object.filter(username=username):
 				error += "An user with this username already exists "
 
 			# If there is some error we return a JSON to say it
