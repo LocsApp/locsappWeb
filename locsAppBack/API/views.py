@@ -64,18 +64,30 @@ class FacebookRegister(APIView):
 			facebook_token = request.data["facebook_token"]
 			username = request.data["username"]
 			profile = facebook.GraphAPI(facebook_token).get_object("me")
+			print("profile = ", profile)
 
 			# We verify the size of the username
 			if len(username) < 3:
 				error += "Username needs to be at least 3 characters "
 
-			# We verify if there is no other user with this username
-			if Account.object.filter(username=username):
-				error += "An user with this username already exists "
-
 			# We verify the user profile contains an email
 			if "email" not in profile:
 				error += "Your access_token did not ask for the email"
+
+			# We verify an user have the same email
+			if "email" not in profile and Account.object.filter(profile["email"]):
+				error += "An user with this email already exists"
+
+			# We veify an user doest not have an existing facebook ID
+			if Account.object.filter(profile["id"]):
+				error += "An user with this id already exists"
+
+			# We verify if there is no other user with this username, id_facebook, email or secondary email
+			if Account.object.filter(username=username):
+				error += "An user with this username already exists "
+			# if Account.object.filter(email=)
+
+
 
 			# If there is some error we return a JSON to say it
 			if error != "":
@@ -83,14 +95,12 @@ class FacebookRegister(APIView):
 					{"message": error}, status=405
 				)
 
-
 			# If there is no error we register a new user
 
 			# Think to split first and last name
 			# Add Birthday
 			# Add gender
-			Account.objects.create_user(username=username, is_registered_with_facebook=profile['id'])
-			print("profile = ", profile)
+			# Account.objects.create_user(username=username, is_registered_with_facebook=profile['id'])
 			return JsonResponse({"Facebook Register": "done"})
 		else:
 			return (JsonResponse(
