@@ -57,6 +57,15 @@ class FacebookLogin(APIView):
 				{"message": "Please send a Facebook token"}, status=405))
 
 
+class FacebookRegister(APIView):
+    def post(self, request):
+        if request.data["facebook_token"]:
+            facebook_token = request.data["facebook_token"]
+        else:
+			return (JsonResponse(
+				{"message": "Please send a Facebook token"}, status=405))
+
+
 class JSONEncoder(json.JSONEncoder):
 
     def default(self, o):
