@@ -42,8 +42,9 @@ import json
 from bson import ObjectId
 
 
-class FacebookLogin(SocialLoginView):
-    adapter_class = FacebookOAuth2Adapter
+class FacebookLogin(APIView):
+    def post(self, request):
+        print("IN Facebook Login")
 
 
 class JSONEncoder(json.JSONEncoder):
