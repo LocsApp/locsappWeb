@@ -69,6 +69,7 @@ static_collections_patterns = [
 api_patterns = [
 
     url(r'^rest-auth/facebook/', views.FacebookLogin.as_view(), name='fb_login'),
+    url(r'^auth/facebook-register', views.FacebookRegister.as_view(), name='fb_register'),
     url(r'^auth/change-username/', views.ChangeUsername.as_view()),
 
     url(r'^articles/', include(article_patterns)),

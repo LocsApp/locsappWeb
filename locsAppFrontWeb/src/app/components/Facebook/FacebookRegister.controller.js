@@ -20,7 +20,7 @@
     var vm = this;
 
 
-     /* Dialog for set an username */
+    /* Dialog for set an username */
     /** @ngInject */
     vm.askUsernameDialog = function (event) {
       $mdDialog.show({
@@ -38,7 +38,6 @@
     };
 
 
-
     vm.register = function () {
 
       //First we ask for the username we launch a dialog box
@@ -46,24 +45,27 @@
 
     };
 
-    vm.askUsernameController = function() {
+    vm.askUsernameController = function () {
 
       var vm = this;
       vm.loader = false;
-    };
 
 
-    /*End ChangeUsernameController */
-/* ezfb.login(function (res) {
+      ezfb.login(function (res) {
 
         if (res.authResponse) {
           $log.log("Loggin ok ", res.authResponse.accessToken);
+          //Des qu'on a le token on envoie la requete a l'API avec l'username
+          //Penser a faire une fonction en back pour verifier si un user existe ou non envoie d'envoyer la requete complete moins penible pour l user
+
+
 
 
         }
-      }, {scope: 'email,user_likes,user_birthday'});*/
+      }, {scope: 'email,user_likes,user_birthday'});
 
-    /* */
+    };
+
 
   }
 
