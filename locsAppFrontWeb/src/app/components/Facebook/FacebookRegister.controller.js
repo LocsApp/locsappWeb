@@ -50,19 +50,38 @@
       var vm = this;
       vm.loader = false;
 
+      /* Result of the call to the API when register the new user */
+      vm.FaceBookRegisterSuccessFn = function (data) {
+        console.log("SUCEES data " + data);
+      };
 
-      ezfb.login(function (res) {
+      vm.FaceBookRegisterErrorFn = function (data) {
+        $log.log("ERROR data " + data.data);
+      };
 
-        if (res.authResponse) {
-          $log.log("Loggin ok ", res.authResponse.accessToken);
-          //Des qu'on a le token on envoie la requete a l'API avec l'username
-          //Penser a faire une fonction en back pour verifier si un user existe ou non envoie d'envoyer la requete complete moins penible pour l user
+      /* Submit the dialog form that ask a username */
+      vm.submit = function () {
 
+        /* Login to facebook to get an access token of the facebook user*/
+        ezfb.login(function (res) {
 
+          /* If we get an access token we call our API and register a new user */
+          if (res.authResponse) {
+            $log.log("Loggin ok ", res.authResponse.accessToken);
+            //Des qu'on a le token on envoie la requete a l'API avec l'username
+            //Penser a faire une fonction en back pour verifier si un user existe ou non envoie d'envoyer la requete complete moins penible pour l user
 
+            UsersService
+              .facebook_register
+              .save({"facebook_token": res.authResponse.accessToken, "username": vm.username})
+              .$promise
+              .then(vm.FaceBookRegisterSuccessFn, vm.FaceBookRegisterErrorFn);
 
-        }
-      }, {scope: 'email,user_likes,user_birthday'});
+          }
+        }, {scope: 'email,user_likes,user_birthday'});
+
+      };
+
 
     };
 

@@ -58,9 +58,27 @@ class FacebookRegister(APIView):
 
 	def post(self, request):
 		print("IN IT")
+		error = ""
 		if "facebook_token" in request.data and "username" in request.data:
+
 			facebook_token = request.data["facebook_token"]
 			username = request.data["username"]
+
+			# We verify the size of the username
+			if len(username) < 3:
+				error += "Username needs to be at least 3 characters "
+
+			# We verify if there is no other user with this username
+			if Account.object.get(username=username):
+				error += "An user with this username already exists "
+
+			# If there is some error we return a JSON to say it
+			if error != "":
+				return JsonResponse(
+					{"message": error}, status=405
+				)
+
+			# If there is no error we register a new user
 			profile = facebook.GraphAPI(facebook_token).get_object("me")
 			print("profile = ", profile)
 			return JsonResponse({"Facebook Register": "done"})
