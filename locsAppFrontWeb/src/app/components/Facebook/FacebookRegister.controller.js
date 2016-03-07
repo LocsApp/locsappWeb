@@ -20,21 +20,48 @@
     var vm = this;
 
 
-    $log.log("register");
+     /* Dialog for set an username */
+    /** @ngInject */
+    vm.askUsernameDialog = function (event) {
+      $mdDialog.show({
+        controller: vm.askUsernameController,
+        controllerAs: 'addUsername',
+        templateUrl: 'app/templates/dialogTemplates/addUsername.tmpl.html',
+        locals: {token: vm.token},
+        bindToController: true,
+        parent: angular.element($document.body),
+        clickOutsideToClose: false,
+        targetEvent: event
+      }).then(function (data) {
+        vm.user = data
+      });
+    };
+
+
 
     vm.register = function () {
-      ezfb.login(function (res) {
+
+      //First we ask for the username we launch a dialog box
+      vm.askUsernameDialog();
+
+    };
+
+    vm.askUsernameController = function() {
+
+      var vm = this;
+      vm.loader = false;
+    };
+
+
+    /*End ChangeUsernameController */
+/* ezfb.login(function (res) {
 
         if (res.authResponse) {
           $log.log("Loggin ok ", res.authResponse.accessToken);
 
 
         }
-      }, {scope: 'email,user_likes,user_birthday'});
-    };
-
-    /*End ChangeUsernameController */
-
+      }, {scope: 'email,user_likes,user_birthday'});*/
 
     /* */
 

@@ -58,6 +58,10 @@ class FacebookLogin(APIView):
 
 
 class FacebookRegister(APIView):
+    """
+    Register with Facebook Use the id to register the user
+    and find him when login because this id are unique
+    """
     def post(self, request):
         if request.data["facebook_token"]:
             facebook_token = request.data["facebook_token"]
