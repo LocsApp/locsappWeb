@@ -53,10 +53,12 @@
       /* Result of the call to the API when register the new user */
       vm.FaceBookRegisterSuccessFn = function (data) {
         console.log("SUCEES data " + data);
+        toastr.success('Congratulations on registrating to Locsapp!');
+
       };
 
       vm.FaceBookRegisterErrorFn = function (data) {
-        $log.log("ERROR data "  + data.data.message);
+        $log.log("ERROR data " + data.data.message);
         toastr.error('Seems like something went wrong with your registration :( ' + data.data.message, 'Woops...');
       };
 
