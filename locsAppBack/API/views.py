@@ -48,7 +48,7 @@ class FacebookLogin(APIView):
         print("IN Facebook Login")
         graph = facebook.GraphAPI("CAACEdEose0cBABIP4jSuoZC6LaZAZATXoZAMvvBawWsURurgp5uaYfZCX0noJsmwy0KPNy51RCcNgSAsZA2EWFvjWZAYJajnOaT6wshOLfmFP1WOV4RNObXmbhbC6doeQ5Sejmwetn3dA3KAd3OFhuy96ZBlaYYa7oZCYrtgDiLa82hnOvpgmZBsOshzodiS7WuZCNjZBenJvPJqwn7mvV6dUDZBj")
         profile = graph.get_object("me")
-        #print("EMAIL = ", email)
+        print("profile = ", profile)
 
 
 class JSONEncoder(json.JSONEncoder):
