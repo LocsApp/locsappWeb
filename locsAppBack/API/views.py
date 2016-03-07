@@ -12,6 +12,7 @@ from rest_auth.registration.views import SocialLoginView
 from .models import Account
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import logout
+import facebook
 
 # User model
 from django.contrib.auth import get_user_model
@@ -45,6 +46,9 @@ from bson import ObjectId
 class FacebookLogin(APIView):
     def post(self, request):
         print("IN Facebook Login")
+        graph = facebook.GraphAPI("CAACEdEose0cBABIP4jSuoZC6LaZAZATXoZAMvvBawWsURurgp5uaYfZCX0noJsmwy0KPNy51RCcNgSAsZA2EWFvjWZAYJajnOaT6wshOLfmFP1WOV4RNObXmbhbC6doeQ5Sejmwetn3dA3KAd3OFhuy96ZBlaYYa7oZCYrtgDiLa82hnOvpgmZBsOshzodiS7WuZCNjZBenJvPJqwn7mvV6dUDZBj")
+        profile = graph.get_object("me")
+        #print("EMAIL = ", email)
 
 
 class JSONEncoder(json.JSONEncoder):
