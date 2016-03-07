@@ -17,10 +17,18 @@
 
     var vm = this;
 
-    //  updateLoginStatus(updateApiMe);
+    vm.login = function (FnSuccess, FnFailure) {
+      ezfb.login(function (res) {
+        /**
+         * no manual $scope.$apply, I got that handled
+         */
+        if (res.authResponse) {
+          $log.log("Loggin ok ", res.authResponse.accessToken);
 
-    vm.login = function () {
+        }
+      }, {scope: 'email,user_likes,user_birthday'});
     };
+
 
 
     /*End ChangeUsernameController */
