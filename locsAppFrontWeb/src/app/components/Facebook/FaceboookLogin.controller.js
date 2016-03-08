@@ -13,18 +13,33 @@
     .controller('FacebookLoginController', FacebookLoginController);
 
   /** @ngInject */
-  function FacebookLoginController($scope, $log, ezfb, UsersService, toastr, $state, $sessionStorage, $localStorage) {
+  function FacebookLoginController($scope, $log, ezfb, UsersService, toastr, $state, $sessionStorage) {
 
     $log.log("LOG IN WITH FACEBOOK");
     /* We directly use ezfb to have the access token and send it to the API */
     var vm = this;
 
+    vm.userProfileGetSuccess = function (data) {
+      $sessionStorage.id = data["id"];
+      $state.go("main.homepage");
+    };
+
+    vm.userProfileGetFailure = function () {
+      toastr.error("An error occured while retrieving your data...", "Woops...")
+    };
+
     vm.FaceBookLoginSuccessFn = function (data) {
       toastr.success('Congratulations on login to Locsapp!');
+      $sessionStorage.key = data["key"];
+      UsersService
+        .profile_check
+        .get({})
+        .$promise
+        .then(vm.userProfileGetSuccess, vm.userProfileGetFailure);
     };
 
     vm.FaceBookLoginErrorFn = function (data) {
-      $log.log("DATA = ", data)
+      $log.log("DATA = ", data);
       //toastr.error('Seems like something went wrong with your login :( ' + data.data.message, 'Woops...');
     };
 
