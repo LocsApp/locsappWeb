@@ -1,8 +1,11 @@
 import requests
 import json
+from rest_framework.authtoken.models import Token
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.views import APIView
 from django.http import JsonResponse
 from API.models import Account
+from rest_auth.views import login
 
 """
 	Register with Facebook Use the id to register the user
@@ -19,16 +22,29 @@ class FacebookLogin(APIView):
 
 	def post(self, request):
 		if "facebook_token" in request.data:
+			error = ""
 			facebook_token = request.data["facebook_token"]
 
 			r = requests.get(
 				"https://graph.facebook.com/v2.5/me?access_token=" +
 				facebook_token +
-				"format=json&method=get&pretty=0&suppress_http_code=1")
+				"&fields=id%2Cname%2Cemail%2Cgender%2Cbirthday&format=json&method=get&pretty=0&suppress_http_code=1")
 			profile = json.loads(r.content.decode("utf8"))
 			r.close()
 
-			return JsonResponse({"message": "Facebook login done"}, status=201)
+			if "id" not in profile:
+				return JsonResponse({"message": "Your access_token did not ask for the email"}, status=405)
+
+			print("profile = ", profile["id"])
+			try:
+				user = Account.object.get(id_facebook=profile["id"])
+				# If the user exists we login him and send a token to access to our API
+				token = Token.objects.create(user=user)
+				print("token = ", token.key)
+				return JsonResponse({"message": "Facebook login done"}, status=201)
+
+			except ObjectDoesNotExist:
+				return JsonResponse({"message": "This facebook account is not associated with LocsApp"}, status=405)
 		else:
 			return (JsonResponse(
 				{"message": "Please send a Facebook token"}, status=405))
