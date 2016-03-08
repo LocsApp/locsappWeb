@@ -15,33 +15,3 @@ class SignupForm(forms.Form):
         user.email = (self.cleaned_data['email'])
         user.save()
 
-
-class SocialNetworkSignupForm(forms.Form):
-
-    def __init__(self, *args, **kwargs):
-        self.sociallogin = kwargs.pop('sociallogin')
-        user = self.sociallogin.user
-        # TODO: Should become more generic, not listing
-        # a few fixed properties.
-        initial = {'email': user_email(user) or '',
-                   'username': 'qwertyuio' or 'qwertyui',
-                   'first_name': user_field(user, 'first_name') or '',
-                   'last_name': user_field(user, 'last_name') or ''}
-        kwargs.update({
-            'initial': initial,
-            'email_required': kwargs.get('email_required',
-                                         settings.EMAIL_REQUIRED)})
-        #super(SocialNetworkSignupForm, self).__init__(*args, **kwargs)
-
-    def save(self, request):
-        adapter = get_adapter()
-        user = adapter.save_user(request, self.sociallogin, form=self)
-        self.custom_signup(request, user)
-        return user
-
-    def raise_duplicate_email_error(self):
-        raise forms.ValidationError(
-            _("An account already exists with this e-mail address."
-              " Please sign in to that account first, then connect"
-              " your %s account.")
-            % self.sociallogin.account.get_provider().name)
