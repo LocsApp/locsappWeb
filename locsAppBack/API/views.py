@@ -37,7 +37,6 @@ from bson import ObjectId
 import requests
 
 
-
 class FacebookLogin(APIView):
 	def post(self, request):
 		if request.data["facebook_token"]:
@@ -120,11 +119,7 @@ class FacebookRegister(APIView):
 			new_user.set_unusable_password()
 			new_user.save()
 
-			# Think to split first and last name
-			# Add Birthday
-			# Add gender
-			# Account.objects.create_user(username=username, is_registered_with_facebook=profile['id'])
-			return JsonResponse({"Facebook Register": "done"})
+			return JsonResponse({"Facebook Register": "done"}, status=201)
 		else:
 			return (JsonResponse(
 				{"message": "Please send a Facebook token and a username"}, status=405))
