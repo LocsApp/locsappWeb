@@ -37,14 +37,12 @@ class JSONEncoder(json.JSONEncoder):
 
 
 # Template for the doc on the homepage of the API
-
-
 class docAPIView(TemplateView):
 	template_name = "API/homeDocAPI.html"
 
 
 """
-    USER PROFILE ENDPOINTS
+	USER PROFILE ENDPOINTS
 """
 
 
@@ -91,19 +89,19 @@ class ChangeUsername(APIView):
 @permission_classes((IsAuthenticated,))
 class deleteEmailUser(APIView):
 	def post(self, request):
-		if ("email" not in request.data or len(request.data["email"]) == 0):
+		if "email" not in request.data or len(request.data["email"]) == 0:
 			return Response(
 				{"Error": "There must be a field 'email' present in the document."}, status=401)
 		answer = request.user.delete_email_address(
 			request, request.data["email"])
-		if ("Error" in answer):
+		if "Error" in answer:
 			return Response(answer, status=401)
 		User = get_user_model()
 		current_user = User.objects.get(pk=self.request.user.pk)
 		serializer = UserDetailsSerializer(current_user)
 		dataSerialized = serializer.data
-		if ("Error" in answer):
-			return (Response(answer, status=401))
+		if "Error" in answer:
+			return Response(answer, status=401)
 		return Response(dataSerialized)
 
 
@@ -119,38 +117,38 @@ class addEmailUser(APIView):
 		except:
 			return Response(
 				{"Error": "Please provide a correct email address."}, status=401)
-		if (request.data["new_email"] == request.user.email):
+		if request.data["new_email"] == request.user.email:
 			return Response(
 				{"Error": "This is your primary email address."}, status=401)
-		if (request.user.secondary_emails is not None):
+		if request.user.secondary_emails is not None:
 			for email_obj in request.user.secondary_emails:
-				if (email_obj[0] == request.data["new_email"]):
-					if (email_obj[1] == "true"):
+				if email_obj[0] == request.data["new_email"]:
+					if email_obj[1] == "true":
 						return Response(
 							{"Error": "You already confirmed that email."}, status=401)
 					break
-			if (len(request.user.secondary_emails) == 5):
+			if len(request.user.secondary_emails) == 5:
 				return Response(
 					{"Error": "Sorry, you can't add more than 5 emails."}, status=401)
 		answer = request.user.add_email_address(
 			request, request.data["new_email"], False)
 		if ("Error" in answer):
-			return (Response(answer, status=401))
+			return Response(answer, status=401)
 		return Response(answer)
 
 
 @permission_classes((IsAuthenticated,))
 class setEmailAsPrimary(APIView):
 	def post(self, request):
-		if ("email" not in request.data or len(request.data["email"]) == 0):
+		if "email" not in request.data or len(request.data["email"]) == 0:
 			return Response(
 				{"Error": "There must be a field 'email' present in the document."}, status=401)
-		if (request.user.secondary_emails is not None):
+		if request.user.secondary_emails is not None:
 			User = get_user_model()
 			current_user = User.objects.get(pk=self.request.user.pk)
 			for email_obj in current_user.secondary_emails:
-				if (email_obj[0] == request.data["email"]):
-					if (email_obj[1] == "false"):
+				if email_obj[0] == request.data["email"]:
+					if email_obj[1] == "false":
 						return (
 							Response({"Error": "This secondary email isn't verified."}, status=401))
 					else:
@@ -160,7 +158,7 @@ class setEmailAsPrimary(APIView):
 						current_user.save()
 						serializer = UserDetailsSerializer(current_user)
 						dataSerialized = serializer.data
-						return (Response(dataSerialized))
+						return Response(dataSerialized)
 			return (
 				Response({"Error": "You don't have this secondary email."}, status=401))
 		return (
