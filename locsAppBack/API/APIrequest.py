@@ -112,7 +112,7 @@ class APIRequestMongo:
     """
 
     def POST(self, request, model, collection_name, success_message):
-        if (request.body):
+        if request.body:
             body = json.loads(request.body.decode('utf8'))
             keys_error = {}
             document = {}
@@ -132,7 +132,7 @@ class APIRequestMongo:
                         missing_keys[key] = "This key is missing"
             keys_error.update(missing_keys)
             if keys_error:
-                return (JsonResponse(keys_error, status=401))
+                return JsonResponse(keys_error, status=401)
             self.db[collection_name].insert_one(document)
             return (JsonResponse(
                 {"message": success_message}, status=200))
@@ -143,7 +143,7 @@ class APIRequestMongo:
     """
 
     def GET(self, collection_name, id=None):
-        if (id is None):
+        if id is None:
             documents = self.db[collection_name].find({})
             answer = {collection_name: []}
             for instance in documents:
@@ -152,7 +152,7 @@ class APIRequestMongo:
         if (id):
             answer = self.parseObjectIdToStr(
                 self.db[collection_name].find_one({"_id": id}))
-        return (JsonResponse(answer, status=200))
+        return JsonResponse(answer, status=200)
 
     """
     verifies is the fields are correct:
@@ -182,7 +182,7 @@ class APIRequestMongo:
             fields[key] = fields[key].replace(" ", "")
             temp_options = fields[key].split("|")[0].split(",")
             # Verification of protected values
-            if (temp_options[0] == "integer_protected"):
+            if temp_options[0] == "integer_protected":
                 if key in answer:
                     error_fields[key] = "This field is protected"
             # Parsing of default values
@@ -196,10 +196,10 @@ class APIRequestMongo:
             if temp_options[0] == "text":
                 if not isinstance(answer[key], type("kek")):
                     error_fields[key] = "It must be a string"
-                elif (len(answer[key]) > int(temp_options[1])
-                        or len(answer[key]) <= 0):
+                elif len(answer[key]) > int(temp_options[1]) or len(answer[key]) <= 0:
                     error_fields[
-                        key] = "The text must not be empty and the length must be inferior or equal to" + temp_options[1]
+                        key] = "The text must not be empty and the length must be inferior or equal to" \
+                               + temp_options[1]
             elif temp_options[0] == "integer":
                 if not isinstance(answer[key], type(1)):
                     error_fields[key] = "The field must be an integer"
