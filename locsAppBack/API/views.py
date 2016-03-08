@@ -34,6 +34,8 @@ APIrequests = APIRequestMongo(db_locsapp)
 from django.core.validators import validate_email
 import json
 from bson import ObjectId
+import urllib.request
+
 
 
 class FacebookLogin(APIView):
@@ -63,24 +65,21 @@ class FacebookRegister(APIView):
 
 			facebook_token = request.data["facebook_token"]
 			username = request.data["username"]
-			profile = facebook.GraphAPI(access_token=facebook_token, version=2.5).get_object("gender")
-			print("profile = ", profile)
 			email_exist = True
 
 
-			import urllib.request
-			test42 = urllib.request.urlopen("https://graph.facebook.com/v2.5/me?access_token=CAAOYGb6QJ8MBAEIjx0pyMzZC7MAefrE1ua3nlZCUNnrNn2PdB16wJT9mOlsXnCYPn6HvS4FffRWbGgG8tIDr41aO0fbRQZCa0uA9Tog1Gd04AUYK0XxJbfyhU6QwMojndLdRRO7t4NAsrWC6rH4sTkTBTlJiS2zTx7MOI7AiGZBcW1OfqdEZCZBl6SraqRAtZA5sQY9c0XaqofZCqgeY2xuN&fields=id%2Cname%2Cemail").read()
-			print("test 24", test42)
-			urllib.close()
+			profile_json = urllib.request.urlopen("https://graph.facebook.com/v2.5/me?access_token=" + facebook_token + "&fields=id%2Cname%2Cemail").read()
+			print("profle_json ", profile_json)
+			profile_json.close()
 
 			# We verify the size of the username
 			if len(username) < 3:
 				error += "Username needs to be at least 3 characters "
 
 			# We verify the user profile contains an email
-			if "email" not in profile:
-				error += "Your access_token did not ask for the email"
-				email_exist = False
+			#if "email" not in profile:
+			#	error += "Your access_token did not ask for the email"
+			#	email_exist = False
 
 			# We verify an user have the same email1
 			#if Account.object.filter(profile["email"]):

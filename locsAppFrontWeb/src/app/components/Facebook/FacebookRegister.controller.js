@@ -52,7 +52,7 @@
 
       /* Result of the call to the API when register the new user */
       vm.FaceBookRegisterSuccessFn = function (data) {
-        console.log("SUCEES data " + data);
+        $log.log("SUCEES data " + data);
         toastr.success('Congratulations on registrating to Locsapp!');
 
       };
