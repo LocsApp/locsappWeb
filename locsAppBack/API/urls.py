@@ -6,8 +6,10 @@ from . import views
 from . import articles
 from . import static_collections
 from django.views.generic.base import RedirectView
-
 from allauth.account.views import confirm_email
+
+
+
 
 """
 @apiDefine UserObjectRegisterDefine
@@ -69,7 +71,7 @@ static_collections_patterns = [
 api_patterns = [
 
     url(r'^auth/facebook-login/', views.FacebookLogin.as_view(), name='fb_login'),
-    url(r'^auth/facebook-register', views.FacebookRegister.as_view(), name='fb_register'),
+   # url(r'^auth/facebook-register', views.FacebookRegister.as_view(), name='fb_register'),
     url(r'^auth/change-username/', views.ChangeUsername.as_view()),
 
     url(r'^articles/', include(article_patterns)),

@@ -5,13 +5,9 @@ from rest_framework.views import APIView
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.authtoken.models import Token
-from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-from rest_auth.registration.views import SocialLoginView
 from .models import Account
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import logout
-import facebook
 # User model
 from django.contrib.auth import get_user_model
 # User serializer
@@ -34,21 +30,6 @@ APIrequests = APIRequestMongo(db_locsapp)
 from django.core.validators import validate_email
 import json
 from bson import ObjectId
-import requests
-
-
-class FacebookLogin(APIView):
-	def post(self, request):
-		if request.data["facebook_token"]:
-			facebook_token = request.data["facebook_token"]
-			graph = facebook.GraphAPI(facebook_token)
-			profile = graph.get_object("me")
-			print("profile = ", profile)
-
-			return JsonResponse({"Facebook": "Facebook"})
-		else:
-			return (JsonResponse(
-				{"message": "Please send a Facebook token"}, status=405))
 
 
 class JSONEncoder(json.JSONEncoder):
