@@ -32,7 +32,7 @@ class FacebookLogin(APIView):
 			r.close()
 
 			if "id" not in profile:
-				return JsonResponse({"message": "Your access_token did not ask for the email"}, status=405)
+				return JsonResponse({"message": "Your access_token did not ask for the email"}, status=400)
 
 			print("profile = ", profile["id"])
 			try:
@@ -52,10 +52,10 @@ class FacebookLogin(APIView):
 					return JsonResponse({"key": token.key}, status=201)
 
 			except ObjectDoesNotExist:
-				return JsonResponse({"message": "This facebook account is not associated with LocsApp"}, status=405)
+				return JsonResponse({"message": "This facebook account is not associated with LocsApp"}, status=401)
 		else:
 			return (JsonResponse(
-				{"message": "Please send a Facebook token"}, status=405))
+				{"message": "Please send a Facebook token"}, status=400))
 
 
 class FacebookRegister(APIView):
@@ -109,7 +109,7 @@ class FacebookRegister(APIView):
 			# If there is some error we return a JSON to say it
 			if error != "":
 				return JsonResponse(
-					{"message": error}, status=405
+					{"message": error}, status=400
 				)
 
 			# If there is no error we register a new user first we check if the field exist and we registered them
@@ -132,4 +132,4 @@ class FacebookRegister(APIView):
 			return JsonResponse({"message": "Facebook register done"}, status=201)
 		else:
 			return (JsonResponse(
-				{"message": "Please send a Facebook token and a username"}, status=405))
+				{"message": "Please send a Facebook token and a username"}, status=400))

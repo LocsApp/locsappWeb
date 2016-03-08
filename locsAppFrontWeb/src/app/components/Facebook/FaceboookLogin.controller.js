@@ -40,7 +40,10 @@
 
     vm.FaceBookLoginErrorFn = function (data) {
       $log.log("DATA = ", data);
-      //toastr.error('Seems like something went wrong with your login :( ' + data.data.message, 'Woops...');
+      if (data.status === 401) {
+        $state.go('main.register');
+        toastr.error('Please register before login');
+      }
     };
 
 
