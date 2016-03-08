@@ -51,7 +51,7 @@
       vm.loader = false;
 
       /* Result of the call to the API when register the new user */
-      vm.FaceBookRegisterSuccessFn = function (data) {
+      vm.FaceBookRegisterSuccessFn = function () {
         toastr.success('Congratulations on registrating to Locsapp!');
         $mdDialog.hide();
         $state.go('main.login');
