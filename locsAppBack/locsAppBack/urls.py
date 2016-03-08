@@ -22,7 +22,6 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from API.views import *
 from API.urls import *
-from social_network.urls import *
 from django.http import HttpResponse
 
 urlpatterns = [

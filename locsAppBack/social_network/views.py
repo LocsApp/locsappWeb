@@ -2,7 +2,7 @@ import requests
 import json
 from rest_framework.views import APIView
 from django.http import JsonResponse
-from ..API.models import Account
+from API.models import Account
 
 
 class FacebookRegister(APIView):
