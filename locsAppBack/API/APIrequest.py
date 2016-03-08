@@ -1,20 +1,16 @@
 # Django imports
 from django.http import JsonResponse
 from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
 
 # JSON import
 import json
 import bson
 
 # Pymongo imports
-from pymongo import MongoClient
 from bson.objectid import ObjectId
 
 import pytz
 from datetime import datetime
-from bson import json_util
-from bson.json_util import dumps
 
 
 class APIRequestMongo:
