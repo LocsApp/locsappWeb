@@ -5,7 +5,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.views import APIView
 from django.http import JsonResponse
 from API.models import Account
-from rest_auth.views import login
 
 """
 	Register with Facebook Use the id to register the user
@@ -39,9 +38,19 @@ class FacebookLogin(APIView):
 			try:
 				user = Account.object.get(id_facebook=profile["id"])
 				# If the user exists we login him and send a token to access to our API
-				token = Token.objects.create(user=user)
-				print("token = ", token.key)
-				return JsonResponse({"message": "Facebook login done", "key": token.key, "id": user.pk}, status=201)
+
+				# Now we check if the token exist
+				try:
+					# The token exists we need to delete it and create a new one
+					old_token = Token.objects.get(user=user)
+					old_token.delete()
+					new_token = Token.objects.create(user=user)
+					return JsonResponse({"message": "Facebook login done", "key": new_token.key, "id": user.pk}, status=201)
+				except ObjectDoesNotExist:
+					# The token exists we can create a new one safely
+					token = Token.objects.create(user=user)
+					return JsonResponse({"message": "Facebook login done", "key": token.key, "id": user.pk}, status=201)
+
 
 			except ObjectDoesNotExist:
 				return JsonResponse({"message": "This facebook account is not associated with LocsApp"}, status=405)
@@ -97,7 +106,6 @@ class FacebookRegister(APIView):
 			if Account.object.filter(username=username):
 				error += "An user with this username already exists "
 			# if Account.object.filter(email=)
-
 
 			# If there is some error we return a JSON to say it
 			if error != "":
