@@ -310,25 +310,25 @@ class livingAddressUserDelete(APIView):
 class billingAddressUser(APIView):
 	def post(self, request, user_pk):
 		User = get_user_model()
-		if (self.request.user.pk):
-			if (int(user_pk) != int(self.request.user.pk)):
+		if self.request.user.pk:
+			if int(user_pk) != int(self.request.user.pk):
 				return Response(
 					{"Unauthorized": "You have no access to this data."}, status=403)
 		else:
 			return Response(
 				{"Unauthorized": "You need to be connected."}, status=403)
-		if ("billing_address" in request.data):
-			if (isinstance(request.data["billing_address"], list)):
-				if (len(request.data["billing_address"]) == 2):
-					if (len(request.data["billing_address"][0]) > 20):
+		if "billing_address" in request.data:
+			if isinstance(request.data["billing_address"], list):
+				if len(request.data["billing_address"]) == 2:
+					if len(request.data["billing_address"][0]) > 20:
 						return Response(
 							{"Error": "Aliases must be smaller than 20 characters"}, status=401)
-					if (isinstance(request.data["billing_address"][1], dict)):
+					if isinstance(request.data["billing_address"][1], dict):
 						if ("first_name" not in request.data["billing_address"][1] or
-								    "last_name" not in request.data["billing_address"][1] or
-								    "address" not in request.data["billing_address"][1] or
-								    "postal_code" not in request.data["billing_address"][1] or
-								    "city" not in request.data["billing_address"][1]):
+									"last_name" not in request.data["billing_address"][1] or
+										"address" not in request.data["billing_address"][1] or
+										"postal_code" not in request.data["billing_address"][1] or
+										"city" not in request.data["billing_address"][1]):
 							return Response(
 								{"Error": "Address collection is not correctly formatted."}, status=401)
 						else:
@@ -340,7 +340,7 @@ class billingAddressUser(APIView):
 					current_user = User.objects.get(pk=user_pk)
 					if (current_user.billing_address is None or len(
 							current_user.billing_address) < 5):
-						if (current_user.billing_address is None):
+						if current_user.billing_address is None:
 							current_user.billing_address = [
 								request.data["billing_address"]]
 						else:
@@ -354,7 +354,7 @@ class billingAddressUser(APIView):
 						current_user.save()
 						serializer = UserDetailsSerializer(current_user)
 						jsonData = serializer.data
-						return (Response(jsonData))
+						return Response(jsonData)
 					else:
 						return Response(
 							{"Error": "The user already has 5 billing addresses"}, status=401)
@@ -373,8 +373,8 @@ class billingAddressUser(APIView):
 
 	def get(self, request, user_pk):
 		User = get_user_model()
-		if (self.request.user.pk):
-			if (int(user_pk) != int(self.request.user.pk)):
+		if self.request.user.pk:
+			if int(user_pk) != int(self.request.user.pk):
 				return Response(
 					{"Unauthorized": "You have no access to this data."}, status=403)
 		else:
@@ -382,32 +382,32 @@ class billingAddressUser(APIView):
 				{"Unauthorized": "You need to be connected."}, status=403)
 		current_user = User.objects.get(pk=user_pk)
 		billing_addresses = current_user.billing_address
-		return (Response(billing_addresses))
+		return Response(billing_addresses)
 
 
 @permission_classes((IsAuthenticated,))
 class billingAddressUserDelete(APIView):
 	def post(self, request, user_pk):
 		User = get_user_model()
-		if (self.request.user.pk):
-			if (int(user_pk) != int(self.request.user.pk)):
+		if self.request.user.pk:
+			if int(user_pk) != int(self.request.user.pk):
 				return Response(
 					{"Unauthorized": "You have no access to this data."}, status=403)
 		else:
 			return Response(
 				{"Unauthorized": "You need to be connected."}, status=403)
-		if ("billing_address" in request.data):
-			if (isinstance(request.data["billing_address"], list)):
-				if (len(request.data["billing_address"]) == 2):
-					if (len(request.data["billing_address"][0]) > 20):
+		if "billing_address" in request.data:
+			if isinstance(request.data["billing_address"], list):
+				if len(request.data["billing_address"]) == 2:
+					if len(request.data["billing_address"][0]) > 20:
 						return Response(
 							{"Error": "Aliases must be smaller than 20 characters"}, status=401)
-					if (isinstance(request.data["billing_address"][1], dict)):
+					if isinstance(request.data["billing_address"][1], dict):
 						if ("first_name" not in request.data["billing_address"][1] or
-								    "last_name" not in request.data["billing_address"][1] or
-								    "address" not in request.data["billing_address"][1] or
-								    "postal_code" not in request.data["billing_address"][1] or
-								    "city" not in request.data["billing_address"][1]):
+									"last_name" not in request.data["billing_address"][1] or
+										"address" not in request.data["billing_address"][1] or
+										"postal_code" not in request.data["billing_address"][1] or
+										"city" not in request.data["billing_address"][1]):
 							return Response(
 								{"Error": "Address collection is not correctly formatted."}, status=401)
 						else:
@@ -417,7 +417,7 @@ class billingAddressUserDelete(APIView):
 						return Response(
 							{"Error": "Addresses must be a collection of data"}, status=401)
 					current_user = User.objects.get(pk=user_pk)
-					if (current_user.billing_address is not None):
+					if current_user.billing_address is not None:
 						for i, address in enumerate(
 								current_user.billing_address):
 							if (address[0] == request.data[
@@ -427,7 +427,7 @@ class billingAddressUserDelete(APIView):
 								serializer = UserDetailsSerializer(
 									current_user)
 								jsonData = serializer.data
-								return (Response(jsonData))
+								return Response(jsonData)
 						return Response(
 							{"Error": "The alias wasn't found in the user's living addresses"}, status=401)
 					else:
