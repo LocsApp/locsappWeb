@@ -12,6 +12,7 @@ django-rest-swagger==0.3.4
 django-robots==1.1
 djangorestframework==3.2.4
 drf-nested-routers==0.10.0
+facebook-sdk==1.0.0a0
 gunicorn==19.3.0
 Markdown==2.6.2
 mongoengine==0.10.0
