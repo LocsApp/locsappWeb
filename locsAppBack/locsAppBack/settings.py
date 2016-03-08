@@ -46,10 +46,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Django allauth different form
-# ACCOUNT_SIGNUP_FORM_CLASS = 'API.forms.UserSignupForm'
-
-# ACCOUNT_SIGNUP_FORM_CLASS = 'API.forms.SignupForm'
+# Django allauth
 ACCOUNT_ADAPTER = 'API.adapter.DefaultAccountAdapterCustom'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
