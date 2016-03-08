@@ -25,7 +25,7 @@ from datetime import datetime
 
 @csrf_exempt
 def staticBaseCategories(request):
-    if (request.method == "GET"):
+    if request.method == "GET":
         return APIrequests.GET("base_categories")
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
@@ -33,7 +33,7 @@ def staticBaseCategories(request):
 
 @csrf_exempt
 def staticSubCategories(request):
-    if (request.method == "GET"):
+    if request.method == "GET":
         return APIrequests.GET("sub_categories")
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
@@ -41,7 +41,7 @@ def staticSubCategories(request):
 
 @csrf_exempt
 def staticGenders(request):
-    if (request.method == "GET"):
+    if request.method == "GET":
         return APIrequests.GET("genders")
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
@@ -49,7 +49,7 @@ def staticGenders(request):
 
 @csrf_exempt
 def staticSizes(request):
-    if (request.method == "GET"):
+    if request.method == "GET":
         return APIrequests.GET("sizes")
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
@@ -57,7 +57,7 @@ def staticSizes(request):
 
 @csrf_exempt
 def staticClotheColors(request):
-    if (request.method == "GET"):
+    if request.method == "GET":
         return APIrequests.GET("clothe_colors")
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
@@ -65,7 +65,7 @@ def staticClotheColors(request):
 
 @csrf_exempt
 def staticClotheStates(request):
-    if (request.method == "GET"):
+    if request.method == "GET":
         return APIrequests.GET("clothe_states")
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
@@ -73,7 +73,7 @@ def staticClotheStates(request):
 
 @csrf_exempt
 def staticPaymentMethods(request):
-    if (request.method == "GET"):
+    if request.method == "GET":
         return APIrequests.GET("payment_methods")
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
