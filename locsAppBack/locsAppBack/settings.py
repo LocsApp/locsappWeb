@@ -66,32 +66,6 @@ OLD_PASSWORD_FIELD_ENABLED = True
 # Keep the user logged after the password has changed
 LOGOUT_ON_PASSWORD_CHANGE = False
 
-SOCIALACCOUNT_PROVIDERS = \
-    {'facebook':
-        {
-            'METHOD': 'oauth2',
-            'SCOPE': ['email', 'public_profile', 'user_friends', 'user_birthday'],
-            'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
-            'FIELDS': [
-                'id',
-                'email',
-                'name',
-                'birthday',
-                'gender',
-                # 'user_friends',
-                'first_name',
-                'last_name',
-                'verified',
-                'locale',
-                'timezone',
-                'link',
-                'updated_time'],
-            'EXCHANGE_TOKEN': True,
-            'LOCALE_FUNC': 'path.to.callable',
-            'VERIFIED_EMAIL': False,
-            'VERSION': 'v2.5'
-        }
-    }
 
 # Different user model
 AUTH_USER_MODEL = 'API.Account'
@@ -103,7 +77,6 @@ CORS_ORIGIN_ALLOW_ALL = True
 # Application definition
 
 INSTALLED_APPS = (
-    # 'API',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
