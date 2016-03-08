@@ -13,7 +13,7 @@
     .controller('FacebookRegisterController', FacebookRegisterController);
 
   /** @ngInject */
-  function FacebookRegisterController($scope, $log, ezfb, UsersService, $mdDialog, $document, toastr, $resource, URL_API, $state, $sessionStorage, $localStorage) {
+  function FacebookRegisterController($log, ezfb, UsersService, $mdDialog, $document, toastr, $state) {
 
     //Ask an username que quand on register sinon on log direct et en back on verifie l'existence de l'utilisateur
 
@@ -30,7 +30,7 @@
         locals: {token: vm.token},
         bindToController: true,
         parent: angular.element($document.body),
-        clickOutsideToClose: false,
+        clickOutsideToClose: true,
         targetEvent: event
       }).then(function (data) {
         vm.user = data
@@ -53,7 +53,8 @@
       /* Result of the call to the API when register the new user */
       vm.FaceBookRegisterSuccessFn = function (data) {
         toastr.success('Congratulations on registrating to Locsapp!');
-
+        $mdDialog.hide();
+        $state.go('main.login');
       };
 
       vm.FaceBookRegisterErrorFn = function (data) {

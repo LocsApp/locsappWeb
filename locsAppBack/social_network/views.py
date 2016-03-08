@@ -41,7 +41,7 @@ class FacebookLogin(APIView):
 				# If the user exists we login him and send a token to access to our API
 				token = Token.objects.create(user=user)
 				print("token = ", token.key)
-				return JsonResponse({"message": "Facebook login done"}, status=201)
+				return JsonResponse({"message": "Facebook login done", "token": token.key}, status=201)
 
 			except ObjectDoesNotExist:
 				return JsonResponse({"message": "This facebook account is not associated with LocsApp"}, status=405)
