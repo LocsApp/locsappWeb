@@ -184,10 +184,10 @@ class livingAddressUser(APIView):
 							{"Error": "Aliases must be smaller than 20 characters"}, status=401)
 					if isinstance(request.data["living_address"][1], dict):
 						if ("first_name" not in request.data["living_address"][1] or
-									"last_name" not in request.data["living_address"][1] or
-										"address" not in request.data["living_address"][1] or
-										"postal_code" not in request.data["living_address"][1] or
-										"city" not in request.data["living_address"][1]):
+								    "last_name" not in request.data["living_address"][1] or
+								    "address" not in request.data["living_address"][1] or
+								    "postal_code" not in request.data["living_address"][1] or
+								    "city" not in request.data["living_address"][1]):
 							return Response(
 								{"Error": "Address collection is not correctly formatted."}, status=401)
 						else:
@@ -263,10 +263,10 @@ class livingAddressUserDelete(APIView):
 							{"Error": "Aliases must be smaller than 20 characters"}, status=401)
 					if isinstance(request.data["living_address"][1], dict):
 						if ("first_name" not in request.data["living_address"][1] or
-									"last_name" not in request.data["living_address"][1] or
-										"address" not in request.data["living_address"][1] or
-										"postal_code" not in request.data["living_address"][1] or
-										"city" not in request.data["living_address"][1]):
+								    "last_name" not in request.data["living_address"][1] or
+								    "address" not in request.data["living_address"][1] or
+								    "postal_code" not in request.data["living_address"][1] or
+								    "city" not in request.data["living_address"][1]):
 							return Response(
 								{"Error": "Address collection is not correctly formatted."}, status=401)
 						else:
@@ -325,10 +325,10 @@ class billingAddressUser(APIView):
 							{"Error": "Aliases must be smaller than 20 characters"}, status=401)
 					if isinstance(request.data["billing_address"][1], dict):
 						if ("first_name" not in request.data["billing_address"][1] or
-									"last_name" not in request.data["billing_address"][1] or
-										"address" not in request.data["billing_address"][1] or
-										"postal_code" not in request.data["billing_address"][1] or
-										"city" not in request.data["billing_address"][1]):
+								    "last_name" not in request.data["billing_address"][1] or
+								    "address" not in request.data["billing_address"][1] or
+								    "postal_code" not in request.data["billing_address"][1] or
+								    "city" not in request.data["billing_address"][1]):
 							return Response(
 								{"Error": "Address collection is not correctly formatted."}, status=401)
 						else:
@@ -404,10 +404,10 @@ class billingAddressUserDelete(APIView):
 							{"Error": "Aliases must be smaller than 20 characters"}, status=401)
 					if isinstance(request.data["billing_address"][1], dict):
 						if ("first_name" not in request.data["billing_address"][1] or
-									"last_name" not in request.data["billing_address"][1] or
-										"address" not in request.data["billing_address"][1] or
-										"postal_code" not in request.data["billing_address"][1] or
-										"city" not in request.data["billing_address"][1]):
+								    "last_name" not in request.data["billing_address"][1] or
+								    "address" not in request.data["billing_address"][1] or
+								    "postal_code" not in request.data["billing_address"][1] or
+								    "city" not in request.data["billing_address"][1]):
 							return Response(
 								{"Error": "Address collection is not correctly formatted."}, status=401)
 						else:
@@ -462,7 +462,7 @@ def searchNotificationsUser(request, user_pk):
 	if request.method == "POST":
 		JSONdoc = json.loads(request.body.decode('utf8'))
 		if ("page" in JSONdoc and
-					"number_items" in JSONdoc):
+				    "number_items" in JSONdoc):
 			if (not isinstance(JSONdoc["page"], type(1)) or not
 			isinstance(JSONdoc["number_items"], type(1))):
 				return (JsonResponse(
@@ -470,10 +470,10 @@ def searchNotificationsUser(request, user_pk):
 			page = JSONdoc["page"]
 			number_items = JSONdoc["number_items"]
 			notifications_user = db_locsapp[
-				"notifications_users"].find({"user_id": int(user_pk), "visible": True}).sort(
+				                     "notifications_users"].find({"user_id": int(user_pk), "visible": True}).sort(
 				"date", -1)[((page - 1) * number_items):((page - 1) * number_items) + number_items]
 			notifications_metadata = {"new": db_locsapp[
-			"notifications_users"].find({"user_id": int(user_pk), "read": False, "visible": True}).count()}
+				"notifications_users"].find({"user_id": int(user_pk), "read": False, "visible": True}).count()}
 			notifications_metadata["total"] = db_locsapp[
 				"notifications_users"].find({"user_id": int(user_pk), "visible": True}).count()
 			notifications = {
@@ -503,10 +503,10 @@ def notificationsUserAllRead(request, user_pk):
 			{"Unauthorized": "You need to be connected."}, status=403)
 	"""
 
-	if (request.method == "GET"):
+	if request.method == "GET":
 		nb_modified = db_locsapp["notifications_users"].update_many(
 			{'user_id': int(user_pk)}, {"$set": {"read": True}})
-		if (nb_modified.modified_count <= 0):
+		if nb_modified.modified_count <= 0:
 			return (JsonResponse(
 				{"Warning": "No notification has been modified. Reason : No notifications were available."}))
 		return (JsonResponse(
@@ -519,13 +519,15 @@ def notificationsUserAllRead(request, user_pk):
 @csrf_exempt
 def notificationsUser(request, user_pk):
 	fields_definition = \
-		{"type": "text, 30",
-		 "content": "text, 300",
-		 "state_url": "text, 50",
-		 "read": "boolean",
-		 "visible": "boolean",
-		 "user_id": "integer",
-		 "date": "date_default"}
+		{
+			"type": "text, 30",
+			"content": "text, 300",
+			"state_url": "text, 50",
+			"read": "boolean",
+			"visible": "boolean",
+			"user_id": "integer",
+			"date": "date_default"
+		}
 
 	"""
 	if (request.user.pk):
@@ -536,10 +538,10 @@ def notificationsUser(request, user_pk):
 		return JsonResponse(
 			{"Unauthorized": "You need to be connected."}, status=403)
 	"""
-	if (request.method == "POST"):
+	if request.method == "POST":
 		return APIrequests.forgeAPIrequestCreate(
 			"POST", request, fields_definition, db_locsapp["notifications_users"])
-	elif (request.method == "GET"):
+	elif request.method == "GET":
 		notifications_user = db_locsapp[
 			"notifications_users"].find({"user_id": int(user_pk), "visible": True}).sort("date", -1)
 		notifications_metadata = {"new": db_locsapp[
@@ -552,11 +554,11 @@ def notificationsUser(request, user_pk):
 		for notification in notifications_user:
 			notification = APIrequests.parseObjectIdToStr(notification)
 			notifications["notifications"].append(notification)
-		return (JsonResponse(notifications, safe=True))
-	elif (request.method == "DELETE"):
+		return JsonResponse(notifications, safe=True)
+	elif request.method == "DELETE":
 		nb_deleted = db_locsapp["notifications_users"].update_many(
 			{'user_id': int(user_pk)}, {"$set": {"visible": False}})
-		if (nb_deleted.modified_count <= 0):
+		if nb_deleted.modified_count <= 0:
 			return (JsonResponse(
 				{"Warning": "No notification has been deleted. Reason : No notifications were available."}))
 		return (JsonResponse(
@@ -567,33 +569,35 @@ def notificationsUser(request, user_pk):
 
 
 """
-    NOTIFICATIONS ENDPOINTS
+	NOTIFICATIONS ENDPOINTS
 """
 
 
 @csrf_exempt
 def notificationAlone(request, notification_pk):
 	fields_definition_put = \
-		{"type": "text, 30",
-		 "content": "text, 300",
-		 "state_url": "text, 50",
-		 "read": "boolean",
-		 "visible": "boolean",
-		 "user_id": "integer"}
+		{
+			"type": "text, 30",
+			"content": "text, 300",
+			"state_url": "text, 50",
+			"read": "boolean",
+			"visible": "boolean",
+			"user_id": "integer"
+		}
 
-	if (request.method == "GET"):
+	if request.method == "GET":
 		notification = db_locsapp["notifications_users"].find_one(
 			{"_id": ObjectId(notification_pk)})
 		answer = APIrequests.parseObjectIdToStr(notification)
-		if (answer is not None):
-			return (JsonResponse(answer, safe=True))
+		if answer is not None:
+			return JsonResponse(answer, safe=True)
 		else:
-			return (JsonResponse({"Error": "Id not found."}, status=404))
-	elif (request.method == "PUT"):
+			return JsonResponse({"Error": "Id not found."}, status=404)
+	elif request.method == "PUT":
 		return APIrequests.forgeAPIrequestPut(
 			request, notification_pk, fields_definition_put, db_locsapp["notifications_users"])
 	else:
-		return (JsonResponse({"Error": "Method not allowed!"}, status=405))
+		return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
 
 """
