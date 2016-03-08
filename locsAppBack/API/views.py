@@ -88,7 +88,7 @@ class FacebookRegister(APIView):
 				error += "Your access_token do not have any id"
 
 			# We veify an user doest not have an existing facebook ID and we also need to verify the existence of the ID
-			if "id" in profile and Account.object.filter(is_registered_with_facebook=profile["id"]):
+			if "id" in profile and Account.object.filter(id_facebook=profile["id"]):
 				error += "An user with this id already exists"
 
 			# We verify if there is no other user with this username, id_facebook, email or secondary email
@@ -104,7 +104,21 @@ class FacebookRegister(APIView):
 					{"message": error}, status=405
 				)
 
-			# If there is no error we register a new user
+			# If there is no error we register a new user first we check if the field exist and we registered them
+			# We know that username, id, and email exist
+			new_user = Account.objects.create_user(username=username, email=profile["email"], id_facebook=profile["id"])
+			if profile["name"]:
+				full_name = profile["name"].split(" ")
+				new_user.first_name = full_name[0]
+				new_user.last_name = full_name[1]
+			if profile["gender"]:
+				new_user.gender = profile["gender"]
+			if profile["birthday"]:
+				new_user.birthdate = profile["birthday"]
+
+			# We set an unusable so the user can only login with Facebook
+			new_user.set_unusable_password()
+			new_user.save()
 
 			# Think to split first and last name
 			# Add Birthday

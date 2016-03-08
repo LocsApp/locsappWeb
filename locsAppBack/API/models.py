@@ -62,7 +62,7 @@ class Account(AbstractBaseUser):
 
     created_at = models.DateTimeField(auto_now_add=True)
     is_admin = models.BooleanField(default=False)
-    is_registered_with_facebook = models.IntegerField(default=-1)
+    id_facebook = models.IntegerField(default=-1)
 
     objects = AccountManager()
     object = AccountManager()
