@@ -99,7 +99,6 @@ INSTALLED_APPS = (
     'rest_auth.registration',
     'rest_framework_swagger',
     'tests',
-    'locsAppMiddleware',
     'API'
 )
 
@@ -116,7 +115,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'locsAppMiddleware.middleware.CheckUsernameExistMiddleware',
 )
 
 ROOT_URLCONF = 'locsAppBack.urls'
