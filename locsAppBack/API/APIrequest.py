@@ -98,14 +98,14 @@ class APIRequestMongo:
     """
 
     def _fieldDefaultNotRequired(self, document, model_attribute, key):
-        if (isinstance(model_attribute, type({}))):
-            if ("_required" in model_attribute):
-                if (not model_attribute["_required"]):
-                    return (True)
-            if ("_default" in model_attribute):
+        if isinstance(model_attribute, type({})):
+            if "_required" in model_attribute:
+                if not model_attribute["_required"]:
+                    return True
+            if "_default" in model_attribute:
                 document[key] = model_attribute["_default"]
-                return (True)
-        return (False)
+                return True
+        return False
 
     """
     This method creates a POST endpoint for a mongo API
