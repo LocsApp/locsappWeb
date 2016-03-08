@@ -68,9 +68,14 @@ class FacebookRegister(APIView):
 			email_exist = True
 
 
-			profile_json = urllib.request.urlopen("https://graph.facebook.com/v2.5/me?access_token=" + facebook_token + "&fields=id%2Cname%2Cemail").read()
-			print("profle_json ", profile_json)
-			profile_json.close()
+			import requests
+			r = requests.get("https://graph.facebook.com/v2.5/me?access_token=" + facebook_token + "&fields=id%2Cname%2Cemail")
+			print("request = ", r.content)
+			j = json.loads(r.content.decode("utf8"))
+
+			print(" j = ", j)
+			print(" email = ", j["email"])
+
 
 			# We verify the size of the username
 			if len(username) < 3:
@@ -95,7 +100,8 @@ class FacebookRegister(APIView):
 			# if Account.object.filter(email=)
 
 
-
+			#We close the connection
+			r.close()
 			# If there is some error we return a JSON to say it
 			if error != "":
 				return JsonResponse(
