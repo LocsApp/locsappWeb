@@ -215,7 +215,7 @@ class APIRequestMongo:
                 if not isinstance(answer[key], type({})):
                     error_fields[key] = "The field must be a dictionnary"
             elif temp_options[0] == "id":
-                if bson.objectid.ObjectId.is_valid(answer[key]) == False:
+                if not bson.objectid.ObjectId.is_valid(answer[key]):
                     error_fields[key] = "The field must be a MongoDB ID"
 
             temp_options = []
