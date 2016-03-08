@@ -34,7 +34,7 @@ APIrequests = APIRequestMongo(db_locsapp)
 from django.core.validators import validate_email
 import json
 from bson import ObjectId
-import urllib.request
+import requests
 
 
 
@@ -65,43 +65,39 @@ class FacebookRegister(APIView):
 
 			facebook_token = request.data["facebook_token"]
 			username = request.data["username"]
-			email_exist = True
 
-
-			import requests
-			r = requests.get("https://graph.facebook.com/v2.5/me?access_token=" + facebook_token + "&fields=id%2Cname%2Cemail")
-			print("request = ", r.content)
-			j = json.loads(r.content.decode("utf8"))
-
-			print(" j = ", j)
-			print(" email = ", j["email"])
-
+			r = requests.get(
+				"https://graph.facebook.com/v2.5/me?access_token=" + facebook_token + "&fields=id%2Cname%2Cemail%2Cgender%2Cbirthday&format=json&method=get&pretty=0&suppress_http_code=1")
+			profile = json.loads(r.content.decode("utf8"))
+			r.close()
 
 			# We verify the size of the username
 			if len(username) < 3:
 				error += "Username needs to be at least 3 characters "
 
 			# We verify the user profile contains an email
-			#if "email" not in profile:
-			#	error += "Your access_token did not ask for the email"
-			#	email_exist = False
+			if "email" not in profile:
+				error += "Your access_token did not ask for the email"
 
-			# We verify an user have the same email1
-			#if Account.object.filter(profile["email"]):
-			#	error += "An user with this email already exists"
+			# We verify an user have the same email1 ALSO VERIFY THE SECONDARY ENMAIL
+			if "email" in profile and Account.object.filter(email=profile["email"]):
+				error += "An user with this email already exists"
 
-			# We veify an user doest not have an existing facebook ID
-			#if Account.object.filter(profile["id"]):
-			#	error += "An user with this id already exists"
+			# We verify the user profile contains and ID
+			if "id" not in profile:
+				error += "Your access_token do not have any id"
+
+			# We veify an user doest not have an existing facebook ID and we also need to verify the existence of the ID
+			if "id" in profile and Account.object.filter(is_registered_with_facebook=profile["id"]):
+				error += "An user with this id already exists"
 
 			# We verify if there is no other user with this username, id_facebook, email or secondary email
+			print("username = ", username)
 			if Account.object.filter(username=username):
 				error += "An user with this username already exists "
 			# if Account.object.filter(email=)
 
 
-			#We close the connection
-			r.close()
 			# If there is some error we return a JSON to say it
 			if error != "":
 				return JsonResponse(
@@ -117,7 +113,7 @@ class FacebookRegister(APIView):
 			return JsonResponse({"Facebook Register": "done"})
 		else:
 			return (JsonResponse(
-				{"message": "Please send a Facebook token"}, status=405))
+				{"message": "Please send a Facebook token and a username"}, status=405))
 
 
 class JSONEncoder(json.JSONEncoder):
