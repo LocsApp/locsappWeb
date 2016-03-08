@@ -1,6 +1,4 @@
 from django.conf.urls import include, url
-# django_rest_framework
-from rest_framework.authtoken.views import obtain_auth_token
 # importing local views
 from . import views
 from . import articles
