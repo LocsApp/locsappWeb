@@ -52,13 +52,11 @@
 
       /* Result of the call to the API when register the new user */
       vm.FaceBookRegisterSuccessFn = function (data) {
-        $log.log("SUCEES data " + data);
         toastr.success('Congratulations on registrating to Locsapp!');
 
       };
 
       vm.FaceBookRegisterErrorFn = function (data) {
-        $log.log("ERROR data " + data.data.message);
         toastr.error('Seems like something went wrong with your registration :( ' + data.data.message, 'Woops...');
       };
 
@@ -70,7 +68,6 @@
 
           /* If we get an access token we call our API and register a new user */
           if (res.authResponse) {
-            $log.log("Loggin ok ", res.authResponse.accessToken);
             //Des qu'on a le token on envoie la requete a l'API avec l'username
             //Penser a faire une fonction en back pour verifier si un user existe ou non envoie d'envoyer la requete complete moins penible pour l user
 

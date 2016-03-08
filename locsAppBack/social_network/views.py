@@ -27,6 +27,8 @@ class FacebookLogin(APIView):
 				"format=json&method=get&pretty=0&suppress_http_code=1")
 			profile = json.loads(r.content.decode("utf8"))
 			r.close()
+
+			return JsonResponse({"message": "Facebook login done"}, status=201)
 		else:
 			return (JsonResponse(
 				{"message": "Please send a Facebook token"}, status=405))
@@ -34,7 +36,7 @@ class FacebookLogin(APIView):
 
 class FacebookRegister(APIView):
 	"""
-	Register a User with Facebook
+	Register a User wregistrationith Facebook
 	First we verify if the maim field are present the token and username
 	We check if the username is correct unique, same for id facebook and email. We also check the secondary email
 	If all is good we create a user and set it with an unsuable password
@@ -103,7 +105,7 @@ class FacebookRegister(APIView):
 			new_user.set_unusable_password()
 			new_user.save()
 
-			return JsonResponse({"Facebook Register": "done"}, status=201)
+			return JsonResponse({"message": "Facebook register done"}, status=201)
 		else:
 			return (JsonResponse(
 				{"message": "Please send a Facebook token and a username"}, status=405))
