@@ -246,7 +246,7 @@ class APIRequestMongo:
 
     # creates a API PUT
     def forgeAPIrequestPut(self, request, id, fields, collection):
-        if (request.body):
+        if request.body:
             answer = json.loads(request.body.decode('utf8'))
             error_keys = {}
             new_fields = {}
@@ -256,22 +256,22 @@ class APIRequestMongo:
                         str(key) + " is not authorized"
                 else:
                     new_fields[key] = fields[key]
-            if (error_keys != {}):
-                return (JsonResponse(error_keys, status=401))
+            if error_keys != {}:
+                return JsonResponse(error_keys, status=401)
             error_keys = self.verifyErrorsInFields(new_fields, answer)
-            if (error_keys != {}):
-                return (JsonResponse(error_keys, status=401))
+            if error_keys != {}:
+                return JsonResponse(error_keys, status=401)
             object = collection.update_one(
                 {"_id": ObjectId(id)}, {"$set": answer})
-            if (object.raw_result['updatedExisting'] is False):
-                return(JsonResponse({"Error": "Id not found!"}, status=404))
-            return(JsonResponse({"message": "Object updated!"}, status=200))
+            if object.raw_result['updatedExisting'] is False:
+                return JsonResponse({"Error": "Id not found!"}, status=404)
+            return JsonResponse({"message": "Object updated!"}, status=200)
         else:
-            return (JsonResponse({"Error": "400 BAD REQUEST"}, status=400))
+            return JsonResponse({"Error": "400 BAD REQUEST"}, status=400)
 
     # creates a API DELETE Endpoint
     def forgeAPIrequestDelete(self, request, fields, collection):
-        if (request.method == "DELETE"):
-            return (HttpResponse("200 OK"))
+        if request.method == "DELETE":
+            return HttpResponse("200 OK")
         else:
-            return (HttpResponse("401 Unauthorized"))
+            return HttpResponse("401 Unauthorized")
