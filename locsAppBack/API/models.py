@@ -1,13 +1,10 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
-from django.core.mail import EmailMessage
 from django.utils import timezone
 from django.contrib.postgres.fields import ArrayField
-from rest_framework import serializers
 from allauth.account.models import EmailAddress
 from allauth.account.signals import email_confirmed, email_confirmation_sent
 from django.dispatch import receiver
-from allauth.account.utils import send_email_confirmation
 # User model
 from django.contrib.auth import get_user_model
 
