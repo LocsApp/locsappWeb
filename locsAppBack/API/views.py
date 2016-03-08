@@ -14,11 +14,12 @@ from django.contrib.auth import get_user_model
 from .serializers import UserDetailsSerializer
 # Pymongo imports
 from pymongo import MongoClient
-from bson.objectid import ObjectId
 # JSON import
-import json
 # APIrequestForgery class
 from .APIrequest import *
+from django.core.validators import validate_email
+import json
+from bson import ObjectId
 
 # Connects to the db and creates a MongoClient instance
 mongodb_client = MongoClient('localhost', 27017)
@@ -26,10 +27,6 @@ db_locsapp = mongodb_client['locsapp']
 
 # Instanciation of the APIRequest class
 APIrequests = APIRequestMongo(db_locsapp)
-
-from django.core.validators import validate_email
-import json
-from bson import ObjectId
 
 
 class JSONEncoder(json.JSONEncoder):
