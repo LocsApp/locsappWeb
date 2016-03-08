@@ -49,8 +49,7 @@ class FacebookLogin(APIView):
 				except ObjectDoesNotExist:
 					# The token exists we can create a new one safely
 					token = Token.objects.create(user=user)
-					return JsonResponse({"message": "Facebook login done", "key": token.key, "id": user.pk}, status=201)
-
+					return JsonResponse({"key": token.key}, status=201)
 
 			except ObjectDoesNotExist:
 				return JsonResponse({"message": "This facebook account is not associated with LocsApp"}, status=405)
