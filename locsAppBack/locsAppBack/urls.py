@@ -15,14 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 
-from django.conf import settings
-from django.conf.urls.static import static
-from django.views.generic import TemplateView
 from django.conf.urls import include, url
 from django.contrib import admin
 from API.views import *
 from API.urls import *
-from django.http import HttpResponse
 
 urlpatterns = [
     url(r'^accounts-social-network/', include('allauth.socialaccount.urls')),
@@ -32,6 +28,6 @@ urlpatterns = [
     url(r'^robots\.txt$', include('robots.urls')),
 
     url(r'^api/v1/', include(api_patterns)),
-    #url(r'^robots\.txt$', include('robots.urls')),
-        # url(r'^.*$', docAPIView.as_view(), name="index"),
+    # url(r'^robots\.txt$', include('robots.urls')),
+    # url(r'^.*$', docAPIView.as_view(), name="index"),
 ]

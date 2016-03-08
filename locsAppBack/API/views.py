@@ -623,7 +623,7 @@ def notificationAlone(request, notification_pk):
 
 
 @csrf_exempt
-def deleteArticle(request):
+def delete_Article(request):
 	fields_definition = ["name", "id"]
 	return APIrequests.forgeAPIrequestDelete(
 		request, fields_definition, db_locsapp["articles"])
