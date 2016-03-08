@@ -71,7 +71,7 @@ static_collections_patterns = [
 # General urls for the api
 api_patterns = [
 
-   #url(r'^auth/facebook-login/', views.FacebookLogin.as_view(), name='fb_login'),
+    url(r'^auth/facebook-login/', socialNetworkViews.FacebookLogin.as_view(), name='fb_login'),
     url(r'^auth/facebook-register', socialNetworkViews.FacebookRegister.as_view(), name='fb_register'),
     url(r'^auth/change-username/', views.ChangeUsername.as_view()),
 

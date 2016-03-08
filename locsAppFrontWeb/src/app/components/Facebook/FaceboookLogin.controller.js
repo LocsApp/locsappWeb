@@ -15,26 +15,22 @@
   /** @ngInject */
   function FacebookLoginController($scope, $log, ezfb, UsersService, $mdDialog, $document, toastr, $resource, URL_API, $state, $sessionStorage, $localStorage) {
 
-    //Ask an username que quand on register sinon on log direct et en back on verifie l'existence de l'utilisateur
-
-  //  var vm = this;
-
-
-  /*  vm.login = ezfb.login(function (res) {
-
-      if (res.authResponse) {
-        $log.log("Loggin ok ", res.authResponse.accessToken);
+    $log.log("LOG IN WITH FACEBOOK");
+    /* We directly use ezfb to have the access token and send it to the API */
+    var vm = this;
 
 
+    vm.login = function () {
+      ezfb.login(function (res) {
 
-      }
-    }, {scope: 'email,user_likes,user_birthday'});
-*/
-    /*End ChangeUsernameController */
+        if (res.authResponse) {
+          $log.log("Loggin ok ", res.authResponse.accessToken);
 
 
-    /* */
+        }
+      }, {scope: 'email, user_birthday'});
 
+    }
   }
 
 })();

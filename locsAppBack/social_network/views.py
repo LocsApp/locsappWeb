@@ -4,15 +4,43 @@ from rest_framework.views import APIView
 from django.http import JsonResponse
 from API.models import Account
 
-
-class FacebookRegister(APIView):
-	"""
+"""
 	Register with Facebook Use the id to register the user
 	and find him when login because this id are unique
+"""
+
+
+class FacebookLogin(APIView):
+	"""
+	We check if the user id present in the facebook token is in our databse
+	If yes we log the user
+	Else we send an error
 	"""
 
 	def post(self, request):
-		print("IN IT")
+		if "facebook_token" in request.data:
+			facebook_token = request.data["facebook_token"]
+
+			r = requests.get(
+				"https://graph.facebook.com/v2.5/me?access_token=" +
+				facebook_token +
+				"format=json&method=get&pretty=0&suppress_http_code=1")
+			profile = json.loads(r.content.decode("utf8"))
+			r.close()
+		else:
+			return (JsonResponse(
+				{"message": "Please send a Facebook token"}, status=405))
+
+
+class FacebookRegister(APIView):
+	"""
+	Register a User with Facebook
+	First we verify if the maim field are present the token and username
+	We check if the username is correct unique, same for id facebook and email. We also check the secondary email
+	If all is good we create a user and set it with an unsuable password
+	"""
+
+	def post(self, request):
 		error = ""
 		if "facebook_token" in request.data and "username" in request.data:
 
@@ -20,7 +48,9 @@ class FacebookRegister(APIView):
 			username = request.data["username"]
 
 			r = requests.get(
-				"https://graph.facebook.com/v2.5/me?access_token=" + facebook_token + "&fields=id%2Cname%2Cemail%2Cgender%2Cbirthday&format=json&method=get&pretty=0&suppress_http_code=1")
+				"https://graph.facebook.com/v2.5/me?access_token=" +
+				facebook_token +
+				"&fields=id%2Cname%2Cemail%2Cgender%2Cbirthday&format=json&method=get&pretty=0&suppress_http_code=1")
 			profile = json.loads(r.content.decode("utf8"))
 			r.close()
 
