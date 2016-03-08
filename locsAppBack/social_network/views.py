@@ -108,6 +108,7 @@ class FacebookRegister(APIView):
 			# If there is no error we register a new user first we check if the field exist and we registered them
 			# We know that username, id, and email exist
 			new_user = Account.objects.create_user(username=username, email=profile["email"], id_facebook=profile["id"])
+			new_user.id_facebook = profile["id"]
 			if profile["name"]:
 				full_name = profile["name"].split(" ")
 				new_user.first_name = full_name[0]
