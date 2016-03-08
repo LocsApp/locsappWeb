@@ -12,7 +12,7 @@
 	//steps vars
 	vm.value = 0;
 	vm.stepsNames = ["squared_one", "squared_two", "squared_three", "squared_four", "squared_five", "squared_six"];
-	vm.stepsComplete = [1, 1, 1, 1, 1, 1];
+	vm.stepsComplete = [1, 0, 0, 0, 0, 0];
 	vm.progressBars = [0, 0, 0, 0, 0, 0]
 	vm.stepFocus = 0;
 
@@ -30,6 +30,11 @@
 	vm.description = null;
 	vm.brands = [{_id:"56cb3ef2b2bc57ab2908e6b2" ,name:"Home made"}]
 	vm.pictures = []
+	vm.date_start = new Date();
+	vm.date_end = new Date();
+
+	// misc vars
+	vm.min_date = new Date();
 
 	//user chose
 	vm.article = {
