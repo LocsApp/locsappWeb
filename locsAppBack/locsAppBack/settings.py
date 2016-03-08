@@ -99,6 +99,7 @@ INSTALLED_APPS = (
     'rest_auth.registration',
     'rest_framework_swagger',
     'tests',
+    'socialNetwork',
     'API'
 )
 
