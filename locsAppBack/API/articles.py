@@ -13,7 +13,6 @@ from bson.json_util import dumps
 from bson import json_util
 from django.http import HttpResponse
 
-
 import json
 from bson import ObjectId
 
@@ -135,11 +134,11 @@ def articleAlone(request, article_pk):
          "pictures": "array",
          "informations": "dict"}
 
-    if (request.method == "PUT"):
+    if request.method == "PUT":
         return APIrequests.forgeAPIrequestPut(
             request, article_pk, fields_definition_put, db_locsapp["articles"])
     else:
-        return (JsonResponse({"Error": "Method not allowed!"}, status=405))
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
 
 @csrf_exempt
