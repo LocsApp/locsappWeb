@@ -7,7 +7,7 @@
 
 
   /** @ngInject */
-  function LoginController($scope, UsersService, toastr, $sessionStorage, $localStorage, $state, $log, $mdDialog, $document, ezfb) {
+  function LoginController($scope, UsersService, toastr, $sessionStorage, $localStorage, $state, $log, $mdDialog, $document) {
     var vm = this;
 
     /*Log in the user*/
@@ -112,30 +112,6 @@
         $mdDialog.hide();
       };
     };
-
-
-    /*Facebook part */
-    vm.loginFacebook = function() {
-
-        ezfb.login(function (res) {
-        /**
-         * no manual $scope.$apply, I got that handled
-         */
-        if (res.authResponse) {
-          UsersService
-            .facebook
-            .save({
-              "access_token": res.authResponse.accessToken,
-              "code": "1011675122186671"
-            })
-            .$promise
-            .then(vm.userLoggedinSuccess, vm.userLoggedinFailure);
-        }
-      }, {scope: 'email,user_likes'});
-
-    };
-
-
 
   }
 })();

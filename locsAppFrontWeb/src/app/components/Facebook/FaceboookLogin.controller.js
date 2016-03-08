@@ -13,7 +13,7 @@
     .controller('FacebookLoginController', FacebookLoginController);
 
   /** @ngInject */
-  function FacebookLoginController($scope, $log, ezfb, UsersService, $mdDialog, $document, toastr, $resource, URL_API, $state, $sessionStorage, $localStorage) {
+  function FacebookLoginController($scope, $log, ezfb, UsersService, toastr, $state, $sessionStorage, $localStorage) {
 
     $log.log("LOG IN WITH FACEBOOK");
     /* We directly use ezfb to have the access token and send it to the API */
