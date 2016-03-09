@@ -8,4 +8,3 @@ class SignupForm(forms.Form):
     def signup(self, request, user):
         user.email = (self.cleaned_data['email'])
         user.save()
-
