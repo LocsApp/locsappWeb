@@ -84,7 +84,8 @@ class ChangeUsername(APIView):
                 {"message": "You username is " + new_user.username}, status=206))
         else:
             return (JsonResponse(
-                {"message": "This Facebook account is already link to a LocsApp account"}, status=405))
+                {"message": "This Facebook account is already link to a LocsApp account"},
+                status=405))
 
 
 @permission_classes((IsAuthenticated,))
@@ -112,7 +113,8 @@ class addEmailUser(APIView):
         if ("new_email" not in request.data or len(
                 request.data["new_email"]) == 0):
             return Response(
-                {"Error": "There must be a field 'new_email' present in the document."}, status=401)
+                {"Error": "There must be a field 'new_email' present in the document."},
+                status=401)
         try:
             validate_email(request.data["new_email"])
         except:
@@ -151,7 +153,8 @@ class setEmailAsPrimary(APIView):
                 if email_obj[0] == request.data["email"]:
                     if email_obj[1] == "false":
                         return (
-                            Response({"Error": "This secondary email isn't verified."}, status=401))
+                            Response({"Error": "This secondary email isn't verified."},
+                                     status=401))
                     else:
                         temp = email_obj[0]
                         email_obj[0] = current_user.email
@@ -190,7 +193,8 @@ class livingAddressUser(APIView):
                                 "postal_code" not in request.data["living_address"][1] or
                                 "city" not in request.data["living_address"][1]):
                             return Response(
-                                {"Error": "Address collection is not correctly formatted."}, status=401)
+                                {"Error": "Address collection is not correctly formatted."},
+                                status=401)
                         else:
                             request.data["living_address"][1] = json.dumps(
                                 request.data["living_address"][1])
@@ -208,7 +212,8 @@ class livingAddressUser(APIView):
                                 if (address[0] == request.data["living_address"][
                                     0] or address[1] == request.data["living_address"][1]):
                                     return Response(
-                                        {"Error": "The alias or the address already exists"}, status=401)
+                                        {"Error": "The alias or the address already exists"},
+                                        status=401)
                             current_user.living_address.append(
                                 request.data["living_address"])
                         current_user.save()
@@ -229,7 +234,8 @@ class livingAddressUser(APIView):
                     {"Error": "The key 'living_address' must be a list."}, status=401)
         else:
             return Response(
-                {"Error": "There must be a key 'living_address' present in the document."}, status=401)
+                {"Error": "There must be a key 'living_address' present in the document."},
+                status=401)
         return Response({"message": "Nice"})
 
     def get(self, request, user_pk):
@@ -270,7 +276,8 @@ class livingAddressUserDelete(APIView):
                                 "postal_code" not in request.data["living_address"][1] or
                                 "city" not in request.data["living_address"][1]):
                             return Response(
-                                {"Error": "Address collection is not correctly formatted."}, status=401)
+                                {"Error": "Address collection is not correctly formatted."},
+                                status=401)
                         else:
                             request.data["living_address"][1] = json.dumps(
                                 request.data["living_address"][1])
@@ -290,14 +297,16 @@ class livingAddressUserDelete(APIView):
                                 jsonData = serializer.data
                                 return (Response(jsonData))
                         return Response(
-                            {"Error": "The alias wasn't found in the user's living addresses"}, status=401)
+                            {"Error": "The alias wasn't found in the user's living addresses"},
+                            status=401)
                     else:
                         return Response(
                             {"Error": "The user has no living address."}, status=401)
                 else:
                     return Response(
                         {
-                            "Error": "The key 'living_address' must have two slots, the first for the alias and"
+                            "Error": "The key 'living_address' must have two slots, the first for"
+                                     " the alias and"
                                      " the second for the address"},
                         status=401)
             else:
@@ -305,7 +314,8 @@ class livingAddressUserDelete(APIView):
                     {"Error": "The key 'living_address' must be a list."}, status=401)
         else:
             return Response(
-                {"Error": "There must be a key 'living_address' present in the document."}, status=401)
+                {"Error": "There must be a key 'living_address' present in the document."},
+                status=401)
         return Response({"message": "Nice"})
 
 
@@ -333,7 +343,8 @@ class billingAddressUser(APIView):
                                     "postal_code" not in request.data["billing_address"][1] or
                                     "city" not in request.data["billing_address"][1]):
                             return Response(
-                                {"Error": "Address collection is not correctly formatted."}, status=401)
+                                {"Error": "Address collection is not correctly formatted."},
+                                status=401)
                         else:
                             request.data["billing_address"][1] = json.dumps(
                                 request.data["billing_address"][1])
@@ -348,9 +359,11 @@ class billingAddressUser(APIView):
                                 request.data["billing_address"]]
                         else:
                             for address in current_user.billing_address:
-                                if address[0] == request.data["billing_address"][0] or address[1] == request.data["billing_address"][1]:
+                                if address[0] == request.data["billing_address"][0] or address[1] \
+                                        == request.data["billing_address"][1]:
                                     return Response(
-                                        {"Error": "The alias or the address already exists"}, status=401)
+                                        {"Error": "The alias or the address already exists"},
+                                        status=401)
                             current_user.billing_address.append(
                                 request.data["billing_address"])
                         current_user.save()
@@ -363,7 +376,8 @@ class billingAddressUser(APIView):
                 else:
                     return Response(
                         {
-                            "Error": "The key 'billing_address' must have two slots, the first for the alias"
+                            "Error": "The key 'billing_address' must have two slots, the first"
+                                     " for the alias"
                                      " and the second for the address"},
                         status=401)
             else:
@@ -371,7 +385,8 @@ class billingAddressUser(APIView):
                     {"Error": "The key 'billing_address' must be a list."}, status=401)
         else:
             return Response(
-                {"Error": "There must be a key 'billing_address' present in the document."}, status=401)
+                {"Error": "There must be a key 'billing_address' present in the document."},
+                status=401)
         return Response({"message": "Nice"})
 
     def get(self, request, user_pk):
@@ -412,7 +427,8 @@ class billingAddressUserDelete(APIView):
                                 "postal_code" not in request.data["billing_address"][1] or
                                 "city" not in request.data["billing_address"][1]):
                             return Response(
-                                {"Error": "Address collection is not correctly formatted."}, status=401)
+                                {"Error": "Address collection is not correctly formatted."},
+                                status=401)
                         else:
                             request.data["billing_address"][1] = json.dumps(
                                 request.data["billing_address"][1])
@@ -432,21 +448,24 @@ class billingAddressUserDelete(APIView):
                                 jsonData = serializer.data
                                 return Response(jsonData)
                         return Response(
-                            {"Error": "The alias wasn't found in the user's living addresses"}, status=401)
+                            {"Error": "The alias wasn't found in the user's living addresses"},
+                            status=401)
                     else:
                         return Response(
                             {"Error": "The user has no billing address."}, status=401)
                 else:
                     return Response(
                         {
-                            "Error": "The key 'billing_address' must have two slots, the first for the alias and the second for the address"},
+                            "Error": "The key 'billing_address' must have two slots, the first for"
+                                     " the alias and the second for the address"},
                         status=401)
             else:
                 return Response(
                     {"Error": "The key 'billing_address' must be a list."}, status=401)
         else:
             return Response(
-                {"Error": "There must be a key 'billing_address' present in the document."}, status=401)
+                {"Error": "There must be a key 'billing_address' present in the document."},
+                status=401)
         return Response({"message": "Nice"})
 
 
@@ -473,10 +492,12 @@ def searchNotificationsUser(request, user_pk):
             page = JSONdoc["page"]
             number_items = JSONdoc["number_items"]
             notifications_user = db_locsapp[
-                                     "notifications_users"].find({"user_id": int(user_pk), "visible": True}).sort(
+                                     "notifications_users"].find({"user_id": int(user_pk),
+                                                                  "visible": True}).sort(
                 "date", -1)[((page - 1) * number_items):((page - 1) * number_items) + number_items]
             notifications_metadata = {"new": db_locsapp[
-                "notifications_users"].find({"user_id": int(user_pk), "read": False, "visible": True}).count()}
+                "notifications_users"].find({"user_id": int(user_pk), "read": False,
+                                             "visible": True}).count()}
             notifications_metadata["total"] = db_locsapp[
                 "notifications_users"].find({"user_id": int(user_pk), "visible": True}).count()
             notifications = {
@@ -488,7 +509,8 @@ def searchNotificationsUser(request, user_pk):
             return JsonResponse(notifications, safe=True)
         else:
             return (JsonResponse(
-                {"Error": "There must be a key 'page' and 'number_items' present in the JSON document."}, status=401))
+                {"Error": "There must be a key 'page' and 'number_items' present in the"
+                          " JSON document."}, status=401))
     else:
         return (JsonResponse(
             {"Error": "405 METHOD NOT ALLOWED"}, status=405))
@@ -511,9 +533,11 @@ def notificationsUserAllRead(request, user_pk):
             {'user_id': int(user_pk)}, {"$set": {"read": True}})
         if nb_modified.modified_count <= 0:
             return (JsonResponse(
-                {"Warning": "No notification has been modified. Reason : No notifications were available."}))
+                {"Warning": "No notification has been modified. Reason :"
+                            " No notifications were available."}))
         return (JsonResponse(
-            {"message": "Notifications successfully updated!", "nb_modified": nb_modified.modified_count}))
+            {"message": "Notifications successfully updated!", "nb_modified":
+                nb_modified.modified_count}))
     else:
         return (JsonResponse(
             {"Error": "405 METHOD NOT ALLOWED"}, status=405))
@@ -548,7 +572,8 @@ def notificationsUser(request, user_pk):
         notifications_user = db_locsapp[
             "notifications_users"].find({"user_id": int(user_pk), "visible": True}).sort("date", -1)
         notifications_metadata = {"new": db_locsapp[
-            "notifications_users"].find({"user_id": int(user_pk), "read": False, "visible": True}).count()}
+            "notifications_users"].find({"user_id": int(user_pk), "read": False,
+                                         "visible": True}).count()}
         notifications_metadata["total"] = db_locsapp[
             "notifications_users"].find({"user_id": int(user_pk), "visible": True}).count()
         notifications = {
@@ -563,9 +588,11 @@ def notificationsUser(request, user_pk):
             {'user_id': int(user_pk)}, {"$set": {"visible": False}})
         if nb_deleted.modified_count <= 0:
             return (JsonResponse(
-                {"Warning": "No notification has been deleted. Reason : No notifications were available."}))
+                {"Warning": "No notification has been deleted. Reason :"
+                            " No notifications were available."}))
         return (JsonResponse(
-            {"message": "Notifications successfully deleted!", "nb_deleted": nb_deleted.modified_count}))
+            {"message": "Notifications successfully deleted!", "nb_deleted":
+                nb_deleted.modified_count}))
     else:
         return (JsonResponse(
             {"Error": "405 METHOD NOT ALLOWED"}, status=405))
