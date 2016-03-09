@@ -20,11 +20,11 @@ class UserDetailsSerializer(serializers.ModelSerializer):
             serializers.ListField(child=serializers.CharField()))
 
         fields = (
-            'id', 'username', 'email', 'secondary_emails', 'first_name', 'last_name', 'birthdate', 'phone',
-            'living_address',
-            'registered_date', 'last_activity_date', 'billing_address', 'logo_url', "is_active", "role")
-        read_only_fields = ('id', 'username', 'role', 'email', 'registered_date', 'last_activity_date', 'logo_url',
-                            'is_active')
+            'id', 'username', 'email', 'secondary_emails', 'first_name', 'last_name', 'birthdate',
+            'phone', 'living_address', 'registered_date', 'last_activity_date', 'billing_address',
+            'logo_url', "is_active", "role")
+        read_only_fields = ('id', 'username', 'role', 'email', 'registered_date',
+                            'last_activity_date', 'logo_url', 'is_active')
 
 
 class PasswordChangeSerializer(serializers.Serializer):
@@ -70,7 +70,8 @@ class PasswordChangeSerializer(serializers.Serializer):
             raise serializers.ValidationError(self.set_password_form.errors)
 
         user = get_user_model().objects.get(username=self.user)
-        send_mail('Change password', 'Your changed the password of your account ' + self.user.username + '',
+        send_mail('Change password', 'Your changed the password of your account ' +
+                  self.user.username + '',
                   settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
         return attrs
 
