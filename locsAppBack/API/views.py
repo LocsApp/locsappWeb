@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from .models import Account
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import logout
+from django.views.decorators.csrf import csrf_protect
 # User model
 from django.contrib.auth import get_user_model
 # User serializer
