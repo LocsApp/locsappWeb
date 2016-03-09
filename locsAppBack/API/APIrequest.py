@@ -45,7 +45,8 @@ class APIRequestMongo:
                 else:
                     for subObject in attribute:
                         return self._fieldModelValidation(
-                            subObject, model_attribute["_type"][0], error_fields, key + ".subfield")
+                            subObject, model_attribute["_type"][0], error_fields, key +
+                            ".subfield")
         elif isinstance(model_attribute, type([])):
             if not isinstance(attribute, (type([]))):
                 error_fields[key] = "This field must be an array"
@@ -194,8 +195,8 @@ class APIRequestMongo:
                     error_fields[key] = "It must be a string"
                 elif len(answer[key]) > int(temp_options[1]) or len(answer[key]) <= 0:
                     error_fields[
-                        key] = "The text must not be empty and the length must be inferior or equal to" \
-                               + temp_options[1]
+                        key] = "The text must not be empty and the length must be inferior" \
+                               " or equal to" + temp_options[1]
             elif temp_options[0] == "integer":
                 if not isinstance(answer[key], type(1)):
                     error_fields[key] = "The field must be an integer"
