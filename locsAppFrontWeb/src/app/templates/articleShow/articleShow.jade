@@ -125,6 +125,24 @@ div(class="article-show")
 
 
 
+  div(layout='row' layout-align='center' class='gridListdemoBasicUsage')
+    div(flex="50")
+      md-grid-list(md-cols-xs='1', md-cols-sm='2', md-cols-md='2', md-cols-gt-md='3',
+      md-row-height-gt-md='1:1', md-row-height='1:1', md-gutter='12px', md-gutter-gt-sm='8px')
+        md-grid-tile.gray(md-rowspan='1', md-colspan='1', md-colspan-sm='1')
+          md-grid-tile-footer
+            h3 #1: (3r x 2c)
+        md-grid-tile.green
+          md-grid-tile-footer
+            h3 #2: (1r x 1c)
+        md-grid-tile.yellow
+          md-grid-tile-footer
+            h3 #3: (1r x 1c)
+        md-grid-tile.blue
+          md-grid-tile-footer
+            h3 #4: (1r x 1c)
+
+  .gridListdemoBasicUsage(flex-offset="55")
 
 
 
@@ -135,15 +153,14 @@ div(class="article-show")
 
 
 
-
-  div.grid-gallery(layout='row' layout-align='center')
+  //div.grid-gallery(layout='row' layout-align='center')
     div(style='background-color:orange;')
       img(ng-click="articleShow.clickImageGallery($event, 0, articleShow.url_pictures)" src="http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg")
       img(ng-click="articleShow.clickImageGallery($event, 1, articleShow.url_pictures)" src="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516")
       img(ng-click="articleShow.clickImageGallery($event, 2, articleShow.url_pictures)" src="http://cdn.shopify.com/s/files/1/0293/9277/products/Fashion_Nova_-_01-21-16-410_large.JPG?v=1453489020")
 
   //Si index % 3 == 0 on ajout une nouvelle grid
-  div.grid-gallery(layout='row' layout-align='center')
+  //div.grid-gallery(layout='row' layout-align='center')
     div(style='background-color:orange;')
       img(ng-click="articleShow.clickImageGallery($event, 3, articleShow.url_pictures)" src="http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg")
       img(ng-click="articleShow.clickImageGallery($event, 4, articleShow.url_pictures)" src="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516")
