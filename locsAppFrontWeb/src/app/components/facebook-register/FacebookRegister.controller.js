@@ -9,7 +9,7 @@
   'use strict';
 
   angular
-    .module('Facebook')
+    .module('LocsappControllers')
     .controller('FacebookRegisterController', FacebookRegisterController);
 
   /** @ngInject */

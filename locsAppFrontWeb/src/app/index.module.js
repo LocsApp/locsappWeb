@@ -11,9 +11,6 @@
   .module("LocsappDirectives", []);
 
   angular
-    .module("Facebook", []);
-
-  angular
 	.module('locsapp', ['ngAnimate',
 		'ngCookies',
 		'ngTouch',
@@ -34,7 +31,6 @@
 		'angularMoment',
 		'perfect_scrollbar',
 		'ezfb',
-		'Facebook',
 		'textAngular',
 		'ngFileUpload',
 		'LocsappDirectives',
