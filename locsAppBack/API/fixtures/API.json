@@ -18,7 +18,8 @@
       "is_active": true,
       "last_login": null,
       "birthdate": null,
-      "last_name": null
+      "last_name": null,
+      "id_facebook": null
     },
     "model": "API.account",
     "pk": 1
