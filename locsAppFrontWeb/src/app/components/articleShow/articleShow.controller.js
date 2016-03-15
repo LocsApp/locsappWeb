@@ -133,6 +133,7 @@
         vm.obj_url_pictures[i] = Object();
         vm.obj_url_pictures[i]["col"] = "1";
         vm.obj_url_pictures[i]["row"] = "1";
+        vm.obj_url_pictures[i]["url"] = vm.url_pictures[i];
 
       }
 
