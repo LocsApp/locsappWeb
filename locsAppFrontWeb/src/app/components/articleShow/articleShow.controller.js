@@ -131,8 +131,8 @@
       vm.obj_url_pictures = [];
       for (var i = 0; i < vm.url_pictures.length; i++) {
         vm.obj_url_pictures[i] = Object();
-        vm.obj_url_pictures[i]["col"] = "2";
-        vm.obj_url_pictures[i]["row"] = "2";
+        vm.obj_url_pictures[i]["col"] = "1";
+        vm.obj_url_pictures[i]["row"] = "1";
 
       }
 
