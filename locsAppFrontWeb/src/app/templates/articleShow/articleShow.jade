@@ -108,9 +108,11 @@ div(class="article-show")
 
   div(layout='column')
     div(layout='row' layout-align='center center' flex="50" style='margin-top: 10px;')
-      md-datepicker(ng-model='dateStart', md-placeholder='Enter date', md-min-date='minDate',
+      md-datepicker(ng-model='articleShow.dateStart', md-placeholder='Enter date',
+      md-min-date='minDate',
       md-max-date='maxDate')
-      md-datepicker(ng-model='dateEnd', md-placeholder='Enter date', md-min-date='minDate',
+      md-datepicker(ng-model='articleShow.dateEnd', md-placeholder='Enter date',
+      md-min-date='minDate',
       md-max-date='maxDate')
       md-button.md-raised(style='text-align:center;' flex="30") Rent this article
 
