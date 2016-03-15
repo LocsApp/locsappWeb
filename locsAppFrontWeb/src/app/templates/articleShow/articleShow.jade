@@ -131,7 +131,7 @@ div(class="article-show")
       md-row-height-gt-md='1:1', md-row-height='1:1', md-gutter='12px', md-gutter-gt-sm='8px')
         md-grid-tile(ng-repeat="tile in articleShow.obj_url_pictures track by $index"
         md-rowspan="{{tile.row}}" md-colspan="{{tile.col}}" md-colspan-sm="1"
-        style='background:url("{{tile.url}}")'
+        style='background:url("{{tile.url}}"); background-size: cover;'
         ng-click="articleShow.clickImageGallery($event, $index, articleShow.url_pictures)")
           md-grid-tile-footer
             h3 {{tile.title}}
