@@ -104,7 +104,7 @@
           "flagged": null
         }
 
-      ]
+      ];
       vm.sexe = "Femme";
       vm.BaseCategory = "evening";
       vm.SubCategory = "dress";
@@ -127,7 +127,16 @@
       vm.id_renter = "two_ask";
 
       //request author profile to get his notation;
+      // Add col and row for the grid gallery
+      vm.obj_url_pictures = [];
+      for (var i = 0; i < vm.url_pictures.length; i++) {
+        vm.obj_url_pictures[i] = Object();
+        vm.obj_url_pictures[i]["col"] = "2";
+        vm.obj_url_pictures[i]["row"] = "2";
 
+      }
+
+      $log.log("TEST = ", vm.url_pictures);
     };
 
     vm.getInfoArticleFailure = function (data) {
