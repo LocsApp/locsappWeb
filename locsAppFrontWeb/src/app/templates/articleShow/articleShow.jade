@@ -113,7 +113,11 @@ div(class="article-show")
       md-card-content.description {{articleShow.description}}
   div(layout='column')
     div(layout='row' layout-align='center' flex="50")
-      md-button.md-raised(style='text-align:center;' flex="50") Rent this article
+      md-datepicker(ng-model='dateStart', md-placeholder='Enter date', md-min-date='minDate',
+      md-max-date='maxDate')
+      md-datepicker(ng-model='dateEnd', md-placeholder='Enter date', md-min-date='minDate',
+      md-max-date='maxDate')
+      md-button.md-raised(style='text-align:center;') Rent this article
   //layout-md='column'
   //div(layout="column" layout-gt-md='row')
     div(flex-offset='0' flex-offset-gt-md='20'  )
