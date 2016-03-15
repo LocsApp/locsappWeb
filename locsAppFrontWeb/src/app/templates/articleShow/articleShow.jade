@@ -1,7 +1,14 @@
 
 div(class="article-show")
+  div(layout='row' layout-align='center')
+    div(flex="50" layout='row')
+      img(src="{{articleShow.url_thumbnail}}")
+      md-card
+        md-card-content.description {{articleShow.description}}
+      md-card
+        md-card-content.description {{articleShow.description}}
   //layout-md='column'
-  div(layout="column" layout-gt-md='row')
+  //div(layout="column" layout-gt-md='row')
     div(flex-offset='0' flex-offset-gt-md='20'  )
       img(src="{{articleShow.url_thumbnail}}")
 
