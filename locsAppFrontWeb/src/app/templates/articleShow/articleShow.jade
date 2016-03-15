@@ -103,7 +103,7 @@ div(class="article-show")
               ng-md-icon(icon="person_outline")
               div.md-list-item-text
                 h3 Meaning payment
-                p {{articleShow.meaning_payment[0] }}
+                span(ng-repeat='payment in articleShow.meaning_payment') {{payment}}
             md-divider
 
   div(layout='column')
