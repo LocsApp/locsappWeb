@@ -8,7 +8,11 @@ from rest_framework.response import Response
 from .models import Account
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import logout
+
+from django.conf import settings
+
 from django.views.decorators.csrf import csrf_exempt
+
 # User model
 from django.contrib.auth import get_user_model
 # User serializer
@@ -21,6 +25,7 @@ from .APIrequest import *
 from django.core.validators import validate_email
 import json
 from bson import ObjectId
+from rest_framework.parsers import FileUploadParser
 
 # Connects to the db and creates a MongoClient instance
 mongodb_client = MongoClient('localhost', 27017)
@@ -31,6 +36,7 @@ APIrequests = APIRequestMongo(db_locsapp)
 
 
 class JSONEncoder(json.JSONEncoder):
+
     def default(self, o):
         if isinstance(o, ObjectId):
             return str(o)
@@ -90,6 +96,7 @@ class ChangeUsername(APIView):
 
 @permission_classes((IsAuthenticated,))
 class deleteEmailUser(APIView):
+
     def post(self, request):
         if "email" not in request.data or len(request.data["email"]) == 0:
             return Response(
@@ -109,6 +116,7 @@ class deleteEmailUser(APIView):
 
 @permission_classes((IsAuthenticated,))
 class addEmailUser(APIView):
+
     def post(self, request):
         if ("new_email" not in request.data or len(
                 request.data["new_email"]) == 0):
@@ -142,6 +150,7 @@ class addEmailUser(APIView):
 
 @permission_classes((IsAuthenticated,))
 class setEmailAsPrimary(APIView):
+
     def post(self, request):
         if "email" not in request.data or len(request.data["email"]) == 0:
             return Response(
@@ -171,6 +180,7 @@ class setEmailAsPrimary(APIView):
 
 @permission_classes((IsAuthenticated,))
 class livingAddressUser(APIView):
+
     def post(self, request, user_pk):
         User = get_user_model()
         if self.request.user.pk:
@@ -210,7 +220,7 @@ class livingAddressUser(APIView):
                         else:
                             for address in current_user.living_address:
                                 if (address[0] == request.data["living_address"][
-                                    0] or address[1] == request.data["living_address"][1]):
+                                        0] or address[1] == request.data["living_address"][1]):
                                     return Response(
                                         {"Error": "The alias or the address already exists"},
                                         status=401)
@@ -254,6 +264,7 @@ class livingAddressUser(APIView):
 
 @permission_classes((IsAuthenticated,))
 class livingAddressUserDelete(APIView):
+
     def post(self, request, user_pk):
         User = get_user_model()
         if self.request.user.pk:
@@ -321,6 +332,7 @@ class livingAddressUserDelete(APIView):
 
 @permission_classes((IsAuthenticated,))
 class billingAddressUser(APIView):
+
     def post(self, request, user_pk):
         User = get_user_model()
         if self.request.user.pk:
@@ -338,10 +350,10 @@ class billingAddressUser(APIView):
                             {"Error": "Aliases must be smaller than 20 characters"}, status=401)
                     if isinstance(request.data["billing_address"][1], dict):
                         if ("first_name" not in request.data["billing_address"][1] or
-                                    "last_name" not in request.data["billing_address"][1] or
-                                    "address" not in request.data["billing_address"][1] or
-                                    "postal_code" not in request.data["billing_address"][1] or
-                                    "city" not in request.data["billing_address"][1]):
+                                "last_name" not in request.data["billing_address"][1] or
+                                "address" not in request.data["billing_address"][1] or
+                                "postal_code" not in request.data["billing_address"][1] or
+                                "city" not in request.data["billing_address"][1]):
                             return Response(
                                 {"Error": "Address collection is not correctly formatted."},
                                 status=401)
@@ -405,6 +417,7 @@ class billingAddressUser(APIView):
 
 @permission_classes((IsAuthenticated,))
 class billingAddressUserDelete(APIView):
+
     def post(self, request, user_pk):
         User = get_user_model()
         if self.request.user.pk:
@@ -484,16 +497,16 @@ def searchNotificationsUser(request, user_pk):
     if request.method == "POST":
         JSONdoc = json.loads(request.body.decode('utf8'))
         if ("page" in JSONdoc and
-                    "number_items" in JSONdoc):
+                "number_items" in JSONdoc):
             if (not isinstance(JSONdoc["page"], type(1)) or not
-            isinstance(JSONdoc["number_items"], type(1))):
+                    isinstance(JSONdoc["number_items"], type(1))):
                 return (JsonResponse(
                     {"Error": "'page' and 'number_items' must be numbers."}, status=401))
             page = JSONdoc["page"]
             number_items = JSONdoc["number_items"]
             notifications_user = db_locsapp[
-                                     "notifications_users"].find({"user_id": int(user_pk),
-                                                                  "visible": True}).sort(
+                "notifications_users"].find({"user_id": int(user_pk),
+                                             "visible": True}).sort(
                 "date", -1)[((page - 1) * number_items):((page - 1) * number_items) + number_items]
             notifications_metadata = {"new": db_locsapp[
                 "notifications_users"].find({"user_id": int(user_pk), "read": False,
@@ -629,6 +642,28 @@ def notificationAlone(request, notification_pk):
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
+
+class ImageAvatarUploadView(APIView):
+    parser_classes = (FileUploadParser, )
+
+    def post(self, request, format="image/*"):
+        up_file = request.data["file"]
+        destination_url = settings.MEDIA_ROOT + hashlib.md5(
+            request.user.username.encode('utf-8')).hexdigest() + '/avatar.jpg'
+        os.makedirs(os.path.dirname(destination_url), exist_ok=True)
+        destination = open(destination_url, 'wb+')
+        for chunk in up_file.chunks():
+            destination.write(chunk)
+            destination.close()
+
+        UserForum.objects.filter(
+            pk=request.user.pk).update(
+            url_avatar=settings.URL_BACK + 'media/' +
+            hashlib.md5(
+                request.user.username.encode('utf-8')).hexdigest() +
+            '/avatar.jpg')
+        return JsonResponse({"url_avatar": settings.URL_BACK + 'media/' + hashlib.md5(
+            request.user.username.encode('utf-8')).hexdigest() + '/avatar.jpg'})
 
 """
     SOCIAL NETWORK ENDPOINTS

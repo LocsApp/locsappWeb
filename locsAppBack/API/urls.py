@@ -50,7 +50,10 @@ user_patterns = [
     url(r'^(?P<user_pk>[0-9]+)/billing_addresses/delete/$',
         views.billingAddressUserDelete.as_view()),
     url(r'^(?P<user_pk>[0-9]+)/notifications/$',
-        views.notificationsUser)
+        views.notificationsUser),
+    url(r'^api/image-upload-avatar/$',
+        views.ImageAvatarUploadView.as_view(),
+        name='image-upload'),
 ]
 
 # Static collections urls
@@ -67,9 +70,12 @@ static_collections_patterns = [
 # General urls for the api
 api_patterns = [
 
-    url(r'^auth/facebook-login/', social_network_views.FacebookLogin.as_view(), name='fb_login'),
-    url(r'^auth/facebook-register', social_network_views.FacebookRegister.as_view()
-        , name='fb_register'),
+    url(r'^auth/facebook-login/',
+        social_network_views.FacebookLogin.as_view(),
+        name='fb_login'),
+    url(r'^auth/facebook-register',
+        social_network_views.FacebookRegister.as_view(),
+        name='fb_register'),
     url(r'^auth/change-username/', views.ChangeUsername.as_view()),
 
     url(r'^articles/', include(article_patterns)),
