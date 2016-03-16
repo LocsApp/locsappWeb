@@ -109,11 +109,11 @@ div(class="article-show")
   div(layout='column')
     div(layout='row' layout-align='center center' flex="50" style='margin-top: 10px;')
       md-datepicker(ng-model='articleShow.dateStart', md-placeholder='Enter date',
-      md-min-date='articleShow.dateStart',
+      md-min-date='articleShow.rentDateStart',
       md-max-date='articleShow.dateEnd')
       md-datepicker(ng-model='articleShow.dateEnd', md-placeholder='Enter date',
       md-min-date='articleShow.dateStart',
-      md-max-date='articleShow.dateEnd')
+      md-max-date='articleShow.rentDateEnd')
       md-button.md-raised(style='text-align:center;' flex="30") Rent this article
 
   div(layout='row' layout-align='center')
