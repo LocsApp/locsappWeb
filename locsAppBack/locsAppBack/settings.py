@@ -19,9 +19,9 @@ PROJECT_ROOT = path.dirname(path.abspath(__file__))
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# For APIDOC
-MEDIA_ROOT = path.join(PROJECT_ROOT, 'templates/api_doc/src')
-MEDIA_URL = '/templates/api_doc/src/'
+# For media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -101,7 +101,7 @@ SOCIALACCOUNT_PROVIDERS = \
             'VERIFIED_EMAIL': False,
             'VERSION': 'v2.5'
         }
-    }
+     }
 
 # Different user model
 AUTH_USER_MODEL = 'API.Account'
@@ -258,9 +258,11 @@ EMAIL_HOST_USER = 'locsapp.eip@gmail.com'
 EMAIL_HOST_PASSWORD = 'Totofaitdubateau'
 
 URL_FRONT = 'http://127.0.0.1:3000/'
+URL_BACK = 'http://127.0.0.1:8000/'
 
 if socket.gethostname() == "sylflo.fr":
     URL_FRONT = 'http://locsapp.sylflo.fr/'
+    URL_BACK = 'http://sylflo.fr:8010/'
     DEBUG = TEMPLATE_DEBUG = True
 
     REST_FRAMEWORK = {

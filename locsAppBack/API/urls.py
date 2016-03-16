@@ -51,7 +51,10 @@ user_patterns = [
     url(r'^(?P<user_pk>[0-9]+)/billing_addresses/delete/$',
         views.billingAddressUserDelete.as_view()),
     url(r'^(?P<user_pk>[0-9]+)/notifications/$',
-        views.notificationsUser)
+        views.notificationsUser),
+    url(r'^api/image-upload-avatar/$',
+        views.ImageAvatarUploadView.as_view(),
+        name='image-upload'),
 ]
 
 # Static collections urls

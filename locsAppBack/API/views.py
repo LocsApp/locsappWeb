@@ -12,6 +12,7 @@ from rest_auth.registration.views import SocialLoginView
 from .models import Account
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import logout
+from django.conf import settings
 
 # User model
 from django.contrib.auth import get_user_model
@@ -35,6 +36,8 @@ db_locsapp = mongodb_client['locsapp']
 
 # Instanciation of the APIRequest class
 APIrequests = APIRequestMongo(db_locsapp)
+
+from rest_framework.parsers import FileUploadParser
 
 from django.core.validators import validate_email
 
@@ -70,6 +73,7 @@ class ChangeUsername(APIView):
     """
     Check if an username is already existing
     """
+
     def post(self, request):
 
         print("ChangeUsername ", request.data["username"])
@@ -102,7 +106,6 @@ class ChangeUsername(APIView):
         else:
             return (JsonResponse(
                 {"message": "This Facebook account is already link to a LocsApp account"}, status=405))
-
 
 
 @permission_classes((IsAuthenticated, ))
@@ -611,13 +614,32 @@ def notificationAlone(request, notification_pk):
     else:
         return (JsonResponse({"Error": "Method not allowed!"}, status=405))
 
+
+class ImageAvatarUploadView(APIView):
+    parser_classes = (FileUploadParser, )
+
+    def post(self, request, format="image/*"):
+        up_file = request.data["file"]
+        destination_url = settings.MEDIA_ROOT + hashlib.md5(
+            request.user.username.encode('utf-8')).hexdigest() + '/avatar.jpg'
+        os.makedirs(os.path.dirname(destination_url), exist_ok=True)
+        destination = open(destination_url, 'wb+')
+        for chunk in up_file.chunks():
+            destination.write(chunk)
+            destination.close()
+
+        UserForum.objects.filter(
+            pk=request.user.pk).update(
+            url_avatar=settings.URL_BACK + 'media/' +
+            hashlib.md5(
+                request.user.username.encode('utf-8')).hexdigest() +
+            '/avatar.jpg')
+        return JsonResponse({"url_avatar": settings.URL_BACK + 'media/' + hashlib.md5(
+            request.user.username.encode('utf-8')).hexdigest() + '/avatar.jpg'})
+
 """
     SOCIAL NETWORK ENDPOINTS
 """
-
-
-
-
 
 
 """
