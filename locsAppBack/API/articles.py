@@ -1,23 +1,14 @@
 from django.http import JsonResponse
-from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from .views import db_locsapp
 from .views import APIrequests
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.views import APIView
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
-from bson import ObjectId
-from bson import Binary, Code
-from bson.json_util import dumps
+from rest_framework.decorators import api_view, permission_classes
 from bson import json_util
 from django.http import HttpResponse
 
-
 import json
 from bson import ObjectId
-
-from types import *
 
 import pytz
 from datetime import datetime
@@ -135,11 +126,11 @@ def articleAlone(request, article_pk):
          "pictures": "array",
          "informations": "dict"}
 
-    if (request.method == "PUT"):
+    if request.method == "PUT":
         return APIrequests.forgeAPIrequestPut(
             request, article_pk, fields_definition_put, db_locsapp["articles"])
     else:
-        return (JsonResponse({"Error": "Method not allowed!"}, status=405))
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
 
 @csrf_exempt

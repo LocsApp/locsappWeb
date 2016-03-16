@@ -16,7 +16,7 @@
 			.save({"username" : $scope.username, "password1" : $scope.password, "password2" : $scope.password, "email" : $scope.email})
 			.$promise
 			.then(vm.userRegisteredSuccess, vm.userRegisteredFailure);
-    }
+    };
 
     /*Success callback for register*/
 	vm.userRegisteredSuccess = function () {

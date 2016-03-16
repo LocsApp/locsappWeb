@@ -1,13 +1,12 @@
 from django.conf.urls import include, url
-# django_rest_framework
-from rest_framework.authtoken.views import obtain_auth_token
 # importing local views
 from . import views
 from . import articles
 from . import static_collections
 from django.views.generic.base import RedirectView
-
 from allauth.account.views import confirm_email
+from social_network import views as social_network_views
+
 
 """
 @apiDefine UserObjectRegisterDefine
@@ -71,7 +70,12 @@ static_collections_patterns = [
 # General urls for the api
 api_patterns = [
 
-    url(r'^rest-auth/facebook/', views.FacebookLogin.as_view(), name='fb_login'),
+    url(r'^auth/facebook-login/',
+        social_network_views.FacebookLogin.as_view(),
+        name='fb_login'),
+    url(r'^auth/facebook-register',
+        social_network_views.FacebookRegister.as_view(),
+        name='fb_register'),
     url(r'^auth/change-username/', views.ChangeUsername.as_view()),
 
     url(r'^articles/', include(article_patterns)),

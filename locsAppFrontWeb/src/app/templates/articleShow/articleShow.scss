@@ -1,12 +1,26 @@
 
 .article-show {
 
+
+    md-datepicker {
+     // margin-top: 6px;
+    }
+
+
+  md-card.about {
+    margin: 0;
+  }
+
+  md-card.about-margin {
+    margin-right: 8px;
+  }
+
   .about {
-    margin-left: 0px;
-    margin-right: 0px;
-    border-right-width: 1px;
-  border-right-style: solid;
-    border-right-color: rgba(0,0,0,0.12);
+
+
+    md-card-content {
+      padding: 0px;
+    }
 
   }
 
@@ -133,29 +147,29 @@ NAV
     height: 71px;
     outline: none;
     cursor: pointer;
-    background: url(http://onehungrymind.com/demos/slider/assets/img/blank.gif) no-repeat;
+    background: url(../assets/images/article-carousel/blank.gif) no-repeat;
 
     &.prev {
       opacity: 0.2;
       left: 20px;
-      background-image: url(http://onehungrymind.com/demos/slider/assets/img/paddle_prev_999.png);
+      background-image: url(../assets/images/article-carousel/paddle_prev_999.png);
       transition: 0.0 .5s linear all;
 
       &:hover {
         opacity: 1;
-        background-image: url(http://onehungrymind.com/demos/slider/assets/img/paddle_prev_fff.png);
+        background-image: url(../assets/images/article-carousel/paddle_prev_fff.png);
       }
     }
 
     &.next {
       opacity: 0.2;
       right: 20px;
-      background-image: url(http://onehungrymind.com/demos/slider/assets/img/paddle_next_999.png);
+      background-image: url(../assets/images/article-carousel/paddle_next_999.png);
       transition: 0.0 .5s linear all;
 
       &:hover {
         opacity: 1;
-        background-image: url(http://onehungrymind.com/demos/slider/assets/img/paddle_next_fff.png);
+        background-image: url(../assets/images/article-carousel/paddle_next_fff.png);
       }
     }
   }
@@ -208,3 +222,27 @@ NAV
   animation: fadeOut 0.4s;
 }
 
+
+.gridListdemoBasicUsage md-grid-list {
+  margin: 8px; }
+
+.gridListdemoBasicUsage .gray {
+ /* background: #f5f5f5; */}
+
+.gridListdemoBasicUsage .green {
+  background: #b9f6ca; }
+
+.gridListdemoBasicUsage .yellow {
+  background: #ffff8d; }
+
+.gridListdemoBasicUsage .blue {
+  background: #84ffff; }
+
+.gridListdemoBasicUsage .purple {
+  background: #b388ff; }
+
+.gridListdemoBasicUsage .red {
+  background: #ff8a80; }
+
+.gridListdemoBasicUsage md-grid-tile {
+  transition: all 400ms ease-out 50ms; }

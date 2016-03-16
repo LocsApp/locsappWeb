@@ -46,25 +46,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Django allauth different form
-# ACCOUNT_SIGNUP_FORM_CLASS = 'API.forms.UserSignupForm'
-
-# ACCOUNT_SIGNUP_FORM_CLASS = 'API.forms.SignupForm'
+# Django allauth
 ACCOUNT_ADAPTER = 'API.adapter.DefaultAccountAdapterCustom'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Locsapp]"
-
-SOCIALACCOUNT_ADAPTER = 'API.adapter.DefaultSocialAccountAdapter'
-# SOCIALACCOUNT_AUTO_SIGNUP = False
-# SOCIALACCOUNT_FORMS = {'signup': 'API.forms.SocialNetworkSignupForm'}
-
-# SOCIALACCOUNT_AUTO_SIGNUP =
-
-#SOCIALACCOUNT_EMAIL_VERIFICATION = "mandatory"
-SOCIALACCOUNT_EMAIL_REQUIRED = True
-#SOCIALACCOUNT_QUERY_EMAIL = True
 
 """
 Attempt to bypass the signup form by using fields (e.g. username, email) retrieved from the social account provider.
@@ -76,33 +63,6 @@ OLD_PASSWORD_FIELD_ENABLED = True
 # Keep the user logged after the password has changed
 LOGOUT_ON_PASSWORD_CHANGE = False
 
-SOCIALACCOUNT_PROVIDERS = \
-    {'facebook':
-        {
-            'METHOD': 'oauth2',
-            'SCOPE': ['email', 'public_profile', 'user_friends', 'user_birthday'],
-            'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
-            'FIELDS': [
-                'id',
-                'email',
-                'name',
-                'birthday',
-                'gender',
-                # 'user_friends',
-                'first_name',
-                'last_name',
-                'verified',
-                'locale',
-                'timezone',
-                'link',
-                'updated_time'],
-            'EXCHANGE_TOKEN': True,
-            'LOCALE_FUNC': 'path.to.callable',
-            'VERIFIED_EMAIL': False,
-            'VERSION': 'v2.5'
-        }
-     }
-
 # Different user model
 AUTH_USER_MODEL = 'API.Account'
 
@@ -113,7 +73,6 @@ CORS_ORIGIN_ALLOW_ALL = True
 # Application definition
 
 INSTALLED_APPS = (
-    # 'API',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -136,7 +95,7 @@ INSTALLED_APPS = (
     'rest_auth.registration',
     'rest_framework_swagger',
     'tests',
-    'locsAppMiddleware',
+    'social_network',
     'API'
 )
 
@@ -153,7 +112,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'locsAppMiddleware.middleware.CheckUsernameExistMiddleware',
 )
 
 ROOT_URLCONF = 'locsAppBack.urls'
@@ -266,14 +224,14 @@ if socket.gethostname() == "sylflo.fr":
     DEBUG = TEMPLATE_DEBUG = True
 
     REST_FRAMEWORK = {
-        #'TEST_REQUEST_DEFAULT_FORMAT': 'json',
+        # 'TEST_REQUEST_DEFAULT_FORMAT': 'json',
         'DEFAULT_AUTHENTICATION_CLASSES': (
             'rest_framework.authentication.SessionAuthentication',
             'rest_framework.authentication.TokenAuthentication',
         ),
-        #'DEFAULT_RENDERER_CLASSES': (
+        # 'DEFAULT_RENDERER_CLASSES': (
         #    'rest_framework.renderers.JSONRenderer',
-        #)
+        # )
     }
 
     ALLOWED_HOSTS = [

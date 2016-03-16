@@ -104,7 +104,7 @@
           "flagged": null
         }
 
-      ]
+      ];
       vm.sexe = "Femme";
       vm.BaseCategory = "evening";
       vm.SubCategory = "dress";
@@ -114,8 +114,8 @@
       vm.brand = "Hermes";
       vm.state = "good";
       vm.description = "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repell";
-      vm.start_availble = "start location";
-      vm.end_availble = "end location";
+      vm.start_availble = "3/15/2016";
+      vm.end_availble = "6/15/2016";
       vm.date_created = "Creation date";
       vm.date_modified = "Modified date";
       vm.long = "longitude";
@@ -128,6 +128,31 @@
 
       //request author profile to get his notation;
 
+      //Put the date min and max
+      vm.dateStart = new Date(vm.start_availble);
+      vm.dateEnd = new Date(vm.end_availble);
+
+    /*  vm.minDate = new Date(
+        vm.dateStart.getFullYear(),
+        $scope.myDat.getMonth() - 2,
+        $scope.myDate.getDate());
+
+      $scope.maxDate = new Date(
+        $scope.myDate.getFullYear(),
+        $scope.myDate.getMonth() + 2,
+        $scope.myDate.getDate());*/
+
+      // Add col and row for the grid gallery
+      vm.obj_url_pictures = [];
+      for (var i = 0; i < vm.url_pictures.length; i++) {
+        vm.obj_url_pictures[i] = Object();
+        vm.obj_url_pictures[i]["col"] = "1";
+        vm.obj_url_pictures[i]["row"] = "1";
+        vm.obj_url_pictures[i]["url"] = vm.url_pictures[i];
+
+      }
+
+      $log.log("TEST = ", vm.url_pictures);
     };
 
     vm.getInfoArticleFailure = function (data) {

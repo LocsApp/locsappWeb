@@ -1,21 +1,12 @@
 
 div(class="article-show")
-
-  div(layout="row" layout-sm="column")
-    div(flex-offset='20' flex='15')
-      img(src="{{articleShow.url_thumbnail}}")
-
+  div(layout='row' layout-align='center')
+    img(src="{{articleShow.url_thumbnail}}")
     div(layout='column')
       h1 {{articleShow.title}}
-      span {{articleShow.username_author}}
-        ng-md-icon(icon="star_rate" size="40")
-        ng-md-icon(icon="star_rate" size="40")
-        ng-md-icon(icon="star_rate" size="40")
-        ng-md-icon(icon="star_rate" size="40")
-        ng-md-icon(icon="star_rate" size="40")
-      div(layout='row' layout-sm="column")
+      div(layout='row')
         md-card(class='about')
-          md-content
+          md-card-content
             //md-subheader.md-no-sticky About the clothe
             md-divider
             md-list-item.md-2-line
@@ -44,61 +35,8 @@ div(class="article-show")
                   h3 Brand
                   p {{articleShow.brand }}
 
-        md-card(class='about')
-          md-content
-            //md-subheader.md-no-sticky About the clothe
-            md-divider
-            md-list-item.md-2-line
-                ng-md-icon(icon="person_outline")
-                div.md-list-item-text
-                  h3 SubCategory
-                  p {{articleShow.SubCategory}}
-            md-divider
-            md-list-item.md-2-line
-              ng-md-icon(icon="person_outline")
-              div.md-list-item-text
-                h3 Size
-                p {{articleShow.size }}
-            md-divider
-            md-list-item.md-2-line
-              ng-md-icon(icon="person_outline")
-              div.md-list-item-text
-                h3 State
-                p {{articleShow.state }}
-            md-divider
-
-        md-card(class='about')
-          md-content
-            //md-subheader.md-no-sticky About the clothe
-            md-divider
-            md-list-item.md-2-line
-              ng-md-icon(icon="person_outline")
-              div.md-list-item-text
-                h3 Main Category
-                p {{articleShow.BaseCategory }}
-            md-divider
-            md-list-item.md-2-line
-              ng-md-icon(icon="person_outline")
-              div.md-list-item-text
-                h3 Gender
-                p {{articleShow.sexe}}
-
-            md-divider
-              md-list-item.md-2-line
-                ng-md-icon(icon="color_lens")
-                div.md-list-item-text
-                  h3 Color
-                  p {{articleShow.color }}
-
-            md-divider
-              md-list-item.md-2-line
-                ng-md-icon(icon="help")
-                div.md-list-item-text
-                  h3 Brand
-                  p {{articleShow.brand }}
-
-        md-card(class='about')
-          md-content
+        md-card(class='about about-margin')
+          md-card-content
             //md-subheader.md-no-sticky About the clothe
             md-divider
             md-list-item.md-2-line
@@ -119,38 +57,76 @@ div(class="article-show")
                 h3 State
                 p {{articleShow.state }}
             md-divider
+        md-card(class='about')
+          md-card-content
+            //md-subheader.md-no-sticky About the clothe
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 Article created
+                p {{articleShow.date_created}}
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 Start availbility
+                p {{articleShow.start_availble }}
+            md-divider
+              md-list-item.md-2-line
+                ng-md-icon(icon="color_lens")
+                div.md-list-item-text
+                  h3 Price
+                  p {{articleShow.price }}
+
+            md-divider
 
 
+        md-card(class='about')
+          md-card-content
+            //md-subheader.md-no-sticky About the clothe
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 Article modified
+                p {{articleShow.date_modified}}
+            md-divider
 
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 End availbility
+                p {{articleShow.end_availble}}
+            md-divider
+            md-list-item.md-2-line
+              ng-md-icon(icon="person_outline")
+              div.md-list-item-text
+                h3 Meaning payment
+                span(ng-repeat='payment in articleShow.meaning_payment') {{payment}},
+            md-divider
 
+  div(layout='column')
+    div(layout='row' layout-align='center center' flex="50" style='margin-top: 10px;')
+      md-datepicker(ng-model='articleShow.dateStart', md-placeholder='Enter date',
+      md-min-date='articleShow.dateStart',
+      md-max-date='articleShow.dateEnd')
+      md-datepicker(ng-model='articleShow.dateEnd', md-placeholder='Enter date',
+      md-min-date='articleShow.dateStart',
+      md-max-date='articleShow.dateEnd')
+      md-button.md-raised(style='text-align:center;' flex="30") Rent this article
 
-    //div()
-      md-card
-        md-card-content this is a card
+  div(layout='row' layout-align='center')
+    div(flex="50")
+      md-grid-list(md-cols-xs='1', md-cols-sm='2', md-cols-md='2', md-cols-gt-md='3',
+      md-row-height-gt-md='1:1', md-row-height='1:1', md-gutter='12px', md-gutter-gt-sm='8px')
+        md-grid-tile(ng-repeat="tile in articleShow.obj_url_pictures track by $index"
+        md-rowspan="{{tile.row}}" md-colspan="{{tile.col}}" md-colspan-sm="1"
+        style='background:url("{{tile.url}}"); background-size: cover; cursor:pointer;'
+        ng-click="articleShow.clickImageGallery($event, $index, articleShow.url_pictures)")
+          //md-grid-tile-footer
+            h3 {{tile.title}}
 
-
-
-  //div(ng-repeat='image in articleShow.url_pictures track by $index')
-
-
-
-
-
-
-
-
-  div.grid-gallery(layout='row' layout-align='center')
-    div(style='background-color:orange;')
-      img(ng-click="articleShow.clickImageGallery($event, 0, articleShow.url_pictures)" src="http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg")
-      img(ng-click="articleShow.clickImageGallery($event, 1, articleShow.url_pictures)" src="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516")
-      img(ng-click="articleShow.clickImageGallery($event, 2, articleShow.url_pictures)" src="http://cdn.shopify.com/s/files/1/0293/9277/products/Fashion_Nova_-_01-21-16-410_large.JPG?v=1453489020")
-
-  //Si index % 3 == 0 on ajout une nouvelle grid
-  div.grid-gallery(layout='row' layout-align='center')
-    div(style='background-color:orange;')
-      img(ng-click="articleShow.clickImageGallery($event, 3, articleShow.url_pictures)" src="http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg")
-      img(ng-click="articleShow.clickImageGallery($event, 4, articleShow.url_pictures)" src="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516")
-      img(ng-click="articleShow.clickImageGallery($event, 5, articleShow.url_pictures)" src="http://cdn.shopify.com/s/files/1/0293/9277/products/Fashion_Nova_-_01-21-16-410_large.JPG?v=1453489020")
 
 
   div(layout='row' layout-align='center')

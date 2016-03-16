@@ -1,20 +1,16 @@
 # Django imports
 from django.http import JsonResponse
 from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
 
 # JSON import
 import json
 import bson
 
 # Pymongo imports
-from pymongo import MongoClient
 from bson.objectid import ObjectId
 
 import pytz
 from datetime import datetime
-from bson import json_util
-from bson.json_util import dumps
 
 
 class APIRequestMongo:
@@ -38,22 +34,23 @@ class APIRequestMongo:
     def _fieldModelValidation(
             self, attribute, model_attribute, error_fields, key):
         modelType = None
-        if (isinstance(model_attribute, type({}))):
+        if isinstance(model_attribute, type({})):
             if ("_type" in model_attribute and not isinstance(model_attribute[
                     "_type"], type({})) and not isinstance(model_attribute["_type"], type([]))):
                 modelType = model_attribute["_type"]
-            elif ("_type" in model_attribute and isinstance(model_attribute["_type"], type([]))):
-                if (not isinstance(attribute, (type([])))):
+            elif "_type" in model_attribute and isinstance(model_attribute["_type"], type([])):
+                if not isinstance(attribute, (type([]))):
                     error_fields[key] = "This field must be an array"
-                    return (False)
+                    return False
                 else:
                     for subObject in attribute:
                         return self._fieldModelValidation(
-                            subObject, model_attribute["_type"][0], error_fields, key + ".subfield")
-        elif (isinstance(model_attribute, type([]))):
-            if (not isinstance(attribute, (type([])))):
+                            subObject, model_attribute["_type"][0], error_fields, key +
+                            ".subfield")
+        elif isinstance(model_attribute, type([])):
+            if not isinstance(attribute, (type([]))):
                 error_fields[key] = "This field must be an array"
-                return (False)
+                return False
             else:
                 for subObject in attribute:
                     return self._fieldModelValidation(
@@ -62,57 +59,57 @@ class APIRequestMongo:
             modelType = model_attribute
         if (bson.objectid.ObjectId.is_valid(attribute) == True and
                 bson.objectid.ObjectId.is_valid(str(modelType)) == True):
-            if (isinstance(model_attribute, type({}))
-                    and "_protected" in model_attribute and model_attribute["_protected"]):
+            if (isinstance(model_attribute, type({})) and "_protected" in
+                    model_attribute and model_attribute["_protected"]):
                 pass
             else:
-                return (True)
-        elif (not isinstance(attribute, modelType)):
+                return True
+        elif not isinstance(attribute, modelType):
             print("ERROR : " + str(attribute))
             error_fields[key] = "This field must be a " + modelType.__name__
-            return (False)
+            return False
         modelType = model_attribute
-        if (isinstance(modelType, type({}))):
-            if ("_protected" in modelType and modelType["_protected"]):
+        if isinstance(modelType, type({})):
+            if "_protected" in modelType and modelType["_protected"]:
                 error_fields[key] = "This field is protected"
-                return(False)
-            if ("_length" in modelType):
-                if (len(str(attribute)) > modelType["_length"]):
+                return False
+            if "_length" in modelType:
+                if len(str(attribute)) > modelType["_length"]:
                     error_fields[key] = "The length must not exceed " + \
                         str(modelType["_length"]) + " characters."
                     return (False)
-            if ("_min" in modelType):
-                if (attribute < modelType["_min"]):
+            if "_min" in modelType:
+                if attribute < modelType["_min"]:
                     error_fields[
                         key] = "The value must ge greater than " + str(modelType["_min"])
-                    return (False)
-            if ("_max" in modelType):
-                if (attribute > modelType["_max"]):
+                    return False
+            if "_max" in modelType:
+                if attribute > modelType["_max"]:
                     error_fields[
                         key] = "The value must ge lower than " + str(modelType["_min"])
-                    return (False)
-        return (True)
+                    return False
+        return True
 
     """
     This checks for primary keys, if not existing, if there is a default or if it is required.
     """
 
     def _fieldDefaultNotRequired(self, document, model_attribute, key):
-        if (isinstance(model_attribute, type({}))):
-            if ("_required" in model_attribute):
-                if (not model_attribute["_required"]):
-                    return (True)
-            if ("_default" in model_attribute):
+        if isinstance(model_attribute, type({})):
+            if "_required" in model_attribute:
+                if not model_attribute["_required"]:
+                    return True
+            if "_default" in model_attribute:
                 document[key] = model_attribute["_default"]
-                return (True)
-        return (False)
+                return True
+        return False
 
     """
     This method creates a POST endpoint for a mongo API
     """
 
     def POST(self, request, model, collection_name, success_message):
-        if (request.body):
+        if request.body:
             body = json.loads(request.body.decode('utf8'))
             keys_error = {}
             document = {}
@@ -132,7 +129,7 @@ class APIRequestMongo:
                         missing_keys[key] = "This key is missing"
             keys_error.update(missing_keys)
             if keys_error:
-                return (JsonResponse(keys_error, status=401))
+                return JsonResponse(keys_error, status=401)
             self.db[collection_name].insert_one(document)
             return (JsonResponse(
                 {"message": success_message}, status=200))
@@ -143,7 +140,7 @@ class APIRequestMongo:
     """
 
     def GET(self, collection_name, id=None):
-        if (id is None):
+        if id is None:
             documents = self.db[collection_name].find({})
             answer = {collection_name: []}
             for instance in documents:
@@ -152,7 +149,7 @@ class APIRequestMongo:
         if (id):
             answer = self.parseObjectIdToStr(
                 self.db[collection_name].find_one({"_id": id}))
-        return (JsonResponse(answer, status=200))
+        return JsonResponse(answer, status=200)
 
     """
     verifies is the fields are correct:
@@ -182,7 +179,7 @@ class APIRequestMongo:
             fields[key] = fields[key].replace(" ", "")
             temp_options = fields[key].split("|")[0].split(",")
             # Verification of protected values
-            if (temp_options[0] == "integer_protected"):
+            if temp_options[0] == "integer_protected":
                 if key in answer:
                     error_fields[key] = "This field is protected"
             # Parsing of default values
@@ -196,10 +193,10 @@ class APIRequestMongo:
             if temp_options[0] == "text":
                 if not isinstance(answer[key], type("kek")):
                     error_fields[key] = "It must be a string"
-                elif (len(answer[key]) > int(temp_options[1])
-                        or len(answer[key]) <= 0):
+                elif len(answer[key]) > int(temp_options[1]) or len(answer[key]) <= 0:
                     error_fields[
-                        key] = "The text must not be empty and the length must be inferior or equal to" + temp_options[1]
+                        key] = "The text must not be empty and the length must be inferior" \
+                               " or equal to" + temp_options[1]
             elif temp_options[0] == "integer":
                 if not isinstance(answer[key], type(1)):
                     error_fields[key] = "The field must be an integer"
@@ -215,7 +212,7 @@ class APIRequestMongo:
                 if not isinstance(answer[key], type({})):
                     error_fields[key] = "The field must be a dictionnary"
             elif temp_options[0] == "id":
-                if bson.objectid.ObjectId.is_valid(answer[key]) == False:
+                if not bson.objectid.ObjectId.is_valid(answer[key]):
                     error_fields[key] = "The field must be a MongoDB ID"
 
             temp_options = []
@@ -246,7 +243,7 @@ class APIRequestMongo:
 
     # creates a API PUT
     def forgeAPIrequestPut(self, request, id, fields, collection):
-        if (request.body):
+        if request.body:
             answer = json.loads(request.body.decode('utf8'))
             error_keys = {}
             new_fields = {}
@@ -256,22 +253,22 @@ class APIRequestMongo:
                         str(key) + " is not authorized"
                 else:
                     new_fields[key] = fields[key]
-            if (error_keys != {}):
-                return (JsonResponse(error_keys, status=401))
+            if error_keys != {}:
+                return JsonResponse(error_keys, status=401)
             error_keys = self.verifyErrorsInFields(new_fields, answer)
-            if (error_keys != {}):
-                return (JsonResponse(error_keys, status=401))
+            if error_keys != {}:
+                return JsonResponse(error_keys, status=401)
             object = collection.update_one(
                 {"_id": ObjectId(id)}, {"$set": answer})
-            if (object.raw_result['updatedExisting'] is False):
-                return(JsonResponse({"Error": "Id not found!"}, status=404))
-            return(JsonResponse({"message": "Object updated!"}, status=200))
+            if object.raw_result['updatedExisting'] is False:
+                return JsonResponse({"Error": "Id not found!"}, status=404)
+            return JsonResponse({"message": "Object updated!"}, status=200)
         else:
-            return (JsonResponse({"Error": "400 BAD REQUEST"}, status=400))
+            return JsonResponse({"Error": "400 BAD REQUEST"}, status=400)
 
     # creates a API DELETE Endpoint
     def forgeAPIrequestDelete(self, request, fields, collection):
-        if (request.method == "DELETE"):
-            return (HttpResponse("200 OK"))
+        if request.method == "DELETE":
+            return HttpResponse("200 OK")
         else:
-            return (HttpResponse("401 Unauthorized"))
+            return HttpResponse("401 Unauthorized")

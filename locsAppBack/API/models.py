@@ -1,13 +1,10 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
-from django.core.mail import EmailMessage
 from django.utils import timezone
 from django.contrib.postgres.fields import ArrayField
-from rest_framework import serializers
 from allauth.account.models import EmailAddress
 from allauth.account.signals import email_confirmed, email_confirmation_sent
 from django.dispatch import receiver
-from allauth.account.utils import send_email_confirmation
 # User model
 from django.contrib.auth import get_user_model
 
@@ -39,8 +36,8 @@ class Account(AbstractBaseUser):
     email = models.EmailField(unique=True, blank=False)
     username = models.CharField(max_length=20, unique=True, blank=False)
 
-    secondary_emails = ArrayField(ArrayField(models.TextField(null=True, default=None), null=True, size=2), null=True,
-                                  size=5)
+    secondary_emails = ArrayField(ArrayField(models.TextField(null=True, default=None),
+                                             null=True, size=2), null=True, size=5)
 
     first_name = models.CharField(max_length=30, default=None, null=True)
     last_name = models.CharField(max_length=30, default=None, null=True)
@@ -48,10 +45,10 @@ class Account(AbstractBaseUser):
     gender = models.CharField(max_length=30, null=True)
 
     phone = models.CharField(max_length=10, null=True)
-    living_address = ArrayField(ArrayField(models.TextField(null=True, default=None), null=True, size=2), null=True,
-                                size=5)
-    billing_address = ArrayField(ArrayField(models.TextField(null=True, default=None), null=True, size=2), null=True,
-                                 size=5)
+    living_address = ArrayField(ArrayField(models.TextField(null=True, default=None), null=True,
+                                           size=2), null=True, size=5)
+    billing_address = ArrayField(ArrayField(models.TextField(null=True, default=None), null=True,
+                                            size=2), null=True, size=5)
     logo_url = models.CharField(max_length=255, null=True)
 
     registered_date = models.DateTimeField(default=timezone.now)
@@ -62,6 +59,7 @@ class Account(AbstractBaseUser):
 
     created_at = models.DateTimeField(auto_now_add=True)
     is_admin = models.BooleanField(default=False)
+    id_facebook = models.CharField(default="", null=True, max_length=255)
 
     objects = AccountManager()
     object = AccountManager()
@@ -98,43 +96,43 @@ class Account(AbstractBaseUser):
         except:
             email = EmailAddress.objects.add_email(
                 request, self, new_email, confirm=True)
-            if (self.secondary_emails is None):
+            if self.secondary_emails is None:
                 self.secondary_emails = [[email.email, "false"]]
             else:
                 self.secondary_emails.append([email.email, "false"])
             self.save(update_fields=['secondary_emails'])
-            return ({"message": "Confirmation email sent!"})
+            return {"message": "Confirmation email sent!"}
         if (email.user_id != self.pk):
-            return ({"Error": "This email is already used by another user."})
+            return {"Error": "This email is already used by another user."}
         EmailAddress.objects.get(email=new_email).delete()
         email = EmailAddress.objects.add_email(
             request, self, new_email, confirm=True)
-        return ({"message": "Reconfirmation email sent!"})
+        return {"message": "Reconfirmation email sent!"}
 
     def delete_email_address(self, request, email_data):
         try:
             email = EmailAddress.objects.get(email=email_data)
         except:
-            return({"Error": "This email doesn't exist."})
-        if (email.user_id != self.pk):
-            return ({"Error": "This email is already used by another user."})
+            return {"Error": "This email doesn't exist."}
+        if email.user_id != self.pk:
+            return {"Error": "This email is already used by another user."}
         for i, email_obj in enumerate(self.secondary_emails):
-            if (email_obj[0] == email_data):
+            if email_obj[0] == email_data:
                 self.secondary_emails.pop(i)
                 EmailAddress.objects.get(email=email_data).delete()
                 self.save(update_fields=['secondary_emails'])
-                return ({"message": "Email succesfully deleted"})
-        return ({"Error": "The email wasn't found in the secondary emails."})
+                return {"message": "Email succesfully deleted"}
+        return {"Error": "The email wasn't found in the secondary emails."}
 
 
 @receiver(email_confirmed)
 def update_user_email(sender, request, email_address, **kwargs):
     User = get_user_model()
     user = User.object.get(pk=email_address.user_id)
-    if (user.secondary_emails is None):
+    if user.secondary_emails is None:
         return
     for email_obj in user.secondary_emails:
-        if (email_address.email == email_obj[0]):
+        if email_address.email == email_obj[0]:
             email_obj[1] = "true"
             user.save()
             break

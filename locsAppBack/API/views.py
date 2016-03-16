@@ -1,34 +1,31 @@
 # Django imports
 
 from django.views.generic.base import TemplateView
-
 from rest_framework.views import APIView
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.authtoken.models import Token
-from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-from rest_auth.registration.views import SocialLoginView
 from .models import Account
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import logout
+
 from django.conf import settings
+
+from django.views.decorators.csrf import csrf_exempt
 
 # User model
 from django.contrib.auth import get_user_model
-
 # User serializer
 from .serializers import UserDetailsSerializer
-
 # Pymongo imports
 from pymongo import MongoClient
-from bson.objectid import ObjectId
-
 # JSON import
-import json
-
 # APIrequestForgery class
 from .APIrequest import *
+from django.core.validators import validate_email
+import json
+from bson import ObjectId
+from rest_framework.parsers import FileUploadParser
 
 # Connects to the db and creates a MongoClient instance
 mongodb_client = MongoClient('localhost', 27017)
@@ -36,17 +33,6 @@ db_locsapp = mongodb_client['locsapp']
 
 # Instanciation of the APIRequest class
 APIrequests = APIRequestMongo(db_locsapp)
-
-from rest_framework.parsers import FileUploadParser
-
-from django.core.validators import validate_email
-
-import json
-from bson import ObjectId
-
-
-class FacebookLogin(SocialLoginView):
-    adapter_class = FacebookOAuth2Adapter
 
 
 class JSONEncoder(json.JSONEncoder):
@@ -56,11 +42,11 @@ class JSONEncoder(json.JSONEncoder):
             return str(o)
         return json.JSONEncoder.default(self, o)
 
+
 # Template for the doc on the homepage of the API
-
-
 class docAPIView(TemplateView):
     template_name = "API/homeDocAPI.html"
+
 
 """
     USER PROFILE ENDPOINTS
@@ -69,7 +55,6 @@ class docAPIView(TemplateView):
 
 @permission_classes((IsAuthenticated,))
 class ChangeUsername(APIView):
-
     """
     Check if an username is already existing
     """
@@ -105,77 +90,80 @@ class ChangeUsername(APIView):
                 {"message": "You username is " + new_user.username}, status=206))
         else:
             return (JsonResponse(
-                {"message": "This Facebook account is already link to a LocsApp account"}, status=405))
+                {"message": "This Facebook account is already link to a LocsApp account"},
+                status=405))
 
 
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 class deleteEmailUser(APIView):
 
     def post(self, request):
-        if ("email" not in request.data or len(request.data["email"]) == 0):
+        if "email" not in request.data or len(request.data["email"]) == 0:
             return Response(
                 {"Error": "There must be a field 'email' present in the document."}, status=401)
         answer = request.user.delete_email_address(
             request, request.data["email"])
-        if ("Error" in answer):
+        if "Error" in answer:
             return Response(answer, status=401)
         User = get_user_model()
         current_user = User.objects.get(pk=self.request.user.pk)
         serializer = UserDetailsSerializer(current_user)
         dataSerialized = serializer.data
-        if ("Error" in answer):
-            return (Response(answer, status=401))
+        if "Error" in answer:
+            return Response(answer, status=401)
         return Response(dataSerialized)
 
 
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 class addEmailUser(APIView):
 
     def post(self, request):
         if ("new_email" not in request.data or len(
                 request.data["new_email"]) == 0):
             return Response(
-                {"Error": "There must be a field 'new_email' present in the document."}, status=401)
+                {"Error": "There must be a field 'new_email' present in the document."},
+                status=401)
         try:
             validate_email(request.data["new_email"])
         except:
             return Response(
                 {"Error": "Please provide a correct email address."}, status=401)
-        if (request.data["new_email"] == request.user.email):
+        if request.data["new_email"] == request.user.email:
             return Response(
                 {"Error": "This is your primary email address."}, status=401)
-        if (request.user.secondary_emails is not None):
+        if request.user.secondary_emails is not None:
             for email_obj in request.user.secondary_emails:
-                if (email_obj[0] == request.data["new_email"]):
-                    if (email_obj[1] == "true"):
+                if email_obj[0] == request.data["new_email"]:
+                    if email_obj[1] == "true":
                         return Response(
                             {"Error": "You already confirmed that email."}, status=401)
                     break
-            if (len(request.user.secondary_emails) == 5):
+            if len(request.user.secondary_emails) == 5:
                 return Response(
                     {"Error": "Sorry, you can't add more than 5 emails."}, status=401)
         answer = request.user.add_email_address(
             request, request.data["new_email"], False)
-        if ("Error" in answer):
-            return (Response(answer, status=401))
+        if "Error" in answer:
+            return Response(answer, status=401)
         return Response(answer)
 
 
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 class setEmailAsPrimary(APIView):
 
     def post(self, request):
-        if ("email" not in request.data or len(request.data["email"]) == 0):
+        if "email" not in request.data or len(request.data["email"]) == 0:
             return Response(
                 {"Error": "There must be a field 'email' present in the document."}, status=401)
-        if (request.user.secondary_emails is not None):
+        if request.user.secondary_emails is not None:
             User = get_user_model()
             current_user = User.objects.get(pk=self.request.user.pk)
             for email_obj in current_user.secondary_emails:
-                if (email_obj[0] == request.data["email"]):
-                    if (email_obj[1] == "false"):
+                if email_obj[0] == request.data["email"]:
+                    if email_obj[1] == "false":
                         return (
-                            Response({"Error": "This secondary email isn't verified."}, status=401))
+                            Response({"Error": "This secondary email isn't verified."},
+                                     status=401))
                     else:
                         temp = email_obj[0]
                         email_obj[0] = current_user.email
@@ -183,39 +171,40 @@ class setEmailAsPrimary(APIView):
                         current_user.save()
                         serializer = UserDetailsSerializer(current_user)
                         dataSerialized = serializer.data
-                        return (Response(dataSerialized))
+                        return Response(dataSerialized)
             return (
                 Response({"Error": "You don't have this secondary email."}, status=401))
         return (
             Response({"Error": "You don't have any secondary email."}, status=401))
 
 
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 class livingAddressUser(APIView):
 
     def post(self, request, user_pk):
         User = get_user_model()
-        if (self.request.user.pk):
-            if (int(user_pk) != int(self.request.user.pk)):
+        if self.request.user.pk:
+            if int(user_pk) != int(self.request.user.pk):
                 return Response(
                     {"Unauthorized": "You have no access to this data."}, status=403)
         else:
             return Response(
                 {"Unauthorized": "You need to be connected."}, status=403)
-        if("living_address" in request.data):
-            if (isinstance(request.data["living_address"], list)):
-                if (len(request.data["living_address"]) == 2):
-                    if (len(request.data["living_address"][0]) > 20):
+        if "living_address" in request.data:
+            if isinstance(request.data["living_address"], list):
+                if len(request.data["living_address"]) == 2:
+                    if len(request.data["living_address"][0]) > 20:
                         return Response(
                             {"Error": "Aliases must be smaller than 20 characters"}, status=401)
-                    if (isinstance(request.data["living_address"][1], dict)):
+                    if isinstance(request.data["living_address"][1], dict):
                         if ("first_name" not in request.data["living_address"][1] or
                                 "last_name" not in request.data["living_address"][1] or
                                 "address" not in request.data["living_address"][1] or
                                 "postal_code" not in request.data["living_address"][1] or
                                 "city" not in request.data["living_address"][1]):
                             return Response(
-                                {"Error": "Address collection is not correctly formatted."}, status=401)
+                                {"Error": "Address collection is not correctly formatted."},
+                                status=401)
                         else:
                             request.data["living_address"][1] = json.dumps(
                                 request.data["living_address"][1])
@@ -225,7 +214,7 @@ class livingAddressUser(APIView):
                     current_user = User.objects.get(pk=user_pk)
                     if (current_user.living_address is None or len(
                             current_user.living_address) < 5):
-                        if (current_user.living_address is None):
+                        if current_user.living_address is None:
                             current_user.living_address = [
                                 request.data["living_address"]]
                         else:
@@ -233,31 +222,36 @@ class livingAddressUser(APIView):
                                 if (address[0] == request.data["living_address"][
                                         0] or address[1] == request.data["living_address"][1]):
                                     return Response(
-                                        {"Error": "The alias or the address already exists"}, status=401)
+                                        {"Error": "The alias or the address already exists"},
+                                        status=401)
                             current_user.living_address.append(
                                 request.data["living_address"])
                         current_user.save()
                         serializer = UserDetailsSerializer(current_user)
                         jsonData = serializer.data
-                        return(Response(jsonData))
+                        return Response(jsonData)
                     else:
                         return Response(
                             {"Error": "The user already has 5 living addresses"}, status=401)
                 else:
                     return Response(
-                        {"Error": "The key 'living_address' must have two slots, the first for the alias and the second for the address"}, status=401)
+                        {
+                            "Error": "The key 'living_address' must have two slots, the first for the alias and"
+                                     " the second for the address"},
+                        status=401)
             else:
                 return Response(
                     {"Error": "The key 'living_address' must be a list."}, status=401)
         else:
             return Response(
-                {"Error": "There must be a key 'living_address' present in the document."}, status=401)
+                {"Error": "There must be a key 'living_address' present in the document."},
+                status=401)
         return Response({"message": "Nice"})
 
     def get(self, request, user_pk):
         User = get_user_model()
-        if (self.request.user.pk):
-            if (int(user_pk) != int(self.request.user.pk)):
+        if self.request.user.pk:
+            if int(user_pk) != int(self.request.user.pk):
                 return Response(
                     {"Unauthorized": "You have no access to this data."}, status=403)
         else:
@@ -265,35 +259,36 @@ class livingAddressUser(APIView):
                 {"Unauthorized": "You need to be connected."}, status=403)
         current_user = User.objects.get(pk=user_pk)
         living_addresses = current_user.living_address
-        return (Response(living_addresses))
+        return Response(living_addresses)
 
 
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 class livingAddressUserDelete(APIView):
 
     def post(self, request, user_pk):
         User = get_user_model()
-        if (self.request.user.pk):
-            if (int(user_pk) != int(self.request.user.pk)):
+        if self.request.user.pk:
+            if int(user_pk) != int(self.request.user.pk):
                 return Response(
                     {"Unauthorized": "You have no access to this data."}, status=403)
         else:
             return Response(
                 {"Unauthorized": "You need to be connected."}, status=403)
-        if("living_address" in request.data):
-            if (isinstance(request.data["living_address"], list)):
-                if (len(request.data["living_address"]) == 2):
-                    if (len(request.data["living_address"][0]) > 20):
+        if "living_address" in request.data:
+            if isinstance(request.data["living_address"], list):
+                if len(request.data["living_address"]) == 2:
+                    if len(request.data["living_address"][0]) > 20:
                         return Response(
                             {"Error": "Aliases must be smaller than 20 characters"}, status=401)
-                    if (isinstance(request.data["living_address"][1], dict)):
+                    if isinstance(request.data["living_address"][1], dict):
                         if ("first_name" not in request.data["living_address"][1] or
                                 "last_name" not in request.data["living_address"][1] or
                                 "address" not in request.data["living_address"][1] or
                                 "postal_code" not in request.data["living_address"][1] or
                                 "city" not in request.data["living_address"][1]):
                             return Response(
-                                {"Error": "Address collection is not correctly formatted."}, status=401)
+                                {"Error": "Address collection is not correctly formatted."},
+                                status=401)
                         else:
                             request.data["living_address"][1] = json.dumps(
                                 request.data["living_address"][1])
@@ -301,7 +296,7 @@ class livingAddressUserDelete(APIView):
                         return Response(
                             {"Error": "Addresses must be a collection of data"}, status=401)
                     current_user = User.objects.get(pk=user_pk)
-                    if (current_user.living_address is not None):
+                    if current_user.living_address is not None:
                         for i, address in enumerate(
                                 current_user.living_address):
                             if (address[0] == request.data[
@@ -313,48 +308,55 @@ class livingAddressUserDelete(APIView):
                                 jsonData = serializer.data
                                 return (Response(jsonData))
                         return Response(
-                            {"Error": "The alias wasn't found in the user's living addresses"}, status=401)
+                            {"Error": "The alias wasn't found in the user's living addresses"},
+                            status=401)
                     else:
                         return Response(
                             {"Error": "The user has no living address."}, status=401)
                 else:
                     return Response(
-                        {"Error": "The key 'living_address' must have two slots, the first for the alias and the second for the address"}, status=401)
+                        {
+                            "Error": "The key 'living_address' must have two slots, the first for"
+                                     " the alias and"
+                                     " the second for the address"},
+                        status=401)
             else:
                 return Response(
                     {"Error": "The key 'living_address' must be a list."}, status=401)
         else:
             return Response(
-                {"Error": "There must be a key 'living_address' present in the document."}, status=401)
+                {"Error": "There must be a key 'living_address' present in the document."},
+                status=401)
         return Response({"message": "Nice"})
 
 
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 class billingAddressUser(APIView):
 
     def post(self, request, user_pk):
         User = get_user_model()
-        if (self.request.user.pk):
-            if (int(user_pk) != int(self.request.user.pk)):
+        if self.request.user.pk:
+            if int(user_pk) != int(self.request.user.pk):
                 return Response(
                     {"Unauthorized": "You have no access to this data."}, status=403)
         else:
             return Response(
                 {"Unauthorized": "You need to be connected."}, status=403)
-        if("billing_address" in request.data):
-            if (isinstance(request.data["billing_address"], list)):
-                if (len(request.data["billing_address"]) == 2):
-                    if (len(request.data["billing_address"][0]) > 20):
+        if "billing_address" in request.data:
+            if isinstance(request.data["billing_address"], list):
+                if len(request.data["billing_address"]) == 2:
+                    if len(request.data["billing_address"][0]) > 20:
                         return Response(
                             {"Error": "Aliases must be smaller than 20 characters"}, status=401)
-                    if (isinstance(request.data["billing_address"][1], dict)):
+                    if isinstance(request.data["billing_address"][1], dict):
                         if ("first_name" not in request.data["billing_address"][1] or
                                 "last_name" not in request.data["billing_address"][1] or
                                 "address" not in request.data["billing_address"][1] or
                                 "postal_code" not in request.data["billing_address"][1] or
                                 "city" not in request.data["billing_address"][1]):
                             return Response(
-                                {"Error": "Address collection is not correctly formatted."}, status=401)
+                                {"Error": "Address collection is not correctly formatted."},
+                                status=401)
                         else:
                             request.data["billing_address"][1] = json.dumps(
                                 request.data["billing_address"][1])
@@ -364,39 +366,45 @@ class billingAddressUser(APIView):
                     current_user = User.objects.get(pk=user_pk)
                     if (current_user.billing_address is None or len(
                             current_user.billing_address) < 5):
-                        if (current_user.billing_address is None):
+                        if current_user.billing_address is None:
                             current_user.billing_address = [
                                 request.data["billing_address"]]
                         else:
                             for address in current_user.billing_address:
-                                if (address[0] == request.data["billing_address"][
-                                        0] or address[1] == request.data["billing_address"][1]):
+                                if address[0] == request.data["billing_address"][0] or address[1] \
+                                        == request.data["billing_address"][1]:
                                     return Response(
-                                        {"Error": "The alias or the address already exists"}, status=401)
+                                        {"Error": "The alias or the address already exists"},
+                                        status=401)
                             current_user.billing_address.append(
                                 request.data["billing_address"])
                         current_user.save()
                         serializer = UserDetailsSerializer(current_user)
                         jsonData = serializer.data
-                        return(Response(jsonData))
+                        return Response(jsonData)
                     else:
                         return Response(
                             {"Error": "The user already has 5 billing addresses"}, status=401)
                 else:
                     return Response(
-                        {"Error": "The key 'billing_address' must have two slots, the first for the alias and the second for the address"}, status=401)
+                        {
+                            "Error": "The key 'billing_address' must have two slots, the first"
+                                     " for the alias"
+                                     " and the second for the address"},
+                        status=401)
             else:
                 return Response(
                     {"Error": "The key 'billing_address' must be a list."}, status=401)
         else:
             return Response(
-                {"Error": "There must be a key 'billing_address' present in the document."}, status=401)
+                {"Error": "There must be a key 'billing_address' present in the document."},
+                status=401)
         return Response({"message": "Nice"})
 
     def get(self, request, user_pk):
         User = get_user_model()
-        if (self.request.user.pk):
-            if (int(user_pk) != int(self.request.user.pk)):
+        if self.request.user.pk:
+            if int(user_pk) != int(self.request.user.pk):
                 return Response(
                     {"Unauthorized": "You have no access to this data."}, status=403)
         else:
@@ -404,35 +412,36 @@ class billingAddressUser(APIView):
                 {"Unauthorized": "You need to be connected."}, status=403)
         current_user = User.objects.get(pk=user_pk)
         billing_addresses = current_user.billing_address
-        return (Response(billing_addresses))
+        return Response(billing_addresses)
 
 
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 class billingAddressUserDelete(APIView):
 
     def post(self, request, user_pk):
         User = get_user_model()
-        if (self.request.user.pk):
-            if (int(user_pk) != int(self.request.user.pk)):
+        if self.request.user.pk:
+            if int(user_pk) != int(self.request.user.pk):
                 return Response(
                     {"Unauthorized": "You have no access to this data."}, status=403)
         else:
             return Response(
                 {"Unauthorized": "You need to be connected."}, status=403)
-        if("billing_address" in request.data):
-            if (isinstance(request.data["billing_address"], list)):
-                if (len(request.data["billing_address"]) == 2):
-                    if (len(request.data["billing_address"][0]) > 20):
+        if "billing_address" in request.data:
+            if isinstance(request.data["billing_address"], list):
+                if len(request.data["billing_address"]) == 2:
+                    if len(request.data["billing_address"][0]) > 20:
                         return Response(
                             {"Error": "Aliases must be smaller than 20 characters"}, status=401)
-                    if (isinstance(request.data["billing_address"][1], dict)):
+                    if isinstance(request.data["billing_address"][1], dict):
                         if ("first_name" not in request.data["billing_address"][1] or
                                 "last_name" not in request.data["billing_address"][1] or
                                 "address" not in request.data["billing_address"][1] or
                                 "postal_code" not in request.data["billing_address"][1] or
                                 "city" not in request.data["billing_address"][1]):
                             return Response(
-                                {"Error": "Address collection is not correctly formatted."}, status=401)
+                                {"Error": "Address collection is not correctly formatted."},
+                                status=401)
                         else:
                             request.data["billing_address"][1] = json.dumps(
                                 request.data["billing_address"][1])
@@ -440,7 +449,7 @@ class billingAddressUserDelete(APIView):
                         return Response(
                             {"Error": "Addresses must be a collection of data"}, status=401)
                     current_user = User.objects.get(pk=user_pk)
-                    if (current_user.billing_address is not None):
+                    if current_user.billing_address is not None:
                         for i, address in enumerate(
                                 current_user.billing_address):
                             if (address[0] == request.data[
@@ -450,21 +459,26 @@ class billingAddressUserDelete(APIView):
                                 serializer = UserDetailsSerializer(
                                     current_user)
                                 jsonData = serializer.data
-                                return (Response(jsonData))
+                                return Response(jsonData)
                         return Response(
-                            {"Error": "The alias wasn't found in the user's living addresses"}, status=401)
+                            {"Error": "The alias wasn't found in the user's living addresses"},
+                            status=401)
                     else:
                         return Response(
                             {"Error": "The user has no billing address."}, status=401)
                 else:
                     return Response(
-                        {"Error": "The key 'billing_address' must have two slots, the first for the alias and the second for the address"}, status=401)
+                        {
+                            "Error": "The key 'billing_address' must have two slots, the first for"
+                                     " the alias and the second for the address"},
+                        status=401)
             else:
                 return Response(
                     {"Error": "The key 'billing_address' must be a list."}, status=401)
         else:
             return Response(
-                {"Error": "There must be a key 'billing_address' present in the document."}, status=401)
+                {"Error": "There must be a key 'billing_address' present in the document."},
+                status=401)
         return Response({"message": "Nice"})
 
 
@@ -480,20 +494,23 @@ def searchNotificationsUser(request, user_pk):
             {"Unauthorized": "You need to be connected."}, status=403)
     """
 
-    if (request.method == "POST"):
+    if request.method == "POST":
         JSONdoc = json.loads(request.body.decode('utf8'))
         if ("page" in JSONdoc and
                 "number_items" in JSONdoc):
-            if (not isinstance(JSONdoc["page"], type(1)) or
-                    not isinstance(JSONdoc["number_items"], type(1))):
+            if (not isinstance(JSONdoc["page"], type(1)) or not
+                    isinstance(JSONdoc["number_items"], type(1))):
                 return (JsonResponse(
                     {"Error": "'page' and 'number_items' must be numbers."}, status=401))
             page = JSONdoc["page"]
             number_items = JSONdoc["number_items"]
             notifications_user = db_locsapp[
-                "notifications_users"].find({"user_id": int(user_pk), "visible": True}).sort("date", -1)[((page - 1) * number_items):((page - 1) * number_items) + number_items]
+                "notifications_users"].find({"user_id": int(user_pk),
+                                             "visible": True}).sort(
+                "date", -1)[((page - 1) * number_items):((page - 1) * number_items) + number_items]
             notifications_metadata = {"new": db_locsapp[
-                "notifications_users"].find({"user_id": int(user_pk), "read": False, "visible": True}).count()}
+                "notifications_users"].find({"user_id": int(user_pk), "read": False,
+                                             "visible": True}).count()}
             notifications_metadata["total"] = db_locsapp[
                 "notifications_users"].find({"user_id": int(user_pk), "visible": True}).count()
             notifications = {
@@ -502,10 +519,11 @@ def searchNotificationsUser(request, user_pk):
             for notification in notifications_user:
                 notification = APIrequests.parseObjectIdToStr(notification)
                 notifications["notifications"].append(notification)
-            return (JsonResponse(notifications, safe=True))
+            return JsonResponse(notifications, safe=True)
         else:
             return (JsonResponse(
-                {"Error": "There must be a key 'page' and 'number_items' present in the JSON document."}, status=401))
+                {"Error": "There must be a key 'page' and 'number_items' present in the"
+                          " JSON document."}, status=401))
     else:
         return (JsonResponse(
             {"Error": "405 METHOD NOT ALLOWED"}, status=405))
@@ -523,14 +541,16 @@ def notificationsUserAllRead(request, user_pk):
             {"Unauthorized": "You need to be connected."}, status=403)
     """
 
-    if (request.method == "GET"):
+    if request.method == "GET":
         nb_modified = db_locsapp["notifications_users"].update_many(
             {'user_id': int(user_pk)}, {"$set": {"read": True}})
-        if (nb_modified.modified_count <= 0):
+        if nb_modified.modified_count <= 0:
             return (JsonResponse(
-                {"Warning": "No notification has been modified. Reason : No notifications were available."}))
+                {"Warning": "No notification has been modified. Reason :"
+                            " No notifications were available."}))
         return (JsonResponse(
-            {"message": "Notifications successfully updated!", "nb_modified": nb_modified.modified_count}))
+            {"message": "Notifications successfully updated!", "nb_modified":
+                nb_modified.modified_count}))
     else:
         return (JsonResponse(
             {"Error": "405 METHOD NOT ALLOWED"}, status=405))
@@ -539,13 +559,15 @@ def notificationsUserAllRead(request, user_pk):
 @csrf_exempt
 def notificationsUser(request, user_pk):
     fields_definition = \
-        {"type": "text, 30",
-         "content": "text, 300",
-         "state_url": "text, 50",
-         "read": "boolean",
-         "visible": "boolean",
-         "user_id": "integer",
-         "date": "date_default"}
+        {
+            "type": "text, 30",
+            "content": "text, 300",
+            "state_url": "text, 50",
+            "read": "boolean",
+            "visible": "boolean",
+            "user_id": "integer",
+            "date": "date_default"
+        }
 
     """
     if (request.user.pk):
@@ -556,14 +578,15 @@ def notificationsUser(request, user_pk):
         return JsonResponse(
             {"Unauthorized": "You need to be connected."}, status=403)
     """
-    if (request.method == "POST"):
+    if request.method == "POST":
         return APIrequests.forgeAPIrequestCreate(
             "POST", request, fields_definition, db_locsapp["notifications_users"])
-    elif (request.method == "GET"):
+    elif request.method == "GET":
         notifications_user = db_locsapp[
             "notifications_users"].find({"user_id": int(user_pk), "visible": True}).sort("date", -1)
         notifications_metadata = {"new": db_locsapp[
-            "notifications_users"].find({"user_id": int(user_pk), "read": False, "visible": True}).count()}
+            "notifications_users"].find({"user_id": int(user_pk), "read": False,
+                                         "visible": True}).count()}
         notifications_metadata["total"] = db_locsapp[
             "notifications_users"].find({"user_id": int(user_pk), "visible": True}).count()
         notifications = {
@@ -572,18 +595,21 @@ def notificationsUser(request, user_pk):
         for notification in notifications_user:
             notification = APIrequests.parseObjectIdToStr(notification)
             notifications["notifications"].append(notification)
-        return (JsonResponse(notifications, safe=True))
-    elif (request.method == "DELETE"):
+        return JsonResponse(notifications, safe=True)
+    elif request.method == "DELETE":
         nb_deleted = db_locsapp["notifications_users"].update_many(
             {'user_id': int(user_pk)}, {"$set": {"visible": False}})
-        if (nb_deleted.modified_count <= 0):
+        if nb_deleted.modified_count <= 0:
             return (JsonResponse(
-                {"Warning": "No notification has been deleted. Reason : No notifications were available."}))
+                {"Warning": "No notification has been deleted. Reason :"
+                            " No notifications were available."}))
         return (JsonResponse(
-            {"message": "Notifications successfully deleted!", "nb_deleted": nb_deleted.modified_count}))
+            {"message": "Notifications successfully deleted!", "nb_deleted":
+                nb_deleted.modified_count}))
     else:
         return (JsonResponse(
             {"Error": "405 METHOD NOT ALLOWED"}, status=405))
+
 
 """
     NOTIFICATIONS ENDPOINTS
@@ -593,26 +619,28 @@ def notificationsUser(request, user_pk):
 @csrf_exempt
 def notificationAlone(request, notification_pk):
     fields_definition_put = \
-        {"type": "text, 30",
-         "content": "text, 300",
-         "state_url": "text, 50",
-         "read": "boolean",
-         "visible": "boolean",
-         "user_id": "integer"}
+        {
+            "type": "text, 30",
+            "content": "text, 300",
+            "state_url": "text, 50",
+            "read": "boolean",
+            "visible": "boolean",
+            "user_id": "integer"
+        }
 
-    if (request.method == "GET"):
+    if request.method == "GET":
         notification = db_locsapp["notifications_users"].find_one(
             {"_id": ObjectId(notification_pk)})
         answer = APIrequests.parseObjectIdToStr(notification)
-        if (answer is not None):
-            return (JsonResponse(answer, safe=True))
+        if answer is not None:
+            return JsonResponse(answer, safe=True)
         else:
-            return (JsonResponse({"Error": "Id not found."}, status=404))
-    elif (request.method == "PUT"):
+            return JsonResponse({"Error": "Id not found."}, status=404)
+    elif request.method == "PUT":
         return APIrequests.forgeAPIrequestPut(
             request, notification_pk, fields_definition_put, db_locsapp["notifications_users"])
     else:
-        return (JsonResponse({"Error": "Method not allowed!"}, status=405))
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
 
 class ImageAvatarUploadView(APIView):
@@ -641,7 +669,6 @@ class ImageAvatarUploadView(APIView):
     SOCIAL NETWORK ENDPOINTS
 """
 
-
 """
     GET END-POINTS
 """
@@ -650,11 +677,9 @@ class ImageAvatarUploadView(APIView):
     POST END-POINTS
 """
 
-
 """
     PUT END-POINTS
 """
-
 
 """
     DELETE END-POINTS
@@ -662,7 +687,7 @@ class ImageAvatarUploadView(APIView):
 
 
 @csrf_exempt
-def deleteArticle(request):
+def delete_Article(request):
     fields_definition = ["name", "id"]
     return APIrequests.forgeAPIrequestDelete(
         request, fields_definition, db_locsapp["articles"])
