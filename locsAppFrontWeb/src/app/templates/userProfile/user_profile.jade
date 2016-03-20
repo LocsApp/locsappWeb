@@ -1,12 +1,20 @@
+section.user-profile(layout="row" layout-align="center")
+  md-card(flex-sm='100' flex="50")
+    md-card-content
+      div(layout="row" layout-align="center")
+        h1 TOTO
+
+
+
 
 //section(layout="column", layout-align="start center", layout-margin, flex)
-	section(layout="row", layout-align="start center", layout-fill, flex).user_profile_header
-		section(layout="column", layout-align="start center", flex="none").user_profile_header_left
-			img(ng-src="../assets/images/users/profile_picture/unknown-user.png")
-		section(layout="column", layout-align="start start", flex).user_profile_header_left
-			span.user_profile_header_left_username {{ profile.user.username }}
-			span.user_profile_header_left_rent Articles rented
-			span.user_profile_header_left_rent_out Articles rent out
-		section(layout="column", layout-align="start end", flex).user_profile_header_right
-			div
-				md-button.md-raised(ng-click="profile.goToParameters()") Manage account
+    section(layout="row", layout-align="start center", layout-fill, flex).user_profile_header
+        section(layout="column", layout-align="start center", flex="none").user_profile_header_left
+            img(ng-src="../assets/images/users/profile_picture/unknown-user.png")
+        section(layout="column", layout-align="start start", flex).user_profile_header_left
+            span.user_profile_header_left_username {{ profile.user.username }}
+            span.user_profile_header_left_rent Articles rented
+            span.user_profile_header_left_rent_out Articles rent out
+        section(layout="column", layout-align="start end", flex).user_profile_header_right
+            div
+                md-button.md-raised(ng-click="profile.goToParameters()") Manage account
