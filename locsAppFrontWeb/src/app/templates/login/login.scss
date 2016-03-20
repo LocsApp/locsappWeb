@@ -1,42 +1,58 @@
 @import "../../theme.scss";
 
-.login-body {
-  
-  .line {
-    //border-top: 1px solid black;
-    //width: 40%;
-    margin-top: 9px;
+.login {
+
+  h1 {
+    margin-top: 0;
   }
 
-  .middle-word {
-    margin: 0px 5px 0px 5px;
+  md-card {
+    padding-bottom: 16px;
   }
 
-  md-checkbox {
-    margin-top: 0px;
-  }
+  .login-body {
 
-  md-checkbox.md-checked .md-icon {
-    background-color: $checkBox;
-  }
+    md-card-content {
+      padding-bottom: 16px;
+    }
 
-  .login-forgot-password {
-    text-decoration: underline;
-    cursor: pointer;
-  }
+    .line {
+      //border-top: 1px solid black;
+      //width: 40%;
+      margin-top: 9px;
+    }
 
+    .middle-word {
+      margin: 0px 5px 0px 5px;
+    }
 
-  .facebook, .md-button.facebook:hover {
-    background-color: rgba(59, 89, 152, 1);
-    color: white;
-  }
+    md-checkbox {
+      margin-top: 0px;
+    }
 
-  .submit-buttons {
-    text-align: right;
-  }
+    md-checkbox.md-checked .md-icon {
+      background-color: $checkBox;
+    }
 
-  .margin-button {
-    margin-top: 30px;
+    .login-forgot-password {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .facebook, .md-button.facebook:hover {
+      background-color: rgba(59, 89, 152, 1);
+      color: white;
+    }
+
+    .submit-buttons {
+      text-align: right;
+    }
+
+    .margin-button {
+      margin-top: 30px;
+    }
+
   }
 
 }
+
