@@ -2,6 +2,8 @@
 
 .login-body {
 
+ width: 100%;
+
   .line {
     //border-top: 1px solid black;
     //width: 40%;
@@ -39,4 +41,28 @@
     margin-top: 30px;
   }
 
+}
+
+
+
+md-card {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  md-card  {
+    width: 600px;
+  }
+}
+@media (min-width: 992px) {
+  md-card  {
+    width: 600px;
+  }
+}
+@media (min-width: 1200px) {
+  md-card  {
+    width: 600px;
+  }
 }

@@ -1,35 +1,37 @@
-md-content
-  div(layout="column", layout-fill).flex
-    div.flex
-      div(layout="column" flex layout-align="start center")
-        div(flex="none")
-          h1 Login
-        div(flex="none").login-body
-          form(name="loginForm" novalidate ng-submit="loginForm.$valid && login.submit()")
-            section(layout="column", layout-align="start center", layout-margin layout-fill)
-              md-input-container(layout-fill)
-                ng-md-icon(icon="mood").
-                input(placeholder="Username" required name="username" ng-model="username" maxlength="20" minlength="3").body-register-container-md
-                div(ng-messages="loginForm.username.$error" ng-if='!loginForm.username.$pristine')
-                  div(ng-message="required") This is required.
-                  div(ng-message="minlength") The username must be longer than 3 characters.
-                  div(ng-message="md-maxlength") The username must be shorter than 20 characters.
-              md-input-container(layout-fill)
-                ng-md-icon(icon="vpn_key")
-                input(placeholder="Password" type="password" name="password" required ng-model="password" maxlength="30" minlength="6").body-register-container-md
-                div(ng-messages="loginForm.password.$error" ng-if="loginForm.password.$dirty")
-                  div(ng-message="required") This is required.
-                  div(ng-message="minlength") The password must be longer than 6 characters.
-                  div(ng-message="maxlength") The password must be shorter than 20 characters.
-              md-checkbox(ng-model="remember_me") Remember me
-              span(ng-click="login.forgotPasswordDialog($event)").login-forgot-password Forgot your password ?
-              div.submit-buttons(layout-fill)
-                md-button.margin-button.md-raised(layout-fill flex="80") Login
-                section.margin-button(layout="row" layout-align="center")
-                  md-divider(flex="30").line
-                  div().middle-word or
-                  md-divider(flex="30").line
-                div.margin-button(ng-controller='FacebookLoginController as FB' layout-fill)
-                  md-button.md-raised.facebook(layout-fill flex="80" ng-click='FB.login()') Login with Facebook
+md-card
+  md-card-content
+    div(layout="column", layout-fill).flex
+      div.flex
+        div(layout="column" flex layout-align="start center")
+          div(flex="none")
+            h1 Login
+          div(flex="none").login-body
+            form(name="loginForm" novalidate ng-submit="loginForm.$valid && login.submit()")
+              section(layout="column", layout-align="start center", layout-margin layout-fill)
+                md-input-container(layout-fill)
+                  ng-md-icon(icon="mood").
+                  input(placeholder="Username" required name="username" ng-model="username" maxlength="20" minlength="3").body-register-container-md
+                  div(ng-messages="loginForm.username.$error" ng-if='!loginForm.username.$pristine')
+                    div(ng-message="required") This is required.
+                    div(ng-message="minlength") The username must be longer than 3 characters.
+                    div(ng-message="md-maxlength") The username must be shorter than 20 characters.
+                md-input-container(layout-fill)
+                  ng-md-icon(icon="vpn_key")
+                  input(placeholder="Password" type="password" name="password" required ng-model="password" maxlength="30" minlength="6").body-register-container-md
+                  div(ng-messages="loginForm.password.$error" ng-if="loginForm.password.$dirty")
+                    div(ng-message="required") This is required.
+                    div(ng-message="minlength") The password must be longer than 6 characters.
+                    div(ng-message="maxlength") The password must be shorter than 20 characters.
+                md-checkbox(ng-model="remember_me") Remember me
+                span(ng-click="login.forgotPasswordDialog($event)").login-forgot-password Forgot your password ?
+                div.submit-buttons(layout-fill)
+                  md-button.margin-button.md-raised(layout-fill flex="90") Login
+                  section.margin-button(layout="row" layout-align="center")
+                    md-divider(flex="30").line
+                    div().middle-word or
+                    md-divider(flex="50").line
+                  div.margin-button(ng-controller='FacebookLoginController as FB' layout-fill)
+                    md-button.md-raised.facebook(layout-fill flex="90" ng-click='FB.login()') Login with Facebook
+
 
 
