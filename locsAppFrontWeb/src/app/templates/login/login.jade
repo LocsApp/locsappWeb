@@ -23,6 +23,7 @@ md-content
                   div(ng-message="maxlength") The password must be shorter than 20 characters.
               md-checkbox(ng-model="remember_me") Remember me
               span(ng-click="login.forgotPasswordDialog($event)").login-forgot-password Forgot your password ?
-              md-button.md-raised Login
-              div(ng-controller='FacebookLoginController as FB')
-                md-button.md-raised.facebook(ng-click='FB.login()') Login with Facebook
+              div.submit-buttons(layout-fill)
+                md-button.md-raised(layout-fill flex="80") Login
+                div(ng-controller='FacebookLoginController as FB' layout-fill)
+                  md-button.md-raised.facebook(layout-fill flex="80" ng-click='FB.login()') Login with Facebook

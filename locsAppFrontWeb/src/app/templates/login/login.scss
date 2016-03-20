@@ -10,9 +10,14 @@
     cursor: pointer;
   }
 
+
   .facebook, .md-button.facebook:hover {
     background-color: rgba(59, 89, 152, 1);
     color: white;
+  }
+
+  .submit-buttons {
+    text-align: right;
   }
 
 }
