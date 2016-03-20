@@ -1,6 +1,13 @@
 @import "../../theme.scss";
 
 .login-body {
+
+  width: 20%;
+
+  md-checkbox {
+    margin-top: 0px;
+  }
+
   md-checkbox.md-checked .md-icon {
     background-color: $checkBox;
   }

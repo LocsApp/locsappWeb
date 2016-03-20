@@ -6,15 +6,15 @@ md-content
           h1 Login
         div(flex="none").login-body
           form(name="loginForm" novalidate ng-submit="loginForm.$valid && login.submit()")
-            section(layout="column", layout-align="start center", layout-margin)
-              md-input-container
+            section(layout="column", layout-align="start center", layout-margin layout-fill)
+              md-input-container(layout-fill)
                 ng-md-icon(icon="mood").
                 input(placeholder="Username" required name="username" ng-model="username" maxlength="20" minlength="3").body-register-container-md
                 div(ng-messages="loginForm.username.$error" ng-if='!loginForm.username.$pristine')
                   div(ng-message="required") This is required.
                   div(ng-message="minlength") The username must be longer than 3 characters.
                   div(ng-message="md-maxlength") The username must be shorter than 20 characters.
-              md-input-container
+              md-input-container(layout-fill)
                 ng-md-icon(icon="vpn_key")
                 input(placeholder="Password" type="password" name="password" required ng-model="password" maxlength="30" minlength="6").body-register-container-md
                 div(ng-messages="loginForm.password.$error" ng-if="loginForm.password.$dirty")
@@ -24,7 +24,8 @@ md-content
               md-checkbox(ng-model="remember_me") Remember me
               span(ng-click="login.forgotPasswordDialog($event)").login-forgot-password Forgot your password ?
               div.submit-buttons(layout-fill)
-                md-button.margin-button.md-raised(layout-fill flex="80") Login
+                md-button.margin-button.md-raised(layout-fill flex="90") Login
                 div.margin-button ou
                 div.margin-button(ng-controller='FacebookLoginController as FB' layout-fill)
-                  md-button.md-raised.facebook(layout-fill flex="80" ng-click='FB.login()') Login with Facebook
+                  md-button.md-raised.facebook(layout-fill flex="90" ng-click='FB.login()') Login with Facebook
+
