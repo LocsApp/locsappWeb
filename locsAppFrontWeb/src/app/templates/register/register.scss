@@ -3,10 +3,8 @@
 .body-register-md {
 
   h1 {
-    text-align: center;
+    margin-top: 0;
   }
-
-  margin: 20px auto;
 
   .facebook, .md-button.facebook:hover {
     background-color: rgba(59, 89, 152, 1);
@@ -15,6 +13,10 @@
 
   .submit-buttons {
     text-align: right;
+  }
+
+  .margin-button {
+    margin-top: 30px;
   }
 
 }

@@ -41,11 +41,12 @@
             div.submit-buttons(layout-fill)
               md-button.md-raised(layout-fill flex="90") Register
               section.margin-button(layout="row" layout-align="center")
-                md-divider(flex="30").line
+                md-divider(flex="50").line
                 div().middle-word or
                 md-divider(flex="50").line
               div(ng-controller='FacebookRegisterController as FB')
-                md-button.md-raised.facebook(layout-fill flex="90" ng-click='FB.register()') Register with Facebook
+                md-button.md-raised.facebook.margin-button(layout-fill flex="90" ng-click='FB.register()') Register with Facebook
+
 
 
 
