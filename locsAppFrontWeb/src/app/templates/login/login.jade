@@ -24,8 +24,12 @@ md-content
               md-checkbox(ng-model="remember_me") Remember me
               span(ng-click="login.forgotPasswordDialog($event)").login-forgot-password Forgot your password ?
               div.submit-buttons(layout-fill)
-                md-button.margin-button.md-raised(layout-fill flex="90") Login
-                div.margin-button ou
+                md-button.margin-button.md-raised(layout-fill flex="80") Login
+                section.margin-button(layout="row" layout-align="center")
+                  md-divider(flex="30").line
+                  div().middle-word or
+                  md-divider(flex="30").line
                 div.margin-button(ng-controller='FacebookLoginController as FB' layout-fill)
-                  md-button.md-raised.facebook(layout-fill flex="90" ng-click='FB.login()') Login with Facebook
+                  md-button.md-raised.facebook(layout-fill flex="80" ng-click='FB.login()') Login with Facebook
+
 

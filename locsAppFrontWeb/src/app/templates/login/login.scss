@@ -2,7 +2,15 @@
 
 .login-body {
 
-  width: 20%;
+  .line {
+    //border-top: 1px solid black;
+    //width: 40%;
+    margin-top: 9px;
+  }
+
+  .middle-word {
+    margin: 0px 5px 0px 5px;
+  }
 
   md-checkbox {
     margin-top: 0px;
