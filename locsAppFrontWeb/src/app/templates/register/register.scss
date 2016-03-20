@@ -2,16 +2,19 @@
 
 .body-register-md {
 
-	h1 {
-		text-align : center;
-	}
+  h1 {
+    text-align: center;
+  }
 
-	margin : 20px auto;
-	height : 400px;
+  margin: 20px auto;
 
-  .facebook, .md-button.facebook:hover  {
+  .facebook, .md-button.facebook:hover {
     background-color: rgba(59, 89, 152, 1);
     color: white;
+  }
+
+  .submit-buttons {
+    text-align: right;
   }
 
 }
