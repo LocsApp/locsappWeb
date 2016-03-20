@@ -1,6 +1,6 @@
 md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavBarController as navbar").locsapp-navbar-gt-sm
 	span
-		h2(ui-sref="main.homepage" style="cursor: pointer;").md-toolbar-tools Locsapp
+		span(ui-sref="main.homepage" style="cursor: pointer;").md-toolbar-tools Locsapp
 	span(ng-if="!main.is_authenticated()")
 		ng-md-icon(icon="login", size="48", ui-sref="main.login").locsapp-navbar-icons-gt-sm
 		ng-md-icon(icon="person_add", size="48", ui-sref="main.register").locsapp-navbar-last-icon-gt-sm

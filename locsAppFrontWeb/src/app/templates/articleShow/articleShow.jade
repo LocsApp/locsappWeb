@@ -3,7 +3,9 @@ div(class="article-show")
   div(layout='row' layout-align='center')
     img(src="{{articleShow.url_thumbnail}}")
     div(layout='column')
-      h1 {{articleShow.title}}
+      h1(style="margin-bottom:0") {{articleShow.title}}
+      h2(style="margin-top:0; font-size: 1em") toto42
+      //Penser a mettre boutton pour follow le vendeur
       div(layout='row')
         md-card(class='about')
           md-card-content
