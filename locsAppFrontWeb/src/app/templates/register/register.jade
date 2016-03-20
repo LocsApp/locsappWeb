@@ -40,10 +40,10 @@
                 div(ng-message="maxlength") The password must be shorter than 20 characters.
             div.submit-buttons(layout-fill)
               md-button.md-raised(layout-fill flex="90") Register
-              section.margin-button(layout="row" layout-align="center")
-                md-divider(flex="50").line
+              section.margin-button.separate-butto(layout="row" layout-align="center")
+                md-divider(flex="45").line
                 div().middle-word or
-                md-divider(flex="50").line
+                md-divider(flex="45").line
               div(ng-controller='FacebookRegisterController as FB')
                 md-button.md-raised.facebook.margin-button(layout-fill flex="90" ng-click='FB.register()') Register with Facebook
 
