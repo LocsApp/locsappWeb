@@ -105,6 +105,7 @@
         }
 
       ];
+      vm.within = "1";
       vm.sexe = "Femme";
       vm.BaseCategory = "evening";
       vm.SubCategory = "dress";

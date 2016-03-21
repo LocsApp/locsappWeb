@@ -34,15 +34,47 @@ div.article-show(layout="row" layout-align="center")
       md-card(flex="50")
         md-card-content
 
-          div(layout="row")
+          div.block-properties(layout="row")
             div(flex="50") Price
-            div.t-right(flex="50") 45$/day
+            div.t-right(flex="50") {{articleShow.price}}$/day
+          md-divider
+          div.block-properties(layout="row")
+            div(flex="50") Payment
+            div.t-right(flex="50" ng-repeat="payment in articleShow.meaning_payment") {{payment}},
+          md-divider
+          div.block-properties(layout="row")
+            div(flex="50") Within
+            div.t-right(flex="50") {{articleShow.within}} km
+          md-divider
+          div.block-properties(layout="row")
+            div(flex="50") Main Category
+            div.t-right(flex="50") {{articleShow.BaseCategory}}
+          md-divider
+          div.block-properties(layout="row")
+            div(flex="50") Sub Category
+            div.t-right(flex="50") {{articleShow.SubCategory}}
+          md-divider
+          div.block-properties(layout="row")
+            div(flex="50") Gender
+            div.t-right(flex="50") {{articleShow.sexe}}
+          md-divider
+          div.block-properties(layout="row")
+            div(flex="50") Size
+            div.t-right(flex="50") {{articleShow.size}}
+          md-divider
+          div.block-properties(layout="row")
+            div(flex="50") Color
+            div.t-right(flex="50") {{articleShow.color}}
+          md-divider
+          div.block-properties(layout="row")
+            div(flex="50") State
+            div.t-right(flex="50") {{articleShow.state}}
           md-divider
 
       md-card(flex="50")
         md-card-content
 
-          div(layout="row")
+          div(layout="row" layout-align="start end")
             div(flex="50") Price
             div.t-right(flex="50") 45$/day
           md-divider
