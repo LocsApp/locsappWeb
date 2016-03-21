@@ -4,7 +4,8 @@ div.login(layout="row" layout-align="center")
       div(layout="row" layout-align="center")
         h1 Login
       .login-body(layout="row" layout-align="center")
-        form(name="loginForm" novalidate ng-submit="loginForm.$valid && login.submit()" flex="50")
+        form(name="loginForm" novalidate ng-submit="loginForm.$valid && login.submit()"
+        flex-sm="100" flex-md="60" flex="50")
           section(layout="column", layout-align="start center", layout-margin layout-fill)
             md-input-container(layout-fill)
               ng-md-icon(icon="mood").
