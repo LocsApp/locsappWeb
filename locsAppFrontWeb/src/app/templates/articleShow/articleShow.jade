@@ -1,5 +1,17 @@
+.article-show(layout="row" layout-align="center")
+  div(layout="column")
+    h1 {{articleShow.title}}
+    div(layout="row")
+      h2 By sylflo
+      span
+        ng-md-icon(icon="star")
+        ng-md-icon(icon="star")
+        ng-md-icon(icon="star")
+        ng-md-icon(icon="star")
+        ng-md-icon(icon="star")
+        span (50)
 
-div(class="article-show")
+//div(class="article-show")
   div(layout='row' layout-align='center')
     img(src="{{articleShow.url_thumbnail}}")
     div(layout='column')
