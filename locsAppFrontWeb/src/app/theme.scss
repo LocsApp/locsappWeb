@@ -25,6 +25,12 @@ $emailConfirmed : #0BAC2B;
 $iconHover : #000000;
 /*Purple-Blue*/
 $iconNotification: #3F51B5;
+/* Submission button blue */
+$blueSubmitButton: #2196F3;
+/* Separator h2 color */
+$separatorBarH2: #555555;
+/* Separator bar element color */
+$separatorBarH2: #C6C6C6;
 
 
 //Textangular
@@ -43,10 +49,3 @@ $iconNotification: #3F51B5;
 	text-align: center;
 }
 
-.separator-bar-h2 {
-  color: #555555;
-}
-
-.separator-bar-element {
-  color: #C6C6C6;
-}
