@@ -1,3 +1,5 @@
+@import "../../theme.scss";
+
 .article-show {
 
   .t-center {
@@ -12,14 +14,6 @@
     text-align: left;
   }
 
-  md-card-content {
-    padding-left: 5px;
-
-    .block-properties {
-      margin-top: 10px;
-    }
-  }
-
   h2 {
     margin-top: 0px;
   }
@@ -27,6 +21,49 @@
   .action-button {
     position: absolute;
     bottom: 0;
+  }
+
+  md-card {
+
+    md-card-content {
+      padding-left: 5px;
+
+      .description {
+        text-align: justify;
+      }
+
+      .md-button.md-raised {
+        background-color: $submitButton;
+        color: white;
+        font-size: 1em;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      .bottom-right-md-card {
+        font-weight: bold;
+        text-decoration: underline;
+      }
+
+      .md-datepicker-input-container {
+       /* width: 80%;
+        margin-left: 0px;*/
+      }
+
+      .block-properties {
+        margin-top: 10px;
+        font-size: 1.1em;
+      }
+
+      .name-properties {
+        color: #8D8D8D;
+      }
+
+      md-divider {
+        border-top-color: $separatorBarElement;
+      }
+    }
+
   }
 }
 

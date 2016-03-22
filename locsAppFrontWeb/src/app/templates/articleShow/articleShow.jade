@@ -35,50 +35,67 @@ div.article-show(layout="row" layout-align="center")
         md-card-content
 
           div.block-properties(layout="row")
-            div(flex="50") Price
+            div.name-properties(flex="50") Price
             div.t-right(flex="50") {{articleShow.price}}$/day
           md-divider
           div.block-properties(layout="row")
-            div(flex="50") Payment
+            div.name-properties(flex="50") Payment
             div.t-right(flex="50" ng-repeat="payment in articleShow.meaning_payment") {{payment}},
           md-divider
           div.block-properties(layout="row")
-            div(flex="50") Within
+            div.name-properties(flex="50") Within
             div.t-right(flex="50") {{articleShow.within}} km
           md-divider
           div.block-properties(layout="row")
-            div(flex="50") Main Category
+            div.name-properties(flex="50") Main Category
             div.t-right(flex="50") {{articleShow.BaseCategory}}
           md-divider
           div.block-properties(layout="row")
-            div(flex="50") Sub Category
+            div.name-properties(flex="50") Sub Category
             div.t-right(flex="50") {{articleShow.SubCategory}}
           md-divider
           div.block-properties(layout="row")
-            div(flex="50") Gender
+            div.name-properties(flex="50") Gender
             div.t-right(flex="50") {{articleShow.sexe}}
           md-divider
           div.block-properties(layout="row")
-            div(flex="50") Size
+            div.name-properties(flex="50") Size
             div.t-right(flex="50") {{articleShow.size}}
           md-divider
           div.block-properties(layout="row")
-            div(flex="50") Color
+            div.name-properties(flex="50") Color
             div.t-right(flex="50") {{articleShow.color}}
           md-divider
           div.block-properties(layout="row")
-            div(flex="50") State
+            div.name-properties(flex="50") State
             div.t-right(flex="50") {{articleShow.state}}
           md-divider
 
       md-card(flex="50")
         md-card-content
+          div(layout="column" flex="100")
+            md-datepicker(flex="100" ng-model="articleShow.AskBeginLocation"
+            md-placeholder="Begin location")
+            md-datepicker(ng-model="articleShow.AskEndLocation" md-placeholder="End location")
+            md-button.md-raised Ask for rent
+            div.bottom-right-md-card Add to your favorites
+            div.bottom-right-md-card Share it
+            div.bottom-right-md-card Send a report
 
-          div(layout="row" layout-align="start end")
-            div(flex="50") Price
-            div.t-right(flex="50") 45$/day
-          md-divider
 
+    div(layout="row" layout-align="center")
+      h2 Description
+
+    div(layout="row" layout-align="center")
+      md-card
+        md-card-content
+          div.description {{articleShow.description}}
+
+    div(layout="row" layout-align="center")
+      h2 Questions
+
+    div(layout="row" layout-align="center")
+      h2 We Recommend
     //md-card
       md-card-content
         div(layout="column")
