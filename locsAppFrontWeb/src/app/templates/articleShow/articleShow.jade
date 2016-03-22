@@ -70,9 +70,23 @@ div.article-show(layout="row" layout-align="center")
             md-placeholder="Begin location")
             md-datepicker(ng-model="articleShow.AskEndLocation" md-placeholder="End location")
             md-button.md-raised Ask for rent
-            div.bottom-right-md-card Add to your favorites
-            div.bottom-right-md-card Share it
-            div.bottom-right-md-card Send a report
+
+            div
+              span
+                ng-md-icon(icon="favorite")
+                span.bottom-right-md-card Add to your favorites
+            div
+              span
+                ng-md-icon(icon="share")
+                span.bottom-right-md-card Share it
+
+            div
+              span
+                ng-md-icon(icon="warning")
+                span.bottom-right-md-card Send a report
+
+
+
 
 
     div(layout="row" layout-align="center")
