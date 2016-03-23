@@ -647,6 +647,9 @@ class ImageAvatarUploadView(APIView):
     parser_classes = (FileUploadParser, )
 
     def post(self, request, format="image/*"):
+        if (not "file" in request.data):
+            return JsonResponse(
+                {"Error": "There is not field file in the document."}, status=403)
         up_file = request.data["file"]
         destination_url = settings.MEDIA_ROOT + hashlib.md5(
             request.user.username.encode('utf-8')).hexdigest() + '/avatar.jpg'
@@ -664,6 +667,30 @@ class ImageAvatarUploadView(APIView):
             '/avatar.jpg')
         return JsonResponse({"url_avatar": settings.URL_BACK + 'media/' + hashlib.md5(
             request.user.username.encode('utf-8')).hexdigest() + '/avatar.jpg'})
+
+
+class ImageArticleUploadView(APIView):
+    parser_classes = (FileUploadParser, )
+
+    def post(self, request, format="image/*"):
+        if (not "file" in request.data):
+            return JsonResponse(
+                {"Error": "There is not field file in the document."}, status=403)
+        elif (not "id" in request.data):
+            return JsonResponse(
+                {"Error": "The id of the article is missing"}, status=403)
+        elif (not "name" in request.data):
+            return JsonResponse(
+                {"Error": "The name of the file is missing"}, status=403)
+        up_file = request.data["file"]
+        directory = request.data["id"]
+        destination_url = settings.MEDIA_ROOT + directory + '/' + name
+        os.makedirs(os.path.dirname(destination_url), exist_ok=True)
+        destination = open(destination_url, 'wb+')
+        for chunk in up_file.chunks():
+            destination.write(chunk)
+            destination.close()
+        return JsonResponse({"url": destination_url})
 
 """
     SOCIAL NETWORK ENDPOINTS
