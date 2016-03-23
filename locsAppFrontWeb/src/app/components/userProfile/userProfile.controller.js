@@ -16,6 +16,7 @@
 	vm.GetInfosUserSuccess = function(data) {
 		$log.log(data);
 		vm.user = data;
+    vm.user.registered_date = vm.user.registered_date.substring(0, 10);
 	};
 
 	/*Failure callback of profile_check*/
