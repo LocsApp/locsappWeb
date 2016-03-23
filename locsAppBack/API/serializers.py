@@ -20,9 +20,9 @@ class UserDetailsSerializer(serializers.ModelSerializer):
             serializers.ListField(child=serializers.CharField()))
 
         fields = (
-            'id', 'username', 'email', 'secondary_emails', 'first_name', 'last_name', 'birthdate',
-            'phone', 'living_address', 'registered_date', 'last_activity_date', 'billing_address',
-            'logo_url', "is_active", "role")
+            'id', 'username', 'email', 'secondary_emails', 'first_name', 'last_name',
+            'gender', 'birthdate', 'phone', 'living_address', 'registered_date',
+            'last_activity_date', 'billing_address', 'logo_url', "is_active", "role")
         read_only_fields = ('id', 'username', 'role', 'email', 'registered_date',
                             'last_activity_date', 'logo_url', 'is_active')
 
