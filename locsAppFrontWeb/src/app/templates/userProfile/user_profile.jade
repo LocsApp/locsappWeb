@@ -1,4 +1,3 @@
-md-icon( md-svg-src="../assets/icons/gender-female.svg" aria-label="android")
 section.user-profile(layout="row" layout-align="center")
   md-card(flex-sm='100' flex="50")
     md-card-content
@@ -6,7 +5,15 @@ section.user-profile(layout="row" layout-align="center")
         img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
 
         div(layout="column")
-          div one
+          h1
+            md-icon(ng-if="!profile.user.gender" md-svg-src="../assets/icons/gender-male-female" +
+            ".svg"
+            aria-label="gender-male-female")
+            md-icon(ng-if="profile.user.gender.indexOf('female') > -1" md-svg-src="../assets/icons/gender-female.svg"
+            aria-label="gender-female")
+            md-icon(ng-if="profile.user.gender.indexOf('male') > -1" md-svg-src="../assets/icons/gender-male.svg"
+            aria-label="gender-male")
+            | {{profile.user.username}}
           div two
           div one
           div two
