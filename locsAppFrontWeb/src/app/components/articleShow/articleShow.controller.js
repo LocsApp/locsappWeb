@@ -1,3 +1,9 @@
+//Voir pour plus tard les date picker s'ils sont reglable correctements
+//Share Faceook pas possible
+//Favorites pas encore dans le profil user
+// Faire les questions reponses en backend
+//Faire le carousel pour les articles
+
 (function () {
 
   'use strict';
