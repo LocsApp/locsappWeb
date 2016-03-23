@@ -1,0 +1,39 @@
+md-card(flex-sm='100' flex-md="100" flex="50")
+  md-card-content
+    div(layout="row" layout-sm="column" layout-align="space-around start")
+      img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
+
+      div(layout="column")
+        h1
+          md-icon(ng-if="!profile.user.gender" md-svg-src="../assets/icons/gender-male-female" +
+          ".svg"
+          aria-label="gender-male-female")
+          md-icon(ng-if="profile.user.gender.indexOf('female') > -1" md-svg-src="../assets/icons/gender-female.svg"
+          aria-label="gender-female")
+          md-icon(ng-if="profile.user.gender.indexOf('male') > -1" md-svg-src="../assets/icons/gender-male.svg"
+          aria-label="gender-male")
+          | {{profile.user.username}}
+
+        div.properties-user
+          div
+            ng-md-icon(icon="cake" size="28")
+            span(ng-if="!profile.user.birthdate") Birthdate: Not specified
+            span(ng-if="profile.user.birthdate") Birthdate {{profile.user.birthdate}}
+
+          div
+            ng-md-icon(icon="location_on" size="28")
+            span(ng-if="!profile.user.within") Within: Unknown
+            span(ng-if="profile.user.within") Within {{profile.user.within}} km
+
+          div
+            ng-md-icon(icon="whatshot" size="28")
+            span(ng-if="!profile.user.last_activity_date") Last activity: Unknown
+            span(ng-if="profile.user.last_activity_date") Last activity {{profile.user.last_activity_date}}
+
+          div
+            ng-md-icon(icon="insert_emoticon" size="28")
+            span Subscribed {{profile.user.registered_date}}
+
+
+
+
