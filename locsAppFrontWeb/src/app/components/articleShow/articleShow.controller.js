@@ -29,80 +29,28 @@
         'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516',
         'http://cdn.shopify.com/s/files/1/0293/9277/products/Fashion_Nova_-_01-21-16-410_large.JPG?v=1453489020'
       ];
-      vm.comments = [
+      vm.questions = [
         {
           "_id": "56cb3cb1b2bc57ab2908e697",
           "id_author": 42,
           "username_author": "locsapp",
-          "content": "Je suis un com de test.",
+          "content": "What is the breast size ? ",
           "is_visible": true,
           "date_created": "fausse date",
           "date_modified": "fausse date",
-          "childs": [],
-          "last_versions": [],
-          "flagged": null
-        },
-        {
-          "_id": "56cb3cb1b2bc57ab2908e787",
-          "id_author": 42,
-          "username_author": "locsapp",
-          "content": "Je suis un com de test. 2",
-          "is_visible": true,
-          "date_created": "fausse date",
-          "date_modified": "fausse date",
-          "childs": [
-            {
-              "_id": "56cb3cb1b2bc57ab2908e787",
-              "id_author": 42,
-              "username_author": "locsapp",
-              "content": "Je suis un com de test. 2",
-              "is_visible": true,
-              "date_created": "fausse date",
-              "date_modified": "fausse date",
-              "childs": [],
-              "last_versions": [],
-              "flagged": null
-            },
-            {
-              "_id": "56cb3cb1b2bc57ab2908e787",
-              "id_author": 42,
-              "username_author": "locsapp",
-              "content": "Je suis un com de test. 2",
-              "is_visible": true,
-              "date_created": "fausse date",
-              "date_modified": "fausse date",
-              "childs": [],
-              "last_versions": [],
-              "flagged": null
-            }
-          ],
-          "last_versions": [],
-          "flagged": null
-        },
-        {
-          "_id": "56cb3cb1b2bc57ab2908e787",
-          "id_author": 42,
-          "username_author": "locsapp",
-          "content": "Je suis un com de test. 2",
-          "is_visible": true,
-          "date_created": "fausse date",
-          "date_modified": "fausse date",
-          "childs": [],
-          "last_versions": [],
-          "flagged": null
-        },
-        {
-          "_id": "56cb3cb1b2bc57ab2908e787",
-          "id_author": 42,
-          "username_author": "locsapp",
-          "content": "Je suis un com de test. 2",
-          "is_visible": false,
-          "date_created": "fausse date",
-          "date_modified": "fausse date",
-          "childs": [],
+          "response": {
+            "_id": "56cb3cb1b2bc57ab2908e698",
+            "id_author": 44,
+            "username_author": "sylflo",
+            "content": "The breast size 95C",
+            "is_visible": true,
+            "date_created": "fausse date",
+            "date_modified": "fausse date"
+          },
           "last_versions": [],
           "flagged": null
         }
+
 
       ];
       vm.within = "1";

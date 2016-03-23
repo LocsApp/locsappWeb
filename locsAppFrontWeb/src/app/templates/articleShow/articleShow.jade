@@ -64,8 +64,8 @@ div.article-show(layout="row" layout-align="center")
           md-divider
 
       md-card(flex="50")
-        md-card-content
-          div(layout="column" flex="100")
+        md-card-content(flex="flex" layout-fill)
+          div(layout="column" flex="flex" layout-fill)
             md-datepicker(flex="100" ng-model="articleShow.AskBeginLocation"
             md-placeholder="Begin location")
             md-datepicker(ng-model="articleShow.AskEndLocation" md-placeholder="End location")
@@ -100,8 +100,29 @@ div.article-show(layout="row" layout-align="center")
         md-card-content
           div.description {{articleShow.description}}
 
+
+
+
     div(layout="row" layout-align="center")
       h2 Questions
+
+    div(layout="row" layout-align="center")
+      div(layout="column" ng-repeat="question in articleShow.questions" ng-if="question.is_visible")
+        div {{question.content}} (Ask by {{question.username_author}})
+        div
+          ng-md-icon(icon="warning")
+          ng-md-icon(icon="thumb_up")
+          span +12
+
+    div(layout="row" layout-align="center")
+      div(layout="column")
+        div What is the breast size ? (Ask by toto)
+        div
+          ng-md-icon(icon="warning")
+          ng-md-icon(icon="thumb_up")
+          span +12
+
+
 
     div(layout="row" layout-align="center")
       h2 We Recommend
