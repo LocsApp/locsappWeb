@@ -5,6 +5,10 @@
   md-card {
     margin-top: 30px;
 
+    md-button {
+      margin-left: 0;
+    }
+
     img {
       height: 300px;
       width: auto;
@@ -44,6 +48,13 @@
 
         }
 
+      }
+    }
+
+    md-list {
+      img {
+        width: 40px;
+        height: auto;
       }
     }
 
