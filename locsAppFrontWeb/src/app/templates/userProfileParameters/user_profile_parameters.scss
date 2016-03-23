@@ -1,138 +1,198 @@
 @import "../../theme.scss";
 
+.user-profile-parameters {
+
+  md-card {
+    margin-top: 30px;
+
+    md-button {
+      margin-left: 0;
+    }
+
+    img {
+      height: 300px;
+      width: auto;
+    }
+
+    md-icon {
+      height: 40px;
+      width: 40px;
+    }
+
+    h1 {
+      font-size: 2.2em;
+      margin-top: 0;
+    }
+
+    .username {
+      font-size: 2em;
+      margin-top: 0;
+      margin-left: -50px;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    .properties-user {
+
+      div {
+        margin-top: 20px;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        ng-md-icon {
+          padding-bottom: 12px;
+        }
+
+        span {
+          font-size: 1.2em;
+          padding-left: 5px;
+
+        }
+
+      }
+    }
+  }
+
+}
+
+/*
 .user_profile_parameters {
-	height: 100%;
+  height: 100%;
 }
 
 .user_profile_parameters_menu {
-	width: 200px;
+  width: 200px;
 
-	md-list {
-		padding: 0px;
-		md-list-item button.md-button:hover:not([disabled]) {
-			background-color : inherit;
-		}
-	}
+  md-list {
+    padding: 0px;
+    md-list-item button.md-button:hover:not([disabled]) {
+      background-color: inherit;
+    }
+  }
 
-	md-card {
-		cursor: pointer;
-		margin-right: 0px;
-	}
+  md-card {
+    cursor: pointer;
+    margin-right: 0px;
+  }
 
-	h3 {
-		text-align: center;
-		margin: auto;
-	}
+  h3 {
+    text-align: center;
+    margin: auto;
+  }
 }
 
 .user_profile_parameters_menu_tab_selected {
-	background-color : $selectedTab;
+  background-color: $selectedTab;
 }
 
 .user_profile_parameters_content {
-	
-	height: 100%;
-	margin-left: 0px;
-	background-color: $headerContainer;
 
-	h2 {
-		margin: 10px auto;
-	}
+  height: 100%;
+  margin-left: 0px;
+  background-color: $headerContainer;
 
-	md-card-content {
-		background-color : $bodyContainer;
-	}
+  h2 {
+    margin: 10px auto;
+  }
 
-	.user_profile_parameters_no_info {
-		color: $noInfo;
-	}
+  md-card-content {
+    background-color: $bodyContainer;
+  }
 
-	.user_profile_parameters_edit_mode {
-		margin-top: -7px;
-		cursor: pointer;
-	}
+  .user_profile_parameters_no_info {
+    color: $noInfo;
+  }
 
-	.user_profile_parameters_info_icon {
-		@extend .user_profile_parameters_edit_mode;
-		cursor: help;
-	}
+  .user_profile_parameters_edit_mode {
+    margin-top: -7px;
+    cursor: pointer;
+  }
 
+  .user_profile_parameters_info_icon {
+    @extend .user_profile_parameters_edit_mode;
+    cursor: help;
+  }
 
-	.user_profile_parameters_addresses {
+  .user_profile_parameters_addresses {
 
-		.user_profile_parameters_email_confirmed {
-			font-size: medium;
-			margin-left: 10px;
-			color: $emailConfirmed;
-		}
+    .user_profile_parameters_email_confirmed {
+      font-size: medium;
+      margin-left: 10px;
+      color: $emailConfirmed;
+    }
 
-		.user_profile_parameters_email_confirmed_set_option {
-			font-size: medium;
-			cursor: pointer;
-			text-decoration: underline;
-			margin-left: 10px;
-		}
+    .user_profile_parameters_email_confirmed_set_option {
+      font-size: medium;
+      cursor: pointer;
+      text-decoration: underline;
+      margin-left: 10px;
+    }
 
-		.user_profile_parameters_email_not_confirmed {
-			font-size: medium;
-			margin-left: 10px;
-			color: $emailNotConfirmed;
-		}
+    .user_profile_parameters_email_not_confirmed {
+      font-size: medium;
+      margin-left: 10px;
+      color: $emailNotConfirmed;
+    }
 
-		md-toolbar:not(.md-menu-toolbar) {
-			background-color: $headerSubContainers;
-		}
+    md-toolbar:not(.md-menu-toolbar) {
+      background-color: $headerSubContainers;
+    }
 
-		.user_profile_parameters_add_address_icon {
-			cursor: pointer;
-		}
+    .user_profile_parameters_add_address_icon {
+      cursor: pointer;
+    }
 
-		.user_profile_parameters_no_address {
-			@extend .user_profile_parameters_no_info;
-			margin: 0px auto;
-		}
+    .user_profile_parameters_no_address {
+      @extend .user_profile_parameters_no_info;
+      margin: 0px auto;
+    }
 
-		.user_profile_parameters_addresses_lists {
-			md-list-item {
-				&:hover {
-					background : $selectedTab;
-				}				
-			}
+    .user_profile_parameters_addresses_lists {
+      md-list-item {
+        &:hover {
+          background: $selectedTab;
+        }
+      }
 
-			.md-button {
-				color : #000000;
+      .md-button {
+        color: #000000;
 
-				&:hover {
-					background : $selectedTab;
-				}
-			}
+        &:hover {
+          background: $selectedTab;
+        }
+      }
 
-			.user_profile_parameters_addresses_delete {
-				color: $deleteIcon;
-			}
+      .user_profile_parameters_addresses_delete {
+        color: $deleteIcon;
+      }
 
-			.user_profile_parameters_addresses_alias_delete {
-				@extend .user_profile_parameters_addresses_delete;
-			}
-		}
-	}
+      .user_profile_parameters_addresses_alias_delete {
+        @extend .user_profile_parameters_addresses_delete;
+      }
+    }
+  }
 }
 
 .user_profile_parameters_address_add_dialogs {
-	md-checkbox.md-default-theme.md-checked, md-checkbox.md-checked .md-ink-ripple, md-icon {
- 		background-color: $checkBox;
-	}
+  md-checkbox.md-default-theme.md-checked, md-checkbox.md-checked .md-ink-ripple, md-icon {
+    background-color: $checkBox;
+  }
 
-	md-checkbox.md-default-theme.md-checked, md-checkbox.md-checked .md-icon {
- 		background: $checkBox;
- 		background-color: $checkBox;		
-	}
+  md-checkbox.md-default-theme.md-checked, md-checkbox.md-checked .md-icon {
+    background: $checkBox;
+    background-color: $checkBox;
+  }
 
-	md-toolbar:not(.md-menu-toolbar) {
-		background-color: $headerSubContainers;
-	}
+  md-toolbar:not(.md-menu-toolbar) {
+    background-color: $headerSubContainers;
+  }
 
-	.user_profile_parameters_address_add_dialogs_header {
-		margin : auto;
-	}
+  .user_profile_parameters_address_add_dialogs_header {
+    margin: auto;
+  }
 }
+*/
