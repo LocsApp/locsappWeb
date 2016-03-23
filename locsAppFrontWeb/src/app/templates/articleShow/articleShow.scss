@@ -19,8 +19,20 @@
     margin-top: 14px;
   }
 
+  h1 {
+    margin-bottom: -15px;
+  }
+
   h2 {
     margin-top: 0px;
+
+    &:first-child {
+      font-weight: normal;
+    }
+  }
+
+  .subtitle {
+    font-size: 0.8em;
   }
 
   .action-button {
