@@ -1,19 +1,17 @@
+md-icon( md-svg-src="../assets/icons/gender-female.svg" aria-label="android")
 section.user-profile(layout="row" layout-align="center")
   md-card(flex-sm='100' flex="50")
     md-card-content
       div(layout="row" layout-align="space-around start")
         img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
+
         div(layout="column")
-          md-icon(md-svg-src="../assets/icons/gender-female.svg" size="50" aria-label="android")
-          ng-md-icon(icon="gender-female" size="50")
-          ng-md-icon(icon="star" size="22")
-          h1 {{profile.user.username}}
-          div Birthdate {{profile.user.birthdate}}
-          div Last activity {{profile.user.last_activity_date}}
-          div Subscribed {{profile.user.registered_date}}
-          md-button.md-raised(ng-click="profile.goToParameters()") Manage account
-
-
+          div one
+          div two
+          div one
+          div two
+          div one
+          div two
 //section(layout="column", layout-align="start center", layout-margin, flex)
     section(layout="row", layout-align="start center", layout-fill, flex).user_profile_header
         section(layout="column", layout-align="start center", flex="none").user_profile_header_left
