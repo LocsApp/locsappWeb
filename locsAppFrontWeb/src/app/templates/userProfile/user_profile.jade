@@ -15,25 +15,25 @@ section.user-profile(layout="row" layout-align="center")
             aria-label="gender-male")
             | {{profile.user.username}}
 
+          div.properties-user
+            div
+              ng-md-icon(icon="cake" size="28")
+              span(ng-if="!profile.user.birthdate") Not specified
+              span(ng-if="profile.user.birthdate") {{profile.user.birthdate}}
 
-          div
-            ng-md-icon(icon="cake" size="22")
-            span(ng-if="!profile.user.birthdate") Not specified
-            span(ng-if="profile.user.birthdate") {{profile.user.birthdate}}
+            div
+              ng-md-icon(icon="location_on" size="28")
+              span(ng-if="!profile.user.within") Unknown
+              span(ng-if="profile.user.within") {{profile.user.within}} km
 
-          div
-            ng-md-icon(icon="location_on" size="22")
-            span(ng-if="!profile.user.within") Unknown
-            span(ng-if="profile.user.within") {{profile.user.within}} km
+            div
+              ng-md-icon(icon="whatshot" size="28")
+              span(ng-if="!profile.user.last_activity_date") Unknown
+              span(ng-if="profile.user.last_activity_date") Last activity {{profile.user.last_activity_date}}
 
-          div
-            ng-md-icon(icon="whatshot" size="22")
-            span(ng-if="!profile.user.last_activity_date") Unknown
-            span(ng-if="profile.user.last_activity_date") {{profile.user.last_activity_date}}
-
-          div
-            ng-md-icon(icon="insert_emoticon" size="22")
-            span {{profile.user.registered_date}}
+            div
+              ng-md-icon(icon="insert_emoticon" size="28")
+              span Subscribed {{profile.user.registered_date}}
 
 
 //section(layout="column", layout-align="start center", layout-margin, flex)

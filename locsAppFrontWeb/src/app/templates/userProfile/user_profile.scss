@@ -1,40 +1,46 @@
 .user-profile {
-   md-card {
+
+  md-card {
     margin-top: 30px;
+
+    img {
+      height: 300px;
+      width: auto;
+    }
+
+    md-icon {
+      height: 40px;
+      width: 40px;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-top: 0;
+      margin-left: -50px;
+    }
+
+    .properties-user {
+
+      div {
+        margin-top: 20px;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        ng-md-icon {
+          padding-bottom: 12px;
+        }
+
+        span {
+          font-size: 1.2em;
+          padding-left: 5px;
+
+        }
+
+      }
+    }
+
   }
-}
 
-.user_profile_header {
-
-
-
-	.user_profile_header_left {
-		img {
-			height : 150px;
-			width : 150px;
-			border-style : solid;
-			border-width : 1px;
-			border-color : grey;
-		}
-
-		.user_profile_header_left_username {
-			font-size : x-large;
-			margin-bottom : 50px;
-			margin-left : 20px;
-		}
-
-		.user_profile_header_left_rent_out {
-			margin-left : 20px;
-		}
-
-		.user_profile_header_left_rent {
-			margin-left : 20px;
-		}
-	}
-
-	.user_profile_header_right {
-		div {
-			height : 150px;
-		}
-	}
 }
