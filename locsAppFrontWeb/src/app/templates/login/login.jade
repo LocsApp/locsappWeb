@@ -6,7 +6,7 @@ div.login(layout="row" layout-align="center")
       .login-body(layout="row" layout-align="center")
         form(name="loginForm" novalidate ng-submit="loginForm.$valid && login.submit()"
         flex-sm="100" flex-md="60" flex="50")
-          section(layout="column", layout-align="start center", layout-margin layout-fill)
+          section(layout="column", layout-align="start center")
             md-input-container(layout-fill)
               ng-md-icon(icon="mood").
               input(placeholder="Username" required name="username" ng-model="username" maxlength="20" minlength="3").body-register-container-md
@@ -23,8 +23,17 @@ div.login(layout="row" layout-align="center")
                 div(ng-message="maxlength") The password must be shorter than 20 characters.
             md-checkbox(ng-model="remember_me") Remember me
             span(ng-click="login.forgotPasswordDialog($event)").login-forgot-password Forgot your password ?
+
             div.submit-buttons(layout-fill)
-              md-button.margin-button-top.margin-button-left.md-raised(layout-fill flex="90") Login
+              md-button.md-raised.margin-button-top(style="width:90%") Login
+              section.margin-button.separate-button.margin-button-top(layout="row" layout-align="center")
+                md-divider(flex="45").line
+                div().middle-word or
+                md-divider(flex="45").line
+              div.margin-button-top(ng-controller='FacebookRegisterController as FB')
+                md-button.md-raised.facebook.margin-button(layout-fill flex="90" ng-click='FB.login()') Login with Facebook
+            //div.submit-buttons
+              md-button.margin-button-top.margin-button-left.md-raised(flex="90") Login
               section.margin-button-top.separate-button(layout="row" layout-align="center")
                 md-divider(flex="45").line
                 div.middle-word or
