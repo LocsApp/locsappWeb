@@ -30,6 +30,7 @@
 	vm.description = null;
 	vm.brands = [{_id:"56cb3ef2b2bc57ab2908e6b2" ,name:"Home made"}]
 	vm.pictures = []
+	vm.files = []
 	vm.date_start = new Date();
 	vm.date_end = new Date();
 
@@ -49,6 +50,34 @@
 		$timeout(function() {
 			vm.stepFocus = focus;
 		}, 100);
+	}
+
+	vm.uploadImageFailure = function(data)
+	{
+		toastr.error(data.error, "Couldn't upload a picture");
+		$log.log(data);
+	}
+
+	vm.uploadImageSuccess = function(data)
+	{
+		vm.pictures.push(data.url);
+	}
+
+	//Upload the pictures
+	vm.submitPictures = function()
+	{
+		for (var i=0; i < vm.files.length; i++)
+		{
+			ArticleService
+			.uploadPicture(vm.files[i])
+			.then(vm.uploadImageSuccess, vm.uploadImageFailure);
+		}
+	}
+
+	//Submit the article
+	vm.submit = function()
+	{
+		vm.submitPictures();
 	}
 
 	//Static collection retrieval

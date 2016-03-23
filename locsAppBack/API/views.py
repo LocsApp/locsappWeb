@@ -26,6 +26,8 @@ from django.core.validators import validate_email
 import json
 from bson import ObjectId
 from rest_framework.parsers import FileUploadParser
+import uuid
+import os
 
 # Connects to the db and creates a MongoClient instance
 mongodb_client = MongoClient('localhost', 27017)
@@ -649,7 +651,7 @@ class ImageAvatarUploadView(APIView):
     def post(self, request, format="image/*"):
         if (not "file" in request.data):
             return JsonResponse(
-                {"Error": "There is not field file in the document."}, status=403)
+                {"Error": "There is no field file in the document."}, status=403)
         up_file = request.data["file"]
         destination_url = settings.MEDIA_ROOT + hashlib.md5(
             request.user.username.encode('utf-8')).hexdigest() + '/avatar.jpg'
@@ -675,17 +677,13 @@ class ImageArticleUploadView(APIView):
     def post(self, request, format="image/*"):
         if (not "file" in request.data):
             return JsonResponse(
-                {"Error": "There is not field file in the document."}, status=403)
-        elif (not "id" in request.data):
-            return JsonResponse(
-                {"Error": "The id of the article is missing"}, status=403)
-        elif (not "name" in request.data):
-            return JsonResponse(
-                {"Error": "The name of the file is missing"}, status=403)
+                {"Error": "There is no field file in the document."}, status=403)
         up_file = request.data["file"]
-        directory = request.data["id"]
-        destination_url = settings.MEDIA_ROOT + directory + '/' + name
-        os.makedirs(os.path.dirname(destination_url), exist_ok=True)
+        dir_location = settings.MEDIA_ROOT + \
+            'articles/'
+        os.makedirs(os.path.dirname(dir_location), exist_ok=True)
+        destination_url = settings.MEDIA_ROOT + \
+            'articles/' + uuid.uuid4().hex
         destination = open(destination_url, 'wb+')
         for chunk in up_file.chunks():
             destination.write(chunk)
