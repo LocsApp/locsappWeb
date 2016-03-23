@@ -32,7 +32,9 @@ div.article-show(layout="row" layout-align="center")
           md-divider
           div.block-properties(layout="row")
             div.name-properties(flex="50") Payment
-            div.t-right(flex="50" ng-repeat="payment in articleShow.meaning_payment") {{payment}},
+            div.t-right(flex="50")
+              span(ng-repeat="payment in articleShow.meaning_payment") {{$first ? '' : ', '}} {{payment}}
+
           md-divider
           div.block-properties(layout="row")
             div.name-properties(flex="50") Within
