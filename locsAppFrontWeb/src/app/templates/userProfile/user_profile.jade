@@ -53,12 +53,15 @@ section.user-profile(layout="row" layout-align="center")
           span ({{profile.user.nb_mark_as_renter}})
 
         div(flex-offset="10" ng-repeat="notation in profile.user.notation_renter")
-        md-list
+        md-list(flex-offset="10")
           md-list-item.md-3-line(ng-repeat="notation in profile.user.notation_renter")
             img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg" class="md-avatar" alt="{{item.who}}")
             div.md-list-item-text(layout="column")
               h4 {{ notation.title_article }}
-              h5 TUTU{{ item.what }}
+              div
+                span(ng-repeat="value in notation.mark track by $index")
+                  ng-md-icon(ng-if="value" icon="star" size="22")
+                  ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
               p {{ notation.description | limitTo: 30 }} {{notation.description.length > 30 ? '...' : ''}}
 
         div(layout="row" layout-align="center")
