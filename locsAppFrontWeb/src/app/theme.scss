@@ -31,6 +31,8 @@ $submitButton: #2196F3;
 $separatorBarH2: #555555;
 /* Separator bar element color */
 $separatorBarElement: #C6C6C6;
+/* Color Star Empty */
+$colorNotationEmpty: grey;
 
 //Textangular
 .ta-editor {
@@ -71,4 +73,9 @@ md-icon {
   border-top-color: $separatorBarH2;
   margin-top: 14px;
 
+}
+
+/* Color star notation */
+.grey {
+  fill: $colorNotationEmpty;
 }

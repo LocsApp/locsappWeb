@@ -42,10 +42,24 @@ section.user-profile(layout="row" layout-align="center")
     md-card(flex-sm='100' flex-md="100" flex="50")
       md-card-content
         div(layout="row" layout-align="center")
+          md-divider.separator-h2(flex="30")
+          h2.t-center(flex="20") Questions
+          md-divider.separator-h2(flex="30")
+        h3(flex-offset="10") As a renter
+          span(ng-repeat="value in profile.user.global_notation_renter track by $index")
+            ng-md-icon(ng-if="value" icon="star" size="22")
+            ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
+          span ({{profile.user.nb_mark_as_renter}})
+
+        div(layout="row" layout-align="center")
+          md-divider(flex="80")
+
+    md-card(flex-sm='100' flex-md="100" flex="50")
+      md-card-content
+        div(layout="row" layout-align="center")
           md-divider.separator-h2(flex="45")
-          h2.t-center(flex="15") Questions
+          h2.t-center(flex="15") Articles
           md-divider.separator-h2(flex="45")
-        h3 As a renter
 
 
 //section(layout="column", layout-align="start center", layout-margin, flex)
