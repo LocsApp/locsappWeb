@@ -88,8 +88,16 @@ md-icon {
   text-transform: uppercase;
 }
 
-.action-button {
+.action-button-position {
   position: fixed;
   bottom: 0;
 
+}
+
+
+/* ---- a arranger si besoin mais normalement tous les actions boutons auront la meme couleur */
+.md-button.md-primary.md-fab,
+.md-button.md-primary.md-fab:not([disabled]):hover {
+  background-color: $submitButton;
+    color: white;
 }
