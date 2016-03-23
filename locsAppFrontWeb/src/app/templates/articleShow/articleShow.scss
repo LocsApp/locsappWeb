@@ -14,6 +14,11 @@
     text-align: left;
   }
 
+  md-divider {
+    border-top-color: $separatorBarH2;
+    margin-top: 14px;
+  }
+
   h2 {
     margin-top: 0px;
   }
@@ -46,8 +51,8 @@
       }
 
       .md-datepicker-input-container {
-       /* width: 80%;
-        margin-left: 0px;*/
+        /* width: 80%;
+         margin-left: 0px;*/
       }
 
       .block-properties {
@@ -61,6 +66,7 @@
 
       md-divider {
         border-top-color: $separatorBarElement;
+        margin-top: 0;
       }
     }
 
