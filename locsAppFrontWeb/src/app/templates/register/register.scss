@@ -2,16 +2,37 @@
 
 .body-register-md {
 
-	h1 {
-		text-align : center;
-	}
+  h1 {
+    margin-top: 0;
+  }
 
-	margin : 20px auto;
-	height : 400px;
+  md-card {
+    margin-top: 30px;
+  }
 
-  .facebook, .md-button.facebook:hover  {
+  .facebook, .md-button.facebook:hover {
     background-color: rgba(59, 89, 152, 1);
     color: white;
+  }
+
+  .submit-buttons {
+    text-align: right;
+  }
+
+  .margin-button {
+    margin-top: 30px;
+  }
+
+  .separate-button {
+    margin-left: 25px;
+  }
+
+  .line {
+    margin-top: 9px;
+  }
+
+  .middle-word {
+    margin: 0px 10px 0px 10px;
   }
 
 }

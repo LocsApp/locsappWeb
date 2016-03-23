@@ -132,15 +132,8 @@
       vm.dateStart = new Date(vm.start_availble);
       vm.dateEnd = new Date(vm.end_availble);
 
-    /*  vm.minDate = new Date(
-        vm.dateStart.getFullYear(),
-        $scope.myDat.getMonth() - 2,
-        $scope.myDate.getDate());
-
-      $scope.maxDate = new Date(
-        $scope.myDate.getFullYear(),
-        $scope.myDate.getMonth() + 2,
-        $scope.myDate.getDate());*/
+      vm.rentDateStart = new Date(vm.start_availble);
+      vm.rentDateEnd = new Date(vm.end_availble);
 
       // Add col and row for the grid gallery
       vm.obj_url_pictures = [];
