@@ -20,6 +20,7 @@ md-card(flex-sm='100' flex-md="100" flex="50")
               ng-md-icon(ng-if="value" icon="star" size="22")
               ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
           p {{ notation.description | limitTo: 30 }} {{notation.description.length > 30 ? '...' : ''}}
+    md-divider(flex-offset="10" flex="80")
     md-list(flex-offset="10" layout="row" layout-sm="column")
       md-list-item.md-3-line(ng-repeat="notation in profile.user.notation_renter track by $index")
         img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg" class="md-avatar" alt="{{item.who}}")
@@ -31,8 +32,8 @@ md-card(flex-sm='100' flex-md="100" flex="50")
               ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
           p {{ notation.description | limitTo: 30 }} {{notation.description.length > 30 ? '...' : ''}}
 
-    div(layout="row" layout-align="center")
-      md-divider(flex="80")
+    div(flex-offset="10")
+      md-button.special-button.md-raised(layout-fill flex="90") Show more
 
 
     h3(flex-offset="10") As a client
@@ -50,6 +51,7 @@ md-card(flex-sm='100' flex-md="100" flex="50")
               ng-md-icon(ng-if="value" icon="star" size="22")
               ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
           p {{ notation.description | limitTo: 30 }} {{notation.description.length > 30 ? '...' : ''}}
+    md-divider(flex-offset="10" flex="80")
     md-list(flex-offset="10" layout="row" layout-sm="column")
       md-list-item.md-3-line(ng-repeat="notation in profile.user.notation_renter track by $index")
         img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg" class="md-avatar" alt="{{item.who}}")
@@ -63,5 +65,5 @@ md-card(flex-sm='100' flex-md="100" flex="50")
 
 
     div(flex-offset="10")
-      md-button.md-raised(layout-fill flex="90") Show more
+      md-button.special-button.md-raised(layout-fill flex="90") Show more
 
