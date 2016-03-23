@@ -9,7 +9,7 @@ md-card(layout-fill)
 				span
 					ng-md-icon(icon="help", size="20")
 						md-tooltip(md-direction="right") It is the main picture for your article. it will be displayed in the search and in the top of your article.
-			img(ngf-src="articleCreate.pictures[0] || 'http://localhost:3000/assets/images/articles/default.jpg'" ngf-select ng-model="articleCreate.pictures[0]" name="logo" ngf-pattern="'image/*'"
+			img(ngf-src="articleCreate.files[0] || 'http://localhost:3000/assets/images/articles/default.jpg'" ngf-select ng-model="articleCreate.files[0]" name="logo" ngf-pattern="'image/*'"
 				accept="image/*" ngf-max-size="2MB" ngf-min-height="100" 
 				ngf-resize="{width: 300, height: 300}" style="cursor: pointer;").logo-picture
 			p
@@ -18,10 +18,10 @@ md-card(layout-fill)
 					ng-md-icon(icon="help", size="20")
 						md-tooltip(md-direction="right") These are your the pictures of your article. It will be displayed in the main body of your article's page.		
 			section(layout="row", layout-align="space-between")
-				img(ngf-src="articleCreate.pictures[1] || 'http://localhost:3000/assets/images/articles/default.jpg'" ngf-select ng-model="articleCreate.pictures[1]" name="picture1" ngf-pattern="'image/*'"
+				img(ngf-src="articleCreate.files[1] || 'http://localhost:3000/assets/images/articles/default.jpg'" ngf-select ng-model="articleCreate.files[1]" name="picture1" ngf-pattern="'image/*'"
 					accept="image/*" ngf-max-size="2MB" ngf-min-height="100" 
 					ngf-resize="{width: 300, height: 300}" style="cursor: pointer;").logo-picture
-				img(ngf-src="articleCreate.pictures[2] || 'http://localhost:3000/assets/images/articles/default.jpg'" ngf-select ng-model="articleCreate.pictures[2]" name="picture2" ngf-pattern="'image/*'"
+				img(ngf-src="articleCreate.files[2] || 'http://localhost:3000/assets/images/articles/default.jpg'" ngf-select ng-model="articleCreate.files[2]" name="picture2" ngf-pattern="'image/*'"
 					accept="image/*" ngf-max-size="2MB" ngf-min-height="100" 
 					ngf-resize="{width: 300, height: 300}" style="cursor: pointer; margin-left: 30px").logo-picture
 			

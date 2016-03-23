@@ -21,7 +21,9 @@ article_patterns = [
         articles.articleAlone),
     url(r'^get/(?P<article_pk>[a-f\d]{24})/$',
         articles.getArticle),
-
+    url(r'^image-upload-article/$',
+        views.ImageArticleUploadView.as_view(),
+        name='image-upload-article'),
 ]
 
 search_patterns = [
@@ -51,9 +53,9 @@ user_patterns = [
         views.billingAddressUserDelete.as_view()),
     url(r'^(?P<user_pk>[0-9]+)/notifications/$',
         views.notificationsUser),
-    url(r'^api/image-upload-avatar/$',
+    url(r'^image-upload-avatar/$',
         views.ImageAvatarUploadView.as_view(),
-        name='image-upload'),
+        name='image-upload-avatar'),
 ]
 
 # Static collections urls

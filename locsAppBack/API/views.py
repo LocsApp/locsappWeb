@@ -26,6 +26,8 @@ from django.core.validators import validate_email
 import json
 from bson import ObjectId
 from rest_framework.parsers import FileUploadParser
+import uuid
+import os
 
 # Connects to the db and creates a MongoClient instance
 mongodb_client = MongoClient('localhost', 27017)
@@ -647,6 +649,9 @@ class ImageAvatarUploadView(APIView):
     parser_classes = (FileUploadParser, )
 
     def post(self, request, format="image/*"):
+        if (not "file" in request.data):
+            return JsonResponse(
+                {"Error": "There is no field file in the document."}, status=403)
         up_file = request.data["file"]
         destination_url = settings.MEDIA_ROOT + hashlib.md5(
             request.user.username.encode('utf-8')).hexdigest() + '/avatar.jpg'
@@ -664,6 +669,26 @@ class ImageAvatarUploadView(APIView):
             '/avatar.jpg')
         return JsonResponse({"url_avatar": settings.URL_BACK + 'media/' + hashlib.md5(
             request.user.username.encode('utf-8')).hexdigest() + '/avatar.jpg'})
+
+
+class ImageArticleUploadView(APIView):
+    parser_classes = (FileUploadParser, )
+
+    def post(self, request, format="image/*"):
+        if (not "file" in request.data):
+            return JsonResponse(
+                {"Error": "There is no field file in the document."}, status=403)
+        up_file = request.data["file"]
+        dir_location = settings.MEDIA_ROOT + \
+            'articles/'
+        os.makedirs(os.path.dirname(dir_location), exist_ok=True)
+        destination_url = settings.MEDIA_ROOT + \
+            'articles/' + uuid.uuid4().hex
+        destination = open(destination_url, 'wb+')
+        for chunk in up_file.chunks():
+            destination.write(chunk)
+            destination.close()
+        return JsonResponse({"url": destination_url})
 
 """
     SOCIAL NETWORK ENDPOINTS
