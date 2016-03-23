@@ -14,11 +14,28 @@ section.user-profile(layout="row" layout-align="center")
             md-icon(ng-if="profile.user.gender.indexOf('male') > -1" md-svg-src="../assets/icons/gender-male.svg"
             aria-label="gender-male")
             | {{profile.user.username}}
-          div two
-          div one
-          div two
-          div one
-          div two
+
+
+          div
+            ng-md-icon(icon="cake" size="22")
+            span(ng-if="!profile.user.birthdate") Not specified
+            span(ng-if="profile.user.birthdate") {{profile.user.birthdate}}
+
+          div
+            ng-md-icon(icon="location_on" size="22")
+            span(ng-if="!profile.user.within") Unknown
+            span(ng-if="profile.user.within") {{profile.user.within}} km
+
+          div
+            ng-md-icon(icon="whatshot" size="22")
+            span(ng-if="!profile.user.last_activity_date") Unknown
+            span(ng-if="profile.user.last_activity_date") {{profile.user.last_activity_date}}
+
+          div
+            ng-md-icon(icon="insert_emoticon" size="22")
+            span {{profile.user.registered_date}}
+
+
 //section(layout="column", layout-align="start center", layout-margin, flex)
     section(layout="row", layout-align="start center", layout-fill, flex).user_profile_header
         section(layout="column", layout-align="start center", flex="none").user_profile_header_left
