@@ -1,35 +1,11 @@
-//div(layout='column', layout-padding='', ng-cloak='')
-  md-content.md-no-momentum
-    md-input-container.md-icon-float.md-block
-      // Use floating label instead of placeholder
-      label Name
-      md-icon.name(md-svg-src='img/icons/ic_person_24px.svg')
-      input(ng-model='user.name', type='text')
-    md-input-container.md-block(md-no-float='')
-      md-icon(md-svg-src='img/icons/ic_phone_24px.svg')
-      input(ng-model='user.phone', type='text', placeholder='Phone Number')
-    md-input-container.md-block
-      // Use floating placeholder instead of label
-      md-icon.email(md-svg-src='img/icons/ic_email_24px.svg')
-      input(ng-model='user.email', type='email', placeholder='Email (required)', ng-required='true')
-    md-input-container.md-block(md-no-float='')
-      input(ng-model='user.address', type='text', placeholder='Address')
-      md-icon(md-svg-src='img/icons/ic_place_24px.svg', style='display:inline-block;')
-    md-input-container.md-icon-float.md-icon-right.md-block
-      label Donation Amount
-      md-icon(md-svg-src='img/icons/ic_card_giftcard_24px.svg')
-      input(ng-model='user.donation', type='number', step='0.01')
-      md-icon(md-svg-src='img/icons/ic_euro_24px.svg')
-
-
 div.login(layout="row" layout-align="center")
-  md-card(flex-sm="100" flex-md="75" flex="50")
+  md-card(flex-xs="100" flex-sm="80" flex-md="60" flex="50")
     md-card-content
       div(layout="row" layout-align="center")
         h1 Login
       .login-body(layout="row" layout-align="center")
         form(name="loginForm" novalidate ng-submit="loginForm.$valid && login.submit()"
-        flex-sm="100" flex-md="60" flex="50")
+        flex-xs="100" flex-sm="80" flex-md="60" flex="50")
           section(layout="column", layout-align="start center")
 
 
