@@ -96,10 +96,19 @@ md-icon {
 
 }
 
-
 /* ---- a arranger si besoin mais normalement tous les actions boutons auront la meme couleur */
 .md-button.md-primary.md-fab,
 .md-button.md-primary.md-fab:not([disabled]):hover {
   background-color: $submitButton;
-    color: white;
+  color: white;
+}
+
+/* there is some problems with Angular Material */
+@media screen and (max-width: 600px) {
+
+  .my-layout-xs {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
 }
