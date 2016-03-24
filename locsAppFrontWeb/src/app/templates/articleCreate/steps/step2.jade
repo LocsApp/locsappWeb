@@ -55,4 +55,4 @@ md-card(layout-fill)
 						md-option(ng-value="opt._id", ng-repeat="opt in articleCreate.brands") {{ opt.name }}
 					div(ng-messages="articleFormStep2.brand.$error" ng-if='!articleFormStep2.brand.$pristine')
 						div(ng-message="required") This is required.
-			md-button.md-raised Next Step
+			md-button.md-raised(type="submit") Next Step

@@ -35,4 +35,4 @@ md-card(layout-fill)
 					md-option(ng-value="opt._id", ng-repeat="opt in articleCreate.subCategories") {{ opt.name }}
 				div(ng-messages="articleFormStep1.sub_category.$error" ng-if='!articleFormStep1.sub_category.$pristine')
 					div(ng-message="required") This is required.
-			md-button.md-raised Next Step		
+			md-button.md-raised(type="submit") Next Step
