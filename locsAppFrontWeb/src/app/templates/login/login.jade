@@ -32,23 +32,17 @@ div.login(layout="row" layout-align="center")
         flex-sm="100" flex-md="60" flex="50")
           section(layout="column", layout-align="start center")
 
-            md-input-container(class="md-icon-float md-block")
-              label Name
-              //ng-md-icon(icon="mood")
-              md-icon(md-svg-src='../assets/icons/gender-female.svg')
-              input(ng-model="user.name" type="text")
 
-
-            md-input-container(layout-fill)
-              ng-md-icon(icon="mood")
-              //md-icon(md-svg-src='../assets/icons/gender-female.svg')
+            md-input-container.md-icon-float.md-block(layout-fill)
+              md-icon(md-svg-src="../assets/icons/register-login/ic_mood_black_24px.svg" class="name")
               input(placeholder="Username" required name="username" ng-model="username" maxlength="20" minlength="3").body-register-container-md
               div(ng-messages="loginForm.username.$error" ng-if='!loginForm.username.$pristine')
                 div(ng-message="required") This is required.
                 div(ng-message="minlength") The username must be longer than 3 characters.
                 div(ng-message="md-maxlength") The username must be shorter than 20 characters.
-            md-input-container(layout-fill)
-              ng-md-icon(icon="vpn_key")
+
+            md-input-container.md-icon-float.md-block(layout-fill)
+              md-icon(md-svg-src="../assets/icons/register-login/ic_vpn_key_black_24px.svg" class="name")
               input(placeholder="Password" type="password" name="password" required ng-model="password" maxlength="30" minlength="6").body-register-container-md
               div(ng-messages="loginForm.password.$error" ng-if="loginForm.password.$dirty")
                 div(ng-message="required") This is required.
@@ -58,11 +52,14 @@ div.login(layout="row" layout-align="center")
             span(ng-click="login.forgotPasswordDialog($event)").login-forgot-password Forgot your password ?
 
             div.submit-buttons(layout-fill)
-              md-button.md-raised.margin-button-top(type="submit" style="width:90%") Login
+              md-button.md-raised.margin-button-top(flex-offset="10" type="submit"
+              style="width:90%") Login
               section.margin-button.separate-button.margin-button-top(layout="row" layout-align="center")
-                md-divider(flex="45").line
+                md-divider(flex-offset="5" flex="45").line
                 div().middle-word or
                 md-divider(flex="45").line
-              div.margin-button-top(ng-controller='FacebookLoginController as FB')
-                md-button.md-raised.facebook.margin-button(layout-fill flex="90" ng-click='FB.login()') Login with Facebook
+              div.margin-button-top(ng-controller='FacebookLoginController as FB' flex="90"
+              flex-offset="10")
+                md-button.md-raised.facebook.margin-button(layout-fill ng-click='FB.login()') Login with Facebook
+
 
