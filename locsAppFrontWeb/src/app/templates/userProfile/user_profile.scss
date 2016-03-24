@@ -2,6 +2,10 @@
 
 .user-profile {
 
+  .layout-row > .flex-30 {
+    height: 1px;
+  }
+
   md-card {
     margin-top: 30px;
 
@@ -70,7 +74,7 @@
         padding-left: 0;
       }
 
-      md-list-item.md-3-line .md-list-item-text p, md-list-item.md-3-line .md-list-item-text h4  {
+      md-list-item.md-3-line .md-list-item-text p, md-list-item.md-3-line .md-list-item-text h4 {
         color: black;
         font-size: 1.1em;
       }
