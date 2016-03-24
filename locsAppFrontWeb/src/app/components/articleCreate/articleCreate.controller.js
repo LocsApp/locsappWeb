@@ -13,7 +13,7 @@
 	vm.value = 0;
 	vm.stepsNames = ["squared_one", "squared_two", "squared_three", "squared_four", "squared_five", "squared_six"];
 	vm.stepsComplete = [1, 1, 1, 1, 1, 1];
-	vm.progressBars = [0, 0, 0, 0, 0, 0]
+	vm.progressBars = [0, 0, 0, 0, 0, 0];
 	vm.stepFocus = 0;
 
 	//Textangular
@@ -50,18 +50,18 @@
 		$timeout(function() {
 			vm.stepFocus = focus;
 		}, 100);
-	}
+	};
 
 	vm.uploadImageFailure = function(data)
 	{
 		toastr.error(data.error, "Couldn't upload a picture");
 		$log.log(data);
-	}
+	};
 
 	vm.uploadImageSuccess = function(data)
 	{
 		vm.pictures.push(data.url);
-	}
+	};
 
 	//Upload the pictures
 	vm.submitPictures = function()
@@ -72,25 +72,25 @@
 			.uploadPicture(vm.files[i])
 			.then(vm.uploadImageSuccess, vm.uploadImageFailure);
 		}
-	}
+	};
 
 	//Submit the article
 	vm.submit = function()
 	{
 		vm.submitPictures();
-	}
+	};
 
 	//Static collection retrieval
 	vm.failedRetrieval = function(data)
 	{
 		$log.log(data);
 		toastr.error("We couldn't retrieve some informations..." , 'Woops...');
-	}
+	};
 
 	vm.getClotheStates = function(data)
 	{
 		vm.clothe_states = data.clothe_states;
-	}
+	};
 
 	vm.getClotheColors = function(data)
 	{
@@ -100,7 +100,7 @@
 		.get()
 		.$promise
 		.then(vm.getClotheStates, vm.failedRetrieval);
-	}
+	};
 
 	vm.getSizes = function(data)
 	{
@@ -110,7 +110,7 @@
 		.get()
 		.$promise
 		.then(vm.getClotheColors, vm.failedRetrieval);
-	}
+	};
 
 	vm.getGenders = function(data)
 	{
@@ -119,8 +119,8 @@
 		.getSizes
 		.get()
 		.$promise
-		.then(vm.getSizes, vm.failedRetrieval);		
-	}
+		.then(vm.getSizes, vm.failedRetrieval);
+	};
 
 	vm.getSubCategories = function(data)
 	{
@@ -129,8 +129,8 @@
 		.getGenders
 		.get()
 		.$promise
-		.then(vm.getGenders, vm.failedRetrieval);		
-	}
+		.then(vm.getGenders, vm.failedRetrieval);
+	};
 
 	vm.getCategories = function(data)
 	{
@@ -140,7 +140,7 @@
 		.get()
 		.$promise
 		.then(vm.getSubCategories, vm.failedRetrieval);
-	}
+	};
 
 	ArticleService
 	.getCategories
