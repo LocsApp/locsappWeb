@@ -13,7 +13,7 @@
   angular
 	.module('locsapp', ['ngAnimate',
 		'ngCookies',
-		'ngTouch',
+		//'ngTouch',
 		'ngSanitize',
 		'ngMessages',
 		'ngAria',

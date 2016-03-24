@@ -20,18 +20,18 @@
     "angular-material-icons": "~0.6.0",
     "angular-ui-router-anim-in-out": "~1.0.2",
     "angular-permission": "~1.1.1",
-    "angular-validation-match": "~1.6.0",
+    "angular-validation-match": "~1.6.0ma",
     "ngstorage": "~0.3.10",
     "angular-loading-bar": "~0.8.0",
     "roboto-slab-fontface-bower": "roboto-slab-fontface#*",
     "ng-webworker": "~0.2.2",
     "angular-moment": "~0.10.3",
-    "angular-material": "oborotev/angular-material",
     "angular-perfect-scrollbar": "~0.0.4",
     "angular-easyfb": "~1.4.1",
     "textAngular": "~1.5.0",
     "font-awesome": "~4.5.0",
-    "ng-file-upload": "~12.0.1"
+    "ng-file-upload": "~12.0.1",
+    "angular-material": "~1.0.6"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.2"
