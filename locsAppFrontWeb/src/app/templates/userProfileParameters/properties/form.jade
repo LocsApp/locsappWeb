@@ -36,19 +36,19 @@ md-card()
 
           md-input-container.md-icon-float.md-block(layout-fill)
             md-icon(md-svg-src="../assets/icons/register-login/ic_email_black_24px.svg")
-            input(placeholder="Email" type="email" name="email" ng-model="profileParams.user.email")
-            .body-register-container-md
-            div(ng-messages="modifyProfilForm.email.$error" ng-if='!modifyProfilForm.email.$pristine'
-            minlength="8" maxlength="100" required name="email" ng-pattern="/^.+@.+\..+$/")
+            input(placeholder="Email" type="email" minlength="8" maxlength="100" required
+            name="email" ng-model="profileParams.user.email" ng-pattern="/^.+@.+\..+$/").body-register-container-md
+            div(ng-messages="modifyProfilForm.email.$error" ng-if='!modifyProfilForm.email.$pristine')
               div(ng-message="required") This is required.
               div(ng-message="minlength") The email must be longer than 8 characters.
               div(ng-message="maxlength") The email must be shorter than 100 characters.
               div(ng-message="pattern") The field must be an email.
 
           md-input-container.md-icon-float.md-block(layout-fill)
-            md-icon(md-svg-src="../assets/icons/register-login/ic_repeat_black_24px.svg" class="name")
+            md-icon(md-svg-src="../assets/icons/register-login/ic_repeat_black_24px.svg")
             input(placeholder="Repeat Email" type="email" minlength="8" maxlength="100" required
-            name="email_repeat" ng-model="profileParams.user.email_repeat" ng-pattern="/^.+@.+\..+$/" match="email").body-register-container-md
+            name="email_repeat" ng-model="profileParams.user.email_repeat" ng-pattern="/^.+@.+\." +
+            ".+$/" match="profileParams.user.email").body-register-container-md
             div(ng-messages="modifyProfilForm.email_repeat.$error" ng-if='!modifyProfilForm.email_repeat.$pristine')
               div(ng-message="required") This is required.
               div(ng-message="minlength") The email must be longer than 8 characters.
