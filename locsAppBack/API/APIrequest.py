@@ -34,7 +34,6 @@ class APIRequestMongo:
     def _fieldModelValidation(
             self, attribute, model_attribute, error_fields, key):
         modelType = None
-        print (model_attribute)
         if isinstance(model_attribute, type({})):
             if ("_type" in model_attribute and not isinstance(model_attribute[
                     "_type"], type({})) and not isinstance(model_attribute["_type"], type([]))):
@@ -58,20 +57,18 @@ class APIRequestMongo:
                         subObject, model_attribute[0], error_fields, key + ".subfield")
         else:
             modelType = model_attribute
-        if (bson.objectid.ObjectId.is_valid(attribute) == True and
-                bson.objectid.ObjectId.is_valid(str(modelType)) == True):
+        if (bson.objectid.ObjectId.is_valid(str(modelType)) == True):
+            if (not bson.objectid.ObjectId.is_valid(attribute)):
+                error_fields[key] = "This field must be an id."
+                return False
             if (isinstance(model_attribute, type({})) and "_protected" in
                     model_attribute and model_attribute["_protected"]):
                 pass
             else:
                 return True
-        elif not isinstance(attribute, type(modelType)):
-            if (isinstance(modelType, type(ObjectId()))):
-                print("ERROR : " + str(attribute))
-                error_fields[key] = "This field must be an id."
-            else:
-                error_fields[key] = "This field must be a " + \
-                    modelType.__name__
+        elif not isinstance(attribute, modelType):
+            error_fields[key] = "This field must be a " + \
+                modelType.__name__
             return False
         modelType = model_attribute
         if isinstance(modelType, type({})):
