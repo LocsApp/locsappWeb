@@ -34,17 +34,7 @@
     };
 
 
-    if (!vm.user)
-      UsersService
-        .profile_check
-        .get({})
-        .$promise
-        .then(vm.GetInfosUserSuccess, vm.GetInfosUserFailure);
-    else
-      vm.parseAddressToJson();
-
-
-    vm.parseAddressToJson = function () {
+     vm.parseAddressToJson = function () {
       var i = 0;
       var temp = null;
 
@@ -61,6 +51,19 @@
         }
       }
     };
+
+
+    if (!vm.user)
+      UsersService
+        .profile_check
+        .get({})
+        .$promise
+        .then(vm.GetInfosUserSuccess, vm.GetInfosUserFailure);
+    else
+      vm.parseAddressToJson();
+
+
+
 
   }
 
