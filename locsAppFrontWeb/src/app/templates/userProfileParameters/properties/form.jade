@@ -34,7 +34,7 @@ md-card()
           md-input-container.md-icon-float.md-block(layout-fill)
             md-icon(md-svg-src="../assets/icons/profil/phone.svg")
             input(placeholder="Phone number" type="text" name="phone_number"
-            ng-model="profileParams.user.phone_number" required)
+            ng-model="profileParams.user.phone" required)
             .body-register-container-md
             div(ng-messages="modifyProfilForm.phone_number.$error" ng-if='!modifyProfilForm.phone_number.$pristine')
               div(ng-message="required") This is required.

@@ -85,11 +85,11 @@
         .modify_profile
         .update({
           secondary_emails: [],
-          first_name: "first name42",
+          first_name: "first name4.536",
           last_name: "Last nane",
           gender: "male",
           birthdate: "2015/05/02",
-          phone: "0553076911",
+          phone: "0553076912",
           living_address: [],
           billing_address: []
         })
