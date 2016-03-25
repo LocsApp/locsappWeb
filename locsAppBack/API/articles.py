@@ -24,6 +24,31 @@ from datetime import datetime
 @permission_classes((IsAuthenticated,))
 def searchArticles(request):
     document = {"metadatas": {}, "articles": []}
+    body = json.loads(request.body.decode('utf8'))
+    search = {}
+    print(body)
+    if (not "_pagination" in body or not isinstance(
+            body["_pagination"], type({}))):
+        return JsonResponse(
+            {"Error": "You need a _pagination dict in your document."})
+    if (not "page_number" in body["_pagination"]
+            or not "items_per_page" in body["_pagination"]):
+        return JsonResponse(
+            {"Error": "The pagination is not in the correct format."})
+    for key in body:
+        if key != "_pagination":
+            if key == "title":
+                search[key] = {"$regex": str(body[key])}
+            else:
+                search[key] = {"$in": body[key]}
+    results = db_locsapp["articles"].find(search)
+    document["metadatas"]["page_number"] = body[
+        "_pagination"]["page_number"]
+    number_pages = int(results.count() / body["_pagination"]["items_per_page"])
+    document["metadatas"][
+        "total_pages"] = 1 if number_pages < 1 else number_pages
+    for instance in results:
+        document["articles"].append(APIrequests.parseObjectIdToStr(instance))
     return JsonResponse(document)
 
 
