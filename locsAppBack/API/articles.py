@@ -22,6 +22,14 @@ from datetime import datetime
 @csrf_exempt
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))
+def searchArticles(request):
+    document = {"metadatas": {}, "articles": []}
+    return JsonResponse(document)
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
 def postNewArticle(request):
     model = {
         "title": {
