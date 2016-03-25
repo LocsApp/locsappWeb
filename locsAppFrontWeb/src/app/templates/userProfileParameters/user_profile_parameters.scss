@@ -55,6 +55,19 @@
 
       }
     }
+
+    form {
+      md-input-container {
+        &:first-child {
+          margin-bottom: 20px;
+
+          span {
+            margin-right: 5px;
+          }
+
+        }
+      }
+    }
   }
 
 }

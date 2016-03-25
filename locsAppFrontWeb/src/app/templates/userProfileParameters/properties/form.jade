@@ -5,24 +5,42 @@ md-card()
       flex-xs="100" flex-sm="80" flex-md="60" flex="50")
         section(layout="column", layout-align="start center")
 
+          md-input-container.md-icon-float.md-block(layout-fill)
+            md-icon(md-svg-src="../assets/icons/register-login/ic_mood_black_24px.svg"
+            class="name")
+            md-radio-group(ng-model="data.group1" layout="row" layout-fill)
+              span Man
+              md-radio-button(value="Apple" class="md-primary")
+              span Woman
+              md-radio-button(value="Banana")
+
 
           md-input-container.md-icon-float.md-block(layout-fill)
             md-icon(md-svg-src="../assets/icons/register-login/ic_mood_black_24px.svg"
             class="name")
-            input(placeholder="Username" required name="username" ng-model="username" maxlength="20" minlength="3").body-register-container-md
-            div(ng-messages="modifyProfilForm.username.$error" ng-if='!modifyProfilForm.username.$pristine')
-              div(ng-message="required") This is required.
-              div(ng-message="minlength") The username must be longer than 3 characters.
-              div(ng-message="md-maxlength") The username must be shorter than 20 characters.
+            input(placeholder="First name" type='text' name="first_name"
+            ng-model="first_name"
+            ).body-register-container-md
+          md-input-container.md-icon-float.md-block(flex-offset="10" layout-fill)
+            md-icon(md-svg-src="../assets/icons/register-login/ic_mood_black_24px.svg")
+            input(placeholder="Last name" type="text" name="last_name" ng-model="last_name")
+            .body-register-container-md
 
           md-input-container.md-icon-float.md-block(layout-fill)
-            md-icon(md-svg-src="../assets/icons/register-login/ic_vpn_key_black_24px.svg"
-            class="name")
-            input(placeholder="Password" type="password" name="password" required ng-model="password" maxlength="30" minlength="6").body-register-container-md
-            div(ng-messages="modifyProfilForm.password.$error" ng-if="modifyProfilForm.password.$dirty")
-              div(ng-message="required") This is required.
-              div(ng-message="minlength") The password must be longer than 6 characters.
-              div(ng-message="maxlength") The password must be shorter than 20 characters.
+            md-icon(md-svg-src="../assets/icons/register-login/ic_mood_black_24px.svg")
+            input(placeholder="Phone number" type="text" name="phone_number"
+            ng-model="phone_number")
+            .body-register-container-md
+
+          md-input-container.md-icon-float.md-block(layout-fill)
+            md-icon(md-svg-src="../assets/icons/register-login/ic_mood_black_24px.svg")
+            input(placeholder="Birthdate" type="text" name="birtdate" ng-model="birthdate")
+            .body-register-container-md
+
+          md-input-container.md-icon-float.md-block(layout-fill)
+            md-icon(md-svg-src="../assets/icons/register-login/ic_mood_black_24px.svg")
+            input(placeholder="Last name" type="email" name="email" ng-model="email")
+            .body-register-container-md
 
 
           div.submit-buttons(layout-fill)
