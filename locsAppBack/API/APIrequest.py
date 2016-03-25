@@ -34,6 +34,7 @@ class APIRequestMongo:
     def _fieldModelValidation(
             self, attribute, model_attribute, error_fields, key):
         modelType = None
+        print (model_attribute)
         if isinstance(model_attribute, type({})):
             if ("_type" in model_attribute and not isinstance(model_attribute[
                     "_type"], type({})) and not isinstance(model_attribute["_type"], type([]))):
@@ -64,9 +65,13 @@ class APIRequestMongo:
                 pass
             else:
                 return True
-        elif not isinstance(attribute, modelType):
-            print("ERROR : " + str(attribute))
-            error_fields[key] = "This field must be a " + modelType.__name__
+        elif not isinstance(attribute, type(modelType)):
+            if (isinstance(modelType, type(ObjectId()))):
+                print("ERROR : " + str(attribute))
+                error_fields[key] = "This field must be an id."
+            else:
+                error_fields[key] = "This field must be a " + \
+                    modelType.__name__
             return False
         modelType = model_attribute
         if isinstance(modelType, type({})):
@@ -75,7 +80,7 @@ class APIRequestMongo:
                 return False
             if "_length" in modelType:
                 if len(str(attribute)) > modelType["_length"]:
-                    error_fields[key] = "The length must not exceed " + \
+                    error_fields[key] = "The length must not exceed " +\
                         str(modelType["_length"]) + " characters."
                     return (False)
             if "_min" in modelType:
@@ -196,7 +201,7 @@ class APIRequestMongo:
                 elif len(answer[key]) > int(temp_options[1]) or len(answer[key]) <= 0:
                     error_fields[
                         key] = "The text must not be empty and the length must be inferior" \
-                               " or equal to" + temp_options[1]
+                        " or equal to" + temp_options[1]
             elif temp_options[0] == "integer":
                 if not isinstance(answer[key], type(1)):
                     error_fields[key] = "The field must be an integer"
