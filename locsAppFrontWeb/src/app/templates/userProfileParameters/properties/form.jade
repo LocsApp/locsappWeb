@@ -1,33 +1,32 @@
-md-card(flex="100")
+md-card()
   md-card-content
-
     div(layout="row" layout-align="center")
-      h1 Edit my profile
-
-    div(layout="row" layout-sm="column" layout-align="space-around start")
-      img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
-
-      div(layout="column")
-        h2.username
-          md-icon(ng-if="!profileParams.user.gender" md-svg-src="../assets/icons/gender-male-female" +
-          ".svg"
-          aria-label="gender-male-female")
-          md-icon(ng-if="profileParams.user.gender.indexOf('female') > -1" md-svg-src="../assets/icons/gender-female.svg"
-          aria-label="gender-female")
-          md-icon(ng-if="profileParams.user.gender.indexOf('male') > -1" md-svg-src="../assets/icons/gender-male.svg"
-          aria-label="gender-male")
-          | {{profileParams.user.username}}
-
-        div.properties-user
-          div
-            ng-md-icon(icon="whatshot" size="28")
-            span(ng-if="!profile.user.last_activity_date") Last activity: Unknown
-            span(ng-if="profile.user.last_activity_date") Last activity {{profile.user.last_activity_date}}
-
-          div
-            ng-md-icon(icon="insert_emoticon" size="28")
-            span Subscribed {{profile.user.registered_date}}
+      form(name="modifyProfilForm" novalidate ng-submit="modifyProfilForm.$valid && modifyProfil.submit()"
+      flex-xs="100" flex-sm="80" flex-md="60" flex="50")
+        section(layout="column", layout-align="start center")
 
 
+          md-input-container.md-icon-float.md-block(layout-fill)
+            md-icon(md-svg-src="../assets/icons/register-login/ic_mood_black_24px.svg"
+            class="name")
+            input(placeholder="Username" required name="username" ng-model="username" maxlength="20" minlength="3").body-register-container-md
+            div(ng-messages="modifyProfilForm.username.$error" ng-if='!modifyProfilForm.username.$pristine')
+              div(ng-message="required") This is required.
+              div(ng-message="minlength") The username must be longer than 3 characters.
+              div(ng-message="md-maxlength") The username must be shorter than 20 characters.
+
+          md-input-container.md-icon-float.md-block(layout-fill)
+            md-icon(md-svg-src="../assets/icons/register-login/ic_vpn_key_black_24px.svg"
+            class="name")
+            input(placeholder="Password" type="password" name="password" required ng-model="password" maxlength="30" minlength="6").body-register-container-md
+            div(ng-messages="modifyProfilForm.password.$error" ng-if="modifyProfilForm.password.$dirty")
+              div(ng-message="required") This is required.
+              div(ng-message="minlength") The password must be longer than 6 characters.
+              div(ng-message="maxlength") The password must be shorter than 20 characters.
+
+
+          div.submit-buttons(layout-fill)
+            md-button.md-raised.margin-button-top(flex-offset="10" type="submit"
+            style="width:90%") Send
 
 
