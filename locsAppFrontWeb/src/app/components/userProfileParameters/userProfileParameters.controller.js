@@ -33,6 +33,14 @@
       vm.parseAddressToJson();
     };
 
+    vm.GetInfosPutUserSuccess = function (data) {
+      $log.log(data);
+      vm.user = data;
+      vm.user.registered_date = vm.user.registered_date.substring(0, 10);
+      vm.user.email_repeat = vm.user.email;
+      //vm.parseAddressToJson();
+    };
+
     /*Failure callback of profile_check*/
     vm.GetInfosUserFailure = function (data) {
       $log.log(data);
@@ -70,6 +78,8 @@
 
 
     vm.submit = function () {
+
+      $log.log("Submit");
 
       UsersService
         .modify_profile
