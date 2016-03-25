@@ -5,7 +5,7 @@ md-card()
       flex-xs="100" flex-sm="80" flex-md="60" flex="50")
         section(layout="column", layout-align="start center")
 
-          md-input-container.md-icon-float.md-block(layout-fill)
+          md-input-container.md-icon-float.md-block(layout-fill required)
             md-icon(md-svg-src="../assets/icons/gender-male-female.svg")
             md-radio-group(ng-model="profileParams.user.gender" layout="row" layout-fill)
               span Man
