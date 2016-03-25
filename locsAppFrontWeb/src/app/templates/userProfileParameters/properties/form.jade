@@ -16,30 +16,28 @@ md-card()
 
 
           md-input-container.md-icon-float.md-block(layout-fill)
-            md-icon(md-svg-src="../assets/icons/register-login/ic_mood_black_24px.svg"
-            class="name")
+            md-icon(md-svg-src="../assets/icons/profil/account.svg")
             input(placeholder="First name" type='text' name="first_name"
-            ng-model="first_name"
+            ng-model="profileParams.user.first_name"
             ).body-register-container-md
           md-input-container.md-icon-float.md-block(flex-offset="10" style="width:90%")
-            input(placeholder="Last name" type="text" name="last_name" ng-model="last_name")
+            input(placeholder="Last name" type="text" name="last_name" ng-model="profileParams.user.last_name")
             .body-register-container-md
 
           md-input-container.md-icon-float.md-block(layout-fill)
-            md-icon(md-svg-src="../assets/icons/register-login/ic_mood_black_24px.svg")
+            md-icon(md-svg-src="../assets/icons/profil/phone.svg")
             input(placeholder="Phone number" type="text" name="phone_number"
-            ng-model="phone_number")
+            ng-model="profileParams.user.phone_number")
             .body-register-container-md
 
           md-input-container.md-icon-float.md-block(layout-fill)
-            md-icon(md-svg-src="../assets/icons/register-login/ic_mood_black_24px.svg")
-            input(placeholder="Birthdate" type="text" name="birtdate" ng-model="birthdate")
+            md-icon(md-svg-src="../assets/icons/profil/cake-variant.svg")
+            input(placeholder="Birthdate" type="text" name="birtdate" ng-model="profileParams.user.birthdate")
             .body-register-container-md
 
           md-input-container.md-icon-float.md-block(layout-fill)
-            md-icon(md-svg-src="../assets/icons/register-login/ic_mood_black_24px.svg")
-            input(placeholder="Email" type="email" name="email" ng-model="email"
-            value="toto@hotmail.fr")
+            md-icon(md-svg-src="../assets/icons/register-login/ic_email_black_24px.svg")
+            input(placeholder="Email" type="email" name="email" ng-model="profileParams.user.email")
             .body-register-container-md
 
 
