@@ -10,9 +10,9 @@ md-card()
             class="name")
             md-radio-group(ng-model="data.group1" layout="row" layout-fill)
               span Man
-              md-radio-button(value="Apple" class="md-primary")
+              md-radio-button(value="Man" class="md-primary" aria-label="man")
               span Woman
-              md-radio-button(value="Banana")
+              md-radio-button(value="Woman" aria-label="woman")
 
 
           md-input-container.md-icon-float.md-block(layout-fill)
@@ -21,8 +21,7 @@ md-card()
             input(placeholder="First name" type='text' name="first_name"
             ng-model="first_name"
             ).body-register-container-md
-          md-input-container.md-icon-float.md-block(flex-offset="10" layout-fill)
-            md-icon(md-svg-src="../assets/icons/register-login/ic_mood_black_24px.svg")
+          md-input-container.md-icon-float.md-block(flex-offset="10" style="width:90%")
             input(placeholder="Last name" type="text" name="last_name" ng-model="last_name")
             .body-register-container-md
 
@@ -39,7 +38,8 @@ md-card()
 
           md-input-container.md-icon-float.md-block(layout-fill)
             md-icon(md-svg-src="../assets/icons/register-login/ic_mood_black_24px.svg")
-            input(placeholder="Last name" type="email" name="email" ng-model="email")
+            input(placeholder="Email" type="email" name="email" ng-model="email"
+            value="toto@hotmail.fr")
             .body-register-container-md
 
 
