@@ -124,7 +124,7 @@
         .save({'email': new_email})
         .$promise
         .then(vm.GetInfosPutUserSuccess, vm.GetInfosUserFailure);
-    }
+    };
 
     /*Resend a confirmation link on the email*/
     vm.resendConfirmationEmail = function (email) {
@@ -133,7 +133,7 @@
         .save({"new_email": email})
         .$promise
         .then(vm.GetResendConfirmationEmailSuccess, vm.GetResendConfirmationEmailFailure);
-    }
+    };
 
     /*Changed the password of the user*/
     vm.change_password = function () {
@@ -275,12 +275,12 @@
         vm.user = data;
         vm.parseAddressToJson();
         vm.hide();
-      }
+      };
 
       /*Failure callback for profile_check*/
       vm.GetUserInfosFailure = function () {
         toastr.error("This is odd...", "Woops...");
-      }
+      };
 
       /*Success callback for add_secondary_email*/
       vm.GetAddSecondaryEmailSuccess = function (data) {
@@ -290,13 +290,13 @@
           .get({})
           .$promise
           .then(vm.GetUserInfosSuccess, vm.GetUserInfosFailure);
-      }
+      };
 
       /*Failure callback for add_secondary_email*/
       vm.GetAddSecondaryEmailFailure = function (data) {
         $log.log(data);
         toastr.error(data.Error, "Woops...");
-      }
+      };
 
       /*Submits the form data from the dialog to the API*/
       vm.submit = function () {
@@ -306,13 +306,13 @@
           .save({"new_email": vm.email})
           .$promise
           .then(vm.GetAddSecondaryEmailSuccess, vm.GetAddSecondaryEmailFailure)
-      }
+      };
 
       /*Hide callback for $mdDialog*/
       vm.hide = function () {
         $mdDialog.hide(vm.user);
       };
-    }
+    };
 
     /*addAddressDialog Controller*/
     /** @ngInject */
@@ -568,7 +568,7 @@
           .save({"email": vm.email[0]})
           .$promise
           .then(vm.GetEmailUserSuccess, vm.GetEmailUserFailure);
-      }
+      };
 
       /*Hide callback for $mdDialog*/
       vm.hide = function () {
@@ -578,5 +578,9 @@
       };
     };
   }
+
+
+  /* ====== New add New Design ====== */
+
 
 })();
