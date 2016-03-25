@@ -22,6 +22,75 @@ from datetime import datetime
 @csrf_exempt
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))
+def searchArticles(request):
+    document = {"metadatas": {}, "articles": []}
+    body = json.loads(request.body.decode('utf8'))
+    search = {}
+    print(body)
+    if (not "_pagination" in body or not isinstance(
+            body["_pagination"], type({}))):
+        return JsonResponse(
+            {"Error": "You need a _pagination dict in your document."})
+    if (not "page_number" in body["_pagination"]
+            or not "items_per_page" in body["_pagination"]):
+        return JsonResponse(
+            {"Error": "The pagination is not in the correct format."})
+    ordering = []
+    if ("_order" in body):
+        if (not isinstance(body["_order"], type([]))):
+            return JsonResponse({"Error": "The order must be a list."})
+        for fields_order in body["_order"]:
+            if (not isinstance(fields_order, type({})) or len(fields_order.keys()) != 2 or not "order" in fields_order or not "field_name" in fields_order or not isinstance(
+                    fields_order["order"], str) or not isinstance(fields_order["field_name"], str)):
+                return JsonResponse(
+                    {"Error": "The order is not correctly formated."})
+            order_temp = None
+            print ("INNIT")
+            if (fields_order["order"] == "ASC"):
+                order_temp = 1
+            else:
+                order_temp = -1
+            ordering.append((fields_order["field_name"], order_temp))
+
+    for key in body:
+        if key != "_pagination" and key != "_order":
+            if key == "title":
+                search[key] = {"$regex": str(body[key])}
+            else:
+                search[key] = {"$in": body[key]}
+    number_items = body["_pagination"]["items_per_page"]
+    page_number = body["_pagination"]["page_number"]
+    if ("_order" in body):
+        results = db_locsapp["articles"].find(search).sort(ordering)[
+            ((page_number -
+              1) *
+             number_items):(
+                (page_number -
+                 1) *
+                number_items) +
+            number_items]
+    else:
+        results = db_locsapp["articles"].find(search)[
+            ((page_number -
+              1) *
+             number_items):(
+                (page_number -
+                 1) *
+                number_items) +
+            number_items]
+    document["metadatas"]["page_number"] = body[
+        "_pagination"]["page_number"]
+    number_pages = int(results.count() / number_items)
+    document["metadatas"][
+        "total_pages"] = 1 if number_pages < 1 else number_pages
+    for instance in results:
+        document["articles"].append(APIrequests.parseObjectIdToStr(instance))
+    return JsonResponse(document)
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
 def postNewArticle(request):
     model = {
         "title": {
@@ -95,7 +164,8 @@ def postNewArticle(request):
             "_required": False
         },
         "article_state": {
-            "_type": ObjectId()
+            "_type": ObjectId(),
+            "_required": False
         }
     }
 

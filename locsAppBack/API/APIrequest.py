@@ -57,16 +57,18 @@ class APIRequestMongo:
                         subObject, model_attribute[0], error_fields, key + ".subfield")
         else:
             modelType = model_attribute
-        if (bson.objectid.ObjectId.is_valid(attribute) == True and
-                bson.objectid.ObjectId.is_valid(str(modelType)) == True):
+        if (bson.objectid.ObjectId.is_valid(str(modelType)) == True):
+            if (not bson.objectid.ObjectId.is_valid(attribute)):
+                error_fields[key] = "This field must be an id."
+                return False
             if (isinstance(model_attribute, type({})) and "_protected" in
                     model_attribute and model_attribute["_protected"]):
                 pass
             else:
                 return True
         elif not isinstance(attribute, modelType):
-            print("ERROR : " + str(attribute))
-            error_fields[key] = "This field must be a " + modelType.__name__
+            error_fields[key] = "This field must be a " + \
+                modelType.__name__
             return False
         modelType = model_attribute
         if isinstance(modelType, type({})):
@@ -75,7 +77,7 @@ class APIRequestMongo:
                 return False
             if "_length" in modelType:
                 if len(str(attribute)) > modelType["_length"]:
-                    error_fields[key] = "The length must not exceed " + \
+                    error_fields[key] = "The length must not exceed " +\
                         str(modelType["_length"]) + " characters."
                     return (False)
             if "_min" in modelType:
@@ -196,7 +198,7 @@ class APIRequestMongo:
                 elif len(answer[key]) > int(temp_options[1]) or len(answer[key]) <= 0:
                     error_fields[
                         key] = "The text must not be empty and the length must be inferior" \
-                               " or equal to" + temp_options[1]
+                        " or equal to" + temp_options[1]
             elif temp_options[0] == "integer":
                 if not isinstance(answer[key], type(1)):
                     error_fields[key] = "The field must be an integer"

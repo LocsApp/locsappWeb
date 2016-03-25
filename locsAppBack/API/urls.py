@@ -30,7 +30,9 @@ search_patterns = [
     url(r'^notifications/(?P<user_pk>[0-9]+)/$',
         views.searchNotificationsUser),
     url(r'^notifications/(?P<user_pk>[0-9]+)/read-all/$',
-        views.notificationsUserAllRead)
+        views.notificationsUserAllRead),
+    url(r'^articles/$',
+        articles.searchArticles),
 ]
 
 notifications_patterns = [
