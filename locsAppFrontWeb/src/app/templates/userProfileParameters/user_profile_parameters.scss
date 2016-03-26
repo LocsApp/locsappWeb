@@ -4,6 +4,17 @@
 
   md-card {
 
+     /* For md-divider */
+      .layout-row > .flex-30 {
+        height: 1px;
+      }
+
+    .div-separator {
+
+      margin-bottom: 40px;
+
+    }
+
     &:first-child {
       md-icon {
         height: 40px;

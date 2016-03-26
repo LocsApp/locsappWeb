@@ -1,5 +1,11 @@
 md-card()
   md-card-content
+    div.div-separator(layout="row" layout-align="center")
+      md-divider.separator-h2(flex="30" hide-sm)
+      h2.t-center(flex="30") Basic information
+      md-divider.separator-h2(flex="30" hide-sm)
+
+
     div(layout="row" layout-align="center")
       form(name="modifyProfilForm" novalidate ng-submit="modifyProfilForm.$valid && profileParams" +
       ".submit()"
@@ -47,7 +53,7 @@ md-card()
             div(ng-messages="modifyProfilForm.birthdate.$error" ng-if='!modifyProfilForm.birthdate.$pristine')
               div(ng-message="required") This is required.
 
-          md-input-container.md-icon-float.md-block(layout-fill)
+          //md-input-container.md-icon-float.md-block(layout-fill)
             md-icon(md-svg-src="../assets/icons/register-login/ic_email_black_24px.svg")
             input(placeholder="Email" type="email" minlength="8" maxlength="100" required
             name="email" ng-model="profileParams.user.email" ng-pattern="/^.+@.+\..+$/").body-register-container-md
@@ -57,7 +63,7 @@ md-card()
               div(ng-message="maxlength") The email must be shorter than 100 characters.
               div(ng-message="pattern") The field must be an email.
 
-          md-input-container.md-icon-float.md-block(layout-fill)
+          //md-input-container.md-icon-float.md-block(layout-fill)
             md-icon(md-svg-src="../assets/icons/register-login/ic_repeat_black_24px.svg")
             input(placeholder="Repeat Email" type="email" minlength="8" maxlength="100" required
             name="email_repeat" ng-model="profileParams.user.email_repeat" ng-pattern="/^.+@.+\." +
