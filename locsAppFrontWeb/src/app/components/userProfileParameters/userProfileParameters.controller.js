@@ -104,9 +104,9 @@
       $log.log("Success changin password");
       $log.log(data);
       toastr.success(data.success, "Success");
-      vm.old_password = "";
+     /* vm.old_password = "";
       vm.new_password = "";
-      vm.confirm_new_password = "";
+      vm.confirm_new_password = "";*/
     };
 
     /*Failure callback of change_password*/
