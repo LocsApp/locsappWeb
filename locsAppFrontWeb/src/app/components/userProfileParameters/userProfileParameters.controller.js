@@ -98,6 +98,39 @@
     };
 
 
+
+      /*Success callback of change_password*/
+    vm.ChangePasswordSuccess = function (data) {
+      $log.log(data);
+      toastr.success(data.success, "Success");
+    };
+
+    /*Failure callback of change_password*/
+    vm.ChangePasswordFailure = function (data) {
+      var error = "This is odd...";
+      $log.log(data);
+      if (data.data.old_password)
+        error = "The old password typed in is invalid."
+      else if (data.data.new_password1)
+        error = data.data.new_password1;
+      else if (data.data.new_password2)
+        error = data.data.new_password2;
+      toastr.error(error, "Woops...");
+    };
+
+    vm.submitPassword = function() {
+
+      $log.log("Submit new password");
+
+      UsersService
+        .change_password
+        .save({"old_password": vm.user.old_password, "new_password1": vm.user.new_password,
+          "new_password2": vm.user.confirm_new_password})
+        .$promise
+        .then(vm.ChangePasswordSuccess, vm.ChangePasswordFailure);
+    }
+
+
   }
 
 })();
