@@ -104,6 +104,9 @@
       $log.log("Success changin password");
       $log.log(data);
       toastr.success(data.success, "Success");
+      vm.old_password = "";
+      vm.new_password = "";
+      vm.confirm_new_password = "";
     };
 
     /*Failure callback of change_password*/
@@ -111,7 +114,7 @@
       var error = "This is odd...";
       $log.log(data);
       if (data.data.old_password)
-        error = "The old password typed in is invalid."
+        error = "The old password typed in is invalid.";
       else if (data.data.new_password1)
         error = data.data.new_password1;
       else if (data.data.new_password2)
@@ -120,13 +123,6 @@
     };
 
     vm.submitPassword = function() {
-
-      $log.log("Submit new password", vm.old_password, vm.new_password, vm.confirm_new_password);
-
-/*        old_password: vm.old_password,
-          new_password1: vm.new_password1,
-          new_password2: vm.new_password2*/
-
 
       UsersService
         .change_password
