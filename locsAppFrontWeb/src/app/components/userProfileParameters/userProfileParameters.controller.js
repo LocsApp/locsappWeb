@@ -101,6 +101,7 @@
 
       /*Success callback of change_password*/
     vm.ChangePasswordSuccess = function (data) {
+      $log.log("Success changin password");
       $log.log(data);
       toastr.success(data.success, "Success");
     };
@@ -120,12 +121,17 @@
 
     vm.submitPassword = function() {
 
-      $log.log("Submit new password");
+      $log.log("Submit new password", vm.old_password, vm.new_password, vm.confirm_new_password);
+
+/*        old_password: vm.old_password,
+          new_password1: vm.new_password1,
+          new_password2: vm.new_password2*/
+
 
       UsersService
         .change_password
-        .save({"old_password": vm.user.old_password, "new_password1": vm.user.new_password,
-          "new_password2": vm.user.confirm_new_password})
+        .save({"old_password": vm.old_password, "new_password1": vm.new_password,
+          "new_password2": vm.confirm_new_password})
         .$promise
         .then(vm.ChangePasswordSuccess, vm.ChangePasswordFailure);
     }
