@@ -25,6 +25,24 @@
     }
     $log.log("vm.user = ", vm.user);
 
+    vm.parseAddressToJson = function () {
+      var i = 0;
+      var temp = null;
+
+      if (vm.user.living_address != null) {
+        for (i = 0; i < vm.user.living_address.length; i++) {
+          temp = angular.fromJson(vm.user.living_address[i][1]);
+          vm.user.living_address[i][1] = temp;
+        }
+      }
+      if (vm.user.billing_address != null) {
+        for (i = 0; i < vm.user.billing_address.length; i++) {
+          temp = angular.fromJson(vm.user.billing_address[i][1]);
+          vm.user.billing_address[i][1] = temp;
+        }
+      }
+    };
+
 
     /*Success callback of profile_check get*/
     vm.GetInfosUserSuccess = function (data) {
@@ -33,6 +51,9 @@
       vm.user.registered_date = vm.user.registered_date.substring(0, 10);
       vm.user.email_repeat = vm.user.email;
       vm.parseAddressToJson();
+
+      $log.log(vm.user.living_address);
+      $log.log(vm.user.billing_address);
 
       vm.user.nb_mark_as_renter = 50;
       vm.user.nb_mark_as_seller = 40;
@@ -71,25 +92,6 @@
     vm.GetInfosUserFailure = function (data) {
       $log.log(data);
       toastr.error("This is odd...", "Woops...");
-    };
-
-
-    vm.parseAddressToJson = function () {
-      var i = 0;
-      var temp = null;
-
-      if (vm.user.living_address != null) {
-        for (i = 0; i < vm.user.living_address.length; i++) {
-          temp = angular.fromJson(vm.user.living_address[i][1]);
-          vm.user.living_address[i][1] = temp;
-        }
-      }
-      if (vm.user.billing_address != null) {
-        for (i = 0; i < vm.user.billing_address.length; i++) {
-          temp = angular.fromJson(vm.user.billing_address[i][1]);
-          vm.user.billing_address[i][1] = temp;
-        }
-      }
     };
 
 

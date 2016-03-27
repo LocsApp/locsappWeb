@@ -89,13 +89,8 @@
 
     md-list {
 
-      .md-avatar {
-        margin-top: 0;
-      }
-
-      img {
-        width: 60px;
-        height: auto;
+      md-list-item.md-3-line .md-list-item-text h4 {
+        font-weight: bold;
       }
 
       md-list-item {
@@ -108,9 +103,6 @@
       }
     }
 
-    .price {
-      font-weight: bold;
-    }
   }
 
 }
