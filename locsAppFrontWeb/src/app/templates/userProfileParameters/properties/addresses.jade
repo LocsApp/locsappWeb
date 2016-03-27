@@ -6,7 +6,8 @@ md-card
       md-divider.separator-h2(flex="35" hide-sm)
 
     h3(flex-offset="10") Living addresses
-      span  ({{profileParams.user.nb_mark_as_renter}})
+      span(ng-if="!profileParams.user.living_address.length")  (0 / 6)
+      span(ng-if="profileParams.user.living_address.length")  ({{profileParams.user.living_address.length }} /6)
     md-list.my-layout-xs(flex-offset="10" layout="row")
       md-list-item.md-3-line(ng-repeat="livingAddress in profileParams.user.living_address track by $index")
         div.md-list-item-text(layout="column")
