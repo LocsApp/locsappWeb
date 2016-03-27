@@ -6,7 +6,7 @@ md-card
       md-divider.separator-h2(flex="35" hide-sm)
 
     h3(flex-offset="10") Living addresses
-      span ({{profileParams.user.nb_mark_as_renter}})
+      span  ({{profileParams.user.nb_mark_as_renter}})
     md-list.my-layout-xs(flex-offset="10" layout="row")
       md-list-item.md-3-line(ng-repeat="notation in profileParams.user.notation_renter track by $index")
         img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3" +
@@ -36,7 +36,7 @@ md-card
 
 
     h3(flex-offset="10") Billing addresses
-      span ({{profileParams.user.nb_mark_as_renter}})
+      span  ({{profileParams.user.nb_mark_as_renter}})
     md-list.my-layout-xs(flex-offset="10" layout="row")
       md-list-item.md-3-line(ng-repeat="notation in profileParams.user.notation_renter track by $index")
         img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3" +
