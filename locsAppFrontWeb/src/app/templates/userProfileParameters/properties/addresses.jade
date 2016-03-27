@@ -28,7 +28,8 @@ md-card
         div.md-list-item-text(layout="column")
           div(layout="row")
             h4 {{ livingAddress[0] }}
-            ng-md-icon(aria-label="delete icon" icon="delete" ng-click="profileParams.deleteAddressDialog($event, livingAddress, 0);").
+            ng-md-icon(
+            aria-label="delete icon" icon="delete" ng-click="profileParams.deleteAddressDialog($event, livingAddress, 0);").
           div {{ livingAddress[1].first_name }} {{ livingAddress[1].last_name }}
           div {{livingAddress[1].address}}
           div(layout="row")
@@ -36,7 +37,9 @@ md-card
             div {{livingAddress[1].city}}
 
     .add-entity
-      md-button.md-fab.md-primary(ng-click="profileParams.addAddressDialog($event, 0)"
+      md-button.md-fab.md-primary(
+      ng-if="profileParams.user.living_address.length < 6 || !profileParams.user.living_address.length"
+      ng-click="profileParams.addAddressDialog($event, 0)"
       aria-label="Edit your profileParams")
         ng-md-icon(icon="edit")
 
@@ -65,7 +68,8 @@ md-card
         div.md-list-item-text(layout="column")
           div(layout="row")
             h4 {{ billingAddress[0] }}
-            ng-md-icon(aria-label="delete icon" icon="delete" ng-click="profileParams.deleteAddressDialog($event, billingAddress, 1);").
+            ng-md-icon(
+            aria-label="delete icon" icon="delete" ng-click="profileParams.deleteAddressDialog($event, billingAddress, 1);").
           div {{ billingAddress[1].first_name }} {{ billingAddress[1].last_name }}
           div {{billingAddress[1].address}}
           div(layout="row")
@@ -74,7 +78,9 @@ md-card
 
 
     .add-entity
-      md-button.md-fab.md-primary(ng-click="profileParams.addAddressDialog($event, 1)"
+      md-button.md-fab.md-primary(
+      ng-if="profileParams.user.billing_address.length < 6 || !profileParams.user.billing_address.length"
+      ng-click="profileParams.addAddressDialog($event, 1)"
       aria-label="Edit your profileParams")
         ng-md-icon(icon="edit")
 
