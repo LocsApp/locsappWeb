@@ -156,7 +156,9 @@
         })
         .$promise
         .then(vm.ChangePasswordSuccess, vm.ChangePasswordFailure);
-    }
+    };
+
+
 
 
   }
