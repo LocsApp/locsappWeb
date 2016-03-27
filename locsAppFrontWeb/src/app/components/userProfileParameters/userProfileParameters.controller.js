@@ -179,6 +179,26 @@
       });
     };
 
+    /*Delete an address dialog*/
+    /** @ngInject */
+    vm.deleteAddressDialog = function (event, address, type) {
+      $mdDialog.show({
+        controller: vm.deleteAddressController,
+        controllerAs: 'deleteAddress',
+        templateUrl: 'app/templates/dialogTemplates/deleteAddress.tmpl.html',
+        locals: {user_id: vm.user.id, address: address, type: type},
+        bindToController: true,
+        parent: angular.element($document.body),
+        targetEvent: event,
+        clickOutsideToClose: true
+      }).then(function (data) {
+        if (data == false)
+          return;
+        else
+          vm.user = data
+      });
+    };
+
     /*addAddressDialog Controller*/
     /** @ngInject */
     vm.addAddressController = function ($mdDialog) {
@@ -211,7 +231,7 @@
       vm.GetAddressUserSuccess = function (data) {
         vm.user = data;
         vm.parseAddressToJson();
-        $log.log(vm.user)
+        $log.log(vm.user);
         if (vm.add_to_other && vm.count == 1)
           toastr.success("The new addresses have been successfully added.", "Success");
         else if (vm.type == 0 && vm.count == 0)
@@ -298,6 +318,81 @@
       };
     };
 
+
+     /*deleteAddressDialog Controller*/
+    /** @ngInject */
+    vm.deleteAddressController = function ($mdDialog) {
+      var vm = this;
+
+      /*init vars*/
+      vm.not_accepted = true;
+
+      /*Parses the strings address in living_address and billing_address to JSON objects*/
+      vm.parseAddressToJson = function () {
+        var i = 0;
+        var temp = null;
+
+        if (vm.user.living_address != null) {
+          for (i = 0; i < vm.user.living_address.length; i++) {
+            temp = angular.fromJson(vm.user.living_address[i][1]);
+            vm.user.living_address[i][1] = temp;
+          }
+        }
+        if (vm.user.billing_address != null) {
+          for (i = 0; i < vm.user.billing_address.length; i++) {
+            temp = angular.fromJson(vm.user.billing_address[i][1]);
+            vm.user.billing_address[i][1] = temp;
+          }
+        }
+      };
+
+      /*Success callback of the ressource callback*/
+      vm.GetAddressUserSuccess = function (data) {
+        $log.log(data);
+        vm.user = data;
+        vm.parseAddressToJson();
+        toastr.success("The address has been successfully deleted.", "Success");
+        vm.hide();
+      };
+
+      /*Failure callback of the ressource callback*/
+      vm.GetAddressUserFailure = function (data) {
+        $log.log(data);
+        toastr.error("This is odd...", "Woops...");
+      };
+
+      /*The user clicked on the Yes button*/
+      vm.accepted = function () {
+        var data_send = {};
+
+        vm.not_accepted = false;
+        /* type == 0 living_address */
+        if (vm.type == 0) {
+          data_send = {"user_id": vm.user_id, "living_address": vm.address};
+          UsersService
+            .living_addresses_delete
+            .save(data_send)
+            .$promise
+            .then(vm.GetAddressUserSuccess, vm.GetAddressUserFailure);
+        }
+        /* type == 1 billing_address */
+        else if (vm.type == 1) {
+          data_send = {"user_id": vm.user_id, "billing_address": vm.address};
+          UsersService
+            .billing_addresses_delete
+            .save(data_send)
+            .$promise
+            .then(vm.GetAddressUserSuccess, vm.GetAddressUserFailure);
+        }
+      };
+
+      /*Hide callback for $mdDialog*/
+      vm.hide = function () {
+        if (vm.not_accepted)
+          $mdDialog.hide(false);
+        $mdDialog.hide(vm.user);
+      };
+    };
 
   }
 

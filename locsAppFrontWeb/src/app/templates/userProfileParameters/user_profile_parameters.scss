@@ -89,6 +89,10 @@
 
     md-list {
 
+      ng-md-icon {
+        margin: 0;
+      }
+
       md-list-item.md-3-line .md-list-item-text h4 {
         font-weight: bold;
       }

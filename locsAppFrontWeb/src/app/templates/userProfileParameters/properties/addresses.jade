@@ -10,7 +10,9 @@ md-card
     md-list.my-layout-xs(flex-offset="10" layout="row")
       md-list-item.md-3-line(ng-repeat="livingAddress in profileParams.user.living_address track by $index")
         div.md-list-item-text(layout="column")
-          h4 {{ livingAddress[0] }}
+          div(layout="row")
+            h4 {{ livingAddress[0] }}
+            ng-md-icon(aria-label="delete icon" icon="delete" ng-click="profileParams.deleteAddressDialog($event, address, 0);").
           div {{ livingAddress[1].first_name }} {{ livingAddress[1].last_name }}
           div {{livingAddress[1].address}}
           div(layout="row")
