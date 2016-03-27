@@ -120,7 +120,7 @@
 
 }
 
-/*
+
 .user_profile_parameters {
   height: 100%;
 }
@@ -128,17 +128,7 @@
 .user_profile_parameters_menu {
   width: 200px;
 
-  md-list {
-    padding: 0px;
-    md-list-item button.md-button:hover:not([disabled]) {
-      background-color: inherit;
-    }
-  }
 
-  md-card {
-    cursor: pointer;
-    margin-right: 0px;
-  }
 
   h3 {
     text-align: center;
@@ -160,9 +150,6 @@
     margin: 10px auto;
   }
 
-  md-card-content {
-    background-color: $bodyContainer;
-  }
 
   .user_profile_parameters_no_info {
     color: $noInfo;
@@ -256,4 +243,4 @@
     margin: auto;
   }
 }
-*/
+
