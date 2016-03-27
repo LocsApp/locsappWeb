@@ -34,17 +34,17 @@ md-card(flex-xs="100" flex-sm='100' flex-md="50" flex="50" ng-if="profile.user.n
               ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
           p {{ notation.description | limitTo: 30 }} {{notation.description.length > 30 ? '...' : ''}}
 
-    div(flex-offset="10")
-      md-button.special-button.md-raised(layout-fill flex="90") Show more
+    div(flex-offset="10" ng-if="profile.user.notation_renter.length > 4")
+      md-button.special-button.md-raised(layout-fill flex="90" ) Show more
 
 
     h3(flex-offset="10") As a client
-      span(ng-repeat="value in profile.user.global_notation_renter track by $index")
+      span(ng-repeat="value in profile.user.global_notation_client track by $index")
         ng-md-icon(ng-if="value" icon="star" size="22")
         ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
-      span ({{profile.user.nb_mark_as_renter}})
+      span ({{profile.user.nb_mark_as_client}})
     md-list.my-layout-xs(flex-offset="10" layout="row")
-      md-list-item.md-3-line(ng-repeat="notation in profile.user.notation_renter track by $index"
+      md-list-item.md-3-line(ng-repeat="notation in profile.user.notation_client track by $index"
       ng-if="$index <= 1")
         img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg" class="md-avatar" alt="{{item.who}}")
         div.md-list-item-text(layout="column")
@@ -56,7 +56,7 @@ md-card(flex-xs="100" flex-sm='100' flex-md="50" flex="50" ng-if="profile.user.n
           p {{ notation.description | limitTo: 30 }} {{notation.description.length > 30 ? '...' : ''}}
     md-divider(flex-offset="10" flex="80")
     md-list.my-layout-xs(flex-offset="10" layout="row")
-      md-list-item.md-3-line(ng-repeat="notation in profile.user.notation_renter track by $index"
+      md-list-item.md-3-line(ng-repeat="notation in profile.user.notation_client track by $index"
       ng-if="$index > 1")
         img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg" class="md-avatar" alt="{{item.who}}")
         div.md-list-item-text(layout="column")
@@ -68,6 +68,6 @@ md-card(flex-xs="100" flex-sm='100' flex-md="50" flex="50" ng-if="profile.user.n
           p {{ notation.description | limitTo: 30 }} {{notation.description.length > 30 ? '...' : ''}}
 
 
-    div(flex-offset="10")
+    div(flex-offset="10" ng-if="profile.user.notation_client.length > 4")
       md-button.special-button.md-raised(layout-fill flex="90") Show more
 
