@@ -89,12 +89,21 @@
 
     md-list {
 
+      .top-address {
+        margin-bottom: 20px;
+      }
+
       ng-md-icon {
         margin: 0;
       }
 
       md-list-item.md-3-line .md-list-item-text h4 {
         font-weight: bold;
+      }
+
+      h4 {
+        margin: 5px 0 0 0;
+
       }
 
       md-list-item {
