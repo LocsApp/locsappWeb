@@ -5,7 +5,8 @@ md-card(flex-sm='100' flex-md="100" flex="50" ng-if="profile.user.nb_mark_as_ren
       h2.t-center(flex="20") Articles
       md-divider.separator-h2(flex="30" hide-sm)
 
-
+    div.t-center(ng-if="!profile.user.articles")
+      p {{profile.user.username}} has no articles available for the moment
     md-list.my-layout-xs(flex-offset="10" layout="row")
       md-list-item.md-3-line(ng-repeat="article in profile.user.articles track by $index"
       ng-if="$index <= 1")

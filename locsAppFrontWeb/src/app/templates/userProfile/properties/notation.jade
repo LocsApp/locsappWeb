@@ -6,10 +6,13 @@ md-card(flex-xs="100" flex-sm='100' flex-md="50" flex="50" ng-if="profile.user.n
       md-divider.separator-h2(flex="30" hide-sm)
 
     h3(flex-offset="10") As a renter
-      span(ng-repeat="value in profile.user.global_notation_renter track by $index")
+      span(ng-repeat="value in profile.user.global_notation_renter track by $index"
+      ng-if="!profile.user.notation_renter")
         ng-md-icon(ng-if="value" icon="star" size="22")
         ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
-      span ({{profile.user.nb_mark_as_renter}})
+      span(ng-if="profile.user.notation_renter") ({{profile.user.nb_mark_as_renter}})
+    p.t-center(ng-if="!profile.user.notation_renter").
+      {{profile.user.username}} has no notation as a renter
     md-list.my-layout-xs(flex-offset="10" layout="row")
       md-list-item.md-3-line(ng-repeat="notation in profile.user.notation_renter track by $index "
       ng-if="$index <= 1")
@@ -38,11 +41,13 @@ md-card(flex-xs="100" flex-sm='100' flex-md="50" flex="50" ng-if="profile.user.n
       md-button.special-button.md-raised(layout-fill flex="90" ) Show more
 
 
-    h3(flex-offset="10") As a client
-      span(ng-repeat="value in profile.user.global_notation_client track by $index")
+    h3( flex-offset="10") As a client
+      span(ng-repeat="value in profile.user.global_notation_client track by $index"
+      ng-if="!profile.user.notation_client")
         ng-md-icon(ng-if="value" icon="star" size="22")
         ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
-      span ({{profile.user.nb_mark_as_client}})
+      span(ng-if="profile.user.notation_client") ({{profile.user.nb_mark_as_client}})
+    p.t-center(ng-if="!profile.user.notation_client") {{profile.user.username}} has no notation as a client
     md-list.my-layout-xs(flex-offset="10" layout="row")
       md-list-item.md-3-line(ng-repeat="notation in profile.user.notation_client track by $index"
       ng-if="$index <= 1")
