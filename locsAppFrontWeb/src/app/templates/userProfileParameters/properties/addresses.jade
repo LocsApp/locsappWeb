@@ -9,7 +9,9 @@ md-card
       span(ng-if="!profileParams.user.living_address.length")  (0 / 6)
       span(ng-if="profileParams.user.living_address.length")  ({{profileParams.user.living_address.length }} /6)
     md-list.my-layout-xs(flex-offset="10" layout="row")
-      md-list-item.md-3-line(ng-repeat="livingAddress in profileParams.user.living_address track by $index")
+      md-list-item.md-3-line(
+      ng-repeat="livingAddress in profileParams.user.living_address track by $index"
+      ng-if="$index < 3")
         div.md-list-item-text(layout="column")
           div(layout="row")
             h4 {{ livingAddress[0] }}
@@ -19,16 +21,19 @@ md-card
           div(layout="row")
            div {{livingAddress[1].postal_code}}
            div {{livingAddress[1].city}}
-    //md-list.my-layout-xs(flex-offset="10" layout="row")
-      md-list-item.md-3-line(ng-repeat="livingAddress in profileParams.user.living_address track by $index")
-        img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg" class="md-avatar" alt="{{item.who}}")
+    md-list.my-layout-xs(flex-offset="10" layout="row")
+      md-list-item.md-3-line(
+      ng-repeat="livingAddress in profileParams.user.living_address track by $index"
+      ng-if="$index >= 3")
         div.md-list-item-text(layout="column")
-          h4 {{ livingAddress.title_article }}
-          div
-            span(ng-repeat="value in livingAddress.mark track by $index")
-              ng-md-icon(ng-if="value" icon="star" size="22")
-              ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
-          p {{ livingAddress.description | limitTo: 30 }} {{livingAddress.description.length > 30 ? '...' : ''}}
+          div(layout="row")
+            h4 {{ livingAddress[0] }}
+            ng-md-icon(aria-label="delete icon" icon="delete" ng-click="profileParams.deleteAddressDialog($event, livingAddress, 0);").
+          div {{ livingAddress[1].first_name }} {{ livingAddress[1].last_name }}
+          div {{livingAddress[1].address}}
+          div(layout="row")
+            div {{livingAddress[1].postal_code}}
+            div {{livingAddress[1].city}}
 
     .add-entity
       md-button.md-fab.md-primary(ng-click="profileParams.addAddressDialog($event, 0)"
@@ -40,7 +45,9 @@ md-card
       span(ng-if="!profileParams.user.billing_address.length")  (0 / 6)
       span(ng-if="profileParams.user.billing_address.length")  ({{profileParams.user.billing_address.length }} /6)
     md-list.my-layout-xs(flex-offset="10" layout="row")
-      md-list-item.md-3-line(ng-repeat="billingAddress in profileParams.user.billing_address track by $index")
+      md-list-item.md-3-line(
+      ng-repeat="billingAddress in profileParams.user.billing_address track by $index"
+      ng-if="$index < 3")
         div.md-list-item-text(layout="column")
           div(layout="row")
             h4 {{ billingAddress[0] }}
@@ -51,16 +58,19 @@ md-card
             div {{billingAddress[1].postal_code}}
             div {{billingAddress[1].city}}
 
-    //md-list.my-layout-xs(flex-offset="10" layout="row")
-      md-list-item.md-3-line(ng-repeat="livingAddress in profileParams.user.livingAddress_renter track by $index")
-        img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg" class="md-avatar" alt="{{item.who}}")
+    md-list.my-layout-xs(flex-offset="10" layout="row")
+      md-list-item.md-3-line(
+      ng-repeat="billingAddress in profileParams.user.billing_address track by $index"
+      ng-if="$index >= 3")
         div.md-list-item-text(layout="column")
-          h4 {{ livingAddress.title_article }}
-          div
-            span(ng-repeat="value in livingAddress.mark track by $index")
-              ng-md-icon(ng-if="value" icon="star" size="22")
-              ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
-          p {{ livingAddress.description | limitTo: 30 }} {{livingAddress.description.length > 30 ? '...' : ''}}
+          div(layout="row")
+            h4 {{ billingAddress[0] }}
+            ng-md-icon(aria-label="delete icon" icon="delete" ng-click="profileParams.deleteAddressDialog($event, billingAddress, 1);").
+          div {{ billingAddress[1].first_name }} {{ billingAddress[1].last_name }}
+          div {{billingAddress[1].address}}
+          div(layout="row")
+            div {{billingAddress[1].postal_code}}
+            div {{billingAddress[1].city}}
 
 
     .add-entity
