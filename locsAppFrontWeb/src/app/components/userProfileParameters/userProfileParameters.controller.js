@@ -81,11 +81,12 @@
     };
 
     vm.GetInfosPutUserSuccess = function (data) {
-      $log.log(data);
+      $log.log("it is workgin", data);
       vm.user = data;
       vm.user.registered_date = vm.user.registered_date.substring(0, 10);
       vm.user.email_repeat = vm.user.email;
-      //vm.parseAddressToJson();
+      toastr.success("The profile has been successfully modified.", "Success");
+      vm.parseAddressToJson();
     };
 
     /*Failure callback of profile_check*/
@@ -117,9 +118,7 @@
           last_name: vm.user.last_name,
           gender: vm.user.gender,
           birthdate: vm.user.birthdate,
-          phone: vm.user.phone,
-          living_address: [],
-          billing_address: []
+          phone: vm.user.phone
         })
         .$promise
         .then(vm.GetInfosPutUserSuccess, vm.GetInfosUserFailure);
