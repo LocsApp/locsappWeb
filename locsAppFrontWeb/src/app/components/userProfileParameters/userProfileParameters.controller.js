@@ -319,7 +319,7 @@
     };
 
 
-     /*deleteAddressDialog Controller*/
+    /*deleteAddressDialog Controller*/
     /** @ngInject */
     vm.deleteAddressController = function ($mdDialog) {
       var vm = this;
@@ -367,8 +367,11 @@
 
         vm.not_accepted = false;
         /* type == 0 living_address */
+
         if (vm.type == 0) {
           data_send = {"user_id": vm.user_id, "living_address": vm.address};
+          $log.log("Delete adress = ", data_send);
+          $log.log("TYpe = ", vm.type);
           UsersService
             .living_addresses_delete
             .save(data_send)

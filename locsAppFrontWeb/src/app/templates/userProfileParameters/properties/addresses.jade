@@ -12,7 +12,7 @@ md-card
         div.md-list-item-text(layout="column")
           div(layout="row")
             h4 {{ livingAddress[0] }}
-            ng-md-icon(aria-label="delete icon" icon="delete" ng-click="profileParams.deleteAddressDialog($event, address, 0);").
+            ng-md-icon(aria-label="delete icon" icon="delete" ng-click="profileParams.deleteAddressDialog($event, livingAddress, 0);").
           div {{ livingAddress[1].first_name }} {{ livingAddress[1].last_name }}
           div {{livingAddress[1].address}}
           div(layout="row")
