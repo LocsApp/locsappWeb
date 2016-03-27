@@ -10,9 +10,9 @@ md-card
       span(ng-if="!profileParams.user.living_address.length")  (0 / 6)
       span(ng-if="profileParams.user.living_address.length")  ({{profileParams.user.living_address.length }} /6)
     md-list.my-layout-xs(flex-offset="10" layout="row")
-      md-list-item.md-3-line(
+      md-list-item(
       ng-repeat="livingAddress in profileParams.user.living_address track by $index")
-        div(layout="column" ng-if="$index % 2 == 0")
+        div(layout="column" ng-if="$index % 2 == 0" layout-align="start start")
           div.top-address
             div(layout="row")
               h4 {{ livingAddress[0] }}
@@ -43,37 +43,34 @@ md-card
         ng-md-icon(icon="edit")
 
 
-    h3(flex-offset="10") Billing addresses
+
+    h3(flex-offset="10") billing addresses
       span(ng-if="!profileParams.user.billing_address.length")  (0 / 6)
       span(ng-if="profileParams.user.billing_address.length")  ({{profileParams.user.billing_address.length }} /6)
     md-list.my-layout-xs(flex-offset="10" layout="row")
-      md-list-item.md-3-line(
-      ng-repeat="billingAddress in profileParams.user.billing_address track by $index"
-      ng-if="$index < 3")
-        div.md-list-item-text(layout="column")
-          div(layout="row")
-            h4 {{ billingAddress[0] }}
-            ng-md-icon(aria-label="delete icon" icon="delete" ng-click="profileParams.deleteAddressDialog($event, billingAddress, 1);").
-          div {{ billingAddress[1].first_name }} {{ billingAddress[1].last_name }}
-          div {{billingAddress[1].address}}
-          div(layout="row")
-            div {{billingAddress[1].postal_code}}
-            div {{billingAddress[1].city}}
-
-    md-list.my-layout-xs(flex-offset="10" layout="row")
-      md-list-item.md-3-line(
-      ng-repeat="billingAddress in profileParams.user.billing_address track by $index"
-      ng-if="$index >= 3")
-        div.md-list-item-text(layout="column")
-          div(layout="row")
-            h4 {{ billingAddress[0] }}
-            ng-md-icon(
-            aria-label="delete icon" icon="delete" ng-click="profileParams.deleteAddressDialog($event, billingAddress, 1);").
-          div {{ billingAddress[1].first_name }} {{ billingAddress[1].last_name }}
-          div {{billingAddress[1].address}}
-          div(layout="row")
-            div {{billingAddress[1].postal_code}}
-            div {{billingAddress[1].city}}
+      md-list-item(
+      ng-repeat="billingAddress in profileParams.user.billing_address track by $index")
+        div(layout="column" ng-if="$index % 2 == 0" layout-align="start start")
+          div.top-address
+            div(layout="row")
+              h4 {{ billingAddress[0] }}
+              ng-md-icon(aria-label="delete icon" icon="delete" ng-click="profileParams.deleteAddressDialog($event, billingAddress, 0);").
+            div {{ billingAddress[1].first_name }} {{ billingAddress[1].last_name }}
+            div {{billingAddress[1].address}}
+            div(layout="row")
+              div {{billingAddress[1].postal_code}}
+              div {{billingAddress[1].city}}
+          div(ng-if="profileParams.user.billing_address[$index + 1]")
+            div(layout="row")
+              h4 {{profileParams.user.billing_address[$index + 1][0]}}
+              ng-md-icon(aria-label="delete icon" icon="delete" ng-click="profileParams.deleteAddressDialog($event, billingAddress, 0);").
+            div {{ billingAddress[1].first_name }} {{ billingAddress[1].last_name }}
+            div {{billingAddress[1].address}}
+            div(layout="row")
+              div {{billingAddress[1].postal_code}}
+              div {{billingAddress[1].city}}
+          //h4(ng-if="profileParams.user.billing_address[$index + 1] && profileParams.user" +".billing_address[$index + 1]") {{profileParams.user.billing_address[$index + 1][0]}}
+          //h4(ng-if="$index % 2 != 0") {{ billingAddress[0] }}
 
 
     .add-entity
@@ -82,4 +79,6 @@ md-card
       ng-click="profileParams.addAddressDialog($event, 1)"
       aria-label="Edit your profileParams")
         ng-md-icon(icon="edit")
+
+
 
