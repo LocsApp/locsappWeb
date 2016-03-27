@@ -15,6 +15,7 @@
 
     var vm = this;
 
+
     /*vars initilization*/
     vm.user = ScopesService.get("user_infos");
     if (vm.user) {
@@ -31,6 +32,30 @@
       vm.user.registered_date = vm.user.registered_date.substring(0, 10);
       vm.user.email_repeat = vm.user.email;
       vm.parseAddressToJson();
+
+      vm.user.nb_mark_as_renter = 50;
+      vm.user.nb_mark_as_seller = 40;
+      vm.user.global_notation_renter = [true, true, true, true, false];
+      vm.user.global_notation_seller = 5;
+      vm.user.notation_renter = [
+        {
+          "author_id": "dgdsgdshfs8787",
+          "author_username": "toto",
+          "title_article": "Veste rouge taille 42",
+          "id_article": "56cb41c0421aa91298799892",
+          "mark": [true, true, true, true, true],
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        },
+
+        {
+          "author_id": "dgdsgdshfs8787",
+          "author_username": "toto",
+          "title_article": "Veste rouge taille 42",
+          "id_article": "56cb41c0421aa91298799892",
+          "mark": [true, true, true, false, false],
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }
+      ];
     };
 
     vm.GetInfosPutUserSuccess = function (data) {
@@ -98,15 +123,14 @@
     };
 
 
-
-      /*Success callback of change_password*/
+    /*Success callback of change_password*/
     vm.ChangePasswordSuccess = function (data) {
       $log.log("Success changin password");
       $log.log(data);
       toastr.success(data.success, "Success");
-     /* vm.old_password = "";
-      vm.new_password = "";
-      vm.confirm_new_password = "";*/
+      /* vm.old_password = "";
+       vm.new_password = "";
+       vm.confirm_new_password = "";*/
     };
 
     /*Failure callback of change_password*/
@@ -122,12 +146,14 @@
       toastr.error(error, "Woops...");
     };
 
-    vm.submitPassword = function() {
+    vm.submitPassword = function () {
 
       UsersService
         .change_password
-        .save({"old_password": vm.old_password, "new_password1": vm.new_password,
-          "new_password2": vm.confirm_new_password})
+        .save({
+          "old_password": vm.old_password, "new_password1": vm.new_password,
+          "new_password2": vm.confirm_new_password
+        })
         .$promise
         .then(vm.ChangePasswordSuccess, vm.ChangePasswordFailure);
     }

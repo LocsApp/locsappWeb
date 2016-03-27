@@ -4,10 +4,10 @@
 
   md-card {
 
-     /* For md-divider */
-      .layout-row > .flex-30 {
-        height: 1px;
-      }
+    /* For md-divider */
+    .layout-row > .flex-30, .layout-row > .flex-35 {
+      height: 1px;
+    }
 
     .div-separator {
 
@@ -72,15 +72,40 @@
 
     form {
       md-input-container {
-     /*   &:first-child {
-          margin-bottom: 20px;
+        /*   &:first-child {
+             margin-bottom: 20px;
 
-          span {
-            margin-right: 5px;
-          }
+             span {
+               margin-right: 5px;
+             }
 
-        }*/
+           }*/
       }
+    }
+
+    md-list {
+
+      .md-avatar {
+        margin-top: 0;
+      }
+
+      img {
+        width: 60px;
+        height: auto;
+      }
+
+      md-list-item {
+        padding-left: 0;
+      }
+
+      md-list-item.md-3-line .md-list-item-text p, md-list-item.md-3-line .md-list-item-text h4 {
+        color: black;
+        font-size: 1.1em;
+      }
+    }
+
+    .price {
+      font-weight: bold;
     }
   }
 
