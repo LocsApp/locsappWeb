@@ -11,7 +11,8 @@
     .controller('ProfileParamsController', ProfileParamsController);
 
   /** @ngInject */
-  function ProfileParamsController($scope, $log, ScopesService, toastr, UsersService) {
+  function ProfileParamsController($scope, $log, ScopesService, toastr, UsersService, $mdDialog,
+                                   $document) {
 
     var vm = this;
 
@@ -176,7 +177,7 @@
       });
     };
 
-     /*addAddressDialog Controller*/
+    /*addAddressDialog Controller*/
     /** @ngInject */
     vm.addAddressController = function ($mdDialog) {
       var vm = this;
@@ -294,8 +295,6 @@
         $mdDialog.hide(vm.user);
       };
     };
-
-
 
 
   }

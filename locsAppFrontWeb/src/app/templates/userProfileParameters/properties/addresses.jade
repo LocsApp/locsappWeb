@@ -30,7 +30,7 @@ md-card
           p {{ notation.description | limitTo: 30 }} {{notation.description.length > 30 ? '...' : ''}}
 
     .add-entity
-      md-button.md-fab.md-primary(ng-click="profileParams.goToParameters()"
+      md-button.md-fab.md-primary(ng-click="profileParams.addAddressDialog($event, 0)"
       aria-label="Edit your profileParams")
         ng-md-icon(icon="edit")
 
@@ -62,7 +62,7 @@ md-card
 
 
     .add-entity
-      md-button.md-fab.md-primary(ng-click="profileParams.goToParameters()"
+      md-button.md-fab.md-primary(ng-click="profileParams.addAddressDialog($event, 1)"
       aria-label="Edit your profileParams")
         ng-md-icon(icon="edit")
 
