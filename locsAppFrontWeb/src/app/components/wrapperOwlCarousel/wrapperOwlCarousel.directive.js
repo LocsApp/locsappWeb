@@ -11,12 +11,15 @@
     .directive('wrapperOwlCarousel', wrapperOwlCarousel);
 
   /** @ngInject */
-  function wrapperOwlCarousel() {
+  function wrapperOwlCarousel($log) {
+
+    $log.log("IN wrrapper carousel");
+
     return {
       restrict: 'E',
       link: function (scope, element, attrs) {
-        var options = scope.$eval($(element).attr('data-options'));
-        $(element).owlCarousel(options);
+        var options = scope.$eval(angular.element(element).attr('data-options'));
+        angular.element(element).owlCarousel(options);
       }
     };
   }

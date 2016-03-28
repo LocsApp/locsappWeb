@@ -17,6 +17,8 @@
     var vm = this;
     //vm.showChildComment = false;
     vm.test_test = ['un', 'deux', 'trois'];
+    vm.items = ['../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg',
+      '../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg'];
 
     $log.log("route params = ", $stateParams.id);
 

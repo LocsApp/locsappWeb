@@ -23,6 +23,11 @@
     bottom: 0;
   }
 
+   md-divider {
+        border-top-color: $separatorBarElement;
+        height: 1px;
+      }
+
   md-card {
 
     md-card-content {
@@ -52,10 +57,6 @@
         color: #8D8D8D;
       }
 
-      md-divider {
-        border-top-color: $separatorBarElement;
-        margin-top: 0;
-      }
     }
 
   }

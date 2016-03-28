@@ -18,8 +18,12 @@ div.article-show(layout="row" layout-align="center")
             ng-md-icon(icon="star" size="22")
             span (50)
 
+
     div(layout="row" layout-align="center")
-      img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
+      div(owl-carousel="items")
+        div.item {{ articleShow.item }}
+
+      //img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
 
 
     div(layout="row")
