@@ -20,7 +20,7 @@
     "angular-material-icons": "~0.6.0",
     "angular-ui-router-anim-in-out": "~1.0.2",
     "angular-permission": "~1.1.1",
-    "angular-validation-match": "~1.6.0ma",
+    "angular-validation-match": "~1.6.0",
     "ngstorage": "~0.3.10",
     "angular-loading-bar": "~0.8.0",
     "roboto-slab-fontface-bower": "roboto-slab-fontface#*",
@@ -31,7 +31,8 @@
     "textAngular": "~1.5.0",
     "font-awesome": "~4.5.0",
     "ng-file-upload": "~12.0.1",
-    "angular-material": "~1.0.6"
+    "angular-material": "~1.0.6",
+    "owl.carousel": "~2.0.0-beta.3"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.2"
