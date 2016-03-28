@@ -23,7 +23,7 @@ md-card
             div(layout="row")
               div {{livingAddress[1].postal_code}}
               div {{livingAddress[1].city}}
-          div(ng-if="profileParams.user.living_address[$index + 1]")
+          //div(ng-if="profileParams.user.living_address[$index + 1]")
             div(layout="row")
               h4 {{profileParams.user.living_address[$index + 1][0]}}
               ng-md-icon(aria-label="delete icon" icon="delete" ng-click="profileParams.deleteAddressDialog($event, livingAddress, 0);").
