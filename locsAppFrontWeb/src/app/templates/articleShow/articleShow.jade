@@ -69,14 +69,31 @@ div.article-show(layout="row" layout-align="center")
             div.t-right(flex="50") {{articleShow.state}}
           md-divider
 
-      md-card(flex="50")
+      md-card.reservation(flex="50")
         md-card-content(flex="flex" layout-fill)
-          div(layout="column" flex="flex" layout-fill)
-            md-datepicker(flex="100" ng-model="articleShow.AskBeginLocation"
+
+          //div.test(layout="column" flex="flex")
+            div(layout-align="center")
+              h1 toto
+          div.date(layout="column" layout-align="start")
+            md-datepicker( ng-model="articleShow.AskBeginLocation"
             md-placeholder="Begin location")
             md-datepicker(ng-model="articleShow.AskEndLocation" md-placeholder="End location")
+            //md-button.md-raised Ask for rent
+
+          div.rent(layout="column" flex="flex" layout-align="center" )
+            //md-datepicker(flex="100" ng-model="articleShow.AskBeginLocation"
+            //md-placeholder="Begin location")
+            //md-datepicker(ng-model="articleShow.AskEndLocation" md-placeholder="End location")
             md-button.md-raised Ask for rent
 
+          //div.favorite-share(layout="column" flex="flex" layout-align="center" )
+            //md-datepicker(flex="100" ng-model="articleShow.AskBeginLocation"
+            //md-placeholder="Begin location")
+            //md-datepicker(ng-model="articleShow.AskEndLocation" md-placeholder="End location")
+            md-button.md-raised Ask for rented222
+
+          div.favorite-share(layout="column" flex="flex" layout-align="end" )
             div
               span
                 ng-md-icon(icon="favorite")

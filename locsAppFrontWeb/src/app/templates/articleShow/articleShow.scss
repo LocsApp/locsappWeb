@@ -33,7 +33,6 @@
 
   }
 
-
   md-card {
 
     md-card-content {
@@ -64,6 +63,37 @@
 
     }
 
+    &.reservation {
+      //overflow: hidden;
+      position: relative;
+      width: 100%;
+
+      md-card-content div {
+
+        &.date {
+          //background: red;
+          height: 33%;
+          width: 100%;
+          position: absolute;
+          top: 0;
+        }
+
+        &.rent {
+          height: 33%;
+          width: 100%;
+          position: absolute;
+          top: 33%;
+        }
+
+        &.favorite-share {
+          height: 33%;
+          width: 100%;
+          position: absolute;
+          //background: blue;
+          top: 66%;
+        }
+      }
+    }
   }
 }
 
