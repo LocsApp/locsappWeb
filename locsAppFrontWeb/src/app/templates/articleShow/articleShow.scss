@@ -68,29 +68,41 @@
       position: relative;
       width: 100%;
 
-      md-card-content div {
+      md-card-content  {
 
-        &.date {
-          //background: red;
-          height: 33%;
-          width: 100%;
-          position: absolute;
-          top: 0;
+        md-datepicker {
+          padding-right: 0;
+          padding-left: 0;
+          width: 98%;
+        }
+        .md-datepicker-input-container {
+          width: 85%;
         }
 
-        &.rent {
-          height: 33%;
-          width: 100%;
-          position: absolute;
-          top: 33%;
-        }
+        div {
 
-        &.favorite-share {
-          height: 33%;
-          width: 100%;
-          position: absolute;
-          //background: blue;
-          top: 66%;
+          &.date {
+            //background: red;
+            height: 33%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+          }
+
+          &.rent {
+            height: 33%;
+            width: 100%;
+            position: absolute;
+            top: 33%;
+          }
+
+          &.favorite-share {
+            height: 33%;
+            width: 100%;
+            position: absolute;
+            //background: blue;
+            top: 66%;
+          }
         }
       }
     }
