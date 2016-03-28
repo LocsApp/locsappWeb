@@ -33,8 +33,6 @@ md-card
             div(layout="row")
               div {{livingAddress[1].postal_code}}
               div {{livingAddress[1].city}}
-          //h4(ng-if="profileParams.user.living_address[$index + 1] && profileParams.user" +".living_address[$index + 1]") {{profileParams.user.living_address[$index + 1][0]}}
-          //h4(ng-if="$index % 2 != 0") {{ livingAddress[0] }}
 
 
     .add-entity
@@ -74,8 +72,6 @@ md-card
             div(layout="row")
               div {{billingAddress[1].postal_code}}
               div {{billingAddress[1].city}}
-          //h4(ng-if="profileParams.user.billing_address[$index + 1] && profileParams.user" +".billing_address[$index + 1]") {{profileParams.user.billing_address[$index + 1][0]}}
-          //h4(ng-if="$index % 2 != 0") {{ billingAddress[0] }}
 
 
     .add-entity
