@@ -117,14 +117,14 @@ div.article-show(layout="row" layout-align="center")
       md-divider.separator-h2(flex="45")
 
 
-    div(layout="row" layout-align="center" ng-repeat="question in articleShow.questions" ng-if="question.is_visible")
+    div.question(layout="row" layout-align="center" ng-repeat="question in articleShow.questions" ng-if="question.is_visible")
       div(layout="column")
         div {{question.content}} (Ask by {{question.username_author}})
         div
           ng-md-icon(icon="warning")
           ng-md-icon(icon="thumb_up")
           span +{{question.is_useful.length}}
-        div {{question.response.content}}
+        div(flex-offset="10") {{question.response.content}}
 
     //div(layout="row" layout-align="center")
       div(layout="column")
