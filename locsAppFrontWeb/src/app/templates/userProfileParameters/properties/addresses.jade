@@ -54,7 +54,9 @@ md-card
           div.top-address
             div(layout="row")
               h4 {{ billingAddress[0] }}
-              ng-md-icon(aria-label="delete icon" icon="delete" ng-click="profileParams.deleteAddressDialog($event, billingAddress, 0);").
+
+              ng-md-icon(aria-label="delete icon" icon="delete" ng-click="profileParams.deleteAddressDialog($event, billingAddress, 1);").
+
             div {{ billingAddress[1].first_name }} {{ billingAddress[1].last_name }}
             div {{billingAddress[1].address}}
             div(layout="row")
@@ -63,7 +65,7 @@ md-card
           div(ng-if="profileParams.user.billing_address[$index + 1]")
             div(layout="row")
               h4 {{profileParams.user.billing_address[$index + 1][0]}}
-              ng-md-icon(aria-label="delete icon" icon="delete" ng-click="profileParams.deleteAddressDialog($event, billingAddress, 0);").
+              ng-md-icon(aria-label="delete icon" icon="delete" ng-click="profileParams.deleteAddressDialog($event, billingAddress, 1);").
             div {{ billingAddress[1].first_name }} {{ billingAddress[1].last_name }}
             div {{billingAddress[1].address}}
             div(layout="row")
