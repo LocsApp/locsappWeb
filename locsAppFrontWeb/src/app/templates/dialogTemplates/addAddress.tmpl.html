@@ -4,7 +4,7 @@
 	</md-toolbar>
 	<md-content>
 		<form name="addAddressForm" ng-submit="addAddressForm.$valid && addAddress.submit()">
-			<md-input-container>
+			<md-input-container class="full-width">
 				<label>Alias</label>
 				<input ng-model="addAddress.alias" name="alias" required md-maxlength="20" minlength="3"></input>
 				<div ng-messages="addAddressForm.alias.$error" ng-if='!addAddressForm.alias.$pristine'>
@@ -33,7 +33,7 @@
 					</div>
 				</md-input-container>
 			</section>
-			<md-input-container>
+			<md-input-container class="full-width">
 				<label>Address</label>
 				<textarea ng-model="addAddress.address" name="address" required md-maxlength="500" minlength="5"></textarea>
 				<div ng-messages="addAddressForm.address.$error" ng-if='!addAddressForm.address.$pristine'>
