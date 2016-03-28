@@ -222,12 +222,12 @@
     vm.editAddressController = function ($mdDialog) {
       var vm = this;
 
-      console.log("vm = ", vm.address);
-      /*initialize vars*/
+      /*console.log("vm = ", vm.address);
+      /!*initialize vars*!/
       vm.add_to_other = false;
       vm.count = 0;
 
-      /*Parses the strings address in living_address and billing_address to JSON objects*/
+      /!*Parses the strings address in living_address and billing_address to JSON objects*!/
       vm.parseAddressToJson = function () {
         var i = 0;
         var temp = null;
@@ -246,7 +246,7 @@
         }
       };
 
-      /*Success callback of the ressource callback*/
+      /!*Success callback of the ressource callback*!/
       vm.GetAddressUserSuccess = function (data) {
         vm.user = data;
         vm.parseAddressToJson();
@@ -287,7 +287,7 @@
         }
       };
 
-      /*Failure callback of the ressource callback*/
+      /!*Failure callback of the ressource callback*!/
       vm.GetAddressUserFailure = function (data) {
         $log.log(data);
         toastr.error(data.data.Error, "Woops...");
@@ -295,7 +295,7 @@
           vm.hide();
       };
 
-      /*Submits the form data from the dialog to the API*/
+      /!*Submits the form data from the dialog to the API*!/
       vm.submit = function () {
         var data = [];
 
@@ -309,7 +309,7 @@
         data.push(vm.alias);
         data.push(address);
         var data_send = {};
-        /* type == 0 living_address || vm.add_to_other == type0 && type1 */
+        /!* type == 0 living_address || vm.add_to_other == type0 && type1 *!/
         if (vm.type == 0 || vm.add_to_other && vm.count == 0) {
           data_send = {"user_id": vm.user.id, "living_address": data};
           UsersService
@@ -318,7 +318,7 @@
             .$promise
             .then(vm.GetAddressUserSuccess, vm.GetAddressUserFailure);
         }
-        /* type == 1 billing_address */
+        /!* type == 1 billing_address *!/
         else if (vm.type == 1 && vm.count == 0) {
           data_send = {"user_id": vm.user.id, "billing_address": data};
           UsersService
@@ -329,7 +329,7 @@
         }
 
       };
-
+*/
       /*Hide callback for $mdDialog*/
       vm.hide = function () {
 
