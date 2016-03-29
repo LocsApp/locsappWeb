@@ -31,6 +31,14 @@
   .question {
     margin-bottom: 20px;
 
+    .submit {
+      width: 100%;
+
+      button {
+        width: 100%;
+      }
+    }
+
   }
 
   md-card {

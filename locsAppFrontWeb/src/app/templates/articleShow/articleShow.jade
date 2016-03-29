@@ -135,7 +135,7 @@ div.article-show(layout="row" layout-align="center")
           span +{{question.is_useful.length}}
         div(flex-offset="10") {{question.response.content}}
 
-        div(ng-if="$last")
+        div.t-center.submit(ng-if="$last")
           md-button.md-raised Show more
 
 
