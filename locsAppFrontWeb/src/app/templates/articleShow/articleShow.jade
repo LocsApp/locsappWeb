@@ -125,19 +125,6 @@ div.article-show(layout="row" layout-align="center")
       h2.t-center(flex="15") Questions
       md-divider.separator-h2(flex="45")
 
-
-    div.question(layout="row" layout-align="center" ng-repeat="question in articleShow.questions track by $index" ng-if="question.is_visible")
-      div(layout="column")
-        div {{question.content}} (Ask by {{question.username_author}})
-        div
-          ng-md-icon(icon="warning")
-          ng-md-icon(icon="thumb_up")
-          span +{{question.is_useful.length}}
-        div(flex-offset="10") {{question.response.content}}
-
-        div.t-center.submit(ng-if="$last")
-          md-button.md-raised Show more
-
     div.question(layout="row" layout-align="center" ng-if="!articleShow.questions")
       div(layout="column")
         md-input-container.md-block
@@ -145,13 +132,21 @@ div.article-show(layout="row" layout-align="center")
           textarea(ng-model="articleShow.askQuestion" md-maxlength="150" rows="5" md-select-on-focus)
 
 
-    //div(layout="row" layout-align="center")
-      div(layout="column")
-        div What is the breast size ? (Ask by toto)
+    div.question(layout="row" layout-align="center" ng-repeat="question in articleShow.questions track by $index " ng-if="question.is_visible")
+      div(layout="column" ng-if='articleShow.isShowQuestion[$index]')
+        div {{question.content}} (Ask by {{question.username_author}})
         div
           ng-md-icon(icon="warning")
           ng-md-icon(icon="thumb_up")
-          span +12
+          span +{{question.is_useful.length}}
+        div(flex-offset="10") {{question.response.content}}
+
+    div.t-center.submit(ng-if='!articleShow.isShowQuestion[articleShow.questions.length - 1]')
+      md-button.md-raised Show more
+
+
+
+
 
 
 

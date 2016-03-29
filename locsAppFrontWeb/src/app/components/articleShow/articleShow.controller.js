@@ -47,7 +47,7 @@
           "username_author": "locsapp",
           "content": "What is the breast size ? ",
           "is_visible": true,
-          "is_useful": ["sdsgdsgs46887"],
+           "is_useful": ["sdsgdsgs46887", "sdfdsgsdgds6465464", "sdfdsgsdgds646546478"],
           "date_created": "fausse date",
           "date_modified": "fausse date",
           "response": {
@@ -69,7 +69,7 @@
           "username_author": "locsapp",
           "content": "What is the breast size ? ",
           "is_visible": true,
-          "is_useful": ["sdsgdsgs46887", "sdfdsgsdgds6465464", "sdfdsgsdgds646546478"],
+          "is_useful": ["sdsgdsgs46887"],
           "date_created": "fausse date",
           "date_modified": "fausse date",
           "response": {
@@ -118,14 +118,10 @@
       vm.rentDateStart = new Date(vm.start_availble);
       vm.rentDateEnd = new Date(vm.end_availble);
 
-      // Add col and row for the grid gallery
-      vm.obj_url_pictures = [];
-      for (var i = 0; i < vm.url_pictures.length; i++) {
-        vm.obj_url_pictures[i] = Object();
-        vm.obj_url_pictures[i]["col"] = "1";
-        vm.obj_url_pictures[i]["row"] = "1";
-        vm.obj_url_pictures[i]["url"] = vm.url_pictures[i];
 
+      vm.isShowQuestion = [true];
+      for (var i = 1; i < vm.questions.length; i++) {
+          vm.isShowQuestion.push(false);
       }
 
       $log.log("TEST = ", vm.url_pictures);
