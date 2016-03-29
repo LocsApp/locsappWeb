@@ -87,25 +87,29 @@
 
           &.date {
             //background: red;
-            height: 33%;
+            height: 40%;
             width: 100%;
             position: absolute;
             top: 0;
+
+            md-datepicker {
+              margin-top: 10px;
+            }
           }
 
           &.rent {
-            height: 33%;
+            height: 20%;
             width: 100%;
             position: absolute;
-            top: 33%;
+            top: 40%;
           }
 
           &.favorite-share {
-            height: 33%;
+            height: 40%;
             width: 100%;
             position: absolute;
             //background: blue;
-            top: 66%;
+            top: 60%;
 
             .details {
               margin-bottom: 10px;
