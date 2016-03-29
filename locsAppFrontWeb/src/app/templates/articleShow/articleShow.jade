@@ -82,12 +82,12 @@ div.article-show(layout="row" layout-align="center")
             md-button.md-raised Ask for rent
 
           div.favorite-share(layout="column" flex="flex" layout-align="end" )
-            div
+            div.details
               span
                 a(href='#')
                   ng-md-icon(icon="favorite")
                   span.bottom-right-md-card Add to your favorites
-            div
+            div.details
               span
                 ng-md-icon(icon="share")
                 span.bottom-right-md-card Share it
@@ -95,11 +95,13 @@ div.article-show(layout="row" layout-align="center")
                   ng-md-icon(icon="facebook")
                   ng-md-icon(icon="twitter")
 
-            div
+            div.details
               span
+                //a(facebook class="facebookShare" data-url='http://google.com'data-shares='shares') {{ shares }}
                 a(href='#')
                   ng-md-icon(icon="warning")
                   span.bottom-right-md-card Send a report
+
 
 
 
