@@ -31,6 +31,10 @@
   .question {
     margin-bottom: 20px;
 
+    ng-md-icon {
+      cursor: pointer;
+    }
+
     .submit {
       width: 100%;
 
@@ -121,6 +125,10 @@
 
             .details {
               margin-bottom: 10px;
+            }
+
+            ng-md-icon {
+              cursor: pointer;
             }
           }
         }
