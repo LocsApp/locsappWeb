@@ -126,7 +126,7 @@ div.article-show(layout="row" layout-align="center")
       md-divider.separator-h2(flex="45")
 
 
-    div.question(layout="row" layout-align="center" ng-repeat="question in articleShow.questions" ng-if="question.is_visible")
+    div.question(layout="row" layout-align="center" ng-repeat="question in articleShow.questions track by index" ng-if="question.is_visible")
       div(layout="column")
         div {{question.content}} (Ask by {{question.username_author}})
         div
@@ -134,6 +134,10 @@ div.article-show(layout="row" layout-align="center")
           ng-md-icon(icon="thumb_up")
           span +{{question.is_useful.length}}
         div(flex-offset="10") {{question.response.content}}
+
+    md-button.md-raised Show more
+
+
 
     //div(layout="row" layout-align="center")
       div(layout="column")
