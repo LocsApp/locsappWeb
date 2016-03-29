@@ -138,6 +138,11 @@ div.article-show(layout="row" layout-align="center")
         div.t-center.submit(ng-if="$last")
           md-button.md-raised Show more
 
+    div.question(layout="row" layout-align="center" ng-if="!articleShow.questions")
+      div(layout="column")
+        md-input-container.md-block
+          label Be the first one to ask something
+          textarea(ng-model="articleShow.askQuestion" md-maxlength="150" rows="5" md-select-on-focus)
 
 
     //div(layout="row" layout-align="center")
