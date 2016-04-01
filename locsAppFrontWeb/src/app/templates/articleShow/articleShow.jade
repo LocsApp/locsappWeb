@@ -132,8 +132,8 @@ div.article-show(layout="row" layout-align="center")
           textarea(ng-model="articleShow.askQuestion" md-maxlength="150" rows="5" md-select-on-focus)
 
 
-    div.question(layout="row" layout-align="center" ng-repeat="question in articleShow.questions track by $index " ng-if="question.is_visible")
-      div(layout="column" ng-if='articleShow.isShowQuestion[$index]')
+    div.question(layout="row" layout-align="center" ng-repeat="question in articleShow.questions track by $index | limitTo: articlehSow.paginationLimit() " ng-if="question.is_visible")
+      div(layout="column")
         div {{question.content}} (Ask by {{question.username_author}})
         div
           ng-md-icon(icon="warning")
@@ -141,7 +141,7 @@ div.article-show(layout="row" layout-align="center")
           span +{{question.is_useful.length}}
         div(flex-offset="10") {{question.response.content}}
 
-    div.t-center.submit(ng-if='!articleShow.isShowQuestion[articleShow.questions.length - 1]')
+    div.t-center.submit(ng-show="articleShow.hasMoreItemsToShow()" ng-click="articleShow.showMoreItems()")
       md-button.md-raised Show more
 
 
