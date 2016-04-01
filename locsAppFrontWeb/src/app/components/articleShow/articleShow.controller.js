@@ -21,75 +21,6 @@
     vm.test_test = ['un', 'deux', 'trois'];
     vm.items = ['../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg',
       '../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg'];
-      vm.questions = [
-
-        {
-          "_id": "56cb3cb1b2bc57ab2908e697",
-          "id_author": 42,
-          "username_author": "locsapp",
-          "content": "What is the breast size ? ",
-          "is_visible": true,
-          "is_useful": ["sdsgdsgs46887", "sdfdsgsdgds6465464", "sdfdsgsdgds646546478"],
-          "date_created": "fausse date",
-          "date_modified": "fausse date",
-          "response": {
-            "_id": "56cb3cb1b2bc57ab2908e698",
-            "id_author": 44,
-            "username_author": "sylflo",
-            "content": "The breast size 95C",
-            "is_visible": true,
-            "date_created": "fausse date",
-            "date_modified": "fausse date"
-          },
-          "last_versions": [],
-          "flagged": null
-        },
-
-        {
-          "_id": "56cb3cb1b2bc57ab2908e697",
-          "id_author": 42,
-          "username_author": "locsapp",
-          "content": "What is the breast size ? ",
-          "is_visible": true,
-          "is_useful": ["sdsgdsgs46887"],
-          "date_created": "fausse date",
-          "date_modified": "fausse date",
-          "response": {
-            "_id": "56cb3cb1b2bc57ab2908e698",
-            "id_author": 44,
-            "username_author": "sylflo",
-            "content": "The breast size 95C",
-            "is_visible": true,
-            "date_created": "fausse date",
-            "date_modified": "fausse date"
-          },
-          "last_versions": [],
-          "flagged": null
-        },
-        {
-          "_id": "56cb3cb1b2bc57ab2908e697",
-          "id_author": 42,
-          "username_author": "locsapp",
-          "content": "What is the breast size ? ",
-          "is_visible": true,
-          "is_useful": ["sdsgdsgs46887"],
-          "date_created": "fausse date",
-          "date_modified": "fausse date",
-          "response": {
-            "_id": "56cb3cb1b2bc57ab2908e698",
-            "id_author": 44,
-            "username_author": "sylflo",
-            "content": "The breast size 95C",
-            "is_visible": true,
-            "date_created": "fausse date",
-            "date_modified": "fausse date"
-          },
-          "last_versions": [],
-          "flagged": null
-        }
-
-
-      ];
 
     $log.log("route params = ", $stateParams.id);
 
@@ -212,6 +143,19 @@
 
 
       $log.log("TEST = ", vm.url_pictures);
+
+      vm.paginationLimit = function () {
+        return pageSize * pagesShown;
+      };
+
+      vm.hasMoreItemsToShow = function () {
+        return pagesShown < (vm.questions.length / pageSize);
+      };
+
+      vm.showMoreItems = function () {
+        pagesShown = pagesShown + 1;
+      };
+
     };
 
     vm.getInfoArticleFailure = function (data) {
@@ -319,19 +263,6 @@
 
     //On affiche le show more si il reste des false dans le tableau
     //Et le show more est affiche on derner true du tableau
-
-    vm.paginationLimit = function () {
-      $log.log("pagination limit = ", pageSize * pagesShown);
-      return pageSize * pagesShown;
-    };
-
-    vm.hasMoreItemsToShow = function () {
-      return pagesShown < (vm.questions.length / pageSize);
-    };
-
-    vm.showMoreItems = function () {
-      pagesShown = pagesShown + 1;
-    };
 
 
   }
