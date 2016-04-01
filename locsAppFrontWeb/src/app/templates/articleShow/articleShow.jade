@@ -132,7 +132,7 @@ div.article-show(layout="row" layout-align="center")
           textarea(ng-model="articleShow.askQuestion" md-maxlength="150" rows="5" md-select-on-focus)
 
 
-    div.question(layout="row" layout-align="center" ng-repeat="question in articleShow.questions track by $index | limitTo: articlehSow.paginationLimit() " ng-if="question.is_visible")
+    div.question(layout="row" layout-align="center" ng-repeat="question in articleShow.questions | limitTo: articleShow.paginationLimit()" ng-if="question.is_visible")
       div(layout="column")
         div {{question.content}} (Ask by {{question.username_author}})
         div
