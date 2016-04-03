@@ -20,17 +20,18 @@ div.article-show(layout="row" layout-align="center")
 
 
     div(layout="row" layout-align="center")
-      wrap-owlcarousel(class="owl-carousel"
-      data-options="{nav: true, autoplay:true, autoplayTimeout:1000, loop:true, items: 1}")
-        div.item
+      wrap-owlcarousel(class="owl-carousel owl-theme"
+      data-options="{nav: true, autoplay:false, autoplayTimeout:5000, loop:true, items: 1, " +
+      "lazyLoad:true, autoWidth:true}")
+        div.item(style="width:250px")
           img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
-        div.item
+        div.item(style="width:250px")
           img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
-        div.item
+        div.item(style="width:250px")
           img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
-        div.item
+        div.item(style="width:250px")
           img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
-        div.item
+        div.item(style="width:250px")
           img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
 
       //img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
