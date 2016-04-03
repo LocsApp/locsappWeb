@@ -23,21 +23,19 @@ div.article-show(layout="row" layout-align="center")
 
 
     div(layout="row" layout-align="center")
-      wrap-owlcarousel(flex="50" class="owl-carousel owl-theme"
+      wrap-owlcarousel( flex="50" class="owl-carousel owl-theme"
       data-options="{nav: true, autoplay:false, autoplayTimeout:5000, loop:true, items: 1, " +
       "lazyLoad:true, autoWidth:false}")
+        //div(ng-if='articleShow.url_pictures[0]').item
+          img(src="{{articleShow.url_pictures[0]}}")
         div.item
-          img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
+          img(src="{{articleShow.url_pictures[0]}}")
         div.item
-          img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
+          img(src="{{articleShow.url_pictures[1]}}")
         div.item
-          img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
+          img(src="{{articleShow.url_pictures[2]}}")
         div.item
-          img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
-        div.item
-          img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
-
-      //img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
+          img(src="{{articleShow.url_pictures[3]}}")
 
 
     div(layout="row")
