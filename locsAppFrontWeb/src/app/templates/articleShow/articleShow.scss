@@ -2,6 +2,8 @@
 
 .article-show {
 
+ // margin-bottom: 50px;
+
   h1 {
     margin-bottom: -15px;
   }
@@ -146,10 +148,11 @@
     }
   }
 
-  owl-carousel {
+  .owl-carousel {
+
     .item {
-      span {
-        margin-top: 20px;
+     span.bold {
+      margin-top: 20px;
       }
     }
   }
