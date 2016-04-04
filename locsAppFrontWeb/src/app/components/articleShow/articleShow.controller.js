@@ -13,10 +13,7 @@
     .controller('ArticleShowController', ArticleShowController);
 
   /** @ngInject */
-  function ArticleShowController($log, $mdDialog, $document, ArticleService, $stateParams, $interval, toastr, $scope) {
-
-    $scope.items1 = [1, 2, 3, 4, 5];
-    $scope.items2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  function ArticleShowController($log, $mdDialog, $document, ArticleService, $stateParams, $interval, toastr) {
 
     var vm = this;
     var pagesShown = 1;
