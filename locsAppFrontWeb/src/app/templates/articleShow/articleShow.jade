@@ -25,8 +25,7 @@ div.article-show(layout="row" layout-align="center")
   "autoplayTimeout:5000, loop:true, items: 1, " +
       "lazyLoad:true, autoWidth:false}")
         .item(owl-carousel-item='', ng-repeat='url_picture in articleShow.url_pictures track by $index')
-          div.item
-            img(src="{{url_picture}}")
+          img(src="{{url_picture}}")
           //p {{url_picture}}
 
 
@@ -180,3 +179,9 @@ div.article-show(layout="row" layout-align="center")
       md-divider.separator-h2(flex="40")
       h2.t-center(flex="20") We Recommend
       md-divider.separator-h2(flex="40")
+    div(layout='row' layout-align='center')
+      data-owl-carousel.owl-carousel(data-options='{navigation: false, pagination: true, ' +
+      'rewindNav : false, loop: true}')
+        .item(owl-carousel-item='', ng-repeat='url_picture in articleShow.url_pictures track by $index')
+          img(src="{{url_picture}}")
+          //p {{::item}}
