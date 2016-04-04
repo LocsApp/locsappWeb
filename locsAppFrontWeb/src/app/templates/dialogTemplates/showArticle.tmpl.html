@@ -1,0 +1,155 @@
+<md-dialog class="fullscreen-dialog">
+  <div layout="row" layout-align="center" class="article-show">
+    <div flex-xs="100" flex-sm="100" flex-md="75" flex="50">
+      <div layout="row" layout-align="center">
+        <div>
+          <h1>{{previewArticle.title}}</h1><br/>
+
+          <div layout="row" class="subtitle">
+            <h2>By sylflo</h2><span>
+            <ng-md-icon icon="star" size="22"></ng-md-icon>
+            <ng-md-icon icon="star" size="22"></ng-md-icon>
+            <ng-md-icon icon="star" size="22"></ng-md-icon>
+            <ng-md-icon icon="star" size="22"></ng-md-icon>
+            <ng-md-icon icon="star" size="22"></ng-md-icon><span>(50)</span></span>
+          </div>
+        </div>
+      </div>
+      <div layout="row" layout-align="center">
+        <data-owl-carousel flex="50" flex-xs="100"
+                           data-options="{nav: true, autoplay:true, autoplayTimeout:5000, loop:true, items: 1, lazyLoad:true, autoWidth:false}"
+                           class="owl-carousel owl-theme">
+          <div owl-carousel-item=""
+               ng-repeat="url_picture in previewArticle.url_pictures track by $index" class="item">
+            <img src="{{url_picture}}"/></div>
+        </data-owl-carousel>
+      </div>
+      <div layout="row" class="my-layout-xs">
+        <md-card flex="50" flex-xs="100">
+          <md-card-content>
+            <div layout="row" class="block-properties">
+              <div flex="50" class="name-properties">Price</div>
+              <div flex="50" class="t-right">{{previewArticle.price}}$/day</div>
+            </div>
+            <md-divider></md-divider>
+            <div layout="row" class="block-properties">
+              <div flex="50" class="name-properties">Payment</div>
+              <div flex="50" class="t-right"><span
+                ng-repeat="payment in previewArticle.meaning_payment">{{$first ? '' : ', '}} {{payment}}</span>
+              </div>
+            </div>
+            <md-divider></md-divider>
+            <div layout="row" class="block-properties">
+              <div flex="50" class="name-properties">Within</div>
+              <div flex="50" class="t-right">{{previewArticle.within}} km</div>
+            </div>
+            <md-divider></md-divider>
+            <div layout="row" class="block-properties">
+              <div flex="50" class="name-properties">Main Category</div>
+              <div flex="50" class="t-right">{{previewArticle.BaseCategory}}</div>
+            </div>
+            <md-divider></md-divider>
+            <div layout="row" class="block-properties">
+              <div flex="50" class="name-properties">Sub Category</div>
+              <div flex="50" class="t-right">{{previewArticle.SubCategory}}</div>
+            </div>
+            <md-divider></md-divider>
+            <div layout="row" class="block-properties">
+              <div flex="50" class="name-properties">Gender</div>
+              <div flex="50" class="t-right">{{previewArticle.sexe}}</div>
+            </div>
+            <md-divider></md-divider>
+            <div layout="row" class="block-properties">
+              <div flex="50" class="name-properties">Size</div>
+              <div flex="50" class="t-right">{{previewArticle.size}}</div>
+            </div>
+            <md-divider></md-divider>
+            <div layout="row" class="block-properties">
+              <div flex="50" class="name-properties">Color</div>
+              <div flex="50" class="t-right">{{previewArticle.color}}</div>
+            </div>
+            <md-divider></md-divider>
+            <div layout="row" class="block-properties">
+              <div flex="50" class="name-properties">State</div>
+              <div flex="50" class="t-right">{{previewArticle.state}}</div>
+            </div>
+            <md-divider></md-divider>
+          </md-card-content>
+        </md-card>
+        <md-card flex="50" flex-xs="100" class="reservation">
+          <md-card-content flex="flex" layout-fill="layout-fill">
+            <div layout="column" layout-align="start" class="date">
+              <md-datepicker ng-model="previewArticle.AskBeginLocation"
+                             md-placeholder="Begin location"></md-datepicker>
+              <md-datepicker ng-model="previewArticle.AskEndLocation"
+                             md-placeholder="End location"></md-datepicker>
+              <!--md-button.md-raised Ask for rent-->
+            </div>
+            <div layout="column" flex="flex" layout-align="start" class="rent">
+              <md-button class="md-raised">Ask for rent</md-button>
+            </div>
+            <div layout="column" flex="flex" layout-align="end" class="favorite-share">
+              <div class="details"><span><a href="#">
+                <ng-md-icon icon="favorite"></ng-md-icon>
+                <span class="bottom-right-md-card">Add to your favorites</span></a></span></div>
+              <div class="details"><span>
+                <ng-md-icon icon="share"></ng-md-icon><span
+                class="bottom-right-md-card">Share it</span><span>
+                  <ng-md-icon icon="facebook"></ng-md-icon>
+                  <ng-md-icon icon="twitter"></ng-md-icon></span></span></div>
+              <div class="details"><span>
+                <!--a(facebook class="facebookShare" data-url='http://google.com'data-shares='shares') {{ shares }}--><a
+                href="#">
+                <ng-md-icon icon="warning"></ng-md-icon>
+                <span class="bottom-right-md-card">Send a report</span></a></span></div>
+            </div>
+          </md-card-content>
+        </md-card>
+      </div>
+      <div layout="row" layout-align="center">
+        <md-divider flex="45" class="separator-h2"></md-divider>
+        <h2 flex="15" class="t-center">Description</h2>
+        <md-divider flex="45" class="separator-h2"></md-divider>
+      </div>
+      <div layout="row" layout-align="center">
+        <md-card>
+          <md-card-content>
+            <div class="description">{{previewArticle.description}}</div>
+          </md-card-content>
+        </md-card>
+      </div>
+      <div layout="row" layout-align="center">
+        <md-divider flex="45" class="separator-h2"></md-divider>
+        <h2 flex="15" class="t-center">Questions</h2>
+        <md-divider flex="45" class="separator-h2"></md-divider>
+      </div>
+      <div layout="row" layout-align="center" class="question">
+        <div layout="column">
+          <md-input-container class="md-block">
+            <label>Be the first one to ask something</label>
+            <textarea ng-model="previewArticle.askQuestion" md-maxlength="150" rows="5"
+                      md-select-on-focus="md-select-on-focus"></textarea>
+          </md-input-container>
+        </div>
+      </div>
+
+      <div layout="row" layout-align="center">
+        <md-divider flex="40" class="separator-h2"></md-divider>
+        <h2 flex="20" class="t-center">We Recommend</h2>
+        <md-divider flex="40" class="separator-h2"></md-divider>
+      </div>
+      <div layout="row" layout-align="center">
+        <data-owl-carousel
+          data-options="{navigation: false, pagination: true, rewindNav : false, loop: true, autoWidth: true, autoplay:true, autoplayTimeout:1000}"
+          class="owl-carousel">
+          <div owl-carousel-item=""
+               ng-repeat="url_picture in previewArticle.url_pictures track by $index" class="item">
+            <img src="{{url_picture}}" style="width:200px; height:auto;"/>
+
+            <div layout-align="center" layout="row"><span class="bold">12$</span></div>
+          </div>
+        </data-owl-carousel>
+      </div>
+    </div>
+  </div>
+</md-dialog>
