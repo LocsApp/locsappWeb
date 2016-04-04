@@ -1,6 +1,3 @@
-//Faire un text-align et si jamais c est trop petit au lieu du layout row on utilise le layout
-//column
-
 div.article-show(layout="row" layout-align="center")
   div(flex-sm="100" flex-md="75" flex="50")
 
@@ -27,29 +24,6 @@ div.article-show(layout="row" layout-align="center")
       "lazyLoad:true, autoWidth:false}")
         .item(owl-carousel-item='', ng-repeat='url_picture in articleShow.url_pictures track by $index')
           img(src="{{url_picture}}")
-          //p {{url_picture}}
-
-
-
-    //div(layout="row" layout-align="center")
-      wrap-owlcarousel( flex="50" class="owl-carousel owl-theme"
-      data-options="{nav: true, autoplay:false, autoplayTimeout:5000, loop:true, items: 1, " +
-      "lazyLoad:true, autoWidth:false}")
-        //div(ng-if='articleShow.url_pictures[0]').item
-          img(src="{{articleShow.url_pictures[0]}}")
-
-        div.item(ng-if='articleShow.url_pictures[0]')
-          img(src="{{articleShow.url_pictures[0]}}")
-
-        div.item(ng-if='articleShow.url_pictures[1]')
-          img(src="{{articleShow.url_pictures[1]}}")
-
-        //div.item
-          img(src="{{articleShow.url_pictures[1]}}")
-        //div.item
-          img(src="{{articleShow.url_pictures[2]}}")
-        //div.item
-          img(ng-if='articleShow.url_pictures[3]' src="{{articleShow.url_pictures[3]}}")
 
 
     div(layout="row")
