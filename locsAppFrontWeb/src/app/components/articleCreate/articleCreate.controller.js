@@ -157,5 +157,14 @@
       .$promise
       .then(vm.getCategories, vm.failedRetrieval);
     //End of Static collection retrieval
+
+
+	  /****
+     * Preview Article Controller
+     */
+     /** @ngInject */
+    vm.previewArticleController = function ($mdDialog) {
+
+    }
   }
 })();
