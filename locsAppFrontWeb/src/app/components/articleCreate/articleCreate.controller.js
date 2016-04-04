@@ -28,9 +28,9 @@
 	vm.clothe_states = null;
 	vm.payment_methods = null;
 	vm.description = null;
-	vm.brands = [{_id:"56cb3ef2b2bc57ab2908e6b2" ,name:"Home made"}]
-	vm.pictures = []
-	vm.files = []
+	vm.brands = [{_id:"56cb3ef2b2bc57ab2908e6b2" ,name:"Home made"}];
+	vm.pictures = [];
+	vm.files = [];
 	vm.date_start = new Date();
 	vm.date_end = new Date();
 
