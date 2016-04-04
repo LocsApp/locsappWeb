@@ -20,7 +20,8 @@ div.article-show(layout="row" layout-align="center")
 
 
     div(layout="row" layout-align="center")
-      data-owl-carousel.owl-carousel.owl-theme(flex="50" data-options="{nav: true, autoplay:false," +
+      data-owl-carousel.owl-carousel.owl-theme(flex="50" data-options="{nav: true, " +
+      "autoplay:true," +
       " " +
   "autoplayTimeout:5000, loop:true, items: 1, " +
       "lazyLoad:true, autoWidth:false}")
@@ -181,7 +182,7 @@ div.article-show(layout="row" layout-align="center")
       md-divider.separator-h2(flex="40")
     div(layout='row' layout-align='center')
       data-owl-carousel.owl-carousel(data-options='{navigation: false, pagination: true, ' +
-      'rewindNav : false, loop: true, autoHeight: true}')
+      'rewindNav : false, loop: true, autoHeight: true, autoplay:true, autoplayTimeout:1000}')
         .item(owl-carousel-item='', ng-repeat='url_picture in articleShow.url_pictures track by $index')
           img(src="{{url_picture}}" style='height:300px; width:auto;')
           //p {{::item}}
