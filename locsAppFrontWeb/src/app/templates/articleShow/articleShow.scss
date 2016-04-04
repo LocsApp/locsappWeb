@@ -91,60 +91,6 @@
       //overflow: hidden;
       position: relative;
       width: 100%;
-
-      md-card-content {
-
-        md-datepicker {
-          padding-right: 0;
-          padding-left: 0;
-          width: 98%;
-        }
-        .md-datepicker-input-container {
-          width: 85%;
-        }
-
-        a {
-          color: black;
-        }
-
-        div {
-
-          &.date {
-            //background: red;
-            height: 40%;
-            width: 100%;
-            position: absolute;
-            top: 0;
-
-            md-datepicker {
-              margin-top: 10px;
-            }
-          }
-
-          &.rent {
-            height: 20%;
-            width: 100%;
-            position: absolute;
-            top: 40%;
-          }
-
-          &.favorite-share {
-            height: 40%;
-            width: 100%;
-            position: absolute;
-            //background: blue;
-            top: 60%;
-
-            .details {
-              margin-bottom: 10px;
-            }
-
-            ng-md-icon {
-              cursor: pointer;
-            }
-          }
-        }
-      }
     }
   }
 
@@ -218,5 +164,63 @@
   .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
     background: #869791;
   }
+
+
+  @media screen and (min-width: 600px) {
+
+       md-card-content {
+
+        md-datepicker {
+          padding-right: 0;
+          padding-left: 0;
+          width: 98%;
+        }
+        .md-datepicker-input-container {
+          width: 85%;
+        }
+
+        a {
+          color: black;
+        }
+
+        div {
+
+          &.date {
+            //background: red;
+            height: 40%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+
+            md-datepicker {
+              margin-top: 10px;
+            }
+          }
+
+          &.rent {
+            height: 20%;
+            width: 100%;
+            position: absolute;
+            top: 40%;
+          }
+
+          &.favorite-share {
+            height: 40%;
+            width: 100%;
+            position: absolute;
+            //background: blue;
+            top: 60%;
+
+            .details {
+              margin-bottom: 10px;
+            }
+
+            ng-md-icon {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+}
 
 }

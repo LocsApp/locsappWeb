@@ -27,8 +27,8 @@ div.article-show(layout="row" layout-align="center")
           img(src="{{url_picture}}")
 
 
-    div(layout="row")
-      md-card(flex="50")
+    div.my-layout-xs(layout="row")
+      md-card(flex="50" flex-xs="100")
         md-card-content
 
           div.block-properties(layout="row")
@@ -70,7 +70,7 @@ div.article-show(layout="row" layout-align="center")
             div.t-right(flex="50") {{articleShow.state}}
           md-divider
 
-      md-card.reservation(flex="50")
+      md-card.reservation(flex="50" flex-xs="100")
         md-card-content(flex="flex" layout-fill)
 
           div.date(layout="column" layout-align="start")
