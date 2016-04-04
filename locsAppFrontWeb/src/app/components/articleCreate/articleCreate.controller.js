@@ -76,7 +76,7 @@
         controller: vm.previewArticleController,
         controllerAs: 'previewArticle',
         templateUrl: 'app/templates/dialogTemplates/showArticle.tmpl.html',
-        //locals: {user_id: vm.user.id, address: address, type: type},
+        locals: {title: vm.title},
         bindToController: true,
         parent: angular.element($document.body),
         targetEvent: event,
@@ -168,12 +168,13 @@
       $log.log("in controller preview article");
 
       var vm = this;
+      $log.log("vm == ", vm);
       //vm.showChildComment = false;
       vm.test_test = ['un', 'deux', 'trois'];
       vm.items = ['../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg',
         '../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg'];
 
-      vm.title = "Robe bleu hermes excellente qualite";
+      /*vm.title = "Robe bleu hermes excellente qualite";*/
       vm.id_author = "42";
       vm.username_author = "author";
       vm.id = "145454e";
