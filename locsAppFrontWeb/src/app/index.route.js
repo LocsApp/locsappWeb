@@ -147,6 +147,19 @@
 				}
 			}
 		})
+    .state('main.article_search', {
+      url: 'search-article/',
+      parent: 'main',
+      templateUrl: 'app/templates/articleSearch/articleSearch.html',
+      controller: 'ArticleSearchController',
+      controllerAs: 'articleSearch',
+      data: {
+			permissions: {
+				only: ['guest', 'user'],
+				redirectTo: 'main.homepage'
+			}
+		}
+    })
     .state('main.articleShow', {
       url: 'article/:id',
       parent: 'main',
