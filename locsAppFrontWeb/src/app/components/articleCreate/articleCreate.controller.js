@@ -6,7 +6,7 @@
 	.controller('ArticleCreateController', ArticleCreateController);
 
   /** @ngInject */
-  function ArticleCreateController($log, ArticleService, toastr, $scope, $timeout) {
+  function ArticleCreateController($log, ArticleService, toastr, $scope, $timeout, $mdDialog, $document) {
 	var vm = this;
 
 	//steps vars
@@ -74,10 +74,32 @@
 		}
 	};
 
+
+  //Dialog for preview article
+      vm.previewArticle = function (event) {
+      $mdDialog.show({
+        controller: vm.previewArticleController,
+        controllerAs: 'previewArticle',
+        templateUrl: 'app/templates/dialogTemplates/showArticle.tmpl.html',
+        //locals: {user_id: vm.user.id, address: address, type: type},
+        bindToController: true,
+        parent: angular.element($document.body),
+        targetEvent: event,
+        clickOutsideToClose: false
+      });
+    };
+
 	//Submit the article
-	vm.submit = function()
+	vm.submit = function(event)
 	{
+    //For upload the pictures
 		vm.submitPictures();
+    vm.previewArticle(event);
+
+
+
+    //We launch a dialog to preview the article
+
 	};
 
 	//Static collection retrieval
