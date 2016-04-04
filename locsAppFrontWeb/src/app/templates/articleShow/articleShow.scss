@@ -91,6 +91,38 @@
       //overflow: hidden;
       position: relative;
       width: 100%;
+
+      md-card-content {
+
+        a {
+          color: black;
+        }
+
+        div {
+
+          &.date {
+            //background: red;
+
+            md-datepicker {
+              margin-top: 10px;
+            }
+          }
+
+          &.rent {
+          }
+
+          &.favorite-share {
+
+            .details {
+              margin-bottom: 10px;
+            }
+
+            ng-md-icon {
+              cursor: pointer;
+            }
+          }
+        }
+      }
     }
   }
 
