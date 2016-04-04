@@ -182,8 +182,8 @@ div.article-show(layout="row" layout-align="center")
       md-divider.separator-h2(flex="40")
     div(layout='row' layout-align='center')
       data-owl-carousel.owl-carousel(data-options='{navigation: false, pagination: true, ' +
-      'rewindNav : false, loop: true, autoHeight: true, autoplay:false, autoplayTimeout:1000}')
+      'rewindNav : false, loop: true, autoWidth: true, autoplay:false, autoplayTimeout:1000}')
         .item(owl-carousel-item='', ng-repeat='url_picture in articleShow.url_pictures track by $index')
-          img(src="{{url_picture}}")
-          //div.bold.t-center 12€
-          //p {{::item}}
+          img(src="{{url_picture}}" style='width:200px; height:auto;')
+          div(layout-align="center" layout="row")
+            span.bold 12$
