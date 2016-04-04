@@ -177,18 +177,6 @@
 
     };
 
-    vm.clickImageGallery = function (event, index) {
-      $mdDialog.show({
-        controller: vm.showImageCarouselController,
-        controllerAs: 'showImageCarousel',
-        templateUrl: 'app/templates/dialogTemplates/articleImageCarousel.tmpl.html',
-        parent: angular.element($document.body),
-        locals: {index: index, slides: vm.url_pictures},
-        targetEvent: event,
-        clickOutsideToClose: true
-      });
-    };
-
 
     vm.submitComment = function (comment) {
       // SI on a clique sur shit on veut revenir a ligne
@@ -201,66 +189,6 @@
         toastr.success("comment sent", "Success!");
     };
 
-
-    vm.showImageCarouselController = function (index, slides) {
-
-      var vm = this;
-
-      vm.slideRight = false;
-      vm.slideLeft = false;
-      vm.fade = false;
-      //$log.log("IN image show Image Gallery", index, slides[0]);
-
-
-      vm.slides = slides;
-      vm.currentIndex = index;
-
-      vm.automaticNext = function () {
-        vm.currentIndex = (vm.currentIndex < vm.slides.length - 1) ? ++vm.currentIndex : 0;
-        vm.slideRight = true;
-        vm.slideLeft = false;
-        vm.fade = false;
-      };
-
-      var intervalNext = $interval(vm.automaticNext, 3000);
-
-
-      vm.cancel = function () {
-
-      };
-
-      vm.setCurrentSlideIndex = function (index) {
-        $log.log("in setCurrentSlideindex");
-        vm.fade = true;
-        vm.slideLeft = false;
-        vm.slideRight = false;
-        $interval.cancel(intervalNext);
-        vm.currentIndex = index;
-      };
-
-      vm.isCurrentSlideIndex = function (index) {
-        return vm.currentIndex == index;
-      };
-
-      vm.prevSlide = function () {
-        vm.currentIndex = (vm.currentIndex > 0) ? --vm.currentIndex : vm.slides.length - 1;
-        vm.slideLeft = true;
-        vm.slideRight = false;
-        vm.fade = false;
-        $interval.cancel(intervalNext);
-      };
-
-      vm.nextSlide = function () {
-        vm.currentIndex = (vm.currentIndex < vm.slides.length - 1) ? ++vm.currentIndex : 0;
-        vm.slideRight = true;
-        vm.slideLeft = false;
-        vm.fade = false;
-
-        $interval.cancel(intervalNext);
-      };
-
-
-    };
 
     //On affiche le show more si il reste des false dans le tableau
     //Et le show more est affiche on derner true du tableau
