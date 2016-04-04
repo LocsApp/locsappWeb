@@ -35,7 +35,7 @@
             <div layout="row" class="block-properties">
               <div flex="50" class="name-properties">Payment</div>
               <div flex="50" class="t-right"><span
-                ng-repeat="payment in previewArticle.meaning_payment">{{$first ? '' : ', '}} {{payment}}</span>
+                ng-repeat="payment in previewArticle.payment_methods">{{$first ? '' : ', '}} {{payment}}</span>
               </div>
             </div>
             <md-divider></md-divider>
@@ -46,32 +46,32 @@
             <md-divider></md-divider>
             <div layout="row" class="block-properties">
               <div flex="50" class="name-properties">Main Category</div>
-              <div flex="50" class="t-right">{{previewArticle.BaseCategory}}</div>
+              <div flex="50" class="t-right">{{previewArticle.article.base_category}}</div>
             </div>
             <md-divider></md-divider>
             <div layout="row" class="block-properties">
               <div flex="50" class="name-properties">Sub Category</div>
-              <div flex="50" class="t-right">{{previewArticle.SubCategory}}</div>
+              <div flex="50" class="t-right">{{previewArticle.subCategories}}</div>
             </div>
             <md-divider></md-divider>
             <div layout="row" class="block-properties">
               <div flex="50" class="name-properties">Gender</div>
-              <div flex="50" class="t-right">{{previewArticle.sexe}}</div>
+              <div flex="50" class="t-right">{{previewArticle.genders}}</div>
             </div>
             <md-divider></md-divider>
             <div layout="row" class="block-properties">
               <div flex="50" class="name-properties">Size</div>
-              <div flex="50" class="t-right">{{previewArticle.size}}</div>
+              <div flex="50" class="t-right">{{previewArticle.sizes}}</div>
             </div>
             <md-divider></md-divider>
             <div layout="row" class="block-properties">
               <div flex="50" class="name-properties">Color</div>
-              <div flex="50" class="t-right">{{previewArticle.color}}</div>
+              <div flex="50" class="t-right">{{previewArticle.clothe_colors}}</div>
             </div>
             <md-divider></md-divider>
             <div layout="row" class="block-properties">
               <div flex="50" class="name-properties">State</div>
-              <div flex="50" class="t-right">{{previewArticle.state}}</div>
+              <div flex="50" class="t-right">{{previewArticle.clothe_states}}</div>
             </div>
             <md-divider></md-divider>
           </md-card-content>
