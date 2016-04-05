@@ -1,26 +1,39 @@
 md-card(layout-fill)
-	md-card-title(layout="row", layout-align="center center").body-title-step
-		md-card-title-text
-			h3 The modalities for the renter
-	md-card-content(layout="column", layout-align="center center")
-		form(name="articleFormStep5" novalidate ng-submit="articleFormStep5.$valid && articleCreate.nextStep(5)", layout="column", layout-align="center center")
-			p
-				md-title The availibility date
-				span
-					ng-md-icon(icon="help", size="20")
-						md-tooltip(md-direction="right") This indicates when the clothe will be available
-			md-datepicker(ng-model="articleCreate.date_start", md-min-date="articleCreate.min_date")
+  md-card-title(layout="row", layout-align="center center").body-title-step
+    md-card-title-text
+      h3 The modalities for the renter
+  md-card-content(layout="column", layout-align="center center")
+    form(name="articleFormStep5" novalidate ng-submit="articleFormStep5.$valid && articleCreate.nextStep(5)", layout="column", layout-align="center center")
+      p
+        md-title The availibility date
+        span
+          ng-md-icon(icon="help", size="20")
+            md-tooltip(md-direction="right") This indicates when the clothe will be available
+      md-datepicker(ng-model="articleCreate.date_start", md-min-date="articleCreate.min_date")
 
-			p
-				md-title End of availibility date
-				span
-					ng-md-icon(icon="help", size="20")
-						md-tooltip(md-direction="right") This indicates when the clothe will not be available anymore
-			md-datepicker(ng-model="articleCreate.date_end", md-min-date="articleCreate.date_start")
-			p
-				md-title Payment methods
-				span
-					ng-md-icon(icon="help", size="20")
-						md-tooltip(md-direction="right") You can select which payment method the user can choose to pay for the renting
-			ng-md-icon(icon="cash", style="cursor: pointer;")
-			md-button.md-raised(type="submit") Next Step
+      p
+        md-title End of availibility date
+        span
+          ng-md-icon(icon="help", size="20")
+            md-tooltip(md-direction="right") This indicates when the clothe will not be available anymore
+      md-datepicker(ng-model="articleCreate.date_end", md-min-date="articleCreate.date_start")
+      p
+        md-title Payment methods
+        span
+          ng-md-icon(icon="help", size="20")
+            md-tooltip(md-direction="right") You can select which payment method the user can choose to pay for the renting
+      ng-md-icon(icon="cash", style="cursor: pointer;")
+      p
+        md-title The price of your article
+        span
+          ng-md-icon(icon="help", size="20")
+            md-tooltip(md-direction="right") This will be the price of your article by day. It will be displayed in the search. The minimum price is 5$ and the max price is 500$.
+      md-input-container.input-centered
+        input(placeholder="Price" required name="price" type="number" ng-model="articleCreate" +
+        ".price"
+        maxlength="500" minlength="10").input-price
+        div(ng-messages="articleFormStep1.price.$error" ng-if='!articleFormStep1.price.$pristine')
+          div(ng-message="required") This is required.
+          div(ng-message="minlength") The price must be higher than 5$.
+          div(ng-message="md-maxlength") The price must be lower than 500$.
+      md-button.md-raised(type="submit") Next Step
