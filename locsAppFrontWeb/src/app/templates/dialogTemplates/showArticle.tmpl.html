@@ -20,7 +20,7 @@
                            data-options="{nav: true, autoplay:true, autoplayTimeout:5000, loop:true, items: 1, lazyLoad:true, autoWidth:false}"
                            class="owl-carousel owl-theme">
           <div owl-carousel-item=""
-               ng-repeat="url_picture in previewArticle.url_pictures track by $index" class="item">
+               ng-repeat="url_picture in previewArticle.pictures track by $index" class="item">
             <img src="{{url_picture}}"/></div>
         </data-owl-carousel>
       </div>
