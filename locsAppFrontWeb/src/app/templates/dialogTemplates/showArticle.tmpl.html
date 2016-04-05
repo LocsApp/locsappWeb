@@ -56,22 +56,27 @@
             <md-divider></md-divider>
             <div layout="row" class="block-properties">
               <div flex="50" class="name-properties">Gender</div>
-              <div flex="50" class="t-right">{{previewArticle.genders}}</div>
+              <div flex="50" class="t-right">{{previewArticle.newArticle.gender.name}}</div>
             </div>
             <md-divider></md-divider>
             <div layout="row" class="block-properties">
               <div flex="50" class="name-properties">Size</div>
-              <div flex="50" class="t-right">{{previewArticle.sizes}}</div>
+              <div flex="50" class="t-right">{{previewArticle.newArticle.size.name}}</div>
             </div>
             <md-divider></md-divider>
             <div layout="row" class="block-properties">
               <div flex="50" class="name-properties">Color</div>
-              <div flex="50" class="t-right">{{previewArticle.clothe_colors}}</div>
+              <div flex="50" class="t-right">{{previewArticle.newArticle.color.name}}</div>
             </div>
             <md-divider></md-divider>
             <div layout="row" class="block-properties">
               <div flex="50" class="name-properties">State</div>
-              <div flex="50" class="t-right">{{previewArticle.clothe_states}}</div>
+              <div flex="50" class="t-right">{{previewArticle.newArticle.clothe_condition.name}}</div>
+            </div>
+            <md-divider></md-divider>
+            <div layout="row" class="block-properties">
+              <div flex="50" class="name-properties">Brand</div>
+              <div flex="50" class="t-right">{{previewArticle.newArticle.brand.name}}</div>
             </div>
             <md-divider></md-divider>
           </md-card-content>
