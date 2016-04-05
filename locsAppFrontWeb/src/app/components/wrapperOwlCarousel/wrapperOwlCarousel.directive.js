@@ -11,7 +11,7 @@
     .directive('owlCarousel', owlCarousel);
 
   /** @ngInject */
-  function owlCarousel($log) {
+  function owlCarousel() {
 
     return {
       restrict: 'E',

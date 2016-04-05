@@ -59,8 +59,7 @@
     };
 
     vm.uploadImageSuccess = function (data) {
-      $log.log("Success upload Image", data, "url = ", data.url);
-      vm.pictures.push(data.url);
+      vm.pictures.push(data.data.url);
     };
 
     //Upload the pictures
@@ -82,7 +81,7 @@
         locals: {
           title: vm.title, newArticle: vm.article, description: vm.description,
           date_start: vm.date_start, date_end: vm.date_end, price: vm.price,
-          files: vm.files
+          files: vm.files, pictures: vm.pictures
         },
         bindToController: true,
         parent: angular.element($document.body),
