@@ -33,6 +33,7 @@
     vm.files = [];
     vm.date_start = new Date();
     vm.date_end = new Date();
+    vm.price = 5; //Set minimum price
 
     // misc vars
     vm.min_date = new Date();

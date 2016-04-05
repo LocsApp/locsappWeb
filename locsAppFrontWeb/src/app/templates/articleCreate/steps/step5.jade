@@ -31,9 +31,9 @@ md-card(layout-fill)
       md-input-container.input-centered
         input(placeholder="Price" required name="price" type="number" ng-model="articleCreate" +
         ".price"
-        maxlength="500" minlength="10").input-price
-        div(ng-messages="articleFormStep1.price.$error" ng-if='!articleFormStep1.price.$pristine')
+        max="500" min="10").input-price
+        div(ng-messages="articleFormStep5.price.$error" ng-if='!articleFormStep5.price.$pristine')
           div(ng-message="required") This is required.
-          div(ng-message="minlength") The price must be higher than 5$.
-          div(ng-message="md-maxlength") The price must be lower than 500$.
+          div(ng-message="min") The price must be higher than 5$.
+          div(ng-message="max") The price must be lower than 500$.
       md-button.md-raised(type="submit") Next Step
