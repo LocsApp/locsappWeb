@@ -1,6 +1,7 @@
 .search-article-toolbar {
 	md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
 		background-color: transparent;
+		color:black;
 	}
 
 	md-toolbar {
@@ -22,4 +23,30 @@
 	md-input-container {
 		margin: 0px 0px 0px 5px;
 	}
+
+	_md-text {
+		display:inline-block;
+	}
+
+	.pagination-toolbar-search-article {
+		ul {
+		    list-style-type: none;
+		}
+		li {
+			margin-right: 3px;
+			display:inline-block;
+		}
+
+		a.md-default-theme:hover:not(.md-button), a:hover:not(.md-button) {
+			color: $onNumber;
+		}
+
+		a.md-default-theme:not(.md-button), a:not(.md-button) {
+			color: $paginateStill;
+		}
+	}
+}
+
+.article-search-sorting-select-container {
+	margin: 75px 0px 0px 20px;
 }

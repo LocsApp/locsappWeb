@@ -4,8 +4,10 @@ div.search-article-toolbar
 	md-toolbar(style="background-color:none" layout="row")
 		span.main-sort-by SORT BY
 		md-input-container
-			label sort
-			md-select(ng-model="articleSearch.sortOption")
+			md-select(ng-model="articleSearch.sortOption" md-container-class="article-search-sorting-select-container" multiple)
 				md-optgroup(label="sorts")
-				md-options(ng-repeat="sort in articleSearch.sortingOptions" value="{{sort}}") {{ sort }}
+					md-option(ng-repeat="sort in articleSearch.sortingOptions" value="{{sort}}") {{ sort }}
+		span.flex
+		span.pagination-toolbar-search-article
+			span(paging page="35" page-size="10" total="1000")
 md-divider.flex

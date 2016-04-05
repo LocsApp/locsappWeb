@@ -33,7 +33,8 @@
 		'ezfb',
 		'textAngular',
 		'ngFileUpload',
-    'djds4rce.angular-socialshare',
+    	'djds4rce.angular-socialshare',
+    	'bw.paging',
 		'LocsappDirectives',
 		'LocsappServices',
 		'LocsappControllers']);
