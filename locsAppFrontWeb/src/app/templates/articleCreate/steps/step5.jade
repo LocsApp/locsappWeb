@@ -29,9 +29,9 @@ md-card(layout-fill)
           ng-md-icon(icon="help", size="20")
             md-tooltip(md-direction="right") This will be the price of your article by day. It will be displayed in the search. The minimum price is 5$ and the max price is 500$.
       md-input-container.input-centered
-        input(placeholder="Price" required name="price" type="number" ng-model="articleCreate" +
-        ".price"
-        max="500" min="10").input-price
+        input(placeholder="Price" required name="price" type="number"
+        ng-model="articleCreate.price"
+        max="500" min="5").input-price
         div(ng-messages="articleFormStep5.price.$error" ng-if='!articleFormStep5.price.$pristine')
           div(ng-message="required") This is required.
           div(ng-message="min") The price must be higher than 5$.

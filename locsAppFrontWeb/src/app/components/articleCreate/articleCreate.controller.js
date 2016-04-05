@@ -33,6 +33,7 @@
     vm.files = [];
     vm.date_start = new Date();
     vm.date_end = new Date();
+
     vm.price = 5; //Set minimum price
 
     // misc vars
@@ -78,7 +79,7 @@
         controllerAs: 'previewArticle',
         templateUrl: 'app/templates/dialogTemplates/showArticle.tmpl.html',
         locals: {title: vm.title, newArticle: vm.article, description: vm.description,
-                date_start: vm.date_start, date_end: vm.date_end},
+                date_start: vm.date_start, date_end: vm.date_end, price: vm.price},
         bindToController: true,
         parent: angular.element($document.body),
         targetEvent: event,
