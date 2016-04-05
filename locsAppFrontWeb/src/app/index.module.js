@@ -34,6 +34,7 @@
 		'textAngular',
 		'ngFileUpload',
     'djds4rce.angular-socialshare',
+    'ngSanitize',
 		'LocsappDirectives',
 		'LocsappServices',
 		'LocsappControllers']);
