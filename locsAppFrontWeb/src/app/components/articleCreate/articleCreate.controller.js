@@ -78,8 +78,10 @@
         controller: vm.previewArticleController,
         controllerAs: 'previewArticle',
         templateUrl: 'app/templates/dialogTemplates/showArticle.tmpl.html',
-        locals: {title: vm.title, newArticle: vm.article, description: vm.description,
-                date_start: vm.date_start, date_end: vm.date_end, price: vm.price},
+        locals: {
+          title: vm.title, newArticle: vm.article, description: vm.description,
+          date_start: vm.date_start, date_end: vm.date_end, price: vm.price
+        },
         bindToController: true,
         parent: angular.element($document.body),
         targetEvent: event,
@@ -105,10 +107,24 @@
       toastr.error("We couldn't retrieve some informations...", 'Woops...');
     };
 
+
+    vm.getPaymentMethods = function (data) {
+
+      vm.payment_methods = data.payment_methods;
+      $log.log("Payment = ", vm.payment_methods);
+      $log.log(vm.payment_methods[0]);
+
+    };
+
     vm.getClotheStates = function (data) {
       vm.clothe_states = data.clothe_states;
-      $log.log("clothed states = ", vm.clothe_states);
-      $log.log(vm.clothe_states[0])
+
+      //And now we'll get payment
+      ArticleService
+        .getPaymentMethods
+        .get()
+        .$promise
+        .then(vm.getPaymentMethods, vm.failedRetrieval);
     };
 
     vm.getClotheColors = function (data) {
