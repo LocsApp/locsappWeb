@@ -11,7 +11,7 @@
 	}
 
 	.main-sort-by {
-		margin-left: 5px;
+		margin-left: 20px !important;
 		color: black;
 		margin: 0;
 	}
@@ -29,6 +29,12 @@
 	}
 
 	.pagination-toolbar-search-article {
+
+		.pagination {
+			margin: 0px;
+			margin-right: 20px;
+		}
+
 		ul {
 		    list-style-type: none;
 		}
@@ -41,12 +47,24 @@
 			color: $onNumber;
 		}
 
-		a.md-default-theme:not(.md-button), a:not(.md-button) {
-			color: $paginateStill;
+		li:not(.current-page-selected-search-article) {
+			a {
+				color: $paginateStill;
+			}
+		}
+		li
+
+		a {
+			text-decoration: none;
+			color: $onNumber;
 		}
 	}
 }
 
 .article-search-sorting-select-container {
-	margin: 75px 0px 0px 20px;
+	margin: 80px 0px 0px 35px;
+}
+
+.current-page-selected-search-article {
+	color: $onNumber;
 }

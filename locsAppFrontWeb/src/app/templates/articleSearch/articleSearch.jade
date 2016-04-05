@@ -9,5 +9,7 @@ div.search-article-toolbar
 					md-option(ng-repeat="sort in articleSearch.sortingOptions" value="{{sort}}") {{ sort }}
 		span.flex
 		span.pagination-toolbar-search-article
-			span(paging page="35" page-size="10" total="1000")
+			span(paging page="articleSearch.currentPage" page-size="10" total="1000" active-class="current-page-selected-search-article")
 md-divider.flex
+
+p {{articleSearch.currentPage}}
