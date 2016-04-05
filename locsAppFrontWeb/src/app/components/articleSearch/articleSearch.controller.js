@@ -14,8 +14,18 @@
 		vm.sortingOptions = ["title", "price"];
 		vm.sortOption = "";
 
-		/*Pagination*/
-		vm.currentPage = 1;
+		/*Pagination vars*/
+		vm.totalItems = 1000;
+		vm.search = {"_pagination" : {
+			        "page_number": 1,
+        			"items_per_page" : 10,
+		}};
+
+		/*Pagination functions*/
+		vm.onArrowClick = function (number)
+		{
+			vm.search._pagination.page_number += number;
+		}
 	}
 
 })();
