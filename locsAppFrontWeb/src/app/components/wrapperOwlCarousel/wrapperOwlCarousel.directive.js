@@ -13,8 +13,6 @@
   /** @ngInject */
   function owlCarousel($log) {
 
-    $log.log("IN wrrapper carousel");
-
     return {
       restrict: 'E',
       transclude: false,
@@ -50,19 +48,5 @@
       };
     });
 
-  /*  angular
-   .module('LocsappDirectives')
-   .directive('owlCarouselItem', [function () {
-   return {
-   restrict: 'A',
-   transclude: false,
-   link: function (scope, element) {
-   // wait for the last item in the ng-repeat then call init
-   if (scope.$last) {
-   scope.initCarousel(element.parent());
-   }
-   }
-   };
-   }]);*/
 
 })();

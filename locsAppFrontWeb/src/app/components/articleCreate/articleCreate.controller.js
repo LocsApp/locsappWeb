@@ -111,8 +111,8 @@
     vm.getPaymentMethods = function (data) {
 
       vm.payment_methods = data.payment_methods;
-      $log.log("Payment = ", vm.payment_methods);
-      $log.log(vm.payment_methods[0]);
+      //$log.log("Payment = ", vm.payment_methods);
+      //$log.log(vm.payment_methods[0]);
 
     };
 
@@ -186,12 +186,7 @@
     /** @ngInject */
     vm.previewArticleController = function () {
 
-      $log.log("in controller preview article");
-
       var vm = this;
-      $log.log("vm == ", vm);
-      //vm.showChildComment = false;
-
       //request author profile to get his notation;
 
       //Put the date min and max
