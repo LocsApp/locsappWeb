@@ -76,7 +76,7 @@
         controller: vm.previewArticleController,
         controllerAs: 'previewArticle',
         templateUrl: 'app/templates/dialogTemplates/showArticle.tmpl.html',
-        locals: {title: vm.title, newArticle: vm.article},
+        locals: {title: vm.title, newArticle: vm.article, description: vm.description},
         bindToController: true,
         parent: angular.element($document.body),
         targetEvent: event,
@@ -104,6 +104,8 @@
 
     vm.getClotheStates = function (data) {
       vm.clothe_states = data.clothe_states;
+      $log.log("clothed states = ", vm.clothe_states);
+      $log.log(vm.clothe_states[0])
     };
 
     vm.getClotheColors = function (data) {
