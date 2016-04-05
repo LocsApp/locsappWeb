@@ -76,7 +76,7 @@
         controller: vm.previewArticleController,
         controllerAs: 'previewArticle',
         templateUrl: 'app/templates/dialogTemplates/showArticle.tmpl.html',
-        locals: {title: vm.title},
+        locals: {title: vm.title, newArticle: vm.article},
         bindToController: true,
         parent: angular.element($document.body),
         targetEvent: event,
