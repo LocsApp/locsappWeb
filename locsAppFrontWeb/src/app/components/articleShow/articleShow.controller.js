@@ -14,9 +14,14 @@
 
   /** @ngInject */
   function ArticleShowController($log, $mdDialog, $document, ArticleService, $stateParams, $interval, toastr) {
+
     var vm = this;
+    var pagesShown = 1;
+    var pageSize = 1;
     //vm.showChildComment = false;
     vm.test_test = ['un', 'deux', 'trois'];
+    vm.items = ['../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg',
+      '../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg'];
 
     $log.log("route params = ", $stateParams.id);
 
@@ -45,7 +50,7 @@
           "username_author": "locsapp",
           "content": "What is the breast size ? ",
           "is_visible": true,
-          "is_useful": ["sdsgdsgs46887"],
+          "is_useful": ["sdsgdsgs46887", "sdfdsgsdgds6465464", "sdfdsgsdgds646546478"],
           "date_created": "fausse date",
           "date_modified": "fausse date",
           "response": {
@@ -67,7 +72,28 @@
           "username_author": "locsapp",
           "content": "What is the breast size ? ",
           "is_visible": true,
-          "is_useful": ["sdsgdsgs46887", "sdfdsgsdgds6465464", "sdfdsgsdgds646546478"],
+          "is_useful": ["sdsgdsgs46887"],
+          "date_created": "fausse date",
+          "date_modified": "fausse date",
+          "response": {
+            "_id": "56cb3cb1b2bc57ab2908e698",
+            "id_author": 44,
+            "username_author": "sylflo",
+            "content": "The breast size 95C",
+            "is_visible": true,
+            "date_created": "fausse date",
+            "date_modified": "fausse date"
+          },
+          "last_versions": [],
+          "flagged": null
+        },
+        {
+          "_id": "56cb3cb1b2bc57ab2908e697",
+          "id_author": 42,
+          "username_author": "locsapp",
+          "content": "What is the breast size ? ",
+          "is_visible": true,
+          "is_useful": ["sdsgdsgs46887"],
           "date_created": "fausse date",
           "date_modified": "fausse date",
           "response": {
@@ -116,17 +142,21 @@
       vm.rentDateStart = new Date(vm.start_availble);
       vm.rentDateEnd = new Date(vm.end_availble);
 
-      // Add col and row for the grid gallery
-      vm.obj_url_pictures = [];
-      for (var i = 0; i < vm.url_pictures.length; i++) {
-        vm.obj_url_pictures[i] = Object();
-        vm.obj_url_pictures[i]["col"] = "1";
-        vm.obj_url_pictures[i]["row"] = "1";
-        vm.obj_url_pictures[i]["url"] = vm.url_pictures[i];
-
-      }
 
       $log.log("TEST = ", vm.url_pictures);
+
+      vm.paginationLimit = function () {
+        return pageSize * pagesShown;
+      };
+
+      vm.hasMoreItemsToShow = function () {
+        return pagesShown < (vm.questions.length / pageSize);
+      };
+
+      vm.showMoreItems = function () {
+        pagesShown = pagesShown + 1;
+      };
+
     };
 
     vm.getInfoArticleFailure = function (data) {
@@ -147,18 +177,6 @@
 
     };
 
-    vm.clickImageGallery = function (event, index) {
-      $mdDialog.show({
-        controller: vm.showImageCarouselController,
-        controllerAs: 'showImageCarousel',
-        templateUrl: 'app/templates/dialogTemplates/articleImageCarousel.tmpl.html',
-        parent: angular.element($document.body),
-        locals: {index: index, slides: vm.url_pictures},
-        targetEvent: event,
-        clickOutsideToClose: true
-      });
-    };
-
 
     vm.submitComment = function (comment) {
       // SI on a clique sur shit on veut revenir a ligne
@@ -172,65 +190,10 @@
     };
 
 
-    vm.showImageCarouselController = function (index, slides) {
-
-      var vm = this;
-
-      vm.slideRight = false;
-      vm.slideLeft = false;
-      vm.fade = false;
-      //$log.log("IN image show Image Gallery", index, slides[0]);
+    //On affiche le show more si il reste des false dans le tableau
+    //Et le show more est affiche on derner true du tableau
 
 
-      vm.slides = slides;
-      vm.currentIndex = index;
-
-      vm.automaticNext = function () {
-        vm.currentIndex = (vm.currentIndex < vm.slides.length - 1) ? ++vm.currentIndex : 0;
-        vm.slideRight = true;
-        vm.slideLeft = false;
-        vm.fade = false;
-      };
-
-      var intervalNext = $interval(vm.automaticNext, 3000);
-
-
-      vm.cancel = function () {
-
-      };
-
-      vm.setCurrentSlideIndex = function (index) {
-        $log.log("in setCurrentSlideindex");
-        vm.fade = true;
-        vm.slideLeft = false;
-        vm.slideRight = false;
-        $interval.cancel(intervalNext);
-        vm.currentIndex = index;
-      };
-
-      vm.isCurrentSlideIndex = function (index) {
-        return vm.currentIndex == index;
-      };
-
-      vm.prevSlide = function () {
-        vm.currentIndex = (vm.currentIndex > 0) ? --vm.currentIndex : vm.slides.length - 1;
-        vm.slideLeft = true;
-        vm.slideRight = false;
-        vm.fade = false;
-        $interval.cancel(intervalNext);
-      };
-
-      vm.nextSlide = function () {
-        vm.currentIndex = (vm.currentIndex < vm.slides.length - 1) ? ++vm.currentIndex : 0;
-        vm.slideRight = true;
-        vm.slideLeft = false;
-        vm.fade = false;
-
-        $interval.cancel(intervalNext);
-      };
-
-
-    }
   }
 
 })();

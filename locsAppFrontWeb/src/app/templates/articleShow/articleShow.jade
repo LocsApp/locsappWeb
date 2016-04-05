@@ -1,8 +1,5 @@
-//Faire un text-align et si jamais c est trop petit au lieu du layout row on utilise le layout
-//column
-
 div.article-show(layout="row" layout-align="center")
-  div(flex-sm="100" flex-md="75" flex="50")
+  div(flex-xs="100" flex-sm="100" flex-md="75" flex="50")
 
     div(layout="row" layout-align="center")
       div
@@ -18,12 +15,20 @@ div.article-show(layout="row" layout-align="center")
             ng-md-icon(icon="star" size="22")
             span (50)
 
+
     div(layout="row" layout-align="center")
-      img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
+      data-owl-carousel.owl-carousel.owl-theme(flex="50" flex-xs="100" data-options="{nav: true," +
+      " " +
+      "autoplay:true," +
+      " " +
+  "autoplayTimeout:5000, loop:true, items: 1, " +
+      "lazyLoad:true, autoWidth:false}")
+        .item(owl-carousel-item='', ng-repeat='url_picture in articleShow.url_pictures track by $index')
+          img(src="{{url_picture}}")
 
 
-    div(layout="row")
-      md-card(flex="50")
+    div.my-layout-xs(layout="row")
+      md-card(flex="50" flex-xs="100")
         md-card-content
 
           div.block-properties(layout="row")
@@ -65,19 +70,25 @@ div.article-show(layout="row" layout-align="center")
             div.t-right(flex="50") {{articleShow.state}}
           md-divider
 
-      md-card(flex="50")
+      md-card.reservation(flex="50" flex-xs="100")
         md-card-content(flex="flex" layout-fill)
-          div(layout="column" flex="flex" layout-fill)
-            md-datepicker(flex="100" ng-model="articleShow.AskBeginLocation"
+
+          div.date(layout="column" layout-align="start")
+            md-datepicker( ng-model="articleShow.AskBeginLocation"
             md-placeholder="Begin location")
             md-datepicker(ng-model="articleShow.AskEndLocation" md-placeholder="End location")
+            //md-button.md-raised Ask for rent
+
+          div.rent(layout="column" flex="flex" layout-align="start" )
             md-button.md-raised Ask for rent
 
-            div
+          div.favorite-share(layout="column" flex="flex" layout-align="end" )
+            div.details
               span
-                ng-md-icon(icon="favorite")
-                span.bottom-right-md-card Add to your favorites
-            div
+                a(href='#')
+                  ng-md-icon(icon="favorite")
+                  span.bottom-right-md-card Add to your favorites
+            div.details
               span
                 ng-md-icon(icon="share")
                 span.bottom-right-md-card Share it
@@ -85,10 +96,13 @@ div.article-show(layout="row" layout-align="center")
                   ng-md-icon(icon="facebook")
                   ng-md-icon(icon="twitter")
 
-            div
+            div.details
               span
-                ng-md-icon(icon="warning")
-                span.bottom-right-md-card Send a report
+                //a(facebook class="facebookShare" data-url='http://google.com'data-shares='shares') {{ shares }}
+                a(href='#')
+                  ng-md-icon(icon="warning")
+                  span.bottom-right-md-card Send a report
+
 
 
 
@@ -112,23 +126,28 @@ div.article-show(layout="row" layout-align="center")
       h2.t-center(flex="15") Questions
       md-divider.separator-h2(flex="45")
 
+    div.question(layout="row" layout-align="center" ng-if="!articleShow.questions")
+      div(layout="column")
+        md-input-container.md-block
+          label Be the first one to ask something
+          textarea(ng-model="articleShow.askQuestion" md-maxlength="150" rows="5" md-select-on-focus)
 
-    div(layout="row" layout-align="center" ng-repeat="question in articleShow.questions" ng-if="question.is_visible")
+
+    div.question(layout="row" layout-align="center" ng-repeat="question in articleShow.questions | limitTo: articleShow.paginationLimit()" ng-if="question.is_visible")
       div(layout="column")
         div {{question.content}} (Ask by {{question.username_author}})
         div
           ng-md-icon(icon="warning")
           ng-md-icon(icon="thumb_up")
           span +{{question.is_useful.length}}
-        div {{question.response.content}}
+        div(flex-offset="10") {{question.response.content}}
 
-    //div(layout="row" layout-align="center")
-      div(layout="column")
-        div What is the breast size ? (Ask by toto)
-        div
-          ng-md-icon(icon="warning")
-          ng-md-icon(icon="thumb_up")
-          span +12
+    div.t-center.submit(ng-show="articleShow.hasMoreItemsToShow()" ng-click="articleShow.showMoreItems()")
+      md-button.md-raised Show more
+
+
+
+
 
 
 
@@ -136,231 +155,10 @@ div.article-show(layout="row" layout-align="center")
       md-divider.separator-h2(flex="40")
       h2.t-center(flex="20") We Recommend
       md-divider.separator-h2(flex="40")
-    //md-card
-      md-card-content
-        div(layout="column")
-          div(layout="row")
-            div(layout-align="end")
-            span(flex="100") TOTO
-            //span TUTU
-
-          span TUTU42
-
-        //md-list-item.md-2-line
-          div.md-list-item-text
-            div(layout='column')
-              (layout-align="start") TOTO
-              span(layout-align="end") TUTU
-
-            //p Secondary text
-
-        md-divider
-
-    //div(layout="row" layout-align="center")
-      div(layout="row"  flex="100")
-        md-card
-          md-card-content
-            md-divider
-            md-list-item.md-2-line
-              div.md-list-item-text
-              h3 {{TITLE}}
-              p Secondary text
-              md-divider
-
-      //div(layout="row" flex="50")
-        h1 toto42
-
-
-
-
-
-  //div(layout="column")
-    h1.t-center {{articleShow.title}}
-    div(layout="row")
-      h2 By sylflo
-      span
-        ng-md-icon(icon="star")
-        ng-md-icon(icon="star")
-        ng-md-icon(icon="star")
-        ng-md-icon(icon="star")
-        ng-md-icon(icon="star")
-        span (50)
-    img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
-
-
-
-  // Action button
-  //md-button.action-button.md-fab.md-primary(aria-label="Use Android")
-    ng-md-icon(icon="edit")
-
-//div(class="article-show")
-  div(layout='row' layout-align='center')
-    img(src="{{articleShow.url_thumbnail}}")
-    div(layout='column')
-      h1(style="margin-bottom:0") {{articleShow.title}}
-      h2(style="margin-top:0; font-size: 1em") toto42
-      //Penser a mettre boutton pour follow le vendeur
-      div(layout='row')
-        md-card(class='about')
-          md-card-content
-            //md-subheader.md-no-sticky About the clothe
-            md-divider
-            md-list-item.md-2-line
-              ng-md-icon(icon="person_outline")
-              div.md-list-item-text
-                h3 Main Category
-                p {{articleShow.BaseCategory }}
-            md-divider
-            md-list-item.md-2-line
-              ng-md-icon(icon="person_outline")
-              div.md-list-item-text
-                h3 Gender
-                p {{articleShow.sexe}}
-
-            md-divider
-              md-list-item.md-2-line
-                ng-md-icon(icon="color_lens")
-                div.md-list-item-text
-                  h3 Color
-                  p {{articleShow.color }}
-
-            md-divider
-              md-list-item.md-2-line
-                ng-md-icon(icon="help")
-                div.md-list-item-text
-                  h3 Brand
-                  p {{articleShow.brand }}
-
-        md-card(class='about about-margin')
-          md-card-content
-            //md-subheader.md-no-sticky About the clothe
-            md-divider
-            md-list-item.md-2-line
-              ng-md-icon(icon="person_outline")
-              div.md-list-item-text
-                h3 SubCategory
-                p {{articleShow.SubCategory}}
-            md-divider
-            md-list-item.md-2-line
-              ng-md-icon(icon="person_outline")
-              div.md-list-item-text
-                h3 Size
-                p {{articleShow.size }}
-            md-divider
-            md-list-item.md-2-line
-              ng-md-icon(icon="person_outline")
-              div.md-list-item-text
-                h3 State
-                p {{articleShow.state }}
-            md-divider
-        md-card(class='about')
-          md-card-content
-            //md-subheader.md-no-sticky About the clothe
-            md-divider
-            md-list-item.md-2-line
-              ng-md-icon(icon="person_outline")
-              div.md-list-item-text
-                h3 Article created
-                p {{articleShow.date_created}}
-            md-divider
-            md-list-item.md-2-line
-
-              ng-md-icon(icon="person_outline")
-              div.md-list-item-text
-                h3 Start availbility
-                p {{articleShow.start_availble }}
-            md-divider
-              md-list-item.md-2-line
-                ng-md-icon(icon="color_lens")
-                div.md-list-item-text
-                  h3 Price
-                  p {{articleShow.price }}
-
-            md-divider
-
-
-        md-card(class='about')
-          md-card-content
-            //md-subheader.md-no-sticky About the clothe
-            md-divider
-            md-list-item.md-2-line
-              ng-md-icon(icon="person_outline")
-              div.md-list-item-text
-                h3 Article modified
-                p {{articleShow.date_modified}}
-            md-divider
-
-            md-list-item.md-2-line
-              ng-md-icon(icon="person_outline")
-              div.md-list-item-text
-                h3 End availbility
-                p {{articleShow.end_availble}}
-            md-divider
-            md-list-item.md-2-line
-              ng-md-icon(icon="person_outline")
-              div.md-list-item-text
-                h3 Meaning payment
-                span(ng-repeat='payment in articleShow.meaning_payment') {{payment}},
-            md-divider
-
-  div(layout='column')
-    div(layout='row' layout-align='center center' flex="50" style='margin-top: 10px;')
-      md-datepicker(ng-model='articleShow.dateStart', md-placeholder='Enter date',
-      md-min-date='articleShow.rentDateStart',
-      md-max-date='articleShow.dateEnd')
-      md-datepicker(ng-model='articleShow.dateEnd', md-placeholder='Enter date',
-      md-min-date='articleShow.dateStart',
-      md-max-date='articleShow.rentDateEnd')
-      md-button.md-raised(style='text-align:center;' flex="30") Rent this article
-
-  div(layout='row' layout-align='center')
-    div(flex="50")
-      md-grid-list(md-cols-xs='1', md-cols-sm='2', md-cols-md='2', md-cols-gt-md='3',
-      md-row-height-gt-md='1:1', md-row-height='1:1', md-gutter='12px', md-gutter-gt-sm='8px')
-        md-grid-tile(ng-repeat="tile in articleShow.obj_url_pictures track by $index"
-        md-rowspan="{{tile.row}}" md-colspan="{{tile.col}}" md-colspan-sm="1"
-        style='background:url("{{tile.url}}"); background-size: cover; cursor:pointer;'
-        ng-click="articleShow.clickImageGallery($event, $index, articleShow.url_pictures)")
-          //md-grid-tile-footer
-            h3 {{tile.title}}
-
-
-
-  div(layout='row' layout-align='center')
-    md-card(flex="50")
-      md-card-content.description {{articleShow.description}}
-
-  div(layout='row' layout-align='center')
-    md-card(flex="50" style="box-shadow: none;")
-      md-list
-        md-subheader.md-no-sticky
-        md-list-item.md-3-line( ng-repeat='parentComment in articleShow.comments track by $index' )
-          img.md-avatar( ng-src='http://localhost:3000/assets/images/users/profile_picture/unknown-user.png', alt='{{parentComment.username_author}}')
-          .md-list-item-text( layout='column')
-            h3 {{ parentComment.username_author}}
-            h4 {{ parentComment.date_created }}
-            p {{ parentComment.content }}
-            p
-              a(href='#' ng-click='articleShow.replyComment[$index] = !articleShow.replyComment[$index]') reply
-              a(href='#' ng-if="parentComment.childs.length" ng-hide='articleShow.showChildComment[$index]' ng-click="articleShow.showChildComment[$index] = !articleShow.showChildComment[$index]")  Show more
-              a(href='#' ng-if="parentComment.childs.length" ng-show='articleShow.showChildComment[$index]' ng-click="articleShow.showChildComment[$index] = !articleShow.showChildComment[$index]")  Show less
-
-            md-input-container.md-block(ng-show='articleShow.replyComment[$index]')
-              label Write a new comment
-              textarea(ng-model='articleShow.childNewComment.$index' input-comment="articleShow.submitComment(articleShow.parentNewComment)")
-
-            md-list-item.md-3-line(ng-repeat='childComment in parentComment.childs' ng-show='articleShow.showChildComment[$index]')
-              img.md-avatar(ng-src='http://localhost:3000/assets/images/users/profile_picture/unknown-user.png', alt='{{parentComment.username_author}}')
-              .md-list-item-text(layout='column')
-                h3 {{ parentComment.username_author}}
-                h4 {{ parentComment.date_created }}
-                p {{ parentComment.content }}
-              md-divider
-
-          md-divider
-      md-input-container.md-block
-        label Write a new comment
-        textarea(ng-model='articleShow.parentNewComment' input-comment="articleShow.submitComment(articleShow.parentNewComment)")
-
-
-
+    div(layout='row' layout-align='center')
+      data-owl-carousel.owl-carousel(data-options='{navigation: false, pagination: true, ' +
+      'rewindNav : false, loop: true, autoWidth: true, autoplay:true, autoplayTimeout:1000}')
+        .item(owl-carousel-item='', ng-repeat='url_picture in articleShow.url_pictures track by $index')
+          img(src="{{url_picture}}" style='width:200px; height:auto;')
+          div(layout-align="center" layout="row")
+            span.bold 12$
