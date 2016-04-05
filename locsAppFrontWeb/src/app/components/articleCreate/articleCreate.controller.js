@@ -59,6 +59,7 @@
     };
 
     vm.uploadImageSuccess = function (data) {
+      $log.log("Success upload Image", data, "url = ", data.url);
       vm.pictures.push(data.url);
     };
 
@@ -80,7 +81,8 @@
         templateUrl: 'app/templates/dialogTemplates/showArticle.tmpl.html',
         locals: {
           title: vm.title, newArticle: vm.article, description: vm.description,
-          date_start: vm.date_start, date_end: vm.date_end, price: vm.price
+          date_start: vm.date_start, date_end: vm.date_end, price: vm.price,
+          files: vm.files
         },
         bindToController: true,
         parent: angular.element($document.body),
@@ -187,6 +189,7 @@
     vm.previewArticleController = function () {
 
       var vm = this;
+      $log.log("vm preview article = ", vm);
       //request author profile to get his notation;
 
       //Put the date min and max

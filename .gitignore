@@ -1,6 +1,9 @@
 #Django Pycache pyc
 *.pyc
 
+#Django media file
+locsAppBack/media/
+
 #Prod are generate by gulp
 locsAppFrontWeb/prod
 
