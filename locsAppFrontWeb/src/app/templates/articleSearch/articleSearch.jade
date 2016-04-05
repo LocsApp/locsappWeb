@@ -1,1 +1,11 @@
-h1 Article Search
+div(style="margin-top: 10px;")
+md-divider.flex
+div.search-article-toolbar
+	md-toolbar(style="background-color:none" layout="row")
+		span.main-sort-by SORT BY
+		md-input-container
+			label sort
+			md-select(ng-model="articleSearch.sortOption")
+				md-optgroup(label="sorts")
+				md-options(ng-repeat="sort in articleSearch.sortingOptions" value="{{sort}}") {{ sort }}
+md-divider.flex

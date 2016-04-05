@@ -8,7 +8,11 @@
 	/** @ngInject */
 	function ArticleSearchController()
 	{
+		var vm = this;
 		
+		/*Option vars*/
+		vm.sortingOptions = ["title", "price"];
+		vm.sortOption = "";
 	}
 
 })();
