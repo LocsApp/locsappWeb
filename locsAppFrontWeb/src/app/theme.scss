@@ -126,3 +126,10 @@ md-icon {
     margin-left: 0;
   }
 }
+
+//For displaying items in line in a select
+md-select-value {
+  ._md-container {
+    display: inline-block !important;
+  }
+}
