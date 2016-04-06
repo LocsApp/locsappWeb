@@ -22,11 +22,11 @@ div.search-article-body
 		div(flex="25")
 			section(layout="column", layout-align="start start")
 				md-card.card-containers
-					md-card-title
+					md-card-title(style="padding-bottom:0px;")
 						md-card-title-text
 							span.title-on-card Your research
 					md-card-content
-						md-input-container
+						md-input-container(style="margin-bottom:0px;")
 							label Your Keyword
 							input(name="searchKeywords")
 						section(layout="row", layout-align="start start")
@@ -92,7 +92,7 @@ div.search-article-body
 						menu-collapse(title="Payment Methods")
 							div(ng-repeat="method in articleSearch.payment_methods")
 								md-checkbox(ng-model="articleSearch.filters.payment_methods[method._id]").filters-checkboxes {{ method.name }}
-						md-divider
+						md-divider(style="margin-top:10px;")
 						section(layout="row", layout-align="start start" style="margin-top: 10px;")
 							span Caution
 							span.flex
