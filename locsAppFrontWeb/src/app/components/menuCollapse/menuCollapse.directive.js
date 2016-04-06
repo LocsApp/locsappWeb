@@ -14,7 +14,6 @@
 		directive.templateUrl = 'app/components/menuCollapse/menuCollapse.tmpl.html';
 
 		directive.link =  function(scope) {
-			console.log(scope);
 
 			scope.isCollapsed = false;
 
