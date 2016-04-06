@@ -22,7 +22,7 @@ md-card(layout-fill)
 						md-tooltip(md-direction="right") It will categorize your article to be found in one of the 3 main themes
 			md-input-container
 				md-select(ng-model="articleCreate.article.base_category", name="base_category", placeholder="Category", required)
-					md-option(ng-value="opt._id", ng-repeat="opt in articleCreate.categories") {{ opt.name }}
+					md-option(ng-value="opt", ng-repeat="opt in articleCreate.categories") {{ opt.name }}
 				div(ng-messages="articleFormStep1.base_category.$error" ng-if='!articleFormStep1.base_category.$pristine')
 					div(ng-message="required") This is required.
 			p
@@ -32,7 +32,7 @@ md-card(layout-fill)
 						md-tooltip(md-direction="right") It will help to precise the scope of your article
 			md-input-container
 				md-select(ng-model="articleCreate.article.sub_category", name="sub_category", placeholder="Sub Category", required)
-					md-option(ng-value="opt._id", ng-repeat="opt in articleCreate.subCategories") {{ opt.name }}
+					md-option(ng-value="opt", ng-repeat="opt in articleCreate.subCategories") {{ opt.name }}
 				div(ng-messages="articleFormStep1.sub_category.$error" ng-if='!articleFormStep1.sub_category.$pristine')
 					div(ng-message="required") This is required.
 			md-button.md-raised(type="submit") Next Step

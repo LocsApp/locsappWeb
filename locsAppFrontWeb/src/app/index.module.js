@@ -1,14 +1,14 @@
-(function() {
+(function () {
   'use strict';
 
   angular
-  .module("LocsappControllers", []);
+    .module("LocsappControllers", []);
 
   angular
-  .module("LocsappServices", []);
+    .module("LocsappServices", []);
 
   angular
-  .module("LocsappDirectives", []);
+    .module("LocsappDirectives", []);
 
   angular
 	.module('locsapp', ['ngAnimate',

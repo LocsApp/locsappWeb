@@ -34,6 +34,8 @@
     vm.date_start = new Date();
     vm.date_end = new Date();
 
+    vm.price = 5; //Set minimum price
+
     // misc vars
     vm.min_date = new Date();
 
@@ -57,7 +59,7 @@
     };
 
     vm.uploadImageSuccess = function (data) {
-      vm.pictures.push(data.url);
+      vm.pictures.push(data.data.url);
     };
 
     //Upload the pictures
@@ -76,7 +78,11 @@
         controller: vm.previewArticleController,
         controllerAs: 'previewArticle',
         templateUrl: 'app/templates/dialogTemplates/showArticle.tmpl.html',
-        //locals: {user_id: vm.user.id, address: address, type: type},
+        locals: {
+          title: vm.title, newArticle: vm.article, description: vm.description,
+          date_start: vm.date_start, date_end: vm.date_end, price: vm.price,
+          files: vm.files, pictures: vm.pictures
+        },
         bindToController: true,
         parent: angular.element($document.body),
         targetEvent: event,
@@ -102,8 +108,24 @@
       toastr.error("We couldn't retrieve some informations...", 'Woops...');
     };
 
+
+    vm.getPaymentMethods = function (data) {
+
+      vm.payment_methods = data.payment_methods;
+      //$log.log("Payment = ", vm.payment_methods);
+      //$log.log(vm.payment_methods[0]);
+
+    };
+
     vm.getClotheStates = function (data) {
       vm.clothe_states = data.clothe_states;
+
+      //And now we'll get payment
+      ArticleService
+        .getPaymentMethods
+        .get()
+        .$promise
+        .then(vm.getPaymentMethods, vm.failedRetrieval);
     };
 
     vm.getClotheColors = function (data) {
@@ -157,5 +179,25 @@
       .$promise
       .then(vm.getCategories, vm.failedRetrieval);
     //End of Static collection retrieval
+
+
+    /****
+     * Preview Article Controller
+     */
+    /** @ngInject */
+    vm.previewArticleController = function () {
+
+      var vm = this;
+      $log.log("vm preview article = ", vm);
+      //request author profile to get his notation;
+
+      //Put the date min and max
+      vm.dateStart = new Date(vm.start_availble);
+      vm.dateEnd = new Date(vm.end_availble);
+
+      vm.rentDateStart = new Date(vm.start_availble);
+      vm.rentDateEnd = new Date(vm.end_availble);
+
+    }
   }
 })();
