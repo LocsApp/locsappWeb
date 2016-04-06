@@ -82,7 +82,7 @@
 	}
 
 	.save-search {
-		min-width: 190px;
+		min-width: 200px;
 
 		background-color: $saveSearch;
 		color: $saveSearchFont;
@@ -91,9 +91,20 @@
 		}
 	}
 
+    md-checkbox.md-checked ._md-icon {
+      background-color: $checkBox;
+    }
+
+	.filters-checkboxes {
+		margin-left: 10px;
+		margin-bottom: 5px;
+	}
+
 	.card-containers {
 
-		min-width: 190px;
+		min-width: 200px;
+		max-width: 200px;
+		width: 200px;
 
 		.title-on-card {
 			color: $headerSubContainers;
@@ -112,6 +123,13 @@
 	md-switch.md-checked ._md-thumb {
 		background-color: $checkBox;
 	}
+}
+
+.article-search-md-card-collapse {
+
+	position: relative;
+	z-index: 1;
+	animation: slideInDown 0.5s;
 }
 
 .article-search-sorting-select-container {

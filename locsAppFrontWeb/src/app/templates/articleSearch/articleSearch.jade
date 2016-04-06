@@ -33,3 +33,75 @@ div.search-article-body
 							span(flex="60") Search only in title
 							span.flex
 							md-switch(ng-model="articleSearch.searchOnlyInTitle").search-only-in-title-switch
+				md-card.card-containers
+					md-card-title
+						md-card-title-text
+							span.title-on-card Your availability
+					md-card-content
+						menu-collapse(title="Position" layout-fill)
+							md-input-container(style="margin-bottom:0px;")
+								label Your position
+								input(name="searchKeywords").flex
+							section(layout="row", layout-align="start start" style="margin-bottom:20px;")
+								ng-md-icon(icon="my_location" flex="15")
+								strong Near Me
+								span.flex
+						div
+							menu-collapse(title="Date")
+								div Begin location
+								md-datepicker(name="beginDate" ng-model="articleSearch.beginDate")
+								div End location
+								md-datepicker(name="endDate" ng-model="articleSearch.endDate")
+				md-card.card-containers
+					md-card-title
+						md-card-title-text
+							span.title-on-card Clothes properties
+					md-card-content
+						menu-collapse(title="Categories")
+							div(ng-repeat="category in articleSearch.categories")
+								md-checkbox(ng-model="articleSearch.filters.categories[category._id]").filters-checkboxes
+									{{ category.name }}
+						md-divider
+						menu-collapse(title="Sub-Categories")
+							div(ng-repeat="subCategory in articleSearch.subCategories")
+								md-checkbox(ng-model="articleSearch.filters[subCategory._id]").filters-checkboxes
+									{{ subCategory.name }}
+						md-divider
+						menu-collapse(title="Brands")
+							div(ng-repeat="brand in articleSearch.brands")
+								md-checkbox(ng-model="articleSearch.filters.brands[brand._id]").filters-checkboxes
+									{{ brand.name }}
+						md-divider
+						menu-collapse(title="Genders")
+							div(ng-repeat="gender in articleSearch.genders")
+								md-checkbox(ng-model="articleSearch.filters.genders[gender._id]").filters-checkboxes
+									{{ gender.name }}
+						md-divider
+						menu-collapse(title="Sizes")
+							div(ng-repeat="size in articleSearch.sizes")
+								md-checkbox(ng-model="articleSearch.filters.sizes[size._id]").filters-checkboxes
+									{{ size.name }}
+						md-divider
+						menu-collapse(title="Colors")
+							div(ng-repeat="color in articleSearch.clothe_colors")
+								md-checkbox(ng-model="articleSearch.filters.colors[color._id]").filters-checkboxes
+									{{ color.name }}
+						md-divider
+						menu-collapse(title="States")
+							div(ng-repeat="state in articleSearch.clothe_states")
+								md-checkbox(ng-model="articleSearch.filters.states[state._id]").filters-checkboxes
+									{{ state.name }}
+				md-card.card-containers
+					md-card-title
+						md-card-title-text
+							span.title-on-card Transaction Modalities
+					md-card-content(style="padding-bottom:0px;")
+						menu-collapse(title="Payment Methods")
+							div(ng-repeat="method in articleSearch.payment_methods")
+								md-checkbox(ng-model="articleSearch.filters.payment_methods[method._id]").filters-checkboxes
+									{{ method.name }}
+						md-divider
+						section(layout="row", layout-align="start start" style="margin-top: 10px;")
+							span Caution
+							span.flex
+							md-switch(ng-model="articleSearch.isCaution").search-only-in-title-switch
