@@ -17,8 +17,8 @@
 		/*Pagination vars*/
 		vm.totalItems = 1000;
 		vm.search = {"_pagination" : {
-			        "page_number": 1,
-        			"items_per_page" : 10,
+					"page_number": 1,
+					"items_per_page" : 10
 		}};
 
 		/*Pagination functions*/

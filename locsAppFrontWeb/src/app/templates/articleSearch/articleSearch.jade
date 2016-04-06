@@ -14,3 +14,6 @@ div.search-article-toolbar
 		span(style="margin-right: 20px;" ng-if="articleSearch.search._pagination.page_number >= articleSearch.totalItems / articleSearch.search._pagination.items_per_page")
 		ng-md-icon(icon="keyboard_arrow_right" ng-click="articleSearch.onArrowClick(1);" ng-if="articleSearch.search._pagination.page_number < articleSearch.totalItems / articleSearch.search._pagination.items_per_page").arrow-next-page
 md-divider.flex
+div.search-article-body
+	div.delimiter
+	md-button.md-raised.save-search Save your search

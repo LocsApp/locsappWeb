@@ -75,6 +75,18 @@
 	}
 }
 
+.search-article-body {
+
+	.delimiter {
+		margin-top: 20px;
+	}
+
+	.save-search {
+		background-color: $saveSearch;
+		color: $saveSearchFont;
+	}
+}
+
 .article-search-sorting-select-container {
 	margin: 80px 0px 0px 35px;
 }
