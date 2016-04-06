@@ -17,3 +17,19 @@ md-divider.flex
 div.search-article-body
 	div.delimiter
 	md-button.md-raised.save-search Save your search
+	div.delimiter
+	section(layout="row", layout-align="start start")
+		div(flex="25")
+			section(layout="column", layout-align="start start")
+				md-card.card-containers
+					md-card-title
+						md-card-title-text
+							span.title-on-card Your research
+					md-card-content
+						md-input-container
+							label Your Keyword
+							input(name="searchKeywords")
+						section(layout="row", layout-align="start start")
+							span(flex="60") Search only in title
+							span.flex
+							md-switch(ng-model="articleSearch.searchOnlyInTitle").search-only-in-title-switch

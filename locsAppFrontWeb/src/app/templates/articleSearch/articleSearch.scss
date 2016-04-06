@@ -82,8 +82,35 @@
 	}
 
 	.save-search {
+		min-width: 190px;
+
 		background-color: $saveSearch;
 		color: $saveSearchFont;
+		&:hover:not([disabled]){
+			background-color: $saveSearchBrighter;
+		}
+	}
+
+	.card-containers {
+
+		min-width: 190px;
+
+		.title-on-card {
+			color: $headerSubContainers;
+			font-size: 20px;
+		}
+	}
+
+	.search-only-in-title-switch {
+		margin-top: 0px;
+	}
+
+	md-switch.md-checked ._md-bar {
+		background-color: $checkBox;
+	}
+
+	md-switch.md-checked ._md-thumb {
+		background-color: $checkBox;
 	}
 }
 
