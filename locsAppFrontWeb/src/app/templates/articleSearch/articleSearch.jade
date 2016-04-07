@@ -19,7 +19,7 @@ div.search-article-body
 	md-button.md-raised.save-search Save your search
 	div.delimiter
 	section(layout="row", layout-align="start start")
-		div(flex="25")
+		div(flex="none")
 			section(layout="column", layout-align="start start")
 				md-card.card-containers
 					md-card-title(style="padding-bottom:0px;")
@@ -97,6 +97,27 @@ div.search-article-body
 							span Caution
 							span.flex
 							md-switch(ng-model="articleSearch.isCaution").search-only-in-title-switch
+		div(layout-margin style="margin-top: 0px;").flex
+			md-grid-list(md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-row-height="200px" md-cols-gt-md="4" md-gutter="20px")
+				md-grid-tile(style="background: red;" md-colspan="1" md-rowspan="2")
+					md-grid-tile-footer
+						h3 Kek
+				md-grid-tile(style="background: yellow;" md-colspan="1" md-rowspan="2")
+					md-grid-tile-footer
+						h3 Kek
+				md-grid-tile(style="background: green;" md-colspan="1" md-rowspan="2")
+					md-grid-tile-footer
+						h3 Kek
+				md-grid-tile(style="background: purple;" md-colspan="1" md-rowspan="2")
+					md-grid-tile-footer
+						h3 Kek
+				md-grid-tile(style="background: blue;" md-colspan="1" md-rowspan="2")
+					md-grid-tile-footer
+						h3 Kek
+				md-grid-tile(style="background: orange;" md-colspan="1" md-rowspan="2")
+					md-grid-tile-footer
+						h3 Kek
+div.delimiter.flex
 md-divider.flex
 div.search-article-toolbar
 	md-toolbar(style="background-color:none" layout="row")
