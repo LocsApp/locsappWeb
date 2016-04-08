@@ -12,7 +12,12 @@
     var service = {
 
       getArticle: $resource(URL_API + 'api/v1/articles/get/:id/', {id: "@article_id"}),
-      getCategories: $resource(URL_API + 'api/v1/static-collections/base-categories/'),
+      getCategories: $resource(URL_API + 'api/v1/static-collections/base-categories/', {
+        query: {
+          method: 'GET',
+          cache: true
+        }
+      }),
       getSubCategories: $resource(URL_API + 'api/v1/static-collections/sub-categories/'),
       getGenders: $resource(URL_API + 'api/v1/static-collections/genders/'),
       getSizes: $resource(URL_API + 'api/v1/static-collections/sizes/'),

@@ -1,10 +1,11 @@
 md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavBarController as navbar").locsapp-navbar-gt-sm
-	span
-		span(ui-sref="main.homepage" style="cursor: pointer;").md-toolbar-tools Locsapp
-	span(ng-if="!main.is_authenticated()")
-		ng-md-icon(icon="login", size="48", ui-sref="main.login").locsapp-navbar-icons-gt-sm
-		ng-md-icon(icon="person_add", size="48", ui-sref="main.register").locsapp-navbar-last-icon-gt-sm
-	span(ng-if="main.is_authenticated()")
-		include ./notifications.jade
-		ng-md-icon(icon="account_box", size="48", ui-sref="main.user_profile").locsapp-navbar-last-icon-gt-sm
-		ng-md-icon(icon="logout", size="48", ui-sref="main.logout").locsapp-navbar-last-icon-gt-sm
+  span
+    span(ui-sref="main.homepage" style="cursor: pointer;").md-toolbar-tools Locsapp
+  span(ng-if="!main.is_authenticated()")
+    ng-md-icon(icon="login", size="48", ui-sref="main.login").locsapp-navbar-icons-gt-sm
+    ng-md-icon(icon="person_add", size="48", ui-sref="main.register").locsapp-navbar-last-icon-gt-sm
+  span(ng-if="main.is_authenticated()")
+    include ./notifications.jade
+    ng-md-icon(icon="account_box", size="48", ui-sref="main.article_create").locsapp-navbar-last-icon-gt-sm
+    ng-md-icon(icon="account_box", size="48", ui-sref="main.user_profile").locsapp-navbar-last-icon-gt-sm
+    ng-md-icon(icon="logout", size="48", ui-sref="main.logout").locsapp-navbar-last-icon-gt-sm
