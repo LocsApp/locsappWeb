@@ -2,84 +2,99 @@
 
 .article-create {
 
-	md-tabs-canvas {
-		height: 100px;
-	}
+  md-tabs-canvas {
+    height: 100px;
+  }
 
-	md-pagination-wrapper {
-		height: 100px;
-		width:100%;
-	}
+  md-pagination-wrapper {
+    height: 100px;
+    width: 100%;
+  }
 
-	md-tab-item {
-		padding: 0px;
-	}
+  md-tab-item {
+    padding: 0px;
+  }
 
-	md-ink-bar {
-		width:64px;
-		background-color:$progressBar;
-	}
+  md-ink-bar {
+    width: 64px;
+    background-color: $progressBar;
+  }
 
-	.icon-progress {
-		height: 64px;
-		width: 64px;
-	}
+  .icon-progress {
+    height: 64px;
+    width: 64px;
+  }
 
-	.icon-progress-completed {
-		@extend .icon-progress;
-		fill: $progressIcon;
-	}
+  .icon-progress-completed {
+    @extend .icon-progress;
+    fill: $progressIcon;
+  }
 
-	.icon-bar-progress {
-		width: 100px;
-		color: $progressBar;
-		background-color: $progressBar;
-	}
+  .icon-bar-progress {
+    width: 100px;
+    color: $progressBar;
+    background-color: $progressBar;
+  }
 
-	md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {
-		background-color: $progressBar;
-	}
+  md-progress-linear.md-default-theme .md-bar, md-progress-linear .md-bar {
+    background-color: $progressBar;
+  }
 
-	.body-steps {
-		padding:5px;
-		width: 100%;
-		md-card {
-			margin-top:30px;
-			max-width: 900px;
-		}
-		.body-title-step {
-			background-color: $headerSubContainers;
-			h3 {
-				color: $bodyContainer;
-			}
-		}
+  .body-steps {
+    padding: 5px;
+    width: 100%;
+    md-card {
+      margin-top: 30px;
+      max-width: 900px;
+    }
+    .body-title-step {
+      background-color: $headerSubContainers;
+      h3 {
+        color: $bodyContainer;
+      }
+    }
 
-		.input-centered {
-			label {
-				margin: auto;
-			}
-		}
+    .input-centered {
+      label {
+        margin: auto;
+      }
+    }
 
-		.input-title {
-			width: 375px;
-		}
+    .input-title {
+      width: 375px;
+    }
 
-		.separate-aligned-blocks {
-			margin-left: 30px;
-		}
+    .separate-aligned-blocks {
+      margin-left: 30px;
+    }
 
-		.logo-picture {
-			height: 300px;
-			width: 300px;
-		}
-	}
+    .logo-picture {
+      height: 300px;
+      width: 300px;
+    }
+  }
 
 }
 
 md-dialog.fullscreen-dialog {
-    max-width: 100%;
-    max-height: 100%;
-    width: 100%;
-    height: 100%;
-    border-radius: 0;
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+
+  .md-button.validate.md-primary.md-fab,
+  .md-button.md-primary.md-fab:not([disabled]):hover {
+    background-color: green;
+    color: white;
+
+  }
+
+   .md-button.close.md-primary.md-fab,
+  .md-button.md-primary.md-fab:not([disabled]):hover {
+    background-color: #C10000;
+    color: white;
+       /* margin-left: 70px;*/
+  }
+
 }

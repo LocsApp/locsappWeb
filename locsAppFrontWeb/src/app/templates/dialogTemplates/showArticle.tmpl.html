@@ -72,7 +72,8 @@
             <md-divider></md-divider>
             <div layout="row" class="block-properties">
               <div flex="50" class="name-properties">State</div>
-              <div flex="50" class="t-right">{{previewArticle.newArticle.clothe_condition.name}}</div>
+              <div flex="50" class="t-right">{{previewArticle.newArticle.clothe_condition.name}}
+              </div>
             </div>
             <md-divider></md-divider>
             <div layout="row" class="block-properties">
@@ -140,5 +141,18 @@
       </div>
 
     </div>
+
+    <div layout="row" layout-align="end end">
+      <md-button class="close action-button-position md-fab md-primary">
+        <ng-md-icon icon="close">
+        </ng-md-icon>
+      </md-button>
+      <md-button class="validate action-button-position md-fab md-primary">
+        <ng-md-icon icon="done">
+        </ng-md-icon>
+      </md-button>
+    </div>
+
+
   </div>
 </md-dialog>
