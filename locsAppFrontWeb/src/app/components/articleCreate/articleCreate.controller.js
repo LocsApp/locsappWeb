@@ -230,6 +230,10 @@
       vm.rentDateStart = new Date(vm.start_availble);
       vm.rentDateEnd = new Date(vm.end_availble);
 
+      vm.createNewArticle = function() {
+
+      }
+
     }
   }
 })();
