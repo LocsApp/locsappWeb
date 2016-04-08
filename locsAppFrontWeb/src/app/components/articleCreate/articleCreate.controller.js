@@ -6,7 +6,7 @@
     .controller('ArticleCreateController', ArticleCreateController);
 
   /** @ngInject */
-  function ArticleCreateController($log, ArticleService, toastr, $scope, $timeout, $mdDialog, $document) {
+  function ArticleCreateController($log, ArticleService, toastr, $timeout, $mdDialog, $document) {
     var vm = this;
 
     //steps vars
@@ -46,8 +46,8 @@
 
 
     //CheckBox payment
-    $scope.items = [1,2,3,4,5];
-  $scope.selected = [1];
+    vm.items = [1,2,3,4,5];
+  vm.selected = [1];
   vm.toggle = function (item, list) {
     var idx = list.indexOf(item);
     if (idx > -1) {
@@ -61,17 +61,17 @@
     return list.indexOf(item) > -1;
   };
   vm.isIndeterminate = function() {
-    return ($scope.selected.length !== 0 &&
-        $scope.selected.length !== $scope.items.length);
+    return (vm.selected.length !== 0 &&
+        vm.selected.length !== vm.items.length);
   };
   vm.isChecked = function() {
-    return $scope.selected.length === $scope.items.length;
+    return vm.selected.length === vm.items.length;
   };
   vm.toggleAll = function() {
-    if ($scope.selected.length === $scope.items.length) {
-      $scope.selected = [];
-    } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
-      $scope.selected = $scope.items.slice(0);
+    if (vm.selected.length === vm.items.length) {
+      vm.selected = [];
+    } else if (vm.selected.length === 0 || vm.selected.length > 0) {
+      vm.selected = vm.items.slice(0);
     }
   };
     //End checkbox payment
