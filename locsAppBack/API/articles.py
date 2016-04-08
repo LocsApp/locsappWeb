@@ -239,7 +239,7 @@ def articleAlone(request, article_pk):
 
     if request.method == "PUT":
         return APIrequests.PUT(
-            request, model, "articles", "The article has been successfully created!", article_pk)
+            request, model, "articles", "The article has been successfully modified!", article_pk)
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 

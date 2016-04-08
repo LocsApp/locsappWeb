@@ -123,6 +123,25 @@
 	md-switch.md-checked ._md-thumb {
 		background-color: $checkBox;
 	}
+
+	.thumbnail-pic {
+		width: 200px;
+		height: 200px;
+	}
+
+	.title-article {
+		margin-bottom: 0px;
+	}
+
+	.price-article {
+		margin-top: 0px;
+		margin-bottom: 0px;
+		color: $articlePrice;
+	}
+
+	.distance-range {
+		margin-left: 10px;
+	}
 }
 
 .article-search-md-card-collapse {

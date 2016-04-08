@@ -6,8 +6,9 @@
 		.controller('ArticleSearchController', ArticleSearchController);
 
 	/** @ngInject */
-	function ArticleSearchController(ArticleService, $log, toastr)
+	function ArticleSearchController(ArticleService, $log, toastr, URL_API)
 	{
+		$log.log(URL_API);
 		var vm = this;
 
 		/*Filters vars*/
@@ -22,6 +23,7 @@
 		vm.filters = {};
 
 		/*Option vars*/
+		vm.url_api = URL_API;
 		vm.sortingOptions = ["title", "price"];
 		vm.sortOption = "";
 
