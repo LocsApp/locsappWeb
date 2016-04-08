@@ -81,6 +81,7 @@ def searchArticles(request):
     number_pages = int(results.count() / number_items)
     document["metadatas"][
         "total_pages"] = 1 if number_pages < 1 else number_pages
+    document["metadatas"]["total_items"] = results.count()
     for instance in results:
         document["articles"].append(APIrequests.parseObjectIdToStr(instance))
     return JsonResponse(document)

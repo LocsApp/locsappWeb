@@ -28,7 +28,7 @@
 		vm.sortOption = "";
 
 		/*Pagination vars*/
-		vm.totalItems = 1000;
+		vm.totalItems = 0;
 		vm.search = {"_pagination" : {
 					"page_number": 1,
 					"items_per_page" : 8
@@ -127,6 +127,7 @@
 		{
 			$log.log(data);
 			vm.articles = data;
+			vm.totalItems = data.metadatas.total_items;
 		}
 
 		ArticleService
