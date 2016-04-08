@@ -4,8 +4,6 @@ from .views import db_locsapp
 from .views import APIrequests
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
-from bson import json_util
-from django.http import HttpResponse
 
 import json
 from bson import ObjectId
@@ -206,9 +204,10 @@ def articleAlone(request, article_pk):
 @csrf_exempt
 def getArticle(request, article_pk):
     if request.method == "GET":
-        article = db_locsapp["articles"].find_one(
-            {"_id": ObjectId(article_pk)})
-        return HttpResponse(json.dumps(
-            article, sort_keys=True, indent=4, default=json_util.default))
+        return APIrequests.GET('articles', article_pk)
+        #article = db_locsapp["articles"].find_one(
+        #    {"_id": ObjectId(article_pk)})
+        #return HttpResponse(json.dumps(
+        #    article, sort_keys=True, indent=4, default=json_util.default))
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
