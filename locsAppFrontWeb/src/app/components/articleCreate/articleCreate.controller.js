@@ -223,23 +223,7 @@
 
 
       /*    "This key is missing"
-       "This key is not authorized."
-       availibility_end
-       :
-       "This key is missing"
-       availibility_start
-       :
-       "This key is missing"
-       location
-       :
-       "This field must be an id."
-       payment_methods
-       :
-       "This key is missing"
-       price
-       :
-       "This field must be a float"
-
+       payment_methods: "This key is missing", location: "This field must be an id."
 
 
        */
@@ -259,7 +243,6 @@
           $log.log("upload imageSuccess ", data);
           $log.log("Vm is ", vm);
           vm.pictures.push(data.data.url);
-          vm.price (vm.price).toFixed(2);
 
           ArticleService
             .createArticle

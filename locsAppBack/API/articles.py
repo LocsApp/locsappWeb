@@ -121,7 +121,7 @@ def postNewArticle(request):
             "_required": False
         },
         "size": ObjectId(),
-        "payment_methods": ObjectId(),
+        "payment_methods": [ObjectId()],
         "brand": ObjectId(),
         "clothe_condition": ObjectId(),
         "description": {
@@ -146,7 +146,10 @@ def postNewArticle(request):
             "_type": str,
             "_required": False
         },
-        "location": ObjectId(),
+        "location": {
+            "_type": ObjectId(),
+            "_required": False
+        },
         "price": {
             "_type": int,
             "_max": 500,
