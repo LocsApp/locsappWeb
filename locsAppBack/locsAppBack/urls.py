@@ -28,6 +28,9 @@ urlpatterns = [
     url(r'^robots\.txt$', include('robots.urls')),
 
     url(r'^api/v1/', include(api_patterns)),
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.MEDIA_ROOT,
+    })
     # url(r'^robots\.txt$', include('robots.urls')),
     # url(r'^.*$', docAPIView.as_view(), name="index"),
 ]

@@ -29,8 +29,11 @@
 		vm.totalItems = 1000;
 		vm.search = {"_pagination" : {
 					"page_number": 1,
-					"items_per_page" : 10
+					"items_per_page" : 8
 		}};
+
+		/*Articles*/
+		vm.articles = {};
 
 		/*Pagination functions*/
 		vm.onArrowClick = function (number)
@@ -111,6 +114,24 @@
 		.$promise
 		.then(vm.getCategories, vm.failedRetrieval);
 		//End of Static collection retrieval
+
+		vm.failedGetArticles = function(data)
+		{
+			toastr.error("Failed to retrieve the articles", "Woops...");
+			$log.log(data);
+		}
+
+		vm.getArticles = function(data)
+		{
+			$log.log(data);
+			vm.articles = data;
+		}
+
+		ArticleService
+		.searchArticles
+		.save(vm.search)
+		.$promise
+		.then(vm.getArticles, vm.failedGetArticles);
 	}
 
 })();
