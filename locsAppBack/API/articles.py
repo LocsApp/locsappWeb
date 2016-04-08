@@ -103,7 +103,7 @@ def postNewArticle(request):
         "url_thumbnail": {
             "_type": str,
             "_default": "http://default.png/",
-            "_length": 100
+            "_length": 1000
         },
         "url_pictures": {
             "_type": [str],

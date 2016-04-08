@@ -265,6 +265,8 @@
               "payment_methods": vm.payment_methods_id,
               "availibility_start": vm.new_start_availble,
               "availibility_end": vm.new_end_availble,
+              "url_pictures": vm.pictures,
+              "url_thumbnail": vm.pictures[0]
 
               /* "location": "toto"*/
             })
