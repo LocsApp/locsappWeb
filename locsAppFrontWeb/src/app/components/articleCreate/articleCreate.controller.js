@@ -45,37 +45,6 @@
     };
 
 
-    //CheckBox payment
-    vm.items = [1,2,3,4,5];
-  vm.selected = [1];
-  vm.toggle = function (item, list) {
-    var idx = list.indexOf(item);
-    if (idx > -1) {
-      list.splice(idx, 1);
-    }
-    else {
-      list.push(item);
-    }
-  };
-  vm.exists = function (item, list) {
-    return list.indexOf(item) > -1;
-  };
-  vm.isIndeterminate = function() {
-    return (vm.selected.length !== 0 &&
-        vm.selected.length !== vm.items.length);
-  };
-  vm.isChecked = function() {
-    return vm.selected.length === vm.items.length;
-  };
-  vm.toggleAll = function() {
-    if (vm.selected.length === vm.items.length) {
-      vm.selected = [];
-    } else if (vm.selected.length === 0 || vm.selected.length > 0) {
-      vm.selected = vm.items.slice(0);
-    }
-  };
-    //End checkbox payment
-
     //Validates and changes to the next step
     vm.nextStep = function (focus) {
       vm.stepsComplete[focus] = 1;
@@ -144,8 +113,39 @@
     vm.getPaymentMethods = function (data) {
 
       vm.payment_methods = data.payment_methods;
-      //$log.log("Payment = ", vm.payment_methods);
+      $log.log("Payment = ", vm.payment_methods);
       //$log.log(vm.payment_methods[0]);
+
+      //CheckBox payment
+      vm.items = vm.payment_methods;
+      vm.selected = [1];
+      vm.toggle = function (item, list) {
+        var idx = list.indexOf(item);
+        if (idx > -1) {
+          list.splice(idx, 1);
+        }
+        else {
+          list.push(item);
+        }
+      };
+      vm.exists = function (item, list) {
+        return list.indexOf(item) > -1;
+      };
+      vm.isIndeterminate = function () {
+        return (vm.selected.length !== 0 &&
+        vm.selected.length !== vm.items.length);
+      };
+      vm.isChecked = function () {
+        return vm.selected.length === vm.items.length;
+      };
+      vm.toggleAll = function () {
+        if (vm.selected.length === vm.items.length) {
+          vm.selected = [];
+        } else if (vm.selected.length === 0 || vm.selected.length > 0) {
+          vm.selected = vm.items.slice(0);
+        }
+      };
+      //End checkbox payment
 
     };
 

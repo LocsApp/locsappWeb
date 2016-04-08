@@ -28,7 +28,7 @@ md-card(layout-fill)
           span Select All
           div(class="demo-select-all-checkboxes" flex="100" ng-repeat="item in articleCreate.items")
             md-checkbox(ng-checked="articleCreate.exists(item, articleCreate.selected)" ng-click="articleCreate.toggle(item, articleCreate.selected)")
-              div {{ item }}
+              div {{ item.name }}
 
       ng-md-icon(icon="cash", style="cursor: pointer;")
       p
