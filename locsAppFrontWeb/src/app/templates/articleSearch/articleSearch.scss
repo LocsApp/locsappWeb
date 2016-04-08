@@ -141,12 +141,14 @@
 		opacity: 0.5;
 		&:hover {
 			opacity: 1;
+			color: $favoriteIcon;
 		}
 	}
 
 	.icon-favorite-enabled {
 		@extend .icon-favorite;
 		opacity: 1;
+		color: $favoriteIcon;
 	}
 
 	.title-article {
