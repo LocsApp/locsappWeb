@@ -203,8 +203,11 @@
       $log.log("vm preview article = ", vm);
       //request author profile to get his notation;
 
+
       //Fill with picture url after send image to the server
       vm.pictures = [];
+      //stock only id in payment methods
+      vm.payment_methods_id = [];
       //Put the date min and max
       vm.dateStart = new Date(vm.start_availble);
       vm.dateEnd = new Date(vm.end_availble);
@@ -212,21 +215,13 @@
       vm.rentDateStart = new Date(vm.start_availble);
       vm.rentDateEnd = new Date(vm.end_availble);
 
-
       vm.createArticleSuccess = function (data) {
-        $log.log("This is a success", data.data);
+        $log.log("This is a success", data);
       };
 
       vm.createArticleFailure = function (data) {
-        $log.log("this is an error", data.data);
+        $log.log("this is an error", data);
       };
-
-
-      /*    "This key is missing"
-       payment_methods: "This key is missing", location: "This field must be an id."
-
-
-       */
 
 
       vm.createNewArticle = function () {
@@ -243,6 +238,11 @@
           $log.log("upload imageSuccess ", data);
           $log.log("Vm is ", vm);
           vm.pictures.push(data.data.url);
+          for (var i = 0; i < vm.payment_methods.length; i++) {
+            $log.log("vm payments methis = ", vm.payment_methods[i]);
+            vm.payment_methods_id.push(vm.payment_methods[i]._id);
+          }
+
 
           ArticleService
             .createArticle
@@ -254,11 +254,11 @@
               "clothe_condition": vm.newArticle.clothe_condition._id,
               "brand": vm.newArticle.brand._id, "description": vm.description,
               "price": vm.price,
-              "payment_methods": vm.selected,
+              "payment_methods": vm.payment_methods_id,
               "availibility_start": "12/05/2015",
               "availibility_end": "12/05/2015",
 
-              "location": "toto"
+              /* "location": "toto"*/
             })
             .$promise
             .then(vm.createArticleSuccess, vm.createArticleFailure);
