@@ -4,8 +4,6 @@ from .views import db_locsapp
 from .views import APIrequests
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
-from bson import json_util
-from django.http import HttpResponse
 
 import json
 from bson import ObjectId
@@ -123,7 +121,7 @@ def postNewArticle(request):
             "_required": False
         },
         "size": ObjectId(),
-        "payment_methods": ObjectId(),
+        "payment_methods": [ObjectId()],
         "brand": ObjectId(),
         "clothe_condition": ObjectId(),
         "description": {
@@ -148,9 +146,12 @@ def postNewArticle(request):
             "_type": str,
             "_required": False
         },
-        "location": ObjectId(),
+        "location": {
+            "_type": ObjectId(),
+            "_required": False
+        },
         "price": {
-            "_type": float,
+            "_type": int,
             "_max": 500,
             "_min": 0
         },
@@ -247,9 +248,6 @@ def articleAlone(request, article_pk):
 @csrf_exempt
 def getArticle(request, article_pk):
     if request.method == "GET":
-        article = db_locsapp["articles"].find_one(
-            {"_id": ObjectId(article_pk)})
-        return HttpResponse(json.dumps(
-            article, sort_keys=True, indent=4, default=json_util.default))
+        return APIrequests.GET('articles', article_pk)
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)

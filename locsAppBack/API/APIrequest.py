@@ -5,6 +5,8 @@ from django.http import HttpResponse
 # JSON import
 import json
 import bson
+from bson import json_util
+from django.http import HttpResponse
 
 # Pymongo imports
 from bson.objectid import ObjectId
@@ -166,16 +168,20 @@ class APIRequestMongo:
     """
 
     def GET(self, collection_name, id=None):
+        print(type(collection_name))
+        print(type(id))
         if id is None:
             documents = self.db[collection_name].find({})
             answer = {collection_name: []}
             for instance in documents:
                 answer[collection_name].append(
                     self.parseObjectIdToStr(instance))
-        if (id):
+        if id:
             answer = self.parseObjectIdToStr(
-                self.db[collection_name].find_one({"_id": id}))
-        return JsonResponse(answer, status=200)
+                self.db[collection_name].find_one({"_id": ObjectId(id)}))
+            print(answer)
+        return HttpResponse(json.dumps(
+        answer, sort_keys=True, indent=4, default=json_util.default))
 
     """
     verifies is the fields are correct:

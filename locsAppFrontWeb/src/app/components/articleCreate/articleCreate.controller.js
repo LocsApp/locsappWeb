@@ -6,7 +6,7 @@
     .controller('ArticleCreateController', ArticleCreateController);
 
   /** @ngInject */
-  function ArticleCreateController($log, ArticleService, toastr, $scope, $timeout, $mdDialog, $document) {
+  function ArticleCreateController($log, ArticleService, toastr, $timeout, $mdDialog, $document) {
     var vm = this;
 
     //steps vars
@@ -29,7 +29,6 @@
     vm.payment_methods = null;
     vm.description = null;
     vm.brands = [{_id: "56cb3ef2b2bc57ab2908e6b2", name: "Home made"}];
-    vm.pictures = [];
     vm.files = [];
     vm.date_start = new Date();
     vm.date_end = new Date();
@@ -44,6 +43,7 @@
       "base_category": ""
     };
 
+
     //Validates and changes to the next step
     vm.nextStep = function (focus) {
       vm.stepsComplete[focus] = 1;
@@ -51,24 +51,6 @@
       $timeout(function () {
         vm.stepFocus = focus;
       }, 100);
-    };
-
-    vm.uploadImageFailure = function (data) {
-      toastr.error(data.error, "Couldn't upload a picture");
-      $log.log(data);
-    };
-
-    vm.uploadImageSuccess = function (data) {
-      vm.pictures.push(data.data.url);
-    };
-
-    //Upload the pictures
-    vm.submitPictures = function () {
-      for (var i = 0; i < vm.files.length; i++) {
-        ArticleService
-          .uploadPicture(vm.files[i])
-          .then(vm.uploadImageSuccess, vm.uploadImageFailure);
-      }
     };
 
 
@@ -81,7 +63,7 @@
         locals: {
           title: vm.title, newArticle: vm.article, description: vm.description,
           date_start: vm.date_start, date_end: vm.date_end, price: vm.price,
-          files: vm.files, pictures: vm.pictures
+          files: vm.files, payment_methods: vm.selected
         },
         bindToController: true,
         parent: angular.element($document.body),
@@ -93,8 +75,7 @@
 
     //Submit the article
     vm.submit = function (event) {
-      //For upload the pictures
-      vm.submitPictures();
+
       vm.previewArticle(event);
 
 
@@ -112,8 +93,38 @@
     vm.getPaymentMethods = function (data) {
 
       vm.payment_methods = data.payment_methods;
-      //$log.log("Payment = ", vm.payment_methods);
       //$log.log(vm.payment_methods[0]);
+
+      //CheckBox payment
+      vm.items_payment_methods = vm.payment_methods;
+      vm.selected = [];
+      vm.toggle = function (item, list) {
+        var idx = list.indexOf(item);
+        if (idx > -1) {
+          list.splice(idx, 1);
+        }
+        else {
+          list.push(item);
+        }
+      };
+      vm.exists = function (item, list) {
+        return list.indexOf(item) > -1;
+      };
+      vm.isIndeterminate = function () {
+        return (vm.selected.length !== 0 &&
+        vm.selected.length !== vm.items_payment_methods.length);
+      };
+      vm.isChecked = function () {
+        return vm.selected.length === vm.items_payment_methods.length;
+      };
+      vm.toggleAll = function () {
+        if (vm.selected.length === vm.items_payment_methods.length) {
+          vm.selected = [];
+        } else if (vm.selected.length === 0 || vm.selected.length > 0) {
+          vm.selected = vm.items_payment_methods.slice(0);
+        }
+      };
+      //End checkbox payment
 
     };
 
@@ -188,15 +199,96 @@
     vm.previewArticleController = function () {
 
       var vm = this;
-      $log.log("vm preview article = ", vm);
+
       //request author profile to get his notation;
 
-      //Put the date min and max
-      vm.dateStart = new Date(vm.start_availble);
-      vm.dateEnd = new Date(vm.end_availble);
+
+      //Fill with picture url after send image to the server
+      vm.pictures = [];
+      //stock only id in payment methods
+      vm.payment_methods_id = [];
 
       vm.rentDateStart = new Date(vm.start_availble);
       vm.rentDateEnd = new Date(vm.end_availble);
+
+      vm.createArticleSuccess = function (data) {
+        $log.log("This is a success", data);
+      };
+
+      vm.createArticleFailure = function (data) {
+        $log.log("this is an error", data);
+      };
+
+
+      vm.createNewArticle = function () {
+
+
+        vm.uploadImageFailure = function (data) {
+          toastr.error(data.error, "Couldn't upload a picture");
+          $log.log(data);
+        };
+
+        vm.uploadImageSuccess = function (data) {
+          vm.pictures.push(data.data.url);
+          for (var i = 0; i < vm.payment_methods.length; i++) {
+            vm.payment_methods_id.push(vm.payment_methods[i]._id);
+          }
+
+          vm.new_start_availble = "";
+          if (vm.date_start.getDate() <= 9)
+            vm.new_start_availble = vm.new_start_availble.concat("0");
+          vm.new_start_availble = vm.new_start_availble.concat(vm.date_start.getDate().toString()).concat("/");
+          if (vm.date_start.getMonth() <= 8)
+            vm.new_start_availble = vm.new_start_availble.concat("0");
+          vm.new_start_availble = vm.new_start_availble.concat((vm.date_start.getMonth() + 1).toString()).concat("/").concat(vm.date_start.getFullYear().toString());
+
+
+          vm.new_end_availble = "";
+          if (vm.date_end.getDate() <= 9)
+            vm.new_end_availble = vm.new_end_availble.concat("0");
+          vm.new_end_availble = vm.new_end_availble.concat(vm.date_end.getDate().toString()).concat("/");
+          if (vm.date_end.getMonth() <= 8)
+            vm.new_end_availble = vm.new_end_availble.concat("0");
+          vm.new_end_availble = vm.new_end_availble.concat((vm.date_end.getMonth() + 1).toString()).concat("/").concat(vm.date_end.getFullYear().toString());
+
+
+          ArticleService
+            .createArticle
+            .save({
+              "title": vm.title, "base_category": vm.newArticle.base_category._id,
+              "sub_category": vm.newArticle.sub_category._id,
+              "gender": vm.newArticle.gender._id, "size": vm.newArticle.size._id,
+              "color": vm.newArticle.color._id,
+              "clothe_condition": vm.newArticle.clothe_condition._id,
+              "brand": vm.newArticle.brand._id, "description": vm.description,
+              "price": vm.price,
+              "payment_methods": vm.payment_methods_id,
+              "availibility_start": vm.new_start_availble,
+              "availibility_end": vm.new_end_availble,
+              "url_pictures": vm.pictures,
+              "url_thumbnail": vm.pictures[0]
+
+              /* "location": "toto"*/
+            })
+            .$promise
+            .then(vm.createArticleSuccess, vm.createArticleFailure);
+        };
+
+
+        //Upload the pictures
+        vm.submitPictures = function () {
+          for (var i = 0; i < vm.files.length; i++) {
+            ArticleService
+              .uploadPicture(vm.files[i])
+              .then(vm.uploadImageSuccess, vm.uploadImageFailure);
+          }
+        };
+
+        //For upload the pictures
+        vm.submitPictures();
+
+
+      }
 
     }
   }
