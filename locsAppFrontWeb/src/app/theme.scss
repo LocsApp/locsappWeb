@@ -12,6 +12,9 @@ $newNotification: #C10000;
 $progressBar: #C10000;
 $progressIcon: #C10000;
 $onNumber: #C10000;
+$saveSearch: #C10000;
+/*Lighter Red*/
+$saveSearchBrighter: #E10000;
 /*Grey*/
 $headerContainer: #A6A6A6;
 $noInfo: #A6A6A6;
@@ -20,6 +23,7 @@ $selectedTab: #A6A6A6;
 $dropIcon: #666666;
 /*White*/
 $bodyContainer: #FFFFFF;
+$saveSearchFont: #FFFFFF;
 /*Green*/
 $emailConfirmed: #0BAC2B;
 /*Black*/
@@ -120,5 +124,12 @@ md-icon {
 
   h2 {
     margin-left: 0;
+  }
+}
+
+//For displaying items in line in a select
+md-select-value {
+  ._md-container {
+    display: inline-block !important;
   }
 }

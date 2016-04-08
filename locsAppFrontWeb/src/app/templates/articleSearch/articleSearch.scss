@@ -28,15 +28,30 @@
 		display:inline-block;
 	}
 
+	.arrow-icons {
+		cursor: pointer;
+	}
+
+	.arrow-previous-page {
+		@extend .arrow-icons;
+		margin-right: 3px;
+	}
+
+	.arrow-next-page {
+		@extend .arrow-icons;
+		margin-right: 20px;
+	}
+
 	.pagination-toolbar-search-article {
 
 		.pagination {
 			margin: 0px;
-			margin-right: 20px;
 		}
+
 
 		ul {
 		    list-style-type: none;
+		    padding: 0px;
 		}
 		li {
 			margin-right: 3px;
@@ -60,8 +75,65 @@
 	}
 }
 
+.search-article-body {
+
+	.delimiter {
+		margin-top: 20px;
+	}
+
+	.save-search {
+		min-width: 200px;
+
+		background-color: $saveSearch;
+		color: $saveSearchFont;
+		&:hover:not([disabled]){
+			background-color: $saveSearchBrighter;
+		}
+	}
+
+    md-checkbox.md-checked ._md-icon {
+      background-color: $checkBox;
+    }
+
+	.filters-checkboxes {
+		margin-left: 10px;
+		margin-bottom: 5px;
+	}
+
+	.card-containers {
+
+		min-width: 200px;
+		max-width: 200px;
+		width: 200px;
+
+		.title-on-card {
+			color: $headerSubContainers;
+			font-size: 20px;
+		}
+	}
+
+	.search-only-in-title-switch {
+		margin-top: 0px;
+	}
+
+	md-switch.md-checked ._md-bar {
+		background-color: $checkBox;
+	}
+
+	md-switch.md-checked ._md-thumb {
+		background-color: $checkBox;
+	}
+}
+
+.article-search-md-card-collapse {
+
+	position: relative;
+	z-index: 1;
+	animation: slideInDown 0.5s;
+}
+
 .article-search-sorting-select-container {
-	margin: 80px 0px 0px 35px;
+	margin: 95px 0px 0px 35px;
 }
 
 .current-page-selected-search-article {

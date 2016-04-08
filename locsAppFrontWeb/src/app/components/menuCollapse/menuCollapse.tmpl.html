@@ -1,0 +1,4 @@
+<ng-md-icon icon="keyboard_arrow_down" style="cursor:pointer;" ng-click="changeCollapse()" ng-if="isCollapsed"></ng-md-icon>
+<ng-md-icon icon="keyboard_arrow_right" style="cursor:pointer;" ng-click="changeCollapse()" ng-if="!isCollapsed"></ng-md-icon>
+<span ng-class="{'{{titleClass}}' : titleClass}" class="menu-collapsed-title">{{title}}</span>
+<md-container ng-show="isCollapsed" ng-class="{'{{animation}}' : isCollapsed}" ng-transclude layout="column"></md-container>
