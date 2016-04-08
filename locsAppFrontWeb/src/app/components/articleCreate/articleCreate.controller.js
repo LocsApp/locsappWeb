@@ -117,7 +117,7 @@
       //$log.log(vm.payment_methods[0]);
 
       //CheckBox payment
-      vm.items = vm.payment_methods;
+      vm.items_payment_methods = vm.payment_methods;
       vm.selected = [1];
       vm.toggle = function (item, list) {
         var idx = list.indexOf(item);
@@ -133,16 +133,16 @@
       };
       vm.isIndeterminate = function () {
         return (vm.selected.length !== 0 &&
-        vm.selected.length !== vm.items.length);
+        vm.selected.length !== vm.items_payment_methods.length);
       };
       vm.isChecked = function () {
-        return vm.selected.length === vm.items.length;
+        return vm.selected.length === vm.items_payment_methods.length;
       };
       vm.toggleAll = function () {
-        if (vm.selected.length === vm.items.length) {
+        if (vm.selected.length === vm.items_payment_methods.length) {
           vm.selected = [];
         } else if (vm.selected.length === 0 || vm.selected.length > 0) {
-          vm.selected = vm.items.slice(0);
+          vm.selected = vm.items_payment_methods.slice(0);
         }
       };
       //End checkbox payment

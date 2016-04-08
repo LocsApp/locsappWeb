@@ -26,7 +26,7 @@ md-card(layout-fill)
         md-indeterminate="articleCreate.isIndeterminate()" ng-click="articleCreate.toggleAll()")
           span(ng-if="articleCreate.isChecked()") Un-
           span Select All
-          div(class="demo-select-all-checkboxes" flex="100" ng-repeat="item in articleCreate.items")
+          div(class="demo-select-all-checkboxes" flex="100" ng-repeat="item in articleCreate.items_payment_methods")
             md-checkbox(ng-checked="articleCreate.exists(item, articleCreate.selected)" ng-click="articleCreate.toggle(item, articleCreate.selected)")
               div {{ item.name }}
 
