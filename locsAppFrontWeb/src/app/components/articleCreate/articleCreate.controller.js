@@ -82,7 +82,7 @@
         locals: {
           title: vm.title, newArticle: vm.article, description: vm.description,
           date_start: vm.date_start, date_end: vm.date_end, price: vm.price,
-          files: vm.files
+          files: vm.files, payment_methods: vm.selected
         },
         bindToController: true,
         parent: angular.element($document.body),
@@ -118,7 +118,7 @@
 
       //CheckBox payment
       vm.items_payment_methods = vm.payment_methods;
-      vm.selected = [1];
+      vm.selected = [];
       vm.toggle = function (item, list) {
         var idx = list.indexOf(item);
         if (idx > -1) {
