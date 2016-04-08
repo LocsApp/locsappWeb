@@ -205,9 +205,5 @@ def articleAlone(request, article_pk):
 def getArticle(request, article_pk):
     if request.method == "GET":
         return APIrequests.GET('articles', article_pk)
-        #article = db_locsapp["articles"].find_one(
-        #    {"_id": ObjectId(article_pk)})
-        #return HttpResponse(json.dumps(
-        #    article, sort_keys=True, indent=4, default=json_util.default))
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
