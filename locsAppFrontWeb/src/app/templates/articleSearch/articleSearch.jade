@@ -102,7 +102,10 @@ div.search-article-body(ng-cloak)
 				md-grid-tile(style="background: yellow;" md-colspan="1" md-rowspan="2" ng-repeat="article in articleSearch.articles.articles")
 					md-card(layout-fill)
 						md-card-content(layout="column", layout-align="start center")
-							img(ng-src="{{ articleSearch.url_api + article.url_thumbnail }}").thumbnail-pic
+							div(style="position: relative;")
+								img(ng-src="{{ articleSearch.url_api + article.url_thumbnail }}").thumbnail-pic
+								div.icon-favorite-disabled
+									ng-md-icon(icon="favorite" size="32")
 							h3.title-article {{ article.title }}
 							h2.price-article {{ article.price }}€/day
 							p {{ article.description }}
