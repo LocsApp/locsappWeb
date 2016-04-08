@@ -48,7 +48,7 @@
     //CheckBox payment
     $scope.items = [1,2,3,4,5];
   $scope.selected = [1];
-  $scope.toggle = function (item, list) {
+  vm.toggle = function (item, list) {
     var idx = list.indexOf(item);
     if (idx > -1) {
       list.splice(idx, 1);
@@ -57,23 +57,24 @@
       list.push(item);
     }
   };
-  $scope.exists = function (item, list) {
+  vm.exists = function (item, list) {
     return list.indexOf(item) > -1;
   };
-  $scope.isIndeterminate = function() {
+  vm.isIndeterminate = function() {
     return ($scope.selected.length !== 0 &&
         $scope.selected.length !== $scope.items.length);
   };
-  $scope.isChecked = function() {
+  vm.isChecked = function() {
     return $scope.selected.length === $scope.items.length;
   };
-  $scope.toggleAll = function() {
+  vm.toggleAll = function() {
     if ($scope.selected.length === $scope.items.length) {
       $scope.selected = [];
     } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
       $scope.selected = $scope.items.slice(0);
     }
   };
+    //End checkbox payment
 
     //Validates and changes to the next step
     vm.nextStep = function (focus) {

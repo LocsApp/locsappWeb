@@ -22,13 +22,14 @@ md-card(layout-fill)
         span
           ng-md-icon(icon="help", size="20")
             md-tooltip(md-direction="right") You can select which payment method the user can choose to pay for the renting
-        md-checkbox(aria-label="Select All" ng-checked="isChecked()"
-        md-indeterminate="isIndeterminate()" ng-click="toggleAll()")
-          span(ng-if="isChecked()") Un-
+        md-checkbox(aria-label="Select All" ng-checked="articleCreate.isChecked()"
+        md-indeterminate="articleCreate.isIndeterminate()" ng-click="articleCreate.toggleAll()")
+          span(ng-if="articleCreate.isChecked()") Un-
           span Select All
           div(class="demo-select-all-checkboxes" flex="100" ng-repeat="item in items")
-            md-checkbox(ng-checked="exists(item, selected)" ng-click="toggle(item, selected)")
+            md-checkbox(ng-checked="articleCreate.exists(item, selected)" ng-click="articleCreate.toggle(item, selected)")
               div {{ item }}
+
       ng-md-icon(icon="cash", style="cursor: pointer;")
       p
         md-title The price of your article
