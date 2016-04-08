@@ -20,6 +20,7 @@
       getClotheStates: $resource(URL_API + 'api/v1/static-collections/clothe-states/'),
       getPaymentMethods: $resource(URL_API + 'api/v1/static-collections/payment-methods/'),
       createArticle: $resource(URL_API + 'api/v1/articles/create/'),
+      searchArticles: $resource(URL_API + 'api/v1/search/articles/'),
       uploadPicture: uploadPicture,
       is_authenticated : is_authenticated
     };
