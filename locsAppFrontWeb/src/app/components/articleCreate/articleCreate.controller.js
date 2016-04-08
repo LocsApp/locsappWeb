@@ -255,8 +255,8 @@
               "brand": vm.newArticle.brand._id, "description": vm.description,
               "price": vm.price,
               "payment_methods": vm.payment_methods_id,
-              "availibility_start": "12/05/2015",
-              "availibility_end": "12/05/2015",
+              "availibility_start": vm.start_availble,
+              "availibility_end": vm.end_availble,
 
               /* "location": "toto"*/
             })
