@@ -104,7 +104,7 @@ def postNewArticle(request):
         },
         "url_thumbnail": {
             "_type": str,
-            "_default": "http://default.png/",
+            "_default": "media/articles/default.jpg",
             "_length": 100
         },
         "url_pictures": {
@@ -184,21 +184,62 @@ def postNewArticle(request):
 
 @csrf_exempt
 def articleAlone(request, article_pk):
-    fields_definition_put = \
-        {"name": "text, 30",
-         "tiny_logo_url": "text, 255",
-         "big_logo_url": "text, 255",
-         "description": "text, 500",
-         "id_author": "integer",
-         "date_created": "date",
-         "id_type": "id",
-         "comments": "array",
-         "pictures": "array",
-         "informations": "dict"}
+    model = {
+        "title": {
+            "_type": str,
+            "_length": 50
+        },
+        "id_author": {
+            "_type": int,
+            "_protected": True
+        },
+        "url_thumbnail": {
+            "_type": str,
+            "_length": 100
+        },
+        "url_pictures": [str],
+        "comments": [ObjectId()],
+        "gender": ObjectId(),
+        "base_category": ObjectId(),
+        "sub_category": ObjectId(),
+        "tags": [ObjectId()],
+        "size": ObjectId(),
+        "payment_methods": ObjectId(),
+        "brand": ObjectId(),
+        "clothe_condition": ObjectId(),
+        "description": {
+            "_type": str,
+            "_default": "This article has no description",
+            "_length": 5000
+        },
+        "availibility_start": {
+            "_type": str,
+            "_length": 50
+        },
+        "availibility_end": {
+            "_type": str,
+            "_length": 50
+        },
+        "creation_date": {
+            "_type": str,
+            "_protected": True
+        },
+        "modified_date": str,
+        "location": ObjectId(),
+        "price": {
+            "_type": float,
+            "_max": 500,
+            "_min": 0
+        },
+        "color": ObjectId(),
+        "demands": [ObjectId()],
+        "id_renter": int,
+        "article_state": ObjectId()
+    }
 
     if request.method == "PUT":
-        return APIrequests.forgeAPIrequestPut(
-            request, article_pk, fields_definition_put, db_locsapp["articles"])
+        return APIrequests.PUT(
+            request, model, "articles", "The article has been successfully created!", article_pk)
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
