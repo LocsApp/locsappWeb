@@ -34,6 +34,7 @@
 		'textAngular',
 		'ngFileUpload',
 		'djds4rce.angular-socialshare',
+    'angular-cache',
 		'bw.paging',
 		'LocsappDirectives',
 		'LocsappServices',
