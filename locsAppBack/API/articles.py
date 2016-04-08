@@ -148,7 +148,7 @@ def postNewArticle(request):
         },
         "location": ObjectId(),
         "price": {
-            "_type": float,
+            "_type": int,
             "_max": 500,
             "_min": 0
         },

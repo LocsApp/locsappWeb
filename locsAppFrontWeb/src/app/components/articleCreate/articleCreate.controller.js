@@ -29,7 +29,6 @@
     vm.payment_methods = null;
     vm.description = null;
     vm.brands = [{_id: "56cb3ef2b2bc57ab2908e6b2", name: "Home made"}];
-    vm.pictures = [];
     vm.files = [];
     vm.date_start = new Date();
     vm.date_end = new Date();
@@ -204,6 +203,8 @@
       $log.log("vm preview article = ", vm);
       //request author profile to get his notation;
 
+      //Fill with picture url after send image to the server
+      vm.pictures = [];
       //Put the date min and max
       vm.dateStart = new Date(vm.start_availble);
       vm.dateEnd = new Date(vm.end_availble);
@@ -222,25 +223,32 @@
 
 
       /*    "This key is missing"
+       "This key is not authorized."
+       availibility_end
+       :
+       "This key is missing"
        availibility_start
        :
        "This key is missing"
-
-
        location
        :
-       "This key is missing"
+       "This field must be an id."
        payment_methods
        :
        "This key is missing"
        price
        :
-       "This key is missing"
+       "This field must be a float"
+
+
+
        */
 
 
       vm.createNewArticle = function () {
 
+
+        $log.log("type price is " + typeof(vm.price));
 
         vm.uploadImageFailure = function (data) {
           toastr.error(data.error, "Couldn't upload a picture");
@@ -248,20 +256,29 @@
         };
 
         vm.uploadImageSuccess = function (data) {
+          $log.log("upload imageSuccess ", data);
+          $log.log("Vm is ", vm);
           vm.pictures.push(data.data.url);
-            ArticleService
-          .createArticle
-          .save({
-            "title": vm.title, "base_category": vm.newArticle.base_category._id,
-            "sub_category": vm.newArticle.sub_category._id,
-            "gender": vm.newArticle.gender._id, "size": vm.newArticle.size._id,
-            "color": vm.newArticle.color._id,
-            "state": vm.newArticle.clothe_condition._id,
-            "brand": vm.newArticle.brand._id,
-            "description": vm.description
-          })
-          .$promise
-          .then(vm.createArticleSuccess, vm.createArticleFailure);
+          vm.price (vm.price).toFixed(2);
+
+          ArticleService
+            .createArticle
+            .save({
+              "title": vm.title, "base_category": vm.newArticle.base_category._id,
+              "sub_category": vm.newArticle.sub_category._id,
+              "gender": vm.newArticle.gender._id, "size": vm.newArticle.size._id,
+              "color": vm.newArticle.color._id,
+              "clothe_condition": vm.newArticle.clothe_condition._id,
+              "brand": vm.newArticle.brand._id, "description": vm.description,
+              "price": vm.price,
+              "payment_methods": vm.selected,
+              "availibility_start": "12/05/2015",
+              "availibility_end": "12/05/2015",
+
+              "location": "toto"
+            })
+            .$promise
+            .then(vm.createArticleSuccess, vm.createArticleFailure);
         };
 
 
