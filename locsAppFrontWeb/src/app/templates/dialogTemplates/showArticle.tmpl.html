@@ -138,23 +138,6 @@
         </div>
       </div>
 
-      <div layout="row" layout-align="center">
-        <md-divider flex="40" class="separator-h2"></md-divider>
-        <h2 flex="20" class="t-center">We Recommend</h2>
-        <md-divider flex="40" class="separator-h2"></md-divider>
-      </div>
-      <div layout="row" layout-align="center">
-        <data-owl-carousel
-          data-options="{navigation: false, pagination: true, rewindNav : false, loop: true, autoWidth: true, autoplay:true, autoplayTimeout:1000}"
-          class="owl-carousel">
-          <div owl-carousel-item=""
-               ng-repeat="url_picture in previewArticle.url_pictures track by $index" class="item">
-            <img src="{{url_picture}}" style="width:200px; height:auto;"/>
-
-            <div layout-align="center" layout="row"><span class="bold">12$</span></div>
-          </div>
-        </data-owl-carousel>
-      </div>
     </div>
   </div>
 </md-dialog>
