@@ -63,15 +63,6 @@
       vm.pictures.push(data.data.url);
     };
 
-    //Upload the pictures
-    vm.submitPictures = function () {
-      for (var i = 0; i < vm.files.length; i++) {
-        ArticleService
-          .uploadPicture(vm.files[i])
-          .then(vm.uploadImageSuccess, vm.uploadImageFailure);
-      }
-    };
-
 
     //Dialog for preview article
     vm.previewArticle = function (event) {
@@ -94,8 +85,7 @@
 
     //Submit the article
     vm.submit = function (event) {
-      //For upload the pictures
-      //vm.submitPictures();
+
       vm.previewArticle(event);
 
 
@@ -230,8 +220,62 @@
       vm.rentDateStart = new Date(vm.start_availble);
       vm.rentDateEnd = new Date(vm.end_availble);
 
-      vm.createNewArticle = function() {
 
+      vm.createArticleSuccess = function (data) {
+        $log.log("This is a success", data.data);
+      };
+
+      vm.createArticleFailure = function (data) {
+        $log.log("this is an error", data.data);
+      };
+
+
+      /*    "This key is missing"
+       availibility_start
+       :
+       "This key is missing"
+
+
+       location
+       :
+       "This key is missing"
+       payment_methods
+       :
+       "This key is missing"
+       price
+       :
+       "This key is missing"
+       */
+
+
+      vm.createNewArticle = function () {
+
+        //Upload the pictures
+        vm.submitPictures = function () {
+          for (var i = 0; i < vm.files.length; i++) {
+            ArticleService
+              .uploadPicture(vm.files[i])
+              .then(vm.uploadImageSuccess, vm.uploadImageFailure);
+          }
+        };
+
+        //Think to upload first
+        //For upload the pictures
+        //vm.submitPictures();
+
+        ArticleService
+          .createArticle
+          .save({
+            "title": vm.title, "base_category": vm.newArticle.base_category._id,
+            "sub_category": vm.newArticle.sub_category._id,
+            "gender": vm.newArticle.gender._id, "size": vm.newArticle.size._id,
+            "color": vm.newArticle.color._id,
+            "state": vm.newArticle.clothe_condition._id,
+            "brand": vm.newArticle.brand._id,
+            "description": vm.description
+          })
+          .$promise
+          .then(vm.createArticleSuccess, vm.createArticleFailure);
       }
 
     }
