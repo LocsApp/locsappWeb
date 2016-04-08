@@ -148,7 +148,7 @@ class APIRequestMongo:
             for instance in documents:
                 answer[collection_name].append(
                     self.parseObjectIdToStr(instance))
-        if (id):
+        if id:
             answer = self.parseObjectIdToStr(
                 self.db[collection_name].find_one({"_id": id}))
         return JsonResponse(answer, status=200)
