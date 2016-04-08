@@ -81,7 +81,7 @@
         locals: {
           title: vm.title, newArticle: vm.article, description: vm.description,
           date_start: vm.date_start, date_end: vm.date_end, price: vm.price,
-          files: vm.files, pictures: vm.pictures
+          files: vm.files
         },
         bindToController: true,
         parent: angular.element($document.body),
@@ -94,7 +94,7 @@
     //Submit the article
     vm.submit = function (event) {
       //For upload the pictures
-      vm.submitPictures();
+      //vm.submitPictures();
       vm.previewArticle(event);
 
 
