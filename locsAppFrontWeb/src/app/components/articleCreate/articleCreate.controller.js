@@ -54,15 +54,6 @@
       }, 100);
     };
 
-    vm.uploadImageFailure = function (data) {
-      toastr.error(data.error, "Couldn't upload a picture");
-      $log.log(data);
-    };
-
-    vm.uploadImageSuccess = function (data) {
-      vm.pictures.push(data.data.url);
-    };
-
 
     //Dialog for preview article
     vm.previewArticle = function (event) {
@@ -250,20 +241,15 @@
 
       vm.createNewArticle = function () {
 
-        //Upload the pictures
-        vm.submitPictures = function () {
-          for (var i = 0; i < vm.files.length; i++) {
-            ArticleService
-              .uploadPicture(vm.files[i])
-              .then(vm.uploadImageSuccess, vm.uploadImageFailure);
-          }
+
+        vm.uploadImageFailure = function (data) {
+          toastr.error(data.error, "Couldn't upload a picture");
+          $log.log(data);
         };
 
-        //Think to upload first
-        //For upload the pictures
-        //vm.submitPictures();
-
-        ArticleService
+        vm.uploadImageSuccess = function (data) {
+          vm.pictures.push(data.data.url);
+            ArticleService
           .createArticle
           .save({
             "title": vm.title, "base_category": vm.newArticle.base_category._id,
@@ -276,6 +262,22 @@
           })
           .$promise
           .then(vm.createArticleSuccess, vm.createArticleFailure);
+        };
+
+
+        //Upload the pictures
+        vm.submitPictures = function () {
+          for (var i = 0; i < vm.files.length; i++) {
+            ArticleService
+              .uploadPicture(vm.files[i])
+              .then(vm.uploadImageSuccess, vm.uploadImageFailure);
+          }
+        };
+
+        //For upload the pictures
+        vm.submitPictures();
+
+
       }
 
     }
