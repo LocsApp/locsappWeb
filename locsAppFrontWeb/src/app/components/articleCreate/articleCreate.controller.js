@@ -93,7 +93,6 @@
     vm.getPaymentMethods = function (data) {
 
       vm.payment_methods = data.payment_methods;
-      $log.log("Payment = ", vm.payment_methods);
       //$log.log(vm.payment_methods[0]);
 
       //CheckBox payment
@@ -200,8 +199,6 @@
     vm.previewArticleController = function () {
 
       var vm = this;
-      $log.log("vm preview article = ", vm);
-
 
       //request author profile to get his notation;
 
@@ -210,9 +207,6 @@
       vm.pictures = [];
       //stock only id in payment methods
       vm.payment_methods_id = [];
-      //Put the date min and max
-      /*  vm.dateStart = new Date(vm.start_availble);
-       vm.dateEnd = new Date(vm.end_availble);*/
 
       vm.rentDateStart = new Date(vm.start_availble);
       vm.rentDateEnd = new Date(vm.end_availble);
@@ -229,19 +223,14 @@
       vm.createNewArticle = function () {
 
 
-        $log.log("type price is " + typeof(vm.price));
-
         vm.uploadImageFailure = function (data) {
           toastr.error(data.error, "Couldn't upload a picture");
           $log.log(data);
         };
 
         vm.uploadImageSuccess = function (data) {
-          $log.log("upload imageSuccess ", data);
-          $log.log("Vm is ", vm);
           vm.pictures.push(data.data.url);
           for (var i = 0; i < vm.payment_methods.length; i++) {
-            $log.log("vm payments methis = ", vm.payment_methods[i]);
             vm.payment_methods_id.push(vm.payment_methods[i]._id);
           }
 
