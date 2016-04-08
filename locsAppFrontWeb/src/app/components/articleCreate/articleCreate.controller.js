@@ -201,6 +201,8 @@
 
       var vm = this;
       $log.log("vm preview article = ", vm);
+
+
       //request author profile to get his notation;
 
 
@@ -209,8 +211,8 @@
       //stock only id in payment methods
       vm.payment_methods_id = [];
       //Put the date min and max
-      vm.dateStart = new Date(vm.start_availble);
-      vm.dateEnd = new Date(vm.end_availble);
+      /*  vm.dateStart = new Date(vm.start_availble);
+       vm.dateEnd = new Date(vm.end_availble);*/
 
       vm.rentDateStart = new Date(vm.start_availble);
       vm.rentDateEnd = new Date(vm.end_availble);
@@ -243,6 +245,23 @@
             vm.payment_methods_id.push(vm.payment_methods[i]._id);
           }
 
+          vm.new_start_availble = "";
+          if (vm.date_start.getDate() <= 9)
+            vm.new_start_availble = vm.new_start_availble.concat("0");
+          vm.new_start_availble = vm.new_start_availble.concat(vm.date_start.getDate().toString()).concat("/");
+          if (vm.date_start.getMonth() <= 8)
+            vm.new_start_availble = vm.new_start_availble.concat("0");
+          vm.new_start_availble = vm.new_start_availble.concat((vm.date_start.getMonth() + 1).toString()).concat("/").concat(vm.date_start.getFullYear().toString());
+
+
+          vm.new_end_availble = "";
+          if (vm.date_end.getDate() <= 9)
+            vm.new_end_availble = vm.new_end_availble.concat("0");
+          vm.new_end_availble = vm.new_end_availble.concat(vm.date_end.getDate().toString()).concat("/");
+          if (vm.date_end.getMonth() <= 8)
+            vm.new_end_availble = vm.new_end_availble.concat("0");
+          vm.new_end_availble = vm.new_end_availble.concat((vm.date_end.getMonth() + 1).toString()).concat("/").concat(vm.date_end.getFullYear().toString());
+
 
           ArticleService
             .createArticle
@@ -255,8 +274,8 @@
               "brand": vm.newArticle.brand._id, "description": vm.description,
               "price": vm.price,
               "payment_methods": vm.payment_methods_id,
-              "availibility_start": vm.start_availble,
-              "availibility_end": vm.end_availble,
+              "availibility_start": vm.new_start_availble,
+              "availibility_end": vm.new_end_availble,
 
               /* "location": "toto"*/
             })
