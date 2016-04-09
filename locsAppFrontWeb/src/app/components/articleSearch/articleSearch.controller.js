@@ -27,7 +27,7 @@
 		vm.sortingOptions = ["title", "price"];
 		vm.sortOption = "";
 		vm.searchOnlyInTitle = true;
-		vm.filtersTable = ["base_categories"];
+		vm.filtersTable = ["base_category"];
 		vm.filtersToggle = [false];
 
 		/*Pagination vars*/
