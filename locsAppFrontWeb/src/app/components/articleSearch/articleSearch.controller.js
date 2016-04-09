@@ -53,7 +53,7 @@
 
 		/*Search bar*/
 		vm.searchTitle = function (keywords) {
-			vm.search.page_number = 1;
+			vm.search._pagination.page_number = 1;
 			vm.search.title = keywords;
 			if (!vm.searchOnlyInTitle)
 				vm.search.description = keywords;
