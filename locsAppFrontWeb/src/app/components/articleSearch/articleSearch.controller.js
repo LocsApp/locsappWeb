@@ -27,6 +27,8 @@
 		vm.sortingOptions = ["title", "price"];
 		vm.sortOption = "";
 		vm.searchOnlyInTitle = true;
+		vm.filtersTable = ["base_categories"];
+		vm.filtersToggle = [false];
 
 		/*Pagination vars*/
 		vm.totalItems = 0;
@@ -49,6 +51,7 @@
 			$log.log($state.go("main.articleShow", {"id" : id}));
 		}
 
+		/*Search bar*/
 		vm.searchTitle = function (keywords) {
 			vm.search.page_number = 1;
 			vm.search.title = keywords;
@@ -58,6 +61,32 @@
 			{
 				if (vm.search.description)
 					delete vm.search.description;
+			}
+			$log.log(vm.search);
+			ArticleService
+			.searchArticles
+			.save(vm.search)
+			.$promise
+			.then(vm.getArticles, vm.failedGetArticles);
+		}
+
+		/*Filters checkboxes*/
+		vm.toggleFilter = function(elem, id)
+		{
+			vm.filtersToggle[elem] = !vm.filtersToggle[elem];
+			if (vm.filtersToggle[elem])
+			{
+				if (!vm.search[vm.filtersTable[elem]])
+					vm.search[vm.filtersTable[elem]] = [id];
+				else
+					vm.search[vm.filtersTable[elem]].push(id);
+			}
+			else if (!vm.filtersToggle[elem])
+			{
+				if (vm.search[vm.filtersTable[elem]].length == 1)
+					delete vm.search[vm.filtersTable[elem]];
+				else
+					vm.search[vm.filtersTable[elem]].splice(vm.search[vm.filtersTable[elem]].indexOf(id));
 			}
 			$log.log(vm.search);
 			ArticleService

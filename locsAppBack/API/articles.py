@@ -64,7 +64,7 @@ def searchArticles(request):
         results = db_locsapp["articles"].find(search).sort(ordering)[
             ((page_number -
               1) *
-             number_items):(
+             number_items): (
                 (page_number -
                  1) *
                 number_items) +
@@ -74,7 +74,7 @@ def searchArticles(request):
         results = db_locsapp["articles"].find(search)[
             ((page_number -
               1) *
-             number_items):(
+             number_items): (
                 (page_number -
                  1) *
                 number_items) +

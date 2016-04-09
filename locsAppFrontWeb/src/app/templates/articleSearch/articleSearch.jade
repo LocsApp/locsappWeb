@@ -61,7 +61,7 @@ div.search-article-body(ng-cloak)
 					md-card-content
 						menu-collapse(title="Categories")
 							div(ng-repeat="category in articleSearch.categories")
-								md-checkbox(ng-model="articleSearch.filters.categories[category._id]").filters-checkboxes {{ category.name }}
+								md-checkbox(ng-click="articleSearch.toggleFilter(0, category._id)").filters-checkboxes {{ category.name }}
 						md-divider
 						menu-collapse(title="Sub-Categories")
 							div(ng-repeat="subCategory in articleSearch.subCategories")
