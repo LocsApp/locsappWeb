@@ -124,41 +124,45 @@
 		background-color: $checkBox;
 	}
 
-	.thumbnail-pic {
-		width: 200px;
-		height: 200px;
-	}
-
-	.icon-favorite {
-		position: absolute;
-		top: 160px;
-		left: 150px;
+	.article-card-tile {
 		cursor: pointer;
-	}
 
-	.icon-favorite-disabled {
-		@extend .icon-favorite;
-		opacity: 0.5;
-		&:hover {
+		.thumbnail-pic {
+			width: 200px;
+			height: 200px;
+		}
+
+		.icon-favorite {
+			position: absolute;
+			top: 160px;
+			left: 150px;
+			cursor: pointer;
+		}
+
+		.icon-favorite-disabled {
+			@extend .icon-favorite;
+			opacity: 0.5;
+			&:hover {
+				opacity: 1;
+				color: $favoriteIcon;
+			}
+		}
+
+		.icon-favorite-enabled {
+			@extend .icon-favorite;
 			opacity: 1;
 			color: $favoriteIcon;
 		}
-	}
 
-	.icon-favorite-enabled {
-		@extend .icon-favorite;
-		opacity: 1;
-		color: $favoriteIcon;
-	}
+		.title-article {
+			margin-bottom: 0px;
+		}
 
-	.title-article {
-		margin-bottom: 0px;
-	}
-
-	.price-article {
-		margin-top: 0px;
-		margin-bottom: 0px;
-		color: $articlePrice;
+		.price-article {
+			margin-top: 0px;
+			margin-bottom: 0px;
+			color: $articlePrice;
+		}
 	}
 
 	.distance-range {

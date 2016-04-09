@@ -6,7 +6,7 @@
 		.controller('ArticleSearchController', ArticleSearchController);
 
 	/** @ngInject */
-	function ArticleSearchController(ArticleService, $log, toastr, URL_API)
+	function ArticleSearchController(ArticleService, $log, toastr, URL_API, $state)
 	{
 		$log.log(URL_API);
 		var vm = this;
@@ -34,13 +34,18 @@
 					"items_per_page" : 8
 		}};
 
-		/*Articles*/
+		/*Articles vars*/
 		vm.articles = {};
 
 		/*Pagination functions*/
 		vm.onArrowClick = function (number)
 		{
 			vm.search._pagination.page_number += number;
+		}
+
+		/*Articles functions*/
+		vm.goToArticlePage = function (id) {
+			$log.log($state.go("main.articleShow", {"id" : id}));
 		}
 
 		//Static collection retrieval
