@@ -28,7 +28,7 @@
 		vm.sortOption = "";
 		vm.searchOnlyInTitle = true;
 		vm.filtersTable = ["base_category"];
-		vm.filtersToggle = [false];
+		vm.filtersToggle = {};
 
 		/*Pagination vars*/
 		vm.totalItems = 0;
@@ -73,15 +73,17 @@
 		/*Filters checkboxes*/
 		vm.toggleFilter = function(elem, id)
 		{
-			vm.filtersToggle[elem] = !vm.filtersToggle[elem];
-			if (vm.filtersToggle[elem])
+			if (!vm.filtersToggle[id])
+				vm.filtersToggle[id] = false;
+			vm.filtersToggle[id] = !vm.filtersToggle[id];
+			if (vm.filtersToggle[id])
 			{
 				if (!vm.search[vm.filtersTable[elem]])
 					vm.search[vm.filtersTable[elem]] = [id];
 				else
 					vm.search[vm.filtersTable[elem]].push(id);
 			}
-			else if (!vm.filtersToggle[elem])
+			else if (!vm.filtersToggle[id])
 			{
 				if (vm.search[vm.filtersTable[elem]].length == 1)
 					delete vm.search[vm.filtersTable[elem]];
