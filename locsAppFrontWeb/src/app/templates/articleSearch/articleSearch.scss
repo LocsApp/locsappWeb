@@ -127,6 +127,32 @@
 	.article-card-tile {
 		cursor: pointer;
 
+		.category-triangle {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 0;
+			height: 0;
+			border-style: solid;
+			border-width: 50px 50px 0 0;
+		}
+
+		.category-triangle-fancy {
+			@extend .category-triangle;
+			border-color: $categoryFancy transparent transparent transparent;
+		}
+
+		.category-triangle-sport {
+			@extend .category-triangle;
+			border-color: $categorySport transparent transparent transparent;
+		}
+
+		.category-triangle-disguise {
+			@extend .category-triangle;
+			border-color: $categoryDisguise transparent transparent transparent;
+		}
+
+
 		.thumbnail-pic {
 			width: 200px;
 			height: 200px;

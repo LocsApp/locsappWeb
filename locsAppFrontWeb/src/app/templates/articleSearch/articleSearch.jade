@@ -103,6 +103,10 @@ div.search-article-body(ng-cloak)
 			md-grid-list(md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-row-height="200px" md-cols-gt-md="4" md-gutter="20px")
 				md-grid-tile(style="background: yellow;" md-colspan="1" md-rowspan="2" ng-repeat="article in articleSearch.articles.articles")
 					md-card(layout-fill ng-click="articleSearch.goToArticlePage(article._id)").article-card-tile
+						div(style="position: relative;")
+							div(ng-if="article.base_category == '56cb3d46b2bc57ab2908e69a'").category-triangle-fancy
+							div(ng-if="article.base_category == '56cb3d13b2bc57ab2908e698'").category-triangle-disguise
+							div(ng-if="article.base_category == '56cb3d17b2bc57ab2908e699'").category-triangle-sport
 						md-card-content(layout="column", layout-align="start center")
 							div(style="position: relative;")
 								img(ng-src="{{ articleSearch.url_api + article.url_thumbnail }}").thumbnail-pic
