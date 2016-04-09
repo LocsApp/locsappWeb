@@ -26,6 +26,7 @@
 		vm.url_api = URL_API;
 		vm.sortingOptions = ["title", "price"];
 		vm.sortOption = "";
+		vm.searchOnlyInTitle = true;
 
 		/*Pagination vars*/
 		vm.totalItems = 0;
@@ -46,6 +47,23 @@
 		/*Articles functions*/
 		vm.goToArticlePage = function (id) {
 			$log.log($state.go("main.articleShow", {"id" : id}));
+		}
+
+		vm.searchTitle = function (keywords) {
+			vm.search.title = keywords;
+			if (!vm.searchOnlyInTitle)
+				vm.search.description = keywords;
+			else
+			{
+				if (vm.search.description)
+					vm.search.description = null;
+			}
+			$log.log(vm.search);
+			ArticleService
+			.searchArticles
+			.save(vm.search)
+			.$promise
+			.then(vm.getArticles, vm.failedGetArticles);
 		}
 
 		//Static collection retrieval

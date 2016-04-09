@@ -28,7 +28,9 @@ div.search-article-body(ng-cloak)
 					md-card-content
 						md-input-container(style="margin-bottom:0px;")
 							label Your Keyword
-							input(name="searchKeywords")
+							input(name="searchKeywords" ng-model="articleSearch.titleKeywords")
+						section(layout="row", layout-align="center center")
+							md-button(ng-click="articleSearch.searchTitle(articleSearch.titleKeywords);" style="margin: 0 0 10 10").md-raised Search
 						section(layout="row", layout-align="start start")
 							span(flex="60") Search only in title
 							span.flex

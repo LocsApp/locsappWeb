@@ -52,7 +52,8 @@ def searchArticles(request):
 
     for key in body:
         if key != "_pagination" and key != "_order":
-            if key == "title":
+            if key == "title" or key == "description":
+                print(key)
                 search[key] = {"$regex": str(body[key])}
             else:
                 search[key] = {"$in": body[key]}
