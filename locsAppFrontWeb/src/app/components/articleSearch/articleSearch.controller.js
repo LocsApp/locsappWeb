@@ -50,13 +50,14 @@
 		}
 
 		vm.searchTitle = function (keywords) {
+			vm.search.page_number = 1;
 			vm.search.title = keywords;
 			if (!vm.searchOnlyInTitle)
 				vm.search.description = keywords;
 			else
 			{
 				if (vm.search.description)
-					vm.search.description = null;
+					delete vm.search.description;
 			}
 			$log.log(vm.search);
 			ArticleService

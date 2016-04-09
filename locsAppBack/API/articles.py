@@ -10,7 +10,7 @@ from bson import ObjectId
 
 import pytz
 from datetime import datetime
-
+import re
 
 """ Articles """
 
@@ -49,12 +49,13 @@ def searchArticles(request):
             else:
                 order_temp = -1
             ordering.append((fields_order["field_name"], order_temp))
-
     for key in body:
         if key != "_pagination" and key != "_order":
             if key == "title" or key == "description":
-                print(key)
-                search[key] = {"$regex": str(body[key])}
+                if not "$or" in search:
+                    search["$or"] = []
+                search["$or"].append(
+                    {key: {"$regex": re.compile(str(body[key]), re.IGNORECASE)}})
             else:
                 search[key] = {"$in": body[key]}
     number_items = body["_pagination"]["items_per_page"]
@@ -69,6 +70,7 @@ def searchArticles(request):
                 number_items) +
             number_items]
     else:
+        print(search)
         results = db_locsapp["articles"].find(search)[
             ((page_number -
               1) *
