@@ -682,13 +682,15 @@ class ImageArticleUploadView(APIView):
         dir_location = settings.MEDIA_ROOT + \
             'articles/'
         os.makedirs(os.path.dirname(dir_location), exist_ok=True)
+        unique_id = uuid.uuid4().hex
         destination_url = settings.MEDIA_ROOT + \
-            'articles/' + uuid.uuid4().hex
+            'articles/' + unique_id
         destination = open(destination_url, 'wb+')
         for chunk in up_file.chunks():
             destination.write(chunk)
             destination.close()
-        return JsonResponse({"url": destination_url})
+        answer_url = 'media/articles/' + unique_id
+        return JsonResponse({"url": answer_url})
 
 """
     SOCIAL NETWORK ENDPOINTS

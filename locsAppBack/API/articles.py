@@ -10,7 +10,7 @@ from bson import ObjectId
 
 import pytz
 from datetime import datetime
-
+import re
 
 """ Articles """
 
@@ -49,11 +49,13 @@ def searchArticles(request):
             else:
                 order_temp = -1
             ordering.append((fields_order["field_name"], order_temp))
-
     for key in body:
         if key != "_pagination" and key != "_order":
-            if key == "title":
-                search[key] = {"$regex": str(body[key])}
+            if key == "title" or key == "description":
+                if not "$or" in search:
+                    search["$or"] = []
+                search["$or"].append(
+                    {key: {"$regex": re.compile(str(body[key]), re.IGNORECASE)}})
             else:
                 search[key] = {"$in": body[key]}
     number_items = body["_pagination"]["items_per_page"]
@@ -62,16 +64,17 @@ def searchArticles(request):
         results = db_locsapp["articles"].find(search).sort(ordering)[
             ((page_number -
               1) *
-             number_items):(
+             number_items): (
                 (page_number -
                  1) *
                 number_items) +
             number_items]
     else:
+        print(search)
         results = db_locsapp["articles"].find(search)[
             ((page_number -
               1) *
-             number_items):(
+             number_items): (
                 (page_number -
                  1) *
                 number_items) +
@@ -81,6 +84,7 @@ def searchArticles(request):
     number_pages = int(results.count() / number_items)
     document["metadatas"][
         "total_pages"] = 1 if number_pages < 1 else number_pages
+    document["metadatas"]["total_items"] = results.count()
     for instance in results:
         document["articles"].append(APIrequests.parseObjectIdToStr(instance))
     return JsonResponse(document)
@@ -102,8 +106,8 @@ def postNewArticle(request):
         },
         "url_thumbnail": {
             "_type": str,
-            "_default": "http://default.png/",
-            "_length": 1000
+            "_default": "media/articles/default.jpg",
+            "_length": 100
         },
         "url_pictures": {
             "_type": [str],
@@ -185,21 +189,62 @@ def postNewArticle(request):
 
 @csrf_exempt
 def articleAlone(request, article_pk):
-    fields_definition_put = \
-        {"name": "text, 30",
-         "tiny_logo_url": "text, 255",
-         "big_logo_url": "text, 255",
-         "description": "text, 500",
-         "id_author": "integer",
-         "date_created": "date",
-         "id_type": "id",
-         "comments": "array",
-         "pictures": "array",
-         "informations": "dict"}
+    model = {
+        "title": {
+            "_type": str,
+            "_length": 50
+        },
+        "id_author": {
+            "_type": int,
+            "_protected": True
+        },
+        "url_thumbnail": {
+            "_type": str,
+            "_length": 100
+        },
+        "url_pictures": [str],
+        "comments": [ObjectId()],
+        "gender": ObjectId(),
+        "base_category": ObjectId(),
+        "sub_category": ObjectId(),
+        "tags": [ObjectId()],
+        "size": ObjectId(),
+        "payment_methods": ObjectId(),
+        "brand": ObjectId(),
+        "clothe_condition": ObjectId(),
+        "description": {
+            "_type": str,
+            "_default": "This article has no description",
+            "_length": 5000
+        },
+        "availibility_start": {
+            "_type": str,
+            "_length": 50
+        },
+        "availibility_end": {
+            "_type": str,
+            "_length": 50
+        },
+        "creation_date": {
+            "_type": str,
+            "_protected": True
+        },
+        "modified_date": str,
+        "location": ObjectId(),
+        "price": {
+            "_type": float,
+            "_max": 500,
+            "_min": 0
+        },
+        "color": ObjectId(),
+        "demands": [ObjectId()],
+        "id_renter": int,
+        "article_state": ObjectId()
+    }
 
     if request.method == "PUT":
-        return APIrequests.forgeAPIrequestPut(
-            request, article_pk, fields_definition_put, db_locsapp["articles"])
+        return APIrequests.PUT(
+            request, model, "articles", "The article has been successfully modified!", article_pk)
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 

@@ -6,8 +6,9 @@
 		.controller('ArticleSearchController', ArticleSearchController);
 
 	/** @ngInject */
-	function ArticleSearchController(ArticleService, $log, toastr)
+	function ArticleSearchController(ArticleService, $log, toastr, URL_API, $state)
 	{
+		$log.log(URL_API);
 		var vm = this;
 
 		/*Filters vars*/
@@ -22,23 +23,79 @@
 		vm.filters = {};
 
 		/*Option vars*/
+		vm.url_api = URL_API;
 		vm.sortingOptions = ["title", "price"];
 		vm.sortOption = "";
+		vm.searchOnlyInTitle = true;
+		vm.filtersTable = ["base_category"];
+		vm.filtersToggle = {};
 
 		/*Pagination vars*/
-		vm.totalItems = 1000;
+		vm.totalItems = 0;
 		vm.search = {"_pagination" : {
 					"page_number": 1,
 					"items_per_page" : 8
 		}};
 
-		/*Articles*/
+		/*Articles vars*/
 		vm.articles = {};
 
 		/*Pagination functions*/
 		vm.onArrowClick = function (number)
 		{
 			vm.search._pagination.page_number += number;
+		}
+
+		/*Articles functions*/
+		vm.goToArticlePage = function (id) {
+			$log.log($state.go("main.articleShow", {"id" : id}));
+		}
+
+		/*Search bar*/
+		vm.searchTitle = function (keywords) {
+			vm.search._pagination.page_number = 1;
+			vm.search.title = keywords;
+			if (!vm.searchOnlyInTitle)
+				vm.search.description = keywords;
+			else
+			{
+				if (vm.search.description)
+					delete vm.search.description;
+			}
+			$log.log(vm.search);
+			ArticleService
+			.searchArticles
+			.save(vm.search)
+			.$promise
+			.then(vm.getArticles, vm.failedGetArticles);
+		}
+
+		/*Filters checkboxes*/
+		vm.toggleFilter = function(elem, id)
+		{
+			if (!vm.filtersToggle[id])
+				vm.filtersToggle[id] = false;
+			vm.filtersToggle[id] = !vm.filtersToggle[id];
+			if (vm.filtersToggle[id])
+			{
+				if (!vm.search[vm.filtersTable[elem]])
+					vm.search[vm.filtersTable[elem]] = [id];
+				else
+					vm.search[vm.filtersTable[elem]].push(id);
+			}
+			else if (!vm.filtersToggle[id])
+			{
+				if (vm.search[vm.filtersTable[elem]].length == 1)
+					delete vm.search[vm.filtersTable[elem]];
+				else
+					vm.search[vm.filtersTable[elem]].splice(vm.search[vm.filtersTable[elem]].indexOf(id));
+			}
+			$log.log(vm.search);
+			ArticleService
+			.searchArticles
+			.save(vm.search)
+			.$promise
+			.then(vm.getArticles, vm.failedGetArticles);
 		}
 
 		//Static collection retrieval
@@ -125,6 +182,7 @@
 		{
 			$log.log(data);
 			vm.articles = data;
+			vm.totalItems = data.metadatas.total_items;
 		}
 
 		ArticleService

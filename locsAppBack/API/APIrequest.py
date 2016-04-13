@@ -139,6 +139,30 @@ class APIRequestMongo:
                 {"message": success_message}, status=200))
 
     """
+    This method creates a PUT endpoint for a mongo API
+    """
+
+    def PUT(self, request, model, collection_name, success_message, id):
+        if request.body:
+            body = json.loads(request.body.decode('utf8'))
+            keys_error = {}
+            document = {}
+            for key in body:
+                if key not in model:
+                    keys_error[key] = "This key is not authorized."
+                else:
+                    self._fieldModelValidation(
+                        body[key], model[key], keys_error, key)
+                    document[key] = body[key]
+                    model.pop(key, None)
+            if keys_error:
+                return JsonResponse(keys_error, status=401)
+            self.db[collection_name].update_one(
+                {"_id": ObjectId(id)}, {"$set": document})
+            return (JsonResponse(
+                    {"message": success_message}, status=200))
+
+    """
     This method creates a GET endpoint for a mongo API
 
     """
