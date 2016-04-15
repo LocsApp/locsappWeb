@@ -14,9 +14,10 @@
 
   /** @ngInject */
   function ArticleShowController($log, $mdDialog, $document, ArticleService, $stateParams,
-                                 $interval, toastr, ScopesService) {
+                                 $interval, toastr, ScopesService, URL_API) {
 
     var vm = this;
+    vm.url_api = URL_API;
     /* Pagination */
     var pagesShown = 1;
     var pageSize = 1;
@@ -89,16 +90,8 @@
         vm.carousel.push(vm.data.url_pictures[i]);
       }
 
-      //$log.log("Url carousel = ", vm.carousel);
+      $log.log("Url carousel = ", vm.carousel);
 
-     /* vm.url_thumbnail = "http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516";
-      vm.url_pictures = ['http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg',
-        'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516',
-        'http://cdn.shopify.com/s/files/1/0293/9277/products/Fashion_Nova_-_01-21-16-410_large.JPG?v=1453489020',
-        'http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg',
-        'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516',
-        'http://cdn.shopify.com/s/files/1/0293/9277/products/Fashion_Nova_-_01-21-16-410_large.JPG?v=1453489020'
-      ];*/
 
       //Nom de la ville si pas connecte ou pas d'addresse dans son compte
       vm.within = "1";

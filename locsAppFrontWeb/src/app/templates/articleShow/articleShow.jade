@@ -16,6 +16,7 @@ div.article-show(layout="row" layout-align="center")
             span (50)
 
 
+
     div(layout="row" layout-align="center")
       data-owl-carousel.owl-carousel.owl-theme(flex="50" flex-xs="100" data-options="{nav: true," +
       " " +
@@ -24,7 +25,7 @@ div.article-show(layout="row" layout-align="center")
   "autoplayTimeout:5000, loop:true, items: 1, " +
       "lazyLoad:true, autoWidth:false}")
         .item(owl-carousel-item='', ng-repeat='url_picture in articleShow.carousel track by $index')
-          img(src="{{url_picture}}")
+          img(ng-src="{{articleShow.url_api + carousel}}")
 
 
     div.my-layout-xs(layout="row")
