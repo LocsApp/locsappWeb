@@ -6,7 +6,8 @@ div(layout="row" layout-align="center" layout-fill)
 
           div(layout="row" layout-align='center')
             div( layout="column", layout-align="center center")
-              md-input-container(style='width:100%')
+
+              md-input-container()
                 md-icon(md-svg-src="../assets/icons/help-circle.svg" class="name")
                   md-tooltip(md-direction="left") It defines for which gender the clothe is meant to be for
                 md-select(ng-model="articleCreate.article.gender", name="gender", placeholder="Gender", required)
@@ -25,7 +26,7 @@ div(layout="row" layout-align="center" layout-fill)
 
 
               md-input-container
-                ng-md-icon(icon="help", size="20")
+                md-icon(md-svg-src="../assets/icons/help-circle.svg" class="name")
                   md-tooltip(md-direction="left") Choose the main color of your clothe
                 md-select(ng-model="articleCreate.article.color", name="color", placeholder="Color", required)
                   md-option(ng-value="opt", ng-repeat="opt in articleCreate.clothe_colors") {{ opt.name }}
@@ -33,7 +34,7 @@ div(layout="row" layout-align="center" layout-fill)
                   div(ng-message="required") This is required.
 
               md-input-container
-                ng-md-icon(icon="help", size="20")
+                md-icon(md-svg-src="../assets/icons/help-circle.svg" class="name")
                   md-tooltip(md-direction="left") Indicate in which state your clothe is
                 md-select(ng-model="articleCreate.article.clothe_condition", name="state", placeholder="State", required)
                   md-option(ng-value="opt", ng-repeat="opt in articleCreate.clothe_states") {{ opt.name }}
@@ -42,7 +43,7 @@ div(layout="row" layout-align="center" layout-fill)
 
 
               md-input-container
-                ng-md-icon(icon="help", size="20")
+                md-icon(md-svg-src="../assets/icons/help-circle.svg" class="name")
                   md-tooltip(md-direction="left") This is the brand of your clothe (you can put homemade if you made it yourself)
                 md-select(ng-model="articleCreate.article.brand", name="brand", placeholder="Brand", required)
                   md-option(ng-value="opt", ng-repeat="opt in articleCreate.brands") {{ opt.name }}
