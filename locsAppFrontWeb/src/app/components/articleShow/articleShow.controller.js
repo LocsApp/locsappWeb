@@ -13,11 +13,23 @@
     .controller('ArticleShowController', ArticleShowController);
 
   /** @ngInject */
-  function ArticleShowController($log, $mdDialog, $document, ArticleService, $stateParams, $interval, toastr) {
+  function ArticleShowController($log, $mdDialog, $document, ArticleService, $stateParams,
+                                 $interval, toastr, ScopesService) {
 
     var vm = this;
+    /* Pagination */
     var pagesShown = 1;
     var pageSize = 1;
+    /* Fixtures */
+    vm.categories = ScopesService.get("static_collections").base_categories;
+		vm.subCategories = ScopesService.get("static_collections").sub_categories;
+		vm.genders = ScopesService.get("static_collections").genders;
+		vm.sizes = ScopesService.get("static_collections").sizes;
+		vm.clothe_colors = ScopesService.get("static_collections").clothe_colors;
+		vm.clothe_states = ScopesService.get("static_collections").clothe_states;
+		vm.brands = [{_id: "56cb3ef2b2bc57ab2908e6b2", name: "Home made"}];
+		vm.payment_methods = ScopesService.get("static_collections").payment_methods;
+
     //vm.showChildComment = false;
     vm.test_test = ['un', 'deux', 'trois'];
     vm.items = ['../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg',
@@ -28,7 +40,9 @@
 
     vm.GetInfoArticleSuccess = function (data) {
       $log.log("data SUCCESS= ", data);
-      vm.title = "Robe bleu hermes excellente qualite";
+      vm.data = data;
+      //vm.title = data.title;
+      //vm.title = "Robe bleu hermes excellente qualite";
       vm.id_author = "42";
       vm.username_author = "author";
       vm.id = "145454e";
