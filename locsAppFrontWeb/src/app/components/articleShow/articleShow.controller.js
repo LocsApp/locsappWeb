@@ -72,9 +72,11 @@
       /* Create date for date picker */
       vm.dateStart = new Date(vm.data.availibility_start);
       vm.dateEnd = new Date(vm.data.availibility_end);
-
       vm.AskBeginLocation = new Date(vm.data.availibility_start);
       vm.AskEndLocation = new Date(vm.data.availibility_end);
+
+      /* Init array questions */
+      vm.questions = [];
 
 
 
@@ -93,7 +95,7 @@
       ];
 
       //Le back renvoie du plus grand au plus petit et uniquement les trois premieres questions
-      vm.questions = [
+     /* vm.questions = [
 
         {
           "_id": "56cb3cb1b2bc57ab2908e697",
@@ -161,16 +163,14 @@
         }
 
 
-      ];
+      ];*/
       vm.within = "1";
+      //Nom de la ville si pas connecte ou pas d'addresse dans son compte
 
       //vm.meaning_payment = ["cash", "check", "bank card"];
       /*vm.description = "At vero eos et accusamus et iusto odio dignissimos ducimus qui" +
        " blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repell";
-       vm.start_availble = "3/15/2016";
-       vm.end_availble = "6/15/2016";
-       vm.date_created = "Creation date";
-       vm.date_modified = "Modified date";*/
+      */
       vm.long = "longitude";
       vm.lat = "latttitude";
       //vm.price = "42";

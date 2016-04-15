@@ -131,7 +131,7 @@ div.article-show(layout="row" layout-align="center")
       h2.t-center(flex="15") Questions
       md-divider.separator-h2(flex="45")
 
-    div.question(layout="row" layout-align="center" ng-if="!articleShow.questions")
+    div.question(layout="row" layout-align="center" ng-if="articleShow.questions.length === 0")
       div(layout="column")
         md-input-container.md-block
           label Be the first one to ask something
