@@ -71,6 +71,12 @@ static_collections_patterns = [
     url(r'^payment-methods/$', static_collections.staticPaymentMethods)
 ]
 
+# Cache urls
+cache_patterns = [
+    url(r'^static-collections/(?P<argument>[0-1]{1})/$',
+        views.checkStaticCollectionVersion.as_view()),
+]
+
 # General urls for the api
 api_patterns = [
 
@@ -103,5 +109,7 @@ api_patterns = [
     url(r'^notifications/', include(notifications_patterns)),
     url(r'^search/', include(search_patterns)),
     url(r'^static-collections/',
-        include(static_collections_patterns))
+        include(static_collections_patterns)),
+    url(r'^cache/',
+        include(cache_patterns)),
 ]

@@ -6,20 +6,20 @@
 		.controller('ArticleSearchController', ArticleSearchController);
 
 	/** @ngInject */
-	function ArticleSearchController(ArticleService, $log, toastr, URL_API, $state)
+	function ArticleSearchController(ArticleService, $log, toastr, URL_API, $state, ScopesService)
 	{
 		$log.log(URL_API);
 		var vm = this;
 
 		/*Filters vars*/
-		vm.categories = null;
-		vm.subCategories = null;
-		vm.genders = null;
-		vm.sizes = null;
-		vm.clothe_colors = null;
-		vm.clothe_states = null;
+		vm.categories = ScopesService.get("static_collections").base_categories;
+		vm.subCategories = ScopesService.get("static_collections").sub_categories;
+		vm.genders = ScopesService.get("static_collections").genders;
+		vm.sizes = ScopesService.get("static_collections").sizes;
+		vm.clothe_colors = ScopesService.get("static_collections").clothe_colors;
+		vm.clothe_states = ScopesService.get("static_collections").clothe_states;
 		vm.brands = [{_id: "56cb3ef2b2bc57ab2908e6b2", name: "Home made"}];
-		vm.payment_methods = null;
+		vm.payment_methods = ScopesService.get("static_collections").payment_methods;
 		vm.filters = {};
 
 		/*Option vars*/
@@ -97,80 +97,6 @@
 			.$promise
 			.then(vm.getArticles, vm.failedGetArticles);
 		}
-
-		//Static collection retrieval
-		vm.failedRetrieval = function (data) {
-			$log.log(data);
-			toastr.error("We couldn't retrieve some informations...", 'Woops...');
-		};
-
-
-		vm.getPaymentMethods = function (data) {
-			vm.payment_methods = data.payment_methods;
-		};
-
-		vm.getClotheStates = function (data) {
-			vm.clothe_states = data.clothe_states;
-
-			//And now we'll get payment
-			ArticleService
-			.getPaymentMethods
-			.get()
-			.$promise
-			.then(vm.getPaymentMethods, vm.failedRetrieval);
-		};
-
-		vm.getClotheColors = function (data) {
-			vm.clothe_colors = data.clothe_colors;
-			ArticleService
-			.getClotheStates
-			.get()
-			.$promise
-			.then(vm.getClotheStates, vm.failedRetrieval);
-		};
-
-		vm.getSizes = function (data) {
-			vm.sizes = data.sizes;
-			ArticleService
-			.getClotheColors
-			.get()
-			.$promise
-			.then(vm.getClotheColors, vm.failedRetrieval);
-		};
-
-		vm.getGenders = function (data) {
-			vm.genders = data.genders;
-			ArticleService
-			.getSizes
-			.get()
-			.$promise
-			.then(vm.getSizes, vm.failedRetrieval);
-		};
-
-		vm.getSubCategories = function (data) {
-		vm.subCategories = data.sub_categories;
-		ArticleService
-			.getGenders
-			.get()
-			.$promise
-			.then(vm.getGenders, vm.failedRetrieval);
-		};
-
-		vm.getCategories = function (data) {
-		vm.categories = data.base_categories;
-		ArticleService
-			.getSubCategories
-			.get()
-			.$promise
-			.then(vm.getSubCategories, vm.failedRetrieval);
-		};
-
-		ArticleService
-		.getCategories
-		.get()
-		.$promise
-		.then(vm.getCategories, vm.failedRetrieval);
-		//End of Static collection retrieval
 
 		vm.failedGetArticles = function(data)
 		{

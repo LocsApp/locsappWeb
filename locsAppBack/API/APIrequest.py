@@ -167,7 +167,7 @@ class APIRequestMongo:
 
     """
 
-    def GET(self, collection_name, id=None):
+    def GET(self, collection_name, id=None, raw=False):
         print(type(collection_name))
         print(type(id))
         if id is None:
@@ -180,8 +180,11 @@ class APIRequestMongo:
             answer = self.parseObjectIdToStr(
                 self.db[collection_name].find_one({"_id": ObjectId(id)}))
             print(answer)
-        return HttpResponse(json.dumps(
-        answer, sort_keys=True, indent=4, default=json_util.default))
+        if (raw is True):
+            return (answer)
+        else:
+            return HttpResponse(json.dumps(
+                answer, sort_keys=True, indent=4, default=json_util.default))
 
     """
     verifies is the fields are correct:
