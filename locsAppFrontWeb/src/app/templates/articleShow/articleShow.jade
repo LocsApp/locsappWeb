@@ -23,7 +23,7 @@ div.article-show(layout="row" layout-align="center")
       " " +
   "autoplayTimeout:5000, loop:true, items: 1, " +
       "lazyLoad:true, autoWidth:false}")
-        .item(owl-carousel-item='', ng-repeat='url_picture in articleShow.url_pictures track by $index')
+        .item(owl-carousel-item='', ng-repeat='url_picture in articleShow.carousel track by $index')
           img(src="{{url_picture}}")
 
 
@@ -38,7 +38,7 @@ div.article-show(layout="row" layout-align="center")
           div.block-properties(layout="row")
             div.name-properties(flex="50") Payment
             div.t-right(flex="50")
-              span(ng-repeat="payment in articleShow.meaning_payment") {{$first ? '' : ', '}} {{payment}}
+              span(ng-repeat="payment in articleShow.name_payment_methods track by $index") {{$first ? '' : ', '}} {{payment}}
 
           md-divider
           div.block-properties(layout="row")

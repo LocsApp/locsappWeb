@@ -36,11 +36,8 @@
     vm.items = ['../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg',
       '../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg'];
 
-    $log.log("route params = ", $stateParams.id);
-
 
     vm.GetInfoArticleSuccess = function (data) {
-      $log.log("data SUCCESS= ", data);
       vm.data = data;
 
       /* find the name using the id fixtures */
@@ -65,9 +62,16 @@
       vm.name_brand = vm.brands[vm.brands.map(function (x) {
         return x._id;
       }).indexOf(vm.data.brand)].name;
-      /*
-       vm.brands = [{_id: "56cb3ef2b2bc57ab2908e6b2", name: "Home made"}];
-       vm.payment_methods = ScopesService.get("static_collections").payment_methods;*/
+
+      /* We can have several payment so we need to loop in the array */
+      vm.name_payment_methods = [];
+      for (var i = 0; i < vm.data.payment_methods.length; i++) {
+        //$log.log("Data pyament  = ", vm.data.payment_methods);
+
+        vm.name_payment_methods.push(vm.payment_methods[vm.payment_methods.map(function (x) {
+          return x._id
+        }).indexOf(vm.data.payment_methods[i])].name);
+      }
 
       /* Create date for date picker */
       vm.dateStart = new Date(vm.data.availibility_start);
@@ -78,6 +82,28 @@
       /* Init array questions */
       vm.questions = [];
 
+      /* We create an array for the carousel and the first picture is the thumbnail */
+      vm.carousel = [];
+      vm.carousel.push(vm.data.url_thumbnail);
+      for (i = 0; i < vm.data.url_pictures.length; i++) {
+        vm.carousel.push(vm.data.url_pictures[i]);
+      }
+
+      //$log.log("Url carousel = ", vm.carousel);
+
+     /* vm.url_thumbnail = "http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516";
+      vm.url_pictures = ['http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg',
+        'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516',
+        'http://cdn.shopify.com/s/files/1/0293/9277/products/Fashion_Nova_-_01-21-16-410_large.JPG?v=1453489020',
+        'http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg',
+        'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516',
+        'http://cdn.shopify.com/s/files/1/0293/9277/products/Fashion_Nova_-_01-21-16-410_large.JPG?v=1453489020'
+      ];*/
+
+      //Nom de la ville si pas connecte ou pas d'addresse dans son compte
+      vm.within = "1";
+      vm.long = "longitude";
+      vm.lat = "latttitude";
 
 
       /* Just for test for the moment */
@@ -85,102 +111,80 @@
       vm.username_author = "author";
       vm.id = "145454e";
 
-      vm.url_thumbnail = "http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516";
-      vm.url_pictures = ['http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg',
-        'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516',
-        'http://cdn.shopify.com/s/files/1/0293/9277/products/Fashion_Nova_-_01-21-16-410_large.JPG?v=1453489020',
-        'http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg',
-        'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516',
-        'http://cdn.shopify.com/s/files/1/0293/9277/products/Fashion_Nova_-_01-21-16-410_large.JPG?v=1453489020'
-      ];
 
       //Le back renvoie du plus grand au plus petit et uniquement les trois premieres questions
-     /* vm.questions = [
+      /* vm.questions = [
 
-        {
-          "_id": "56cb3cb1b2bc57ab2908e697",
-          "id_author": 42,
-          "username_author": "locsapp",
-          "content": "What is the breast size ? ",
-          "is_visible": true,
-          "is_useful": ["sdsgdsgs46887", "sdfdsgsdgds6465464", "sdfdsgsdgds646546478"],
-          "date_created": "fausse date",
-          "date_modified": "fausse date",
-          "response": {
-            "_id": "56cb3cb1b2bc57ab2908e698",
-            "id_author": 44,
-            "username_author": "sylflo",
-            "content": "The breast size 95C",
-            "is_visible": true,
-            "date_created": "fausse date",
-            "date_modified": "fausse date"
-          },
-          "last_versions": [],
-          "flagged": null
-        },
+       {
+       "_id": "56cb3cb1b2bc57ab2908e697",
+       "id_author": 42,
+       "username_author": "locsapp",
+       "content": "What is the breast size ? ",
+       "is_visible": true,
+       "is_useful": ["sdsgdsgs46887", "sdfdsgsdgds6465464", "sdfdsgsdgds646546478"],
+       "date_created": "fausse date",
+       "date_modified": "fausse date",
+       "response": {
+       "_id": "56cb3cb1b2bc57ab2908e698",
+       "id_author": 44,
+       "username_author": "sylflo",
+       "content": "The breast size 95C",
+       "is_visible": true,
+       "date_created": "fausse date",
+       "date_modified": "fausse date"
+       },
+       "last_versions": [],
+       "flagged": null
+       },
 
-        {
-          "_id": "56cb3cb1b2bc57ab2908e697",
-          "id_author": 42,
-          "username_author": "locsapp",
-          "content": "What is the breast size ? ",
-          "is_visible": true,
-          "is_useful": ["sdsgdsgs46887"],
-          "date_created": "fausse date",
-          "date_modified": "fausse date",
-          "response": {
-            "_id": "56cb3cb1b2bc57ab2908e698",
-            "id_author": 44,
-            "username_author": "sylflo",
-            "content": "The breast size 95C",
-            "is_visible": true,
-            "date_created": "fausse date",
-            "date_modified": "fausse date"
-          },
-          "last_versions": [],
-          "flagged": null
-        },
-        {
-          "_id": "56cb3cb1b2bc57ab2908e697",
-          "id_author": 42,
-          "username_author": "locsapp",
-          "content": "What is the breast size ? ",
-          "is_visible": true,
-          "is_useful": ["sdsgdsgs46887"],
-          "date_created": "fausse date",
-          "date_modified": "fausse date",
-          "response": {
-            "_id": "56cb3cb1b2bc57ab2908e698",
-            "id_author": 44,
-            "username_author": "sylflo",
-            "content": "The breast size 95C",
-            "is_visible": true,
-            "date_created": "fausse date",
-            "date_modified": "fausse date"
-          },
-          "last_versions": [],
-          "flagged": null
-        }
-
-
-      ];*/
-      vm.within = "1";
-      //Nom de la ville si pas connecte ou pas d'addresse dans son compte
-
-      //vm.meaning_payment = ["cash", "check", "bank card"];
-      /*vm.description = "At vero eos et accusamus et iusto odio dignissimos ducimus qui" +
-       " blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repell";
-      */
-      vm.long = "longitude";
-      vm.lat = "latttitude";
-      //vm.price = "42";
-
-      //request author profile to get his notation;
-
-      //Put the date min and max
+       {
+       "_id": "56cb3cb1b2bc57ab2908e697",
+       "id_author": 42,
+       "username_author": "locsapp",
+       "content": "What is the breast size ? ",
+       "is_visible": true,
+       "is_useful": ["sdsgdsgs46887"],
+       "date_created": "fausse date",
+       "date_modified": "fausse date",
+       "response": {
+       "_id": "56cb3cb1b2bc57ab2908e698",
+       "id_author": 44,
+       "username_author": "sylflo",
+       "content": "The breast size 95C",
+       "is_visible": true,
+       "date_created": "fausse date",
+       "date_modified": "fausse date"
+       },
+       "last_versions": [],
+       "flagged": null
+       },
+       {
+       "_id": "56cb3cb1b2bc57ab2908e697",
+       "id_author": 42,
+       "username_author": "locsapp",
+       "content": "What is the breast size ? ",
+       "is_visible": true,
+       "is_useful": ["sdsgdsgs46887"],
+       "date_created": "fausse date",
+       "date_modified": "fausse date",
+       "response": {
+       "_id": "56cb3cb1b2bc57ab2908e698",
+       "id_author": 44,
+       "username_author": "sylflo",
+       "content": "The breast size 95C",
+       "is_visible": true,
+       "date_created": "fausse date",
+       "date_modified": "fausse date"
+       },
+       "last_versions": [],
+       "flagged": null
+       }
 
 
-      $log.log("TEST = ", vm.url_pictures);
+       ];*/
+
+
+      // $log.log("TEST = ", vm.url_pictures);
 
       vm.paginationLimit = function () {
         return pageSize * pagesShown;
@@ -200,8 +204,6 @@
       $log.error("error", data)
     };
 
-    //"56cb41c0421aa91298799892"
-    //$stateParams.id
     ArticleService
       .getArticle
       .get({id: $stateParams.id})
