@@ -33,7 +33,7 @@ div.article-show(layout="row" layout-align="center")
 
           div.block-properties(layout="row")
             div.name-properties(flex="50") Price
-            div.t-right(flex="50") {{articleShow.price}}$/day
+            div.t-right(flex="50") {{articleShow.data.price}}$/day
           md-divider
           div.block-properties(layout="row")
             div.name-properties(flex="50") Payment
@@ -47,28 +47,33 @@ div.article-show(layout="row" layout-align="center")
           md-divider
           div.block-properties(layout="row")
             div.name-properties(flex="50") Main Category
-            div.t-right(flex="50") {{articleShow.BaseCategory}}
+            div.t-right(flex="50") {{articleShow.name_category}}
           md-divider
           div.block-properties(layout="row")
             div.name-properties(flex="50") Sub Category
-            div.t-right(flex="50") {{articleShow.SubCategory}}
+            div.t-right(flex="50") {{articleShow.name_subCategory}}
           md-divider
           div.block-properties(layout="row")
             div.name-properties(flex="50") Gender
-            div.t-right(flex="50") {{articleShow.sexe}}
+            div.t-right(flex="50") {{articleShow.name_gender}}
           md-divider
           div.block-properties(layout="row")
             div.name-properties(flex="50") Size
-            div.t-right(flex="50") {{articleShow.size}}
+            div.t-right(flex="50") {{articleShow.name_size}}
           md-divider
           div.block-properties(layout="row")
             div.name-properties(flex="50") Color
-            div.t-right(flex="50") {{articleShow.color}}
+            div.t-right(flex="50") {{articleShow.name_clothe_colors}}
           md-divider
           div.block-properties(layout="row")
             div.name-properties(flex="50") State
-            div.t-right(flex="50") {{articleShow.state}}
+            div.t-right(flex="50") {{articleShow.name_clothe_states}}
           md-divider
+          div.block-properties(layout="row")
+            div.name-properties(flex="50") Brand
+            div.t-right(flex="50") {{articleShow.name_brand}}
+          md-divider
+
 
       md-card.reservation(flex="50" flex-xs="100")
         md-card-content(flex="flex" layout-fill)

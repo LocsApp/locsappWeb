@@ -22,13 +22,14 @@
     var pageSize = 1;
     /* Fixtures */
     vm.categories = ScopesService.get("static_collections").base_categories;
-		vm.subCategories = ScopesService.get("static_collections").sub_categories;
-		vm.genders = ScopesService.get("static_collections").genders;
-		vm.sizes = ScopesService.get("static_collections").sizes;
-		vm.clothe_colors = ScopesService.get("static_collections").clothe_colors;
-		vm.clothe_states = ScopesService.get("static_collections").clothe_states;
-		vm.brands = [{_id: "56cb3ef2b2bc57ab2908e6b2", name: "Home made"}];
-		vm.payment_methods = ScopesService.get("static_collections").payment_methods;
+    vm.subCategories = ScopesService.get("static_collections").sub_categories;
+    vm.genders = ScopesService.get("static_collections").genders;
+    vm.sizes = ScopesService.get("static_collections").sizes;
+    vm.clothe_colors = ScopesService.get("static_collections").clothe_colors;
+    vm.clothe_states = ScopesService.get("static_collections").clothe_states;
+    vm.brands = [{_id: "56cb3ef2b2bc57ab2908e6b2", name: "Home made"}];
+    vm.payment_methods = ScopesService.get("static_collections").payment_methods;
+
 
     //vm.showChildComment = false;
     vm.test_test = ['un', 'deux', 'trois'];
@@ -41,11 +42,47 @@
     vm.GetInfoArticleSuccess = function (data) {
       $log.log("data SUCCESS= ", data);
       vm.data = data;
-      //vm.title = data.title;
-      //vm.title = "Robe bleu hermes excellente qualite";
+
+      /* find the name using the id fixtures */
+      vm.name_gender = vm.genders[vm.genders.map(function (x) {
+        return x._id;
+      }).indexOf(vm.data.gender)].name;
+      vm.name_category = vm.categories[vm.categories.map(function (x) {
+        return x._id;
+      }).indexOf(vm.data.base_category)].name;
+      vm.name_subCategory = vm.subCategories[vm.subCategories.map(function (x) {
+        return x._id;
+      }).indexOf(vm.data.sub_category)].name;
+      vm.name_size = vm.sizes[vm.sizes.map(function (x) {
+        return x._id;
+      }).indexOf(vm.data.size)].name;
+      vm.name_clothe_colors = vm.clothe_colors[vm.clothe_colors.map(function (x) {
+        return x._id;
+      }).indexOf(vm.data.color)].name;
+      vm.name_clothe_states = vm.clothe_states[vm.clothe_states.map(function (x) {
+        return x._id;
+      }).indexOf(vm.data.clothe_condition)].name;
+      vm.name_brand = vm.brands[vm.brands.map(function (x) {
+        return x._id;
+      }).indexOf(vm.data.brand)].name;
+      /*
+       vm.brands = [{_id: "56cb3ef2b2bc57ab2908e6b2", name: "Home made"}];
+       vm.payment_methods = ScopesService.get("static_collections").payment_methods;*/
+
+      /* Create date for date picker */
+      vm.dateStart = new Date(vm.data.availibility_start);
+      vm.dateEnd = new Date(vm.data.availibility_end);
+
+      vm.AskBeginLocation = new Date(vm.data.availibility_start);
+      vm.AskEndLocation = new Date(vm.data.availibility_end);
+
+
+
+      /* Just for test for the moment */
       vm.id_author = "42";
       vm.username_author = "author";
       vm.id = "145454e";
+
       vm.url_thumbnail = "http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516";
       vm.url_pictures = ['http://www.voguequeen.com/images/dresses/bridesmaids/20120921/fashion-chiffon-a-line-strapless-sleeveless-short-length-empire-bridesmaid-dress_120920005.jpg',
         'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=135603516',
@@ -126,35 +163,21 @@
 
       ];
       vm.within = "1";
-      vm.sexe = "Femme";
-      vm.BaseCategory = "evening";
-      vm.SubCategory = "dress";
-      vm.tags = ["blue", "dress", "evening"];
-      vm.size = "L";
-      vm.meaning_payment = ["cash", "check", "bank card"];
-      vm.brand = "Hermes";
-      vm.state = "good";
-      vm.description = "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repell";
-      vm.start_availble = "3/15/2016";
-      vm.end_availble = "6/15/2016";
-      vm.date_created = "Creation date";
-      vm.date_modified = "Modified date";
+
+      //vm.meaning_payment = ["cash", "check", "bank card"];
+      /*vm.description = "At vero eos et accusamus et iusto odio dignissimos ducimus qui" +
+       " blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repell";
+       vm.start_availble = "3/15/2016";
+       vm.end_availble = "6/15/2016";
+       vm.date_created = "Creation date";
+       vm.date_modified = "Modified date";*/
       vm.long = "longitude";
       vm.lat = "latttitude";
-      vm.price = "42";
-      vm.color = "red";
-      vm.id_user_ask_for_location = ["one_ask", "two_ask", "three_ask"];
-      vm.state_renting = "askeur";
-      vm.id_renter = "two_ask";
+      //vm.price = "42";
 
       //request author profile to get his notation;
 
       //Put the date min and max
-      vm.dateStart = new Date(vm.start_availble);
-      vm.dateEnd = new Date(vm.end_availble);
-
-      vm.rentDateStart = new Date(vm.start_availble);
-      vm.rentDateEnd = new Date(vm.end_availble);
 
 
       $log.log("TEST = ", vm.url_pictures);
