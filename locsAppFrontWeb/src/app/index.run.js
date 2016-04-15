@@ -6,7 +6,7 @@
     .run(runBlock);
 
   /** @ngInject */
-  function runBlock($http, Permission, UsersService, NotificationsService, $q, $sessionStorage,
+  function runBlock($http, Permission, UsersService, NotificationsService, CacheService, ScopesService, $q, $sessionStorage,
                     $localStorage, $log, toastr, $rootScope, $state, URL_API, ngMdIconService,
                     $FB) {
     //Automatize send of Csrf token
@@ -36,6 +36,40 @@
 
     //Destruction and memory release of the rootScopeOnStateChangeStart
     $rootScope.$on('$destroy', rootScopeOnStateChangeStart);
+
+    //Check for the cache
+    if (!$localStorage.static_collections ||
+        !$localStorage.static_collections.version ||
+        !$localStorage.static_collections.body)
+    {
+      $log.log("NO CACHE");
+      CacheService
+      .checkStaticCollectionVersion
+      .save({"argument" : 1})
+      .$promise
+      .then(function (data) { $localStorage.static_collections = {}; $localStorage.static_collections.version = data.version; $localStorage.static_collections.body = data.static_collections; ScopesService.set("static_collections", $localStorage.static_collections.body);},
+        function(data) { $log.log("ERROR CACHE RETRIEVAL"); $log.log(data); });
+    }
+    else
+    {
+      CacheService
+      .checkStaticCollectionVersion
+      .save({"argument" : 0, "version": $localStorage.static_collections.version})
+      .$promise
+      .then(function (data) { 
+        if (!data.up_to_date)
+        {
+          $localStorage.static_collections = {};
+          $localStorage.static_collections.version = data.version;
+          $localStorage.static_collections.body = data.static_collections;
+        }
+      },
+        function(data) { $log.log("ERROR CACHE RETRIEVAL"); $log.log(data); }); 
+    }
+
+    //Set the shared scope of the elements of cache
+    ScopesService.set("static_collections", $localStorage.static_collections.body);
+    //End check for the cache
 
     //Defining of guest role for permissions
     Permission.defineRole("guest", function () {

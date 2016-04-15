@@ -14,10 +14,14 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 import socket
 from os import path
+import datetime
 
 PROJECT_ROOT = path.dirname(path.abspath(__file__))
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# STATIC COLLECTION VERSION
+STATIC_COLLECTION_VERSION = datetime.datetime(2016, 4, 15, 13, 00)
 
 # For media files
 MEDIA_URL = 'media/'

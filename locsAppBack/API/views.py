@@ -28,6 +28,7 @@ from bson import ObjectId
 from rest_framework.parsers import FileUploadParser
 import uuid
 import os
+import datetime
 
 # Connects to the db and creates a MongoClient instance
 mongodb_client = MongoClient('localhost', 27017)
@@ -417,6 +418,43 @@ class billingAddressUser(APIView):
         return Response(billing_addresses)
 
 
+class checkStaticCollectionVersion(APIView):
+
+    def post(self, request, argument):
+        if (int(argument) != 1):
+            verificator = None
+            if (not "version" in request.data):
+                return Response(
+                    {"Error": "You need to provide the version of the cache."})
+            try:
+                verificator = datetime.datetime.strptime(request.data[
+                    "version"], '%Y-%m-%dT%H:%M:%S')
+            except:
+                return Response(
+                    {"Error": "You need to provide a correct version for the cache."})
+        if (int(argument) == 1 or not isinstance(verificator, type(
+                settings.STATIC_COLLECTION_VERSION)) or verificator != settings.STATIC_COLLECTION_VERSION):
+            static_collections = {}
+            static_collections.update(APIrequests.GET(
+                "base_categories", raw=True))
+            static_collections.update(APIrequests.GET(
+                "sub_categories", raw=True))
+            static_collections.update(APIrequests.GET(
+                "clothe_colors", raw=True))
+            static_collections.update(APIrequests.GET(
+                "clothe_states", raw=True))
+            static_collections.update(APIrequests.GET(
+                "genders", raw=True))
+            static_collections.update(APIrequests.GET(
+                "payment_methods", raw=True))
+            static_collections.update(APIrequests.GET(
+                "sizes", raw=True))
+            return Response(
+                {"up_to_date": False, "static_collections": static_collections, "version": settings.STATIC_COLLECTION_VERSION})
+        else:
+            return Response({"up_to_date": True})
+
+
 @permission_classes((IsAuthenticated,))
 class billingAddressUserDelete(APIView):
 
@@ -560,16 +598,15 @@ def notificationsUserAllRead(request, user_pk):
 
 @csrf_exempt
 def notificationsUser(request, user_pk):
-    fields_definition = \
-        {
-            "type": "text, 30",
-            "content": "text, 300",
-            "state_url": "text, 50",
-            "read": "boolean",
-            "visible": "boolean",
-            "user_id": "integer",
-            "date": "date_default"
-        }
+    fields_definition = {
+        "type": "text, 30",
+        "content": "text, 300",
+        "state_url": "text, 50",
+        "read": "boolean",
+        "visible": "boolean",
+        "user_id": "integer",
+        "date": "date_default"
+    }
 
     """
     if (request.user.pk):
@@ -620,15 +657,14 @@ def notificationsUser(request, user_pk):
 
 @csrf_exempt
 def notificationAlone(request, notification_pk):
-    fields_definition_put = \
-        {
-            "type": "text, 30",
-            "content": "text, 300",
-            "state_url": "text, 50",
-            "read": "boolean",
-            "visible": "boolean",
-            "user_id": "integer"
-        }
+    fields_definition_put = {
+        "type": "text, 30",
+        "content": "text, 300",
+        "state_url": "text, 50",
+        "read": "boolean",
+        "visible": "boolean",
+        "user_id": "integer"
+    }
 
     if request.method == "GET":
         notification = db_locsapp["notifications_users"].find_one(
@@ -679,12 +715,10 @@ class ImageArticleUploadView(APIView):
             return JsonResponse(
                 {"Error": "There is no field file in the document."}, status=403)
         up_file = request.data["file"]
-        dir_location = settings.MEDIA_ROOT + \
-            'articles/'
+        dir_location = settings.MEDIA_ROOT + 'articles/'
         os.makedirs(os.path.dirname(dir_location), exist_ok=True)
         unique_id = uuid.uuid4().hex
-        destination_url = settings.MEDIA_ROOT + \
-            'articles/' + unique_id
+        destination_url = settings.MEDIA_ROOT + 'articles/' + unique_id
         destination = open(destination_url, 'wb+')
         for chunk in up_file.chunks():
             destination.write(chunk)

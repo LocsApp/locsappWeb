@@ -19,7 +19,6 @@ import re
 
 @csrf_exempt
 @api_view(['POST'])
-@permission_classes((IsAuthenticated,))
 def searchArticles(request):
     document = {"metadatas": {}, "articles": []}
     body = json.loads(request.body.decode('utf8'))
@@ -252,6 +251,6 @@ def articleAlone(request, article_pk):
 @csrf_exempt
 def getArticle(request, article_pk):
     if request.method == "GET":
-        return APIrequests.GET('articles', article_pk)
+        return APIrequests.GET('articles', id=article_pk)
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
