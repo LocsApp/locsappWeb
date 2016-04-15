@@ -4,4 +4,8 @@ div.article-edit(layout="row" layout-align="center")
     div(layout="row" layout-align="center")
       h1 Edit Article
 
-    include ./steps/step1.jade
+    form(name="articleFormEdit" novalidate ng-submit="articleFormEdit.$valid && articleEdit" +
+    ".submit()",
+    layout="column", layout-align="center center" flex="100")
+      include ./steps/step1.jade
+      include ./steps/step2.jade
