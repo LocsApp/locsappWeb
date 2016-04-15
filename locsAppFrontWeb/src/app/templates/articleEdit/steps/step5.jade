@@ -1,3 +1,21 @@
-//
-   Created by sylflo on 4/15/16.
+div(layout="row" layout-align="center" layout-fill)
+      md-card(flex="flex")
+        md-card-content(layout="column", layout-align="center center")
+          div(layout="row" layout-align="center")
+            h2 Availbility dates
+
+          div(layout="row" layout-align='center')
+            div( layout="column", layout-align="center center")
+
+
+
+              //md-input-container()
+                md-icon(md-svg-src="../assets/icons/help-circle.svg" class="name")
+                  md-tooltip(md-direction="left") It defines for which gender the clothe is meant to be for
+                md-select(ng-model="articleCreate.article.gender", name="gender", placeholder="Gender", required)
+                  md-option(ng-value="opt", ng-repeat="opt in articleCreate.genders") {{ opt.name }}
+                div(ng-messages="articleFormStep2.gender.$error" ng-if='!articleFormStep2.gender.$pristine')
+                  div(ng-message="required") This is required.
+
+
 

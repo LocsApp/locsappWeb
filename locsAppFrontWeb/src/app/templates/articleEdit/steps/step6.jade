@@ -1,0 +1,24 @@
+div(layout="row" layout-align="center" layout-fill)
+      md-card(flex="flex")
+        md-card-content(layout="column", layout-align="center center")
+          div(layout="row" layout-align="center")
+            h2 Payment
+
+          div(layout="row" layout-align='center')
+            div( layout="column", layout-align="center center")
+
+
+
+
+              md-input-container
+                md-icon(md-svg-src="../assets/icons/help-circle.svg" class="name")
+                  md-tooltip(md-direction="left") This will be the price of your article by day. It will be displayed in the search. The minimum price is 5$ and the max price is 500$.
+                input(placeholder="Price" required name="price" type="number"
+                ng-model="articleCreate.price"
+                max="500" min="5")
+                div(ng-messages="articleFormStep5.price.$error" ng-if='!articleFormStep5.price.$pristine')
+                  div(ng-message="required") This is required.
+                  div(ng-message="min") The price must be higher than 5$.
+                  div(ng-message="max") The price must be lower than 500$
+
+
