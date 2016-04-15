@@ -119,9 +119,9 @@ div.article-show(layout="row" layout-align="center")
       md-divider.separator-h2(flex="45")
 
     div(layout="row" layout-align="center")
-      md-card
+      md-card(flex="100")
         md-card-content
-          div.description {{articleShow.description}}
+          div.description(ng-bind-html='articleShow.data.description')
 
 
 
