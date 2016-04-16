@@ -7,7 +7,7 @@
 
   /** @ngInject */
   function ArticleCreateController($log, ArticleService, toastr, $timeout, $mdDialog, $document,
-  ScopesService) {
+                                   ScopesService) {
     var vm = this;
 
     /* Get fixtures from cache */
@@ -19,43 +19,45 @@
     vm.clothe_states = ScopesService.get("static_collections").clothe_states;
     vm.brands = [{_id: "56cb3ef2b2bc57ab2908e6b2", name: "Home made"}];
     vm.payment_methods = ScopesService.get("static_collections").payment_methods;
-     //vm.payment_methods = data.payment_methods;
-      //$log.log(vm.payment_methods[0]);
+    //vm.payment_methods = data.payment_methods;
+    //$log.log(vm.payment_methods[0]);
 
-      //CheckBox payment
-      vm.items_payment_methods = vm.payment_methods;
-      vm.selected = [];
-      vm.toggle = function (item, list) {
-        var idx = list.indexOf(item);
-        if (idx > -1) {
-          list.splice(idx, 1);
-        }
-        else {
-          list.push(item);
-        }
-      };
-      vm.exists = function (item, list) {
-        return list.indexOf(item) > -1;
-      };
-      vm.isIndeterminate = function () {
-        return (vm.selected.length !== 0 &&
-        vm.selected.length !== vm.items_payment_methods.length);
-      };
-      vm.isChecked = function () {
-        return vm.selected.length === vm.items_payment_methods.length;
-      };
-      vm.toggleAll = function () {
-        if (vm.selected.length === vm.items_payment_methods.length) {
-          vm.selected = [];
-        } else if (vm.selected.length === 0 || vm.selected.length > 0) {
-          vm.selected = vm.items_payment_methods.slice(0);
-        }
-      };
+    //CheckBox payment
+    vm.items_payment_methods = vm.payment_methods;
+    vm.selected = [];
+    vm.toggle = function (item, list) {
+      var idx = list.indexOf(item);
+      if (idx > -1) {
+        list.splice(idx, 1);
+      }
+      else {
+        list.push(item);
+      }
+    };
+    vm.exists = function (item, list) {
+      return list.indexOf(item) > -1;
+    };
+    vm.isIndeterminate = function () {
+      return (vm.selected.length !== 0 &&
+      vm.selected.length !== vm.items_payment_methods.length);
+    };
+    vm.isChecked = function () {
+      return vm.selected.length === vm.items_payment_methods.length;
+    };
+    vm.toggleAll = function () {
+      if (vm.selected.length === vm.items_payment_methods.length) {
+        vm.selected = [];
+      } else if (vm.selected.length === 0 || vm.selected.length > 0) {
+        vm.selected = vm.items_payment_methods.slice(0);
+      }
+    };
 
     //steps vars
     vm.value = 0;
     vm.stepsNames = ["squared_one", "squared_two", "squared_three", "squared_four", "squared_five", "squared_six"];
-    vm.stepsComplete = [1, 0, 0, 0, 0, 0];
+    //vm.stepsComplete = [1, 0, 0, 0, 0, 0];
+    vm.stepsComplete = [1, 1, 1, 1, 1, 1];
+
     vm.progressBars = [0, 0, 0, 0, 0, 0];
     vm.stepFocus = 0;
 
@@ -124,7 +126,6 @@
       $log.log(data);
       toastr.error("We couldn't retrieve some informations...", 'Woops...');
     };
-
 
 
     /****

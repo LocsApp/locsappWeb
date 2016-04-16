@@ -1,4 +1,4 @@
-<md-dialog class="fullscreen-dialog">
+<md-dialog class="fullscreen-dialog" style="height: 999999px">
   <div layout="row" layout-align="center" class="article-show">
     <div flex-xs="100" flex-sm="100" flex-md="75" flex="50">
       <div layout="row" layout-align="center">
@@ -155,4 +155,18 @@
 
 
   </div>
+
+  <md-dialog-actions layout="row" class="layout-row">
+      <a class="md-button md-ink-ripple _md-autofocus" ng-transclude="" href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus="" aria-label="More on Wikipedia" data-unsp-sanitized="clean"><span class="ng-scope">
+        More on Wikipedia
+      </span></a>
+      <span flex="" class="flex"></span>
+      <button class="md-button md-ink-ripple" type="button" ng-transclude="" ng-click="answer('not useful')" aria-label="Not Useful"><span class="ng-scope">
+       Not Useful
+      </span></button>
+      <button class="md-button md-ink-ripple" type="button" ng-transclude="" ng-click="answer('useful')" style="margin-right:20px;" aria-label="Useful"><span class="ng-scope">
+        Useful
+      </span></button>
+    </md-dialog-actions>
+
 </md-dialog>

@@ -90,8 +90,9 @@
         vm.carousel.push(vm.data.url_pictures[i]);
       }
 
-      $log.log("Url carousel = ", vm.carousel);
 
+      /* We did a request to get the username of the vendor and his notation as a vendor */
+    vm.data.id_author;
 
       //Nom de la ville si pas connecte ou pas d'addresse dans son compte
       vm.within = "1";
