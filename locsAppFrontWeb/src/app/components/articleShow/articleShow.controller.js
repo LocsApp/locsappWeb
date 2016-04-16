@@ -92,7 +92,6 @@
 
 
       vm.getSellerSuccess = function (data) {
-        console.log("data Seller = ", data);
         vm.username_author = data.username;
         vm.nb_renter_notation = data.notation_renter;
 
