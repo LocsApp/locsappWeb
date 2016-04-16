@@ -1046,6 +1046,17 @@
     }
   },
    {
+    "fields": {
+      "user": 29,
+      "email": "athena@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 29
+  },
+
+   {
     "pk": 30,
     "model": "API.account",
     "fields": {
@@ -1071,6 +1082,17 @@
       "phone": "0712245889"
     }
   },
+   {
+    "fields": {
+      "user": 30,
+      "email": "marine@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 30
+  },
+
    {
     "pk": 31,
     "model": "API.account",
@@ -1098,6 +1120,17 @@
     }
   },
    {
+    "fields": {
+      "user": 31,
+      "email": "chirac@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 31
+  },
+
+   {
     "pk": 32,
     "model": "API.account",
     "fields": {
@@ -1122,6 +1155,17 @@
       "last_activity_date": null,
       "phone": "0712245889"
     }
+  },
+
+   {
+    "fields": {
+      "user": 32,
+      "email": "bayrou@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 32
   },
 
     {
@@ -1150,6 +1194,17 @@
       "phone": "0712245889"
     }
   },
+   {
+    "fields": {
+      "user": 33,
+      "email": "tortank@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 66
+  },
+
 
    {
     "pk": 34,
@@ -1179,6 +1234,17 @@
   },
 
    {
+    "fields": {
+      "user": 34,
+      "email": "jean.margoulin@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 34
+  },
+
+   {
     "pk": 35,
     "model": "API.account",
     "fields": {
@@ -1204,6 +1270,17 @@
       "phone": "0712245889"
     }
   },
+    {
+    "fields": {
+      "user": 35,
+      "email": "salade@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 35
+  },
+
 
    {
     "pk": 36,
@@ -1230,6 +1307,17 @@
       "last_activity_date": null,
       "phone": "0712245889"
     }
+  },
+
+    {
+    "fields": {
+      "user": 36,
+      "email": "fashion@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 36
   },
 
    {
@@ -1259,6 +1347,17 @@
     }
   },
 
+    {
+    "fields": {
+      "user": 37,
+      "email": "fashion-victim@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 37
+  },
+
    {
     "pk": 38,
     "model": "API.account",
@@ -1284,5 +1383,18 @@
       "last_activity_date": null,
       "phone": "0712245889"
     }
+  },
+
+    {
+    "fields": {
+      "user": 38,
+      "email": "julie@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 38
   }
+
+
 ]
