@@ -36,18 +36,19 @@
 
     //Destruction and memory release of the rootScopeOnStateChangeStart
     $rootScope.$on('$destroy', rootScopeOnStateChangeStart);
-
+    
     //Check for the cache
     if (!$localStorage.static_collections ||
         !$localStorage.static_collections.version ||
         !$localStorage.static_collections.body)
     {
       $log.log("NO CACHE");
+      $localStorage.static_collections = {};
       CacheService
       .checkStaticCollectionVersion
       .save({"argument" : 1})
       .$promise
-      .then(function (data) { $localStorage.static_collections = {}; $localStorage.static_collections.version = data.version; $localStorage.static_collections.body = data.static_collections; ScopesService.set("static_collections", $localStorage.static_collections.body);},
+      .then(function (data) { $localStorage.static_collections.version = data.version; $localStorage.static_collections.body = data.static_collections; ScopesService.set("static_collections", $localStorage.static_collections.body);},
         function(data) { $log.log("ERROR CACHE RETRIEVAL"); $log.log(data); });
     }
     else
