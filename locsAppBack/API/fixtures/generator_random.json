@@ -28,6 +28,17 @@
     }
   },
 
+  {
+    "fields": {
+      "user": 2,
+      "email": "toto@hotmail.fr",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 2
+  },
+
    {
     "pk": 3,
     "model": "API.account",
@@ -53,6 +64,17 @@
       "last_activity_date": null,
       "phone": "0712245889"
     }
+  },
+
+  {
+    "fields": {
+      "user": 3,
+      "email": "tutu@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 3
   },
 
    {
@@ -82,6 +104,17 @@
     }
   },
 
+  {
+    "fields": {
+      "user": 4,
+      "email": "tata@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 4
+  },
+
    {
     "pk": 5,
     "model": "API.account",
@@ -107,6 +140,17 @@
       "last_activity_date": null,
       "phone": "0712245889"
     }
+  },
+
+  {
+    "fields": {
+      "user": 5,
+      "email": "storm@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 5
   },
 
    {
@@ -136,6 +180,17 @@
     }
   },
 
+  {
+    "fields": {
+      "user": 6,
+      "email": "pikachu@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 6
+  },
+
    {
     "pk": 7,
     "model": "API.account",
@@ -161,6 +216,17 @@
       "last_activity_date": null,
       "phone": "0712245889"
     }
+  },
+
+  {
+    "fields": {
+      "user": 7,
+      "email": "tasdemorve@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 7
   },
 
    {
@@ -191,6 +257,17 @@
   },
 
    {
+    "fields": {
+      "user": 8,
+      "email": "roucoucoul@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 8
+  },
+
+   {
     "pk": 9,
     "model": "API.account",
     "fields": {
@@ -216,6 +293,18 @@
       "phone": "0712245889"
     }
   },
+
+   {
+    "fields": {
+      "user": 9,
+      "email": "plop@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 9
+  },
+
    {
     "pk": 10,
     "model": "API.account",
@@ -242,6 +331,18 @@
       "phone": "0712245889"
     }
   },
+
+   {
+    "fields": {
+      "user": 10,
+      "email": "sylvain@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 10
+  },
+
    {
     "pk": 11,
     "model": "API.account",
@@ -268,6 +369,18 @@
       "phone": "0712245889"
     }
   },
+
+   {
+    "fields": {
+      "user": 11,
+      "email": "salameche@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 11
+  },
+
    {
     "pk": 12,
     "model": "API.account",
