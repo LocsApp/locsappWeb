@@ -408,31 +408,17 @@
     }
   },
    {
-    "pk": 13,
-    "model": "API.account",
     "fields": {
-      "password": "pbkdf2_sha256$20000$gvQA6t7MZAuY$ocy8paI2OK067UaCvsWAbPuAmmgNrLsH3oAHFsi/d1k=",
-      "living_address": "[\"[\\\"tutu42\\\", \\\"{\\\\\\\"city\\\\\\\": \\\\\\\"[PK[PJ\\\\\\\", \\\\\\\"last_name\\\\\\\": \\\\\\\"Sylvain\\\\\\\", \\\\\\\"first_name\\\\\\\": \\\\\\\"Chateau\\\\\\\", \\\\\\\"postal_code\\\\\\\": 24260, \\\\\\\"address\\\\\\\": \\\\\\\"pEGAIR\\\\\\\"}\\\"]\", \"[\\\"troioi\\\", \\\"{\\\\\\\"postal_code\\\\\\\": 33000, \\\\\\\"first_name\\\\\\\": \\\\\\\"Chateau\\\\\\\", \\\\\\\"city\\\\\\\": \\\\\\\"Bordeaux\\\\\\\", \\\\\\\"last_name\\\\\\\": \\\\\\\"Sylvain\\\\\\\", \\\\\\\"address\\\\\\\": \\\\\\\"App 10\\\\\\\\n61 Rue de Laseppedsf\\\\\\\"}\\\"]\", \"[\\\"toto\\\", \\\"{\\\\\\\"first_name\\\\\\\": \\\\\\\"Sylvain\\\\\\\", \\\\\\\"city\\\\\\\": \\\\\\\"Saint-Chamassy\\\\\\\", \\\\\\\"postal_code\\\\\\\": 24260, \\\\\\\"address\\\\\\\": \\\\\\\"Pegauret\\\\\\\", \\\\\\\"last_name\\\\\\\": \\\\\\\"Chateau\\\\\\\"}\\\"]\"]",
-      "registered_date": "2015-12-02T06:37:22.644Z",
-      "last_login": "2016-04-16T09:02:40.397Z",
-      "is_admin": false,
-      "created_at": "2015-12-02T06:37:22.661Z",
-      "secondary_emails": "[]",
-      "billing_address": "[\"[\\\"tutu\\\", \\\"{\\\\\\\"city\\\\\\\": \\\\\\\"Bordeaux\\\\\\\", \\\\\\\"last_name\\\\\\\": \\\\\\\"Chateau\\\\\\\", \\\\\\\"postal_code\\\\\\\": 33000, \\\\\\\"address\\\\\\\": \\\\\\\"St Chamassy\\\\\\\", \\\\\\\"first_name\\\\\\\": \\\\\\\"Sylvain\\\\\\\"}\\\"]\", \"[\\\"wasfdgstsafdgf\\\", \\\"{\\\\\\\"city\\\\\\\": \\\\\\\"Bordeauxx\\\\\\\", \\\\\\\"address\\\\\\\": \\\\\\\"App 10\\\\\\\\n61 Rue de Laseppe\\\\\\\", \\\\\\\"postal_code\\\\\\\": 33000, \\\\\\\"first_name\\\\\\\": \\\\\\\"Chateau\\\\\\\", \\\\\\\"last_name\\\\\\\": \\\\\\\"Sylvain\\\\\\\"}\\\"]\"]",
-      "gender": "male",
-      "email": "mao@outlook.com",
-      "logo_url": null,
-      "first_name": "Sylvain",
-      "id_facebook": null,
-      "username": "mao",
-      "birthdate": "2015/02/04",
-      "last_name": "mao",
-      "role": "user",
-      "is_active": true,
-      "last_activity_date": null,
-      "phone": "0712245889"
-    }
+      "user": 12,
+      "email": "rodolf@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 12
   },
+
+
    {
     "pk": 13,
     "model": "API.account",
@@ -460,6 +446,17 @@
     }
   },
    {
+    "fields": {
+      "user": 13,
+      "email": "blabla@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 13
+  },
+
+   {
     "pk": 14,
     "model": "API.account",
     "fields": {
@@ -485,6 +482,17 @@
       "phone": "0712245889"
     }
   },
+   {
+    "fields": {
+      "user": 14,
+      "email": "romain@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 14
+  },
+
    {
     "pk": 15,
     "model": "API.account",
@@ -512,6 +520,17 @@
     }
   },
    {
+    "fields": {
+      "user": 15,
+      "email": "jade@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 15
+  },
+
+   {
     "pk": 16,
     "model": "API.account",
     "fields": {
@@ -536,6 +555,16 @@
       "last_activity_date": null,
       "phone": "0712245889"
     }
+  },
+   {
+    "fields": {
+      "user": 16,
+      "email": "victoria@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 16
   },
 
     {
@@ -566,6 +595,17 @@
   },
 
    {
+    "fields": {
+      "user": 17,
+      "email": "new@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 17
+  },
+
+   {
     "pk": 18,
     "model": "API.account",
     "fields": {
@@ -590,6 +630,17 @@
       "last_activity_date": null,
       "phone": "0712245889"
     }
+  },
+
+   {
+    "fields": {
+      "user": 18,
+      "email": "camille@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 18
   },
 
    {
@@ -620,6 +671,17 @@
   },
 
    {
+    "fields": {
+      "user": 19,
+      "email": "jeremy@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 19
+  },
+
+   {
     "pk": 20,
     "model": "API.account",
     "fields": {
@@ -644,6 +706,17 @@
       "last_activity_date": null,
       "phone": "0712245889"
     }
+  },
+
+   {
+    "fields": {
+      "user": 20,
+      "email": "antoine@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 20
   },
 
    {
@@ -674,6 +747,17 @@
   },
 
    {
+    "fields": {
+      "user": 21,
+      "email": "babacar@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 21
+  },
+
+   {
     "pk": 22,
     "model": "API.account",
     "fields": {
@@ -698,6 +782,17 @@
       "last_activity_date": null,
       "phone": "0712245889"
     }
+  },
+
+   {
+    "fields": {
+      "user": 22,
+      "email": "baptiste@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 22
   },
 
    {
@@ -728,6 +823,17 @@
   },
 
    {
+    "fields": {
+      "user": 23,
+      "email": "arnaud@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 23
+  },
+
+   {
     "pk": 24,
     "model": "API.account",
     "fields": {
@@ -752,6 +858,17 @@
       "last_activity_date": null,
       "phone": "0712245889"
     }
+  },
+
+   {
+    "fields": {
+      "user": 24,
+      "email": "sacha@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 24
   },
 
    {
@@ -781,6 +898,17 @@
     }
   },
    {
+    "fields": {
+      "user": 25,
+      "email": "regis@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 25
+  },
+
+   {
     "pk": 26,
     "model": "API.account",
     "fields": {
@@ -807,6 +935,17 @@
     }
   },
    {
+    "fields": {
+      "user": 26,
+      "email": "sophie@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 26
+  },
+
+   {
     "pk": 27,
     "model": "API.account",
     "fields": {
@@ -831,6 +970,17 @@
       "last_activity_date": null,
       "phone": "0712245889"
     }
+  },
+
+   {
+    "fields": {
+      "user": 27,
+      "email": "clara@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 27
   },
    {
     "pk": 28,
@@ -858,6 +1008,17 @@
       "phone": "0712245889"
     }
   },
+   {
+    "fields": {
+      "user": 28,
+      "email": "hercule@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 28
+  },
+
    {
     "pk": 29,
     "model": "API.account",
