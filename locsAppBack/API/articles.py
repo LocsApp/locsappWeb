@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
+from django.core.exceptions import ObjectDoesNotExist
 
 import json
 from bson import ObjectId
@@ -19,12 +20,13 @@ import re
 
 class FindUserByIdForArticle(APIView):
     def get(self, request, user_pk):
-        user = get_user_model().object.get(pk=user_pk)
-        print("user = ", user)
-        #user = get_user_model.objects.get(User=user_basis)
-        #print("USER = ", user)
-        #serializer = UserDetailsSerializer(user)
-        #return Response(serializer.data)
+        try:
+            user = get_user_model().object.get(pk=user_pk)
+            print("user = ", user)
+            return JsonResponse({"username": user.username, "notation_renter": "4",
+                                 "nb_notation_renter": "50"})
+        except ObjectDoesNotExist:
+            return JsonResponse({"message": "user id does not exist"}, status=404)
 
 
 """ Articles """
