@@ -25,6 +25,7 @@
       getPaymentMethods: $resource(URL_API + 'api/v1/static-collections/payment-methods/'),
       createArticle: $resource(URL_API + 'api/v1/articles/create/'),
       searchArticles: $resource(URL_API + 'api/v1/search/articles/'),
+      getSeller: $resource(URL_API + 'api/v1/articles/seller/:id/', {id: "@user_id"}),
       uploadPicture: uploadPicture,
       is_authenticated : is_authenticated
     };

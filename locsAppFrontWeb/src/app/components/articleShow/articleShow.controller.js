@@ -91,8 +91,23 @@
       }
 
 
+      vm.getSellerSuccess = function (data) {
+        console.log("data Seller = ", data);
+        vm.username_author = data.username;
+        vm.nb_renter_notation = data.notation_renter;
+
+      };
+
+      vm.getSellerFailure = function () {
+        toastr.error("there was an error when retrieving the seller.\n Please reload the page", "Error");
+      };
+
       /* We did a request to get the username of the vendor and his notation as a vendor */
-    vm.data.id_author;
+      ArticleService
+        .getSeller
+        .get({id: vm.data.id_author})
+        .$promise
+        .then(vm.getSellerSuccess, vm.getSellerFailure);
 
       //Nom de la ville si pas connecte ou pas d'addresse dans son compte
       vm.within = "1";
@@ -102,8 +117,8 @@
 
       /* Just for test for the moment */
       vm.id_author = "42";
-      vm.username_author = "author";
-      vm.id = "145454e";
+      //vm.username_author = "author";
+      //vm.id = "145454e";
 
 
       //Le back renvoie du plus grand au plus petit et uniquement les trois premieres questions
