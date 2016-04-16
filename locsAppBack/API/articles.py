@@ -24,7 +24,7 @@ class FindUserByIdForArticle(APIView):
             user = get_user_model().object.get(pk=user_pk)
             print("user = ", user)
             return JsonResponse({"username": user.username, "notation_renter": "4",
-                                 "nb_notation_renter": "50"})
+                                 "nb_notation_renter": "50"}, status=200)
         except ObjectDoesNotExist:
             return JsonResponse({"message": "user id does not exist"}, status=404)
 
