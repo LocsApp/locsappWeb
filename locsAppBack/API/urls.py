@@ -24,6 +24,7 @@ article_patterns = [
     url(r'^image-upload-article/$',
         views.ImageArticleUploadView.as_view(),
         name='image-upload-article'),
+    url(r'^seller/(?P<user_pk>[0-9]+)/$', articles.FindUserByIdForArticle.as_view())
 ]
 
 search_patterns = [
@@ -86,7 +87,6 @@ api_patterns = [
     url(r'^auth/facebook-register',
         social_network_views.FacebookRegister.as_view(),
         name='fb_register'),
-    url(r'^auth/change-username/', views.ChangeUsername.as_view()),
 
     url(r'^articles/', include(article_patterns)),
     url(r'^rest-auth/', include('rest_auth.urls')),

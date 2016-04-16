@@ -4,6 +4,8 @@ from .views import db_locsapp
 from .views import APIrequests
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
+from django.contrib.auth import get_user_model
+from rest_framework.views import APIView
 
 import json
 from bson import ObjectId
@@ -11,6 +13,19 @@ from bson import ObjectId
 import pytz
 from datetime import datetime
 import re
+
+""" Seller Article """
+
+
+class FindUserByIdForArticle(APIView):
+    def get(self, request, user_pk):
+        user = get_user_model().object.get(pk=user_pk)
+        print("user = ", user)
+        #user = get_user_model.objects.get(User=user_basis)
+        #print("USER = ", user)
+        #serializer = UserDetailsSerializer(user)
+        #return Response(serializer.data)
+
 
 """ Articles """
 

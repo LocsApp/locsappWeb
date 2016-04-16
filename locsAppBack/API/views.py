@@ -30,6 +30,7 @@ import uuid
 import os
 import datetime
 
+
 # Connects to the db and creates a MongoClient instance
 mongodb_client = MongoClient('localhost', 27017)
 db_locsapp = mongodb_client['locsapp']
