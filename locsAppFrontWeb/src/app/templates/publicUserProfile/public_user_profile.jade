@@ -1,0 +1,18 @@
+section.user-profile(layout="row" layout-align="center")
+
+
+
+  div(layout="column" flex-xs="100" flex-sm="100" flex-md="75" flex="50")
+
+    include ./properties/main.jade
+    include ./properties/notation.jade
+    include ./properties/article.jade
+
+    div(layout="row" layout-align="end end")
+      md-button.action-button-position.md-fab.md-primary(ng-click="profile.goToParameters()"
+      aria-label="Edit your profile")
+        ng-md-icon(icon="edit")
+
+
+
+

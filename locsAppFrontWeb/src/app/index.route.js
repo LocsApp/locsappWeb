@@ -76,6 +76,16 @@
 				}
 			}
 		})
+    .state('main.public_user_profile', {
+			url: 'public_profile',
+			parent: 'main',
+			controller: 'PublicProfileController',
+			controllerAs: 'publicProfile',
+			templateUrl : 'app/templates/userProfile/public_user_profile.html',
+			data: {
+
+			}
+		})
 		.state('main.user_profile', {
 			url: 'profile',
 			parent: 'main',

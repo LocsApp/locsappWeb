@@ -1,0 +1,80 @@
+md-card(flex-xs="100" flex-sm='100' flex-md="50" flex="50" ng-if="publicProfile.user.nb_mark_as_renter")
+  md-card-content
+    div(layout="row" layout-align="center")
+      md-divider.separator-h2(flex="30" hide-sm)
+      h2.t-center(flex="20") Notations
+      md-divider.separator-h2(flex="30" hide-sm)
+
+    h3(flex-offset="10") As a renter
+      span(ng-repeat="value in publicProfile.user.global_notation_renter track by $index"
+      ng-if="!publicProfile.user.notation_renter")
+        ng-md-icon(ng-if="value" icon="star" size="22")
+        ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
+      span(ng-if="publicpublicProfile.user.notation_renter") ({{publicpublicProfile.user.nb_mark_as_renter}})
+    p.t-center(ng-if="!publicpublicProfile.user.notation_renter").
+      {{publicpublicProfile.user.username}} has no notation as a renter
+    md-list.my-layout-xs(flex-offset="10" layout="row")
+      md-list-item.md-3-line(ng-repeat="notation in publicpublicProfile.user.notation_renter track by $index "
+      ng-if="$index <= 1")
+        img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg" class="md-avatar" alt="{{item.who}}")
+        div.md-list-item-text(layout="column")
+          h4 {{ notation.title_article }}
+          div
+            span(ng-repeat="value in notation.mark track by $index")
+              ng-md-icon(ng-if="value" icon="star" size="22")
+              ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
+          p {{ notation.description | limitTo: 30 }} {{notation.description.length > 30 ? '...' : ''}}
+    md-divider(flex-offset="10" flex="80")
+    md-list.my-layout-xs(flex-offset="10" layout="row")
+      md-list-item.md-3-line(ng-repeat="notation in publicpublicProfile.user.notation_renter track by $index"
+      ng-if="$index > 1")
+        img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3" +
+        ".jpg" class="md-avatar" alt="{{item.who}}")
+        div.md-list-item-text(layout="column")
+          h4 {{ notation.title_article }}
+          div
+            span(ng-repeat="value in notation.mark track by $index")
+              ng-md-icon(ng-if="value" icon="star" size="22")
+              ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
+          p {{ notation.description | limitTo: 30 }} {{notation.description.length > 30 ? '...' : ''}}
+
+    div(flex-offset="10" ng-if="publicpublicProfile.user.notation_renter.length > 4")
+      md-button.special-button.md-raised(layout-fill flex="90" ) Show more
+
+
+    h3( flex-offset="10") As a client
+      span(ng-repeat="value in publicpublicProfile.user.global_notation_client track by $index"
+      ng-if="!publicpublicProfile.user.notation_client")
+        ng-md-icon(ng-if="value" icon="star" size="22")
+        ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
+      span(ng-if="publicpublicProfile.user.notation_client") ({{publicpublicProfile.user.nb_mark_as_client}})
+    p.t-center(ng-if="!publicpublicProfile.user.notation_client") {{publicpublicProfile.user.username}} has no notation as a client
+    md-list.my-layout-xs(flex-offset="10" layout="row")
+      md-list-item.md-3-line(ng-repeat="notation in publicpublicProfile.user.notation_client track by $index"
+      ng-if="$index <= 1")
+        img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg" class="md-avatar" alt="{{item.who}}")
+        div.md-list-item-text(layout="column")
+          h4 {{ notation.title_article }}
+          div
+            span(ng-repeat="value in notation.mark track by $index")
+              ng-md-icon(ng-if="value" icon="star" size="22")
+              ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
+          p {{ notation.description | limitTo: 30 }} {{notation.description.length > 30 ? '...' : ''}}
+    md-divider(flex-offset="10" flex="80")
+    md-list.my-layout-xs(flex-offset="10" layout="row")
+      md-list-item.md-3-line(ng-repeat="notation in publicpublicProfile.user.notation_client track by $index"
+      ng-if="$index > 1")
+        img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3" +
+        ".jpg" class="md-avatar" alt="{{item.who}}")
+        div.md-list-item-text(layout="column")
+          h4 {{ notation.title_article }}
+          div
+            span(ng-repeat="value in notation.mark track by $index")
+              ng-md-icon(ng-if="value" icon="star" size="22")
+              ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
+          p {{ notation.description | limitTo: 30 }} {{notation.description.length > 30 ? '...' : ''}}
+
+
+    div(flex-offset="10" ng-if="publicpublicProfile.user.notation_client.length > 4")
+      md-button.special-button.md-raised(layout-fill flex="90") Show more
+
