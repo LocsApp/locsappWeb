@@ -7,6 +7,8 @@ from rest_framework.decorators import api_view, permission_classes
 from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import EmailMessage
+from django.conf import settings
 
 import json
 from bson import ObjectId
@@ -14,6 +16,14 @@ from bson import ObjectId
 import pytz
 from datetime import datetime
 import re
+
+
+from pymongo import MongoClient
+
+# Connects to the db and creates a MongoClient instance
+mongodb_client = MongoClient('localhost', 27017)
+db_locsapp = mongodb_client['locsapp']
+
 
 """ Seller Article """
 
@@ -283,10 +293,20 @@ We send an email to the adminstrator that tell us who user send a report for whi
 def sendReport(request, article_pk):
     if request.method == "POST":
         list_reporter = get_user_model().objects.filter(is_admin=True)
+        list_email = []
         for reporter in list_reporter:
-            print("reporter = ", reporter)
-
-
-        return JsonResponse({"Success": "yess"}, status=200)
+            list_email.append(reporter.email)
+        article = db_locsapp["articles"].find_one({"_id": ObjectId(article_pk)})
+        print("article = ", str(article['_id']))
+        if article is None:
+            return JsonResponse({"Error": "This article does not exist"}, status=404)
+        message = 'The user ' + request.user.username + ' sent a report about this article' + \
+                  ' <a href="' + settings.URL_FRONT + 'article/' + str(article['_id']) + '">' + \
+                  article['title'] + '</a>'
+        print("message = ", message)
+        email = EmailMessage('Report for article ' + article['title'], message,
+                             to=['locsapp.eip@gmail.com'])
+        email.send()
+        return JsonResponse({"Success": "Report sent to the administrators."}, status=200)
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
