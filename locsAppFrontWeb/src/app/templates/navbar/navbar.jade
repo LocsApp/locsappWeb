@@ -19,9 +19,47 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
 
     div
       span.icon-and-title
-        a(href='#' ui-sref="main.user_profile")
-          ng-md-icon(icon="account_box" size="38")
-          span.title My profile
+        a(href='#' ui-sref="main.article_search")
+          ng-md-icon(icon="search" size="38")
+          span.title Search
+
+    div
+      span.icon-and-title
+        a(href='#' ui-sref="main.article_create")
+          ng-md-icon(icon="create" size="38")
+          span.title Create an article
+
+
+
+    //div
+      span.icon-and-title
+        // md-menu-origin
+        a(href='#')
+          ng-md-icon(md-menu-origin icon="account_box" size="38")
+          span.title My account
+
+    div
+      span.icon-and-title
+        md-menu
+          a(href='#' ng-click='navbar.openMenu($mdOpenMenu, $event)')
+            ng-md-icon(md-menu-origin='' icon="account_box" size="38" )
+            span.title My account
+          md-menu-content(width='4')
+            md-menu-item
+              md-button(ng-click='navbar.redial($event)')
+                md-icon(md-svg-icon='call:dialpad', md-menu-align-target='')
+                |             Redial
+            md-menu-item
+              md-button(disabled='disabled', ng-click='navbar.checkVoicemail()')
+                md-icon(md-svg-icon='call:voicemail')
+                |             Check voicemail
+            md-menu-divider
+            md-menu-item
+              md-button(ng-click='navbar.toggleNotifications()')
+                md-icon(md-svg-icon="social:notifications-{{navbar.notificationsEnabled ? 'off' : 'on'}}")
+                |             {{navbar.notificationsEnabled ? 'Disable' : 'Enable' }} notifications
+
+
 
     div
       span.icon-and-title
@@ -30,4 +68,10 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
           span.title Log out
 
 
+
+
     //ng-md-icon(icon="account_box", size="48", ui-sref="main.article_create").locsapp-navbar-last-icon-gt-sm
+
+
+
+
