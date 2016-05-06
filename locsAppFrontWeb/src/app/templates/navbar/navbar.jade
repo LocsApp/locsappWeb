@@ -34,13 +34,13 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
       span.icon-and-title
         md-menu
           a(href='#' ng-click='navbar.openMenuArticle($mdOpenMenu, $event)')
-            ng-md-icon(md-menu-origin='' icon="account_box" size="38" )
+            md-icon(md-svg-src="../assets/icons/menu/ic_note_white_24px.svg" class="name")
             span.title My articles
           md-menu-content.submenu(width='4')
 
             md-menu-item
               a.submenu(href='#' ui-sref="main.user_profile")
-                ng-md-icon(icon="perm_identity" size="35" )
+                ng-md-icon(icon="help" size="35" )
                 span.submenu.subtitle Current requests
             md-divider
 
@@ -94,14 +94,14 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
 
             md-menu-item
               a.submenu(href='#' ui-sref="main.user_profile")
-                ng-md-icon(icon="perm_identity" size="35" )
+                md-icon(md-svg-src="../assets/icons/menu/ic_note_white_24px.svg" class="name")
                 span.submenu.subtitle My articles
             md-divider
 
 
             md-menu-item
               a.submenu(href='#' ui-sref="main.profile_management")
-                ng-md-icon(icon="create" size="35")
+                ng-md-icon(icon="search" size="35")
                 span.submenu.subtitle My searches
 
 
