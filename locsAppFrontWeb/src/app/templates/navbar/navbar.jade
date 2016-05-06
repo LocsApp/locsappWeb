@@ -31,26 +31,20 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
 
 
 
-    //div
-      span.icon-and-title
-        // md-menu-origin
-        a(href='#')
-          ng-md-icon(md-menu-origin icon="account_box" size="38")
-          span.title My account
-
-    //div.submenu
+    div.submenu
       span.icon-and-title
         md-menu
           a(href='#' ng-click='navbar.openMenuAccount($mdOpenMenu, $event)')
             ng-md-icon(md-menu-origin='' icon="account_box" size="38" )
             span.title My account
-          .submenu.md-menu-content(width='1')
+          md-menu-content.submenu(width='4')
 
             md-menu-item
               a.submenu(href='#' ui-sref="main.user_profile")
-                ng-md-icon(icon="create" size="35" md-menu-align-target)
+                ng-md-icon(icon="create" size="35" )
                 span.submenu.subtitle My informations
             md-divider
+
 
             md-menu-item
               a.submenu(href='#' ui-sref="main.profile_management")
@@ -62,7 +56,6 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
               a.submenu(href='#' ui-sref="main.homepage")
                 ng-md-icon(icon="create" size="35")
                 span.submenu.subtitle Historic
-
 
 
 
@@ -83,19 +76,7 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
                span.title My account
              .submenu.md-menu-content(width='1')
 
-    div.submenu
-      span.icon-and-title
-        md-menu
-          a(href='#' ng-click='navbar.openMenuAccount($mdOpenMenu, $event)')
-            ng-md-icon(md-menu-origin='' icon="account_box" size="38" )
-            span.title My account
-          md-menu-content.submenu(width='4')
 
-            md-menu-item
-              a.submenu(href='#' ui-sref="main.user_profile")
-                ng-md-icon(icon="create" size="35" md-menu-align-target)
-                span.submenu.subtitle My informations
-            md-divider
 
 
 
