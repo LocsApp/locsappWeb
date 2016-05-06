@@ -290,22 +290,28 @@ We send an email to the adminstrator that tell us who user send a report for whi
 @csrf_exempt
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))
-def sendReport(request, article_pk):
+def sendReport(request):
     if request.method == "POST":
-        list_reporter = get_user_model().objects.filter(is_admin=True)
-        list_email = ['locsapp.eip@gmail.com']
-        for reporter in list_reporter:
-            list_email.append(reporter.email)
-        article = db_locsapp["articles"].find_one({"_id": ObjectId(article_pk)})
-        print("article = ", str(article['_id']))
-        if article is None:
-            return JsonResponse({"Error": "This article does not exist"}, status=404)
-        message = 'The user ' + request.user.username + ' sent a report about this article' + \
-                  ' <a href="' + settings.URL_FRONT + 'article/' + str(article['_id']) + '">' + \
-                  article['title'] + '</a>'
-        email = EmailMessage('Report for article ' + article['title'], message,
-                             to=list_email)
-        email.send()
-        return JsonResponse({"Success": "Report sent to the administrators."}, status=200)
+        if request.body:
+            answer = json.loads(request.body.decode('utf8'))
+            if not answer['article_id']:
+                return JsonResponse({"Error": "Please send an article id"}, status=404)
+
+            list_reporter = get_user_model().objects.filter(is_admin=True)
+            list_email = ['locsapp.eip@gmail.com']
+            for reporter in list_reporter:
+                list_email.append(reporter.email)
+            article = db_locsapp["articles"].find_one({"_id": ObjectId(answer['article_id'])})
+            if article is None:
+                return JsonResponse({"Error": "This article does not exist"}, status=404)
+            message = 'The user ' + request.user.username + ' sent a report about this article' + \
+                      ' <a href="' + settings.URL_FRONT + 'article/' + str(article['_id']) + '">' + \
+                      article['title'] + '</a>'
+            email = EmailMessage('Report for article ' + article['title'], message,
+                                 to=list_email)
+            email.send()
+            return JsonResponse({"Success": "Report sent to the administrators."}, status=200)
+        else:
+            return JsonResponse({"Error": "Please send a json"}, status=404)
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)

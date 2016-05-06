@@ -121,78 +121,6 @@
       //vm.id = "145454e";
 
 
-      //Le back renvoie du plus grand au plus petit et uniquement les trois premieres questions
-      /* vm.questions = [
-
-       {
-       "_id": "56cb3cb1b2bc57ab2908e697",
-       "id_author": 42,
-       "username_author": "locsapp",
-       "content": "What is the breast size ? ",
-       "is_visible": true,
-       "is_useful": ["sdsgdsgs46887", "sdfdsgsdgds6465464", "sdfdsgsdgds646546478"],
-       "date_created": "fausse date",
-       "date_modified": "fausse date",
-       "response": {
-       "_id": "56cb3cb1b2bc57ab2908e698",
-       "id_author": 44,
-       "username_author": "sylflo",
-       "content": "The breast size 95C",
-       "is_visible": true,
-       "date_created": "fausse date",
-       "date_modified": "fausse date"
-       },
-       "last_versions": [],
-       "flagged": null
-       },
-
-       {
-       "_id": "56cb3cb1b2bc57ab2908e697",
-       "id_author": 42,
-       "username_author": "locsapp",
-       "content": "What is the breast size ? ",
-       "is_visible": true,
-       "is_useful": ["sdsgdsgs46887"],
-       "date_created": "fausse date",
-       "date_modified": "fausse date",
-       "response": {
-       "_id": "56cb3cb1b2bc57ab2908e698",
-       "id_author": 44,
-       "username_author": "sylflo",
-       "content": "The breast size 95C",
-       "is_visible": true,
-       "date_created": "fausse date",
-       "date_modified": "fausse date"
-       },
-       "last_versions": [],
-       "flagged": null
-       },
-       {
-       "_id": "56cb3cb1b2bc57ab2908e697",
-       "id_author": 42,
-       "username_author": "locsapp",
-       "content": "What is the breast size ? ",
-       "is_visible": true,
-       "is_useful": ["sdsgdsgs46887"],
-       "date_created": "fausse date",
-       "date_modified": "fausse date",
-       "response": {
-       "_id": "56cb3cb1b2bc57ab2908e698",
-       "id_author": 44,
-       "username_author": "sylflo",
-       "content": "The breast size 95C",
-       "is_visible": true,
-       "date_created": "fausse date",
-       "date_modified": "fausse date"
-       },
-       "last_versions": [],
-       "flagged": null
-       }
-
-
-       ];*/
-
-
       // $log.log("TEST = ", vm.url_pictures);
 
       vm.paginationLimit = function () {
@@ -219,6 +147,27 @@
       .$promise
       .then(vm.GetInfoArticleSuccess, vm.getInfoArticleFailure);
 
+
+    vm.sendReportSuccess = function () {
+      toastr.success("Report sent", "Success!");
+    };
+
+    vm.sendReportError = function (data) {
+        toastr.error("An error occurred", "Error");
+        $log.log("sendReport Error", data);
+    };
+
+    vm.sendReport = function () {
+
+      $log.log("Send report = id", $stateParams.id);
+
+     ArticleService
+        .sendReport
+        .save({"id_article": $stateParams.id})
+        .$promise
+        .then(vm.sendReportSuccess, vm.sendReportError);
+
+    };
 
     vm.reply = function () {
       //Show the new input

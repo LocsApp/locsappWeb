@@ -25,7 +25,7 @@ article_patterns = [
         views.ImageArticleUploadView.as_view(),
         name='image-upload-article'),
     url(r'^seller/(?P<user_pk>[0-9]+)/$', articles.FindUserByIdForArticle.as_view()),
-    url(r'^report/(?P<article_pk>[a-f\d]{24})/$', articles.sendReport)
+    url(r'^report/$', articles.sendReport)
 ]
 
 search_patterns = [
