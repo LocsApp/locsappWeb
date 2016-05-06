@@ -2,18 +2,18 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
   span
     span(ui-sref="main.homepage" style="cursor: pointer;").md-toolbar-tools Locsapp
   div(layout="row" ng-if="!main.is_authenticated()")
+
     div
       span.icon-and-title
-        a(href='#')
-          ng-md-icon(icon="person_add" size="30")
-          span.title Sign in
-    div
-      span.icon-and-title
-        a(href='#')
-          ng-md-icon(icon="login" size="30")
+        a(href='#' ui-sref="main.login")
+          ng-md-icon(icon="login" size="38")
           span.title Log in
-    //ng-md-icon(icon="login", size="48", ui-sref="main.login").locsapp-navbar-icons-gt-sm
-    //ng-md-icon(icon="person_add", size="48", ui-sref="main.register").locsapp-navbar-last-icon-gt-sm
+
+    div
+      span.icon-and-title
+        a(href='#' ui-sref="main.register")
+          ng-md-icon(icon="person_add" size="38")
+          span.title Sign in
   span(ng-if="main.is_authenticated()")
     include ./notifications.jade
 
