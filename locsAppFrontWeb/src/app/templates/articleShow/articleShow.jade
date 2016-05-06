@@ -25,7 +25,7 @@ div.article-show(layout="row" layout-align="center")
   "autoplayTimeout:5000, loop:true, items: 1, " +
       "lazyLoad:true, autoWidth:false}")
         .item(owl-carousel-item='', ng-repeat='url_picture in articleShow.carousel track by $index')
-          img(ng-src="{{articleShow.url_api + carousel}}")
+          img(ng-src="{{url_picture}}")
 
 
     div.my-layout-xs(layout="row")
