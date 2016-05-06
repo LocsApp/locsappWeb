@@ -10,11 +10,31 @@
     var vm = this;
 
     /* DropDownMenu */
-    var originatorEv;
-    this.openMenuAccount = function($mdOpenMenu, ev) {
-      originatorEv = ev;
+
+    var originatorArticleEv;
+    this.openMenuArticle = function ($mdOpenMenu, ev) {
+      originatorArticleEv = ev;
       $mdOpenMenu(ev);
     };
+
+    var originatorQuestionsEv;
+    this.openMenuQuestions = function ($mdOpenMenu, ev) {
+      originatorQuestionsEv = ev;
+      $mdOpenMenu(ev);
+    };
+
+     var originatorFavoritesEv;
+    this.openMenuFavorites = function ($mdOpenMenu, ev) {
+      originatorFavoritesEv = ev;
+      $mdOpenMenu(ev);
+    };
+
+    var originatorAccountEv;
+    this.openMenuAccount = function ($mdOpenMenu, ev) {
+      originatorAccountEv = ev;
+      $mdOpenMenu(ev);
+    };
+
     /* DropDownMenu */
 
 
