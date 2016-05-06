@@ -295,6 +295,7 @@ def sendReport(request):
     if request.method == "POST":
         if request.body:
             answer = json.loads(request.body.decode('utf8'))
+            print("Object id = ", answer)
             try:
                 answer['article_id']
             except KeyError:

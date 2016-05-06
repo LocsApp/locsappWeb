@@ -163,7 +163,7 @@
 
      ArticleService
         .sendReport
-        .save({"id_article": $stateParams.id})
+        .save({"article_id": $stateParams.id})
         .$promise
         .then(vm.sendReportSuccess, vm.sendReportError);
 

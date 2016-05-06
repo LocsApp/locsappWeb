@@ -26,7 +26,7 @@
       createArticle: $resource(URL_API + 'api/v1/articles/create/'),
       searchArticles: $resource(URL_API + 'api/v1/search/articles/'),
       getSeller: $resource(URL_API + 'api/v1/articles/seller/:id/', {id: "@user_id"}),
-      sendReport: $resource(URL_API + 'api/v1/articles/report/:id/', {id: "@article_id"}),
+      sendReport: $resource(URL_API + 'api/v1/articles/report/'),
       uploadPicture: uploadPicture,
       is_authenticated: is_authenticated
     };
