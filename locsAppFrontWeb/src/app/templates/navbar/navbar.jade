@@ -38,7 +38,7 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
           ng-md-icon(md-menu-origin icon="account_box" size="38")
           span.title My account
 
-    div.submenu
+    //div.submenu
       span.icon-and-title
         md-menu
           a(href='#' ng-click='navbar.openMenuAccount($mdOpenMenu, $event)')
@@ -73,9 +73,44 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
           span.title Log out
 
 
-
-
     //ng-md-icon(icon="account_box", size="48", ui-sref="main.article_create").locsapp-navbar-last-icon-gt-sm
+
+    //div.submenu
+         span.icon-and-title
+           md-menu
+             a(href='#' ng-click='navbar.openMenuAccount($mdOpenMenu, $event)')
+               ng-md-icon(md-menu-origin='' icon="account_box" size="38" )
+               span.title My account
+             .submenu.md-menu-content(width='1')
+
+    div.submenu
+      span.icon-and-title
+        md-menu
+          a(href='#' ng-click='navbar.openMenu($mdOpenMenu, $event)')
+            ng-md-icon(md-menu-origin='' icon="account_box" size="38" )
+            span.title My account
+          md-menu-content(width='4')
+
+            md-menu-item
+              a.submenu(href='#' ui-sref="main.user_profile")
+                ng-md-icon(icon="create" size="35" md-menu-align-target)
+                span.submenu.subtitle My informations
+            md-divider
+
+            md-menu-item
+              md-button(ng-click='navbar.redial($event)')
+                md-icon(md-svg-icon='call:dialpad', md-menu-align-target='')
+                |             Redial
+            md-menu-item
+              md-button(disabled='disabled', ng-click='navbar.checkVoicemail()')
+                md-icon(md-svg-icon='call:voicemail')
+                |             Check voicemail
+            md-menu-divider
+            md-menu-item
+              md-button(ng-click='navbar.toggleNotifications()')
+                md-icon(md-svg-icon="social:notifications-{{navbar.notificationsEnabled ? 'off' : 'on'}}")
+                |             {{ctrl.notificationsEnabled ? 'Disable' : 'Enable' }} notifications
+
 
 
 
