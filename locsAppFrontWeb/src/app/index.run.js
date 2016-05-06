@@ -7,8 +7,7 @@
 
   /** @ngInject */
   function runBlock($http, Permission, UsersService, NotificationsService, CacheService, ScopesService, $q, $sessionStorage,
-                    $localStorage, $log, toastr, $rootScope, $state, URL_API, ngMdIconService,
-                    $FB) {
+                    $localStorage, $log, toastr, $rootScope, $state, URL_API, ngMdIconService) {
     //Automatize send of Csrf token
     $http.defaults.xsrfHeaderName = 'X-CSRFToken';
     $http.defaults.xsrfCookieName = 'csrftoken';
@@ -36,7 +35,7 @@
 
     //Destruction and memory release of the rootScopeOnStateChangeStart
     $rootScope.$on('$destroy', rootScopeOnStateChangeStart);
-    
+
     //Check for the cache
     if (!$localStorage.static_collections ||
         !$localStorage.static_collections.version ||
@@ -57,7 +56,7 @@
       .checkStaticCollectionVersion
       .save({"argument" : 0, "version": $localStorage.static_collections.version})
       .$promise
-      .then(function (data) { 
+      .then(function (data) {
         if (!data.up_to_date)
         {
           $localStorage.static_collections = {};
@@ -65,7 +64,7 @@
           $localStorage.static_collections.body = data.static_collections;
         }
       },
-        function(data) { $log.log("ERROR CACHE RETRIEVAL"); $log.log(data); }); 
+        function(data) { $log.log("ERROR CACHE RETRIEVAL"); $log.log(data); });
     }
 
     //Set the shared scope of the elements of cache
@@ -139,8 +138,6 @@
 
       return (deferred.promise);
     });
-
-     $FB.init('1011661268854723');
   }
 
 })();

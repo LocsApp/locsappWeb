@@ -310,6 +310,11 @@ def sendReport(request):
             article = db_locsapp["articles"].find_one({"_id": ObjectId(answer['article_id'])})
             if article is None:
                 return JsonResponse({"Error": "This article does not exist"}, status=404)
+
+            # We insert a new report in this article and if there is more than 5 users we create a
+            #  new collection report associated to the id of this article
+
+
             message = 'The user ' + request.user.username + ' sent a report about this article' + \
                       ' <a href="' + settings.URL_FRONT + 'article/' + str(article['_id']) + '">' + \
                       article['title'] + '</a>'
