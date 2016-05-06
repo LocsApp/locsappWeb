@@ -263,10 +263,30 @@ def articleAlone(request, article_pk):
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
+""" Show article """
+
 
 @csrf_exempt
 def getArticle(request, article_pk):
     if request.method == "GET":
         return APIrequests.GET('articles', id=article_pk)
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+"""
+We send an email to the adminstrator that tell us who user send a report for which article
+"""
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def sendReport(request, article_pk):
+    if request.method == "POST":
+        list_reporter = get_user_model().objects.filter(is_admin=True)
+        for reporter in list_reporter:
+            print("reporter = ", reporter)
+
+
+        return JsonResponse({"Success": "yess"}, status=200)
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
