@@ -47,11 +47,21 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
           .submenu.md-menu-content(width='1')
 
             md-menu-item
-              .submenu.subtitle My informations
+              a.submenu(href='#' ui-sref="main.user_profile")
+                ng-md-icon(icon="create" size="35")
+                span.submenu.subtitle My informations
             md-divider
 
             md-menu-item
-              .submenu.subtitle My informations
+              a.submenu(href='#' ui-sref="main.profile_management")
+                ng-md-icon(icon="create" size="35")
+                span.submenu.subtitle Edit my profile
+            md-divider
+
+            md-menu-item
+              a.submenu(href='#' ui-sref="main.homepage")
+                ng-md-icon(icon="create" size="35")
+                span.submenu.subtitle Historic
 
 
 

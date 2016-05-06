@@ -7,8 +7,22 @@
   }
 
    &.subtitle {
-      color: white;
+       font-weight: bold;
+      font-size: 0.9em;
+      text-transform: uppercase;
+      padding-right: 10px;
+      margin-left: 10px;
     }
+
+  md-divider {
+    border-top-color: white;
+  }
+
+}
+
+a.submenu, a:hover.submenu {
+   color: white;
+    text-decoration: none;
 }
 
 .locsapp-navbar-gt-sm {

@@ -10,8 +10,10 @@
     var vm = this;
 
     /* DropDownMenu */
-    this.openMenuAccount = function($mdOpenMenu, ev) {
+    var originatorEv;
+    this.openMenuAccount = function ($mdOpenMenu, ev) {
       $mdOpenMenu(ev);
+      originatorEv = ev;
     };
     /* DropDownMenu */
 
