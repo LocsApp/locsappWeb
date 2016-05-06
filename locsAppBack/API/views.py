@@ -56,6 +56,14 @@ class docAPIView(TemplateView):
     USER PROFILE ENDPOINTS
 """
 
+
+@permission_classes((IsAuthenticated,))
+class GetNotationPreviewArticle(APIView):
+    def get(self, request):
+        get_user_model().objects.get(pk=self.request.user.pk)
+        # First we get the username id and with this we can get the notation
+
+
 @permission_classes((IsAuthenticated,))
 class deleteEmailUser(APIView):
 

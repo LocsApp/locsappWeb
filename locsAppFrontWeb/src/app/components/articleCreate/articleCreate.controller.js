@@ -7,7 +7,7 @@
 
   /** @ngInject */
   function ArticleCreateController($log, ArticleService, toastr, $timeout, $mdDialog, $document,
-                                   ScopesService) {
+                                   ScopesService, $state) {
     var vm = this;
 
     /* Get fixtures from cache */
@@ -148,16 +148,20 @@
       vm.rentDateStart = new Date(vm.start_availble);
       vm.rentDateEnd = new Date(vm.end_availble);
 
-      vm.createArticleSuccess = function (data) {
-        $log.log("This is a success", data);
+      vm.createArticleSuccess = function () {
+        toastr.success("Article created", 'Success');
+        $state.go("main.article_search");
+        $mdDialog.cancel();
+        //$log.log("This is a success", data);
       };
 
       vm.createArticleFailure = function (data) {
+        toastr.error("We couldn't create your article...", 'Woops...');
         $log.log("this is an error", data);
       };
 
 
-      vm.closeDialog = function() {
+      vm.closeDialog = function () {
         $mdDialog.cancel();
       };
 
@@ -171,7 +175,11 @@
 
         vm.uploadImageSuccess = function (data) {
           vm.pictures.push(data.data.url);
-          for (var i = 0; i < vm.payment_methods.length; i++) {
+          $log.log("data url = ", vm.pictures.length);
+          $log.log("lenght files = ", vm.files.length);
+
+          if (vm.pictures.length == vm.files.length) {
+         for (var i = 0; i < vm.payment_methods.length; i++) {
             vm.payment_methods_id.push(vm.payment_methods[i]._id);
           }
 
@@ -208,11 +216,11 @@
               "availibility_end": vm.new_end_availble,
               "url_pictures": vm.pictures,
               "url_thumbnail": vm.pictures[0]
-
-              /* "location": "toto"*/
             })
             .$promise
             .then(vm.createArticleSuccess, vm.createArticleFailure);
+          }
+
         };
 
 
@@ -222,11 +230,17 @@
             ArticleService
               .uploadPicture(vm.files[i])
               .then(vm.uploadImageSuccess, vm.uploadImageFailure);
+
+
           }
+
+          //We create the article here
         };
 
         //For upload the pictures
         vm.submitPictures();
+
+
 
 
       }
