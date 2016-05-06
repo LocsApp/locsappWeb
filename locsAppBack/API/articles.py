@@ -294,7 +294,7 @@ def sendReport(request):
     if request.method == "POST":
         if request.body:
             answer = json.loads(request.body.decode('utf8'))
-            if not answer['article_id']:
+            if not hasattr(answer, 'article_id'):
                 return JsonResponse({"Error": "Please send an article id"}, status=404)
 
             list_reporter = get_user_model().objects.filter(is_admin=True)
