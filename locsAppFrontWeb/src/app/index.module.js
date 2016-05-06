@@ -34,6 +34,7 @@
 		'textAngular',
 		'ngFileUpload',
 		'bw.paging',
+    '720kb.socialshare',
 		'LocsappDirectives',
 		'LocsappServices',
 		'LocsappControllers']);
