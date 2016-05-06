@@ -157,6 +157,10 @@
       };
 
 
+      vm.closeDialog = function() {
+        $mdDialog.cancel();
+      };
+
       vm.createNewArticle = function () {
 
 

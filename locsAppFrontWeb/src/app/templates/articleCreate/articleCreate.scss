@@ -96,17 +96,17 @@ md-dialog.fullscreen-dialog {
   }
 
   .md-button.validate.md-primary.md-fab,
-  .md-button.md-primary.md-fab:not([disabled]):hover {
+  .md-button.validate.md-primary.md-fab:not([disabled]):hover {
     background-color: green;
     color: white;
-
-
+    cursor: pointer;
   }
 
    .md-button.close.md-primary.md-fab,
-  .md-button.md-primary.md-fab:not([disabled]):hover {
+  .md-button.close.md-primary.md-fab:not([disabled]):hover {
     background-color: #C10000;
     color: white;
+     cursor: pointer;
   }
 
 }
