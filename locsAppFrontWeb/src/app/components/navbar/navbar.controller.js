@@ -11,7 +11,7 @@
 
     /* DropDownMenu */
     var originatorEv;
-    this.openMenu = function($mdOpenMenu, ev) {
+    this.openMenuAccount = function($mdOpenMenu, ev) {
       originatorEv = ev;
       $mdOpenMenu(ev);
     };

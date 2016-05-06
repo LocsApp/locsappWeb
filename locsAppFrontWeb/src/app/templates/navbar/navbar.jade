@@ -86,10 +86,10 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
     div.submenu
       span.icon-and-title
         md-menu
-          a(href='#' ng-click='navbar.openMenu($mdOpenMenu, $event)')
+          a(href='#' ng-click='navbar.openMenuAccount($mdOpenMenu, $event)')
             ng-md-icon(md-menu-origin='' icon="account_box" size="38" )
             span.title My account
-          md-menu-content(width='4')
+          md-menu-content.submenu(width='4')
 
             md-menu-item
               a.submenu(href='#' ui-sref="main.user_profile")

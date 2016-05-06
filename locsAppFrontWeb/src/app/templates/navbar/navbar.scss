@@ -1,10 +1,11 @@
 @import "../../theme.scss";
 
+ md-menu-content.submenu {
+    background: #C10000;
+ }
+
 .submenu {
 
-  &.md-menu-content {
-    background: #C10000;
-  }
 
    &.subtitle {
        font-weight: bold;
