@@ -14,9 +14,20 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
         a(href='#' ui-sref="main.register")
           ng-md-icon(icon="person_add" size="38")
           span.title Sign in
-  span(ng-if="main.is_authenticated()")
-    include ./notifications.jade
+  div(layout='row' ng-if="main.is_authenticated()")
+    //include ./notifications.jade
 
-    ng-md-icon(icon="account_box", size="48", ui-sref="main.article_create").locsapp-navbar-last-icon-gt-sm
-    ng-md-icon(icon="account_box", size="48", ui-sref="main.user_profile").locsapp-navbar-last-icon-gt-sm
-    ng-md-icon(icon="logout", size="48", ui-sref="main.logout").locsapp-navbar-last-icon-gt-sm
+    div
+      span.icon-and-title
+        a(href='#' ui-sref="main.user_profile")
+          ng-md-icon(icon="account_box" size="38")
+          span.title My profile
+
+    div
+      span.icon-and-title
+        a(href='#' ui-sref="main.logout")
+          ng-md-icon(icon="logout" size="38")
+          span.title Log out
+
+
+    //ng-md-icon(icon="account_box", size="48", ui-sref="main.article_create").locsapp-navbar-last-icon-gt-sm
