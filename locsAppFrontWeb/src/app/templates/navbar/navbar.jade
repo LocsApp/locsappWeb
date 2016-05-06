@@ -38,26 +38,21 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
           ng-md-icon(md-menu-origin icon="account_box" size="38")
           span.title My account
 
-    div
+    div.submenu
       span.icon-and-title
         md-menu
-          a(href='#' ng-click='navbar.openMenu($mdOpenMenu, $event)')
+          a(href='#' ng-click='navbar.openMenuAccount($mdOpenMenu, $event)')
             ng-md-icon(md-menu-origin='' icon="account_box" size="38" )
             span.title My account
-          md-menu-content(width='4')
+          .submenu.md-menu-content(width='1')
+
             md-menu-item
-              md-button(ng-click='navbar.redial($event)')
-                md-icon(md-svg-icon='call:dialpad', md-menu-align-target='')
-                |             Redial
+              .submenu.subtitle My informations
+            md-divider
+
             md-menu-item
-              md-button(disabled='disabled', ng-click='navbar.checkVoicemail()')
-                md-icon(md-svg-icon='call:voicemail')
-                |             Check voicemail
-            md-menu-divider
-            md-menu-item
-              md-button(ng-click='navbar.toggleNotifications()')
-                md-icon(md-svg-icon="social:notifications-{{navbar.notificationsEnabled ? 'off' : 'on'}}")
-                |             {{navbar.notificationsEnabled ? 'Disable' : 'Enable' }} notifications
+              .submenu.subtitle My informations
+
 
 
 

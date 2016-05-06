@@ -1,6 +1,21 @@
 @import "../../theme.scss";
 
+.submenu {
+
+  &.md-menu-content {
+    background: #C10000;
+  }
+
+   &.subtitle {
+      color: white;
+    }
+}
+
 .locsapp-navbar-gt-sm {
+
+  md-divider {
+    color: white;
+  }
 
   ng-md-icon {
     margin-bottom: 20px;

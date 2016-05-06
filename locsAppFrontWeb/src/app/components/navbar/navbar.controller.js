@@ -9,11 +9,11 @@
   function NavBarController(NotificationsService, $state, $log) {
     var vm = this;
 
-    /* Test */
-    this.openMenu = function($mdOpenMenu, ev) {
+    /* DropDownMenu */
+    this.openMenuAccount = function($mdOpenMenu, ev) {
       $mdOpenMenu(ev);
     };
-    /* End test */
+    /* DropDownMenu */
 
 
     /* Init vars */
