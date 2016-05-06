@@ -293,7 +293,7 @@ We send an email to the adminstrator that tell us who user send a report for whi
 def sendReport(request, article_pk):
     if request.method == "POST":
         list_reporter = get_user_model().objects.filter(is_admin=True)
-        list_email = []
+        list_email = ['locsapp.eip@gmail.com']
         for reporter in list_reporter:
             list_email.append(reporter.email)
         article = db_locsapp["articles"].find_one({"_id": ObjectId(article_pk)})
@@ -303,9 +303,8 @@ def sendReport(request, article_pk):
         message = 'The user ' + request.user.username + ' sent a report about this article' + \
                   ' <a href="' + settings.URL_FRONT + 'article/' + str(article['_id']) + '">' + \
                   article['title'] + '</a>'
-        print("message = ", message)
         email = EmailMessage('Report for article ' + article['title'], message,
-                             to=['locsapp.eip@gmail.com'])
+                             to=list_email)
         email.send()
         return JsonResponse({"Success": "Report sent to the administrators."}, status=200)
     else:
