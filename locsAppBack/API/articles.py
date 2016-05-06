@@ -10,6 +10,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMessage
 from django.conf import settings
 
+
 import json
 from bson import ObjectId
 
@@ -294,9 +295,13 @@ def sendReport(request):
     if request.method == "POST":
         if request.body:
             answer = json.loads(request.body.decode('utf8'))
-            if not hasattr(answer, 'article_id'):
-                return JsonResponse({"Error": "Please send an article id"}, status=404)
+            try:
+                answer['article_id']
+            except KeyError:
+                return JsonResponse({"Error": "Please send the article id"}, status=404)
 
+            if not ObjectId.is_valid(answer['article_id']):
+                return JsonResponse({"Error": "Please send a correct article id"}, status=401)
             list_reporter = get_user_model().objects.filter(is_admin=True)
             list_email = ['locsapp.eip@gmail.com']
             for reporter in list_reporter:
