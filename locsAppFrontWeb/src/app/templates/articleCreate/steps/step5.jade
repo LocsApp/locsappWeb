@@ -9,26 +9,31 @@ md-card(layout-fill)
         span
           ng-md-icon(icon="help", size="20")
             md-tooltip(md-direction="right") This indicates when the clothe will be available
-      md-datepicker(ng-model="articleCreate.date_start", md-min-date="articleCreate.min_date")
+      p
+        md-datepicker(ng-model="articleCreate.date_start", md-min-date="articleCreate.min_date")
 
       p
         md-title End of availibility date
         span
           ng-md-icon(icon="help", size="20")
             md-tooltip(md-direction="right") This indicates when the clothe will not be available anymore
-      md-datepicker(ng-model="articleCreate.date_end", md-min-date="articleCreate.date_start")
+      p
+        md-datepicker(ng-model="articleCreate.date_end", md-min-date="articleCreate.date_start")
       p
         md-title Payment methods
         span
           ng-md-icon(icon="help", size="20")
             md-tooltip(md-direction="right") You can select which payment method the user can choose to pay for the renting
+
+      p
         md-checkbox(aria-label="Select All" ng-checked="articleCreate.isChecked()"
         md-indeterminate="articleCreate.isIndeterminate()" ng-click="articleCreate.toggleAll()")
-          span(ng-if="articleCreate.isChecked()") Un-
-          span Select All
-          div(class="demo-select-all-checkboxes" flex="100" ng-repeat="item in articleCreate.items_payment_methods")
-            md-checkbox(ng-checked="articleCreate.exists(item, articleCreate.selected)" ng-click="articleCreate.toggle(item, articleCreate.selected)")
-              div {{ item.name }}
+
+        span(ng-if="articleCreate.isChecked()") Un-
+        span Select All
+        div(class="demo-select-all-checkboxes" flex="100" ng-repeat="item in articleCreate.items_payment_methods")
+          md-checkbox(ng-checked="articleCreate.exists(item, articleCreate.selected)" ng-click="articleCreate.toggle(item, articleCreate.selected)")
+            div {{ item.name }}
 
       ng-md-icon(icon="cash", style="cursor: pointer;")
       p
