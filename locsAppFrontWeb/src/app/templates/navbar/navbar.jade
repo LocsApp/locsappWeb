@@ -1,4 +1,41 @@
-md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavBarController as navbar").locsapp-navbar-gt-sm
+//We use a sidenav for small screen that we hide for big screen
+div(ng-controller="NavBarController as navbar")
+  md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id='left', md-is-locked-open="$mdMedia('gt-md')")
+    md-toolbar.md-theme-indigo
+      h1.md-toolbar-tools Sidenav Left
+    md-content(layout-padding='', ng-controller='LeftCtrl')
+      md-button.md-primary(ng-click='close()', hide-gt-md='')
+        | Close Sidenav Left
+      p(hide-md='', show-gt-md='')
+        | This sidenav is locked open on your device. To go back to the default behavior,
+        | narrow your display.
+  md-content(flex='', layout-padding='')
+    div(layout='column', layout-fill='', layout-align='top center')
+      p
+        | The left sidenav will 'lock open' on a medium (>=960px wide) device.
+      p
+        | The right sidenav will focus on a specific child element.
+      div
+        md-button.md-primary(ng-click='toggleLeft()', hide-gt-md='')
+          | Toggle left
+      div
+        md-button.md-primary(ng-click='toggleRight()', ng-hide='isOpenRight()')
+          | Toggle right
+    div(flex='')
+  md-sidenav.md-sidenav-right.md-whiteframe-z2(md-component-id='right')
+    md-toolbar.md-theme-light
+      h1.md-toolbar-tools Sidenav Right
+    md-content(ng-controller='RightCtrl', layout-padding='')
+      form
+        md-input-container
+          label(for='testInput') Test input
+          input#testInput(type='text', ng-model='data', md-autofocus='')
+      md-button.md-primary(ng-click='close()')
+        | Close Sidenav Right
+
+
+//Navbar for big screen
+//md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavBarController as navbar").locsapp-navbar-gt-sm
   span
     span(ui-sref="main.homepage" style="cursor: pointer;").md-toolbar-tools Locsapp
   div(layout="row" ng-if="!main.is_authenticated()")
