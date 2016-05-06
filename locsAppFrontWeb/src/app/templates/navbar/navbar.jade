@@ -97,19 +97,6 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
                 span.submenu.subtitle My informations
             md-divider
 
-            md-menu-item
-              md-button(ng-click='navbar.redial($event)')
-                md-icon(md-svg-icon='call:dialpad', md-menu-align-target='')
-                |             Redial
-            md-menu-item
-              md-button(disabled='disabled', ng-click='navbar.checkVoicemail()')
-                md-icon(md-svg-icon='call:voicemail')
-                |             Check voicemail
-            md-menu-divider
-            md-menu-item
-              md-button(ng-click='navbar.toggleNotifications()')
-                md-icon(md-svg-icon="social:notifications-{{navbar.notificationsEnabled ? 'off' : 'on'}}")
-                |             {{ctrl.notificationsEnabled ? 'Disable' : 'Enable' }} notifications
 
 
 
