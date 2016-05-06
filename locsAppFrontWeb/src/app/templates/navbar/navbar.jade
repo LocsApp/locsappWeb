@@ -6,13 +6,13 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
     div
       span.icon-and-title
         a(href='#' ui-sref="main.login")
-          ng-md-icon(icon="login" size="38")
+          ng-md-icon(icon="login" size="30")
           span.title Log in
 
     div
       span.icon-and-title
         a(href='#' ui-sref="main.register")
-          ng-md-icon(icon="person_add" size="38")
+          ng-md-icon(icon="person_add" size="30")
           span.title Sign in
   div(layout='row' ng-if="main.is_authenticated()")
     //include ./notifications.jade
@@ -20,13 +20,13 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
     div
       span.icon-and-title
         a(href='#' ui-sref="main.article_search")
-          ng-md-icon(icon="search" size="38")
+          ng-md-icon(icon="search" size="30")
           span.title Search
 
     div
       span.icon-and-title
         a(href='#' ui-sref="main.article_create")
-          ng-md-icon(icon="create" size="38")
+          ng-md-icon(icon="create" size="30")
           span.title Create an article
 
 
@@ -67,7 +67,7 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
       span.icon-and-title
         md-menu
           a(href='#' ng-click='navbar.openMenuQuestions($mdOpenMenu, $event)')
-            ng-md-icon(md-menu-origin='' icon="question_answer" size="38" )
+            ng-md-icon(md-menu-origin='' icon="question_answer" size="30" )
             span.title My questions
           md-menu-content.submenu(width='4')
 
@@ -88,7 +88,7 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
       span.icon-and-title
         md-menu
           a(href='#' ng-click='navbar.openMenuFavorites($mdOpenMenu, $event)')
-            ng-md-icon(md-menu-origin='' icon="bookmark" size="38" )
+            ng-md-icon(md-menu-origin='' icon="bookmark" size="30" )
             span.title My bookmarks
           md-menu-content.submenu(width='4')
 
@@ -109,7 +109,7 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
       span.icon-and-title
         md-menu
           a(href='#' ng-click='navbar.openMenuAccount($mdOpenMenu, $event)')
-            ng-md-icon(md-menu-origin='' icon="account_box" size="38" )
+            ng-md-icon(md-menu-origin='' icon="account_box" size="30" )
             span.title My account
           md-menu-content.submenu(width='4')
 
@@ -136,7 +136,7 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
     div
       span.icon-and-title
         a(href='#' ui-sref="main.logout")
-          ng-md-icon(icon="logout" size="38")
+          ng-md-icon(icon="logout" size="30")
           span.title Log out
 
 
@@ -146,7 +146,7 @@ md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavB
          span.icon-and-title
            md-menu
              a(href='#' ng-click='navbar.openMenuAccount($mdOpenMenu, $event)')
-               ng-md-icon(md-menu-origin='' icon="account_box" size="38" )
+               ng-md-icon(md-menu-origin='' icon="account_box" size="30" )
                span.title My account
              .submenu.md-menu-content(width='1')
 

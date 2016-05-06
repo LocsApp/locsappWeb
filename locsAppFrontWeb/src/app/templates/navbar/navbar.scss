@@ -11,8 +11,6 @@
        font-weight: bold;
       font-size: 0.9em;
       text-transform: uppercase;
-      padding-right: 10px;
-      margin-left: 10px;
     }
 
   md-divider {
@@ -34,7 +32,8 @@ a.submenu, a:hover.submenu {
 
   ng-md-icon {
     margin-bottom: 20px;
-    margin-right: 10px
+    margin-right: 10px;
+    margin-top: 12px;
   }
 
   .icon-and-title {
@@ -47,11 +46,11 @@ a.submenu, a:hover.submenu {
 
     .title {
       font-weight: bold;
-      font-size: 1em;
+      font-size: 0.7em;
       text-transform: uppercase;
       border-right: 1px solid white;
       padding-right: 10px;
-      margin-left: 10px;
+      //margin-left: 10px;
 
     }
   }
