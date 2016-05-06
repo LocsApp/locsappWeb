@@ -81,17 +81,24 @@
 }
 
 md-dialog.fullscreen-dialog {
+
   max-width: 100%;
   max-height: 100%;
   width: 100%;
   border-radius: 0;
   height: 100%;
 
+  .action-button {
+    cursor: pointer;
+    position: fixed;
+    right: 1%;
+    top: -5%;
+  }
+
   .md-button.validate.md-primary.md-fab,
   .md-button.md-primary.md-fab:not([disabled]):hover {
     background-color: green;
     color: white;
-    position: fixed;
 
 
   }
@@ -100,8 +107,6 @@ md-dialog.fullscreen-dialog {
   .md-button.md-primary.md-fab:not([disabled]):hover {
     background-color: #C10000;
     color: white;
-     position: fixed;
-       /* margin-left: 70px;*/
   }
 
 }

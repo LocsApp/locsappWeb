@@ -1,4 +1,25 @@
-<md-dialog class="fullscreen-dialog" style="height: 999999px">
+<md-dialog class="fullscreen-dialog">
+
+  <div class="action-button">
+    <md-button class="close md-fab md-primary"
+    ng-click="" aria-label="Create this article">
+      <ng-md-icon icon="close"></ng-md-icon>
+    </md-button>
+
+     <md-button class="validate md-fab md-primary"
+    ng-click="previewArticle.createNewArticle()" aria-label="Create this article">
+      <ng-md-icon icon="done"></ng-md-icon>
+    </md-button>
+
+
+     <!--md-button class="close action-button-position md-fab md-primary">
+        <ng-md-icon icon="close">
+        </ng-md-icon>
+      </md-button>-->
+  </div>
+
+
+
   <div layout="row" layout-align="center" class="article-show">
     <div flex-xs="100" flex-sm="100" flex-md="75" flex="50">
       <div layout="row" layout-align="center">
@@ -147,26 +168,12 @@
         <ng-md-icon icon="close">
         </ng-md-icon>
       </md-button>-->
-      <md-button class="validate action-button-position md-fab md-primary" ng-click="previewArticle.createNewArticle()">
-        <ng-md-icon icon="done">
-        </ng-md-icon>
-      </md-button>
+
     </div>
 
 
   </div>
 
-  <md-dialog-actions layout="row" class="layout-row">
-      <a class="md-button md-ink-ripple _md-autofocus" ng-transclude="" href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus="" aria-label="More on Wikipedia" data-unsp-sanitized="clean"><span class="ng-scope">
-        More on Wikipedia
-      </span></a>
-      <span flex="" class="flex"></span>
-      <button class="md-button md-ink-ripple" type="button" ng-transclude="" ng-click="answer('not useful')" aria-label="Not Useful"><span class="ng-scope">
-       Not Useful
-      </span></button>
-      <button class="md-button md-ink-ripple" type="button" ng-transclude="" ng-click="answer('useful')" style="margin-right:20px;" aria-label="Useful"><span class="ng-scope">
-        Useful
-      </span></button>
-    </md-dialog-actions>
+
 
 </md-dialog>

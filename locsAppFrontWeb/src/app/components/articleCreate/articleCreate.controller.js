@@ -136,7 +136,8 @@
 
       var vm = this;
 
-      //request author profile to get his notation;
+      //request author profile to get his notation; We only need the notation so do a special
+      // route in the backend will be the best
 
 
       //Fill with picture url after send image to the server
