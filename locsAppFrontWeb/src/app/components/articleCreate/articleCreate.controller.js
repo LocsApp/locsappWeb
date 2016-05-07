@@ -6,13 +6,58 @@
     .controller('ArticleCreateController', ArticleCreateController);
 
   /** @ngInject */
-  function ArticleCreateController($log, ArticleService, toastr, $timeout, $mdDialog, $document) {
+  function ArticleCreateController($log, ArticleService, toastr, $timeout, $mdDialog, $document,
+                                   ScopesService, $state) {
     var vm = this;
+
+    /* Get fixtures from cache */
+    vm.categories = ScopesService.get("static_collections").base_categories;
+    vm.subCategories = ScopesService.get("static_collections").sub_categories;
+    vm.genders = ScopesService.get("static_collections").genders;
+    vm.sizes = ScopesService.get("static_collections").sizes;
+    vm.clothe_colors = ScopesService.get("static_collections").clothe_colors;
+    vm.clothe_states = ScopesService.get("static_collections").clothe_states;
+    vm.brands = [{_id: "56cb3ef2b2bc57ab2908e6b2", name: "Home made"}];
+    vm.payment_methods = ScopesService.get("static_collections").payment_methods;
+    //vm.payment_methods = data.payment_methods;
+    //$log.log(vm.payment_methods[0]);
+
+    //CheckBox payment
+    vm.items_payment_methods = vm.payment_methods;
+    vm.selected = [];
+    vm.toggle = function (item, list) {
+      var idx = list.indexOf(item);
+      if (idx > -1) {
+        list.splice(idx, 1);
+      }
+      else {
+        list.push(item);
+      }
+    };
+    vm.exists = function (item, list) {
+      return list.indexOf(item) > -1;
+    };
+    vm.isIndeterminate = function () {
+      return (vm.selected.length !== 0 &&
+      vm.selected.length !== vm.items_payment_methods.length);
+    };
+    vm.isChecked = function () {
+      return vm.selected.length === vm.items_payment_methods.length;
+    };
+    vm.toggleAll = function () {
+      if (vm.selected.length === vm.items_payment_methods.length) {
+        vm.selected = [];
+      } else if (vm.selected.length === 0 || vm.selected.length > 0) {
+        vm.selected = vm.items_payment_methods.slice(0);
+      }
+    };
 
     //steps vars
     vm.value = 0;
     vm.stepsNames = ["squared_one", "squared_two", "squared_three", "squared_four", "squared_five", "squared_six"];
     vm.stepsComplete = [1, 0, 0, 0, 0, 0];
+    //vm.stepsComplete = [1, 1, 1, 1, 1, 1];
+
     vm.progressBars = [0, 0, 0, 0, 0, 0];
     vm.stepFocus = 0;
 
@@ -20,15 +65,8 @@
     vm.toolbar = [['h1', 'h2', 'h3'], ['p', 'bold', 'italics', 'underline'], ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'], ['undo', 'redo', 'clear']];
 
     //article vars
-    vm.categories = null;
-    vm.subCategories = null;
-    vm.genders = null;
-    vm.sizes = null;
-    vm.clothe_colors = null;
-    vm.clothe_states = null;
-    vm.payment_methods = null;
+    //vm.payment_methods = null;
     vm.description = null;
-    vm.brands = [{_id: "56cb3ef2b2bc57ab2908e6b2", name: "Home made"}];
     vm.files = [];
     vm.date_start = new Date();
     vm.date_end = new Date();
@@ -90,108 +128,6 @@
     };
 
 
-    vm.getPaymentMethods = function (data) {
-
-      vm.payment_methods = data.payment_methods;
-      //$log.log(vm.payment_methods[0]);
-
-      //CheckBox payment
-      vm.items_payment_methods = vm.payment_methods;
-      vm.selected = [];
-      vm.toggle = function (item, list) {
-        var idx = list.indexOf(item);
-        if (idx > -1) {
-          list.splice(idx, 1);
-        }
-        else {
-          list.push(item);
-        }
-      };
-      vm.exists = function (item, list) {
-        return list.indexOf(item) > -1;
-      };
-      vm.isIndeterminate = function () {
-        return (vm.selected.length !== 0 &&
-        vm.selected.length !== vm.items_payment_methods.length);
-      };
-      vm.isChecked = function () {
-        return vm.selected.length === vm.items_payment_methods.length;
-      };
-      vm.toggleAll = function () {
-        if (vm.selected.length === vm.items_payment_methods.length) {
-          vm.selected = [];
-        } else if (vm.selected.length === 0 || vm.selected.length > 0) {
-          vm.selected = vm.items_payment_methods.slice(0);
-        }
-      };
-      //End checkbox payment
-
-    };
-
-    vm.getClotheStates = function (data) {
-      vm.clothe_states = data.clothe_states;
-
-      //And now we'll get payment
-      ArticleService
-        .getPaymentMethods
-        .get()
-        .$promise
-        .then(vm.getPaymentMethods, vm.failedRetrieval);
-    };
-
-    vm.getClotheColors = function (data) {
-      vm.clothe_colors = data.clothe_colors;
-      ArticleService
-        .getClotheStates
-        .get()
-        .$promise
-        .then(vm.getClotheStates, vm.failedRetrieval);
-    };
-
-    vm.getSizes = function (data) {
-      vm.sizes = data.sizes;
-      ArticleService
-        .getClotheColors
-        .get()
-        .$promise
-        .then(vm.getClotheColors, vm.failedRetrieval);
-    };
-
-    vm.getGenders = function (data) {
-      vm.genders = data.genders;
-      ArticleService
-        .getSizes
-        .get()
-        .$promise
-        .then(vm.getSizes, vm.failedRetrieval);
-    };
-
-    vm.getSubCategories = function (data) {
-      vm.subCategories = data.sub_categories;
-      ArticleService
-        .getGenders
-        .get()
-        .$promise
-        .then(vm.getGenders, vm.failedRetrieval);
-    };
-
-    vm.getCategories = function (data) {
-      vm.categories = data.base_categories;
-      ArticleService
-        .getSubCategories
-        .get()
-        .$promise
-        .then(vm.getSubCategories, vm.failedRetrieval);
-    };
-
-    ArticleService
-      .getCategories
-      .get()
-      .$promise
-      .then(vm.getCategories, vm.failedRetrieval);
-    //End of Static collection retrieval
-
-
     /****
      * Preview Article Controller
      */
@@ -200,7 +136,8 @@
 
       var vm = this;
 
-      //request author profile to get his notation;
+      //request author profile to get his notation; We only need the notation so do a special
+      // route in the backend will be the best
 
 
       //Fill with picture url after send image to the server
@@ -211,14 +148,22 @@
       vm.rentDateStart = new Date(vm.start_availble);
       vm.rentDateEnd = new Date(vm.end_availble);
 
-      vm.createArticleSuccess = function (data) {
-        $log.log("This is a success", data);
+      vm.createArticleSuccess = function () {
+        toastr.success("Article created", 'Success');
+        $state.go("main.article_search");
+        $mdDialog.cancel();
+        //$log.log("This is a success", data);
       };
 
       vm.createArticleFailure = function (data) {
+        toastr.error("We couldn't create your article...", 'Woops...');
         $log.log("this is an error", data);
       };
 
+
+      vm.closeDialog = function () {
+        $mdDialog.cancel();
+      };
 
       vm.createNewArticle = function () {
 
@@ -230,7 +175,11 @@
 
         vm.uploadImageSuccess = function (data) {
           vm.pictures.push(data.data.url);
-          for (var i = 0; i < vm.payment_methods.length; i++) {
+          $log.log("data url = ", vm.pictures.length);
+          $log.log("lenght files = ", vm.files.length);
+
+          if (vm.pictures.length == vm.files.length) {
+         for (var i = 0; i < vm.payment_methods.length; i++) {
             vm.payment_methods_id.push(vm.payment_methods[i]._id);
           }
 
@@ -267,11 +216,11 @@
               "availibility_end": vm.new_end_availble,
               "url_pictures": vm.pictures,
               "url_thumbnail": vm.pictures[0]
-
-              /* "location": "toto"*/
             })
             .$promise
             .then(vm.createArticleSuccess, vm.createArticleFailure);
+          }
+
         };
 
 
@@ -281,11 +230,17 @@
             ArticleService
               .uploadPicture(vm.files[i])
               .then(vm.uploadImageSuccess, vm.uploadImageFailure);
+
+
           }
+
+          //We create the article here
         };
 
         //For upload the pictures
         vm.submitPictures();
+
+
 
 
       }

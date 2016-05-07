@@ -1,0 +1,15 @@
+div.article-edit(layout="row" layout-align="center")
+  div(flex-xs="100" flex-sm="100" flex-md="75" flex="50")
+
+    div(layout="row" layout-align="center")
+      h1 Edit Article
+
+    form(name="articleFormEdit" novalidate ng-submit="articleFormEdit.$valid && articleEdit" +
+    ".submit()",
+    layout="column", layout-align="center center" flex="100")
+      include ./steps/step1.jade
+      include ./steps/step2.jade
+      include ./steps/step3.jade
+      include ./steps/step4.jade
+      include ./steps/step5.jade
+      include ./steps/step6.jade

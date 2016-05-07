@@ -1,10 +1,181 @@
-md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavBarController as navbar").locsapp-navbar-gt-sm
-	span
-		span(ui-sref="main.homepage" style="cursor: pointer;").md-toolbar-tools Locsapp
-	span(ng-if="!main.is_authenticated()")
-		ng-md-icon(icon="login", size="48", ui-sref="main.login").locsapp-navbar-icons-gt-sm
-		ng-md-icon(icon="person_add", size="48", ui-sref="main.register").locsapp-navbar-last-icon-gt-sm
-	span(ng-if="main.is_authenticated()")
-		include ./notifications.jade
-		ng-md-icon(icon="account_box", size="48", ui-sref="main.user_profile").locsapp-navbar-last-icon-gt-sm
-		ng-md-icon(icon="logout", size="48", ui-sref="main.logout").locsapp-navbar-last-icon-gt-sm
+//We use a sidenav for small screen that we hide for big screen
+div(ng-controller="NavBarController as navbar")
+  div.sidenav(hide show-md show-xs show-sm)
+    ng-md-icon(icon="menu" ng-click='navbar.toggleRight()', ng-hide='navbar.isOpenRight()'
+    style='cursor:pointer')
+
+
+
+
+    md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id='right')
+      md-toolbar.md-theme-light
+        h1.md-toolbar-tools Sidenav Right
+      md-content(layout-padding='')
+        form
+          md-input-container
+            label(for='testInput') Test input
+            input#testInput(type='text', ng-model='data', md-autofocus='')
+        md-button.md-primary(ng-click='close()')
+          | Close Sidenav Right
+
+
+  //Navbar for big screen
+  md-toolbar(layout="row", layout-align="space-between center" hide-md hide-xs hide-sm).locsapp-navbar-gt-sm
+    span
+      span(ui-sref="main.homepage" style="cursor: pointer;").md-toolbar-tools Locsapp
+    div(layout="row" ng-if="!main.is_authenticated()")
+
+      div
+        span.icon-and-title
+          a(href='#' ui-sref="main.login")
+            ng-md-icon(icon="login" size="30")
+            span.title Log in
+
+      div
+        span.icon-and-title
+          a(href='#' ui-sref="main.register")
+            ng-md-icon(icon="person_add" size="30")
+            span.title Sign in
+    div(layout='row' ng-if="main.is_authenticated()")
+      //include ./notifications.jade
+
+      div
+        span.icon-and-title
+          a(href='#' ui-sref="main.article_search")
+            ng-md-icon(icon="search" size="30")
+            span.title Search
+
+      div
+        span.icon-and-title
+          a(href='#' ui-sref="main.article_create")
+            ng-md-icon(icon="create" size="30")
+            span.title Create an article
+
+
+      div.submenu
+        span.icon-and-title
+          md-menu
+            a(href='#' ng-click='navbar.openMenuArticle($mdOpenMenu, $event)')
+              md-icon(md-svg-src="../assets/icons/menu/ic_note_white_24px.svg" class="name")
+              span.title My articles
+            md-menu-content.submenu(width='4')
+
+              md-menu-item
+                a.submenu(href='#' ui-sref="main.user_profile")
+                  ng-md-icon(icon="help" size="25" )
+                  span.submenu.subtitle Current requests
+              md-divider
+
+
+              md-menu-item
+                a.submenu(href='#' ui-sref="main.profile_management")
+                  ng-md-icon(icon="create" size="25")
+                  span.submenu.subtitle Current articles
+              md-divider
+
+              md-menu-item
+                a.submenu(href='#' ui-sref="main.homepage")
+                  md-icon(md-svg-src="../assets/icons/menu/ic_timeline_white_24px.svg" class="name")
+                  span.submenu.subtitle Timeline
+              md-divider
+
+              md-menu-item
+                a.submenu(href='#' ui-sref="main.homepage")
+                  ng-md-icon(icon="star" size="25")
+                  span.submenu.subtitle Notation
+
+
+      div.submenu
+        span.icon-and-title
+          md-menu
+            a(href='#' ng-click='navbar.openMenuQuestions($mdOpenMenu, $event)')
+              ng-md-icon(md-menu-origin='' icon="question_answer" size="30" )
+              span.title My questions
+            md-menu-content.submenu(width='4')
+
+              md-menu-item
+                a.submenu(href='#' ui-sref="main.user_profile")
+                  ng-md-icon(icon="arrow_forward" size="25" )
+                  span.submenu.subtitle Questions I have asked
+              md-divider
+
+
+              md-menu-item
+                a.submenu(href='#' ui-sref="main.profile_management")
+                  ng-md-icon(icon="arrow_back" size="25")
+                  span.submenu.subtitle Questions to answer
+
+
+      div.submenu
+        span.icon-and-title
+          md-menu
+            a(href='#' ng-click='navbar.openMenuFavorites($mdOpenMenu, $event)')
+              ng-md-icon(md-menu-origin='' icon="bookmark" size="30" )
+              span.title My bookmarks
+            md-menu-content.submenu(width='4')
+
+              md-menu-item
+                a.submenu(href='#' ui-sref="main.user_profile")
+                  md-icon(md-svg-src="../assets/icons/menu/ic_note_white_24px.svg" class="name")
+                  span.submenu.subtitle My articles
+              md-divider
+
+
+              md-menu-item
+                a.submenu(href='#' ui-sref="main.profile_management")
+                  ng-md-icon(icon="search" size="25")
+                  span.submenu.subtitle My searches
+
+
+      div.submenu
+        span.icon-and-title
+          md-menu
+            a(href='#' ng-click='navbar.openMenuAccount($mdOpenMenu, $event)')
+              ng-md-icon(md-menu-origin='' icon="account_box" size="30" )
+              span.title My account
+            md-menu-content.submenu(width='4')
+
+              md-menu-item
+                a.submenu(href='#' ui-sref="main.user_profile")
+                  ng-md-icon(icon="perm_identity" size="25" )
+                  span.submenu.subtitle My informations
+              md-divider
+
+
+              md-menu-item
+                a.submenu(href='#' ui-sref="main.profile_management")
+                  ng-md-icon(icon="create" size="25")
+                  span.submenu.subtitle Edit my profile
+              md-divider
+
+              md-menu-item
+                a.submenu(href='#' ui-sref="main.homepage")
+                  ng-md-icon(icon="history" size="25")
+                  span.submenu.subtitle History
+
+
+
+      div
+        span.icon-and-title
+          a(href='#' ui-sref="main.logout")
+            ng-md-icon(icon="logout" size="30")
+            span.title.hide-last Log out
+
+
+      //ng-md-icon(icon="account_box", size="48", ui-sref="main.article_create").locsapp-navbar-last-icon-gt-sm
+
+      //div.submenu
+           span.icon-and-title
+             md-menu
+               a(href='#' ng-click='navbar.openMenuAccount($mdOpenMenu, $event)')
+                 ng-md-icon(md-menu-origin='' icon="account_box" size="30" )
+                 span.title My account
+               .submenu.md-menu-content(width='1')
+
+
+
+
+
+
+
+

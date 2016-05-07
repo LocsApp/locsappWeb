@@ -1,167 +1,227 @@
 @import "../../theme.scss";
 
-.locsapp-navbar-gt-sm {
+ md-menu-content.submenu {
+    background: #C10000;
+ }
 
-	&:not(.md-menu-toolbar) { 
-		background: $navbar-background;
-	};
+.submenu {
 
-	.locsapp-navbar-icons-gt-sm {
-		width: 48px;
-		height: 48px;
-		cursor: pointer;
-	};
 
-	.locsapp-navbar-last-icon-gt-sm {
-		@extend .locsapp-navbar-icons-gt-sm;
-		margin-right: 20px;
-	};
+   &.subtitle {
+       font-weight: bold;
+      font-size: 0.7em;
+      text-transform: uppercase;
+    }
+
+  md-divider {
+    border-top-color: white;
+  }
 
 }
 
-.locsapp-navbar-notifications-container	 > * {
-    -moz-transition: none;
-    -webkit-transition: none;
-    -o-transition: color 0 ease-in;
-    transition: none !important;
+a.submenu, a:hover.submenu {
+   color: white;
+    text-decoration: none;
+}
+
+.locsapp-navbar-gt-sm {
+
+  md-divider {
+    color: white;
+  }
+
+  ng-md-icon {
+    margin-bottom: 20px;
+    margin-right: 10px;
+    margin-top: 12px;
+  }
+
+  .icon-and-title {
+    padding-left: 10px;
+  }
+
+  a, a:hover {
+    color: white;
+    text-decoration: none;
+
+    .title {
+      font-weight: bold;
+      font-size: 0.7em;
+      text-transform: uppercase;
+      border-right: 1px solid white;
+      padding-right: 10px;
+      //margin-left: 10px;
+
+      &.hide-last {
+        border-right: none;
+      }
+
+    }
+  }
+
+  &:not(.md-menu-toolbar) {
+    background: $navbar-background;
+  }
+;
+
+  .locsapp-navbar-icons-gt-sm {
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+  }
+;
+
+  .locsapp-navbar-last-icon-gt-sm {
+    @extend .locsapp-navbar-icons-gt-sm;
+    margin-right: 20px;
+  }
+;
+
+}
+
+.locsapp-navbar-notifications-container > * {
+  -moz-transition: none;
+  -webkit-transition: none;
+  -o-transition: color 0 ease-in;
+  transition: none !important;
 }
 
 .locsapp-navbar-container-icon-notifications {
-	display: inline-block;
-	position: relative;
-	top: -10px;
+  display: inline-block;
+  position: relative;
+  top: -10px;
 }
 
 .locsapp-navbar-icon-number-notification-container {
-	position: absolute;
-	top: 0px;
-	left: 25px;
+  position: absolute;
+  top: 0px;
+  left: 25px;
 }
 
 .locsapp-navbar-icon-number-notification {
-	border-radius: 10px;
-	background-color: $iconNotification;
-	padding: 5px;
-	font-size: 12px;
-	vertical-align: middle;
+  border-radius: 10px;
+  background-color: $iconNotification;
+  padding: 5px;
+  font-size: 12px;
+  vertical-align: middle;
 }
 
 .locsapp-notifications-scroller {
-    overflow-y: hidden;
-    position: relative;
+  overflow-y: hidden;
+  position: relative;
 }
-
 
 .locsapp-navbar-notifications-container {
 
-	padding: 0px;
-	width: 300px; 
-	line-break: loose;
+  padding: 0px;
+  width: 300px;
+  line-break: loose;
 
-	ng-md-icon {
-		cursor: pointer;
-	}
+  ng-md-icon {
+    cursor: pointer;
 
-	md-toolbar {
-		.md-toolbar-tools {
-			font-size: 17px;
-			letter-spacing: 0.005em;
-			box-sizing: border-box;
-			font-weight: 400;
-			display: flex;
-			align-items: center;
-			flex-direction: row;
-			width: 100%;
-			height: auto;
-			max-height: 64px;
-			padding: 5px 5px;
-			margin: 0px;
-		}
-		min-height: auto;
+  }
 
-		.last-icon {
-			margin-right: 5px;
-		}
-	}
+  md-toolbar {
+    .md-toolbar-tools {
+      font-size: 17px;
+      letter-spacing: 0.005em;
+      box-sizing: border-box;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      width: 100%;
+      height: auto;
+      max-height: 64px;
+      padding: 5px 5px;
+      margin: 0px;
+    }
+    min-height: auto;
 
-	md-content {
-		padding-left: 5px;
-	}
+    .last-icon {
+      margin-right: 5px;
+    }
+  }
 
-	md-list-item {
-		cursor: pointer;
-		padding-right: 5px;
-		padding-left: 0px;
+  md-content {
+    padding-left: 5px;
+  }
 
-		&:hover {
-			.locsapp-navbar-notifications-drop-icon {
-				color: $dropIcon;
-				visibility: visible;
-			}
-		}
+  md-list-item {
+    cursor: pointer;
+    padding-right: 5px;
+    padding-left: 0px;
 
-		&:hover:not(.locsapp-navbar-notifications-new) {
-			background-color: rgba(0, 0, 0, 0.05);
-			md-content {
-				background-color: rgba(0, 0, 0, 0);
-			}
-		}
-	}
+    &:hover {
+      .locsapp-navbar-notifications-drop-icon {
+        color: $dropIcon;
+        visibility: visible;
+      }
+    }
 
-	.locsapp-navbar-notifications-body-container {
-		height: 250px;
-	}
+    &:hover:not(.locsapp-navbar-notifications-new) {
+      background-color: rgba(0, 0, 0, 0.05);
+      md-content {
+        background-color: rgba(0, 0, 0, 0);
+      }
+    }
+  }
 
-	.locsapp-navbar-notifications-load-more {
-		height: 20px;
-		margin: 0;
-		margin-left: auto;
-		margin-right: auto;
-	}
+  .locsapp-navbar-notifications-body-container {
+    height: 250px;
+  }
 
-	.locsapp-navbar-notifications-new {
-		background-color: rgba(0, 0, 0, 0.3);
-		md-content {
-			background-color: rgba(0, 0, 0, 0);
-		}
-	}
+  .locsapp-navbar-notifications-load-more {
+    height: 20px;
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-	.locsapp-navbar-notifications-left-icon {
-		margin: auto 5px;
-		fill: $iconNotification;
-	}
+  .locsapp-navbar-notifications-new {
+    background-color: rgba(0, 0, 0, 0.3);
+    md-content {
+      background-color: rgba(0, 0, 0, 0);
+    }
+  }
 
-	.locsapp-navbar-notifications-date {
-		font-weight: bolder;
-		font-size: 14px;
-		color: $newNotification;
-	}
+  .locsapp-navbar-notifications-left-icon {
+    margin: auto 5px;
+    fill: $iconNotification;
+  }
 
-	.locsapp-navbar-notifications-content-first {
-		padding-bottom : 5px;
-	}
+  .locsapp-navbar-notifications-date {
+    font-weight: bolder;
+    font-size: 14px;
+    color: $newNotification;
+  }
 
-	.locsapp-navbar-notifications-content {
-		padding-top : 5px;
-		padding-bottom : 5px;
-	}
+  .locsapp-navbar-notifications-content-first {
+    padding-bottom: 5px;
+  }
 
-	.locsapp-navbar-notifications-content-last {
-		padding-top : 5px;
-	}
+  .locsapp-navbar-notifications-content {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
 
-	.locsapp-navbar-notifications-drop-icon {
-		margin: 0px;
-		margin-right: 5px;
-		color: $noInfo;
-		visibility: hidden;
+  .locsapp-navbar-notifications-content-last {
+    padding-top: 5px;
+  }
 
-		&:hover {
-			color: $iconHover !important;
-		}
-	}
+  .locsapp-navbar-notifications-drop-icon {
+    margin: 0px;
+    margin-right: 5px;
+    color: $noInfo;
+    visibility: hidden;
 
-	.ng-hide-add {
-		animation: fadeOutLeft 0.5s;
-	}
+    &:hover {
+      color: $iconHover !important;
+    }
+  }
+
+  .ng-hide-add {
+    animation: fadeOutLeft 0.5s;
+  }
 }

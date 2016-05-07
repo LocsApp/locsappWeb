@@ -76,6 +76,16 @@
 				}
 			}
 		})
+    .state('main.public_user_profile', {
+			url: 'public_profile',
+			parent: 'main',
+			controller: 'PublicProfileController',
+			controllerAs: 'publicProfile',
+			templateUrl : 'app/templates/userProfile/public_user_profile.html',
+			data: {
+
+			}
+		})
 		.state('main.user_profile', {
 			url: 'profile',
 			parent: 'main',
@@ -167,6 +177,15 @@
       controller: 'ArticleShowController',
       controllerAs: 'articleShow'
     })
+
+    .state('main.articleEdit', {
+      url: 'article-edit/:id',
+      parent: 'main',
+      templateUrl: 'app/templates/articleEdit/articleEdit.html',
+      controller: 'ArticleEditController',
+      controllerAs: 'articleEdit'
+    })
+
     .state('main.article_create', {
       url: 'create-article/',
       parent: 'main',

@@ -3,17 +3,18 @@ div.article-show(layout="row" layout-align="center")
 
     div(layout="row" layout-align="center")
       div
-        h1 {{articleShow.title}}
+        h1 {{articleShow.data.title}}
         br
         div.subtitle(layout="row")
-          h2 By sylflo
+          h2 By <a href="/profile/{{articleShow.username_author}}"> {{articleShow.username_author}} </a>
           span
             ng-md-icon(icon="star" size="22")
             ng-md-icon(icon="star" size="22")
             ng-md-icon(icon="star" size="22")
             ng-md-icon(icon="star" size="22")
             ng-md-icon(icon="star" size="22")
-            span (50)
+            span ({{articleShow.nb_renter_notation}})
+
 
 
     div(layout="row" layout-align="center")
@@ -21,10 +22,10 @@ div.article-show(layout="row" layout-align="center")
       " " +
       "autoplay:true," +
       " " +
-  "autoplayTimeout:5000, loop:true, items: 1, " +
+      "autoplayTimeout:5000, loop:true, items: 1, " +
       "lazyLoad:true, autoWidth:false}")
-        .item(owl-carousel-item='', ng-repeat='url_picture in articleShow.url_pictures track by $index')
-          img(src="{{url_picture}}")
+        .item(owl-carousel-item='', ng-repeat='url_picture in articleShow.carousel track by $index')
+          img(ng-src="{{url_picture}}")
 
 
     div.my-layout-xs(layout="row")
@@ -33,12 +34,12 @@ div.article-show(layout="row" layout-align="center")
 
           div.block-properties(layout="row")
             div.name-properties(flex="50") Price
-            div.t-right(flex="50") {{articleShow.price}}$/day
+            div.t-right(flex="50") {{articleShow.data.price}}$/day
           md-divider
           div.block-properties(layout="row")
             div.name-properties(flex="50") Payment
             div.t-right(flex="50")
-              span(ng-repeat="payment in articleShow.meaning_payment") {{$first ? '' : ', '}} {{payment}}
+              span(ng-repeat="payment in articleShow.name_payment_methods track by $index") {{$first ? '' : ', '}} {{payment}}
 
           md-divider
           div.block-properties(layout="row")
@@ -47,28 +48,33 @@ div.article-show(layout="row" layout-align="center")
           md-divider
           div.block-properties(layout="row")
             div.name-properties(flex="50") Main Category
-            div.t-right(flex="50") {{articleShow.BaseCategory}}
+            div.t-right(flex="50") {{articleShow.name_category}}
           md-divider
           div.block-properties(layout="row")
             div.name-properties(flex="50") Sub Category
-            div.t-right(flex="50") {{articleShow.SubCategory}}
+            div.t-right(flex="50") {{articleShow.name_subCategory}}
           md-divider
           div.block-properties(layout="row")
             div.name-properties(flex="50") Gender
-            div.t-right(flex="50") {{articleShow.sexe}}
+            div.t-right(flex="50") {{articleShow.name_gender}}
           md-divider
           div.block-properties(layout="row")
             div.name-properties(flex="50") Size
-            div.t-right(flex="50") {{articleShow.size}}
+            div.t-right(flex="50") {{articleShow.name_size}}
           md-divider
           div.block-properties(layout="row")
             div.name-properties(flex="50") Color
-            div.t-right(flex="50") {{articleShow.color}}
+            div.t-right(flex="50") {{articleShow.name_clothe_colors}}
           md-divider
           div.block-properties(layout="row")
             div.name-properties(flex="50") State
-            div.t-right(flex="50") {{articleShow.state}}
+            div.t-right(flex="50") {{articleShow.name_clothe_states}}
           md-divider
+          div.block-properties(layout="row")
+            div.name-properties(flex="50") Brand
+            div.t-right(flex="50") {{articleShow.name_brand}}
+          md-divider
+
 
       md-card.reservation(flex="50" flex-xs="100")
         md-card-content(flex="flex" layout-fill)
@@ -93,6 +99,11 @@ div.article-show(layout="row" layout-align="center")
                 ng-md-icon(icon="share")
                 span.bottom-right-md-card Share it
                 span
+                  a(href="#" socialshare socialshare-provider="facebook"
+                  socialshare-url="http://localhost:3000/article/572c5c64fbbe6158bf447728"
+                  socialshare-text="headlines" socialshare-description="description"
+                  socialshare-media="http://127.0.0.1:8000/media/articles/c6a1d210906944e294a81519cd67e6f0"
+                  socialshare-type="feed" socialshare-via="1011661268854723")  SHARE ME
                   ng-md-icon(icon="facebook")
                   ng-md-icon(icon="twitter")
 
@@ -101,7 +112,7 @@ div.article-show(layout="row" layout-align="center")
                 //a(facebook class="facebookShare" data-url='http://google.com'data-shares='shares') {{ shares }}
                 a(href='#')
                   ng-md-icon(icon="warning")
-                  span.bottom-right-md-card Send a report
+                  span.bottom-right-md-card(ng-click='articleShow.sendReport()') Send a report
 
 
 
@@ -114,9 +125,9 @@ div.article-show(layout="row" layout-align="center")
       md-divider.separator-h2(flex="45")
 
     div(layout="row" layout-align="center")
-      md-card
+      md-card(flex="100")
         md-card-content
-          div.description {{articleShow.description}}
+          div.description(ng-bind-html='articleShow.data.description')
 
 
 
@@ -126,7 +137,7 @@ div.article-show(layout="row" layout-align="center")
       h2.t-center(flex="15") Questions
       md-divider.separator-h2(flex="45")
 
-    div.question(layout="row" layout-align="center" ng-if="!articleShow.questions")
+    div.question(layout="row" layout-align="center" ng-if="articleShow.questions.length === 0")
       div(layout="column")
         md-input-container.md-block
           label Be the first one to ask something

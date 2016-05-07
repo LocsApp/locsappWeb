@@ -1,4 +1,4 @@
-(function(){
+(function () {
 
   'use strict';
 
@@ -12,7 +12,11 @@
     var service = {
 
       getArticle: $resource(URL_API + 'api/v1/articles/get/:id/', {id: "@article_id"}),
-      getCategories: $resource(URL_API + 'api/v1/static-collections/base-categories/'),
+      getCategories: $resource(URL_API + 'api/v1/static-collections/base-categories/'
+        , {}, {
+          cache: true,
+          method: 'GET'
+        }),
       getSubCategories: $resource(URL_API + 'api/v1/static-collections/sub-categories/'),
       getGenders: $resource(URL_API + 'api/v1/static-collections/genders/'),
       getSizes: $resource(URL_API + 'api/v1/static-collections/sizes/'),
@@ -21,22 +25,24 @@
       getPaymentMethods: $resource(URL_API + 'api/v1/static-collections/payment-methods/'),
       createArticle: $resource(URL_API + 'api/v1/articles/create/'),
       searchArticles: $resource(URL_API + 'api/v1/search/articles/'),
+      getSeller: $resource(URL_API + 'api/v1/articles/seller/:id/', {id: "@user_id"}),
+      sendReport: $resource(URL_API + 'api/v1/articles/report/'),
       uploadPicture: uploadPicture,
-      is_authenticated : is_authenticated
+      is_authenticated: is_authenticated
     };
 
     return service;
 
-        function uploadPicture(file) {
-            return (Upload.upload({
-                url: URL_API + 'api/v1/articles/image-upload-article/',
-                data: {file: file}
-            }));
-        }
+    function uploadPicture(file) {
+      return (Upload.upload({
+        url: URL_API + 'api/v1/articles/image-upload-article/',
+        data: {file: file}
+      }));
+    }
 
-        function is_authenticated() {
-            return ($sessionStorage.key || $localStorage.key) ? true : false;
-        }
+    function is_authenticated() {
+      return ($sessionStorage.key || $localStorage.key) ? true : false;
+    }
   }
 
 })();

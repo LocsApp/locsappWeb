@@ -1,0 +1,29 @@
+//
+   Created by sylflo on 4/15/16.
+
+div.pictures(layout="row" layout-align="center" layout-fill)
+      md-card(flex="flex")
+        md-card-content(layout="column", layout-align="center center")
+          div(layout="row" layout-align="center")
+            h2 Pictures
+
+          div(layout="row" layout-align='center')
+            div( layout="column" layout-align="center center")
+
+              p
+                span
+                  ng-md-icon(icon="help", size="20")
+                    md-tooltip(md-direction="left") It is the main picture for your article. it will be displayed in the search and in the top of your article.
+                md-title The thumbnail picture
+
+              img(ngf-src="articleCreate.files[0] || 'http://localhost:3000/assets/images/articles/default.jpg'" ngf-select ng-model="articleCreate.files[0]" name="logo" ngf-pattern="'image/*'"
+              accept="image/*" ngf-max-size="2MB" ngf-min-height="100"
+              ngf-resize="{width: 300, height: 300}" style="cursor: pointer;").logo-picture
+
+          div(layout="row" layout-align="start")
+            md-button.md-fab.md-primary(
+            aria-label="Add a new pictures")
+              ng-md-icon(icon="add")
+            span Add more images
+
+

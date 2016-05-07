@@ -4,6 +4,12 @@ from .views import db_locsapp
 from .views import APIrequests
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
+from django.contrib.auth import get_user_model
+from rest_framework.views import APIView
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import EmailMessage
+from django.conf import settings
+
 
 import json
 from bson import ObjectId
@@ -11,6 +17,27 @@ from bson import ObjectId
 import pytz
 from datetime import datetime
 import re
+
+
+from pymongo import MongoClient
+
+# Connects to the db and creates a MongoClient instance
+mongodb_client = MongoClient('localhost', 27017)
+db_locsapp = mongodb_client['locsapp']
+
+
+""" Seller Article """
+
+
+class FindUserByIdForArticle(APIView):
+    def get(self, request, user_pk):
+        try:
+            user = get_user_model().object.get(pk=user_pk)
+            return JsonResponse({"username": user.username, "notation_renter": "4",
+                                 "nb_notation_renter": "50"}, status=200)
+        except ObjectDoesNotExist:
+            return JsonResponse({"message": "user id does not exist"}, status=404)
+
 
 """ Articles """
 
@@ -247,10 +274,55 @@ def articleAlone(request, article_pk):
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
+""" Show article """
+
 
 @csrf_exempt
 def getArticle(request, article_pk):
     if request.method == "GET":
         return APIrequests.GET('articles', id=article_pk)
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+"""
+We send an email to the adminstrator that tell us who user send a report for which article
+"""
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def sendReport(request):
+    if request.method == "POST":
+        if request.body:
+            answer = json.loads(request.body.decode('utf8'))
+            print("Object id = ", answer)
+            try:
+                answer['article_id']
+            except KeyError:
+                return JsonResponse({"Error": "Please send the article id"}, status=404)
+
+            if not ObjectId.is_valid(answer['article_id']):
+                return JsonResponse({"Error": "Please send a correct article id"}, status=401)
+            list_reporter = get_user_model().objects.filter(is_admin=True)
+            list_email = ['locsapp.eip@gmail.com']
+            for reporter in list_reporter:
+                list_email.append(reporter.email)
+            article = db_locsapp["articles"].find_one({"_id": ObjectId(answer['article_id'])})
+            if article is None:
+                return JsonResponse({"Error": "This article does not exist"}, status=404)
+
+            # We insert a new report in this article and if there is more than 5 users we create a
+            #  new collection report associated to the id of this article
+
+
+            message = 'The user ' + request.user.username + ' sent a report about this article' + \
+                      ' <a href="' + settings.URL_FRONT + 'article/' + str(article['_id']) + '">' + \
+                      article['title'] + '</a>'
+            email = EmailMessage('Report for article ' + article['title'], message,
+                                 to=list_email)
+            email.send()
+            return JsonResponse({"Success": "Report sent to the administrators."}, status=200)
+        else:
+            return JsonResponse({"Error": "Please send a json"}, status=404)
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)

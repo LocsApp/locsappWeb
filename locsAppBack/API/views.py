@@ -30,6 +30,7 @@ import uuid
 import os
 import datetime
 
+
 # Connects to the db and creates a MongoClient instance
 mongodb_client = MongoClient('localhost', 27017)
 db_locsapp = mongodb_client['locsapp']
@@ -57,44 +58,11 @@ class docAPIView(TemplateView):
 
 
 @permission_classes((IsAuthenticated,))
-class ChangeUsername(APIView):
-    """
-    Checks if a username already exists
-    """
+class GetNotationPreviewArticle(APIView):
 
-    def post(self, request):
-
-        print("ChangeUsername ", request.data["username"])
-        print("ChangeUsername ", request.user)
-        if request.user.username == "":
-
-            if len(request.data["username"]) > 20:
-                return (JsonResponse(
-                    {"message": "Your username is too long"}, status=405))
-
-            if len(request.data["username"]) < 3:
-                return (JsonResponse(
-                    {"message": "Your username is too short"}, status=405))
-
-            if Account.object.filter(username=request.data["username"]):
-                return (JsonResponse(
-                    {"message": "There is already an account with this username"}, status=405))
-
-            new_user = Account.object.get(pk=request.user.pk)
-            new_user.username = request.data["username"]
-            new_user.save()
-            try:
-                request.user.auth_token.delete()
-            except (AttributeError, ObjectDoesNotExist):
-                pass
-
-            logout(request)
-            return (JsonResponse(
-                {"message": "You username is " + new_user.username}, status=206))
-        else:
-            return (JsonResponse(
-                {"message": "This Facebook account is already link to a LocsApp account"},
-                status=405))
+    def get(self, request):
+        get_user_model().objects.get(pk=self.request.user.pk)
+        # First we get the username id and with this we can get the notation
 
 
 @permission_classes((IsAuthenticated,))

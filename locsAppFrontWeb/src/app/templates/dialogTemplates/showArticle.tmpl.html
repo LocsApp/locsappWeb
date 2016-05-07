@@ -1,4 +1,25 @@
 <md-dialog class="fullscreen-dialog">
+
+  <div>
+    <md-button class="close md-fab md-primary"
+    ng-click="previewArticle.closeDialog()" aria-label="Create this article">
+      <ng-md-icon icon="close"></ng-md-icon>
+    </md-button>
+
+     <md-button class="validate md-fab md-primary"
+    ng-click="previewArticle.createNewArticle()" aria-label="Create this article">
+      <ng-md-icon icon="done"></ng-md-icon>
+    </md-button>
+
+
+     <!--md-button class="close action-button-position md-fab md-primary">
+        <ng-md-icon icon="close">
+        </ng-md-icon>
+      </md-button>-->
+  </div>
+
+
+
   <div layout="row" layout-align="center" class="article-show">
     <div flex-xs="100" flex-sm="100" flex-md="75" flex="50">
       <div layout="row" layout-align="center">
@@ -147,12 +168,12 @@
         <ng-md-icon icon="close">
         </ng-md-icon>
       </md-button>-->
-      <md-button class="validate action-button-position md-fab md-primary" ng-click="previewArticle.createNewArticle()">
-        <ng-md-icon icon="done">
-        </ng-md-icon>
-      </md-button>
+
     </div>
 
 
   </div>
+
+
+
 </md-dialog>
