@@ -6,7 +6,7 @@
     .controller('NavBarController', NavBarController)
 
   /** @ngInject */
-  function NavBarController(NotificationsService, $state, $log, $scope, $mdSidenav, $timeout) {
+  function NavBarController(NotificationsService, $state, $log, $scope, $mdSidenav) {
     var vm = this;
 
     /* Side Nav Menu */
@@ -23,27 +23,19 @@
 
     /* DropDownMenu */
 
-    var originatorArticleEv;
-    this.openMenuArticle = function ($mdOpenMenu, ev) {
-      originatorArticleEv = ev;
+    vm.openMenuArticle = function ($mdOpenMenu, ev) {
       $mdOpenMenu(ev);
     };
 
-    var originatorQuestionsEv;
-    this.openMenuQuestions = function ($mdOpenMenu, ev) {
-      originatorQuestionsEv = ev;
+    vm.openMenuQuestions = function ($mdOpenMenu, ev) {
       $mdOpenMenu(ev);
     };
 
-    var originatorFavoritesEv;
-    this.openMenuFavorites = function ($mdOpenMenu, ev) {
-      originatorFavoritesEv = ev;
+    vm.openMenuFavorites = function ($mdOpenMenu, ev) {
       $mdOpenMenu(ev);
     };
 
-    var originatorAccountEv;
-    this.openMenuAccount = function ($mdOpenMenu, ev) {
-      originatorAccountEv = ev;
+    vm.openMenuAccount = function ($mdOpenMenu, ev) {
       $mdOpenMenu(ev);
     };
 
@@ -62,11 +54,7 @@
       $mdOpenMenu(event);
     };
 
-    var originatorEv;
-    vm.openMenu = function ($mdOpenMenu, ev) {
-      originatorEv = ev;
-      $mdOpenMenu(ev);
-    };
+
 
     /*Goes to the state parameter*/
     vm.goToState = function (state_name) {
