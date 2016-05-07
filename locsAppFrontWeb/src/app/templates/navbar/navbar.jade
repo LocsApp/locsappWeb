@@ -1,11 +1,11 @@
 //We use a sidenav for small screen that we hide for big screen
 div(ng-controller="NavBarController as navbar")
-  md-content(flex='', layout-padding='')
-    div(layout='column', layout-fill='', layout-align='top center')
-      ng-md-icon(icon="menu" ng-click='navbar.toggleRight()', ng-hide='navbar.isOpenRight()'
-      style='cursor:pointer')
+  ng-md-icon(icon="menu" ng-click='navbar.toggleRight()', ng-hide='navbar.isOpenRight()'
+  style='cursor:pointer')
 
-    div(flex='')
+
+
+
   md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id='right')
     md-toolbar.md-theme-light
       h1.md-toolbar-tools Sidenav Right
