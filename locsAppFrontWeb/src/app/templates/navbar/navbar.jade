@@ -1,25 +1,26 @@
 //We use a sidenav for small screen that we hide for big screen
 div(ng-controller="NavBarController as navbar")
-  ng-md-icon(icon="menu" ng-click='navbar.toggleRight()', ng-hide='navbar.isOpenRight()'
-  style='cursor:pointer')
+  div.sidenav(hide show-md show-xs show-sm)
+    ng-md-icon(icon="menu" ng-click='navbar.toggleRight()', ng-hide='navbar.isOpenRight()'
+    style='cursor:pointer')
 
 
 
 
-  md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id='right')
-    md-toolbar.md-theme-light
-      h1.md-toolbar-tools Sidenav Right
-    md-content(layout-padding='')
-      form
-        md-input-container
-          label(for='testInput') Test input
-          input#testInput(type='text', ng-model='data', md-autofocus='')
-      md-button.md-primary(ng-click='close()')
-        | Close Sidenav Right
+    md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id='right')
+      md-toolbar.md-theme-light
+        h1.md-toolbar-tools Sidenav Right
+      md-content(layout-padding='')
+        form
+          md-input-container
+            label(for='testInput') Test input
+            input#testInput(type='text', ng-model='data', md-autofocus='')
+        md-button.md-primary(ng-click='close()')
+          | Close Sidenav Right
 
 
   //Navbar for big screen
-  md-toolbar(layout="row", layout-align="space-between center" ng-controller="NavBarController as navbar").locsapp-navbar-gt-sm
+  md-toolbar(layout="row", layout-align="space-between center" hide-md hide-xs hide-sm).locsapp-navbar-gt-sm
     span
       span(ui-sref="main.homepage" style="cursor: pointer;").md-toolbar-tools Locsapp
     div(layout="row" ng-if="!main.is_authenticated()")
