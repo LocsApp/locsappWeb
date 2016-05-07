@@ -59,7 +59,7 @@ class docAPIView(TemplateView):
 @permission_classes((IsAuthenticated,))
 class ChangeUsername(APIView):
     """
-    Check if an username is already existing
+    Checks if a username already exists
     """
 
     def post(self, request):
