@@ -96,7 +96,6 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.twitter',
     'rest_auth',
-    'autofixture',
     'rest_auth.registration',
     'rest_framework_swagger',
     'tests',

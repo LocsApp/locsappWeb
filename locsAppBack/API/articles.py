@@ -30,13 +30,15 @@ db_locsapp = mongodb_client['locsapp']
 
 
 class FindUserByIdForArticle(APIView):
+
     def get(self, request, user_pk):
         try:
             user = get_user_model().object.get(pk=user_pk)
             return JsonResponse({"username": user.username, "notation_renter": "4",
                                  "nb_notation_renter": "50"}, status=200)
         except ObjectDoesNotExist:
-            return JsonResponse({"message": "user id does not exist"}, status=404)
+            return JsonResponse(
+                {"message": "user id does not exist"}, status=404)
 
 
 """ Articles """
@@ -114,6 +116,45 @@ def searchArticles(request):
     for instance in results:
         document["articles"].append(APIrequests.parseObjectIdToStr(instance))
     return JsonResponse(document)
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def postNewDemand(request):
+    model = {
+        "id_author": {
+            "_type": int,
+            "_default": request.user.pk,
+            "_protected": True
+        },
+        "id_target": {
+            "_type": int
+        },
+        "id_article": {
+            "_type": ObjectId()
+        },
+        "availibility_start": {
+            "_type": str
+        },
+        "availibility_end": {
+            "_type": str
+        },
+        "status": {
+            "_type": str,
+            "_default": "pending"
+        },
+        "visible": {
+            "_type": boolean,
+            "_default": True
+        }
+    }
+
+    if request.method == "POST":
+        return APIrequests.POST(
+            request, model, "articles_demands", "The demand has been successfully issued!")
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
 
 @csrf_exempt
@@ -288,6 +329,8 @@ def getArticle(request, article_pk):
 """
 We send an email to the adminstrator that tell us who user send a report for which article
 """
+
+
 @csrf_exempt
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))
@@ -299,21 +342,24 @@ def sendReport(request):
             try:
                 answer['article_id']
             except KeyError:
-                return JsonResponse({"Error": "Please send the article id"}, status=404)
+                return JsonResponse(
+                    {"Error": "Please send the article id"}, status=404)
 
             if not ObjectId.is_valid(answer['article_id']):
-                return JsonResponse({"Error": "Please send a correct article id"}, status=401)
+                return JsonResponse(
+                    {"Error": "Please send a correct article id"}, status=401)
             list_reporter = get_user_model().objects.filter(is_admin=True)
             list_email = ['locsapp.eip@gmail.com']
             for reporter in list_reporter:
                 list_email.append(reporter.email)
-            article = db_locsapp["articles"].find_one({"_id": ObjectId(answer['article_id'])})
+            article = db_locsapp["articles"].find_one(
+                {"_id": ObjectId(answer['article_id'])})
             if article is None:
-                return JsonResponse({"Error": "This article does not exist"}, status=404)
+                return JsonResponse(
+                    {"Error": "This article does not exist"}, status=404)
 
             # We insert a new report in this article and if there is more than 5 users we create a
             #  new collection report associated to the id of this article
-
 
             message = 'The user ' + request.user.username + ' sent a report about this article' + \
                       ' <a href="' + settings.URL_FRONT + 'article/' + str(article['_id']) + '">' + \
@@ -321,7 +367,8 @@ def sendReport(request):
             email = EmailMessage('Report for article ' + article['title'], message,
                                  to=list_email)
             email.send()
-            return JsonResponse({"Success": "Report sent to the administrators."}, status=200)
+            return JsonResponse(
+                {"Success": "Report sent to the administrators."}, status=200)
         else:
             return JsonResponse({"Error": "Please send a json"}, status=404)
     else:
