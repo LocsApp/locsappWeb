@@ -24,8 +24,10 @@ article_patterns = [
     url(r'^image-upload-article/$',
         views.ImageArticleUploadView.as_view(),
         name='image-upload-article'),
-    url(r'^seller/(?P<user_pk>[0-9]+)/$', articles.FindUserByIdForArticle.as_view()),
-    url(r'^report/$', articles.sendReport)
+    url(r'^seller/(?P<user_pk>[0-9]+)/$',
+        articles.FindUserByIdForArticle.as_view()),
+    url(r'^report/$', articles.sendReport),
+    url(r'^demands/$', articles.demandsMain)
 ]
 
 search_patterns = [

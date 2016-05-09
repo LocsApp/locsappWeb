@@ -121,7 +121,7 @@ def searchArticles(request):
 @csrf_exempt
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))
-def postNewDemand(request):
+def demandsMain(request):
     model = {
         "id_author": {
             "_type": int,
@@ -135,24 +135,26 @@ def postNewDemand(request):
             "_type": ObjectId()
         },
         "availibility_start": {
-            "_type": str
+            "_type": datetime.now(pytz.utc)
         },
         "availibility_end": {
-            "_type": str
+            "_type": datetime.now(pytz.utc)
         },
         "status": {
             "_type": str,
             "_default": "pending"
         },
         "visible": {
-            "_type": boolean,
+            "_type": bool,
             "_default": True
         }
     }
 
     if request.method == "POST":
         return APIrequests.POST(
-            request, model, "articles_demands", "The demand has been successfully issued!")
+            request, model, "article_demands", "The demand has been successfully issued!")
+    elif request.method == "GET":
+        return APIrequests.GET('article_demands', id=request.user.user_pk)
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
