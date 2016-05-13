@@ -85,7 +85,7 @@ div.article-show(layout="row" layout-align="center")
             md-datepicker(ng-model="articleShow.AskEndLocation" md-placeholder="End location")
             //md-button.md-raised Ask for rent
 
-          div.rent(layout="column" flex="flex" layout-align="start" )
+          div.rent(layout="column" flex="flex" layout-align="start" ng-click="articleShow.askRentDialog($event)")
             md-button.md-raised Ask for rent
 
           div.favorite-share(layout="column" flex="flex" layout-align="end" )

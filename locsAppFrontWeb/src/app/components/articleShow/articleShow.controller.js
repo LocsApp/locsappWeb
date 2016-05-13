@@ -14,7 +14,7 @@
 
   /** @ngInject */
   function ArticleShowController($log, $mdDialog, $document, ArticleService, $stateParams,
-                                 $interval, toastr, ScopesService, URL_API) {
+                                 $interval, toastr, ScopesService, URL_API, $sessionStorage, $localStorage) {
 
     var vm = this;
     vm.url_api = URL_API;
@@ -93,6 +93,7 @@
 
 
       vm.getSellerSuccess = function (data) {
+        vm.author_id = data._id;
         vm.username_author = data.username;
         vm.nb_renter_notation = data.notation_renter;
 
@@ -186,6 +187,23 @@
         toastr.success("comment sent", "Success!");
     };
 
+
+    /*Dialog to ask to rent the article*/
+    /** @ngInject */
+    vm.askRentDialog = function (event) {
+      $mdDialog.show({
+        controller: vm.askRentController,
+        controllerAs: 'askRent',
+        templateUrl: 'app/templates/dialogTemplates/askRent.tmpl.html',
+        locals: {user_id: $localStorage.id || $sessionStorage.id, author_id: vm.author_id, article_id: $stateParams.id},
+        bindToController: true,
+        parent: angular.element($document.body),
+        targetEvent: event,
+        clickOutsideToClose: true
+      }).then(function (data) {
+        $log.log("finished");
+      });
+    };
 
     //On affiche le show more si il reste des false dans le tableau
     //Et le show more est affiche on derner true du tableau
