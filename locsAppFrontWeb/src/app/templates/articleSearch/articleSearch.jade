@@ -114,7 +114,7 @@ div.search-article-body(ng-cloak)
 									ng-md-icon(icon="favorite" size="32")
 							h3.title-article {{ article.title }}
 							h2.price-article {{ article.price }}€/day
-							p {{ article.description }}
+							p(ng-bind-html="article.description")
 					md-grid-tile-footer
 						span.distance-range Within 0 km
 md-divider.flex
