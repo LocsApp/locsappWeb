@@ -193,6 +193,23 @@
     vm.askForRent = function()
     {
       $log.log("INNIT");
+      ArticleService
+      .demands
+      .save({
+      "id_target": vm.data.id_author,
+      "id_article": vm.data._id,
+      "availibility_start": vm.AskBeginLocation,
+      "availibility_end": vm.AskEndLocation,
+      "date_issued": new Date().toString(),
+      "article_name": vm.data.title})
+      .$promise
+      .then(function (data) {
+        toastr.success("Your demand has been sent!", "Success !");
+      },
+      function (data) {
+        toastr.error("An error occured while sending the demand", "Woops...");
+        $log.log(data);
+      })
     }
 
     /*Dialog to ask to rent the article*/

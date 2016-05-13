@@ -27,6 +27,7 @@
       searchArticles: $resource(URL_API + 'api/v1/search/articles/'),
       getSeller: $resource(URL_API + 'api/v1/articles/seller/:id/', {id: "@user_id"}),
       sendReport: $resource(URL_API + 'api/v1/articles/report/'),
+      demands : $resource(URL_API + 'api/v1/articles/demands/'),
       uploadPicture: uploadPicture,
       is_authenticated: is_authenticated
     };
