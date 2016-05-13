@@ -75,10 +75,12 @@
       }
 
       /* Create date for date picker */
-      vm.dateStart = new Date(vm.data.availibility_start);
-      vm.dateEnd = new Date(vm.data.availibility_end);
-      vm.AskBeginLocation = new Date(vm.data.availibility_start);
-      vm.AskEndLocation = new Date(vm.data.availibility_end);
+      vm.dateBeginParts = vm.data.availibility_start.split("/");
+      vm.dateEndParts = vm.data.availibility_end.split("/");
+      vm.dateStart = new Date(vm.dateBeginParts[2], vm.dateBeginParts[1] - 1, vm.dateBeginParts[0]);
+      vm.dateEnd = new Date(vm.dateEndParts[2], vm.dateEndParts[1] - 1, vm.dateEndParts[0]);
+      vm.AskBeginLocation = new Date(vm.dateBeginParts[2], vm.dateBeginParts[1] - 1, vm.dateBeginParts[0]);
+      vm.AskEndLocation = new Date(vm.dateEndParts[2], vm.dateEndParts[1] - 1, vm.dateEndParts[0]);
 
       /* Init array questions */
       vm.questions = [];
@@ -187,6 +189,11 @@
         toastr.success("comment sent", "Success!");
     };
 
+    /*Function to ask for rent*/
+    vm.askForRent = function()
+    {
+      $log.log("INNIT");
+    }
 
     /*Dialog to ask to rent the article*/
     /** @ngInject */
@@ -195,7 +202,7 @@
         controller: vm.askRentController,
         controllerAs: 'askRent',
         templateUrl: 'app/templates/dialogTemplates/askRent.tmpl.html',
-        locals: {user_id: $localStorage.id || $sessionStorage.id, author_id: vm.author_id, article_id: $stateParams.id},
+        locals: {user_id: $localStorage.id || $sessionStorage.id, author_id: vm.author_id, article_id: $stateParams.id, article_name: vm.data.title, article_date_begin: vm.data.availibility_start, article_date_end: vm.data.availibility_end},
         bindToController: true,
         parent: angular.element($document.body),
         targetEvent: event,
@@ -203,6 +210,17 @@
       }).then(function (data) {
         $log.log("finished");
       });
+    };
+
+    /*askRentDialog Controller*/
+    /** @ngInject */
+    vm.askRentController = function ($mdDialog) {
+      var vm = this;
+
+      /*Hide callback for $mdDialog*/
+      vm.hide = function () {
+        $mdDialog.hide(vm.user);
+      };
     };
 
     //On affiche le show more si il reste des false dans le tableau

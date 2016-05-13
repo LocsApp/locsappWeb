@@ -135,10 +135,16 @@ def demandsMain(request):
             "_type": ObjectId()
         },
         "availibility_start": {
-            "_type": datetime.now(pytz.utc)
+            "_type": str
         },
         "availibility_end": {
-            "_type": datetime.now(pytz.utc)
+            "_type": str
+        },
+        "date_issued": {
+            "_type": str
+        },
+        "article_name": {
+            "_type": str
         },
         "status": {
             "_type": str,

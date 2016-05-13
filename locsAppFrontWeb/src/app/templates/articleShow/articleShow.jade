@@ -81,11 +81,11 @@ div.article-show(layout="row" layout-align="center")
 
           div.date(layout="column" layout-align="start")
             md-datepicker( ng-model="articleShow.AskBeginLocation"
-            md-placeholder="Begin location")
-            md-datepicker(ng-model="articleShow.AskEndLocation" md-placeholder="End location")
+            md-placeholder="Begin location"  md-min-date="articleShow.dateStart" md-max-date="articleShow.dateEnd")
+            md-datepicker(ng-model="articleShow.AskEndLocation" md-placeholder="End location" md-min-date="articleShow.AskBeginLocation" md-max-date="articleShow.dateEnd")
             //md-button.md-raised Ask for rent
 
-          div.rent(layout="column" flex="flex" layout-align="start" ng-click="articleShow.askRentDialog($event)")
+          div.rent(layout="column" flex="flex" layout-align="start" ng-click="articleShow.askForRent()")
             md-button.md-raised Ask for rent
 
           div.favorite-share(layout="column" flex="flex" layout-align="end" )
