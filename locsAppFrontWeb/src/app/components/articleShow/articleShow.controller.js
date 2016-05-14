@@ -200,7 +200,6 @@
       "id_article": vm.data._id,
       "availibility_start": vm.AskBeginLocation,
       "availibility_end": vm.AskEndLocation,
-      "date_issued": new Date().toString(),
       "article_name": vm.data.title,
       "article_thumbnail_url": vm.data.url_thumbnail,
       "author_name": ScopesService.get("current_user").username,

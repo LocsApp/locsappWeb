@@ -149,7 +149,9 @@ def demandsMain(request):
             "_type": str
         },
         "date_issued": {
-            "_type": str
+            "_type": str,
+            "_protected": True,
+            "_default": datetime.now(pytz.utc)
         },
         "article_name": {
             "_type": str

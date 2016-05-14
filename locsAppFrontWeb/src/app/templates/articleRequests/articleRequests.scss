@@ -7,6 +7,10 @@
 		}
 	}
 
+	.card-information-demand {
+	height: 200px;
+	}
+
 	.title-request-category {
 		text-align: center;
 		margin: 0px;
@@ -19,6 +23,45 @@
 
 	.information-demand {
 		margin-left: 20px;
+	}
+
+	.title-article {
+		margin-bottom: 0px;
+	}
+
+	.asked-by {
+		color: gray;
+		font-size: small;
+	}
+
+	.circle-basis {
+		border-radius: 50%;
+		width: 50px;
+		height: 50px;
+		margin-left:30px;
+		margin-top: 10px;
+		margin-right: 10px;
+	}
+
+	.circle-blue {
+		@extend .circle-basis;
+		background-color: #8BC8DB;
+	}
+
+	.accept-button {
+		background-color: #2196F3;
+
+		&:hover:not([disabled]) {
+			background-color: #2196F3;
+		}		
+	}
+
+	.not-accept {
+		background-color: #D32F2F;
+
+		&:hover:not([disabled]) {
+			background-color: #D32F2F;
+		}
 	}
 
 }

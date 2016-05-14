@@ -7,7 +7,7 @@
 
 
   /** @ngInject */
-  function LoginController($scope, UsersService, toastr, $sessionStorage, $localStorage, $state, $log, $mdDialog, $document, ScopeService) {
+  function LoginController($scope, UsersService, toastr, $sessionStorage, $localStorage, $state, $log, $mdDialog, $document, ScopesService) {
     var vm = this;
 
     /*Log in the user*/
@@ -26,7 +26,7 @@
       else
         $sessionStorage.id = data["id"];
       $state.go("main.homepage");
-      ScopeService.set("current_user", data);
+      ScopesService.set("current_user", data);
     };
 
     vm.userProfileGetFailure = function () {
