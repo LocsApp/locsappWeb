@@ -189,13 +189,12 @@ class APIRequestMongo:
             answer = self.parseObjectIdToStr(
                 self.db[collection_name].find_one({"_id": ObjectId(id)}))
         if special_field:
-            for key in special_field:
-                documents = self.db[collection_name].find(
-                    {str(key): special_field[key]})
-                answer = {collection_name: []}
-                for instance in documents:
-                    answer[collection_name].append(
-                        self.parseObjectIdToStr(instance))
+            documents = self.db[collection_name].find(
+                special_field)
+            answer = {collection_name: []}
+            for instance in documents:
+                answer[collection_name].append(
+                    self.parseObjectIdToStr(instance))
         if (raw is True):
             return (answer)
         else:

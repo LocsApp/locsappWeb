@@ -10,7 +10,7 @@
   function ArticleRequestsController($log, ArticleService, toastr, ScopesService, URL_API) {
     var vm = this;
 
-    vm.demands = [];
+    vm.demands = true;
 
     vm.url_api = URL_API;
 
@@ -22,6 +22,24 @@
     vm.GetDemandsFailure = function (data) {
       $log.log(data);
     };
+
+    vm.refuseDemand = function (index)
+    {
+      ArticleService
+      .refuseDemand
+      .save({"id_demand": vm.demands[index]._id})
+      .$promise
+      .then(function(data)
+      {
+        toastr.success(data.message, "Success!");
+        vm.demands.splice(index, 1);
+      },
+      function(data)
+      {
+        toastr.error(data.data.Error, "Woops...");
+        $log.log(data);
+      })
+    }
 
     ArticleService
     .demands

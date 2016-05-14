@@ -27,7 +27,8 @@ article_patterns = [
     url(r'^seller/(?P<user_pk>[0-9]+)/$',
         articles.FindUserByIdForArticle.as_view()),
     url(r'^report/$', articles.sendReport),
-    url(r'^demands/$', articles.demandsMain)
+    url(r'^demands/$', articles.demandsMain),
+    url(r'^refuse-demand/$', articles.refuseDemand)
 ]
 
 search_patterns = [

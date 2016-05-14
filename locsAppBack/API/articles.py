@@ -119,6 +119,32 @@ def searchArticles(request):
 
 
 @csrf_exempt
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def refuseDemand(request):
+    if request.method == "POST":
+        body = json.loads(request.body.decode('utf8'))
+        print(body["id_demand"])
+        if (body["id_demand"] is None):
+            return JsonResponse(
+                {"Error": "The key id_demand is needed."}, status=401)
+        demand = db_locsapp["article_demands"].find_one(
+            {"_id": ObjectId(body["id_demand"])})
+        if (demand is None):
+            return JsonResponse(
+                {"Error": "The demand doesn't exist."}, status=401)
+        if (demand["id_target"] != request.user.pk):
+            return JsonResponse(
+                {"Error": "You are not allowed to refuse this demand."}, status=401)
+        db_locsapp["article_demands"].update({"_id": ObjectId(body["id_demand"])}, {
+                                             "$set": {"visible": False}})
+        return JsonResponse(
+            {"message": "The demand has been successfully denied!"}, status=200)
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+@csrf_exempt
 @api_view(['POST', 'GET'])
 @permission_classes((IsAuthenticated,))
 def demandsMain(request):
@@ -174,7 +200,7 @@ def demandsMain(request):
             request, model, "article_demands", "The demand has been successfully issued!", verifyIfDemandAlreadyIssued)
     elif request.method == "GET":
         return APIrequests.GET(
-            'article_demands', special_field={"id_target": request.user.pk})
+            'article_demands', special_field={"id_target": request.user.pk, "visible": True})
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 

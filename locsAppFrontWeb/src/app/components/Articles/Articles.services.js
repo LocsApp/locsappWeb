@@ -28,6 +28,7 @@
       getSeller: $resource(URL_API + 'api/v1/articles/seller/:id/', {id: "@user_id"}),
       sendReport: $resource(URL_API + 'api/v1/articles/report/'),
       demands : $resource(URL_API + 'api/v1/articles/demands/'),
+      refuseDemand : $resource(URL_API + 'api/v1/articles/refuse-demand/'),
       uploadPicture: uploadPicture,
       is_authenticated: is_authenticated
     };
