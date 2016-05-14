@@ -201,13 +201,19 @@
       "availibility_start": vm.AskBeginLocation,
       "availibility_end": vm.AskEndLocation,
       "date_issued": new Date().toString(),
-      "article_name": vm.data.title})
+      "article_name": vm.data.title,
+      "article_thumbnail_url": vm.data.url_thumbnail,
+      "author_name": ScopesService.get("current_user").username,
+      "author_notation": ScopesService.get("current_user").notation_renting || -1})
       .$promise
       .then(function (data) {
         toastr.success("Your demand has been sent!", "Success !");
       },
       function (data) {
-        toastr.error("An error occured while sending the demand", "Woops...");
+        if (data.data.error)
+          toastr.error(data.data.error, "Woops...");
+        else
+          toastr.error("An error occured while sending the demand", "Woops...");
         $log.log(data);
       })
     }

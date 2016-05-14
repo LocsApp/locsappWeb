@@ -1,0 +1,30 @@
+div(layout="row", layout-align="center center")
+	h2 Current Requests
+div(style="margin-top:40px;")
+div(layout="row")
+	span.flex
+	div(flex="70").article-requests-body
+		div(layout="row" layout-align="center start")
+			span(flex="25").special-divider
+				md-divider
+			h3.title-request-category.flex My Requests As Renter
+			span(flex="25").special-divider
+				md-divider
+		div(style="margin-top:20px;")
+		div(ng-repeat="demand in articleRequests.demands")
+			div(layout="row" hide-md hide-sm hide-xs)
+				md-card(flex="40")
+					div(layout="row")
+						img.img-icon-demand-article(ng-src="{{ articleRequests.url_api + demand.article_thumbnail_url}}")
+						div.flex.information-demand
+							p {{ demand.article_name }}
+								md-card(flex="40")
+			div(layout="row" hide-gt-md)
+				md-card.flex
+					div(layout="row")
+						img.img-icon-demand-article(ng-src="{{ articleRequests.url_api + demand.article_thumbnail_url}}")
+						div.flex.information-demand
+							p {{ demand.article_name }}
+
+
+	span.flex

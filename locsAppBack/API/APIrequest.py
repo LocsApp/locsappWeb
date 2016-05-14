@@ -112,7 +112,8 @@ class APIRequestMongo:
     This method creates a POST endpoint for a mongo API
     """
 
-    def POST(self, request, model, collection_name, success_message):
+    def POST(self, request, model, collection_name,
+             success_message, verification_callback=None):
         if request.body:
             body = json.loads(request.body.decode('utf8'))
             keys_error = {}
@@ -134,7 +135,15 @@ class APIRequestMongo:
             keys_error.update(missing_keys)
             if keys_error:
                 return JsonResponse(keys_error, status=401)
-            self.db[collection_name].insert_one(document)
+            if (verification_callback is None):
+                self.db[collection_name].insert_one(document)
+            else:
+                testVerification = verification_callback(document)
+                if (testVerification is True):
+                    self.db[collection_name].insert_one(document)
+                else:
+                    return (JsonResponse(
+                        testVerification, status=401))
             return (JsonResponse(
                 {"message": success_message}, status=200))
 
@@ -167,10 +176,10 @@ class APIRequestMongo:
 
     """
 
-    def GET(self, collection_name, id=None, raw=False):
+    def GET(self, collection_name, id=None, raw=False, special_field=None):
         print(type(collection_name))
         print(type(id))
-        if id is None:
+        if id is None and special_field is None:
             documents = self.db[collection_name].find({})
             answer = {collection_name: []}
             for instance in documents:
@@ -179,7 +188,14 @@ class APIRequestMongo:
         if id:
             answer = self.parseObjectIdToStr(
                 self.db[collection_name].find_one({"_id": ObjectId(id)}))
-            print(answer)
+        if special_field:
+            for key in special_field:
+                documents = self.db[collection_name].find(
+                    {str(key): special_field[key]})
+                answer = {collection_name: []}
+                for instance in documents:
+                    answer[collection_name].append(
+                        self.parseObjectIdToStr(instance))
         if (raw is True):
             return (answer)
         else:

@@ -119,7 +119,7 @@ def searchArticles(request):
 
 
 @csrf_exempt
-@api_view(['POST'])
+@api_view(['POST', 'GET'])
 @permission_classes((IsAuthenticated,))
 def demandsMain(request):
     model = {
@@ -127,6 +127,14 @@ def demandsMain(request):
             "_type": int,
             "_default": request.user.pk,
             "_protected": True
+        },
+        "author_name": {
+            "_type": str
+        },
+        "author_notation": {
+            "_type": int,
+            "_max": 5,
+            "_min": -1
         },
         "id_target": {
             "_type": int
@@ -146,6 +154,9 @@ def demandsMain(request):
         "article_name": {
             "_type": str
         },
+        "article_thumbnail_url": {
+            "_type": str
+        },
         "status": {
             "_type": str,
             "_default": "pending"
@@ -158,11 +169,22 @@ def demandsMain(request):
 
     if request.method == "POST":
         return APIrequests.POST(
-            request, model, "article_demands", "The demand has been successfully issued!")
+            request, model, "article_demands", "The demand has been successfully issued!", verifyIfDemandAlreadyIssued)
     elif request.method == "GET":
-        return APIrequests.GET('article_demands', id=request.user.user_pk)
+        return APIrequests.GET(
+            'article_demands', special_field={"id_target": request.user.pk})
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+def verifyIfDemandAlreadyIssued(document):
+    if (db_locsapp["article_demands"].find_one(
+            {"id_article": document["id_article"], "id_author": document["id_author"]}) is not None):
+        return ({"error": "You already made the demand for this article."})
+    elif (db_locsapp["article_demands"].find_one({"id_target": document["id_author"]}) is not None):
+        return ({"error": "You can't demand for your own article."})
+    else:
+        return (True)
 
 
 @csrf_exempt

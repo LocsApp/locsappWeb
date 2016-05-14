@@ -186,6 +186,20 @@
       controllerAs: 'articleEdit'
     })
 
+     .state('main.article_requests', {
+      url: 'my-requests/',
+      parent: 'main',
+      templateUrl: 'app/templates/articleRequests/articleRequests.html',
+      controller: 'ArticleRequestsController',
+      controllerAs: 'articleRequests',
+      data: {
+			permissions: {
+				only: ['user'],
+				redirectTo: 'main.homepage'
+			}
+		}
+    })
+
     .state('main.article_create', {
       url: 'create-article/',
       parent: 'main',
