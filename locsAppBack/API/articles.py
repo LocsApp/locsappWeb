@@ -88,7 +88,7 @@ def searchArticles(request):
                 search[key] = {"$in": body[key]}
     number_items = body["_pagination"]["items_per_page"]
     page_number = body["_pagination"]["page_number"]
-    if ("_order" in body):
+    if ("_order" in body and len(body["_order"]) > 0):
         results = db_locsapp["articles"].find(search).sort(ordering)[
             ((page_number -
               1) *

@@ -35,7 +35,8 @@
 		vm.search = {"_pagination" : {
 					"page_number": 1,
 					"items_per_page" : 8
-		}};
+					},
+					"_order" : []};
 
 		/*Articles vars*/
 		vm.articles = {};
@@ -49,6 +50,32 @@
 		/*Articles functions*/
 		vm.goToArticlePage = function (id) {
 			$log.log($state.go("main.articleShow", {"id" : id}));
+		}
+
+		vm.manageSortOptions = function(option)
+		{
+			var existingOption = false;
+
+			for (var x = 0; x < vm.search._order.length; x++)
+			{
+				if (vm.search._order[x].field_name == option)
+				{
+					if (vm.search._order[x].order == "DESC")
+					{
+						var index = vm.search._order.indexOf(vm.search._order[x]);
+						if (index > -1)
+							vm.search._order.splice(index, 1);
+						else
+							$log.log("Error while removing an object in the sort order array")
+					}
+					else if (vm.search._order[x].order == "ASC")
+						vm.search._order[x].order = "DESC"
+					existingOption = true;
+				}
+			}
+			if (!existingOption)
+				vm.search._order.push({"order": "ASC", "field_name" : option})
+			$log.log(vm.search._order);
 		}
 
 		/*Search bar*/
