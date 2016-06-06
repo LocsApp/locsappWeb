@@ -75,6 +75,11 @@
 			}
 			if (!existingOption)
 				vm.search._order.push({"order": "ASC", "field_name" : option})
+			ArticleService
+				.searchArticles
+				.save(vm.search)
+				.$promise
+				.then(vm.getArticles, vm.failedGetArticles);
 			$log.log(vm.search._order);
 		}
 
