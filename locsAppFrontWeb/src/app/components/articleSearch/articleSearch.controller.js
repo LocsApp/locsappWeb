@@ -52,7 +52,8 @@
 			$log.log($state.go("main.articleShow", {"id" : id}));
 		}
 
-		vm.manageSortOptions = function(option)
+		/*Handles the adding of sorting options and send them to the back*/
+		vm.manageSortOptions = function($event, option)
 		{
 			var existingOption = false;
 
@@ -69,7 +70,10 @@
 							$log.log("Error while removing an object in the sort order array")
 					}
 					else if (vm.search._order[x].order == "ASC")
+					{
 						vm.search._order[x].order = "DESC"
+						$event.stopPropagation();
+					}
 					existingOption = true;
 				}
 			}
@@ -81,6 +85,21 @@
 				.$promise
 				.then(vm.getArticles, vm.failedGetArticles);
 			$log.log(vm.search._order);
+		}
+
+		/* Handles the order showing near the options*/
+		vm.optionSortOrderStatus = function(name)
+		{
+			$log.log("in this func")
+			var existingOption = false;
+
+			for (var x = 0; x < vm.search._order.length; x++)
+			{
+				if (vm.search._order[x].field_name == name)
+					return (vm.search._order[x].order)
+			}
+			if (!existingOption)
+				return (null)
 		}
 
 		/*Search bar*/
