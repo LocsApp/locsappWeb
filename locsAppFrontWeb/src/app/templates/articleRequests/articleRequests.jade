@@ -32,6 +32,8 @@ div(layout="row")
 								md-button.md-raised ACCEPT
 								span.flex
 								md-button(ng-click="articleRequests.refuseDemand($index)").md-raised REFUSE
+						div(flex="none")
+							div(ng-if="demand.status == 'pending'").circle-blue
 						div(flex="20")
 			div(layout="row" hide-gt-md)
 				md-card.card-information-demand.flex
@@ -62,5 +64,36 @@ div(layout="row")
 		div(style="margin-top:20px;")
 		div(ng-if="articleRequests.demandsAsRenting.length < 1 && articleRequests.demandsAsRenting != true")
 			p(style="text-align: center;") You issued no requests yet.
+		div(ng-repeat="demand in articleRequests.demandsAsRenting track by $index")
+			div(layout="row" hide-md hide-sm hide-xs)
+				md-card.card-information-demand(flex="40")
+					div(layout="row")
+						img.img-icon-demand-article(ng-src="{{ articleRequests.url_api + demand.article_thumbnail_url}}")
+						div.flex.information-demand
+							p.title-article {{ demand.article_name }}
+							div
+								span From :
+								strong {{ }} {{ demand.availibility_start | date : medium }}
+							div
+								span To :
+								strong {{ }} {{ demand.availibility_end | date : medium }}
+						div(flex="none")
+							div(ng-if="demand.status == 'pending'").circle-blue
+						div(flex="20")
+			div(layout="row" hide-gt-md)
+				md-card.card-information-demand.flex
+					div(layout="row")
+						img.img-icon-demand-article(ng-src="{{ articleRequests.url_api + demand.article_thumbnail_url}}")
+						div.flex.information-demand
+							p.title-article {{ demand.article_name }}
+							div.asked-by Asked By {{ demand.author_name }} on {{ demand.date_issued.$date | date : medium }}
+							div
+								span From :
+								strong {{ }} {{ demand.availibility_start | date : medium }}
+							div
+								span To :
+								strong {{ }} {{ demand.availibility_end | date : medium }}
+						div(flex="none")
+							div(ng-if="demand.status == 'pending'").circle-blue
 
 	span.flex

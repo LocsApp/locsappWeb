@@ -196,6 +196,7 @@ class APIRequestMongo:
                 answer[collection_name].append(
                     self.parseObjectIdToStr(instance))
         if (raw is True):
+            print(answer)
             return (answer)
         else:
             return HttpResponse(json.dumps(

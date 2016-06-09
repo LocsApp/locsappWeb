@@ -211,7 +211,7 @@ def demandsMain(request):
 def demandsAsRenting(request):
     if request.method == "GET":
         return APIrequests.GET(
-            'article_demands', special_field={"id_autor": request.user.pk, "visible": True})
+            'article_demands', special_field={"id_author": request.user.pk, "visible": True})
 
 
 def verifyIfDemandAlreadyIssued(document):

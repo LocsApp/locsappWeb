@@ -25,6 +25,7 @@
     };
 
     vm.GetDemandsRentingSuccess = function (data) {
+      $log.log("renting")
       $log.log(data);
       vm.demandsAsRenting = data.article_demands;
     };
