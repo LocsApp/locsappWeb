@@ -6,7 +6,7 @@ div.search-article-toolbar
 		md-input-container
 			md-select(ng-model="articleSearch.sortOption" md-container-class="article-search-sorting-select-container" multiple aria-label="sorting options")
 				md-optgroup(label="sorts")
-					md-option(ng-repeat="sort in articleSearch.sortingOptions" ng-value="sort" ng-click="articleSearch.manageSortOptions($event, sort)") {{sort}} <span style="font-size:small; font-weight: bold;">{{ articleSearch.optionSortOrderStatus(sort) }}</span>
+					md-option(ng-repeat="sort in articleSearch.sortingOptions track by $index" ng-value="sort" ng-click="articleSearch.manageSortOptions($event, sort)") {{sort}} <span style="font-size:small; font-weight: bold;">{{ articleSearch.optionSortOrderStatus(sort) }}</span>
 		span.flex
 		ng-md-icon(icon="keyboard_arrow_left" ng-click="articleSearch.onArrowClick(-1);" ng-if="articleSearch.search._pagination.page_number != 1").arrow-previous-page
 		span.pagination-toolbar-search-article

@@ -205,6 +205,15 @@ def demandsMain(request):
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
 
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def demandsAsRenting(request):
+    if request.method == "GET":
+        return APIrequests.GET(
+            'article_demands', special_field={"id_autor": request.user.pk, "visible": True})
+
+
 def verifyIfDemandAlreadyIssued(document):
     if (db_locsapp["article_demands"].find_one(
             {"id_article": document["id_article"], "id_author": document["id_author"]}) is not None):

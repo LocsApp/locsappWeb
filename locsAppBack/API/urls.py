@@ -28,6 +28,7 @@ article_patterns = [
         articles.FindUserByIdForArticle.as_view()),
     url(r'^report/$', articles.sendReport),
     url(r'^demands/$', articles.demandsMain),
+    url(r'^demands-as-renting/$', articles.demandsAsRenting),
     url(r'^refuse-demand/$', articles.refuseDemand)
 ]
 

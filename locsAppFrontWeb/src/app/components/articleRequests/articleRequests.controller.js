@@ -11,6 +11,7 @@
     var vm = this;
 
     vm.demands = true;
+    vm.demandsAsRenting = true;
 
     vm.url_api = URL_API;
 
@@ -20,6 +21,15 @@
     };
 
     vm.GetDemandsFailure = function (data) {
+      $log.log(data);
+    };
+
+    vm.GetDemandsRentingSuccess = function (data) {
+      $log.log(data);
+      vm.demandsAsRenting = data.article_demands;
+    };
+
+    vm.GetDemandsRentingFailure = function (data) {
       $log.log(data);
     };
 
@@ -46,6 +56,12 @@
     .get()
     .$promise
     .then(vm.GetDemandsSuccess, vm.GetDemandsFailure);
+
+    ArticleService
+    .demandsAsRenting
+    .get()
+    .$promise
+    .then(vm.GetDemandsRentingSuccess, vm.GetDemandsRentingFailure);
   }
 
  })();

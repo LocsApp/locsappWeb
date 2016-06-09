@@ -53,5 +53,14 @@ div(layout="row")
 								md-button(ng-click="articleRequests.refuseDemand($index)").not-accept.md-raised REFUSE
 						div(flex="none")
 							div(ng-if="demand.status == 'pending'").circle-blue
+		div(layout="row" layout-align="center start")
+			span(flex="25").special-divider
+				md-divider
+			h3.title-request-category.flex My Requests As Renting
+			span(flex="25").special-divider
+				md-divider
+		div(style="margin-top:20px;")
+		div(ng-if="articleRequests.demandsAsRenting.length < 1 && articleRequests.demandsAsRenting != true")
+			p(style="text-align: center;") You issued no requests yet.
 
 	span.flex
