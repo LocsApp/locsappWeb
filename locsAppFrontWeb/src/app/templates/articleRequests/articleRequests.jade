@@ -28,13 +28,12 @@ div(layout="row")
 							div
 								span To :
 								strong {{ }} {{ demand.availibility_end | date : medium }}
-							div(layout="row" style="margin-top: 30px;")
-								md-button.md-raised ACCEPT
+							div(layout="row" style="margin-top: 10px;")
+								md-button(class="md-primary").md-raised ACCEPT
 								span.flex
-								md-button(ng-click="articleRequests.refuseDemand($index)").md-raised REFUSE
+								md-button(ng-click="articleRequests.refuseDemand($index)").not-accept.md-raised REFUSE
 						div(flex="none")
 							div(ng-if="demand.status == 'pending'").circle-blue
-						div(flex="20")
 			div(layout="row" hide-gt-md)
 				md-card.card-information-demand.flex
 					div(layout="row")
