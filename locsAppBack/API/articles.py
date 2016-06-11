@@ -118,10 +118,7 @@ def searchArticles(request):
     return JsonResponse(document)
 
 
-@csrf_exempt
-@api_view(['POST'])
-@permission_classes((IsAuthenticated,))
-def refuseDemand(request):
+def demandsOptions(request, key_check, visibility, status, status_message):
     if request.method == "POST":
         body = json.loads(request.body.decode('utf8'))
         print(body["id_demand"])
@@ -133,15 +130,31 @@ def refuseDemand(request):
         if (demand is None):
             return JsonResponse(
                 {"Error": "The demand doesn't exist."}, status=401)
-        if (demand["id_target"] != request.user.pk):
+        if (demand[key_check] != request.user.pk):
             return JsonResponse(
                 {"Error": "You are not allowed to refuse this demand."}, status=401)
         db_locsapp["article_demands"].update({"_id": ObjectId(body["id_demand"])}, {
-                                             "$set": {"visible": False}})
+                                             "$set": {"visible": visibility, "status": status}})
         return JsonResponse(
-            {"message": "The demand has been successfully denied!"}, status=200)
+            {"message": status_message}, status=200)
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def refuseDemand(request):
+    return demandsOptions(request, "id_target", False, "refused",
+                          "The demand has been successfully denied!")
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def retractDemand(request):
+    return demandsOptions(request, "id_author", False, "retracted",
+                          "You have successfully retracted!")
 
 
 @csrf_exempt

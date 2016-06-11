@@ -52,6 +52,24 @@
       })
     }
 
+    vm.retractDemand = function (index)
+    {
+            ArticleService
+      .retractDemand
+      .save({"id_demand": vm.demandsAsRenting[index]._id})
+      .$promise
+      .then(function(data)
+      {
+        toastr.success(data.message, "Success!");
+        vm.demandsAsRenting.splice(index, 1);
+      },
+      function(data)
+      {
+        toastr.error(data.data.Error, "Woops...");
+        $log.log(data);
+      })
+    }
+
     ArticleService
     .demands
     .get()

@@ -98,7 +98,7 @@ div(layout="row")
 								strong {{ }} {{ demand.availibility_end | date : medium }}
 							div(layout="row" style="margin-top: 30px;")
 								span.flex
-								md-button.not-accept.md-raised RETRACT
+								md-button(ng-click="articleRequests.retractDemand($index)").not-accept.md-raised RETRACT
 								span.flex
 						div(flex="none")
 							div(ng-if="demand.status == 'pending'").circle-blue

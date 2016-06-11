@@ -29,7 +29,8 @@ article_patterns = [
     url(r'^report/$', articles.sendReport),
     url(r'^demands/$', articles.demandsMain),
     url(r'^demands-as-renting/$', articles.demandsAsRenting),
-    url(r'^refuse-demand/$', articles.refuseDemand)
+    url(r'^refuse-demand/$', articles.refuseDemand),
+    url(r'^retract-demand/$', articles.retractDemand)
 ]
 
 search_patterns = [
