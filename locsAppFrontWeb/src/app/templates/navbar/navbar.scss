@@ -1,17 +1,24 @@
 @import "../../theme.scss";
 
- md-menu-content.submenu {
+.sidenav {
+
+  md-toolbar {
     background: #C10000;
- }
+
+  }
+}
+
+md-menu-content.submenu {
+  background: #C10000;
+}
 
 .submenu {
 
-
-   &.subtitle {
-       font-weight: bold;
-      font-size: 0.7em;
-      text-transform: uppercase;
-    }
+  &.subtitle {
+    font-weight: bold;
+    font-size: 0.7em;
+    text-transform: uppercase;
+  }
 
   md-divider {
     border-top-color: white;
@@ -20,8 +27,8 @@
 }
 
 a.submenu, a:hover.submenu {
-   color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 .locsapp-navbar-gt-sm {

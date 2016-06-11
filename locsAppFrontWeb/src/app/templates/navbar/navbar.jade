@@ -28,13 +28,11 @@ div(ng-controller="NavBarController as navbar")
       div
         span.icon-and-title
           a(href='#' ui-sref="main.login")
-            ng-md-icon(icon="login" size="30")
             span.title Log in
 
       div
         span.icon-and-title
           a(href='#' ui-sref="main.register")
-            ng-md-icon(icon="person_add" size="30")
             span.title Sign in
     div(layout='row' ng-if="main.is_authenticated()")
       //include ./notifications.jade
@@ -42,13 +40,11 @@ div(ng-controller="NavBarController as navbar")
       div
         span.icon-and-title
           a(href='#' ui-sref="main.article_search")
-            ng-md-icon(icon="search" size="30")
             span.title Search
 
       div
         span.icon-and-title
           a(href='#' ui-sref="main.article_create")
-            ng-md-icon(icon="create" size="30")
             span.title Create an article
 
 
@@ -56,32 +52,27 @@ div(ng-controller="NavBarController as navbar")
         span.icon-and-title
           md-menu
             a(href='#' ng-click='navbar.openMenuArticle($mdOpenMenu, $event)')
-              md-icon(md-svg-src="../assets/icons/menu/ic_note_white_24px.svg" class="name")
               span.title My articles
             md-menu-content.submenu(width='4')
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.article_requests")
-                  ng-md-icon(icon="help" size="25" )
                   span.submenu.subtitle Current requests
               md-divider
 
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.profile_management")
-                  ng-md-icon(icon="create" size="25")
                   span.submenu.subtitle Current articles
               md-divider
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.homepage")
-                  md-icon(md-svg-src="../assets/icons/menu/ic_timeline_white_24px.svg" class="name")
                   span.submenu.subtitle Timeline
               md-divider
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.homepage")
-                  ng-md-icon(icon="star" size="25")
                   span.submenu.subtitle Notation
 
 
@@ -89,13 +80,11 @@ div(ng-controller="NavBarController as navbar")
         span.icon-and-title
           md-menu
             a(href='#' ng-click='navbar.openMenuQuestions($mdOpenMenu, $event)')
-              ng-md-icon(md-menu-origin='' icon="question_answer" size="30" )
               span.title My questions
             md-menu-content.submenu(width='4')
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.user_profile")
-                  ng-md-icon(icon="arrow_forward" size="25" )
                   span.submenu.subtitle Questions I have asked
               md-divider
 
@@ -110,20 +99,17 @@ div(ng-controller="NavBarController as navbar")
         span.icon-and-title
           md-menu
             a(href='#' ng-click='navbar.openMenuFavorites($mdOpenMenu, $event)')
-              ng-md-icon(md-menu-origin='' icon="bookmark" size="30" )
               span.title My bookmarks
             md-menu-content.submenu(width='4')
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.user_profile")
-                  md-icon(md-svg-src="../assets/icons/menu/ic_note_white_24px.svg" class="name")
                   span.submenu.subtitle My articles
               md-divider
 
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.profile_management")
-                  ng-md-icon(icon="search" size="25")
                   span.submenu.subtitle My searches
 
 
@@ -131,26 +117,22 @@ div(ng-controller="NavBarController as navbar")
         span.icon-and-title
           md-menu
             a(href='#' ng-click='navbar.openMenuAccount($mdOpenMenu, $event)')
-              ng-md-icon(md-menu-origin='' icon="account_box" size="30" )
               span.title My account
             md-menu-content.submenu(width='4')
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.user_profile")
-                  ng-md-icon(icon="perm_identity" size="25" )
                   span.submenu.subtitle My informations
               md-divider
 
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.profile_management")
-                  ng-md-icon(icon="create" size="25")
                   span.submenu.subtitle Edit my profile
               md-divider
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.homepage")
-                  ng-md-icon(icon="history" size="25")
                   span.submenu.subtitle History
 
 
@@ -158,7 +140,6 @@ div(ng-controller="NavBarController as navbar")
       div
         span.icon-and-title
           a(href='#' ui-sref="main.logout")
-            ng-md-icon(icon="logout" size="30")
             span.title.hide-last Log out
 
 
