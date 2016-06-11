@@ -218,8 +218,9 @@ def demandsAsRenting(request):
 
 
 def verifyIfDemandAlreadyIssued(document):
-    if (db_locsapp["article_demands"].find_one(
-            {"id_article": document["id_article"], "id_author": document["id_author"]}) is not None):
+    retrieval = db_locsapp["article_demands"].find_one(
+        {"id_article": document["id_article"], "id_author": document["id_author"]})
+    if (retrieval is not None and retrieval["status"] != "retracted"):
         return ({"error": "You already made the demand for this article."})
     elif (db_locsapp["article_demands"].find_one({"id_target": document["id_author"]}) is not None):
         return ({"error": "You can't demand for your own article."})
