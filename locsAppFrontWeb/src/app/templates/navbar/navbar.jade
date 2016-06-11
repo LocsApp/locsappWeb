@@ -1,6 +1,6 @@
 //We use a sidenav for small screen that we hide for big screen
 div(ng-controller="NavBarController as navbar")
-  div.sidenav(hide show-xs)
+  div.sidenav(hide show-xs show-sm)
     ng-md-icon(icon="menu" ng-click='navbar.toggleRight()', ng-hide='navbar.isOpenRight()'
     style='cursor:pointer')
 
@@ -20,7 +20,7 @@ div(ng-controller="NavBarController as navbar")
 
 
   //Navbar for big screen
-  md-toolbar(layout="row", layout-align="space-between center" hide-xs).locsapp-navbar-gt-sm
+  md-toolbar(layout="row", layout-align="space-between center" hide-xs hide-sm).locsapp-navbar-gt-sm
     span
       span(ui-sref="main.homepage" style="cursor: pointer;").md-toolbar-tools Locsapp
     div(layout="row" ng-if="!main.is_authenticated()")
