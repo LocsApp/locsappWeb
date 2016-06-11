@@ -10,8 +10,10 @@
 		var vm = this;
 
 		vm.userLoggedoutSuccess = function () {
+			var temp_static_collections = $localStorage.static_collections;
 			$localStorage.$reset();
 			$sessionStorage.$reset();
+			$localStorage.temp_static_collections = temp_static_collections;
 			toastr.success("You logged out securely.", "Successful Log Out");
 			$state.go("main.homepage");
 		};

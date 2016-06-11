@@ -165,6 +165,9 @@ def demandsMain(request):
         "id_target": {
             "_type": int
         },
+        "name_target": {
+            "_type": str
+        },
         "id_article": {
             "_type": ObjectId()
         },

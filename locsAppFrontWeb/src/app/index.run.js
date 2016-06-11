@@ -52,6 +52,7 @@
     }
     else
     {
+      $log.log($localStorage)
       CacheService
       .checkStaticCollectionVersion
       .save({"argument" : 0, "version": $localStorage.static_collections.version})
@@ -66,6 +67,10 @@
       },
         function(data) { $log.log("ERROR CACHE RETRIEVAL"); $log.log(data); });
     }
+
+    //If the page was reloaded but user still logged in, for shared user informations
+    if ($localStorage.current_user)
+      ScopesService.set("current_user", $localStorage.current_user);
 
     //Set the shared scope of the elements of cache
     ScopesService.set("static_collections", $localStorage.static_collections.body);

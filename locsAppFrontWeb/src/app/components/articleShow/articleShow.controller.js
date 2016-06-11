@@ -192,11 +192,11 @@
     /*Function to ask for rent*/
     vm.askForRent = function()
     {
-      $log.log("INNIT");
       ArticleService
       .demands
       .save({
       "id_target": vm.data.id_author,
+      "name_target": vm.username_author,
       "id_article": vm.data._id,
       "availibility_start": vm.AskBeginLocation,
       "availibility_end": vm.AskEndLocation,

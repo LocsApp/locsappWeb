@@ -26,6 +26,8 @@
       else
         $sessionStorage.id = data["id"];
       $state.go("main.homepage");
+      $localStorage.current_user = data;
+      $log.log($localStorage);
       ScopesService.set("current_user", data);
     };
 
