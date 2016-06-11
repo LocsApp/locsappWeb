@@ -2,6 +2,17 @@
 
 .user-profile-parameters {
 
+  md-input-container.gender {
+
+    margin-bottom: 20px;
+
+    md-radio-group {
+      margin-left: 35px;
+      margin-top: 8px;
+
+    }
+  }
+
   md-card {
 
     /* For md-divider */

@@ -110,18 +110,26 @@
 
       $log.log("Submit");
 
-      UsersService
-        .modify_profile
-        .update({
-          secondary_emails: [],
-          first_name: vm.user.first_name,
-          last_name: vm.user.last_name,
-          gender: vm.user.gender,
-          birthdate: vm.user.birthdate,
-          phone: vm.user.phone
-        })
-        .$promise
-        .then(vm.GetInfosPutUserSuccess, vm.GetInfosUserFailure);
+      if (!vm.user.gender) {
+        $log.log("Gender ");
+      }
+
+      else {
+
+
+        UsersService
+          .modify_profile
+          .update({
+            secondary_emails: [],
+            first_name: vm.user.first_name,
+            last_name: vm.user.last_name,
+            gender: vm.user.gender,
+            birthdate: vm.user.birthdate,
+            phone: vm.user.phone
+          })
+          .$promise
+          .then(vm.GetInfosPutUserSuccess, vm.GetInfosUserFailure);
+      }
     };
 
 
@@ -168,8 +176,10 @@
         controller: vm.addAddressController,
         controllerAs: 'addAddress',
         templateUrl: 'app/templates/dialogTemplates/addAddress.tmpl.html',
-        locals: {user: vm.user, type: type, states: $scope.states,
-          first_name: vm.user.first_name, last_name: vm.user.last_name},
+        locals: {
+          user: vm.user, type: type, states: $scope.states,
+          first_name: vm.user.first_name, last_name: vm.user.last_name
+        },
         bindToController: true,
         parent: angular.element($document.body),
         targetEvent: event,
@@ -223,113 +233,113 @@
       var vm = this;
 
       /*console.log("vm = ", vm.address);
-      /!*initialize vars*!/
-      vm.add_to_other = false;
-      vm.count = 0;
+       /!*initialize vars*!/
+       vm.add_to_other = false;
+       vm.count = 0;
 
-      /!*Parses the strings address in living_address and billing_address to JSON objects*!/
-      vm.parseAddressToJson = function () {
-        var i = 0;
-        var temp = null;
+       /!*Parses the strings address in living_address and billing_address to JSON objects*!/
+       vm.parseAddressToJson = function () {
+       var i = 0;
+       var temp = null;
 
-        if (vm.user.living_address != null) {
-          for (i = 0; i < vm.user.living_address.length; i++) {
-            temp = angular.fromJson(vm.user.living_address[i][1]);
-            vm.user.living_address[i][1] = temp;
-          }
-        }
-        if (vm.user.billing_address != null) {
-          for (i = 0; i < vm.user.billing_address.length; i++) {
-            temp = angular.fromJson(vm.user.billing_address[i][1]);
-            vm.user.billing_address[i][1] = temp;
-          }
-        }
-      };
+       if (vm.user.living_address != null) {
+       for (i = 0; i < vm.user.living_address.length; i++) {
+       temp = angular.fromJson(vm.user.living_address[i][1]);
+       vm.user.living_address[i][1] = temp;
+       }
+       }
+       if (vm.user.billing_address != null) {
+       for (i = 0; i < vm.user.billing_address.length; i++) {
+       temp = angular.fromJson(vm.user.billing_address[i][1]);
+       vm.user.billing_address[i][1] = temp;
+       }
+       }
+       };
 
-      /!*Success callback of the ressource callback*!/
-      vm.GetAddressUserSuccess = function (data) {
-        vm.user = data;
-        vm.parseAddressToJson();
-        $log.log(vm.user);
-        if (vm.add_to_other && vm.count == 1)
-          toastr.success("The new addresses have been successfully added.", "Success");
-        else if (vm.type == 0 && vm.count == 0)
-          toastr.success("The new living address has been successfully added.", "Success");
-        else if (vm.type == 1 && vm.count == 0)
-          toastr.success("The new billing address has been successfully added.", "Success");
-        if (!vm.add_to_other)
-          vm.hide();
-        else {
-          if (vm.count != 0) {
-            vm.hide();
-            return;
-          }
-          $log.log("In it " + vm.count);
-          vm.count++;
-          var dataAddress = [];
+       /!*Success callback of the ressource callback*!/
+       vm.GetAddressUserSuccess = function (data) {
+       vm.user = data;
+       vm.parseAddressToJson();
+       $log.log(vm.user);
+       if (vm.add_to_other && vm.count == 1)
+       toastr.success("The new addresses have been successfully added.", "Success");
+       else if (vm.type == 0 && vm.count == 0)
+       toastr.success("The new living address has been successfully added.", "Success");
+       else if (vm.type == 1 && vm.count == 0)
+       toastr.success("The new billing address has been successfully added.", "Success");
+       if (!vm.add_to_other)
+       vm.hide();
+       else {
+       if (vm.count != 0) {
+       vm.hide();
+       return;
+       }
+       $log.log("In it " + vm.count);
+       vm.count++;
+       var dataAddress = [];
 
-          var address = {
-            first_name: vm.first_name,
-            last_name: vm.last_name,
-            address: vm.address,
-            postal_code: vm.postal_code,
-            city: vm.city
-          };
-          dataAddress.push(vm.alias);
-          dataAddress.push(address);
-          var data_send = {};
-          data_send = {"user_id": vm.user.id, "billing_address": dataAddress};
-          UsersService
-            .billing_addresses
-            .save(data_send)
-            .$promise
-            .then(vm.GetAddressUserSuccess, vm.GetAddressUserFailure);
-        }
-      };
+       var address = {
+       first_name: vm.first_name,
+       last_name: vm.last_name,
+       address: vm.address,
+       postal_code: vm.postal_code,
+       city: vm.city
+       };
+       dataAddress.push(vm.alias);
+       dataAddress.push(address);
+       var data_send = {};
+       data_send = {"user_id": vm.user.id, "billing_address": dataAddress};
+       UsersService
+       .billing_addresses
+       .save(data_send)
+       .$promise
+       .then(vm.GetAddressUserSuccess, vm.GetAddressUserFailure);
+       }
+       };
 
-      /!*Failure callback of the ressource callback*!/
-      vm.GetAddressUserFailure = function (data) {
-        $log.log(data);
-        toastr.error(data.data.Error, "Woops...");
-        if (vm.count == 1)
-          vm.hide();
-      };
+       /!*Failure callback of the ressource callback*!/
+       vm.GetAddressUserFailure = function (data) {
+       $log.log(data);
+       toastr.error(data.data.Error, "Woops...");
+       if (vm.count == 1)
+       vm.hide();
+       };
 
-      /!*Submits the form data from the dialog to the API*!/
-      vm.submit = function () {
-        var data = [];
+       /!*Submits the form data from the dialog to the API*!/
+       vm.submit = function () {
+       var data = [];
 
-        var address = {
-          first_name: vm.first_name,
-          last_name: vm.last_name,
-          address: vm.address,
-          postal_code: vm.postal_code,
-          city: vm.city
-        };
-        data.push(vm.alias);
-        data.push(address);
-        var data_send = {};
-        /!* type == 0 living_address || vm.add_to_other == type0 && type1 *!/
-        if (vm.type == 0 || vm.add_to_other && vm.count == 0) {
-          data_send = {"user_id": vm.user.id, "living_address": data};
-          UsersService
-            .living_addresses
-            .save(data_send)
-            .$promise
-            .then(vm.GetAddressUserSuccess, vm.GetAddressUserFailure);
-        }
-        /!* type == 1 billing_address *!/
-        else if (vm.type == 1 && vm.count == 0) {
-          data_send = {"user_id": vm.user.id, "billing_address": data};
-          UsersService
-            .billing_addresses
-            .save(data_send)
-            .$promise
-            .then(vm.GetAddressUserSuccess, vm.GetAddressUserFailure);
-        }
+       var address = {
+       first_name: vm.first_name,
+       last_name: vm.last_name,
+       address: vm.address,
+       postal_code: vm.postal_code,
+       city: vm.city
+       };
+       data.push(vm.alias);
+       data.push(address);
+       var data_send = {};
+       /!* type == 0 living_address || vm.add_to_other == type0 && type1 *!/
+       if (vm.type == 0 || vm.add_to_other && vm.count == 0) {
+       data_send = {"user_id": vm.user.id, "living_address": data};
+       UsersService
+       .living_addresses
+       .save(data_send)
+       .$promise
+       .then(vm.GetAddressUserSuccess, vm.GetAddressUserFailure);
+       }
+       /!* type == 1 billing_address *!/
+       else if (vm.type == 1 && vm.count == 0) {
+       data_send = {"user_id": vm.user.id, "billing_address": data};
+       UsersService
+       .billing_addresses
+       .save(data_send)
+       .$promise
+       .then(vm.GetAddressUserSuccess, vm.GetAddressUserFailure);
+       }
 
-      };
-*/
+       };
+       */
       /*Hide callback for $mdDialog*/
       vm.hide = function () {
 
@@ -338,7 +348,7 @@
     };
 
 
-     /*addAddressDialog Controller*/
+    /*addAddressDialog Controller*/
     /** @ngInject */
     vm.addAddressController = function ($mdDialog) {
       var vm = this;

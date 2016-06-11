@@ -12,13 +12,19 @@ md-card()
       flex-xs="100" flex-sm="80" flex-md="60" flex="50")
         section(layout="column", layout-align="start center")
 
-          //md-input-container.md-icon-float.md-block(layout-fill)
+
+          md-input-container.md-icon-float.md-block.gender(layout-fill)
             md-icon(md-svg-src="../assets/icons/gender-male-female.svg")
-            md-radio-group(ng-model="profileParams.user.gender" layout="row" layout-fill)
+            md-radio-group(ng-model="profileParams.user.gender" name="gender" layout="row"
+            required)
               span Man
-              md-radio-button(value="Man" class="md-primary" aria-label="man")
+              md-radio-button(value="Man" class="md-primary" aria-label="man" required)
               span Woman
-              md-radio-button(value="Woman" aria-label="woman")
+              md-radio-button(value="Woman" aria-label="woman" required)
+            div(ng-messages="profileParams.gender.$error" ng-if='!profileParams.gender.$pristine')
+              div(ng-message="required") This is required.
+
+
 
 
           md-input-container.md-icon-float.md-block(layout-fill)
