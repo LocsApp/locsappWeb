@@ -70,28 +70,36 @@ div(layout="row")
 						img.img-icon-demand-article(ng-src="{{ articleRequests.url_api + demand.article_thumbnail_url}}")
 						div.flex.information-demand
 							p.title-article {{ demand.article_name }}
-							div
+							div.asked-by Asked To {{ demand.name_target }} on {{ demand.date_issued.$date | date : medium }}
+							div(style="margin-top:20px;")
 								span From :
 								strong {{ }} {{ demand.availibility_start | date : medium }}
 							div
 								span To :
 								strong {{ }} {{ demand.availibility_end | date : medium }}
+							div(layout="row" style="margin-top: 30px;")
+								span.flex
+								md-button.not-accept.md-raised RETRACT
+								span.flex
 						div(flex="none")
 							div(ng-if="demand.status == 'pending'").circle-blue
-						div(flex="20")
 			div(layout="row" hide-gt-md)
 				md-card.card-information-demand.flex
 					div(layout="row")
 						img.img-icon-demand-article(ng-src="{{ articleRequests.url_api + demand.article_thumbnail_url}}")
 						div.flex.information-demand
 							p.title-article {{ demand.article_name }}
-							div.asked-by Asked By {{ demand.author_name }} on {{ demand.date_issued.$date | date : medium }}
-							div
+							div.asked-by Asked To {{ demand.name_target }} on {{ demand.date_issued.$date | date : medium }}
+							div(style="margin-top:20px;")
 								span From :
 								strong {{ }} {{ demand.availibility_start | date : medium }}
 							div
 								span To :
 								strong {{ }} {{ demand.availibility_end | date : medium }}
+							div(layout="row" style="margin-top: 30px;")
+								span.flex
+								md-button.not-accept.md-raised RETRACT
+								span.flex
 						div(flex="none")
 							div(ng-if="demand.status == 'pending'").circle-blue
 
