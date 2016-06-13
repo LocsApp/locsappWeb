@@ -20,6 +20,7 @@
     /*vars initilization*/
     vm.user = ScopesService.get("user_infos");
     if (vm.user) {
+      vm.current_user_email = vm.user.email;
       vm.user.email_repeat = "";
       vm.user.registered_date = vm.user.registered_date.substring(0, 10);
     }
@@ -49,6 +50,7 @@
       $log.log(data);
       vm.user = data;
       vm.user.registered_date = vm.user.registered_date.substring(0, 10);
+      vm.current_user_email = vm.user.email;
       vm.user.email_repeat = "";
       vm.parseAddressToJson();
 
@@ -127,7 +129,7 @@
 
     };
 
-    vm.ChangeEmailSucces = function(data) {
+    vm.ChangeEmailSuccess = function(data) {
       console.log("Succes = ", data);
     };
 
@@ -138,11 +140,15 @@
 
     vm.submitChangeEmail = function() {
 
-      console.log("email = ", profileParams.user.email);
+      console.log("email = ", vm.user.email);
+      if (vm.current_user_email == vm.user.email) {
+          toastr.error("You already using this email address", "Error...");
+      }
+
         UsersService
           .set_primary_email
           .save({
-            email: profileParams.user.email
+            email: vm.user.email
           })
           .$promise
           .then(vm.ChangeEmailSuccess, vm.ChangeEmailFailure)
