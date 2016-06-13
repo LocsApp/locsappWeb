@@ -86,7 +86,7 @@ def searchArticles(request):
                     {key: {"$regex": re.compile(str(body[key]), re.IGNORECASE)}})
             else:
                 search[key] = {"$in": body[key]}
-    search["availibility_end"] = {"$lt": datetime.now(pytz.utc)}
+    search["availibility_end"] = {"$gte": datetime.now(pytz.utc)}
     number_items = body["_pagination"]["items_per_page"]
     page_number = body["_pagination"]["page_number"]
     print(search)
