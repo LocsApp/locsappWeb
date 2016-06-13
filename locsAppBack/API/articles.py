@@ -87,6 +87,7 @@ def searchArticles(request):
             else:
                 search[key] = {"$in": body[key]}
     search["availibility_end"] = {"$gte": datetime.now(pytz.utc)}
+    search["available"] = True
     number_items = body["_pagination"]["items_per_page"]
     page_number = body["_pagination"]["page_number"]
     print(search)
