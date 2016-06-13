@@ -86,8 +86,11 @@ def searchArticles(request):
                     {key: {"$regex": re.compile(str(body[key]), re.IGNORECASE)}})
             else:
                 search[key] = {"$in": body[key]}
+    search["availibility_end"] = {"$gte": datetime.now(pytz.utc)}
+    search["available"] = True
     number_items = body["_pagination"]["items_per_page"]
     page_number = body["_pagination"]["page_number"]
+    print(search)
     if ("_order" in body and len(body["_order"]) > 0):
         results = db_locsapp["articles"].find(search).sort(ordering)[
             ((page_number -
@@ -98,7 +101,6 @@ def searchArticles(request):
                 number_items) +
             number_items]
     else:
-        print(search)
         results = db_locsapp["articles"].find(search)[
             ((page_number -
               1) *
@@ -318,6 +320,10 @@ def postNewArticle(request):
             "_type": int,
             "_required": False
         },
+        "available": {
+            "_type": bool,
+            "_default": True
+        },
         "article_state": {
             "_type": ObjectId(),
             "_required": False
@@ -326,13 +332,26 @@ def postNewArticle(request):
 
     if request.method == "POST":
         return APIrequests.POST(
-            request, model, "articles", "The article has been successfully created!")
+            request, model, "articles", "The article has been successfully created!", convertDates)
         '''
         return APIrequests.forgeAPIrequestCreate(
             "POST", request, fields_definition, db_locsapp["articles"])
         '''
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+def convertDates(document):
+    try:
+        availibility_start = datetime.strptime(
+            document["availibility_start"], "%d/%m/%Y")
+        availibility_end = datetime.strptime(
+            document["availibility_end"], "%d/%m/%Y")
+        document["availibility_start"] = availibility_start
+        document["availibility_end"] = availibility_end
+    except:
+        return({"error": "Misformatted availibility_start or availibility_end"})
+    return (True)
 
 # Updates an article
 
