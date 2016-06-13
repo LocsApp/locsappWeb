@@ -27,9 +27,9 @@ md-card()
           md-input-container.md-icon-float.md-block(layout-fill)
             md-icon(md-svg-src="../assets/icons/register-login/ic_repeat_black_24px.svg")
             input(placeholder="Repeat Email" type="email" minlength="8" maxlength="100" required
-            name="email_repeat" ng-model="profileParams.user.email_repeat" ng-pattern="/^" +
-            ".+@.+\"" +
-            ".+$/" match="profileParamsEmail.user.email").body-register-container-md
+            name="email_repeat" ng-model="profileParams.user.email_repeat"
+            ng-pattern="/^.+@.+\..+$/"
+            match="profileParamsEmail.user.email").body-register-container-md
             div(ng-messages="modifyProfilFormEmail.email_repeat.$error" ng-if='!modifyProfilFormEmail.email_repeat.$pristine')
               div(ng-message="required") This is required.
               div(ng-message="minlength") The email must be longer than 8 characters.

@@ -20,7 +20,7 @@
     /*vars initilization*/
     vm.user = ScopesService.get("user_infos");
     if (vm.user) {
-      vm.user.email_repeat = vm.user.email;
+      vm.user.email_repeat = "";
       vm.user.registered_date = vm.user.registered_date.substring(0, 10);
     }
     $log.log("vm.user = ", vm.user);
@@ -49,7 +49,7 @@
       $log.log(data);
       vm.user = data;
       vm.user.registered_date = vm.user.registered_date.substring(0, 10);
-      vm.user.email_repeat = vm.user.email;
+      vm.user.email_repeat = "";
       vm.parseAddressToJson();
 
       $log.log(vm.user.living_address);
@@ -124,6 +124,28 @@
         })
         .$promise
         .then(vm.GetInfosPutUserSuccess, vm.GetInfosUserFailure);
+
+    };
+
+    vm.ChangeEmailSucces = function(data) {
+      console.log("Succes = ", data);
+    };
+
+     vm.ChangeEmailFailure = function(data) {
+      console.log("err = ", data);
+    };
+
+
+    vm.submitChangeEmail = function() {
+
+      console.log("email = ", profileParams.user.email);
+        UsersService
+          .set_primary_email
+          .save({
+            email: profileParams.user.email
+          })
+          .$promise
+          .then(vm.ChangeEmailSuccess, vm.ChangeEmailFailure)
 
     };
 
