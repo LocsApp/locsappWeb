@@ -75,12 +75,18 @@
       }
 
       /* Create date for date picker */
+      $log.log(vm.data.availibility_start)
+      /*
       vm.dateBeginParts = vm.data.availibility_start.split("/");
       vm.dateEndParts = vm.data.availibility_end.split("/");
       vm.dateStart = new Date(vm.dateBeginParts[2], vm.dateBeginParts[1] - 1, vm.dateBeginParts[0]);
       vm.dateEnd = new Date(vm.dateEndParts[2], vm.dateEndParts[1] - 1, vm.dateEndParts[0]);
       vm.AskBeginLocation = new Date(vm.dateBeginParts[2], vm.dateBeginParts[1] - 1, vm.dateBeginParts[0]);
-      vm.AskEndLocation = new Date(vm.dateEndParts[2], vm.dateEndParts[1] - 1, vm.dateEndParts[0]);
+      vm.AskEndLocation = new Date(vm.dateEndParts[2], vm.dateEndParts[1] - 1, vm.dateEndParts[0]);*/
+      vm.dateStart = new Date(vm.data.availibility_start.$date)
+      vm.dateEnd = new Date(vm.data.availibility_end.$date)
+      vm.AskBeginLocation = new Date(vm.data.availibility_start.$date)
+      vm.AskEndLocation = new Date(vm.data.availibility_start.$date)
 
       /* Init array questions */
       vm.questions = [];
