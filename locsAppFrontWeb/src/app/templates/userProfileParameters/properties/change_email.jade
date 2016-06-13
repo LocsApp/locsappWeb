@@ -7,68 +7,30 @@ md-card()
 
 
     div(layout="row" layout-align="center")
-      form(name="modifyProfilForm" novalidate ng-submit="modifyProfilForm.$valid && profileParams" +
-      ".submit()"
+      form(name="modifyProfilFormEmail" novalidate ng-submit="modifyProfilFormEmail.$valid && " +
+      "profileParams" +
+      ".submitChangeEmail()"
       flex-xs="100" flex-sm="80" flex-md="60" flex="50")
         section(layout="column", layout-align="start center")
 
-          //md-input-container.md-icon-float.md-block(layout-fill)
-            md-icon(md-svg-src="../assets/icons/gender-male-female.svg")
-            md-radio-group(ng-model="profileParams.user.gender" layout="row" layout-fill)
-              span Man
-              md-radio-button(value="Man" class="md-primary" aria-label="man")
-              span Woman
-              md-radio-button(value="Woman" aria-label="woman")
-
-
           md-input-container.md-icon-float.md-block(layout-fill)
-            md-icon(md-svg-src="../assets/icons/profil/account.svg")
-            input(placeholder="First name" type='text' name="first_name"
-            ng-model="profileParams.user.first_name" required
-            ).body-register-container-md
-            div(ng-messages="modifyProfilForm.first_name.$error" ng-if='!modifyProfilForm.first_name.$pristine')
-              div(ng-message="required") This is required.
-
-          md-input-container.md-icon-float.md-block(layout-fill)
-            md-icon(md-svg-src="../assets/icons/profil/account.svg")
-            input(placeholder="Last name" type='text' name="last_name"
-            ng-model="profileParams.user.last_name" required
-            ).body-register-container-md
-            div(ng-messages="modifyProfilForm.last_name.$error" ng-if='!modifyProfilForm.last_name.$pristine')
-              div(ng-message="required") This is required.
-
-          md-input-container.md-icon-float.md-block(layout-fill)
-            md-icon(md-svg-src="../assets/icons/profil/phone.svg")
-            input(placeholder="Phone number" type="text" name="phone_number"
-            ng-model="profileParams.user.phone" required)
-            .body-register-container-md
-            div(ng-messages="modifyProfilForm.phone_number.$error" ng-if='!modifyProfilForm.phone_number.$pristine')
-              div(ng-message="required") This is required.
-
-          md-input-container.md-icon-float.md-block(layout-fill)
-            md-icon(md-svg-src="../assets/icons/profil/cake-variant.svg")
-            input(placeholder="Birthdate" type='text' name="birthdate"
-            ng-model="profileParams.user.birthdate" required
-            ).body-register-container-md
-            div(ng-messages="modifyProfilForm.birthdate.$error" ng-if='!modifyProfilForm.birthdate.$pristine')
-              div(ng-message="required") This is required.
-
-          //md-input-container.md-icon-float.md-block(layout-fill)
             md-icon(md-svg-src="../assets/icons/register-login/ic_email_black_24px.svg")
             input(placeholder="Email" type="email" minlength="8" maxlength="100" required
-            name="email" ng-model="profileParams.user.email" ng-pattern="/^.+@.+\..+$/").body-register-container-md
-            div(ng-messages="modifyProfilForm.email.$error" ng-if='!modifyProfilForm.email.$pristine')
+            name="email" ng-model="profileParams.user.email" ng-pattern="/^.+@.+\..+$/")
+            .body-register-container-md
+            div(ng-messages="modifyProfilFormEmail.email.$error" ng-if='!modifyProfilFormEmail.email.$pristine')
               div(ng-message="required") This is required.
               div(ng-message="minlength") The email must be longer than 8 characters.
               div(ng-message="maxlength") The email must be shorter than 100 characters.
               div(ng-message="pattern") The field must be an email.
 
-          //md-input-container.md-icon-float.md-block(layout-fill)
+          md-input-container.md-icon-float.md-block(layout-fill)
             md-icon(md-svg-src="../assets/icons/register-login/ic_repeat_black_24px.svg")
             input(placeholder="Repeat Email" type="email" minlength="8" maxlength="100" required
-            name="email_repeat" ng-model="profileParams.user.email_repeat" ng-pattern="/^.+@.+\." +
-            ".+$/" match="profileParams.user.email").body-register-container-md
-            div(ng-messages="modifyProfilForm.email_repeat.$error" ng-if='!modifyProfilForm.email_repeat.$pristine')
+            name="email_repeat" ng-model="profileParams.user.email_repeat" ng-pattern="/^" +
+            ".+@.+\"" +
+            ".+$/" match="profileParamsEmail.user.email").body-register-container-md
+            div(ng-messages="modifyProfilFormEmail.email_repeat.$error" ng-if='!modifyProfilFormEmail.email_repeat.$pristine')
               div(ng-message="required") This is required.
               div(ng-message="minlength") The email must be longer than 8 characters.
               div(ng-message="maxlength") The email must be shorter than 100 characters.

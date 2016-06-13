@@ -110,26 +110,21 @@
 
       $log.log("Submit");
 
-      if (!vm.user.gender) {
-        $log.log("Gender ");
-      }
-
-      else {
 
 
-        UsersService
-          .modify_profile
-          .update({
-            secondary_emails: [],
-            first_name: vm.user.first_name,
-            last_name: vm.user.last_name,
-            gender: vm.user.gender,
-            birthdate: vm.user.birthdate,
-            phone: vm.user.phone
-          })
-          .$promise
-          .then(vm.GetInfosPutUserSuccess, vm.GetInfosUserFailure);
-      }
+      UsersService
+        .modify_profile
+        .update({
+          secondary_emails: [],
+          first_name: vm.user.first_name,
+          last_name: vm.user.last_name,
+          gender: vm.user.gender,
+          birthdate: vm.user.birthdate,
+          phone: vm.user.phone
+        })
+        .$promise
+        .then(vm.GetInfosPutUserSuccess, vm.GetInfosUserFailure);
+
     };
 
 
