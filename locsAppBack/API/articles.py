@@ -134,7 +134,7 @@ def demandsOptions(request, key_check, visibility, status, status_message):
                 {"Error": "The demand doesn't exist."}, status=401)
         if (demand[key_check] != request.user.pk):
             return JsonResponse(
-                {"Error": "You are not allowed to refuse this demand."}, status=401)
+                {"Error": "You are not allowed to do that."}, status=401)
         db_locsapp["article_demands"].update({"_id": ObjectId(body["id_demand"])}, {
                                              "$set": {"visible": visibility, "status": status}})
         return JsonResponse(
@@ -236,7 +236,7 @@ def verifyIfDemandAlreadyIssued(document):
     if (db_locsapp["article_demands"].find_one({"$and": [{"id_article": document["id_article"]}, {
             "id_author": document["id_author"]}, {"status": {"$ne": "retracted"}}]}) is not None):
         return ({"error": "You already made the demand for this article."})
-    elif (db_locsapp["article_demands"].find_one({"id_target": document["id_author"]}) is not None):
+    elif (db_locsapp["article_demands"].find_one({"id_article": document["id_article"], "id_target": document["id_author"]}) is not None):
         return ({"error": "You can't demand for your own article."})
     else:
         return (True)
