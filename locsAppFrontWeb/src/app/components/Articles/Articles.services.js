@@ -31,6 +31,7 @@
       demandsAsRenting: $resource(URL_API + 'api/v1/articles/demands-as-renting/'),
       refuseDemand : $resource(URL_API + 'api/v1/articles/refuse-demand/'),
       retractDemand : $resource(URL_API + 'api/v1/articles/retract-demand/'),
+      acceptDemand: $resource(URL_API + 'api/v1/articles/accept-demand/'),
       uploadPicture: uploadPicture,
       is_authenticated: is_authenticated
     };

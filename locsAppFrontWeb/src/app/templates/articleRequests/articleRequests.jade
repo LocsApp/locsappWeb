@@ -29,7 +29,7 @@ div(layout="row")
 								span To :
 								strong {{ }} {{ demand.availibility_end | date : medium }}
 							div(layout="row" style="margin-top: 10px;")
-								md-button(class="md-primary").md-raised ACCEPT
+								md-button(class="md-primary" ng-click="articleRequests.acceptDemand($index)").md-raised ACCEPT
 								span.flex
 								md-button(ng-click="articleRequests.refuseDemand($index)").not-accept.md-raised REFUSE
 						div(flex="none")
@@ -49,7 +49,7 @@ div(layout="row")
 								span To :
 								strong {{ }} {{ demand.availibility_end | date : medium }}
 							div(layout="row" style="margin-top: 30px;")
-								md-button(class="md-primary").md-raised ACCEPT
+								md-button(class="md-primary" ng-click="articleRequests.acceptDemand($index)").md-raised ACCEPT
 								span.flex
 								md-button(ng-click="articleRequests.refuseDemand($index)").not-accept.md-raised REFUSE
 						div(flex="none")
