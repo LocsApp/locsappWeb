@@ -66,7 +66,10 @@
         for(var x=0; x < vm.demands.length; x++)
         {
           if (vm.demands[x].id_article == article_id)
-            vm.demandsAsRenting.splice(x, 1);
+          {
+            vm.demands.splice(x, 1);
+            x--;
+          }
         }
       },
       function(data)
