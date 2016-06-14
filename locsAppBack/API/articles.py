@@ -218,7 +218,7 @@ def demandsMain(request):
             request, model, "article_demands", "The demand has been successfully issued!", verifyIfDemandAlreadyIssued)
     elif request.method == "GET":
         return APIrequests.GET(
-            'article_demands', special_field={"id_target": request.user.pk, "visible": True})
+            'article_demands', special_field={"id_target": request.user.pk, "visible": True, "status": "pending"})
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
@@ -229,7 +229,7 @@ def demandsMain(request):
 def demandsAsRenting(request):
     if request.method == "GET":
         return APIrequests.GET(
-            'article_demands', special_field={"id_author": request.user.pk, "visible": True})
+            'article_demands', special_field={"id_author": request.user.pk, "visible": True, "status": "pending"})
 
 
 def verifyIfDemandAlreadyIssued(document):
