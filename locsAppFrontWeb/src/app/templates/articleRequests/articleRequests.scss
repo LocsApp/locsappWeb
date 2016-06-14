@@ -11,6 +11,10 @@
 	height: 210px;
 	}
 
+	.card-information-demand-big-screen {
+		@extend .card-information-demand;
+	}
+
 	.title-request-category {
 		text-align: center;
 		margin: 0px;
