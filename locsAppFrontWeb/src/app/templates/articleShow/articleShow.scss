@@ -85,6 +85,12 @@
         color: #8D8D8D;
       }
 
+      .article-not-available {
+        color: $notAvailable;
+        text-align: center;
+        font-size: large;
+      }
+
     }
 
     &.reservation {
