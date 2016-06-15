@@ -79,17 +79,18 @@ div.article-show(layout="row" layout-align="center")
       md-card.reservation(flex="50" flex-xs="100")
         md-card-content(flex="flex" layout-fill)
 
-          div.date(layout="column" layout-align="start" ng-if="!articleShow.articleNotAvailable")
+          div.date(layout="column" layout-align="start" ng-if="!articleShow.articleNotAvailable && !articleShow.ownArticle")
             md-datepicker( ng-model="articleShow.AskBeginLocation"
             md-placeholder="Begin location"  md-min-date="articleShow.dateStart" md-max-date="articleShow.dateEnd")
             md-datepicker(ng-model="articleShow.AskEndLocation" md-placeholder="End location" md-min-date="articleShow.AskBeginLocation" md-max-date="articleShow.dateEnd")
             //md-button.md-raised Ask for rent
 
-          div.rent(layout="column" flex="flex" layout-align="start" ng-click="articleShow.askForRent()" ng-if="!articleShow.articleNotAvailable")
+          div.rent(layout="column" flex="flex" layout-align="start" ng-click="articleShow.askForRent()" ng-if="!articleShow.articleNotAvailable && !articleShow.ownArticle")
             md-button.md-raised Ask for rent
 
-          div(layout="row" layout-align="center center" ng-if="articleShow.articleNotAvailable")
-            div(class="article-not-available").flex This article is not available at this moment.
+          div(layout="row" layout-align="center center" ng-if="articleShow.articleNotAvailable || articleShow.ownArticle")
+            div(class="article-not-available" ng-if="!articleShow.ownArticle").flex This article is not available at this moment.
+            div(class="article-not-available" ng-if="articleShow.ownArticle").flex You can't book your own article.
 
           div.favorite-share(layout="column" flex="flex" layout-align="end" )
             div.details
