@@ -95,7 +95,7 @@
       vm.AskBeginLocation = new Date(vm.dateStart)
       vm.AskEndLocation = new Date(vm.dateStart)
 
-      if (vm.data.id_target == ScopesService.get("current_user").id_author)
+      if (vm.data.id_author == ScopesService.get("current_user").id)
         vm.ownArticle = true;
 
       /* Init array questions */
