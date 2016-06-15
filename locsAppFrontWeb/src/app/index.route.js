@@ -200,6 +200,20 @@
 		}
     })
 
+     .state('main.article_timelines', {
+      url: 'my-timelines/',
+      parent: 'main',
+      templateUrl: 'app/templates/articleTimeline/articleTimeline.html',
+      controller: 'ArticleTimelinesController',
+      controllerAs: 'articleTimeline',
+      data: {
+			permissions: {
+				only: ['user'],
+				redirectTo: 'main.homepage'
+			}
+		}
+    })
+
     .state('main.article_create', {
       url: 'create-article/',
       parent: 'main',

@@ -32,6 +32,8 @@
       refuseDemand : $resource(URL_API + 'api/v1/articles/refuse-demand/'),
       retractDemand : $resource(URL_API + 'api/v1/articles/retract-demand/'),
       acceptDemand: $resource(URL_API + 'api/v1/articles/accept-demand/'),
+      currentTimelines: $resource(URL_API + 'api/v1/articles/current-timelines/'),
+      currentTimelinesAsRenting: $resource(URL_API + 'api/v1/articles/current-timelines-as-renting/'),
       uploadPicture: uploadPicture,
       is_authenticated: is_authenticated
     };
