@@ -12,7 +12,7 @@ div(layout="row")
 				md-divider
 		div(style="margin-top:20px;")
 		div(ng-if="articleRequests.demands.length < 1 && articleRequests.demands != true")
-			p(style="text-align: center;") There are no demands available at the moment
+			p(style="text-align: center;") There are no demands available at the moment.
 		div(ng-repeat="demand in articleRequests.demands track by $index")
 			div(layout="row" layout-align="center")
 				md-card.card-information-demand-big-screen(hide-md hide-sm hide-xs flex="60")
@@ -79,7 +79,7 @@ div(layout="row")
 								strong {{ }} {{ demand.availibility_end | date : medium }}
 							div(layout="row" style="margin-top: 30px;")
 								span.flex
-								md-button.not-accept.md-raised RETRACT
+								md-button(ng-click="articleRequests.retractDemand($index)").not-accept.md-raised RETRACT
 								span.flex
 						div(flex="none")
 							div(ng-if="demand.status == 'pending'").circle-blue
