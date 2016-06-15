@@ -31,7 +31,9 @@ article_patterns = [
     url(r'^demands-as-renting/$', articles.demandsAsRenting),
     url(r'^refuse-demand/$', articles.refuseDemand),
     url(r'^retract-demand/$', articles.retractDemand),
-    url(r'^accept-demand/$', articles.acceptDemand)
+    url(r'^accept-demand/$', articles.acceptDemand),
+    url(r'^current-timelines/$', articles.currentTimelines),
+    url(r'^current-timelines-as-renting/$', articles.currentTimelinesAsRenting),
 ]
 
 search_patterns = [

@@ -275,6 +275,28 @@ def demandsAsRenting(request):
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
 
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def currentTimelines(request):
+    if request.method == "GET":
+        return APIrequests.GET(
+            'article_demands', special_field={"id_target": request.user.pk, "visible": True, "status": "accepted"})
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def currentTimelinesAsRenting(request):
+    if request.method == "GET":
+        return APIrequests.GET(
+            'article_demands', special_field={"id_author": request.user.pk, "visible": True, "status": "accepted"})
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
 def verifyIfDemandAlreadyIssued(document):
     if (db_locsapp["article_demands"].find_one({"$and": [{"id_article": document["id_article"]}, {
             "id_author": document["id_author"]}, {"status": {"$ne": "retracted"}}]}) is not None):
