@@ -12,10 +12,10 @@ div(layout="row")
 				md-divider
 		div(style="margin-top:20px;")
 		div(ng-if="articleRequests.demands.length < 1 && articleRequests.demands != true")
-			p(style="text-align: center;") There are no demands available at the moment
+			p(style="text-align: center;") There are no demands available at the moment.
 		div(ng-repeat="demand in articleRequests.demands track by $index")
-			div(layout="row" hide-md hide-sm hide-xs)
-				md-card.card-information-demand(flex="40")
+			div(layout="row" layout-align="center")
+				md-card.card-information-demand-big-screen(hide-md hide-sm hide-xs flex="60")
 					div(layout="row")
 						img.img-icon-demand-article(ng-src="{{ articleRequests.url_api + demand.article_thumbnail_url}}")
 						div.flex.information-demand
@@ -29,12 +29,12 @@ div(layout="row")
 								span To :
 								strong {{ }} {{ demand.availibility_end | date : medium }}
 							div(layout="row" style="margin-top: 10px;")
-								md-button(class="md-primary").md-raised ACCEPT
+								md-button(class="md-primary" ng-click="articleRequests.acceptDemand($index)").md-raised ACCEPT
 								span.flex
 								md-button(ng-click="articleRequests.refuseDemand($index)").not-accept.md-raised REFUSE
 						div(flex="none")
 							div(ng-if="demand.status == 'pending'").circle-blue
-			div(layout="row" hide-gt-md)
+			div(layout="column" hide-gt-md)
 				md-card.card-information-demand.flex
 					div(layout="row")
 						img.img-icon-demand-article(ng-src="{{ articleRequests.url_api + demand.article_thumbnail_url}}")
@@ -49,7 +49,7 @@ div(layout="row")
 								span To :
 								strong {{ }} {{ demand.availibility_end | date : medium }}
 							div(layout="row" style="margin-top: 30px;")
-								md-button(class="md-primary").md-raised ACCEPT
+								md-button(class="md-primary" ng-click="articleRequests.acceptDemand($index)").md-raised ACCEPT
 								span.flex
 								md-button(ng-click="articleRequests.refuseDemand($index)").not-accept.md-raised REFUSE
 						div(flex="none")
@@ -64,8 +64,8 @@ div(layout="row")
 		div(ng-if="articleRequests.demandsAsRenting.length < 1 && articleRequests.demandsAsRenting != true")
 			p(style="text-align: center;") You issued no requests yet.
 		div(ng-repeat="demand in articleRequests.demandsAsRenting track by $index")
-			div(layout="row" hide-md hide-sm hide-xs)
-				md-card.card-information-demand(flex="40")
+			div(layout="row" layout-align="center")
+				md-card.card-information-demand-big-screen(hide-md hide-sm hide-xs flex="60")
 					div(layout="row")
 						img.img-icon-demand-article(ng-src="{{ articleRequests.url_api + demand.article_thumbnail_url}}")
 						div.flex.information-demand
@@ -79,7 +79,7 @@ div(layout="row")
 								strong {{ }} {{ demand.availibility_end | date : medium }}
 							div(layout="row" style="margin-top: 30px;")
 								span.flex
-								md-button.not-accept.md-raised RETRACT
+								md-button(ng-click="articleRequests.retractDemand($index)").not-accept.md-raised RETRACT
 								span.flex
 						div(flex="none")
 							div(ng-if="demand.status == 'pending'").circle-blue

@@ -85,8 +85,18 @@
       vm.AskEndLocation = new Date(vm.dateEndParts[2], vm.dateEndParts[1] - 1, vm.dateEndParts[0]);*/
       vm.dateStart = new Date(vm.data.availibility_start.$date)
       vm.dateEnd = new Date(vm.data.availibility_end.$date)
-      vm.AskBeginLocation = new Date(vm.data.availibility_start.$date)
-      vm.AskEndLocation = new Date(vm.data.availibility_start.$date)
+      if (vm.dateEnd < new Date())
+        vm.articleNotAvailable = true;
+      if (vm.dateStart < new Date())
+      {
+        delete vm.dateStart;
+        vm.dateStart = new Date();
+      }
+      vm.AskBeginLocation = new Date(vm.dateStart)
+      vm.AskEndLocation = new Date(vm.dateStart)
+
+      if (vm.data.id_author == ScopesService.get("current_user").id)
+        vm.ownArticle = true;
 
       /* Init array questions */
       vm.questions = [];

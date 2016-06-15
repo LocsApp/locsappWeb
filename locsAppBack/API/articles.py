@@ -134,7 +134,7 @@ def demandsOptions(request, key_check, visibility, status, status_message):
                 {"Error": "The demand doesn't exist."}, status=401)
         if (demand[key_check] != request.user.pk):
             return JsonResponse(
-                {"Error": "You are not allowed to refuse this demand."}, status=401)
+                {"Error": "You are not allowed to do that."}, status=401)
         db_locsapp["article_demands"].update({"_id": ObjectId(body["id_demand"])}, {
                                              "$set": {"visible": visibility, "status": status}})
         return JsonResponse(
@@ -218,7 +218,48 @@ def demandsMain(request):
             request, model, "article_demands", "The demand has been successfully issued!", verifyIfDemandAlreadyIssued)
     elif request.method == "GET":
         return APIrequests.GET(
-            'article_demands', special_field={"id_target": request.user.pk, "visible": True})
+            'article_demands', special_field={"id_target": request.user.pk, "visible": True, "status": "pending"})
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def acceptDemand(request):
+    if request.method == "POST":
+        if request.body:
+            answer = json.loads(request.body.decode('utf8'))
+            if not answer["id_demand"]:
+                return JsonResponse(
+                    {"Error": "You need to send the id of the demand."}, status=401)
+            print(answer["id_demand"])
+            document = db_locsapp["article_demands"].find_one(
+                {"_id": ObjectId(answer['id_demand'])})
+            if document is None:
+                return JsonResponse(
+                    {"Error": "The demand doesn't exist."}, status=401)
+            if document["id_target"] != request.user.pk:
+                return JsonResponse(
+                    {"Error": "You're not allowed to accept this demand."}, status=401)
+            if document["status"] != "pending":
+                return JsonResponse(
+                    {"Error": "This demand isn't a pending request."}, status=401)
+            print(document)
+            id_article = document["id_article"]
+            db_locsapp["article_demands"].update(
+                {
+                    "id_target": request.user.pk, "id_article": id_article, "status": "pending"}, {
+                    "$set": {
+                        "status": "refused"}}, multi=True)
+            db_locsapp["article_demands"].update({"_id": ObjectId(answer['id_demand'])}, {
+                "$set": {"status": "accepted"}})
+            db_locsapp["articles"].update({"_id": ObjectId(id_article)}, {
+                                          "$set": {"available": False}})
+            return JsonResponse(
+                {"message": "Request has been successfully accepted!"})
+        else:
+            return JsonResponse({"Error": "Please send a json"}, status=404)
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
@@ -229,14 +270,38 @@ def demandsMain(request):
 def demandsAsRenting(request):
     if request.method == "GET":
         return APIrequests.GET(
-            'article_demands', special_field={"id_author": request.user.pk, "visible": True})
+            'article_demands', special_field={"id_author": request.user.pk, "visible": True, "status": "pending"})
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def currentTimelines(request):
+    if request.method == "GET":
+        return APIrequests.GET(
+            'article_demands', special_field={"id_target": request.user.pk, "visible": True, "status": "accepted"})
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def currentTimelinesAsRenting(request):
+    if request.method == "GET":
+        return APIrequests.GET(
+            'article_demands', special_field={"id_author": request.user.pk, "visible": True, "status": "accepted"})
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
 
 def verifyIfDemandAlreadyIssued(document):
     if (db_locsapp["article_demands"].find_one({"$and": [{"id_article": document["id_article"]}, {
             "id_author": document["id_author"]}, {"status": {"$ne": "retracted"}}]}) is not None):
         return ({"error": "You already made the demand for this article."})
-    elif (db_locsapp["article_demands"].find_one({"id_target": document["id_author"]}) is not None):
+    elif (db_locsapp["article_demands"].find_one({"id_article": document["id_article"], "id_target": document["id_author"]}) is not None):
         return ({"error": "You can't demand for your own article."})
     else:
         return (True)

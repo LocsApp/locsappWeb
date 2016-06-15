@@ -52,9 +52,36 @@
       })
     }
 
+    vm.acceptDemand = function(index)
+    {
+      ArticleService
+      .acceptDemand
+      .save({"id_demand": vm.demands[index]._id})
+      .$promise
+      .then(function(data)
+      {
+        $log.log(data)
+        var article_id= vm.demands[index].id_article;
+        toastr.success(data.message, "Success!");
+        for(var x=0; x < vm.demands.length; x++)
+        {
+          if (vm.demands[x].id_article == article_id)
+          {
+            vm.demands.splice(x, 1);
+            x--;
+          }
+        }
+      },
+      function(data)
+      {
+        toastr.error(data.data.Error, "Woops...");
+        $log.log(data);
+      })
+    }
+
     vm.retractDemand = function (index)
     {
-            ArticleService
+      ArticleService
       .retractDemand
       .save({"id_demand": vm.demandsAsRenting[index]._id})
       .$promise
