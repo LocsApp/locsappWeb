@@ -13,11 +13,12 @@ from django.conf import settings
 
 import json
 from bson import ObjectId
+from bson import json_util
 
 import pytz
 from datetime import datetime
 import re
-
+from django.http import HttpResponse
 
 from pymongo import MongoClient
 
@@ -280,8 +281,16 @@ def demandsAsRenting(request):
 @permission_classes((IsAuthenticated,))
 def currentTimelines(request):
     if request.method == "GET":
-        return APIrequests.GET(
-            'article_demands', special_field={"id_target": request.user.pk, "visible": True, "status": "accepted"})
+        docs = APIrequests.GET(
+            'article_demands', special_field={"id_target": request.user.pk, "visible": True, "status": "accepted"}, raw=True)
+        for idx, document in enumerate(docs["article_demands"]):
+            if (datetime.now(pytz.utc) > datetime.strptime(
+                    document["availibility_end"], "%Y-%m-%dT%H:%M:%S.%fZ")):
+                db_locsapp["article_demands"].update({"_id": ObjectId(document['_id'])}, {
+                                                     "$set": {"status": "finished"}})
+                docs["article_demands"].pop(idx)
+        return (HttpResponse(json.dumps(
+                docs, sort_keys=True, indent=4, default=json_util.default)))
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
@@ -291,8 +300,16 @@ def currentTimelines(request):
 @permission_classes((IsAuthenticated,))
 def currentTimelinesAsRenting(request):
     if request.method == "GET":
-        return APIrequests.GET(
-            'article_demands', special_field={"id_author": request.user.pk, "visible": True, "status": "accepted"})
+        docs = APIrequests.GET(
+            'article_demands', special_field={"id_author": request.user.pk, "visible": True, "status": "accepted"}, raw=True)
+        for idx, document in enumerate(docs["article_demands"]):
+            if (datetime.now(pytz.utc) > datetime.strptime(
+                    document["availibility_end"], "%Y-%m-%dT%H:%M:%S.%fZ")):
+                db_locsapp["article_demands"].update({"_id": ObjectId(document['_id'])}, {
+                                                     "$set": {"status": "finished"}})
+                docs["article_demands"].pop(idx)
+        return (HttpResponse(json.dumps(
+                docs, sort_keys=True, indent=4, default=json_util.default)))
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
@@ -354,7 +371,8 @@ def verifyIfNotAlreadyIssued(document):
     if (retrieve is None or retrieve["id_article"] != document["id_article"]):
         return ({"Error": "id_demand not conform."})
     if (retrieve["status"] != "finished" and retrieve["status"] == "accepted"):
-        if (datetime.now(pytz.utc) > datetime.strptime(retrieve["availibility_end"])2016 - 06 - 29T17: 00: 00.000Z):
+        if (datetime.now(pytz.utc) > datetime.strptime(
+                retrieve["availibility_end"], "%Y-%m-%dT%H:%M:%S.%fZ")):
             db_locsapp["article_demands"].update({"_id": ObjectId(document['id_demand'])}, {
                                                  "$set": {"status": "finished"}})
         else:
