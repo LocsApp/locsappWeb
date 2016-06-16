@@ -23,7 +23,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
             'id', 'username', 'email', 'secondary_emails', 'first_name', 'last_name',
             'gender', 'birthdate', 'phone', 'living_address', 'registered_date',
             'last_activity_date', 'billing_address', 'logo_url', "is_active", "role")
-        read_only_fields = ('id', 'username', 'role', 'email', 'registered_date',
+        read_only_fields = ('id', 'username', 'role', 'email', 'registered_date', "tenant_score", "renter_score",
                             'last_activity_date', 'logo_url', 'is_active')
 
 
@@ -62,7 +62,8 @@ class PasswordChangeSerializer(serializers.Serializer):
 
     def validate(self, attrs):
         if len(attrs['new_password1']) < 6 or len(attrs['new_password2']) < 6:
-            raise serializers.ValidationError("Password must be a minimum of 6 characters.")
+            raise serializers.ValidationError(
+                "Password must be a minimum of 6 characters.")
         self.set_password_form = self.set_password_form_class(
             user=self.user, data=attrs
         )

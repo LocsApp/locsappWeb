@@ -61,6 +61,9 @@ class Account(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     id_facebook = models.CharField(default="", null=True, max_length=255)
 
+    tenant_score = models.IntegerField(default=-1)
+    renter_score = models.IntegerField(default=-1)
+
     objects = AccountManager()
     object = AccountManager()
 

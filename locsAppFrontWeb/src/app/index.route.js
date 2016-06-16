@@ -214,6 +214,20 @@
 		}
     })
 
+     .state('main.article_notations', {
+      url: 'notations/',
+      parent: 'main',
+      templateUrl: 'app/templates/articleNotation/articleNotation.html',
+      controller: 'ArticleNotationController',
+      controllerAs: 'articleNotation',
+      data: {
+			permissions: {
+				only: ['user'],
+				redirectTo: 'main.homepage'
+			}
+		}
+    })
+
     .state('main.article_create', {
       url: 'create-article/',
       parent: 'main',

@@ -11,13 +11,16 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 
 
+from dateutil.parser import parse
+
 import json
 from bson import ObjectId
+from bson import json_util
 
 import pytz
 from datetime import datetime
 import re
-
+from django.http import HttpResponse
 
 from pymongo import MongoClient
 
@@ -280,8 +283,15 @@ def demandsAsRenting(request):
 @permission_classes((IsAuthenticated,))
 def currentTimelines(request):
     if request.method == "GET":
-        return APIrequests.GET(
-            'article_demands', special_field={"id_target": request.user.pk, "visible": True, "status": "accepted"})
+        docs = APIrequests.GET(
+            'article_demands', special_field={"id_target": request.user.pk, "visible": True, "status": "accepted"}, raw=True)
+        for idx, document in enumerate(docs["article_demands"]):
+            if (datetime.now(pytz.utc) > parse(document["availibility_end"])):
+                db_locsapp["article_demands"].update({"_id": ObjectId(document['_id'])}, {
+                                                     "$set": {"status": "finished"}})
+                docs["article_demands"].pop(idx)
+        return (HttpResponse(json.dumps(
+                docs, sort_keys=True, indent=4, default=json_util.default)))
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
@@ -291,8 +301,15 @@ def currentTimelines(request):
 @permission_classes((IsAuthenticated,))
 def currentTimelinesAsRenting(request):
     if request.method == "GET":
-        return APIrequests.GET(
-            'article_demands', special_field={"id_author": request.user.pk, "visible": True, "status": "accepted"})
+        docs = APIrequests.GET(
+            'article_demands', special_field={"id_author": request.user.pk, "visible": True, "status": "accepted"}, raw=True)
+        for idx, document in enumerate(docs["article_demands"]):
+            if (datetime.now(pytz.utc) > parse(document["availibility_end"])):
+                db_locsapp["article_demands"].update({"_id": ObjectId(document['_id'])}, {
+                                                     "$set": {"status": "finished"}})
+                docs["article_demands"].pop(idx)
+        return (HttpResponse(json.dumps(
+                docs, sort_keys=True, indent=4, default=json_util.default)))
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
@@ -305,6 +322,69 @@ def verifyIfDemandAlreadyIssued(document):
         return ({"error": "You can't demand for your own article."})
     else:
         return (True)
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def postNewMark(request):
+    model = {
+        "id_author": {
+            "_type": int,
+            "_default": request.user.pk,
+            "_protected": True
+        },
+        "id_target": int,
+        "id_demand": {
+            "_type": ObjectId()
+        },
+        "id_article": {
+            "_type": ObjectId()
+        },
+        "value": {
+            "_type": int,
+            "_min": 1,
+            "_max": 5
+        },
+        "as_renter": {
+            "_type": bool
+        },
+        "date_issued": {
+            "_type": str,
+            "_protected": True,
+            "_default": datetime.now(pytz.utc)
+        }
+    }
+    if request.method == "POST":
+        return APIrequests.POST(
+            request, model, "articles", "The mark has been successfully added!", verifyIfNotAlreadyIssued)
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+def verifyIfNotAlreadyIssued(document):
+    if (db_locsapp["articles"].find_one(
+            {"_id": ObjectId(document['id_article'])}) is None):
+        return ({"Error": "The article doesn't exist."})
+    retrieve = db_locsapp["article_demands"].find_one(
+        {"_id": ObjectId(document['id_demand'])})
+    if (retrieve is None or retrieve["id_article"] != document["id_article"]):
+        return ({"Error": "id_demand not conform."})
+    if (retrieve["status"] != "finished" and retrieve["status"] == "accepted"):
+        if (datetime.now(pytz.utc) > parse(document["availibility_end"])):
+            db_locsapp["article_demands"].update({"_id": ObjectId(document['id_demand'])}, {
+                                                 "$set": {"status": "finished"}})
+        else:
+            return ({"Error": "The article renting is not finished yet."})
+    else:
+        return ({"Error": "The demand hasn't even been accepted yet."})
+    if ((document["as_renter"] and retrieve["id_author"] != document["id_author"]) or (
+            document["as_renter"] is False and retrieve["id_target"] != document["id_author"])):
+        return ({"Error": "You are not allowed to make this notation."})
+    if (db_locsapp["marks"].find_one({"id_demand": document["id_demand"], "id_article": document[
+            'id_article'], "id_target": document["id_target"], "id_author": document["id_author"]}) is not None):
+        return ({"Error": "You already gave a mark for this article."})
+    return (True)
 
 
 @csrf_exempt
