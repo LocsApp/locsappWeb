@@ -353,6 +353,14 @@ def verifyIfNotAlreadyIssued(document):
         {"_id": ObjectId(document['id_demand'])})
     if (retrieve is None or retrieve["id_article"] != document["id_article"]):
         return ({"Error": "id_demand not conform."})
+    if (retrieve["status"] != "finished" and retrieve["status"] == "accepted"):
+        if (datetime.now(pytz.utc) > datetime.strptime(retrieve["availibility_end"])2016 - 06 - 29T17: 00: 00.000Z):
+            db_locsapp["article_demands"].update({"_id": ObjectId(document['id_demand'])}, {
+                                                 "$set": {"status": "finished"}})
+        else:
+            return ({"Error": "The article renting is not finished yet."})
+    else:
+        return ({"Error": "The demand hasn't even been accepted yet."})
     if ((document["as_renter"] and retrieve["id_author"] != document["id_author"]) or (
             document["as_renter"] is False and retrieve["id_target"] != document["id_author"])):
         return ({"Error": "You are not allowed to make this notation."})
