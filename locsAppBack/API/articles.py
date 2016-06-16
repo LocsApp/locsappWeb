@@ -577,6 +577,7 @@ def getArticle(request, article_pk):
 View for sending a question and notification to the owner
 """
 def sendQuestion(request):
+    article_pk = ""
     model = {
         "id_author": {
             "_type": int,
@@ -607,6 +608,11 @@ def sendQuestion(request):
             "_default": True
         }
     }
+    if request.method == "PUTT":
+        return APIrequests.PUT(
+            request, model, "articles", "The article has been successfully modified!", article_pk)
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
 """
 We send an email to the adminstrator that tell us who user send a report for which article
