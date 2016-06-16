@@ -30,7 +30,7 @@ div(layout="row")
 								strong {{ }} {{ demand.availibility_end | date : medium }}
 							div(layout="row" layout-align="start center")
 								md-progress-linear(style="margin-top:20px;" md-mode="determinate" value="{{articleTimeline.daysLeftCalculate(demand)}}" flex="60")
-								span(style="padding-top:10px; padding-left:10px;") {{ articleTimeline.howManyDaysLeft(demand) }} days left
+								span(style="padding-top:10px; padding-left:10px;") {{ articleTimeline.howManyDaysLeft(demand) }} day(s) left
 			div(layout="column" hide-gt-md)
 				md-card.card-information-demand.flex
 					div(layout="row")
@@ -47,7 +47,7 @@ div(layout="row")
 								strong {{ }} {{ demand.availibility_end | date : medium }}
 							div(layout="row" layout-align="start center")
 								md-progress-linear(style="margin-top:10px;" md-mode="determinate" value="{{articleTimeline.daysLeftCalculate(demand)}}" flex="60")
-								span(style="padding-top:10px; padding-left:10px;") {{ articleTimeline.howManyDaysLeft(demand) }} days left
+								span(style="padding-top:10px; padding-left:10px;") {{ articleTimeline.howManyDaysLeft(demand) }} day(s) left
 		div(layout="row" layout-align="center start")
 			span(flex="25").special-divider
 				md-divider
@@ -74,7 +74,7 @@ div(layout="row")
 								strong {{ }} {{ demand.availibility_end | date : medium }}
 							div(layout="row" layout-align="start center")
 								md-progress-linear(style="margin-top:20px;" md-mode="determinate" value="{{articleTimeline.daysLeftCalculate(demand)}}" flex="60")
-								span(style="padding-top:10px; padding-left:10px;") {{ articleTimeline.howManyDaysLeft(demand) }} days left
+								span(style="padding-top:10px; padding-left:10px;") {{ articleTimeline.howManyDaysLeft(demand) }} day(s) left
 			div(layout="column" hide-gt-md)
 				md-card.card-information-demand.flex
 					div(layout="row")
@@ -91,6 +91,6 @@ div(layout="row")
 								strong {{ }} {{ demand.availibility_end | date : medium }}
 							div(layout="row" layout-align="start center")
 								md-progress-linear(style="margin-top:10px;" md-mode="determinate" value="{{articleTimeline.daysLeftCalculate(demand)}}" flex="60")
-								span(style="padding-top:10px; padding-left:10px;") {{ articleTimeline.howManyDaysLeft(demand) }} days left
+								span(style="padding-top:10px; padding-left:10px;") {{ articleTimeline.howManyDaysLeft(demand) }} day(s) left
 
 	span.flex
