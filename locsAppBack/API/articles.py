@@ -574,6 +574,41 @@ def getArticle(request, article_pk):
 
 
 """
+View for sending a question and notification to the owner
+"""
+def sendQuestion(request):
+    model = {
+        "id_author": {
+            "_type": int,
+            "_default": request.user.pk,
+            "_protected": True
+        },
+        "author_name": {
+            "_type": str
+        },
+        "content": {
+            "_type": str,
+        },
+        "thumbs_up": {
+            "_type": int,
+            "default": 0,
+            "protected": True
+        },
+        "report": {
+            "_type": int,
+            "default": 0,
+            "protected": True
+        },
+        "id_article": {
+            "_type": ObjectId()
+        },
+        "visible": {
+            "_type": bool,
+            "_default": True
+        }
+    }
+
+"""
 We send an email to the adminstrator that tell us who user send a report for which article
 """
 
