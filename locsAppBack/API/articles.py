@@ -11,6 +11,8 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 
 
+from dateutil.parser import parse
+
 import json
 from bson import ObjectId
 from bson import json_util
@@ -284,8 +286,7 @@ def currentTimelines(request):
         docs = APIrequests.GET(
             'article_demands', special_field={"id_target": request.user.pk, "visible": True, "status": "accepted"}, raw=True)
         for idx, document in enumerate(docs["article_demands"]):
-            if (datetime.now(pytz.utc) > datetime.strptime(
-                    document["availibility_end"], "%Y-%m-%dT%H:%M:%S.%fZ")):
+            if (datetime.now(pytz.utc) > parse(document["availibility_end"])):
                 db_locsapp["article_demands"].update({"_id": ObjectId(document['_id'])}, {
                                                      "$set": {"status": "finished"}})
                 docs["article_demands"].pop(idx)
@@ -303,8 +304,7 @@ def currentTimelinesAsRenting(request):
         docs = APIrequests.GET(
             'article_demands', special_field={"id_author": request.user.pk, "visible": True, "status": "accepted"}, raw=True)
         for idx, document in enumerate(docs["article_demands"]):
-            if (datetime.now(pytz.utc) > datetime.strptime(
-                    document["availibility_end"], "%Y-%m-%dT%H:%M:%S.%fZ")):
+            if (datetime.now(pytz.utc) > parse(document["availibility_end"])):
                 db_locsapp["article_demands"].update({"_id": ObjectId(document['_id'])}, {
                                                      "$set": {"status": "finished"}})
                 docs["article_demands"].pop(idx)
@@ -371,8 +371,7 @@ def verifyIfNotAlreadyIssued(document):
     if (retrieve is None or retrieve["id_article"] != document["id_article"]):
         return ({"Error": "id_demand not conform."})
     if (retrieve["status"] != "finished" and retrieve["status"] == "accepted"):
-        if (datetime.now(pytz.utc) > datetime.strptime(
-                retrieve["availibility_end"], "%Y-%m-%dT%H:%M:%S.%fZ")):
+        if (datetime.now(pytz.utc) > parse(document["availibility_end"])):
             db_locsapp["article_demands"].update({"_id": ObjectId(document['id_demand'])}, {
                                                  "$set": {"status": "finished"}})
         else:
