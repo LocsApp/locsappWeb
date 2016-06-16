@@ -310,6 +310,61 @@ def verifyIfDemandAlreadyIssued(document):
 @csrf_exempt
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))
+def postNewMark(request):
+    model = {
+        "id_author": {
+            "_type": int,
+            "_default": request.user.pk,
+            "_protected": True
+        },
+        "id_target": int,
+        "id_demand": {
+            "_type": ObjectId()
+        },
+        "id_article": {
+            "_type": ObjectId()
+        },
+        "value": {
+            "_type": int,
+            "_min": 1,
+            "_max": 5
+        },
+        "as_renter": {
+            "_type": bool
+        },
+        "date_issued": {
+            "_type": str,
+            "_protected": True,
+            "_default": datetime.now(pytz.utc)
+        }
+    }
+    if request.method == "POST":
+        return APIrequests.POST(
+            request, model, "articles", "The mark has been successfully added!", verifyIfNotAlreadyIssued)
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+def verifyIfNotAlreadyIssued(document):
+    if (db_locsapp["articles"].find_one(
+            {"_id": ObjectId(document['id_article'])}) is None):
+        return ({"Error": "The article doesn't exist."})
+    retrieve = db_locsapp["article_demands"].find_one(
+        {"_id": ObjectId(document['id_demand'])})
+    if (retrieve is None or retrieve["id_article"] != document["id_article"]):
+        return ({"Error": "id_demand not conform."})
+    if ((document["as_renter"] and retrieve["id_author"] != document["id_author"]) or (
+            document["as_renter"] is False and retrieve["id_target"] != document["id_author"])):
+        return ({"Error": "You are not allowed to make this notation."})
+    if (db_locsapp["marks"].find_one({"id_demand": document["id_demand"], "id_article": document[
+            'id_article'], "id_target": document["id_target"], "id_author": document["id_author"]}) is not None):
+        return ({"Error": "You already gave a mark for this article."})
+    return (True)
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
 def postNewArticle(request):
     model = {
         "title": {
