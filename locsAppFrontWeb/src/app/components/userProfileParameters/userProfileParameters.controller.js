@@ -113,7 +113,6 @@
       $log.log("Submit");
 
 
-
       UsersService
         .modify_profile
         .update({
@@ -129,29 +128,31 @@
 
     };
 
-    vm.ChangeEmailSuccess = function(data) {
-      console.log("Succes = ", data);
+    vm.ChangeEmailSuccess = function (data) {
+      toastr.success("Please check your email", "Success...");
+      $log.log("Succes = ", data);
     };
 
-     vm.ChangeEmailFailure = function(data) {
-      console.log("err = ", data);
+    vm.ChangeEmailFailure = function (data) {
+      toastr.error("Error changing your email", "Error...");
+      $log.log("err = ", data);
     };
 
 
-    vm.submitChangeEmail = function() {
+    vm.submitChangeEmail = function () {
 
-      console.log("email = ", vm.user.email);
+      $log.log("email = ", vm.user.email);
       if (vm.current_user_email == vm.user.email) {
-          toastr.error("You already using this email address", "Error...");
+        toastr.error("You already using this email address", "Error...");
       }
 
-        UsersService
-          .set_primary_email
-          .save({
-            email: vm.user.email
-          })
-          .$promise
-          .then(vm.ChangeEmailSuccess, vm.ChangeEmailFailure)
+      UsersService
+        .set_primary_email
+        .save({
+          email: vm.user.email
+        })
+        .$promise
+        .then(vm.ChangeEmailSuccess, vm.ChangeEmailFailure)
 
     };
 
