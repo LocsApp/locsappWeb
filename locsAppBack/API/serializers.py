@@ -22,8 +22,8 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'username', 'email', 'secondary_emails', 'first_name', 'last_name',
             'gender', 'birthdate', 'phone', 'living_address', 'registered_date',
-            'last_activity_date', 'billing_address', 'logo_url', "is_active", "role", "tenant_score", "renter_score")
-        read_only_fields = ('id', 'username', 'role', 'email', 'registered_date',
+            'last_activity_date', 'billing_address', 'logo_url', "is_active", "role")
+        read_only_fields = ('id', 'username', 'role', 'email', 'registered_date', "tenant_score", "renter_score",
                             'last_activity_date', 'logo_url', 'is_active')
 
 
