@@ -38,7 +38,6 @@
     /* Calculates how many days are left to show in the progress bar */
     vm.daysLeftCalculate = function(demand)
     {
-      var oneDay = 24*60*60*1000;
       var start = new Date(demand.availibility_start)
       var end = new Date(demand.availibility_end)
       end.setDate(end.getDate() + 1);
