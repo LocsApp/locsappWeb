@@ -243,12 +243,12 @@
     })
 
 
-   .state('main.question', {
-      url: 'question/',
+   .state('main.questions', {
+      url: 'questions/',
       parent: 'main',
-      templateUrl: 'app/templates/question/question.html',
-      controller: 'QuestionController',
-      controllerAs: 'questionCreate',
+      templateUrl: 'app/templates/articleQuestions/articleQuestions.html',
+      controller: 'ArticleQuestionsController',
+      controllerAs: 'articleQuestion',
       data: {
 			permissions: {
 				only: ['guest', 'user'],

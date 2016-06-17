@@ -4,17 +4,27 @@
 
    angular
     .module('LocsappControllers')
-    .controller('ArticleQuestionController', ArticleQuestionController);
+    .controller('ArticleQuestionsController', ArticleQuestionsController);
 
   /** @ngInject */
-  function ArticleQuestionController($log, ArticleService, toastr, ScopesService, URL_API) {
+  function ArticleQuestionsController($log, ArticleService, toastr, ScopesService, URL_API) {
     var vm = this;
+    vm.questions = "";
 
-    vm.notationsClient = true;
-    vm.notationsRenter = true;
+   vm.GetQuestionsSuccess = function(data) {
+      vm.questions = data.questions;
+    };
 
-    vm.url_api = URL_API;
+    vm.GetQuestionsFailure = function(data) {
+      $log.log("GetQuestionFailure", data)
+    };
+
+    ArticleService
+      .questions
+      .get({})
+      .$promise
+      .then(vm.GetQuestionsSuccess, vm.GetQuestionsFailure);
 
   }
 
-});
+})();

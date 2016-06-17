@@ -579,7 +579,7 @@ View for sending a question and notification to the owner
 
 
 @csrf_exempt
-@api_view(['POST', 'GET'])
+@api_view(['POST'])
 @permission_classes((IsAuthenticated,))
 def sendQuestion(request):
     """
@@ -588,47 +588,70 @@ def sendQuestion(request):
     existe
     """
 
-    model = {
-        "id_author": {
-            "_type": int,
-            "_default": request.user.pk,
-            "_protected": True
-        },
-        "author_name": {
-            "_type": str
-        },
-        "content": {
-            "_type": str,
-        },
-        "thumbs_up": {
-            "_type": int,
-            "_default": 0,
-            #"_protected": True
-        },
-        "report": {
-            "_type": int,
-            "_default": 0,
-            #"_protected": True
-        },
-        "id_article": {
-            "_type": ObjectId()
-        },
-        "visible": {
-            "_type": bool,
-            "_default": True
-        },
-        "response": {
-            "_type": ObjectId(),
-            "_default": None
-        }
-    }
     if request.method == "POST":
-        return APIrequests.POST(
-            request, model, "questions", "The question has been sent!")
-    if request.method == "GET":
-        return APIrequests.GET("questions")
+
+        body = json.loads(request.body.decode('utf8'))
+        if not ObjectId.is_valid(body['id_article']):
+                    return JsonResponse(
+                        {"Error": "Please send a correct article id"}, status=401)
+
+        article = db_locsapp["articles"].find_one(
+                    {"_id": ObjectId(body['id_article'])})
+        if article:
+            print("ARTICLE = ", article)
+
+            model = {
+                "id_author": {
+                    "_type": int,
+                    "_default": request.user.pk,
+                    "_protected": True
+                },
+                "author_name": {
+                    "_type": str
+                },
+                "content": {
+                    "_type": str,
+                },
+                "thumbs_up": {
+                    "_type": int,
+                    "_default": 0,
+                    #"_protected": True
+                },
+                "report": {
+                    "_type": int,
+                    "_default": 0,
+                    #"_protected": True
+                },
+                "visible": {
+                    "_type": bool,
+                    "_default": True
+                },
+                "response": {
+                    "_type": ObjectId(),
+                    "_default": None
+                },
+                "id_article": {
+                    "_type": ObjectId()
+                },
+                "title_article": {
+                    "_type": str,
+                    "_default": article['title']
+                },
+                "image_article": {
+                    "_type": str,
+                    "_default": article['url_thumbnail']
+                }
+                # Check title article and image article exsits
+            }
+
+            return APIrequests.POST(
+                request, model, "questions", "The question has been sent!")
+        else:
+            print("ERROR ID")
+            return JsonResponse({"Error": "We need a valid id article"}, status=405)
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
 
 """
 We send an email to the adminstrator that tell us who user send a report for which article
