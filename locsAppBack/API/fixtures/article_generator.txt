@@ -1,0 +1,52 @@
+[
+
+  '{{repeat(1, 100)}}',
+  {
+    _id: {
+
+      $oid: '{{objectId()}}'
+    },
+
+    price: '{{integer(1, 500)}}',
+    color : '{{random("56cb3ef2b2bc57ab2908e6b2", "56cb3efdb2bc57ab2908e6b3", "56cb3f0eb2bc57ab2908e6b4", "56cb3f16b2bc57ab2908e6b5", "56cb3f21b2bc57ab2908e6b6")}}',
+    clothe_condition : '{{random("56cb3e69b2bc57ab2908e6ae", "56cb3e86b2bc57ab2908e6af", "56cb3e8cb2bc57ab2908e6b0", "56cb3e94b2bc57ab2908e6b1")}}',
+    gender : '{{random("56cb39c4b2bc57ab2908e691", "56cb39c9b2bc57ab2908e692", "56cb39ceb2bc57ab2908e693", "56cb39d2b2bc57ab2908e694", "56cb39e2b2bc57ab2908e695", "56cb3a0db2bc57ab2908e696")}}',
+    brand : "56cb3ef2b2bc57ab2908e6b2",
+
+    url_pictures : [
+                "media/articles/af44b8859d28401989e79c4d26c2e5c7",
+                "media/articles/00442b82eeb549bc8a62b0734052b95d"
+        ],
+    description: '{{lorem(2, "paragraphs")}}',
+    availibility_end : {
+       $date:  "{{integer(2016, 2017)}}-{{integer(8, 12)}}-{{integer(10, 30)}}T00:00:00.000Z"
+    },
+
+    id_author: '{{integer(1, 38)}}',
+
+
+
+    title: '{{lorem(5, "words")}}',
+    payment_methods : [
+                "56cb3dd6b2bc57ab2908e6aa",
+                "56cb3ddbb2bc57ab2908e6ab",
+                "56cb3de5b2bc57ab2908e6ac",
+                "56cb3df0b2bc57ab2908e6ad"
+        ],
+
+    available: true,
+    availibility_start: {
+      $date:  "2016-06-22T00:00:00.000Z"
+  },
+
+    url_thumbnail : "media/articles/af44b8859d28401989e79c4d26c2e5c7",
+    sub_category : '{{random("56d065b69fa9594c687df424", "56d065ba9fa9594c687df425", "56d065be9fa9594c687df426", "56d065c39fa9594c687df427", "56d065c69fa9594c687df428", "56d065ca9fa9594c687df429", "56d065ce9fa9594c687df42a")}}',
+    base_category : '{{random("56cb3d13b2bc57ab2908e698", "56cb3d17b2bc57ab2908e699", "56cb3d46b2bc57ab2908e69a")}}',
+    creation_date: {
+    $date: "2016-06-16T13:59:36.505Z"
+  },
+
+    size : '{{random("56d065da9fa9594c687df42b", "56d065dc9fa9594c687df42c", "56d065de9fa9594c687df42d", "56d065e09fa9594c687df42e", "56d065e39fa9594c687df42f", "56d065e59fa9594c687df430", "56d065e89fa9594c687df431", "56d065ea9fa9594c687df432")}}'
+
+  }
+]
