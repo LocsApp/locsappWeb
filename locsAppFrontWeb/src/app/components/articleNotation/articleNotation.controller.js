@@ -31,6 +31,12 @@
       $log.log(data);
     };
 
+    /* Stores the new mark in the given demand */
+    vm.starValue = function(newValue, demand) {
+      demand.value = newValue;
+      $log.log(demand.value)
+    }
+
     ArticleService
     .getPendingMarksForClients
     .get()

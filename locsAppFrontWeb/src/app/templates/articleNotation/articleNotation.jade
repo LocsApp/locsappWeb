@@ -24,7 +24,8 @@ div(layout="row" layout-align="center start")
 					md-card-content
 						section(layout="row")
 							div(ng-repeat="number in articleNotation.number_stars")
-								ng-md-icon(icon="star_border" size="48").icon-star
+								ng-md-icon(icon="star_border" size="48" ng-if="!demand.value || demand.value < number" ng-click="articleNotation.starValue(number, demand)").icon-star
+								ng-md-icon(icon="star" size="48" ng-if="demand.value && demand.value >= number" ng-click="articleNotation.starValue(number, demand)").icon-star-filled
 						section(layout="row").section-height-limiter
 							md-input-container.comment-container.flex
 								label Comment
@@ -52,7 +53,8 @@ div(layout="row" layout-align="center start")
 					md-card-content
 						section(layout="row")
 							div(ng-repeat="number in articleNotation.number_stars")
-								ng-md-icon(icon="star_border" size="48").icon-star
+								ng-md-icon(icon="star_border" size="48" ng-if="!demand.value || demand.value < number" ng-click="articleNotation.starValue(number, demand)").icon-star
+								ng-md-icon(icon="star" size="48" ng-if="demand.value && demand.value >= number" ng-click="articleNotation.starValue(number, demand)").icon-star-filled
 						section(layout="row").section-height-limiter
 							md-input-container.comment-container.flex
 								label Comment
