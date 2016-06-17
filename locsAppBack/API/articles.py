@@ -579,7 +579,7 @@ View for sending a question and notification to the owner
 
 
 @csrf_exempt
-@api_view(['POST'])
+@api_view(['POST', 'GET'])
 @permission_classes((IsAuthenticated,))
 def sendQuestion(request):
     """
@@ -625,7 +625,8 @@ def sendQuestion(request):
     if request.method == "POST":
         return APIrequests.POST(
             request, model, "questions", "The question has been sent!")
-
+    if request.method == "GET":
+        return APIrequests.GET("questions")
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
