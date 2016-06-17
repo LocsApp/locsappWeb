@@ -349,6 +349,10 @@ def postNewMark(request):
         "as_renter": {
             "_type": bool
         },
+        "comment": {
+            "_type": str,
+            "_length": 90
+        },
         "date_issued": {
             "_type": str,
             "_protected": True,

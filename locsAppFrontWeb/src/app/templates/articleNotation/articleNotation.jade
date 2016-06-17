@@ -14,8 +14,23 @@ div(layout="row" layout-align="center start")
 			p(style="text-align: center;") There are no clients to give a mark to at the moment.
 		div(ng-repeat="demand in articleNotation.notationsClient track by $index")
 			div(layout="row" layout-align="center")
-				md-card.card-information-demand-big-screen(hide-md hide-sm hide-xs flex="60")
-					img(flex="none" src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg").img-icon-demand-article
+				md-card.card-notation(hide-md hide-sm hide-xs flex="60")
+					md-card-header
+						md-card-avatar.img-icon-notation
+							img(flex="none" src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg").img-rounded
+						md-card-header-text.header-infos
+							span(class="md-title") {{ demand.author_name }}
+							span(class="md-subhead") {{ demand.article_name }}
+					md-card-content
+						section(layout="row")
+							div(ng-repeat="number in articleNotation.number_stars")
+								ng-md-icon(icon="star_border" size="48").icon-star
+						section(layout="row").section-height-limiter
+							md-input-container.comment-container.flex
+								label Comment
+								input(name="comment" ng-model="demand.comment" md-maxlength="90" minlength="5")
+						section(layout="row")
+							md-button.accept-button.flex SEND
 		div(layout="row" layout-align="center start")
 			span(flex="25").special-divider
 				md-divider
@@ -27,5 +42,20 @@ div(layout="row" layout-align="center start")
 			p(style="text-align: center;") There are no renters to give a mark to at the moment.
 		div(ng-repeat="demand in articleNotation.notationsRenter track by $index")
 			div(layout="row" layout-align="center")
-				md-card.card-information-demand-big-screen(hide-md hide-sm hide-xs flex="60")
-					img(flex="none" src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg").img-icon-notation
+				md-card.card-notation(hide-md hide-sm hide-xs flex="60")
+					md-card-header
+						md-card-avatar.img-icon-notation
+							img(flex="none" src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg").img-rounded
+						md-card-header-text.header-infos
+							span(class="md-title") {{ demand.name_target }}
+							span(class="md-subhead") {{ demand.article_name }}
+					md-card-content
+						section(layout="row")
+							div(ng-repeat="number in articleNotation.number_stars")
+								ng-md-icon(icon="star_border" size="48").icon-star
+						section(layout="row").section-height-limiter
+							md-input-container.comment-container.flex
+								label Comment
+								input(name="comment" ng-model="demand.comment" md-maxlength="90" minlength="5")
+						section(layout="row")
+							md-button.accept-button.flex SEND

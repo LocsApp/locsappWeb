@@ -15,6 +15,8 @@
 
     vm.url_api = URL_API;
 
+    vm.number_stars = [1,2,3,4,5];
+
     vm.GetNotationsClientSuccess = function (data) {
       $log.log(data);
       vm.notationsClient = data.article_demands;
