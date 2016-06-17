@@ -362,6 +362,28 @@ def postNewMark(request):
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
 
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def getMarkForClient(request):
+    if request.method == "GET":
+        return APIrequests.GET(
+            'article_demands', special_field={"id_target": request.user.pk, "visible": True, "status": "finished"})
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def getMarkForRenter(request):
+    if request.method == "GET":
+        return APIrequests.GET(
+            'article_demands', special_field={"id_author": request.user.pk, "visible": True, "status": "finished"})
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
 def verifyIfNotAlreadyIssued(document):
     if (db_locsapp["articles"].find_one(
             {"_id": ObjectId(document['id_article'])}) is None):

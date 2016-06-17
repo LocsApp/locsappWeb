@@ -1,9 +1,8 @@
 div(layout="row", layout-align="center center")
 	h2 Notations
 div(style="margin-top:40px;")
-div(layout="row")
-	span.flex
-	div(flex="70").article-requests-body
+div(layout="row" layout-align="center start")
+	div(flex="70").article-requests-body.article-notations-body
 		div(layout="row" layout-align="center start")
 			span(flex="25").special-divider
 				md-divider
@@ -17,3 +16,16 @@ div(layout="row")
 			div(layout="row" layout-align="center")
 				md-card.card-information-demand-big-screen(hide-md hide-sm hide-xs flex="60")
 					img(flex="none" src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg").img-icon-demand-article
+		div(layout="row" layout-align="center start")
+			span(flex="25").special-divider
+				md-divider
+			h3.title-request-category.flex Renters
+			span(flex="25").special-divider
+				md-divider
+		div(style="margin-top:20px;")
+		div(ng-if="articleNotation.notationsRenter.length < 1 && articleNotation.notationsRenter != true")
+			p(style="text-align: center;") There are no renters to give a mark to at the moment.
+		div(ng-repeat="demand in articleNotation.notationsRenter track by $index")
+			div(layout="row" layout-align="center")
+				md-card.card-information-demand-big-screen(hide-md hide-sm hide-xs flex="60")
+					img(flex="none" src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg").img-icon-notation

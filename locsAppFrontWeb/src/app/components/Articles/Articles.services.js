@@ -34,6 +34,9 @@
       acceptDemand: $resource(URL_API + 'api/v1/articles/accept-demand/'),
       currentTimelines: $resource(URL_API + 'api/v1/articles/current-timelines/'),
       currentTimelinesAsRenting: $resource(URL_API + 'api/v1/articles/current-timelines-as-renting/'),
+      giveMark: $resource(URL_API + 'api/v1/articles/give-mark/'),
+      getPendingMarksForClients: $resource(URL_API + 'api/v1/articles/get-pending-marks-for-clients/'),
+      getPendingMarksForRenters: $resource(URL_API + 'api/v1/articles/get-pending-marks-for-renters/'),
       uploadPicture: uploadPicture,
       is_authenticated: is_authenticated
     };

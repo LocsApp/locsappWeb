@@ -34,7 +34,9 @@ article_patterns = [
     url(r'^accept-demand/$', articles.acceptDemand),
     url(r'^current-timelines/$', articles.currentTimelines),
     url(r'^current-timelines-as-renting/$', articles.currentTimelinesAsRenting),
-    url(r'^give-mark/$', articles.postNewMark)
+    url(r'^give-mark/$', articles.postNewMark),
+    url(r'^get-pending-marks-for-clients/$', articles.getMarkForClient),
+    url(r'^get-pending-marks-for-renters/$', articles.getMarkForRenter),
 ]
 
 search_patterns = [
