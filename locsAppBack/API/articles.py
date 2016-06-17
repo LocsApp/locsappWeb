@@ -279,7 +279,7 @@ def demandsAsRenting(request):
 
 
 @csrf_exempt
-@api_view(['GET'])
+@api_view(['@mickael44: Quel slogan on prend alors?GET'])
 @permission_classes((IsAuthenticated,))
 def currentTimelines(request):
     if request.method == "GET":
@@ -576,8 +576,18 @@ def getArticle(request, article_pk):
 """
 View for sending a question and notification to the owner
 """
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
 def sendQuestion(request):
-    article_pk = ""
+    """
+    On s occupe que du document question d abord
+    On doit creer une liste de questions et on append si une question associe au meme id article
+    existe
+    """
+
     model = {
         "id_author": {
             "_type": int,
@@ -592,13 +602,13 @@ def sendQuestion(request):
         },
         "thumbs_up": {
             "_type": int,
-            "default": 0,
-            "protected": True
+            "_default": 0,
+            #"_protected": True
         },
         "report": {
             "_type": int,
-            "default": 0,
-            "protected": True
+            "_default": 0,
+            #"_protected": True
         },
         "id_article": {
             "_type": ObjectId()
@@ -606,11 +616,16 @@ def sendQuestion(request):
         "visible": {
             "_type": bool,
             "_default": True
+        },
+        "response": {
+            "_type": ObjectId(),
+            "_default": None
         }
     }
-    if request.method == "PUTT":
-        return APIrequests.PUT(
-            request, model, "articles", "The article has been successfully modified!", article_pk)
+    if request.method == "POST":
+        return APIrequests.POST(
+            request, model, "questions", "The question has been sent!")
+
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 

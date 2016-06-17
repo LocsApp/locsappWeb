@@ -240,7 +240,25 @@
 				redirectTo: 'main.homepage'
 			}
 		}
-    });
+    })
+
+
+   .state('main.question', {
+      url: 'question/',
+      parent: 'main',
+      templateUrl: 'app/templates/question/question.html',
+      controller: 'QuestionController',
+      controllerAs: 'questionCreate',
+      data: {
+			permissions: {
+				only: ['guest', 'user'],
+				redirectTo: 'main.homepage'
+			}
+		}
+    })
+
+
+  ;
 
 	$urlRouterProvider.otherwise(function($injector) {
 		var $state = $injector.get("$state");
