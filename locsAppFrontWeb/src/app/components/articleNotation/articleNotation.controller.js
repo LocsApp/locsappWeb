@@ -31,10 +31,41 @@
       $log.log(data);
     };
 
+    vm.sendNotationFailure = function (data) {
+      $log.log(data);
+      toastr.error(data.data.Error, "Woops...")
+    };
+
+    vm.sendNotationSuccess = function (data) {
+      toastr.success(data.message, "Success!")
+      $log.log(data);
+    }
+
     /* Stores the new mark in the given demand */
     vm.starValue = function(newValue, demand) {
       demand.value = newValue;
       $log.log(demand.value)
+    }
+
+    /* Sends the notation */
+    vm.sendNotation = function(demand, mode) {
+      $log.log("kek");
+      if (!demand.value || demand.value < 1 || demand.value > 5)
+        toastr.error("The mark must be of value between 1 and 5" ,"Woops...")
+      else if (!demand.comment || demand.comment.length < 5 || demand.comment.length > 90)
+        toastr.error("The comment length must be shorter than 5 characters and longer than 90." ,"Woops...")
+      else
+        ArticleService
+      .giveMark
+      .save({
+       "id_target": demand.id_target, 
+       "id_demand": demand._id, 
+       "id_article": demand.id_article, 
+       "value": demand.value,
+       "as_renter": mode,
+       "comment": demand.comment})
+      .$promise
+      .then(vm.sendNotationSuccess, vm.sendNotationFailure);
     }
 
     ArticleService

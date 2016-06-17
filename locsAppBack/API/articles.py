@@ -22,6 +22,8 @@ from datetime import datetime
 import re
 from django.http import HttpResponse
 
+from django.contrib.auth import get_user_model
+
 from pymongo import MongoClient
 
 # Connects to the db and creates a MongoClient instance
@@ -361,7 +363,7 @@ def postNewMark(request):
     }
     if request.method == "POST":
         return APIrequests.POST(
-            request, model, "articles", "The mark has been successfully added!", verifyIfNotAlreadyIssued)
+            request, model, "notations", "The mark has been successfully added!", verifyIfNotAlreadyIssued)
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
@@ -371,8 +373,14 @@ def postNewMark(request):
 @permission_classes((IsAuthenticated,))
 def getMarkForClient(request):
     if request.method == "GET":
-        return APIrequests.GET(
-            'article_demands', special_field={"id_target": request.user.pk, "visible": True, "status": "finished"})
+        docs = APIrequests.GET(
+            'article_demands', special_field={"id_target": request.user.pk, "visible": True, "status": "finished"}, raw=True)
+        for idx, document in enumerate(docs["article_demands"]):
+            if (db_locsapp["notations"].find_one(
+                    {"id_demand": document["_id"], "as_renter": True}) is not None):
+                docs["article_demands"].pop(idx)
+        return (HttpResponse(json.dumps(
+                docs, sort_keys=True, indent=4, default=json_util.default)))
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
@@ -382,13 +390,20 @@ def getMarkForClient(request):
 @permission_classes((IsAuthenticated,))
 def getMarkForRenter(request):
     if request.method == "GET":
-        return APIrequests.GET(
-            'article_demands', special_field={"id_author": request.user.pk, "visible": True, "status": "finished"})
+        docs = APIrequests.GET(
+            'article_demands', special_field={"id_author": request.user.pk, "visible": True, "status": "finished"}, raw=True)
+        for idx, document in enumerate(docs["article_demands"]):
+            if (db_locsapp["notations"].find_one(
+                    {"id_demand": document["_id"], "as_renter": False}) is not None):
+                docs["article_demands"].pop(idx)
+        return (HttpResponse(json.dumps(
+                docs, sort_keys=True, indent=4, default=json_util.default)))
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
 
 def verifyIfNotAlreadyIssued(document):
+    print(document)
     if (db_locsapp["articles"].find_one(
             {"_id": ObjectId(document['id_article'])}) is None):
         return ({"Error": "The article doesn't exist."})
@@ -396,20 +411,46 @@ def verifyIfNotAlreadyIssued(document):
         {"_id": ObjectId(document['id_demand'])})
     if (retrieve is None or retrieve["id_article"] != document["id_article"]):
         return ({"Error": "id_demand not conform."})
-    if (retrieve["status"] != "finished" and retrieve["status"] == "accepted"):
+    if (retrieve["status"] == "accepted"):
         if (datetime.now(pytz.utc) > parse(document["availibility_end"])):
             db_locsapp["article_demands"].update({"_id": ObjectId(document['id_demand'])}, {
                                                  "$set": {"status": "finished"}})
         else:
             return ({"Error": "The article renting is not finished yet."})
-    else:
+    elif (retrieve["status"] == "pending"):
         return ({"Error": "The demand hasn't even been accepted yet."})
-    if ((document["as_renter"] and retrieve["id_author"] != document["id_author"]) or (
+    elif (retrieve["status"] == "completed"):
+        return ({"Error": "The transaction has already been completed"})
+    if ((document["as_renter"] is True and retrieve["id_author"] != document["id_author"]) or (
             document["as_renter"] is False and retrieve["id_target"] != document["id_author"])):
         return ({"Error": "You are not allowed to make this notation."})
     if (db_locsapp["marks"].find_one({"id_demand": document["id_demand"], "id_article": document[
             'id_article'], "id_target": document["id_target"], "id_author": document["id_author"]}) is not None):
         return ({"Error": "You already gave a mark for this article."})
+    if (db_locsapp["notations"].find_one({"id_demand": document[
+            "id_demand"], "as_renter": not document["as_renter"]}) is not None):
+        db_locsapp["article_demands"].update({"_id": ObjectId(document['id_demand'])}, {
+            "$set": {"status": "completed"}})
+    try:
+        User = get_user_model()
+        current_user = User.objects.get(pk=document["id_author"])
+        number_of_marks = db_locsapp["notations"].find(
+            {"id_target": document["id_author"], "as_renter": document["as_renter"]}).count()
+        if (number_of_marks != 0):
+            if (document["as_renter"] is True):
+                new_average = current_user.renter_score + \
+                    (document["value"] -
+                     current_user.renter_score) / number_of_marks
+            else:
+                new_average = current_user.tenant_score + \
+                    (document["value"] -
+                     current_user.tenant_score) / number_of_marks
+        else:
+            new_average = document["value"]
+        print("IN HERE")
+        current_user.save()
+    except:
+        return ({"Error": "Error while updating the user model."})
     return (True)
 
 
@@ -635,8 +676,8 @@ def sendReport(request):
             #  new collection report associated to the id of this article
 
             message = 'The user ' + request.user.username + ' sent a report about this article' + \
-                      ' <a href="' + settings.URL_FRONT + 'article/' + str(article['_id']) + '">' + \
-                      article['title'] + '</a>'
+                ' <a href="' + settings.URL_FRONT + 'article/' + str(article['_id']) + '">' + \
+                article['title'] + '</a>'
             email = EmailMessage('Report for article ' + article['title'], message,
                                  to=list_email)
             email.send()
