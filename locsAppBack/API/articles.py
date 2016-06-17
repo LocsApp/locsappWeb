@@ -377,7 +377,7 @@ def getMarkForClient(request):
             'article_demands', special_field={"id_target": request.user.pk, "visible": True, "status": "finished"}, raw=True)
         for idx, document in enumerate(docs["article_demands"]):
             if (db_locsapp["notations"].find_one(
-                    {"id_demand": document["_id"], "as_renter": True}) is not None):
+                    {"id_demand": document["_id"], "as_renter": False}) is not None):
                 docs["article_demands"].pop(idx)
         return (HttpResponse(json.dumps(
                 docs, sort_keys=True, indent=4, default=json_util.default)))
@@ -394,7 +394,7 @@ def getMarkForRenter(request):
             'article_demands', special_field={"id_author": request.user.pk, "visible": True, "status": "finished"}, raw=True)
         for idx, document in enumerate(docs["article_demands"]):
             if (db_locsapp["notations"].find_one(
-                    {"id_demand": document["_id"], "as_renter": False}) is not None):
+                    {"id_demand": document["_id"], "as_renter": True}) is not None):
                 docs["article_demands"].pop(idx)
         return (HttpResponse(json.dumps(
                 docs, sort_keys=True, indent=4, default=json_util.default)))
@@ -433,20 +433,24 @@ def verifyIfNotAlreadyIssued(document):
             "$set": {"status": "completed"}})
     try:
         User = get_user_model()
-        current_user = User.objects.get(pk=document["id_author"])
+        current_user = User.objects.get(pk=document["id_target"])
         number_of_marks = db_locsapp["notations"].find(
             {"id_target": document["id_author"], "as_renter": document["as_renter"]}).count()
         if (number_of_marks != 0):
             if (document["as_renter"] is True):
-                new_average = current_user.renter_score + \
-                    (document["value"] -
-                     current_user.renter_score) / number_of_marks
+                new_average = current_user.renter_score + (document["value"] -
+                                                           current_user.renter_score) / number_of_marks
+                current_user.renter_score = int(new_average)
             else:
-                new_average = current_user.tenant_score + \
-                    (document["value"] -
-                     current_user.tenant_score) / number_of_marks
+                new_average = current_user.tenant_score + (document["value"] -
+                                                           current_user.tenant_score) / number_of_marks
+                current_user.tenant_score = int(new_average)
         else:
             new_average = document["value"]
+            if (document["as_renter"] is True):
+                current_user.renter_score = int(new_average)
+            else:
+                current_user.tenant_score = int(new_average)
         print("IN HERE")
         current_user.save()
     except:

@@ -31,7 +31,7 @@ div(layout="row" layout-align="center start")
 								label Comment
 								input(name="comment" ng-model="demand.comment" md-maxlength="90" minlength="5")
 						section(layout="row")
-							md-button(ng-click="articleNotation.sendNotation(demand, false)").accept-button.flex SEND
+							md-button(ng-click="articleNotation.sendNotation($index, demand, false)").accept-button.flex SEND
 		div(layout="row" layout-align="center start")
 			span(flex="25").special-divider
 				md-divider
@@ -60,4 +60,4 @@ div(layout="row" layout-align="center start")
 								label Comment
 								input(name="comment" ng-model="demand.comment" md-maxlength="90" minlength="5")
 						section(layout="row")
-							md-button(ng-click="articleNotation.sendNotation(demand, true)").accept-button.flex SEND
+							md-button(ng-click="articleNotation.sendNotation($index, demand, true)").accept-button.flex SEND
