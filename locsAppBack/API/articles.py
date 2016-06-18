@@ -611,7 +611,7 @@ def sendQuestion(request):
 		article = db_locsapp["articles"].find_one(
 			{"_id": ObjectId(body['id_article'])})
 		if article:
-			print("ARTICLE = ", article)
+			# print("ARTICLE = ", article)
 
 			model = {
 				"id_author": {
@@ -658,13 +658,32 @@ def sendQuestion(request):
 			}
 
 			return APIrequests.POST(
-				request, model, "questions", "The question has been sent!")
+				request, model, "questions", "The question has been sent!", addQuestionInArticle)
 		else:
 			return JsonResponse({"Error": "We need a valid id article"}, status=405)
 
-
 	else:
 		return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+def addQuestionInArticle(document):
+	article = db_locsapp["articles"].find_one({"_id": ObjectId(document['id_article'])})
+	# print("article = ", article)
+	id_article = document['id_article']
+	print("document = ", document)
+	document.pop("image_article")
+	document.pop("title_article")
+	document.pop("id_article")
+	try:
+		questions = article['questions']
+		questions.append(document)
+		db_locsapp["articles"].update({"_id": ObjectId(id_article)}, {
+			"$set": {"questions": questions}})
+	except KeyError:
+		db_locsapp["articles"].update({"_id": ObjectId(id_article)}, {
+			"$set": {"questions": [document]}})
+
+	return True
 
 
 """

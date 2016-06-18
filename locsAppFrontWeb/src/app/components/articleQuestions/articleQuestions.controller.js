@@ -1,8 +1,8 @@
-(function(){
+(function () {
 
   'use strict';
 
-   angular
+  angular
     .module('LocsappControllers')
     .controller('ArticleQuestionsController', ArticleQuestionsController);
 
@@ -11,11 +11,12 @@
     var vm = this;
     vm.questions = "";
 
-   vm.GetQuestionsSuccess = function(data) {
+    vm.GetQuestionsSuccess = function (data) {
       vm.questions = data.questions;
+      $log.log("Vm questions = ", vm.questions);
     };
 
-    vm.GetQuestionsFailure = function(data) {
+    vm.GetQuestionsFailure = function (data) {
       $log.log("GetQuestionFailure", data)
     };
 
