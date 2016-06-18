@@ -38,6 +38,7 @@ article_patterns = [
     url(r'^give-mark/$', articles.postNewMark),
 
     url(r'^questions/$', questions.sendQuestion),
+
 ]
 
 search_patterns = [

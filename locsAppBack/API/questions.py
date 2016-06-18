@@ -97,19 +97,21 @@ def sendQuestion(request):
 def addQuestionInArticle(document):
 	article = db_locsapp["articles"].find_one({"_id": ObjectId(document['id_article'])})
 	# print("article = ", article)
+	document_to_copy = document.copy()
 	id_article = document['id_article']
-	print("document = ", document)
-	document.pop("image_article")
-	document.pop("title_article")
-	document.pop("id_article")
+	document_to_copy.pop("image_article")
+	document_to_copy.pop("title_article")
+	document_to_copy.pop("id_article")
 	try:
 		questions = article['questions']
-		questions.append(document)
+		questions.append(document_to_copy)
 		db_locsapp["articles"].update({"_id": ObjectId(id_article)}, {
 			"$set": {"questions": questions}})
 	except KeyError:
 		db_locsapp["articles"].update({"_id": ObjectId(id_article)}, {
-			"$set": {"questions": [document]}})
+			"$set": {"questions": [document_to_copy]}})
 
 	return True
+
+
 
