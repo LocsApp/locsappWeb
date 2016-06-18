@@ -27,6 +27,10 @@ def sendQuestion(request):
 	"""
 
 	if request.method == "GET":
+		request.user.pk = 26
+		questions = db_locsapp["questions"].find_one({"id_author": request.user.pk})
+		print("Before print questions")
+		print("questions = ", questions)
 		return APIrequests.GET("questions", special_field={"id_author": request.user.pk, "visible": True})
 
 	elif request.method == "POST":
@@ -35,6 +39,9 @@ def sendQuestion(request):
 		if not ObjectId.is_valid(body['id_article']):
 			return JsonResponse(
 				{"Error": "Please send a correct article id"}, status=401)
+		if 'id_author' in body or 'url_thumbnail' in body or 'title' in body:
+			return JsonResponse(
+				{"Error": "What are you trying to do ?"}, status=401)
 
 		article = db_locsapp["articles"].find_one(
 			{"_id": ObjectId(body['id_article'])})
@@ -48,8 +55,16 @@ def sendQuestion(request):
 					"_protected": True
 				},
 				"author_name": {
-					"_type": str
+					"_type": str,
+					"_default": request.user.username,
 				},
+
+				"id_owner": {
+					"_type": int,
+					"_default": article['id_author']
+				},
+
+
 				"content": {
 					"_type": str,
 				},
@@ -102,6 +117,7 @@ def addQuestionInArticle(document):
 	document_to_copy.pop("image_article")
 	document_to_copy.pop("title_article")
 	document_to_copy.pop("id_article")
+	document_to_copy.pop('id_author')
 	try:
 		questions = article['questions']
 		questions.append(document_to_copy)
