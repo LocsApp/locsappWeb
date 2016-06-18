@@ -6,6 +6,7 @@ from . import static_collections
 from django.views.generic.base import RedirectView
 from allauth.account.views import confirm_email
 from social_network import views as social_network_views
+from . import questions
 
 
 """
@@ -36,7 +37,7 @@ article_patterns = [
     url(r'^current-timelines-as-renting/$', articles.currentTimelinesAsRenting),
     url(r'^give-mark/$', articles.postNewMark),
 
-    url(r'^questions/$', articles.sendQuestion),
+    url(r'^questions/$', questions.sendQuestion),
 ]
 
 search_patterns = [
