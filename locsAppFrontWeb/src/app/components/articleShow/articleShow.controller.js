@@ -221,7 +221,7 @@
       "author_name": ScopesService.get("current_user").username,
       "author_notation": ScopesService.get("current_user").notation_renting || -1})
       .$promise
-      .then(function (data) {
+      .then(function () {
         toastr.success("Your demand has been sent!", "Success !");
       },
       function (data) {
@@ -245,7 +245,7 @@
         parent: angular.element($document.body),
         targetEvent: event,
         clickOutsideToClose: true
-      }).then(function (data) {
+      }).then(function () {
         $log.log("finished");
       });
     };

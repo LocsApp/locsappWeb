@@ -1,0 +1,41 @@
+.article-notations-body 
+{
+	.card-notation {
+		height: 330px;
+	}
+
+	.img-icon-notation {
+        height: 100px;
+        width:100px;
+    }
+
+    .img-rounded {
+    	border-radius: 50%;
+    }
+
+    .header-infos {
+    	.md-title {
+    		font-size: large
+    	}
+
+    }
+
+    .icon-star {
+    	height: 48px;
+    	width: 48px;
+    	margin-right: 5px;
+    	cursor: pointer
+    }
+
+    .icon-star-filled {
+    	@extend .icon-star;
+    	color: $starFilled;
+    }
+
+    .comment-container {
+    	height: 60px;
+    	width:100%;
+    	margin-bottom: 0px;
+    }
+
+}
