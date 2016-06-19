@@ -146,7 +146,7 @@ div.article-show(layout="row" layout-align="center")
         md-input-container.md-block
           label Be the first one to ask something
           textarea(ng-model="articleShow.askQuestion" md-maxlength="150" rows="5" md-select-on-focus)
-
+          md-button.md-raised(ng-submit='articleShow.sendQuestion()') Send question
 
     div.question(layout="row" layout-align="center" ng-repeat="question in articleShow.questions | limitTo: articleShow.paginationLimit()" ng-if="question.is_visible")
       div(layout="column")

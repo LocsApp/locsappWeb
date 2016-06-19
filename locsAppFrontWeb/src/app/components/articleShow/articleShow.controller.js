@@ -77,18 +77,17 @@
       /* Create date for date picker */
       $log.log(vm.data.availibility_start)
       /*
-      vm.dateBeginParts = vm.data.availibility_start.split("/");
-      vm.dateEndParts = vm.data.availibility_end.split("/");
-      vm.dateStart = new Date(vm.dateBeginParts[2], vm.dateBeginParts[1] - 1, vm.dateBeginParts[0]);
-      vm.dateEnd = new Date(vm.dateEndParts[2], vm.dateEndParts[1] - 1, vm.dateEndParts[0]);
-      vm.AskBeginLocation = new Date(vm.dateBeginParts[2], vm.dateBeginParts[1] - 1, vm.dateBeginParts[0]);
-      vm.AskEndLocation = new Date(vm.dateEndParts[2], vm.dateEndParts[1] - 1, vm.dateEndParts[0]);*/
+       vm.dateBeginParts = vm.data.availibility_start.split("/");
+       vm.dateEndParts = vm.data.availibility_end.split("/");
+       vm.dateStart = new Date(vm.dateBeginParts[2], vm.dateBeginParts[1] - 1, vm.dateBeginParts[0]);
+       vm.dateEnd = new Date(vm.dateEndParts[2], vm.dateEndParts[1] - 1, vm.dateEndParts[0]);
+       vm.AskBeginLocation = new Date(vm.dateBeginParts[2], vm.dateBeginParts[1] - 1, vm.dateBeginParts[0]);
+       vm.AskEndLocation = new Date(vm.dateEndParts[2], vm.dateEndParts[1] - 1, vm.dateEndParts[0]);*/
       vm.dateStart = new Date(vm.data.availibility_start.$date)
       vm.dateEnd = new Date(vm.data.availibility_end.$date)
       if (vm.dateEnd < new Date())
         vm.articleNotAvailable = true;
-      if (vm.dateStart < new Date())
-      {
+      if (vm.dateStart < new Date()) {
         delete vm.dateStart;
         vm.dateStart = new Date();
       }
@@ -172,15 +171,15 @@
     };
 
     vm.sendReportError = function (data) {
-        toastr.error("An error occurred", "Error");
-        $log.log("sendReport Error", data);
+      toastr.error("An error occurred", "Error");
+      $log.log("sendReport Error", data);
     };
 
     vm.sendReport = function () {
 
       $log.log("Send report = id", $stateParams.id);
 
-     ArticleService
+      ArticleService
         .sendReport
         .save({"article_id": $stateParams.id})
         .$promise
@@ -206,32 +205,32 @@
     };
 
     /*Function to ask for rent*/
-    vm.askForRent = function()
-    {
+    vm.askForRent = function () {
       ArticleService
-      .demands
-      .save({
-      "id_target": vm.data.id_author,
-      "name_target": vm.username_author,
-      "id_article": vm.data._id,
-      "availibility_start": vm.AskBeginLocation,
-      "availibility_end": vm.AskEndLocation,
-      "article_name": vm.data.title,
-      "article_thumbnail_url": vm.data.url_thumbnail,
-      "author_name": ScopesService.get("current_user").username,
-      "author_notation": ScopesService.get("current_user").notation_renting || -1})
-      .$promise
-      .then(function () {
-        toastr.success("Your demand has been sent!", "Success !");
-      },
-      function (data) {
-        if (data.data.error)
-          toastr.error(data.data.error, "Woops...");
-        else
-          toastr.error("An error occured while sending the demand", "Woops...");
-        $log.log(data);
-      })
-    }
+        .demands
+        .save({
+          "id_target": vm.data.id_author,
+          "name_target": vm.username_author,
+          "id_article": vm.data._id,
+          "availibility_start": vm.AskBeginLocation,
+          "availibility_end": vm.AskEndLocation,
+          "article_name": vm.data.title,
+          "article_thumbnail_url": vm.data.url_thumbnail,
+          "author_name": ScopesService.get("current_user").username,
+          "author_notation": ScopesService.get("current_user").notation_renting || -1
+        })
+        .$promise
+        .then(function () {
+            toastr.success("Your demand has been sent!", "Success !");
+          },
+          function (data) {
+            if (data.data.error)
+              toastr.error(data.data.error, "Woops...");
+            else
+              toastr.error("An error occured while sending the demand", "Woops...");
+            $log.log(data);
+          })
+    };
 
     /*Dialog to ask to rent the article*/
     /** @ngInject */
@@ -240,7 +239,14 @@
         controller: vm.askRentController,
         controllerAs: 'askRent',
         templateUrl: 'app/templates/dialogTemplates/askRent.tmpl.html',
-        locals: {user_id: $localStorage.id || $sessionStorage.id, author_id: vm.author_id, article_id: $stateParams.id, article_name: vm.data.title, article_date_begin: vm.data.availibility_start, article_date_end: vm.data.availibility_end},
+        locals: {
+          user_id: $localStorage.id || $sessionStorage.id,
+          author_id: vm.author_id,
+          article_id: $stateParams.id,
+          article_name: vm.data.title,
+          article_date_begin: vm.data.availibility_start,
+          article_date_end: vm.data.availibility_end
+        },
         bindToController: true,
         parent: angular.element($document.body),
         targetEvent: event,
@@ -264,6 +270,36 @@
     //On affiche le show more si il reste des false dans le tableau
     //Et le show more est affiche on derner true du tableau
 
+    vm.sendQuestionSuccess = function (data) {
+      $log.log("sendQuestiopnSuccess = ", data)
+    };
+
+    vm.sendQuestionError = function (data) {
+      $log.error("sendQuestionError= ", data)
+
+    };
+
+    vm.sendQuestion = function () {
+
+      /*
+       "author_name": "LocsApp",
+       "content": "Ceci est une qeuestoi encore une autren encore une autre",
+       "thumbs_up": 0,
+       "report": 0,
+       "id_article": "5762ba8a166e3ba35f4e88c3"
+       */
+
+      ArticleService
+        .questions
+        .save({
+          "author_name": "",
+          "content": "",
+          //"t"
+        })
+        .$promise
+        .then(vm.sendQuestionSuccess, vm.sendQuestionError)
+
+    }
 
   }
 
