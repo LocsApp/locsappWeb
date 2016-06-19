@@ -14,7 +14,7 @@
 
   /** @ngInject */
   function ArticleShowController($log, $mdDialog, $document, ArticleService, $stateParams,
-                                 $interval, toastr, ScopesService, URL_API, $sessionStorage, $localStorage) {
+                                 $interval, toastr, ScopesService, URL_API, $sessionStorage, $localStorage, $state) {
 
     var vm = this;
     vm.url_api = URL_API;
@@ -273,7 +273,9 @@
     vm.sendQuestionSuccess = function (data) {
 
       toastr.success("Your questions has been sent", "Success!");
-      $log.log("sendQuestiopnSuccess = ", data)
+      $log.log("sendQuestiopnSuccess = ", data);
+      $state.go($state.$current, null, { reload: true });
+
     };
 
     vm.sendQuestionError = function (data) {
@@ -286,14 +288,13 @@
       $log.log("in SendQuestion", vm.askQuestion);
 
 
-      if (vm.askQuestion != undefined || vm.askQuestion == "") {
+      if (vm.askQuestion != undefined) {
 
         ArticleService
           .questions
           .save({
             "content": vm.askQuestion,
             "id_article": $stateParams.id
-            //"t"
           })
           .$promise
           .then(vm.sendQuestionSuccess, vm.sendQuestionError)
