@@ -40,6 +40,7 @@
 
     vm.GetInfoArticleSuccess = function (data) {
       vm.data = data;
+      $log.log("GetInfoArticleSuccess = ", data);
 
       /* find the name using the id fixtures */
       vm.name_gender = vm.genders[vm.genders.map(function (x) {
@@ -75,7 +76,7 @@
       }
 
       /* Create date for date picker */
-      $log.log(vm.data.availibility_start)
+      $log.log(vm.data.availibility_start);
       /*
        vm.dateBeginParts = vm.data.availibility_start.split("/");
        vm.dateEndParts = vm.data.availibility_end.split("/");
@@ -83,16 +84,16 @@
        vm.dateEnd = new Date(vm.dateEndParts[2], vm.dateEndParts[1] - 1, vm.dateEndParts[0]);
        vm.AskBeginLocation = new Date(vm.dateBeginParts[2], vm.dateBeginParts[1] - 1, vm.dateBeginParts[0]);
        vm.AskEndLocation = new Date(vm.dateEndParts[2], vm.dateEndParts[1] - 1, vm.dateEndParts[0]);*/
-      vm.dateStart = new Date(vm.data.availibility_start.$date)
-      vm.dateEnd = new Date(vm.data.availibility_end.$date)
+      vm.dateStart = new Date(vm.data.availibility_start.$date);
+      vm.dateEnd = new Date(vm.data.availibility_end.$date);
       if (vm.dateEnd < new Date())
         vm.articleNotAvailable = true;
       if (vm.dateStart < new Date()) {
         delete vm.dateStart;
         vm.dateStart = new Date();
       }
-      vm.AskBeginLocation = new Date(vm.dateStart)
-      vm.AskEndLocation = new Date(vm.dateStart)
+      vm.AskBeginLocation = new Date(vm.dateStart);
+      vm.AskEndLocation = new Date(vm.dateStart);
 
       if (vm.data.id_author == ScopesService.get("current_user").id)
         vm.ownArticle = true;
