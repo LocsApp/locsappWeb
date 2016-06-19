@@ -271,6 +271,8 @@
     //Et le show more est affiche on derner true du tableau
 
     vm.sendQuestionSuccess = function (data) {
+
+      toastr.success("Your questions has been sent", "Success!");
       $log.log("sendQuestiopnSuccess = ", data)
     };
 
@@ -281,25 +283,28 @@
 
     vm.sendQuestion = function () {
 
-      /*
-       "author_name": "LocsApp",
-       "content": "Ceci est une qeuestoi encore une autren encore une autre",
-       "thumbs_up": 0,
-       "report": 0,
-       "id_article": "5762ba8a166e3ba35f4e88c3"
-       */
+      $log.log("in SendQuestion", vm.askQuestion);
 
-      ArticleService
-        .questions
-        .save({
-          "author_name": "",
-          "content": "",
-          //"t"
-        })
-        .$promise
-        .then(vm.sendQuestionSuccess, vm.sendQuestionError)
 
+      if (vm.askQuestion != undefined || vm.askQuestion == "") {
+
+        ArticleService
+          .questions
+          .save({
+            "content": vm.askQuestion,
+            "id_article": $stateParams.id
+            //"t"
+          })
+          .$promise
+          .then(vm.sendQuestionSuccess, vm.sendQuestionError)
+
+      }
+      else {
+         toastr.error("Your question can't be empty", "Error!");
+      }
     }
+
+
 
   }
 
