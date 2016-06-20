@@ -100,7 +100,10 @@
 
       /* Init array questions */
       console.log("questions = ", vm.data.questions);
-      vm.questions = vm.data.questions;
+      if (vm.data.questions == undefined)
+        vm.questions = "";
+      else
+        vm.questions = vm.data.questions;
 
       /* We create an array for the carousel and the first picture is the thumbnail */
       vm.carousel = [];

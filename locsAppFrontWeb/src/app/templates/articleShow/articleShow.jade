@@ -144,12 +144,6 @@ div.article-show(layout="row" layout-align="center")
     span test = {{articleShow.questions}}
     hr
 
-    div.question(layout="row" layout-align="center" ng-if="articleShow.questions.length === 0")
-      div(layout="column")
-        md-input-container.md-block
-          label Be the first one to ask something
-          textarea(ng-model="articleShow.askQuestion" md-maxlength="150" rows="5" md-select-on-focus)
-          md-button.md-raised(ng-click='articleShow.sendQuestion()') Send question
 
     div.question(layout="row" layout-align="center" ng-repeat="question in articleShow.questions | limitTo: articleShow.paginationLimit()" ng-if="question.visible")
       div(layout="column")
@@ -159,6 +153,14 @@ div.article-show(layout="row" layout-align="center")
           ng-md-icon(icon="thumb_up")
           span +{{question.thumbs_up}}
         div(flex-offset="10") {{question.response.content}}
+
+    div(layout="row" layout-align="center")
+      div(layout="column")
+        md-input-container.md-block
+          label(ng-if="articleShow.questions.length === 0") Be the first one to ask something
+          label(ng-if="articleShow.questions.length != 0") Please ask your question
+          textarea(ng-model="articleShow.askQuestion" md-maxlength="150" rows="5" md-select-on-focus)
+          md-button.md-raised(ng-click='articleShow.sendQuestion()') Send question
 
     div.t-center.submit(ng-show="articleShow.hasMoreItemsToShow()" ng-click="articleShow.showMoreItems()")
       md-button.md-raised Show more

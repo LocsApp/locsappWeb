@@ -51,8 +51,14 @@ def sendQuestion(request):
             {"_id": ObjectId(body['id_article'])})
         if article:
             # print("ARTICLE = ", article)
-
             model = {
+
+                "id": {
+                    "_type": str,
+                    "_default": str(ObjectId()),
+                    "_protected": True
+                },
+
                 "id_author": {
                     "_type": int,
                     "_default": request.user.pk,
@@ -64,7 +70,7 @@ def sendQuestion(request):
                     '_protected': True
                 },
 
-                "id_owner": {
+                "id_owner_article": {
                     "_type": int,
                     "_default": article['id_author']
                 },
@@ -104,8 +110,10 @@ def sendQuestion(request):
                 # Check title article and image article exsits
             }
 
-            return APIrequests.POST(
-                request, model, "questions", "The question has been sent!", addQuestionInArticle)
+            return APIrequests.POST(request, model, "questions", "The question has been sent!",
+                              addQuestionInArticle)
+            #print("test = ", test)
+            #return JsonResponse({"Error": "We need a valid id article"}, status=405)
         else:
             return JsonResponse({"Error": "We need a valid id article"}, status=405)
 
@@ -116,6 +124,7 @@ def sendQuestion(request):
 def addQuestionInArticle(document):
     article = db_locsapp["articles"].find_one({"_id": ObjectId(document['id_article'])})
     # print("article = ", article)
+    print("document = ", document)
     document_to_copy = document.copy()
     id_article = document['id_article']
     document_to_copy.pop("image_article")
