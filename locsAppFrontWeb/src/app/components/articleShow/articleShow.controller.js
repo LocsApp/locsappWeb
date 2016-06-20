@@ -99,7 +99,8 @@
         vm.ownArticle = true;
 
       /* Init array questions */
-      vm.questions = [];
+      console.log("questions = ", vm.data.questions);
+      vm.questions = vm.data.questions;
 
       /* We create an array for the carousel and the first picture is the thumbnail */
       vm.carousel = [];
