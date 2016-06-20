@@ -2,7 +2,7 @@
 
 .article-show {
 
- // margin-bottom: 50px;
+  // margin-bottom: 50px;
 
   h1 {
     margin-bottom: -15px;
@@ -132,11 +132,19 @@
     }
   }
 
+  /* Questions */
+
+  .question-not-available {
+    color: #C10000;
+    text-align: center;
+    font-size: large;
+  }
+
   .owl-carousel {
 
     .item {
-     span.bold {
-      margin-top: 20px;
+      span.bold {
+        margin-top: 20px;
       }
     }
   }
@@ -203,62 +211,61 @@
     background: #869791;
   }
 
-
   @media screen and (min-width: 600px) {
 
-       md-card-content {
+    md-card-content {
 
-        md-datepicker {
-          padding-right: 0;
-          padding-left: 0;
-          width: 98%;
+      md-datepicker {
+        padding-right: 0;
+        padding-left: 0;
+        width: 98%;
+      }
+      .md-datepicker-input-container {
+        width: 85%;
+      }
+
+      a {
+        color: black;
+      }
+
+      div {
+
+        &.date {
+          //background: red;
+          height: 40%;
+          width: 100%;
+          position: absolute;
+          top: 0;
+
+          md-datepicker {
+            margin-top: 10px;
+          }
         }
-        .md-datepicker-input-container {
-          width: 85%;
+
+        &.rent {
+          height: 20%;
+          width: 100%;
+          position: absolute;
+          top: 40%;
         }
 
-        a {
-          color: black;
-        }
+        &.favorite-share {
+          height: 40%;
+          width: 100%;
+          position: absolute;
+          //background: blue;
+          top: 60%;
 
-        div {
-
-          &.date {
-            //background: red;
-            height: 40%;
-            width: 100%;
-            position: absolute;
-            top: 0;
-
-            md-datepicker {
-              margin-top: 10px;
-            }
+          .details {
+            margin-bottom: 10px;
           }
 
-          &.rent {
-            height: 20%;
-            width: 100%;
-            position: absolute;
-            top: 40%;
-          }
-
-          &.favorite-share {
-            height: 40%;
-            width: 100%;
-            position: absolute;
-            //background: blue;
-            top: 60%;
-
-            .details {
-              margin-bottom: 10px;
-            }
-
-            ng-md-icon {
-              cursor: pointer;
-            }
+          ng-md-icon {
+            cursor: pointer;
           }
         }
       }
-}
+    }
+  }
 
 }

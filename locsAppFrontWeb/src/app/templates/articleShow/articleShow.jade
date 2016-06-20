@@ -154,7 +154,13 @@ div.article-show(layout="row" layout-align="center")
           span +{{question.thumbs_up}}
         div(flex-offset="10") {{question.response.content}}
 
-    div(layout="row" layout-align="center")
+
+    div(layout="row" layout-align="center" class="question-not-available" ng-if="articleShow" +
+    ".ownArticle")
+      div(layout="column")
+        div.flex You can't ask question on your own article
+
+    div(layout="row" layout-align="center" ng-if="!articleShow.ownArticle")
       div(layout="column")
         md-input-container.md-block
           label(ng-if="articleShow.questions.length === 0") Be the first one to ask something

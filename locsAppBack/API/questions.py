@@ -49,6 +49,10 @@ def sendQuestion(request):
 
         article = db_locsapp["articles"].find_one(
             {"_id": ObjectId(body['id_article'])})
+
+        if request.user.pk == article['id_author']:
+            return JsonResponse({"Error": "You are the owner of this article"}, status=401)
+
         if article:
             # print("ARTICLE = ", article)
             model = {
@@ -112,10 +116,8 @@ def sendQuestion(request):
 
             return APIrequests.POST(request, model, "questions", "The question has been sent!",
                               addQuestionInArticle)
-            #print("test = ", test)
-            #return JsonResponse({"Error": "We need a valid id article"}, status=405)
         else:
-            return JsonResponse({"Error": "We need a valid id article"}, status=405)
+            return JsonResponse({"Error": "We need a valid id article"}, status=403)
 
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
@@ -124,7 +126,9 @@ def sendQuestion(request):
 def addQuestionInArticle(document):
     article = db_locsapp["articles"].find_one({"_id": ObjectId(document['id_article'])})
     # print("article = ", article)
-    print("document = ", document)
+
+
+
     document_to_copy = document.copy()
     id_article = document['id_article']
     document_to_copy.pop("image_article")
