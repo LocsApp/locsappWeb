@@ -39,6 +39,7 @@ article_patterns = [
     url(r'^get-pending-marks-for-clients/$', articles.getMarkForClient),
     url(r'^get-pending-marks-for-renters/$', articles.getMarkForRenter),
     url(r'^questions/$', questions.sendQuestion),
+    url(r'^answers/$', questions.answerQuestion),
 
 ]
 
