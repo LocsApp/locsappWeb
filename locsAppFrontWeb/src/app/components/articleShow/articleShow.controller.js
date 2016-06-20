@@ -275,23 +275,20 @@
     //On affiche le show more si il reste des false dans le tableau
     //Et le show more est affiche on derner true du tableau
 
-    vm.sendQuestionSuccess = function (data) {
+    vm.sendQuestionSuccess = function () {
 
       toastr.success("Your questions has been sent", "Success!");
-      $log.log("sendQuestiopnSuccess = ", data);
-      $state.go($state.$current, null, { reload: true });
+      // $log.log("sendQuestiopnSuccess = ", data);
+      $state.go($state.$current, null, {reload: true});
 
     };
 
     vm.sendQuestionError = function (data) {
-      $log.error("sendQuestionError= ", data)
-
+      $log.error("sendQuestionError= ", data);
+      toastr.error("Something went wrong", "Error!");
     };
 
     vm.sendQuestion = function () {
-
-      $log.log("in SendQuestion", vm.askQuestion);
-
 
       if (vm.askQuestion != undefined) {
 
@@ -306,10 +303,38 @@
 
       }
       else {
-         toastr.error("Your question can't be empty", "Error!");
+        toastr.error("Your question can't be empty", "Error!");
+      }
+    };
+
+    vm.sendAnswerError = function (data) {
+      toastr.error("Something went wrong", "Error!");
+      $log.error("sendAnswerError", data);
+    };
+
+    vm.sendAnswerSuccess = function () {
+
+      toastr.success("Your answer has been sent", "Success!");
+      // $log.log("sendQuestiopnSuccess = ", data);
+      $state.go($state.$current, null, {reload: true});
+    };
+
+    vm.sendAnswer = function (idQuestion) {
+      if (vm.answerQuestion != undefined) {
+        ArticleService
+          .answers
+          .save({
+            "response": vm.answerQuestion,
+            "id_question": idQuestion
+          })
+          .$promise
+          .then(vm.sendAnswerSuccess, vm.sendAnswerError)
+      }
+
+      else {
+        toastr.error("Your answer can't be empty", "Error!");
       }
     }
-
 
 
   }

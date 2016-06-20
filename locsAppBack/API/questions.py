@@ -148,10 +148,10 @@ def addQuestionInArticle(document):
 
 
 @csrf_exempt
-@api_view(['PUT'])
+@api_view(['POST'])
 @permission_classes((IsAuthenticated,))
 def answerQuestion(request):
-	if request.method == 'PUT':
+	if request.method == 'POST':
 
 		body = json.loads(request.body.decode('utf8'))
 

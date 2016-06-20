@@ -152,12 +152,12 @@ div.article-show(layout="row" layout-align="center")
           ng-md-icon(icon="warning")
           ng-md-icon(icon="thumb_up")
           span +{{question.thumbs_up}}
-        div(flex-offset="10") {{question.response.content}}
-        md-input-container.md-block(ng-if="articleShow.ownArticle")
+        div(flex-offset="10") {{question.response}}
+        md-input-container.md-block(ng-if="articleShow.ownArticle && question.response == undefined")
           label You can answer the question here
           textarea(ng-model="articleShow.answerQuestion" md-maxlength="150" rows="5"
           md-select-on-focus)
-          md-button.md-raised(ng-click='articleShow.sendAnswer()') Answer the question
+          md-button.md-raised(ng-click='articleShow.sendAnswer(question.id)') Answer the question
 
 
 
