@@ -51,6 +51,18 @@
     },
     "model": "API.account"
   },
+
+  {
+    "fields": {
+      "user": 2,
+      "email": "toto@hotmail.fr",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 2
+  },
+
   {
     "pk": 3,
     "fields": {
@@ -77,6 +89,18 @@
     },
     "model": "API.account"
   },
+
+    {
+    "fields": {
+      "user": 3,
+      "email": "tutu@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 3
+  },
+
   {
     "pk": 4,
     "fields": {
@@ -103,6 +127,18 @@
     },
     "model": "API.account"
   },
+
+    {
+    "fields": {
+      "user": 4,
+      "email": "tata@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 4
+  },
+
   {
     "pk": 5,
     "fields": {
@@ -129,6 +165,18 @@
     },
     "model": "API.account"
   },
+
+    {
+    "fields": {
+      "user": 5,
+      "email": "storm@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 5
+  },
+
   {
     "pk": 6,
     "fields": {
@@ -155,6 +203,17 @@
     },
     "model": "API.account"
   },
+    {
+    "fields": {
+      "user": 6,
+      "email": "pikachu@hotmail.fr",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 6
+  },
+
   {
     "pk": 7,
     "fields": {
@@ -181,6 +240,17 @@
     },
     "model": "API.account"
   },
+    {
+    "fields": {
+      "user": 7,
+      "email": "tasdemorve@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 7
+  },
+
   {
     "pk": 8,
     "fields": {
@@ -207,6 +277,17 @@
     },
     "model": "API.account"
   },
+    {
+    "fields": {
+      "user": 8,
+      "email": "roucoucoul@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 8
+  },
+
   {
     "pk": 9,
     "fields": {
@@ -233,6 +314,18 @@
     },
     "model": "API.account"
   },
+
+    {
+    "fields": {
+      "user": 9,
+      "email": "plop@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 9
+  },
+
   {
     "pk": 10,
     "fields": {
@@ -259,6 +352,17 @@
     },
     "model": "API.account"
   },
+    {
+    "fields": {
+      "user": 10,
+      "email": "sylvain@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 10
+  },
+
   {
     "pk": 11,
     "fields": {
@@ -285,6 +389,17 @@
     },
     "model": "API.account"
   },
+    {
+    "fields": {
+      "user": 11,
+      "email": "salameche@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 11
+  },
+
   {
     "pk": 12,
     "fields": {
@@ -311,6 +426,18 @@
     },
     "model": "API.account"
   },
+
+    {
+    "fields": {
+      "user": 12,
+      "email": "rodolf@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 12
+  },
+
   {
     "pk": 13,
     "fields": {
@@ -337,6 +464,18 @@
     },
     "model": "API.account"
   },
+
+    {
+    "fields": {
+      "user": 13,
+      "email": "blabla@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 13
+  },
+
   {
     "pk": 14,
     "fields": {
@@ -363,6 +502,18 @@
     },
     "model": "API.account"
   },
+
+    {
+    "fields": {
+      "user": 14,
+      "email": "romain@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 14
+  },
+
   {
     "pk": 15,
     "fields": {
@@ -389,6 +540,18 @@
     },
     "model": "API.account"
   },
+
+    {
+    "fields": {
+      "user": 15,
+      "email": "jade@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 15
+  },
+
   {
     "pk": 16,
     "fields": {
@@ -415,6 +578,18 @@
     },
     "model": "API.account"
   },
+
+    {
+    "fields": {
+      "user": 16,
+      "email": "victoria@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 16
+  },
+
   {
     "pk": 17,
     "fields": {
@@ -441,6 +616,18 @@
     },
     "model": "API.account"
   },
+
+    {
+    "fields": {
+      "user": 17,
+      "email": "new@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 17
+  },
+
   {
     "pk": 18,
     "fields": {
@@ -467,6 +654,18 @@
     },
     "model": "API.account"
   },
+
+    {
+    "fields": {
+      "user": 18,
+      "email": "camille@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 18
+  },
+
   {
     "pk": 19,
     "fields": {
@@ -493,6 +692,18 @@
     },
     "model": "API.account"
   },
+
+    {
+    "fields": {
+      "user": 19,
+      "email": "jeremy@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 19
+  },
+
   {
     "pk": 20,
     "fields": {
@@ -519,6 +730,17 @@
     },
     "model": "API.account"
   },
+    {
+    "fields": {
+      "user": 20,
+      "email": "antoine@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 20
+  },
+
   {
     "pk": 21,
     "fields": {
@@ -545,6 +767,18 @@
     },
     "model": "API.account"
   },
+
+    {
+    "fields": {
+      "user": 21,
+      "email": "bababacar@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 21
+  },
+
   {
     "pk": 22,
     "fields": {
@@ -571,6 +805,18 @@
     },
     "model": "API.account"
   },
+
+    {
+    "fields": {
+      "user": 22,
+      "email": "baptiste@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 22
+  },
+
   {
     "pk": 23,
     "fields": {
@@ -597,6 +843,17 @@
     },
     "model": "API.account"
   },
+    {
+    "fields": {
+      "user": 23,
+      "email": "arnaud@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 23
+  },
+
   {
     "pk": 24,
     "fields": {
@@ -623,6 +880,18 @@
     },
     "model": "API.account"
   },
+
+    {
+    "fields": {
+      "user": 24,
+      "email": "sacha@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 24
+  },
+
   {
     "pk": 25,
     "fields": {
@@ -649,6 +918,18 @@
     },
     "model": "API.account"
   },
+
+    {
+    "fields": {
+      "user": 25,
+      "email": "regis@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 25
+  },
+
   {
     "pk": 26,
     "fields": {
@@ -675,6 +956,17 @@
     },
     "model": "API.account"
   },
+    {
+    "fields": {
+      "user": 26,
+      "email": "sophie@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 26
+  },
+
   {
     "pk": 27,
     "fields": {
@@ -701,6 +993,17 @@
     },
     "model": "API.account"
   },
+    {
+    "fields": {
+      "user": 27,
+      "email": "clara@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 27
+  },
+
   {
     "pk": 28,
     "fields": {
@@ -727,6 +1030,17 @@
     },
     "model": "API.account"
   },
+    {
+    "fields": {
+      "user": 28,
+      "email": "hercule@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 28
+  },
+
   {
     "pk": 29,
     "fields": {
@@ -753,6 +1067,17 @@
     },
     "model": "API.account"
   },
+    {
+    "fields": {
+      "user": 29,
+      "email": "athena@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 29
+  },
+
   {
     "pk": 30,
     "fields": {
@@ -779,6 +1104,17 @@
     },
     "model": "API.account"
   },
+    {
+    "fields": {
+      "user": 30,
+      "email": "marine@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 30
+  },
+
   {
     "pk": 31,
     "fields": {
@@ -805,6 +1141,17 @@
     },
     "model": "API.account"
   },
+    {
+    "fields": {
+      "user": 31,
+      "email": "chirac@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 31
+  },
+
   {
     "pk": 32,
     "fields": {
@@ -831,6 +1178,17 @@
     },
     "model": "API.account"
   },
+    {
+    "fields": {
+      "user": 32,
+      "email": "bayrou@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 32
+  },
+
   {
     "pk": 33,
     "fields": {
@@ -857,6 +1215,17 @@
     },
     "model": "API.account"
   },
+    {
+    "fields": {
+      "user": 33,
+      "email": "tortank@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 33
+  },
+
   {
     "pk": 34,
     "fields": {
@@ -883,6 +1252,17 @@
     },
     "model": "API.account"
   },
+    {
+    "fields": {
+      "user": 34,
+      "email": "jean.margoulin@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 34
+  },
+
   {
     "pk": 35,
     "fields": {
@@ -909,6 +1289,17 @@
     },
     "model": "API.account"
   },
+    {
+    "fields": {
+      "user": 35,
+      "email": "salade@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 35
+  },
+
   {
     "pk": 36,
     "fields": {
@@ -935,6 +1326,17 @@
     },
     "model": "API.account"
   },
+    {
+    "fields": {
+      "user": 36,
+      "email": "fashion@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 36
+  },
+
   {
     "pk": 37,
     "fields": {
@@ -961,6 +1363,18 @@
     },
     "model": "API.account"
   },
+
+    {
+    "fields": {
+      "user": 37,
+      "email": "fashion-victim@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 37
+  },
+
   {
     "pk": 38,
     "fields": {
@@ -986,5 +1400,17 @@
       "phone": "0712245889"
     },
     "model": "API.account"
+  },
+    {
+    "fields": {
+      "user": 38,
+      "email": "julie@outlook.com",
+      "verified": true,
+      "primary": true
+    },
+    "model": "account.emailaddress",
+    "pk": 38
   }
+
+
 ]
