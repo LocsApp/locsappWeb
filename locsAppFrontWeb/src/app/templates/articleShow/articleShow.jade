@@ -153,10 +153,16 @@ div.article-show(layout="row" layout-align="center")
           ng-md-icon(icon="thumb_up")
           span +{{question.thumbs_up}}
         div(flex-offset="10") {{question.response.content}}
+        md-input-container.md-block(ng-if="articleShow.ownArticle")
+          label You can answer the question here
+          textarea(ng-model="articleShow.answerQuestion" md-maxlength="150" rows="5"
+          md-select-on-focus)
+          md-button.md-raised(ng-click='articleShow.sendAnswer()') Answer the question
 
 
-    div(layout="row" layout-align="center" class="question-not-available" ng-if="articleShow" +
-    ".ownArticle")
+
+
+    div(layout="row" layout-align="center" class="question-not-available" ng-if="articleShow.ownArticle")
       div(layout="column")
         div.flex You can't ask question on your own article
 
