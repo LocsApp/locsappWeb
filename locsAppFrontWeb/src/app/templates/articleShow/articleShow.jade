@@ -146,7 +146,7 @@ div.article-show(layout="row" layout-align="center")
 
 
     div.question(layout="row" layout-align="center" ng-repeat="question in articleShow.questions track by $index | limitTo: articleShow.paginationLimit()" ng-if="question.visible")
-      div(layout="column")
+      div(layout="column" )
         div {{question.content}} (Ask by <a href='/profile/{{question.author_name}}'> {{question.author_name}} </a>)
         div
           ng-md-icon(icon="warning")
