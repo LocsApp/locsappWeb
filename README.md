@@ -68,6 +68,7 @@ La marche à suivre est la suivante
 
 1. Se déplacer dans le dosier locsAppBack/API/fixtures/locsapp-mongo-2016-02-22T17-18-30
 2. Lancer la commande ``` mongorestore -d locsapp ./ ```
+3. Pour les articles faites ``` mongoimport --db locsapp --collection articles locsAppBack/API/fixtures/articles_import.json ``` à la racine du dossier git
 
 Une fois ceci-fait vos documents ont été importé dans la db mongo locsapp
 
