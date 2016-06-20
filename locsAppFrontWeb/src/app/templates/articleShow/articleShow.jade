@@ -145,7 +145,7 @@ div.article-show(layout="row" layout-align="center")
     hr
 
 
-    div.question(layout="row" layout-align="center" ng-repeat="question in articleShow.questions | limitTo: articleShow.paginationLimit()" ng-if="question.visible")
+    div.question(layout="row" layout-align="center" ng-repeat="question in articleShow.questions track by $index | limitTo: articleShow.paginationLimit()" ng-if="question.visible")
       div(layout="column")
         div {{question.content}} (Ask by <a href='/profile/{{question.author_name}}'> {{question.author_name}} </a>)
         div
@@ -155,9 +155,9 @@ div.article-show(layout="row" layout-align="center")
         div(flex-offset="10") {{question.response}}
         md-input-container.md-block(ng-if="articleShow.ownArticle && question.response == undefined")
           label You can answer the question here
-          textarea(ng-model="articleShow.answerQuestion" md-maxlength="150" rows="5"
+          textarea(ng-model="articleShow.answers[$index]" md-maxlength="150" rows="5"
           md-select-on-focus)
-          md-button.md-raised(ng-click='articleShow.sendAnswer(question.id)') Answer the question
+          md-button.md-raised(ng-click='articleShow.sendAnswer(question.id, articleShow.answers[$index])') Answer the question
 
 
 

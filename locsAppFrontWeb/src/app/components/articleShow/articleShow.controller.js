@@ -102,8 +102,10 @@
       console.log("questions = ", vm.data.questions);
       if (vm.data.questions == undefined)
         vm.questions = "";
-      else
+      else {
         vm.questions = vm.data.questions;
+        vm.answers = new Array(vm.questions.length);
+      }
 
       /* We create an array for the carousel and the first picture is the thumbnail */
       vm.carousel = [];
@@ -319,12 +321,12 @@
       $state.go($state.$current, null, {reload: true});
     };
 
-    vm.sendAnswer = function (idQuestion) {
-      if (vm.answerQuestion != undefined) {
+    vm.sendAnswer = function (idQuestion, answer) {
+      if (answer != undefined) {
         ArticleService
           .answers
           .save({
-            "response": vm.answerQuestion,
+            "response": answer,
             "id_question": idQuestion
           })
           .$promise
