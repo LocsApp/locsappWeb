@@ -16,7 +16,7 @@ db_locsapp = mongodb_client['locsapp']
 
 
 @csrf_exempt
-@api_view(['POST', 'GET'])
+@api_view(['POST'])
 @permission_classes((IsAuthenticated,))
 def sendQuestion(request):
 	"""
@@ -25,15 +25,7 @@ def sendQuestion(request):
 	existe
 	"""
 
-	if request.method == "GET":
-		request.user.pk = 26
-		questions = db_locsapp["questions"].find_one({"id_author": request.user.pk})
-		print("Before print questions")
-		print("questions = ", questions)
-		return APIrequests.GET("questions",
-		                       special_field={"id_author": request.user.pk, "visible": True})
-
-	elif request.method == "POST":
+	if request.method == "POST":
 
 		body = json.loads(request.body.decode('utf8'))
 		if 'thumbs_up' in body or 'report' in body or 'id_author' in body or 'title' in body or \
@@ -216,7 +208,8 @@ def thumbsUp(request):
 		# Update the question document
 		question['thumbs_up'].append(request.user.pk)
 		db_locsapp["questions"].update_one({"id": body['id_question']}, {"$set": {"thumbs_up":
-			question['thumbs_up']}})
+			                                                                          question[
+				                                                                          'thumbs_up']}})
 
 		# We find the aricle with this question
 		articles = db_locsapp["articles"].find({"questions.id": body['id_question']})
@@ -241,7 +234,6 @@ def thumbsUp(request):
 		return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
 
-
 @csrf_exempt
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))
@@ -263,7 +255,8 @@ def report(request):
 		# Update the question document
 		question['report'].append(request.user.pk)
 		db_locsapp["questions"].update_one({"id": body['id_question']}, {"$set": {"report":
-			question['report']}})
+			                                                                          question[
+				                                                                          'report']}})
 
 		# We find the aricle with this question
 		articles = db_locsapp["articles"].find({"questions.id": body['id_question']})
@@ -287,3 +280,28 @@ def report(request):
 	else:
 		return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
+
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def articleWithQuestionToAnswer(request):
+	if request.method == "GET":
+		return APIrequests.GET("articles",
+		                       special_field={"id_author": request.user.pk,
+		                                        "questions.response": None})
+
+	else:
+		return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def articleWithQuestionUserAsked(request):
+	if request.method == "GET":
+		return APIrequests.GET("articles",
+		                       special_field={"questions.author_name": request.user.username,
+		                                        "questions.response": None})
+
+	else:
+		return JsonResponse({"Error": "Method not allowed!"}, status=405)
