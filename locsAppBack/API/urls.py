@@ -41,7 +41,7 @@ article_patterns = [
     url(r'^questions/$', questions.sendQuestion),
     url(r'^answers/$', questions.answerQuestion),
     url(r'^upvote/$', questions.thumbsUp),
-
+	url(r'^report-question/$', questions.report),
 ]
 
 search_patterns = [

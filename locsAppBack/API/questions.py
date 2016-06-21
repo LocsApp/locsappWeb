@@ -211,7 +211,7 @@ def thumbsUp(request):
 		if request.user.pk == question['id_owner_article']:
 			return JsonResponse({"Error": "You are the owner of the article!"}, status=403)
 		if request.user.pk in question['thumbs_up']:
-			return JsonResponse({"Error": "You already up vote this answer!"}, status=403)
+			return JsonResponse({"Error": "You already up vote this question!"}, status=403)
 
 		# Update the question document
 		question['thumbs_up'].append(request.user.pk)
@@ -239,3 +239,51 @@ def thumbsUp(request):
 
 	else:
 		return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def report(request):
+	if request.method == 'POST':
+		body = json.loads(request.body.decode('utf8'))
+
+		if 'id_question' not in body:
+			return JsonResponse({"Error": "You are missing some fields!"}, status=405)
+
+		question = db_locsapp["questions"].find_one({"id": body['id_question']})
+		if question is None:
+			return JsonResponse({"Error": "Enter a valid question id!"}, status=404)
+		if request.user.pk == question['id_owner_article']:
+			return JsonResponse({"Error": "You are the owner of the article!"}, status=403)
+		if request.user.pk in question['report']:
+			return JsonResponse({"Error": "You already report this question!"}, status=403)
+
+		# Update the question document
+		question['report'].append(request.user.pk)
+		db_locsapp["questions"].update_one({"id": body['id_question']}, {"$set": {"report":
+			question['report']}})
+
+		# We find the aricle with this question
+		articles = db_locsapp["articles"].find({"questions.id": body['id_question']})
+		article = None
+
+		for articleLoop in articles:
+			article = articleLoop
+
+		# We change the answer in the question
+		questions = article['questions']
+		i = 0
+		for question in questions:
+			if question['id'] == body['id_question']:
+				questions[i]['report'].append(request.user.pk)
+			i += 1
+
+		db_locsapp["articles"].update_one({"_id": article['_id']},
+		                                  {"$set": {"questions": questions}})
+		return JsonResponse({"Success": "Your report has been added!"}, status=201)
+
+	else:
+		return JsonResponse({"Error": "Method not allowed!"}, status=405)
+

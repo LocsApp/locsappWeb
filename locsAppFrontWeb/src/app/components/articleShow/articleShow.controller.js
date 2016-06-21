@@ -362,6 +362,32 @@
         .then(vm.upVoteSuccess, vm.upVoteError);
     };
 
+    /* Report */
+     vm.reportSuccess = function (data) {
+      toastr.success("Your report has been sent", "Success!");
+      $state.go($state.$current, null, {reload: true});
+      $log.log("reportSuccess = ", data);
+    };
+
+    vm.reportError = function (data) {
+      $log.error("reportError", data);
+      if (data.status == 403)
+        toastr.error(data.data.Error, "Error!");
+      else
+        toastr.error("Something went wrong", "Error!");
+    };
+
+    vm.report = function (idQuestion) {
+      ArticleService
+        .reportQuestion
+        .save({
+          "id_question": idQuestion
+        })
+        .$promise
+        .then(vm.reportSuccess, vm.reportError);
+    };
+
+
 
   }
 

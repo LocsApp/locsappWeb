@@ -38,6 +38,7 @@
       questions: $resource(URL_API + 'api/v1/articles/questions/'),
       answers: $resource(URL_API + 'api/v1/articles/answers/'),
       upVote: $resource(URL_API + 'api/v1/articles/upvote/'),
+      reportQuestion: $resource(URL_API + 'api/v1/articles/report-question/'),
 
       giveMark: $resource(URL_API + 'api/v1/articles/give-mark/'),
       getPendingMarksForClients: $resource(URL_API + 'api/v1/articles/get-pending-marks-for-clients/'),

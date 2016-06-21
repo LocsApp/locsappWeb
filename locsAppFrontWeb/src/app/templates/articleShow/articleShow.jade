@@ -149,7 +149,7 @@ div.article-show(layout="row" layout-align="center")
       div(layout="column" )
         div {{question.content}} (Ask by <a href='/profile/{{question.author_name}}'> {{question.author_name}} </a>)
         div
-          ng-md-icon(icon="warning")
+          ng-md-icon(icon="warning" ng-click='articleShow.report(question.id)')
           ng-md-icon(icon="thumb_up" ng-click='articleShow.upVote(question.id)')
           span +{{question.thumbs_up.length}}
         div(flex-offset="10") {{question.response}}
