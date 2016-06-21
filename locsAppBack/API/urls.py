@@ -40,6 +40,7 @@ article_patterns = [
     url(r'^get-pending-marks-for-renters/$', articles.getMarkForRenter),
     url(r'^questions/$', questions.sendQuestion),
     url(r'^answers/$', questions.answerQuestion),
+    url(r'^upvote/$', questions.thumbsUp),
 
 ]
 

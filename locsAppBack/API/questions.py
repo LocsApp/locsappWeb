@@ -31,7 +31,7 @@ def sendQuestion(request):
 		print("Before print questions")
 		print("questions = ", questions)
 		return APIrequests.GET("questions",
-							   special_field={"id_author": request.user.pk, "visible": True})
+		                       special_field={"id_author": request.user.pk, "visible": True})
 
 	elif request.method == "POST":
 
@@ -83,13 +83,13 @@ def sendQuestion(request):
 					"_type": str,
 				},
 				"thumbs_up": {
-					"_type": int,
-					"_default": 0,
+					"_type": [int],
+					"_default": [],
 					# "_protected": True
 				},
 				"report": {
-					"_type": int,
-					"_default": 0,
+					"_type": [int],
+					"_default": [],
 					# "_protected": True
 				},
 				"visible": {
@@ -115,7 +115,7 @@ def sendQuestion(request):
 			}
 
 			return APIrequests.POST(request, model, "questions", "The question has been sent!",
-									addQuestionInArticle)
+			                        addQuestionInArticle)
 		else:
 			return JsonResponse({"Error": "We need a valid id article"}, status=403)
 
@@ -126,8 +126,6 @@ def sendQuestion(request):
 def addQuestionInArticle(document):
 	article = db_locsapp["articles"].find_one({"_id": ObjectId(document['id_article'])})
 	# print("article = ", article)
-
-
 
 	document_to_copy = document.copy()
 	id_article = document['id_article']
@@ -166,11 +164,11 @@ def answerQuestion(request):
 			return JsonResponse({"Error": "You are not the owner of the article!"}, status=403)
 
 		# We update the question in the document question
-		question = db_locsapp["questions"].find_one({"id": body['id_question']})
+		# question = db_locsapp["questions"].find_one({"id": body['id_question']})
 		print("question = ", question)
 		db_locsapp["questions"].update_one({"id": body['id_question']}, {"$set": {"response":
-																					  body[
-																						  'response']}})
+			                                                                          body[
+				                                                                          'response']}})
 		# We find the aricle with this question
 		articles = db_locsapp["articles"].find({"questions.id": body['id_question']})
 		article = None
@@ -186,11 +184,58 @@ def answerQuestion(request):
 				questions[i]['response'] = body['response']
 			i += 1
 
-		db_locsapp["articles"].update_one({"_id": article['_id']}, {"$set": {"questions": questions}})
+		db_locsapp["articles"].update_one({"_id": article['_id']},
+		                                  {"$set": {"questions": questions}})
 		# print("articleEEEEEE  =", article)
 
 		return JsonResponse({"Success": "Answer has been sent!"}, status=201)
 
 	# On update la question dans l articke
+	else:
+		return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def thumbsUp(request):
+	if request.method == 'POST':
+		body = json.loads(request.body.decode('utf8'))
+
+		if 'id_question' not in body:
+			return JsonResponse({"Error": "You are missing some fields!"}, status=405)
+
+		question = db_locsapp["questions"].find_one({"id": body['id_question']})
+		if question is None:
+			return JsonResponse({"Error": "Enter a valid question id!"}, status=404)
+		if request.user.pk == question['id_owner_article']:
+			return JsonResponse({"Error": "You are the owner of the article!"}, status=403)
+		if request.user.pk in question['thumbs_up']:
+			return JsonResponse({"Error": "You already up vote this answer!"}, status=403)
+
+		# Update the question document
+		question['thumbs_up'].append(request.user.pk)
+		db_locsapp["questions"].update_one({"id": body['id_question']}, {"$set": {"thumbs_up":
+			question['thumbs_up']}})
+
+		# We find the aricle with this question
+		articles = db_locsapp["articles"].find({"questions.id": body['id_question']})
+		article = None
+
+		for articleLoop in articles:
+			article = articleLoop
+
+		# We change the answer in the question
+		questions = article['questions']
+		i = 0
+		for question in questions:
+			if question['id'] == body['id_question']:
+				questions[i]['thumbs_up'].append(request.user.pk)
+			i += 1
+
+		db_locsapp["articles"].update_one({"_id": article['_id']},
+		                                  {"$set": {"questions": questions}})
+		return JsonResponse({"Success": "Your upvote has been added!"}, status=201)
+
 	else:
 		return JsonResponse({"Error": "Method not allowed!"}, status=405)

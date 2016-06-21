@@ -336,7 +336,31 @@
       else {
         toastr.error("Your answer can't be empty", "Error!");
       }
-    }
+    };
+
+    vm.upVoteSuccess = function (data) {
+      toastr.success("Your upvote has been sent", "Success!");
+      $state.go($state.$current, null, {reload: true});
+      $log.log("upVoteSuccess = ", data);
+    };
+
+    vm.upVoteError = function (data) {
+      $log.error("upVoteError", data);
+      if (data.status == 403)
+        toastr.error(data.data.Error, "Error!");
+      else
+        toastr.error("Something went wrong", "Error!");
+    };
+
+    vm.upVote = function (idQuestion) {
+      ArticleService
+        .upVote
+        .save({
+          "id_question": idQuestion
+        })
+        .$promise
+        .then(vm.upVoteSuccess, vm.upVoteError);
+    };
 
 
   }
