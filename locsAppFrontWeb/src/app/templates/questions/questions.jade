@@ -1,44 +1,36 @@
-.questions(ng-controller="QuestionsController as questions")
+.questions(ng-controller="QuestionsController as questions" layout="row" layout-align="center" )
+  div(flex-xs="100" flex-sm="100" flex-md="75" flex="50")
+
     div(layout="row" layout-align="center")
       h1.t-center(flex="20") My questions
 
 
     div(layout="row" layout-align="center")
-      md-divider.separator-h2(flex="30" hide-sm style='width:1px')
-      h2.t-center(flex="20") Questions I have asked
-      md-divider.separator-h2(flex="30" hide-sm style='width:1px')
+      md-divider.separator-h2(flex="35" hide-sm)
+      h2.t-center(flex="30") Questions I have asked
+      md-divider.separator-h2(flex="35" hide-sm)
+
+    div(ng-repeat='article in questions.articlesWithQuestionUserAsked track by $index')
+      div(layout='row' layout-align='center')
+          div un {{article._id}}
+          div Deux {{questions.articlesWithQuestionUserAsked[$index + 1]._id}}
+          span(ng-if="$index < questions.articlesWithQuestionUserAsked.length - 1")
+            //h2 IN IF
+            span(ng-bind="$index  + 1")
+      //div(layout='row' layout-align='center')
+        div un
+        div deux
 
 
     div(layout="row" layout-align="center")
-      md-divider.separator-h2(flex="30" hide-sm style='width:1px')
-      h1.t-center(flex="20") Questions to answer
-      md-divider.separator-h2(flex="30" hide-sm style='width:1px')
-
-
-    div(layout='row' layout-align='center')
-
-      //index 0,1,2
-      div(layout="column" layout-align="space-around start" ng-repeat='question in articleQuestion.questions track by $index')
-        //Si c est paire on affiche ici
-        md-card
-          md-card-content
-            div {{$index}}
-
-
-      div(layout="column" layout-align="space-around end" ng-repeat='question in articleQuestion.questions track by $index')
-        //Si c est paire on affiche ici
-        md-card
-          md-card-content
-            div {{$index}}
+      md-divider.separator-h2(flex="35" hide-sm)
+      h2.t-center(flex="30") Questions to answer
+      md-divider.separator-h2(flex="35" hide-sm)
 
 
 
-    //div(layout="row" layout-align="center" ng-repeat='question in articleQuestion.questions track by $index')
-      md-card(flex="50")
-        md-card-content(ng-show='question.visible')
-          div(layout='row')
-            div(flex='10')
-              h2 {{question.title_article}}
-            div(flex='90')
-              p {{question.content}}
+
+
+  //div(layout="row" layout-align="center" ng-repeat='article in questions' +'.articlesWithQuestionUserAsked track by $index')
+    p {{article}
 

@@ -2,10 +2,12 @@
 
 .questions {
 
-  display: none;
-
   md-divider {
     border-top-color: $separatorBarElement;
     height: 1px;
+  }
+
+  h2 {
+    margin-top: 0;
   }
 }
