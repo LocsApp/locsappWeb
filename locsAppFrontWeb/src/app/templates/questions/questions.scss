@@ -1,0 +1,11 @@
+@import "../../theme.scss";
+
+.questions {
+
+  display: none;
+
+  md-divider {
+    border-top-color: $separatorBarElement;
+    height: 1px;
+  }
+}

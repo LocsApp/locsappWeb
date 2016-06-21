@@ -4,10 +4,10 @@
 
   angular
     .module('LocsappControllers')
-    .controller('ArticleQuestionsController', ArticleQuestionsController);
+    .controller('QuestionsController', QuestionsController);
 
   /** @ngInject */
-  function ArticleQuestionsController($log, ArticleService, toastr, ScopesService, URL_API) {
+  function QuestionsController($log, ArticleService, toastr, ScopesService, URL_API) {
     var vm = this;
     vm.questions = "";
 /*

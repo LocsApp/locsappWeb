@@ -246,9 +246,9 @@
    .state('main.questions', {
       url: 'questions/',
       parent: 'main',
-      templateUrl: 'app/templates/articleQuestions/articleQuestions.html',
-      controller: 'ArticleQuestionsController',
-      controllerAs: 'articleQuestion',
+      templateUrl: 'app/templates/questions/questions.html',
+      controller: 'QuestionsController',
+      controllerAs: 'questions',
       data: {
 			permissions: {
 				only: ['guest', 'user'],
