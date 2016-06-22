@@ -10,13 +10,29 @@
       h2.t-center(flex="30") Questions I have asked
       md-divider.separator-h2(flex="35" hide-sm)
 
+    //p {{questions.articlesWithQuestionUserAsked[0]}}
     div(ng-repeat='article in questions.articlesWithQuestionUserAsked track by $index')
       div(layout='row' layout-align='center')
-          div un {{article._id}}
-          div Deux {{questions.articlesWithQuestionUserAsked[$index + 1]._id}}
+          md-card(flex='50')
+            md-card-content
+              div(layout='row')
+                img(ng-src="{{ questions.url_api + article.url_thumbnail }}")
+                div(layout='column')
+                  h3 {{article.title}}
+                  p {{article.description | limitTo:questions.limitDescription}}
+
+          md-card(ng-if='$index < questions.articlesWithQuestionUserAsked.length - 1' flex='50')
+            md-card-content
+              div(layout='row')
+                img(ng-src="{{ questions.url_api + questions.articlesWithQuestionUserAsked[$index + 1].url_thumbnail }}")
+                div(layout='column')
+                  h3 {{questions.articlesWithQuestionUserAsked[$index + 1].title}}
+                  p {{questions.articlesWithQuestionUserAsked[$index + 1].description | limitTo:questions.limitDescription}}
+
+          //div Deux {{questions.articlesWithQuestionUserAsked[$index + 1]._id}}
           span(ng-if="$index < questions.articlesWithQuestionUserAsked.length - 1")
             //h2 IN IF
-            span(ng-bind="$index  + 1")
+            span(ng-bind="$index  + 1" style='display:none;')
       //div(layout='row' layout-align='center')
         div un
         div deux

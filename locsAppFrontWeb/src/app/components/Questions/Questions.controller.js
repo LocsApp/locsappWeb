@@ -9,6 +9,8 @@
   /** @ngInject */
   function QuestionsController($log, ArticleService, toastr, ScopesService, URL_API) {
     var vm = this;
+    vm.url_api = URL_API;
+    vm.limitDescription = 50;
     vm.questions = "";
 /*
 
