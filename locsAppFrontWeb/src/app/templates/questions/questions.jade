@@ -13,21 +13,22 @@
     //p {{questions.articlesWithQuestionUserAsked[0]}}
     div(ng-repeat='article in questions.articlesWithQuestionUserAsked track by $index')
       div(layout='row' layout-align='center')
-          md-card(flex='50')
+          md-card(flex='50' ng-click='questions.goToArticlePage(article._id)')
             md-card-content
               div(layout='row')
                 img(ng-src="{{ questions.url_api + article.url_thumbnail }}")
                 div(layout='column')
                   h3 {{article.title}}
-                  p {{article.description | limitTo:questions.limitDescription}}
+                  p {{article.description | limitTo:questions.limitDescription}} <span ng-if='article.description.length > questions.limitDescription'>...</span>
 
-          md-card(ng-if='$index < questions.articlesWithQuestionUserAsked.length - 1' flex='50')
+          md-card(ng-if='$index < questions.articlesWithQuestionUserAsked.length - 1' flex='50'
+          ng-click='questions.goToArticlePage(questions.articlesWithQuestionUserAsked[$index + 1]._id)')
             md-card-content
               div(layout='row')
                 img(ng-src="{{ questions.url_api + questions.articlesWithQuestionUserAsked[$index + 1].url_thumbnail }}")
                 div(layout='column')
                   h3 {{questions.articlesWithQuestionUserAsked[$index + 1].title}}
-                  p {{questions.articlesWithQuestionUserAsked[$index + 1].description | limitTo:questions.limitDescription}}
+                  p {{questions.articlesWithQuestionUserAsked[$index + 1].description | limitTo:questions.limitDescription}} <span ng-if='questions.articlesWithQuestionUserAsked[$index + 1].description.length > questions.limitDescription'>...</span>
 
           //div Deux {{questions.articlesWithQuestionUserAsked[$index + 1]._id}}
           span(ng-if="$index < questions.articlesWithQuestionUserAsked.length - 1")

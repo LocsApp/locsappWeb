@@ -7,35 +7,35 @@
     .controller('QuestionsController', QuestionsController);
 
   /** @ngInject */
-  function QuestionsController($log, ArticleService, toastr, ScopesService, URL_API) {
+  function QuestionsController($log, ArticleService, $state, URL_API) {
     var vm = this;
     vm.url_api = URL_API;
     vm.limitDescription = 50;
     vm.questions = "";
-/*
+    /*
 
-    vm.GetArticleWitQuestionToAnswerSuccess = function (data) {
-      $log.log("ArticleWitQuestionToAnswerSuccess", data);
-      //vm.questions = data.questions;
-      //$log.log("Vm questions = ", vm.questions);
-    };
+     vm.GetArticleWitQuestionToAnswerSuccess = function (data) {
+     $log.log("ArticleWitQuestionToAnswerSuccess", data);
+     //vm.questions = data.questions;
+     //$log.log("Vm questions = ", vm.questions);
+     };
 
-    vm.GetArticleWitQuestionToAnswerFailure = function (data) {
-      $log.error("ArticleWitQuestionToAnswerFailure", data)
-    };
+     vm.GetArticleWitQuestionToAnswerFailure = function (data) {
+     $log.error("ArticleWitQuestionToAnswerFailure", data)
+     };
 
-    ArticleService
-      .articleWithQuestionToAnswer
-      .get({})
-      .$promise
-      .then(vm.GetArticleWitQuestionToAnswerSuccess, vm.GetArticleWitQuestionToAnswerFailure);
+     ArticleService
+     .articleWithQuestionToAnswer
+     .get({})
+     .$promise
+     .then(vm.GetArticleWitQuestionToAnswerSuccess, vm.GetArticleWitQuestionToAnswerFailure);
 
-*/
+     */
 
     /* ArticleWithQuestionUserAsked */
-     vm.GetArticleWithQuestionUserAskedSuccess = function (data) {
+    vm.GetArticleWithQuestionUserAskedSuccess = function (data) {
       $log.log("ArrticleWithQuestionUserAskedSuccess", data);
-       vm.articlesWithQuestionUserAsked = data.articles;
+      vm.articlesWithQuestionUserAsked = data.articles;
       //vm.questions = data.questions;
       //$log.log("Vm questions = ", vm.questions);
     };
@@ -50,6 +50,11 @@
       .$promise
       .then(vm.GetArticleWithQuestionUserAskedSuccess, vm.GetArticleWithQuestionUserAskedFailure)
 
+    vm.goToArticlePage = function (id) {
+      $state.go("main.articleShow", {"id": id});
+    }
+
   }
+
 
 })();
