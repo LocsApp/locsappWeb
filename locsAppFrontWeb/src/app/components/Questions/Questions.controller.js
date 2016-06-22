@@ -12,25 +12,22 @@
     vm.url_api = URL_API;
     vm.limitDescription = 50;
     vm.questions = "";
-    /*
 
-     vm.GetArticleWitQuestionToAnswerSuccess = function (data) {
-     $log.log("ArticleWitQuestionToAnswerSuccess", data);
-     //vm.questions = data.questions;
-     //$log.log("Vm questions = ", vm.questions);
-     };
 
-     vm.GetArticleWitQuestionToAnswerFailure = function (data) {
-     $log.error("ArticleWitQuestionToAnswerFailure", data)
-     };
+    vm.GetArticleWitQuestionToAnswerSuccess = function (data) {
+      vm.articlesWithQuestionsToAnswer = data.articles;
+    };
 
-     ArticleService
-     .articleWithQuestionToAnswer
-     .get({})
-     .$promise
-     .then(vm.GetArticleWitQuestionToAnswerSuccess, vm.GetArticleWitQuestionToAnswerFailure);
+    vm.GetArticleWitQuestionToAnswerFailure = function (data) {
+      $log.error("ArticleWitQuestionToAnswerFailure", data)
+    };
 
-     */
+    ArticleService
+      .articleWithQuestionToAnswer
+      .get({})
+      .$promise
+      .then(vm.GetArticleWitQuestionToAnswerSuccess, vm.GetArticleWitQuestionToAnswerFailure);
+
 
     /* ArticleWithQuestionUserAsked */
     vm.GetArticleWithQuestionUserAskedSuccess = function (data) {

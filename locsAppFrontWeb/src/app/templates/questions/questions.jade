@@ -11,7 +11,11 @@
       md-divider.separator-h2(flex="35" hide-sm)
 
     //p {{questions.articlesWithQuestionUserAsked[0]}}
-    div(ng-repeat='article in questions.articlesWithQuestionUserAsked track by $index')
+    div(ng-if='questions.articlesWithQuestionUserAsked.length == 0')
+      div(layout='row' layout-align='center')
+        p You did not ask a question about any article
+
+    div(ng-if='questions.articlesWithQuestionUserAsked.length > 0' ng-repeat='article in questions.articlesWithQuestionUserAsked track by $index')
       div(layout='row' layout-align='center')
           md-card(flex='50' ng-click='questions.goToArticlePage(article._id)')
             md-card-content
@@ -44,10 +48,33 @@
       h2.t-center(flex="30") Questions to answer
       md-divider.separator-h2(flex="35" hide-sm)
 
+    div(ng-if='questions.articlesWithQuestionsToAnswer.length == 0')
+      div(layout='row' layout-align='center')
+        p You don't have any question to answer about an article
+
+    div(ng-if='questions.articlesWithQuestionsToAnswer.length > 0' ng-repeat='article in questions.articlesWithQuestionsToAnswer track by $index')
+      div(layout='row' layout-align='center')
+        md-card(flex='50' ng-click='questions.goToArticlePage(article._id)')
+          md-card-content
+            div(layout='row')
+              img(ng-src="{{ questions.url_api + article.url_thumbnail }}")
+              div(layout='column')
+                h3 {{article.title}}
+                p {{article.description | limitTo:questions.limitDescription}} <span ng-if='article.description.length > questions.limitDescription'>...</span>
+
+        md-card(ng-if='$index < questions.articlesWithQuestionsToAnswer.length - 1' flex='50'
+        ng-click='questions.goToArticlePage(questions.articlesWithQuestionsToAnswer[$index + 1]._id)')
+          md-card-content
+            div(layout='row')
+              img(ng-src="{{ questions.url_api + questions.articlesWithQuestionsToAnswer[$index + 1].url_thumbnail }}")
+              div(layout='column')
+                h3 {{questions.articlesWithQuestionsToAnswer[$index + 1].title}}
+                p {{questions.articlesWithQuestionsToAnswer[$index + 1].description | limitTo:questions.limitDescription}} <span ng-if='questions.articlesWithQuestionsToAnswer[$index + 1].description.length > questions.limitDescription'>...</span>
+
+        span(ng-if="$index < questions.articlesWithQuestionsToAnswer.length - 1")
+          //h2 IN IF
+          span(ng-bind="$index  + 1" style='display:none;')
 
 
 
-
-  //div(layout="row" layout-align="center" ng-repeat='article in questions' +'.articlesWithQuestionUserAsked track by $index')
-    p {{article}
 
