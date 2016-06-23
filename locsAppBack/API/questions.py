@@ -1,6 +1,3 @@
-"""
-View for sending a question and notification to the owner
-"""
 import json
 from bson import ObjectId
 from django.http import JsonResponse
@@ -9,6 +6,9 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from .views import APIrequests
+from datetime import datetime
+import pytz
+
 
 # Connects to the db and creates a MongoClient instance
 mongodb_client = MongoClient('localhost', 27017)
@@ -93,7 +93,8 @@ def sendQuestion(request):
 					"_default": None
 				},
 				"id_article": {
-					"_type": ObjectId()
+					"_type": ObjectId(),
+					"_default": article['_id']
 				},
 				"title_article": {
 					"_type": str,
@@ -102,7 +103,12 @@ def sendQuestion(request):
 				"image_article": {
 					"_type": str,
 					"_default": article['url_thumbnail']
-				}
+				},
+				"creation_date": {
+					"_type": str,
+					"_protected": True,
+					"_default": datetime.now(pytz.utc)
+				},
 				# Check title article and image article exsits
 			}
 
@@ -288,7 +294,7 @@ def articleWithQuestionToAnswer(request):
 	if request.method == "GET":
 		return APIrequests.GET("articles",
 		                       special_field={"id_author": request.user.pk,
-		                                        "questions.response": None})
+		                                      "questions.response": None})
 
 	else:
 		return JsonResponse({"Error": "Method not allowed!"}, status=405)
@@ -301,7 +307,7 @@ def articleWithQuestionUserAsked(request):
 	if request.method == "GET":
 		return APIrequests.GET("articles",
 		                       special_field={"questions.author_name": request.user.username,
-		                                        "questions.response": None})
+		                                      "questions.response": None})
 
 	else:
 		return JsonResponse({"Error": "Method not allowed!"}, status=405)

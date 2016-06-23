@@ -6,6 +6,7 @@ from . import static_collections
 from django.views.generic.base import RedirectView
 from allauth.account.views import confirm_email
 from social_network import views as social_network_views
+from . import favorites
 from . import questions
 
 """
@@ -43,6 +44,12 @@ article_patterns = [
 	url(r'^articles-with-question-to-answer/$', questions.articleWithQuestionToAnswer),
 	url(r'^articles-with-question-asked/$', questions.articleWithQuestionUserAsked),
 
+
+
+]
+
+favorite_patterns = [
+	url(r'^articles/$', favorites.addFavoriteArticle),
 ]
 
 search_patterns = [
@@ -108,6 +115,7 @@ api_patterns = [
 	    name='fb_register'),
 
 	url(r'^articles/', include(article_patterns)),
+	url(r'^favorites/', include(favorite_patterns)),
 	url(r'^rest-auth/', include('rest_auth.urls')),
 	url(r'^email-sent/', RedirectView.as_view(url='http://127.0.0.1:3000/', permanent=False),
 	    name="account_email_verification_sent"),
