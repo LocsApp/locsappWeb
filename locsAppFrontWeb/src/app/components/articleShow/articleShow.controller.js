@@ -363,7 +363,7 @@
     };
 
     /* Report */
-     vm.reportSuccess = function (data) {
+    vm.reportSuccess = function (data) {
       toastr.success("Your report has been sent", "Success!");
       $state.go($state.$current, null, {reload: true});
       $log.log("reportSuccess = ", data);
@@ -387,6 +387,26 @@
         .then(vm.reportSuccess, vm.reportError);
     };
 
+    vm.addArticleToFavoriteSuccess = function (data) {
+      toastr.success("This article has been added to your favorite", "Success!");
+      $state.go($state.$current, null, {reload: true});
+      $log.log("addArticleToFavoriteSuccess = ", data);
+    };
+
+    vm.addArticleToFavoriteError = function (data) {
+      $log.error("addArticleToFavoriteError", data);
+      toastr.error(data.data.Error, "Error!");
+    };
+
+    vm.addArticleToFavorite = function (idArticle) {
+      ArticleService
+        .articlesFavorite
+        .save({
+          "id_article": idArticle
+        })
+        .$promise
+        .then(vm.addArticleToFavoriteSuccess, vm.addArticleToFavoriteError)
+    }
 
 
   }

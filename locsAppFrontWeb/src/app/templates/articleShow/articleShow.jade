@@ -96,7 +96,7 @@ div.article-show(layout="row" layout-align="center")
             div.details
               span
                 a(href='#')
-                  ng-md-icon(icon="favorite")
+                  ng-md-icon(icon="favorite" ng-click="articleShow.addArticleToFavorite(articleShow.data._id)")
                   span.bottom-right-md-card Add to your favorites
             div.details
               span

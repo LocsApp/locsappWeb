@@ -25,7 +25,7 @@ class UserDetailsSerializer(serializers.ModelSerializer):
             'last_activity_date', 'billing_address', 'logo_url', "is_active", "role")
         read_only_fields = ('id', 'username', 'role', 'email', 'registered_date', "tenant_score", "renter_score",
                             'last_activity_date', 'logo_url', 'is_active',
-                            'article_favorite')
+                            'favorite_articles')
 
 
 class PasswordChangeSerializer(serializers.Serializer):

@@ -44,12 +44,11 @@ article_patterns = [
 	url(r'^articles-with-question-to-answer/$', questions.articleWithQuestionToAnswer),
 	url(r'^articles-with-question-asked/$', questions.articleWithQuestionUserAsked),
 
-
-
 ]
 
 favorite_patterns = [
 	url(r'^articles/$', favorites.addFavoriteArticle),
+
 ]
 
 search_patterns = [
