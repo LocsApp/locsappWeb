@@ -16,7 +16,7 @@ div.search-article-toolbar
 md-divider.flex
 div.search-article-body(ng-cloak)
 	div.delimiter
-	md-button.md-raised.save-search Save your search
+	md-button.md-raised.save-search(ng-click='articleSearch.saveResearch()') Save your search
 	div.delimiter
 	section(layout="row", layout-align="start start")
 		div(flex="none")

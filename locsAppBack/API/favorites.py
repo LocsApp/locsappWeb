@@ -139,3 +139,13 @@ def addFavoriteArticleInUserProfile(document):
 	return True
 
 
+@csrf_exempt
+@api_view(['POST', 'GET'])
+@permission_classes((IsAuthenticated,))
+def addFavoriteResearch(request):
+	if request.method == "GET":
+		model = {
+			"_type"
+		}
+	else:
+		return JsonResponse({"Error": "Method not allowed!"}, status=405)

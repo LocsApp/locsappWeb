@@ -90,7 +90,7 @@
 		/* Handles the order showing near the options*/
 		vm.optionSortOrderStatus = function(name)
 		{
-			$log.log("in this func")
+			//$log.log("in this func")
 			var existingOption = false;
 
 			for (var x = 0; x < vm.search._order.length; x++)
@@ -167,6 +167,13 @@
 		.save(vm.search)
 		.$promise
 		.then(vm.getArticles, vm.failedGetArticles);
+
+      vm.saveResearch = function() {
+        $log.log("in Save Research");
+        $log.log("vm = ", vm);
+      }
 	}
+
+
 
 })();
