@@ -110,9 +110,8 @@ def addFavoriteArticle(request):
 			return JsonResponse(
 				{"Error": "Please send a correct favorite article id"}, status=401)
 
-		# We get the article from the db
-		return JsonResponse({"Success": "get"}, status=200)
-
+		return APIrequests.GET("favorite_article",
+		                       special_field={"id_user": request.user.pk})
 
 	else:
 		return JsonResponse({"Error": "Method not allowed!"}, status=405)

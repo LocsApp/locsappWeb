@@ -236,7 +236,7 @@
       controllerAs: 'articleCreate',
       data: {
 			permissions: {
-				only: ['guest', 'user'],
+				only: ['user'],
 				redirectTo: 'main.homepage'
 			}
 		}
@@ -251,7 +251,21 @@
       controllerAs: 'questions',
       data: {
 			permissions: {
-				only: ['guest', 'user'],
+				only: ['user'],
+				redirectTo: 'main.homepage'
+			}
+		}
+    })
+
+    .state('main.articles', {
+      url: 'favorites/',
+      parent: 'main',
+      templateUrl: 'app/templates/favorite/favorite.html',
+      controller: 'FavoriteController',
+      controllerAs: 'favorite',
+      data: {
+			permissions: {
+				only: ['user'],
 				redirectTo: 'main.homepage'
 			}
 		}

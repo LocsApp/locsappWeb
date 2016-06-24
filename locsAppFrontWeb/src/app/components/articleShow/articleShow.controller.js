@@ -395,7 +395,7 @@
 
     vm.addArticleToFavoriteError = function (data) {
       $log.error("addArticleToFavoriteError", data);
-      toastr.error(data.data.Error, "Error!");
+      toastr.error(data.data.error, "Error!");
     };
 
     vm.addArticleToFavorite = function (idArticle) {
