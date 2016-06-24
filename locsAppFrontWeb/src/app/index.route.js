@@ -83,8 +83,11 @@
 			controllerAs: 'publicProfile',
 			templateUrl : 'app/templates/userProfile/public_user_profile.html',
 			data: {
-
-			}
+        permissions: {
+          only: ['guest', 'user'],
+          redirectTo: 'main.homepage'
+        }
+      }
 		})
 		.state('main.user_profile', {
 			url: 'profile',
@@ -175,7 +178,13 @@
       parent: 'main',
       templateUrl: 'app/templates/articleShow/articleShow.html',
       controller: 'ArticleShowController',
-      controllerAs: 'articleShow'
+      controllerAs: 'articleShow',
+      data: {
+        permissions: {
+          only: ['guest', 'user'],
+          redirectTo: 'main.homepage'
+        }
+      }
     })
 
     .state('main.articleEdit', {
@@ -183,7 +192,13 @@
       parent: 'main',
       templateUrl: 'app/templates/articleEdit/articleEdit.html',
       controller: 'ArticleEditController',
-      controllerAs: 'articleEdit'
+      controllerAs: 'articleEdit',
+      data: {
+        permissions: {
+          only: ['user'],
+          redirectTo: 'main.homepage'
+        }
+      }
     })
 
      .state('main.article_requests', {
@@ -257,7 +272,7 @@
 		}
     })
 
-    .state('main.favorites', {
+    .state('main.articles', {
       url: 'favorites/',
       parent: 'main',
       templateUrl: 'app/templates/favorite/favorite.html',
