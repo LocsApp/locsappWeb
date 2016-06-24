@@ -17,7 +17,7 @@ db_locsapp = mongodb_client['locsapp']
 
 
 @csrf_exempt
-@api_view(['POST', 'DELETE'])
+@api_view(['POST', 'DELETE', 'GET'])
 @permission_classes((IsAuthenticated,))
 def addFavoriteArticle(request):
 	if request.method == "POST":
@@ -100,6 +100,20 @@ def addFavoriteArticle(request):
 			                     status=200)
 		else:
 			return JsonResponse({"Error": "Choose an article you have in favorite"}, status=403)
+
+	elif request.method == 'GET':
+		body = json.loads(request.body.decode('utf8'))
+		if 'id_favorite_article' not in body:
+			return JsonResponse({"Error": "Please add the favorite article id"}, status=400)
+		# We get the article from the db
+		if not ObjectId.is_valid(body['id_favorite_article']):
+			return JsonResponse(
+				{"Error": "Please send a correct favorite article id"}, status=401)
+
+		# We get the article from the db
+		return JsonResponse({"Success": "get"}, status=200)
+
+
 	else:
 		return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
