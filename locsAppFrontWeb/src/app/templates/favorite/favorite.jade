@@ -1,0 +1,54 @@
+.favorite(ng-controller="FavoriteController as favorite" layout="row" layout-align="center" )
+  div(flex-xs="100" flex-sm="100" flex-md="75" flex="50")
+
+    div(layout="row" layout-align="center")
+      h1.t-center(flex="20") My favorites
+
+
+    div(layout="row" layout-align="center")
+      md-divider.separator-h2(flex="35" hide-sm)
+      h2.t-center(flex="30") My articles
+      md-divider.separator-h2(flex="35" hide-sm)
+
+    //p {{favorite.articlesWithQuestionUserAsked[0]}}
+    div(ng-if='favorite.articlesWithQuestionUserAsked.length == 0')
+      div(layout='row' layout-align='center')
+        p You don't have any favorite articles
+
+    div(ng-if='favorite.articlesWithQuestionUserAsked.length > 0' ng-repeat='article in favorite.articlesWithQuestionUserAsked track by $index')
+      div(layout='row' layout-align='center')
+          md-card(flex='50' ng-click='favorite.goToArticlePage(article._id)')
+            md-card-content
+              div(layout='row')
+                img(ng-src="{{ favorite.url_api + article.url_thumbnail }}")
+                div(layout='column')
+                  h3 {{article.title}}
+                  p {{article.description | limitTo:favorite.limitDescription}} <span ng-if='article.description.length > favorite.limitDescription'>...</span>
+
+          md-card(ng-if='$index < favorite.articlesWithQuestionUserAsked.length - 1' flex='50'
+          ng-click='favorite.goToArticlePage(favorite.articlesWithQuestionUserAsked[$index + 1]._id)')
+            md-card-content
+              div(layout='row')
+                img(ng-src="{{ favorite.url_api + favorite.articlesWithQuestionUserAsked[$index + 1].url_thumbnail }}")
+                div(layout='column')
+                  h3 {{favorite.articlesWithQuestionUserAsked[$index + 1].title}}
+                  p {{favorite.articlesWithQuestionUserAsked[$index + 1].description | limitTo:favorite.limitDescription}} <span ng-if='favorite.articlesWithQuestionUserAsked[$index + 1].description.length > favorite.limitDescription'>...</span>
+
+          //div Deux {{favorite.articlesWithQuestionUserAsked[$index + 1]._id}}
+          span(ng-if="$index < favorite.articlesWithQuestionUserAsked.length - 1")
+            //h2 IN IF
+            span(ng-bind="$index  + 1" style='display:none;')
+      //div(layout='row' layout-align='center')
+        div un
+        div deux
+
+
+    div(layout="row" layout-align="center")
+      md-divider.separator-h2(flex="35" hide-sm)
+      h2.t-center(flex="30") My researches
+      md-divider.separator-h2(flex="35" hide-sm)
+
+
+
+
+

@@ -58,6 +58,11 @@ def addFavoriteArticle(request):
 					"_default": article['url_thumbnail'],
 				},
 
+				'price': {
+					"_type": str,
+					"_default": article['price']
+				},
+
 				'id_user': {
 					"_type": int,
 					"_default": request.user.pk,
@@ -102,14 +107,6 @@ def addFavoriteArticle(request):
 			return JsonResponse({"Error": "Choose an article you have in favorite"}, status=403)
 
 	elif request.method == 'GET':
-		body = json.loads(request.body.decode('utf8'))
-		if 'id_favorite_article' not in body:
-			return JsonResponse({"Error": "Please add the favorite article id"}, status=400)
-		# We get the article from the db
-		if not ObjectId.is_valid(body['id_favorite_article']):
-			return JsonResponse(
-				{"Error": "Please send a correct favorite article id"}, status=401)
-
 		return APIrequests.GET("favorite_article",
 		                       special_field={"id_user": request.user.pk})
 

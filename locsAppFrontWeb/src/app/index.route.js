@@ -257,7 +257,7 @@
 		}
     })
 
-    .state('main.articles', {
+    .state('main.favorites', {
       url: 'favorites/',
       parent: 'main',
       templateUrl: 'app/templates/favorite/favorite.html',

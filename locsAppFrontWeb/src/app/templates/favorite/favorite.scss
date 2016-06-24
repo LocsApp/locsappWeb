@@ -1,0 +1,17 @@
+@import "../../theme.scss";
+
+.favorite {
+
+  md-divider {
+    border-top-color: $separatorBarElement;
+    height: 1px;
+  }
+
+  h2 {
+    margin-top: 0;
+  }
+
+  md-card {
+    cursor: pointer;
+  }
+}
