@@ -48,6 +48,7 @@ article_patterns = [
 
 favorite_patterns = [
 	url(r'^articles/$', favorites.addFavoriteArticle),
+	url(r'^delete-articles/$', favorites.deleteFavoriteArticle),
 
 ]
 

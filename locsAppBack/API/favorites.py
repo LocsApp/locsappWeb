@@ -16,8 +16,40 @@ mongodb_client = MongoClient('localhost', 27017)
 db_locsapp = mongodb_client['locsapp']
 
 
+
 @csrf_exempt
-@api_view(['POST', 'DELETE', 'GET'])
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def deleteFavoriteArticle(request):
+	if request.method == "POST":
+		body = json.loads(request.body.decode('utf8'))
+		print("body = ", body)
+		if 'id_favorite_article' not in body:
+			return JsonResponse({"Error": "Please add the favorite article id"}, status=400)
+		# We get the article from the db
+		if not ObjectId.is_valid(body['id_favorite_article']):
+			return JsonResponse(
+				{"Error": "Please send a correct favorite article id"}, status=401)
+
+		# We get the article from the db
+
+		favorite_article = db_locsapp["favorite_article"].find_one({"_id": ObjectId(body[
+			                                                                       'id_favorite_article']), "id_user": request.user.pk})
+		if favorite_article:
+			db_locsapp["favorite_article"].delete_one({'_id': ObjectId(favorite_article[
+				                                                           '_id'])})
+
+			user = get_user_model().object.get(pk=request.user.pk)
+			user.favorite_articles.remove(favorite_article['id_article'])
+			user.save()
+			return JsonResponse({"Success": "This article has been removed from your favorite"},
+			                     status=200)
+		else:
+			return JsonResponse({"Error": "Choose an article you have in favorite"}, status=403)
+
+
+@csrf_exempt
+@api_view(['POST', 'GET'])
 @permission_classes((IsAuthenticated,))
 def addFavoriteArticle(request):
 	if request.method == "POST":
@@ -80,31 +112,6 @@ def addFavoriteArticle(request):
 			                        addFavoriteArticleInUserProfile)
 		else:
 			return JsonResponse({"Error": "We need a valid id article"}, status=403)
-
-	elif request.method == "DELETE":
-		body = json.loads(request.body.decode('utf8'))
-		if 'id_favorite_article' not in body:
-			return JsonResponse({"Error": "Please add the favorite article id"}, status=400)
-		# We get the article from the db
-		if not ObjectId.is_valid(body['id_favorite_article']):
-			return JsonResponse(
-				{"Error": "Please send a correct favorite article id"}, status=401)
-
-		# We get the article from the db
-
-		favorite_article = db_locsapp["favorite_article"].find_one({"_id": ObjectId(body[
-			                                                                       'id_article']), "id_user": request.user.pk})
-		if favorite_article:
-			db_locsapp["favorite_article"].delete_one({'_id': ObjectId(favorite_article[
-				                                                           '_id'])})
-
-			user = get_user_model().object.get(pk=request.user.pk)
-			favorite_article = user.favorite_articles
-			favorite_article.remove(favorite_article['id'])
-			return  JsonResponse({"Success": "This article has been removed from your favorite"},
-			                     status=200)
-		else:
-			return JsonResponse({"Error": "Choose an article you have in favorite"}, status=403)
 
 	elif request.method == 'GET':
 		return APIrequests.GET("favorite_article",

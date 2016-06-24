@@ -43,6 +43,8 @@
       articleWithQuestionUserAsked: $resource(URL_API + 'api/v1/articles/articles-with-question-asked/'),
 
       articlesFavorite: $resource(URL_API + 'api/v1/favorites/articles/'),
+      deleteArticlesFavorite: $resource(URL_API + 'api/v1/favorites/delete-articles/'),
+
 
       giveMark: $resource(URL_API + 'api/v1/articles/give-mark/'),
       getPendingMarksForClients: $resource(URL_API + 'api/v1/articles/get-pending-marks-for-clients/'),

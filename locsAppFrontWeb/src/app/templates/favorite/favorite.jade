@@ -11,31 +11,35 @@
       md-divider.separator-h2(flex="35" hide-sm)
 
     //p {{favorite.articlesWithQuestionUserAsked[0]}}
-    div(ng-if='favorite.articlesWithQuestionUserAsked.length == 0')
+    div(ng-if='favorite.favorite_articles.length == 0')
       div(layout='row' layout-align='center')
         p You don't have any favorite articles
 
-    div(ng-if='favorite.articlesWithQuestionUserAsked.length > 0' ng-repeat='article in favorite.articlesWithQuestionUserAsked track by $index')
+    div(ng-if='favorite.favorite_articles.length > 0' ng-repeat='article in favorite.favorite_articles track by $index')
       div(layout='row' layout-align='center')
-          md-card(flex='50' ng-click='favorite.goToArticlePage(article._id)')
+          md-card(flex='50' ng-click='favorite.goToArticlePage(article.id_article)')
             md-card-content
               div(layout='row')
                 img(ng-src="{{ favorite.url_api + article.url_thumbnail }}")
                 div(layout='column')
                   h3 {{article.title}}
+                  span {{article.price}}
                   p {{article.description | limitTo:favorite.limitDescription}} <span ng-if='article.description.length > favorite.limitDescription'>...</span>
+                  div(layout="column" layout-align="end end")
+                    //p toto
+                    ng-md-icon(icon="delete" ng-click='favorite.deleteArticleFavorite(article._id)')
 
-          md-card(ng-if='$index < favorite.articlesWithQuestionUserAsked.length - 1' flex='50'
-          ng-click='favorite.goToArticlePage(favorite.articlesWithQuestionUserAsked[$index + 1]._id)')
+          md-card(ng-if='$index < favorite.favorite_articles.length - 1' flex='50'
+          ng-click='favorite.goToArticlePage(favorite.favorite_articles[$index + 1].id_article)')
             md-card-content
               div(layout='row')
-                img(ng-src="{{ favorite.url_api + favorite.articlesWithQuestionUserAsked[$index + 1].url_thumbnail }}")
+                img(ng-src="{{ favorite.url_api + favorite.favorite_articles[$index + 1].url_thumbnail }}")
                 div(layout='column')
-                  h3 {{favorite.articlesWithQuestionUserAsked[$index + 1].title}}
-                  p {{favorite.articlesWithQuestionUserAsked[$index + 1].description | limitTo:favorite.limitDescription}} <span ng-if='favorite.articlesWithQuestionUserAsked[$index + 1].description.length > favorite.limitDescription'>...</span>
+                  h3 {{favorite.favorite_articles[$index + 1].title}}
+                  p {{favorite.favorite_articles[$index + 1].description | limitTo:favorite.limitDescription}} <span ng-if='favorite.favorite_articles[$index + 1].description.length > favorite.limitDescription'>...</span>
 
           //div Deux {{favorite.articlesWithQuestionUserAsked[$index + 1]._id}}
-          span(ng-if="$index < favorite.articlesWithQuestionUserAsked.length - 1")
+          span(ng-if="$index < favorite.favorite_articles.length - 1")
             //h2 IN IF
             span(ng-bind="$index  + 1" style='display:none;')
       //div(layout='row' layout-align='center')
