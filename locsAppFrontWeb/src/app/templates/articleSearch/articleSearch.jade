@@ -112,9 +112,9 @@ div.search-article-body(ng-cloak)
 								img(ng-src="{{ articleSearch.url_api + article.url_thumbnail }}").thumbnail-pic
 								div.icon-favorite-disabled
 									ng-md-icon(icon="favorite" size="32")
-							h3.title-article {{ article.title }}
+							h3.title-article {{ article.title | limitTo:articleSearch.limitTitle }} <span ng-if='article.title.length > articleSearch.limitTitle'>...</span>
 							h2.price-article {{ article.price }}€/day
-							p(ng-bind-html="article.description")
+							p(ng-bind-html="article.description | limitTo:articleSearch.limitDescription") <span ng-if='article.description.length > articleSearch.limitDescription'>...</span>
 					md-grid-tile-footer
 						span.distance-range Within 0 km
 md-divider.flex
