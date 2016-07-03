@@ -23,7 +23,7 @@
 
 		$http
 			.get(URL_API + 'api/v1/verify-email/'+ $stateParams.key + '/')
-			.then(vm.VerifyEmailSuccess, vm.VerifyEmailFailure);
+			.then(vm.VerifyEmailFailure, vm.VerifyEmailSuccess);
 	}
 
 })();

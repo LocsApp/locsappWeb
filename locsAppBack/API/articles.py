@@ -228,6 +228,29 @@ def demandsMain(request):
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
 
+"""
+HISTORY
+"""
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def getArticleHistoryAsClient(request):
+    if request.method == "GET":
+        return APIrequests.GET(
+            'article_demands', special_field={"id_author": request.user.pk, "visible": True})
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def getArticleHistoryAsRenter(request):
+    if request.method == "GET":
+        return APIrequests.GET(
+            'article_demands', special_field={"id_target": request.user.pk, "visible": True})
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
 @csrf_exempt
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))
