@@ -48,6 +48,8 @@ article_patterns = [
 history_patterns = [
     url(r'^articles-as-client/$', articles.getArticleHistoryAsClient),
     url(r'^articles-as-renter/$', articles.getArticleHistoryAsRenter),
+    url(r'^notations-as-renter/$', articles.getNotationsAsRenter),
+    url(r'^notations-as-client/$', articles.getNotationsAsClient),
 ]
 
 favorite_patterns = [

@@ -252,6 +252,26 @@ def getArticleHistoryAsRenter(request):
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
 @csrf_exempt
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def getNotationsAsClient(request):
+    if request.method == "GET":
+        return APIrequests.GET(
+            "notations", special_field={"as_renter": False})
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def getNotationsAsRenter(request):
+    if request.method == "GET":
+        return APIrequests.GET(
+            "notations", special_field={"as_renter": True})
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+@csrf_exempt
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))
 def acceptDemand(request):
