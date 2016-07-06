@@ -124,7 +124,7 @@ div.search-article-toolbar
 		span.flex
 		ng-md-icon(icon="keyboard_arrow_left" ng-click="articleSearch.onArrowClick(-1);" ng-if="articleSearch.search._pagination.page_number != 1").arrow-previous-page
 		span.pagination-toolbar-search-article
-			span(paging page="articleSearch.search._pagination.page_number" page-size="articleSearch.search._pagination.items_per_page" total="articleSearch.totalItems" active-class="current-page-selected-search-article")
+			span(paging ng-click="articleSearch.onArrowClick(42);" page="articleSearch.search._pagination.page_number" page-size="articleSearch.search._pagination.items_per_page" total="articleSearch.totalItems" active-class="current-page-selected-search-article")
 		span(style="margin-right: 20px;" ng-if="articleSearch.search._pagination.page_number >= articleSearch.totalItems / articleSearch.search._pagination.items_per_page")
 		ng-md-icon(icon="keyboard_arrow_right" ng-click="articleSearch.onArrowClick(1);" ng-if="articleSearch.search._pagination.page_number < articleSearch.totalItems / articleSearch.search._pagination.items_per_page").arrow-next-page
 md-divider.flex
