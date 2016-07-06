@@ -46,7 +46,14 @@
 
     /*Pagination functions*/
     vm.onArrowClick = function (number) {
-      vm.search._pagination.page_number += number;
+      $log.log("in arrow click")
+      if (number != 42)
+        vm.search._pagination.page_number += number;
+      ArticleService
+      .searchArticles
+      .save(vm.search)
+      .$promise
+      .then(vm.getArticles, vm.failedGetArticles);
     }
 
     /*Articles functions*/
