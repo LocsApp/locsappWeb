@@ -673,6 +673,10 @@ def articleAlone(request, article_pk):
     if request.method == "PUT":
         return APIrequests.PUT(
             request, model, "articles", "The article has been successfully modified!", article_pk)
+    elif request.method == "GET":
+        doc = db_locsapp["articles"].find_one({"_id": ObjectId(article_pk)})
+        answer = APIrequests.parseObjectIdToStr(doc)
+        return (JsonResponse(answer))
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
