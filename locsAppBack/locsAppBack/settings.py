@@ -241,7 +241,7 @@ if socket.gethostname() == "sylflo.fr":
     }
 
     ALLOWED_HOSTS = [
-        "http://locsapp.sylflo.fr",
+        "https://locsapp.sylflo.fr",
         "locsapp.sylflo.fr",
         ".sylflo.fr",
         "sylflo.fr",
