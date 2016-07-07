@@ -287,6 +287,20 @@
         }
       })
 
+      .state('main.history_notations', {
+        url: 'history-notations/',
+        parent: 'main',
+        templateUrl: 'app/templates/historyNotations/historyNotations.html',
+        controller: 'HistoryNotationController',
+        controllerAs: 'historyNotation',
+        data: {
+          permissions: {
+            only: ['user'],
+            redirectTo: 'main.homepage'
+          }
+        }
+      })
+
       .state('main.articles', {
         url: 'favorites/',
         parent: 'main',

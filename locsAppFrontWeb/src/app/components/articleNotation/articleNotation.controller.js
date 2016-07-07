@@ -76,9 +76,11 @@
         ArticleService
         .giveMark
         .save({
-         "id_target": id_target, 
-         "id_demand": demand._id, 
-         "id_article": demand.id_article, 
+          "author_name": ScopesService.get("current_user").username,
+         "id_target": id_target,
+         "id_demand": demand._id,
+         "id_article": demand.id_article,
+          "article_name": demand.article_name,
          "value": demand.value,
          "as_renter": mode,
          "comment": demand.comment})

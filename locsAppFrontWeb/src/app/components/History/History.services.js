@@ -4,7 +4,7 @@
 
   angular
     .module('LocsappServices')
-    .factory('HistoryService', ArticleService);
+    .factory('HistoryService', HistoryService);
 
   /** @ngInject */
   function HistoryService($log, $resource, URL_API) {

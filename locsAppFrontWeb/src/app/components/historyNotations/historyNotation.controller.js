@@ -23,28 +23,40 @@
 
     vm.GetNotationsClientSuccess = function (data) {
       $log.log(data);
-      vm.notationsClient = data.article_demands;
+      vm.notationsClient = data.notations;
+      for (var i =0; i < vm.notationsClient.length; i++)
+      {
+        vm.notationsClient[i].nb_stars = [0, 0, 0, 0, 0]
+        for (vm.iterator=0; vm.iterator < vm.notationsClient[i].nb_stars.length; vm.iterator++)
+        {
+          if (vm.iterator < vm.notationsClient[i].value)
+            vm.notationsClient[i].nb_stars[vm.iterator] = 1;
+          else
+            vm.notationsClient[i].nb_stars[vm.iterator] = 0;
+        }
+      }
     };
 
     vm.GetNotationsRenterSuccess = function (data) {
       $log.log(data);
-      vm.notationsRenter = data.article_demands;
+      vm.notationsRenter = data.notations;
+      for (var i =0; i < vm.notationsRenter.length; i++)
+      {
+        vm.notationsRenter[i].nb_stars = [0, 0, 0, 0, 0]
+        for (vm.iterator=0; vm.iterator < vm.notationsRenter[i].nb_stars.length; vm.iterator++)
+        {
+          if (vm.iterator < vm.notationsRenter[i].value)
+            vm.notationsRenter[i].nb_stars[vm.iterator] = 1;
+          else
+            vm.notationsRenter[i].nb_stars[vm.iterator] = 0;
+        }
+      }
     };
 
     vm.GetNotationFailure = function (data) {
       $log.log(data);
     };
 
-    /* used to show the proper numbe rof stars */
-    vm.arrayGen = function arrayGen(value) {
-      for (vm.iterator=0; vm.iterator < vm.dummyArray.length; vm.iterator++)
-      {
-        if (vm.iterator < value)
-          vm.dummyArray[vm.iterator] = 1;
-        else
-          vm.dummyArray[vm.iterator] = 0;
-      }
-    }
 
     HistoryService
     .getMarksForClients

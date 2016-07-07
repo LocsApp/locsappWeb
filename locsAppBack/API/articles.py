@@ -257,7 +257,7 @@ def getArticleHistoryAsRenter(request):
 def getNotationsAsClient(request):
     if request.method == "GET":
         return APIrequests.GET(
-            "notations", special_field={"as_renter": False})
+            "notations", special_field={"id_target": request.user.pk, "as_renter": False})
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
@@ -267,7 +267,7 @@ def getNotationsAsClient(request):
 def getNotationsAsRenter(request):
     if request.method == "GET":
         return APIrequests.GET(
-            "notations", special_field={"as_renter": True})
+            "notations", special_field={"id_target": request.user.pk, "as_renter": True})
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 

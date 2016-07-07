@@ -6,7 +6,7 @@ div(layout="row" layout-align="center start")
     div(layout="row" layout-align="center start")
       span(flex="25").special-divider
         md-divider
-      h3.title-request-category.flex Clients
+      h3.title-request-category.flex As Client
       span(flex="25").special-divider
         md-divider
     div(style="margin-top:20px;")
@@ -21,18 +21,20 @@ div(layout="row" layout-align="center start")
             md-card-header-text.header-infos
               span(class="md-title") {{ demand.author_name }}
               span(class="md-subhead") {{ demand.article_name }}
+              span(class="md-subhead") {{ demand.date_issued.$date | date:'medium' }}
           md-card-content
             section(layout="row")
-              div(ng-repeat="number in historyNotation.arrayGen(demand.value)")
+              div(ng-repeat="number in demand.nb_stars track by $index")
                 ng-md-icon(icon="star_border" size="48" ng-if="number == 0" ng-click="historyNotation.starValue(number, demand)").icon-star
                 ng-md-icon(icon="star" size="48" ng-if="number == 1" ng-click="historyNotation.starValue(number, demand)").icon-star-filled
             section(layout="row").section-height-limiter
-              strong Comment
-              p {{ demand.comment }}
+              strong(style="margin-top: 10px;") Comment
+            section(layout="row")
+              div {{ demand.comment }}
     div(layout="row" layout-align="center start")
       span(flex="25").special-divider
         md-divider
-      h3.title-request-category.flex Renters
+      h3.title-request-category.flex As Renter
       span(flex="25").special-divider
         md-divider
     div(style="margin-top:20px;")
@@ -44,14 +46,16 @@ div(layout="row" layout-align="center start")
           md-card-header
             md-card-avatar.img-icon-notation
               img(flex="none" src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg").img-rounded
-          md-card-header-text.header-infos
-            span(class="md-title") {{ demand.author_name }}
-            span(class="md-subhead") {{ demand.article_name }}
+            md-card-header-text.header-infos
+              span(class="md-title") {{ demand.author_name }}
+              span(class="md-subhead") {{ demand.article_name }}
+              span(class="md-subhead") {{ demand.date_issued.$date | date:'medium' }}
           md-card-content
             section(layout="row")
-              div(ng-repeat="number in historyNotation.arrayGen(demand.value)")
+              div(ng-repeat="number in demand.nb_stars track by $index")
                 ng-md-icon(icon="star_border" size="48" ng-if="number == 0" ng-click="historyNotation.starValue(number, demand)").icon-star
                 ng-md-icon(icon="star" size="48" ng-if="number == 1" ng-click="historyNotation.starValue(number, demand)").icon-star-filled
             section(layout="row").section-height-limiter
-              strong Comment
-              p {{ demand.comment }}
+              strong(style="margin-top: 10px;") Comment
+            section(layout="row")
+              div {{ demand.comment }}
