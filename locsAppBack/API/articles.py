@@ -257,7 +257,7 @@ def getArticleHistoryAsRenter(request):
 def getNotationsAsClient(request):
     if request.method == "GET":
         return APIrequests.GET(
-            "notations", special_field={"as_renter": False})
+            "notations", special_field={"id_target": request.user.pk, "as_renter": False})
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
@@ -267,7 +267,7 @@ def getNotationsAsClient(request):
 def getNotationsAsRenter(request):
     if request.method == "GET":
         return APIrequests.GET(
-            "notations", special_field={"as_renter": True})
+            "notations", special_field={"id_target": request.user.pk, "as_renter": True})
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
@@ -379,6 +379,7 @@ def postNewMark(request):
             "_default": request.user.pk,
             "_protected": True
         },
+        "author_name": str,
         "id_target": int,
         "id_demand": {
             "_type": ObjectId()
@@ -386,6 +387,7 @@ def postNewMark(request):
         "id_article": {
             "_type": ObjectId()
         },
+        "article_name": str,
         "value": {
             "_type": int,
             "_min": 1,
