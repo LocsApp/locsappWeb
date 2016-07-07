@@ -60,7 +60,7 @@ class APIRequestMongo:
         else:
             modelType = model_attribute
         if (bson.objectid.ObjectId.is_valid(str(modelType)) == True):
-            if (not bson.objectid.ObjectId.is_valid(attribute)):
+            if (not bson.objectid.ObjectId.is_valid(attribute) and not isinstance("test", modelType)):
                 error_fields[key] = "This field must be an id."
                 return False
             if (isinstance(model_attribute, type({})) and "_protected" in
