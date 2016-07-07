@@ -1,0 +1,104 @@
+div(layout="row", layout-align="center center")
+  h2 History Articles
+div(style="margin-top:40px;")
+div(layout="row")
+  span.flex
+  div(flex="70").article-requests-body
+    div(layout="row" layout-align="center start")
+      span(flex="25").special-divider
+        md-divider
+      h3.title-request-category.flex Article History as Renter
+      span(flex="25").special-divider
+        md-divider
+    div(style="margin-top:20px;")
+    div(ng-if="historyArticles.articlesRenter.length < 1 && historyArticles.articlesRenter != true")
+      p(style="text-align: center;") There are no article history as Renter.
+    div(ng-repeat="demand in historyArticles.articlesRenter track by $index")
+      div(layout="row" layout-align="center")
+        md-card.card-information-demand-big-screen(hide-md hide-sm hide-xs flex="60")
+          div(layout="row")
+            img.img-icon-demand-article(ng-src="{{ historyArticles.url_api + demand.article_thumbnail_url}}")
+            div.flex.information-demand
+              p.title-article {{ demand.article_name }}
+              div.asked-by Asked By {{ demand.author_name }}
+
+              div(style="margin-top:30px;")
+                span Started :
+                strong {{ }} {{ demand.availibility_start | date : medium }}
+              div
+                span Finished :
+                strong {{ }} {{ demand.availibility_end | date : medium }}
+            div(flex="none")
+              div(ng-if="demand.status == 'pending'").circle-blue-history
+              div(ng-if="demand.status == 'completed'").circle-green-history
+              div(ng-if="demand.status == 'refused'").circle-red-history
+              div(ng-if="demand.status == 'retracted'").circle-grey-history
+      div(layout="column" hide-gt-md)
+        md-card.card-information-demand.flex
+          div(layout="row")
+            img.img-icon-demand-article(ng-src="{{ historyArticles.url_api + demand.article_thumbnail_url}}")
+            div.flex.information-demand
+              p.title-article {{ demand.article_name }}
+              div.asked-by Asked By {{ demand.author_name }}
+
+              div(style="margin-top:30px;")
+                span Started :
+                strong {{ }} {{ demand.availibility_start | date : medium }}
+              div
+                span Finished :
+                strong {{ }} {{ demand.availibility_end | date : medium }}
+            div(flex="none")
+              div(ng-if="demand.status == 'pending'").circle-blue-history
+              div(ng-if="demand.status == 'completed'").circle-green-history
+              div(ng-if="demand.status == 'refused'").circle-red-history
+              div(ng-if="demand.status == 'retracted'").circle-grey-history
+    div(layout="row" layout-align="center start")
+      span(flex="25").special-divider
+        md-divider
+      h3.title-request-category.flex Article History as Client
+      span(flex="25").special-divider
+        md-divider
+    div(style="margin-top:20px;")
+    div(ng-if="historyArticles.articlesClient.length < 1 && historyArticles.articlesClient != true")
+      p(style="text-align: center;") There are no article history as Client.
+    div(ng-repeat="demand in historyArticles.articlesClient track by $index")
+      div(layout="row" layout-align="center")
+        md-card.card-information-demand-big-screen(hide-md hide-sm hide-xs flex="60")
+          div(layout="row")
+            img.img-icon-demand-article(ng-src="{{ historyArticles.url_api + demand.article_thumbnail_url}}")
+            div.flex.information-demand
+              p.title-article {{ demand.article_name }}
+              div.asked-by Asked To {{ demand.name_target }}
+
+              div(style="margin-top:30px;")
+                span Started :
+                strong {{ }} {{ demand.availibility_start | date : medium }}
+              div
+                span Finished :
+                strong {{ }} {{ demand.availibility_end | date : medium }}
+            div(flex="none")
+              div(ng-if="demand.status == 'pending'").circle-blue-history
+              div(ng-if="demand.status == 'completed'").circle-green-history
+              div(ng-if="demand.status == 'refused'").circle-red-history
+              div(ng-if="demand.status == 'retracted'").circle-grey-history
+      div(layout="row" hide-gt-md)
+        md-card.card-information-demand.flex
+          div(layout="row")
+            img.img-icon-demand-article(ng-src="{{ historyArticles.url_api + demand.article_thumbnail_url}}")
+            div.flex.information-demand
+              p.title-article {{ demand.article_name }}
+              div.asked-by Asked To {{ demand.target_name }}
+
+              div(style="margin-top:30px;")
+                span Started :
+                strong {{ }} {{ demand.availibility_start | date : medium }}
+              div
+                span Finished :
+                strong {{ }} {{ demand.availibility_end | date : medium }}
+            div(flex="none")
+              div(ng-if="demand.status == 'pending'").circle-blue-history
+              div(ng-if="demand.status == 'completed'").circle-green-history
+              div(ng-if="demand.status == 'refused'").circle-red-history
+              div(ng-if="demand.status == 'retracted'").circle-grey-history
+
+  span.flex
