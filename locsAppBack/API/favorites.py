@@ -39,9 +39,6 @@ def deleteFavoriteArticle(request):
 			db_locsapp["favorite_article"].delete_one({'_id': ObjectId(favorite_article[
 				                                                           '_id'])})
 
-			user = get_user_model().object.get(pk=request.user.pk)
-			user.favorite_articles.remove(favorite_article['id_article'])
-			user.save()
 			return JsonResponse({"Success": "This article has been removed from your favorite"},
 			                     status=200)
 		else:
@@ -56,6 +53,8 @@ def addFavoriteArticle(request):
 		# On a besoin de l'id Article et de l user connect (request.user)
 
 		body = json.loads(request.body.decode('utf8'))
+		print("body = ", body)
+		print(body['id_article'])
 		if 'id_article' not in body:
 			return JsonResponse({"Error": "Please add the article id"}, status=400)
 		# We get the article from the db
@@ -108,8 +107,7 @@ def addFavoriteArticle(request):
 
 			}
 			return APIrequests.POST(request, model, "favorite_article",
-			                        "This article has been added to your favorite",
-			                        addFavoriteArticleInUserProfile)
+			                        "This article has been added to your favorite")
 		else:
 			return JsonResponse({"Error": "We need a valid id article"}, status=403)
 
@@ -122,21 +120,6 @@ def addFavoriteArticle(request):
 
 
 
-
-def addFavoriteArticleInUserProfile(document):
-	user = get_user_model().object.get(pk=document['id_user'])
-	favorite_article = user.favorite_articles
-	if favorite_article == None:
-		favorite_article = [document['id_article']]
-	else:
-		if document['id_article'] not in favorite_article:
-			favorite_article.append(document['id_article'])
-		else:
-			return {"error": "You already add this article in your favorite."}
-
-	user.favorite_articles = favorite_article
-	user.save()
-	return True
 
 
 @csrf_exempt

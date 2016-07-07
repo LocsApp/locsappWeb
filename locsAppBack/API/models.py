@@ -64,9 +64,6 @@ class Account(AbstractBaseUser):
     tenant_score = models.IntegerField(default=-1)
     renter_score = models.IntegerField(default=-1)
 
-    favorite_articles = ArrayField(ArrayField(models.CharField(max_length=50), blank=True),
-                                   null=True)
-
     objects = AccountManager()
     object = AccountManager()
 

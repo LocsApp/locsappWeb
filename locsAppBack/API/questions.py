@@ -9,7 +9,6 @@ from .views import APIrequests
 from datetime import datetime
 import pytz
 
-
 # Connects to the db and creates a MongoClient instance
 mongodb_client = MongoClient('localhost', 27017)
 db_locsapp = mongodb_client['locsapp']
@@ -28,6 +27,9 @@ def sendQuestion(request):
 	if request.method == "POST":
 
 		body = json.loads(request.body.decode('utf8'))
+		print("ceci est une phrase")
+		#print(body['content'])
+
 		if 'thumbs_up' in body or 'report' in body or 'id_author' in body or 'title' in body or \
 						'url_thumbnail' in body:
 			return JsonResponse(
@@ -46,8 +48,16 @@ def sendQuestion(request):
 			return JsonResponse({"Error": "You are the owner of this article"}, status=401)
 
 		if article:
+			print("body = ", body)
+			#print(body['content'])
+
 			# print("ARTICLE = ", article)
 			model = {
+
+				"content": {
+					"_type": str,
+					"_default": body['content'],
+				},
 
 				"id": {
 					"_type": str,
@@ -71,9 +81,6 @@ def sendQuestion(request):
 					"_default": article['id_author']
 				},
 
-				"content": {
-					"_type": str,
-				},
 				"thumbs_up": {
 					"_type": [int],
 					"_default": [],
