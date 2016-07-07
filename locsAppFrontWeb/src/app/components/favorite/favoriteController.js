@@ -6,8 +6,7 @@
     .module('LocsappControllers')
     .controller('FavoriteController', FavoriteController);
 
-  function FavoriteController($log, $mdDialog, $document, ArticleService, $stateParams,
-                              $interval, toastr, ScopesService, URL_API, $sessionStorage, $localStorage/*, $state*/) {
+  function FavoriteController($log, ArticleService, $state, toastr, URL_API) {
     var vm = this;
     vm.url_api = URL_API;
     vm.limitDescription = 50;
@@ -28,7 +27,7 @@
       .then(vm.getArticleFavoriteSuccess, vm.getArticleFavoriteError);
 
     vm.goToArticlePage = function (id) {
-      //$state.go("main.articleShow", {"id": id});
+      $state.go("main.articleShow", {"id": id});
     };
 
     vm.deleteArticleFavoriteSuccess = function (data) {
