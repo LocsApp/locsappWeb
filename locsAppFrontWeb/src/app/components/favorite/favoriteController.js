@@ -7,7 +7,7 @@
     .controller('FavoriteController', FavoriteController);
 
   function FavoriteController($log, $mdDialog, $document, ArticleService, $stateParams,
-                              $interval, toastr, ScopesService, URL_API, $sessionStorage, $localStorage, $state) {
+                              $interval, toastr, ScopesService, URL_API, $sessionStorage, $localStorage/*, $state*/) {
     var vm = this;
     vm.url_api = URL_API;
     vm.limitDescription = 50;

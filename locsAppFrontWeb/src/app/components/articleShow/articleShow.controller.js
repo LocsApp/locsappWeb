@@ -99,7 +99,7 @@
         vm.ownArticle = true;
 
       /* Init array questions */
-      console.log("questions = ", vm.data.questions);
+      //$log.log("questions = ", vm.data.questions);
       if (vm.data.questions == undefined)
         vm.questions = "";
       else {
