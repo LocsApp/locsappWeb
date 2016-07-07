@@ -379,6 +379,7 @@ def postNewMark(request):
             "_default": request.user.pk,
             "_protected": True
         },
+        "author_name": str,
         "id_target": int,
         "id_demand": {
             "_type": ObjectId()
@@ -386,6 +387,7 @@ def postNewMark(request):
         "id_article": {
             "_type": ObjectId()
         },
+        "article_name": str,
         "value": {
             "_type": int,
             "_min": 1,

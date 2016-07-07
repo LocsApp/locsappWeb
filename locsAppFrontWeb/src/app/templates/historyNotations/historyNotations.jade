@@ -1,0 +1,57 @@
+div(layout="row", layout-align="center center")
+  h2 Notations
+div(style="margin-top:40px;")
+div(layout="row" layout-align="center start")
+  div(flex="70").article-requests-body.article-notations-body
+    div(layout="row" layout-align="center start")
+      span(flex="25").special-divider
+        md-divider
+      h3.title-request-category.flex Clients
+      span(flex="25").special-divider
+        md-divider
+    div(style="margin-top:20px;")
+    div(ng-if="historyNotation.notationsClient.length < 1 && historyNotation.notationsClient != true")
+      p(style="text-align: center;") No marks as a client received.
+    div(ng-repeat="demand in historyNotation.notationsClient track by $index")
+      div(layout="row" layout-align="center")
+        md-card.card-notation(hide-md hide-sm hide-xs flex="60")
+          md-card-header
+            md-card-avatar.img-icon-notation
+              img(flex="none" src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg").img-rounded
+            md-card-header-text.header-infos
+              span(class="md-title") {{ demand.author_name }}
+              span(class="md-subhead") {{ demand.article_name }}
+          md-card-content
+            section(layout="row")
+              div(ng-repeat="number in historyNotation.arrayGen(demand.value)")
+                ng-md-icon(icon="star_border" size="48" ng-if="number == 0" ng-click="historyNotation.starValue(number, demand)").icon-star
+                ng-md-icon(icon="star" size="48" ng-if="number == 1" ng-click="historyNotation.starValue(number, demand)").icon-star-filled
+            section(layout="row").section-height-limiter
+              strong Comment
+              p {{ demand.comment }}
+    div(layout="row" layout-align="center start")
+      span(flex="25").special-divider
+        md-divider
+      h3.title-request-category.flex Renters
+      span(flex="25").special-divider
+        md-divider
+    div(style="margin-top:20px;")
+    div(ng-if="historyNotation.notationsRenter.length < 1 && historyNotation.notationsRenter != true")
+      p(style="text-align: center;") No marks as a renter received.
+    div(ng-repeat="demand in historyNotation.notationsRenter track by $index")
+      div(layout="row" layout-align="center")
+        md-card.card-notation(hide-md hide-sm hide-xs flex="60")
+          md-card-header
+            md-card-avatar.img-icon-notation
+              img(flex="none" src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg").img-rounded
+          md-card-header-text.header-infos
+            span(class="md-title") {{ demand.author_name }}
+            span(class="md-subhead") {{ demand.article_name }}
+          md-card-content
+            section(layout="row")
+              div(ng-repeat="number in historyNotation.arrayGen(demand.value)")
+                ng-md-icon(icon="star_border" size="48" ng-if="number == 0" ng-click="historyNotation.starValue(number, demand)").icon-star
+                ng-md-icon(icon="star" size="48" ng-if="number == 1" ng-click="historyNotation.starValue(number, demand)").icon-star-filled
+            section(layout="row").section-height-limiter
+              strong Comment
+              p {{ demand.comment }}
