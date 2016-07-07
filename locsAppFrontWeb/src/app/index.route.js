@@ -301,6 +301,20 @@
         }
       })
 
+      .state('main.history_articles', {
+        url: 'history-articles/',
+        parent: 'main',
+        templateUrl: 'app/templates/historyArticles/historyArticles.html',
+        controller: 'HistoryArticleController',
+        controllerAs: 'historyArticles',
+        data: {
+          permissions: {
+            only: ['user'],
+            redirectTo: 'main.homepage'
+          }
+        }
+      })
+
       .state('main.favorites', {
         url: 'favorites/',
         parent: 'main',
