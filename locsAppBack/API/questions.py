@@ -55,8 +55,7 @@ def sendQuestion(request):
 			model = {
 
 				"content": {
-					"_type": str,
-					"_default": body['content'],
+					"_type": str
 				},
 
 				"id": {
