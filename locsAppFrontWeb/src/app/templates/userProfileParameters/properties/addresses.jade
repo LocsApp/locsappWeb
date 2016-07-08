@@ -7,8 +7,8 @@ md-card
       md-divider.separator-h2(flex="30" hide-sm)
 
     h3(flex-offset="10") Living addresses
-      span(ng-if="!profileParams.user.living_address.length")  (0 / 6)
-      span(ng-if="profileParams.user.living_address.length")  ({{profileParams.user.living_address.length }} /6)
+      span(ng-if="!profileParams.user.living_address.length")  (0 / {{ profileParams.limitAdress }})
+      span(ng-if="profileParams.user.living_address.length")  ({{profileParams.user.living_address.length }} /{{ profileParams.limitAdress }})
     md-list.my-layout-xs(flex-offset="10" layout="row")
       md-list-item(
       ng-repeat="livingAddress in profileParams.user.living_address track by $index")
@@ -37,7 +37,7 @@ md-card
 
     .add-entity
       md-button.md-fab.md-primary(
-      ng-if="profileParams.user.living_address.length < 6 || !profileParams.user.living_address.length"
+      ng-if="profileParams.user.living_address.length < profileParams.limitAdress || !profileParams.user.living_address.length"
       ng-click="profileParams.addAddressDialog($event, 0)"
       aria-label="Edit your profileParams")
         ng-md-icon(icon="add")
@@ -45,8 +45,8 @@ md-card
 
 
     h3(flex-offset="10") billing addresses
-      span(ng-if="!profileParams.user.billing_address.length")  (0 / 6)
-      span(ng-if="profileParams.user.billing_address.length")  ({{profileParams.user.billing_address.length }} /6)
+      span(ng-if="!profileParams.user.billing_address.length")  (0 / {{ profileParams.limitAdress }})
+      span(ng-if="profileParams.user.billing_address.length")  ({{profileParams.user.billing_address.length }} / {{ profileParams.limitAdress }})
     md-list.my-layout-xs(flex-offset="10" layout="row")
       md-list-item(
       ng-repeat="billingAddress in profileParams.user.billing_address track by $index")
@@ -76,7 +76,7 @@ md-card
 
     .add-entity
       md-button.md-fab.md-primary(
-      ng-if="profileParams.user.billing_address.length < 6 || !profileParams.user.billing_address.length"
+      ng-if="profileParams.user.billing_address.length < profileParams.limitAdress || !profileParams.user.billing_address.length"
       ng-click="profileParams.addAddressDialog($event, 1)"
       aria-label="Edit your profileParams")
         ng-md-icon(icon="add")

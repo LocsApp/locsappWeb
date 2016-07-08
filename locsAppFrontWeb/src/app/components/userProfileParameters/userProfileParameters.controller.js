@@ -15,7 +15,7 @@
                                    $document) {
 
     var vm = this;
-
+    vm.limitAdress = 5;
     var init_logo_url = "";
 
     /*vars initilization*/
