@@ -16,6 +16,7 @@
 
     var vm = this;
 
+    var init_logo_url = "";
 
     /*vars initilization*/
     vm.user = ScopesService.get("user_infos");
@@ -23,6 +24,7 @@
       vm.current_user_email = vm.user.email;
       vm.user.email_repeat = "";
       vm.user.registered_date = vm.user.registered_date.substring(0, 10);
+      init_logo_url = vm.user.logo_url;
     }
     $log.log("vm.user = ", vm.user);
 
@@ -49,6 +51,7 @@
     vm.GetInfosUserSuccess = function (data) {
       $log.log(data);
       vm.user = data;
+      init_logo_url = vm.user.logo_url;
       vm.user.registered_date = vm.user.registered_date.substring(0, 10);
       vm.current_user_email = vm.user.email;
       vm.user.email_repeat = "";
@@ -112,14 +115,20 @@
      We watch the variable for the profile picture so we upload it directly the user does not
      need to click on a submit button
      */
-   /* $scope.$watch('profileParams.avatar', function () {
-      $log.log("image avatar = ", vm.logo_url);
 
-      UsersService
-        .uploadPicture(vm.logo_url)
-        .then(vm.uploadImageSuccess, vm.uploadImageFailure);
+    $scope.$watch('profileParams.user.logo_url', function (new_fieldcontainer, old_fieldcontainer) {
+      if (typeof old_fieldcontainer === 'undefined' || init_logo_url == vm.user.logo_url) return;
 
-    }, true);*/
+      if (new_fieldcontainer != null) {
+        UsersService
+          .uploadPicture(vm.user.logo_url)
+          .then(vm.uploadImageSuccess, vm.uploadImageFailure);
+      }
+    });
+
+
+
+
 
 
     if (!vm.user)
