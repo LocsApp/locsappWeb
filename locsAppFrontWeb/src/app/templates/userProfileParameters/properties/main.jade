@@ -5,7 +5,10 @@ md-card()
       h1 Edit my profile
 
     div.my-layout-xs(layout="row" layout-sm="column" layout-align="space-around start")
-      img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
+      //img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
+      img(ngf-src="profileParams.avatar || 'http://localhost:3000/assets/images/articles/default.jpg'" ngf-select ng-model="profileParams.avatar" name="logo" ngf-pattern="'image/*'"
+      accept="image/*" ngf-max-size="2MB" ngf-min-height="100"
+      ngf-resize="{width: 300, height: 300}" style="cursor: pointer;")
 
       div(layout="column")
         h2.username
