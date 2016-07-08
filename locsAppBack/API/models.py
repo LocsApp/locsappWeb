@@ -20,8 +20,12 @@ def validate_phone(phone_number):
         if c not in numbers:
             raise ValidationError(
             _('%(phone_number)s contains no numeric characters'),
-            params={'value': phone_number},
-        )
+            params={'value': phone_number},)
+    if phone_number[0] != 0:
+        raise ValidationError(
+            _('%(phone_number)s should start by 0'),
+            params={'value': phone_number},)
+
 
 
 
