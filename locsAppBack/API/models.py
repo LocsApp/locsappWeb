@@ -9,6 +9,22 @@ from django.dispatch import receiver
 from django.contrib.auth import get_user_model
 
 
+
+from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
+
+
+def validate_phone(phone_number):
+    numbers = set('01234567899')
+    for c in phone_number:
+        if c not in numbers:
+            raise ValidationError(
+            _('%(phone_number)s contains no numeric characters'),
+            params={'value': phone_number},
+        )
+
+
+
 class AccountManager(BaseUserManager):
 
     def create_user(self, email, password=None, **kwargs):
@@ -44,7 +60,7 @@ class Account(AbstractBaseUser):
     birthdate = models.CharField(max_length=30, null=True)
     gender = models.CharField(max_length=30, null=True)
 
-    phone = models.CharField(max_length=10, null=True)
+    phone = models.CharField(max_length=10, null=True, validators=[validate_phone])
     living_address = ArrayField(ArrayField(models.TextField(null=True, default=None), null=True,
                                            size=2), null=True, size=5)
     billing_address = ArrayField(ArrayField(models.TextField(null=True, default=None), null=True,
