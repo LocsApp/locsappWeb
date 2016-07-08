@@ -98,6 +98,30 @@
     };
 
 
+    vm.uploadImageSuccess = function (data) {
+      toastr.success("Success", "Your avatar has been changed");
+      $log.log("uploadImageSuccess = ", data);
+    };
+
+    vm.uploadImageFailure = function (data) {
+      toastr.error(data.error, "Couldn't upload a picture");
+      $log.error("uploadImageFailure = ", data);
+    };
+
+    /*
+     We watch the variable for the profile picture so we upload it directly the user does not
+     need to click on a submit button
+     */
+   /* $scope.$watch('profileParams.avatar', function () {
+      $log.log("image avatar = ", vm.logo_url);
+
+      UsersService
+        .uploadPicture(vm.logo_url)
+        .then(vm.uploadImageSuccess, vm.uploadImageFailure);
+
+    }, true);*/
+
+
     if (!vm.user)
       UsersService
         .profile_check
