@@ -31,6 +31,9 @@
 
 		/*The user submits the new passwords with the uid and token*/
 		vm.submit = function () {
+
+      $log.log("IN Password Reset");
+
 			UsersService
 				.password_reset_confirm
 				.save({"new_password1" : vm.new_password1, "new_password2" : vm.new_password2, "uid" : $stateParams.uid, "token" : $stateParams.token})

@@ -226,9 +226,9 @@
 
         //Upload the pictures
         vm.submitPictures = function () {
-          console.log("images files = ",vm.files);
+          //$log.log("images files = ",vm.files);
           for (var i = 0; i < vm.files.length; i++) {
-            console.log("file index = ",vm.files[i]);
+            //$log.log("file index = ",vm.files[i]);
             ArticleService
               .uploadPicture(vm.files[i])
               .then(vm.uploadImageSuccess, vm.uploadImageFailure);
