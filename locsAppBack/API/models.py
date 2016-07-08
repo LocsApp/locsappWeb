@@ -7,8 +7,7 @@ from allauth.account.signals import email_confirmed, email_confirmation_sent
 from django.dispatch import receiver
 # User model
 from django.contrib.auth import get_user_model
-
-
+import datetime
 
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
@@ -19,14 +18,22 @@ def validate_phone(phone_number):
     for c in phone_number:
         if c not in numbers:
             raise ValidationError(
-            _('%(phone_number)s contains no numeric characters'),
+            _('%(phone_number) contains no numeric characters'),
             params={'value': phone_number},)
 
     if phone_number[0] != '0':
         raise ValidationError(
-            _('%(phone_number)s should start by 0'),
+            _('%(phone_number) should start by 0'),
             params={'value': phone_number},)
 
+
+def validate_birthdate(date_text):
+    try:
+        datetime.datetime.strptime(date_text, '%d/%m/%Y')
+    except ValueError:
+        raise ValidationError(
+            _('%(phone_number) should be this format DD/MM/YYYY'),
+            params={'value': date_text},)
 
 
 class AccountManager(BaseUserManager):
@@ -61,7 +68,7 @@ class Account(AbstractBaseUser):
 
     first_name = models.CharField(max_length=30, default=None, null=True)
     last_name = models.CharField(max_length=30, default=None, null=True)
-    birthdate = models.CharField(max_length=30, null=True)
+    birthdate = models.CharField(max_length=30, null=True, validators=[validate_birthdate])
     gender = models.CharField(max_length=30, null=True)
 
     phone = models.CharField(max_length=10, null=True, validators=[validate_phone])
