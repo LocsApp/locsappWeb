@@ -1,7 +1,9 @@
 md-card
       md-card-content
         div.my-layout-xs(layout="row"  layout-align="space-around start")
-          img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg" style="margin-bottom:30px;")
+          //img(ng-src="profile.user.logo_url || 'http://localhost:3000/assets/images/users/profile_picture/unknown-user.png'" style="margin-bottom:30px;")
+          img(ng-if='profile.user.logo_url' ng-src='{{profile.user.logo_url}}')
+          img(ng-if='!profile.user.logo_url' src='http://localhost:3000/assets/images/users/profile_picture/unknown-user.png')
 
           div(layout="column")
             h1
@@ -28,7 +30,7 @@ md-card
               div
                 ng-md-icon(icon="whatshot" size="28")
                 span(ng-if="!profile.user.last_activity_date") Last activity: Unknown
-                span(ng-if="profile.user.last_activity_date") Last activity {{profile.user.last_activity_date}}
+                span(ng-if="profile.user.last_activity_date") Last activity {{profile.user.last_activity_date.split('T')[0]}}
 
               div
                 ng-md-icon(icon="insert_emoticon" size="28")
