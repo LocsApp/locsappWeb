@@ -116,6 +116,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'API.middleware.UpdateLastActivityMiddleware'
 )
 
 ROOT_URLCONF = 'locsAppBack.urls'

@@ -5,7 +5,10 @@ md-card()
       h1 Edit my profile
 
     div.my-layout-xs(layout="row" layout-sm="column" layout-align="space-around start")
-      img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
+      //img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
+      img(ngf-src="profileParams.user.logo_url || 'http://localhost:3000/assets/images/users/profile_picture/unknown-user.png'" ngf-select ng-model="profileParams.user.logo_url" name="logo" ngf-pattern="'image/*'"
+      accept="image/*" ngf-max-size="2MB" ngf-min-height="100"
+      ngf-resize="{width: 300, height: 300}" style="cursor: pointer;")
 
       div(layout="column")
         h2.username
@@ -21,8 +24,8 @@ md-card()
         div.properties-user
           div
             ng-md-icon(icon="whatshot" size="28")
-            span(ng-if="!profile.user.last_activity_date") Last activity: Unknown
-            span(ng-if="profile.user.last_activity_date") Last activity {{profile.user.last_activity_date}}
+            span(ng-if="!profileParams.user.last_activity_date") Last activity: Unknown
+            span(ng-if="profileParams.user.last_activity_date") Last activity {{profileParams.user.last_activity_date.split('T')[0]}}
 
           div
             ng-md-icon(icon="insert_emoticon" size="28")

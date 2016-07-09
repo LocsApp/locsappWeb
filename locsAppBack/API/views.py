@@ -29,6 +29,8 @@ from rest_framework.parsers import FileUploadParser
 import uuid
 import os
 import datetime
+import hashlib
+import shutil
 
 
 # Connects to the db and creates a MongoClient instance
@@ -659,15 +661,21 @@ class ImageAvatarUploadView(APIView):
         up_file = request.data["file"]
         destination_url = settings.MEDIA_ROOT + hashlib.md5(
             request.user.username.encode('utf-8')).hexdigest() + '/avatar.jpg'
-        os.makedirs(os.path.dirname(destination_url), exist_ok=True)
+        print(os.path.dirname(destination_url))
+        if os.path.isdir(os.path.dirname(destination_url)):
+            shutil.rmtree(os.path.dirname(destination_url))
+            print("File exist we need to delete it")
+            print(os.path.dirname(destination_url))
+
+        os.makedirs(os.path.dirname(destination_url))
         destination = open(destination_url, 'wb+')
         for chunk in up_file.chunks():
             destination.write(chunk)
             destination.close()
 
-        UserForum.objects.filter(
+        get_user_model().objects.filter(
             pk=request.user.pk).update(
-            url_avatar=settings.URL_BACK + 'media/' +
+            logo_url=settings.URL_BACK + 'media/' +
             hashlib.md5(
                 request.user.username.encode('utf-8')).hexdigest() +
             '/avatar.jpg')
