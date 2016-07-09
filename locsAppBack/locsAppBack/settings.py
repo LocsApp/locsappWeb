@@ -48,7 +48,7 @@ SECRET_KEY = '0#bk$^5fieu@defbgkbxaadd*5y940w-k$jwf!-8=pg)hz085$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS =  []
 
 # Django allauth
 ACCOUNT_ADAPTER = 'API.adapter.DefaultAccountAdapterCustom'

@@ -30,6 +30,7 @@ div(layout="row")
                 strong {{ }} {{ demand.availibility_end | date : medium }}
             div(flex="none")
               div(ng-if="demand.status == 'pending'").circle-blue-history
+              div(ng-if="demand.status == 'finished'").circle-green-pale-history
               div(ng-if="demand.status == 'completed'").circle-green-history
               div(ng-if="demand.status == 'refused'").circle-red-history
               div(ng-if="demand.status == 'retracted'").circle-grey-history
@@ -49,6 +50,7 @@ div(layout="row")
                 strong {{ }} {{ demand.availibility_end | date : medium }}
             div(flex="none")
               div(ng-if="demand.status == 'pending'").circle-blue-history
+              div(ng-if="demand.status == 'finished'").circle-green-pale-history
               div(ng-if="demand.status == 'completed'").circle-green-history
               div(ng-if="demand.status == 'refused'").circle-red-history
               div(ng-if="demand.status == 'retracted'").circle-grey-history

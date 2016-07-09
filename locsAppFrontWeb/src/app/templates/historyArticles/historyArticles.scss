@@ -18,6 +18,11 @@
     background-color: #00cc66;
   }
 
+  .circle-green-pale-history {
+    @extend .circle-history;
+    background-color: #ccffcc;
+  }
+
   .circle-red-history {
     @extend .circle-history;
     background-color: #cc0000;
