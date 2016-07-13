@@ -12,20 +12,26 @@ md-card()
       flex-xs="100" flex-sm="80" flex-md="60" flex="50")
         section(layout="column", layout-align="start center")
 
+          md-input-container.md-icon-float.md-block(layout-fill)
+            md-icon(md-svg-src="../assets/icons/profil/account.svg")
+            input(placeholder="toto" type='text' name="toto"
+            ng-model="profileParams.user.toto" required gender-form-validator
+            ).body-register-container-md
+            div(ng-messages="modifyProfilForm.toto.$error" ng-if='!modifyProfilForm.toto.$pristine')
+              div(ng-message="required") This is required.
+              div(ng-message='nullGender') does not start by a
 
           md-input-container.md-icon-float.md-block.gender(layout-fill)
             md-icon(md-svg-src="../assets/icons/gender-male-female.svg")
             md-radio-group(ng-model="profileParams.user.gender" name="gender" layout="row"
-            required)
+            required gender-form-validator)
               span Man
               md-radio-button(value="Man" class="md-primary" aria-label="man" required)
               span Woman
               md-radio-button(value="Woman" aria-label="woman" required)
             div(ng-messages="profileParams.gender.$error" ng-if='!profileParams.gender.$pristine')
               div(ng-message="required") This is required.
-
-
-
+              div(ng-message='nullGender') This is required
 
           md-input-container.md-icon-float.md-block(layout-fill)
             md-icon(md-svg-src="../assets/icons/profil/account.svg")
@@ -46,10 +52,11 @@ md-card()
           md-input-container.md-icon-float.md-block(layout-fill)
             md-icon(md-svg-src="../assets/icons/profil/phone.svg")
             input(placeholder="Phone number" type="text" name="phone_number"
-            ng-model="profileParams.user.phone" required)
+            ng-model="profileParams.user.phone" required phone-number-form-validator)
             .body-register-container-md
             div(ng-messages="modifyProfilForm.phone_number.$error" ng-if='!modifyProfilForm.phone_number.$pristine')
               div(ng-message="required") This is required.
+              div(ng-message="phoneNumber") Phone number is incorrect
 
           md-input-container.md-icon-float.md-block(layout-fill)
             md-icon(md-svg-src="../assets/icons/profil/cake-variant.svg")

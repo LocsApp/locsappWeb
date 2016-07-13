@@ -127,10 +127,6 @@
     });
 
 
-
-
-
-
     if (!vm.user)
       UsersService
         .profile_check
@@ -143,21 +139,30 @@
 
     vm.submit = function () {
 
-      $log.log("Submit");
+      vm.user.gender = undefined;
+
+      $log.log("Submit", vm.user.gender);
+      if (vm.user.gender == undefined || vm.user.gender != "Man" || vm.user.gender != "Woman") {
+        $log.log("Ceci est une erreur gender");
+      }
+
+/*      if (false) {
 
 
-      UsersService
-        .modify_profile
-        .update({
-          secondary_emails: [],
-          first_name: vm.user.first_name,
-          last_name: vm.user.last_name,
-          gender: vm.user.gender,
-          birthdate: vm.user.birthdate,
-          phone: vm.user.phone
-        })
-        .$promise
-        .then(vm.GetInfosPutUserSuccess, vm.GetInfosUserFailure);
+        UsersService
+          .modify_profile
+          .update({
+            secondary_emails: [],
+            first_name: vm.user.first_name,
+            last_name: vm.user.last_name,
+            gender: vm.user.gender,
+            birthdate: vm.user.birthdate,
+            phone: vm.user.phone
+          })
+          .$promise
+          .then(vm.GetInfosPutUserSuccess, vm.GetInfosUserFailure);
+
+      }*/
 
     };
 
