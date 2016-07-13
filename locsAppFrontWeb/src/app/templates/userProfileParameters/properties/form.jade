@@ -12,19 +12,12 @@ md-card()
       flex-xs="100" flex-sm="80" flex-md="60" flex="50")
         section(layout="column", layout-align="start center")
 
-          md-input-container.md-icon-float.md-block(layout-fill)
-            md-icon(md-svg-src="../assets/icons/profil/account.svg")
-            input(placeholder="toto" type='text' name="toto"
-            ng-model="profileParams.user.toto" required gender-form-validator
-            ).body-register-container-md
-            div(ng-messages="modifyProfilForm.toto.$error" ng-if='!modifyProfilForm.toto.$pristine')
-              div(ng-message="required") This is required.
-              div(ng-message='nullGender') does not start by a
-
           md-input-container.md-icon-float.md-block.gender(layout-fill)
-            md-icon(md-svg-src="../assets/icons/gender-male-female.svg")
+            md-icon(ng-if='profileParams.user.gender == "Man"' md-svg-src="../assets/icons/gender-male.svg")
+            md-icon(ng-if='profileParams.user.gender == "Woman"' md-svg-src="../assets/icons/gender-female.svg")
+            md-icon(ng-if='profileParams.user.gender != "Man" && profileParams.user.gender != "Woman"' md-svg-src="../assets/icons/gender-male-female.svg")
             md-radio-group(ng-model="profileParams.user.gender" name="gender" layout="row"
-            required gender-form-validator)
+            required)
               span Man
               md-radio-button(value="Man" class="md-primary" aria-label="man" required)
               span Woman

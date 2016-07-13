@@ -139,15 +139,15 @@
 
     vm.submit = function () {
 
-      vm.user.gender = undefined;
+    /*  vm.user.gender = undefined;
 
       $log.log("Submit", vm.user.gender);
       if (vm.user.gender == undefined || vm.user.gender != "Man" || vm.user.gender != "Woman") {
         $log.log("Ceci est une erreur gender");
       }
+*/
 
-/*      if (false) {
-
+        $log.log("sumbit profile");
 
         UsersService
           .modify_profile
@@ -162,7 +162,6 @@
           .$promise
           .then(vm.GetInfosPutUserSuccess, vm.GetInfosUserFailure);
 
-      }*/
 
     };
 
