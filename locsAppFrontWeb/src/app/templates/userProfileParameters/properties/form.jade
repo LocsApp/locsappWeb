@@ -60,7 +60,7 @@ md-card()
             ).body-register-container-md
             div(ng-messages="modifyProfilForm.birthdate.$error" ng-if='!modifyProfilForm.birthdate.$pristine')
               div(ng-message="required") This is required.
-              div(ng-message="birthdate") Birthdate should be dd/mm/yyyy
+              div(ng-message="birthdate") Birthdate should be yyyy/mm/dd
 
 
           div.submit-buttons(layout-fill)

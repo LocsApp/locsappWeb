@@ -29,10 +29,10 @@ def validate_phone(phone_number):
 
 def validate_birthdate(date_text):
     try:
-        datetime.datetime.strptime(date_text, '%d/%m/%Y')
+        datetime.datetime.strptime(date_text, '%Y/%m/%d')
     except ValueError:
         raise ValidationError(
-            _('%(phone_number) should be this format DD/MM/YYYY'),
+            _('%(phone_number) should be this format YYYY/MM/DD'),
             params={'value': date_text},)
 
 
