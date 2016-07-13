@@ -26,6 +26,9 @@
       vm.user.email_repeat = "";
       vm.user.registered_date = vm.user.registered_date.substring(0, 10);
       init_logo_url = vm.user.logo_url;
+      vm.user.last_activity_date = vm.user.last_activity_date.split('T')[0].replace(/-/g, '/');
+      vm.user.registered_date = vm.user.registered_date.substring(0, 10).replace(/-/g, '/');
+
     }
     $log.log("vm.user = ", vm.user);
 
@@ -53,7 +56,8 @@
       $log.log(data);
       vm.user = data;
       init_logo_url = vm.user.logo_url;
-      vm.user.registered_date = vm.user.registered_date.substring(0, 10);
+      vm.user.registered_date = vm.user.registered_date.substring(0, 10).replace(/-/g, '/');
+      vm.user.last_activity_date = vm.user.last_activity_date.split('T')[0].replace(/-/g, '/');
       vm.current_user_email = vm.user.email;
       vm.user.email_repeat = "";
       vm.parseAddressToJson();
