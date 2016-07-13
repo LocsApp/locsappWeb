@@ -16,6 +16,7 @@
 
     var vm = this;
     vm.limitAdress = 5;
+    vm.genderError = false;
     var init_logo_url = "";
 
     /*vars initilization*/
@@ -139,16 +140,13 @@
 
     vm.submit = function () {
 
-    /*  vm.user.gender = undefined;
-
-      $log.log("Submit", vm.user.gender);
-      if (vm.user.gender == undefined || vm.user.gender != "Man" || vm.user.gender != "Woman") {
-        $log.log("Ceci est une erreur gender");
+      $log.log("sumbit profile");
+      if (vm.user.gender != "Man" && vm.user.gender != "Woman") {
+        vm.genderError = true;
       }
-*/
-
-        $log.log("sumbit profile");
-
+      else {
+        vm.genderError = false;
+        $log.log("everyting is cool");
         UsersService
           .modify_profile
           .update({
@@ -161,6 +159,7 @@
           })
           .$promise
           .then(vm.GetInfosPutUserSuccess, vm.GetInfosUserFailure);
+      }
 
 
     };

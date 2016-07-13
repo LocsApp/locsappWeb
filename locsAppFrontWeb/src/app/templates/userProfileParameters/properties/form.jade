@@ -22,25 +22,27 @@ md-card()
               md-radio-button(value="Man" class="md-primary" aria-label="man" required)
               span Woman
               md-radio-button(value="Woman" aria-label="woman" required)
-            div(ng-messages="profileParams.gender.$error" ng-if='!profileParams.gender.$pristine')
-              div(ng-message="required") This is required.
-              div(ng-message='nullGender') This is required
+            div(class='my-error' ng-show='profileParams.genderError') This is required
 
           md-input-container.md-icon-float.md-block(layout-fill)
             md-icon(md-svg-src="../assets/icons/profil/account.svg")
             input(placeholder="First name" type='text' name="first_name"
-            ng-model="profileParams.user.first_name" required
+            ng-model="profileParams.user.first_name" required maxlength="30" minlength="5"
             ).body-register-container-md
             div(ng-messages="modifyProfilForm.first_name.$error" ng-if='!modifyProfilForm.first_name.$pristine')
               div(ng-message="required") This is required.
+              div(ng-message="minlength") The first name must be longer than 5 characters.
+              div(ng-message="maxlength") The first name must be shorter than 20 characters.
 
           md-input-container.md-icon-float.md-block(layout-fill)
             md-icon(md-svg-src="../assets/icons/profil/account.svg")
             input(placeholder="Last name" type='text' name="last_name"
-            ng-model="profileParams.user.last_name" required
+            ng-model="profileParams.user.last_name" required maxlength="30" minlength="5"
             ).body-register-container-md
             div(ng-messages="modifyProfilForm.last_name.$error" ng-if='!modifyProfilForm.last_name.$pristine')
               div(ng-message="required") This is required.
+              div(ng-message="minlength") The last name must be longer than 5 characters.
+              div(ng-message="maxlength") The last name must be shorter than 20 characters.
 
           md-input-container.md-icon-float.md-block(layout-fill)
             md-icon(md-svg-src="../assets/icons/profil/phone.svg")
