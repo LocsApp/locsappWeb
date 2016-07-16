@@ -22,7 +22,8 @@ md-card
                 span(ng-if="!profile.user.birthdate") Birthdate: Not specified
                 span(ng-if="profile.user.birthdate") Birthdate {{profile.user.birthdate}}
 
-              div
+              //We don't need the within because the user access is own profile
+              //div
                 ng-md-icon(icon="location_on" size="28")
                 span(ng-if="!profile.user.within") Within: Unknown
                 span(ng-if="profile.user.within") Within {{profile.user.within}} km
