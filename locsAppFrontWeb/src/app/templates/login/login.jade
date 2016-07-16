@@ -24,8 +24,9 @@ div.login(layout="row" layout-align="center")
                 div(ng-message="required") This is required.
                 div(ng-message="minlength") The password must be longer than 6 characters.
                 div(ng-message="maxlength") The password must be shorter than 20 characters.
-            md-checkbox(ng-model="remember_me") Remember me
-            span(ng-click="login.forgotPasswordDialog($event)").login-forgot-password Forgot your password ?
+            div(layout="column"       layout-align="start center")
+              md-checkbox(ng-model="remember_me") Remember me
+              span(ng-click="login.forgotPasswordDialog($event)").login-forgot-password Forgot your password ?
 
             div.submit-buttons()
               md-button.md-raised.margin-button-top(flex-offset="10" type="submit"
