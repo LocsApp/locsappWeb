@@ -27,6 +27,7 @@
       vm.user.registered_date = vm.user.registered_date.substring(0, 10);
       init_logo_url = vm.user.logo_url;
       vm.user.last_activity_date = vm.user.last_activity_date.split('T')[0].replace(/-/g, '/');
+      //$log.log("user last activity date", vm.user.last_activity_date);
       vm.user.registered_date = vm.user.registered_date.substring(0, 10).replace(/-/g, '/');
 
     }
