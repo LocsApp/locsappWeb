@@ -10,9 +10,8 @@ md-card()
       form(name="modifyProfilForm" novalidate ng-submit="modifyProfilForm.$valid && profileParams" +
       ".submit()"
       flex-xs="100" flex-sm="80" flex-md="60" flex="50")
-        section(layout="column", layout-align="start center")
 
-          md-input-container.md-icon-float.md-block.gender(layout-fill)
+          md-input-container.md-icon-float.md-block.gender
             md-icon(ng-if='profileParams.user.gender == "Man"' md-svg-src="../assets/icons/gender-male.svg")
             md-icon(ng-if='profileParams.user.gender == "Woman"' md-svg-src="../assets/icons/gender-female.svg")
             md-icon(ng-if='profileParams.user.gender != "Man" && profileParams.user.gender != "Woman"' md-svg-src="../assets/icons/gender-male-female.svg")
@@ -24,7 +23,7 @@ md-card()
               md-radio-button(value="Woman" aria-label="woman" required)
             div(class='my-error' ng-show='profileParams.genderError') This is required
 
-          md-input-container.md-icon-float.md-block(layout-fill)
+          md-input-container.md-icon-float.md-block
             md-icon(md-svg-src="../assets/icons/profil/account.svg")
             input(placeholder="First name" type='text' name="first_name"
             ng-model="profileParams.user.first_name" required maxlength="30" minlength="5"
@@ -34,7 +33,7 @@ md-card()
               div(ng-message="minlength") The first name must be longer than 5 characters.
               div(ng-message="maxlength") The first name must be shorter than 20 characters.
 
-          md-input-container.md-icon-float.md-block(layout-fill)
+          md-input-container.md-icon-float.md-block
             md-icon(md-svg-src="../assets/icons/profil/account.svg")
             input(placeholder="Last name" type='text' name="last_name"
             ng-model="profileParams.user.last_name" required maxlength="30" minlength="5"
@@ -44,7 +43,7 @@ md-card()
               div(ng-message="minlength") The last name must be longer than 5 characters.
               div(ng-message="maxlength") The last name must be shorter than 20 characters.
 
-          md-input-container.md-icon-float.md-block(layout-fill)
+          md-input-container.md-icon-float.md-block
             md-icon(md-svg-src="../assets/icons/profil/phone.svg")
             input(placeholder="Phone number" type="text" name="phone_number"
             ng-model="profileParams.user.phone" required phone-number-form-validator)
@@ -53,7 +52,7 @@ md-card()
               div(ng-message="required") This is required.
               div(ng-message="phoneNumber") Phone number is incorrect
 
-          md-input-container.md-icon-float.md-block(layout-fill)
+          md-input-container.md-icon-float.md-block
             md-icon(md-svg-src="../assets/icons/profil/cake-variant.svg")
             input(placeholder="Birthdate" type='text' name="birthdate"
             ng-model="profileParams.user.birthdate" required birthdate-form-validator

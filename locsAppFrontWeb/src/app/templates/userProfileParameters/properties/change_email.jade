@@ -11,9 +11,8 @@ md-card()
       "profileParams" +
       ".submitChangeEmail()"
       flex-xs="100" flex-sm="80" flex-md="60" flex="50")
-        section(layout="column", layout-align="start center")
 
-          md-input-container.md-icon-float.md-block(layout-fill)
+          md-input-container.md-icon-float.md-block
             md-icon(md-svg-src="../assets/icons/register-login/ic_email_black_24px.svg")
             input(placeholder="Email" type="email" minlength="8" maxlength="100" required
             name="email" ng-model="profileParams.user.email" ng-pattern="/^.+@.+\..+$/")
@@ -24,7 +23,7 @@ md-card()
               div(ng-message="maxlength") The email must be shorter than 100 characters.
               div(ng-message="pattern") The field must be an email.
 
-          md-input-container.md-icon-float.md-block(layout-fill)
+          md-input-container.md-icon-float.md-block
             md-icon(md-svg-src="../assets/icons/register-login/ic_repeat_black_24px.svg")
             input(placeholder="Repeat Email" type="email" minlength="8" maxlength="100" required
             name="email_repeat" ng-model="profileParams.user.email_repeat"
@@ -38,7 +37,7 @@ md-card()
               div(ng-message="match") Emails must match.
 
 
-          div.submit-buttons(layout-fill)
+          div.submit-buttons
             md-button.special-button.md-raised.margin-button-top(type="submit"
             style="width:100%") Send
 
