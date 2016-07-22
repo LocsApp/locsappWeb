@@ -14,11 +14,11 @@
 
 
     vm.GetArticleFromUserProfileSuccess = function (data) {
-      vm.user.total_article = data.total_article;
+      vm.user.total_article = data.nb_total_articles;
 
       vm.user.first_part_article = [];
       vm.user.second_part_article = [];
-      
+
       //Need to check if the variabl we want to access exist first
       for (var i = 0; i < 2; i++) {
         if (data.articles[i] != undefined)

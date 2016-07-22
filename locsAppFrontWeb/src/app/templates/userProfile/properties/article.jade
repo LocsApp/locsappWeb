@@ -45,6 +45,6 @@ md-card
           p {{ article.description | limitTo: 30 }} {{article.description.length > 30 ? '...' : ''}}
 
 
-    div(flex-offset="10" ng-if="profile.user.nb_total_articles > 4")
+    div(flex-offset="10" ng-if="profile.user.total_article > 4")
       md-button.special-button.md-raised(layout-fill flex="90" ng-href="/articles/{{profile.user.username}}") Show more
 
