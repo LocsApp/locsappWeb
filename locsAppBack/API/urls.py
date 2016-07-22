@@ -43,6 +43,10 @@ article_patterns = [
     url(r'^report-question/$', questions.report),
     url(r'^articles-with-question-to-answer/$', questions.articleWithQuestionToAnswer),
     url(r'^articles-with-question-asked/$', questions.articleWithQuestionUserAsked),
+    url(r'^user-profile/(?P<user_pk>[0-9]+)/$',
+        articles.getFirstFourArticleOwnedByUser),
+    url(r'^all/(?P<user_pk>[0-9]+)/(?P<id_page>[0-9]+)/$',
+        articles.getAllArticleOwnedByUser),
 ]
 
 history_patterns = [

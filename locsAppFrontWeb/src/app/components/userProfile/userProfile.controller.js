@@ -12,6 +12,18 @@
     /*vars initilization*/
     vm.user = {};
 
+
+    vm.GetArticleFromUserProfileSuccess = function (data) {
+      vm.user.articles = data.articles;
+      vm.user.nb_total_articles = data.nb_total_articles;
+      $log.log("username = ", vm.user.username);
+    };
+
+    vm.GetArticleFromUserProfileFailure = function (data) {
+      $log.error("GetArticleFromUserProfileFailure", data);
+      //toastr.error("This is odd...", "Woops...");
+    };
+
     /*Success callback of profile_check*/
     vm.GetInfosUserSuccess = function (data) {
       $log.log(data);
@@ -52,6 +64,14 @@
          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
          }*/
       ]
+
+      // We call the routes to get articles of the current user
+      UsersService
+        .articleFromUserProfile
+        .get({id: vm.user.id})
+        .$promise
+        .then(vm.GetArticleFromUserProfileSuccess, vm.GetArticleFromUserProfileFailure)
+
     };
 
     /*Failure callback of profile_check*/
