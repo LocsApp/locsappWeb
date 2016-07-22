@@ -1,23 +1,43 @@
-md-card(ng-if="profile.user.articles")
+md-card
   md-card-content
     div(layout="row" layout-align="center")
       md-divider.separator-h2(flex="30" hide-sm)
       h2.t-center(flex="20") Articles
       md-divider.separator-h2(flex="30" hide-sm)
 
-    div.t-center(ng-if="!profile.user.articles")
+    div.t-center(ng-if="profile.user.total_article == 0")
       p {{profile.user.username}} has no articles available for the moment
     md-list.my-layout-xs(flex-offset="10" layout="row")
-      md-list-item.md-3-line(ng-repeat="article in profile.user.articles track by $index"
-      ng-if="$index == 1")
+      md-list-item.md-3-line(ng-repeat="article in profile.user.first_part_article track by $index"
+      ng-if="$index <= 1")
         img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg" class="md-avatar" alt="{{item.who}}")
         div.md-list-item-text(layout="column")
           h4 {{ article.title_article }}
           div.price 12€
           p {{ article.description | limitTo: 30 }} {{article.description.length > 30 ? '...' : ''}}
     md-divider(flex-offset="10" flex="80")
-    md-list.my-layout-xs(flex-offset="10" layout="row" ng-if="$index == 2")
-      md-list-item.md-3-line(ng-repeat="article in profile.user.articles track by $index")
+    md-list.my-layout-xs(flex-offset="10" layout="row" ng-if="$index > 1")
+      md-list-item.md-3-line(ng-repeat="article in profile.user.first_part_article track by $index")
+        img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg" class="md-avatar" alt="{{item.who}}")
+        div.md-list-item-text(layout="column")
+          h4 {{ article.title_article }}
+          div.price 12€
+          p {{ article.description | limitTo: 30 }} {{article.description.length > 30 ? '...' : ''}}
+
+
+    div.t-center(ng-if="profile.user.total_article == 0")
+      p {{profile.user.username}} has no articles available for the moment
+    md-list.my-layout-xs(flex-offset="10" layout="row")
+      md-list-item.md-3-line(ng-repeat="article in profile.user.second_part_article track by $index"
+      ng-if="$index <= 1")
+        img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg" class="md-avatar" alt="{{item.who}}")
+        div.md-list-item-text(layout="column")
+          h4 {{ article.title_article }}
+          div.price 12€
+          p {{ article.description | limitTo: 30 }} {{article.description.length > 30 ? '...' : ''}}
+    md-divider(flex-offset="10" flex="80")
+    md-list.my-layout-xs(flex-offset="10" layout="row" ng-if="$index > 1")
+      md-list-item.md-3-line(ng-repeat="article in profile.user.second_part_article track by $index")
         img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg" class="md-avatar" alt="{{item.who}}")
         div.md-list-item-text(layout="column")
           h4 {{ article.title_article }}

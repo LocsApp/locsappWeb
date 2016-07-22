@@ -705,7 +705,7 @@ def getFirstFourArticleOwnedByUser(request, user_pk):
             article['_id'] = str(article['_id'])
             articles.append(article)
 
-        return JsonResponse({"nb_total_articles": total_article  ,"articles": articles})
+        return JsonResponse({"nb_total_articles": total_article, "articles": articles})
     else:
         return JsonResponse({"Error": "Method not allowed"}, status=405)
 

@@ -14,9 +14,23 @@
 
 
     vm.GetArticleFromUserProfileSuccess = function (data) {
-      vm.user.articles = data.articles;
-      vm.user.nb_total_articles = data.nb_total_articles;
-      $log.log("username = ", vm.user.username);
+      vm.user.total_article = data.total_article;
+
+      vm.user.first_part_article = [];
+      vm.user.second_part_article = [];
+      
+      //Need to check if the variabl we want to access exist first
+      for (var i = 0; i < 2; i++) {
+        if (data.articles[i] != undefined)
+          vm.user.first_part_article[i] = data.articles[i];
+      }
+      var j = 0;
+      for (var i = 2; i < 4; i++) {
+        if (data.articles[i] != undefined)
+          vm.user.second_part_article[j] = data.articles[i];
+          j++;
+      }
+
     };
 
     vm.GetArticleFromUserProfileFailure = function (data) {
