@@ -46,9 +46,11 @@
       vm.name_gender = vm.genders[vm.genders.map(function (x) {
         return x._id;
       }).indexOf(vm.data.gender)].name;
+
       vm.name_category = vm.categories[vm.categories.map(function (x) {
         return x._id;
       }).indexOf(vm.data.base_category)].name;
+
       vm.name_subCategory = vm.subCategories[vm.subCategories.map(function (x) {
         return x._id;
       }).indexOf(vm.data.sub_category)].name;
@@ -95,8 +97,15 @@
       vm.AskBeginLocation = new Date(vm.dateStart);
       vm.AskEndLocation = new Date(vm.dateStart);
 
-      if (vm.data.id_author == ScopesService.get("current_user").id)
-        vm.ownArticle = true;
+      $log.log("id_author = ", vm.data.id_author);
+      //$log.log("ScopesServiece = ",  ScopesService.get("current_user").id);
+
+
+        if (ScopesService.get("current_user") && ScopesService.get("current_user").id
+          &&
+          (vm.data.id_author == ScopesService.get("current_user").id))
+          vm.ownArticle = true;
+
 
       /* Init array questions */
       //$log.log("questions = ", vm.data.questions);
@@ -138,13 +147,6 @@
       vm.within = "1";
       vm.long = "longitude";
       vm.lat = "latttitude";
-
-
-      /* Just for test for the moment */
-      vm.id_author = "42";
-      //vm.username_author = "author";
-      //vm.id = "145454e";
-
 
       // $log.log("TEST = ", vm.url_pictures);
 
