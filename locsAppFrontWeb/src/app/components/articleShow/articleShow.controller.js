@@ -100,7 +100,6 @@
       $log.log("id_author = ", vm.data.id_author);
       //$log.log("ScopesServiece = ",  ScopesService.get("current_user").id);
 
-
         if (ScopesService.get("current_user") && ScopesService.get("current_user").id
           &&
           (vm.data.id_author == ScopesService.get("current_user").id))
