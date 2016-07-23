@@ -6,12 +6,12 @@
     .controller('ProfileController', ProfileController);
 
   /** @ngInject */
-  function ProfileController($scope, $log, UsersService, ScopesService, $state, toastr) {
+  function ProfileController($scope, $log, UsersService, ScopesService, $state, toastr, URL_API) {
     var vm = this;
 
     /*vars initilization*/
     vm.user = {};
-
+    vm.url_api = URL_API;
 
     vm.GetArticleFromUserProfileSuccess = function (data) {
       vm.user.total_article = data.nb_total_articles;
