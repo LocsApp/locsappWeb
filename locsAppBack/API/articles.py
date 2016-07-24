@@ -699,7 +699,7 @@ def getArticle(request, article_pk):
 def getFirstFourArticleOwnedByUser(request, user_pk):
     if request.method == "GET":
         articles = []
-        total_article = db_locsapp["articles"].count({})
+        total_article = db_locsapp["articles"].count({"id_author": int(user_pk), "available": True})
 
         for article in db_locsapp["articles"].find({"id_author": int(user_pk), "available": True}).sort("creation_date", DESCENDING).limit(4):
             article['_id'] = str(article['_id'])
@@ -716,7 +716,7 @@ def getFirstFourArticleOwnedByUser(request, user_pk):
 def getAllArticleOwnedByUser(request, user_pk, id_page):
     if request.method == "GET":
         id_page = int(id_page)
-        nb_item = db_locsapp["articles"].count({})
+        nb_item = db_locsapp["articles"].count({"id_author": int(user_pk), "available": True})
         item_on_a_page = 10
         nb_page = nb_item / item_on_a_page
         articles = []
