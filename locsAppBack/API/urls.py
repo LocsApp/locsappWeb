@@ -8,6 +8,7 @@ from allauth.account.views import confirm_email
 from social_network import views as social_network_views
 from . import favorites
 from . import questions
+from . import notations
 
 """
 @apiDefine UserObjectRegisterDefine
@@ -54,6 +55,7 @@ history_patterns = [
     url(r'^articles-as-renter/$', articles.getArticleHistoryAsRenter),
     url(r'^notations-as-renter/$', articles.getNotationsAsRenter),
     url(r'^notations-as-client/$', articles.getNotationsAsClient),
+    url(r'^notations-profile/(?P<user_pk>[0-9]+)/$', notations.getFirstFourNotationOwnedByUser)
 ]
 
 favorite_patterns = [

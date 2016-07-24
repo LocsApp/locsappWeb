@@ -13,8 +13,17 @@
     vm.user = {};
     vm.url_api = URL_API;
 
+    vm.GetFirstFourNotationSuccess = function(data) {
+      $log.log("GetFirstFourNotationSuccess = ", data);
+    };
+
+    vm.GetFirstFourNotationFailure = function(data) {
+      $log.error("GetFirstFourNotationFailure", data);
+    };
+
+
     vm.GetArticleFromUserProfileSuccess = function (data) {
-      $log.log("GetArticleFromUserProfileSuccess", data);
+      //$log.log("GetArticleFromUserProfileSuccess", data);
 
       vm.user.total_article = data.nb_total_articles;
 
@@ -32,6 +41,14 @@
           vm.user.second_part_article[j] = data.articles[i];
           j++;
       }
+
+      // Call the endpoint to have the notation
+       UsersService
+         .firstFourNotation
+        .get({id: vm.user.id})
+        .$promise
+        .then(vm.GetFirstFourNotationSuccess, vm.GetFirstFourNotationFailure)
+
 
     };
 

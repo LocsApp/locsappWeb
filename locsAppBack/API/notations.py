@@ -10,14 +10,21 @@ db_locsapp = mongodb_client['locsapp']
 @csrf_exempt
 def getFirstFourNotationOwnedByUser(request, user_pk):
     if request.method == "GET":
-        articles = []
-        total_article = db_locsapp["articles"].count({"id_author": int(user_pk), "available": True})
+        notations_as_renter = []
+        notations_as_client = []
+        total_notation_as_renter = db_locsapp["notations"].count({"id_target": int(user_pk), "as_renter": True})
+        total_notation_as_client = db_locsapp["notations"].count({"id_target": int(user_pk), "as_renter": False})
 
-        for article in db_locsapp["articles"].find({"id_author": int(user_pk), "available": True}).sort("creation_date", DESCENDING).limit(4):
-            article['_id'] = str(article['_id'])
-            articles.append(article)
+        for notation_as_renter in db_locsapp["notations"].find({"id_target": int(user_pk), "as_renter": True}).sort("date_issued", DESCENDING).limit(2):
+            notation_as_renter['_id'] = str(notation_as_renter['_id'])
+            notations_as_renter.append(notation_as_renter)
 
-        return JsonResponse({"nb_total_articles": total_article, "articles": articles})
+        for notation_as_client in db_locsapp["notations"].find({"id_target": int(user_pk), "as_renter": False}).sort("date_issued", DESCENDING).limit(2):
+            notation_as_client['_id'] = str(notation_as_client['_id'])
+            notations_as_client.append(notation_as_client)
+
+        return JsonResponse({"nb_notation_renter": total_notation_as_renter, "renter_notation": notations_as_renter,
+                             "nb_notation_client": total_notation_as_client, "client_notation": notations_as_client})
     else:
         return JsonResponse({"Error": "Method not allowed"}, status=405)
 
