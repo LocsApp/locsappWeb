@@ -1,4 +1,4 @@
-(function(){
+(function () {
 
   'use strict';
 
@@ -7,80 +7,76 @@
     .controller('NotationAsRenterController', NotationAsRenterController);
 
   /** @ngInject */
-  function NotationAsRenterController(HistoryService, $stateParams, $log) {
+  function NotationAsRenterController(HistoryService, $stateParams, $log, $state) {
 
     var vm = this;
+    var i;
+    vm.current_page = 1;
+    vm.page_size = 10;
+    vm.id_user = $stateParams.id_user;
 
 
-    vm.GetNotationAsRenterSuccess = function(data) {
+    //$log.log("current_page = ", vm.current_page);
+
+
+    vm.GetNotationAsRenterSuccess = function (data) {
       $log.log("GetNotationAsRenterSuccess", data);
       vm.notations = data.notations_as_renter;
 
-        for (i = 0; i < vm.notations.length; i++) {
-            var score_renter = Math.round(vm.notations[i].value);
-            var score_array_renter = [];
+      for (i = 0; i < vm.notations.length; i++) {
+        var score_renter = Math.round(vm.notations[i].value);
+        var score_array_renter = [];
 
-            for (var j = 0; j < 5; j++) {
-              if (j < score_renter)
-                score_array_renter.push(true);
-              else
-                score_array_renter.push(false);
-            }
-            vm.notations[i].score = score_array_renter;
-
+        for (var j = 0; j < 5; j++) {
+          if (j < score_renter)
+            score_array_renter.push(true);
+          else
+            score_array_renter.push(false);
         }
+        vm.notations[i].score = score_array_renter;
 
-      vm.nb_page = data.nb_page;
+      }
+
+      vm.nb_items = data.nb_page * vm.page_size;
     };
 
-    vm.getNotationAsRenterFailure = function(data) {
-     $log.error("getNotationAsRenterFailure", data);
+    vm.getNotationAsRenterFailure = function (data) {
+      $log.error("getNotationAsRenterFailure", data);
     };
 
 
     HistoryService
       .getNotationsAsRenter
-      .get({id_user: $stateParams.id_user, id_page: $stateParams.id_page})
+      .get({id_user: $stateParams.id_user, id_page: vm.current_page})
       .$promise
       .then(vm.GetNotationAsRenterSuccess, vm.getNotationAsRenterFailure);
+
+    vm.prevPage = function (idPage) {
+      HistoryService
+        .getNotationsAsRenter
+        .get({id_user: $stateParams.id_user, id_page: idPage})
+        .$promise
+        .then(vm.GetNotationAsRenterSuccess, vm.getNotationAsRenterFailure);
+    };
+
+    vm.nextPage = function (idPage) {
+      HistoryService
+        .getNotationsAsRenter
+        .get({id_user: $stateParams.id_user, id_page: idPage})
+        .$promise
+        .then(vm.GetNotationAsRenterSuccess, vm.getNotationAsRenterFailure);
+    };
+
+    vm.goToPage = function (currentPage) {
+
+      HistoryService
+        .getNotationsAsRenter
+        .get({id_user: $stateParams.id_user, id_page: currentPage})
+        .$promise
+        .then(vm.GetNotationAsRenterSuccess, vm.getNotationAsRenterFailure);
+    }
+
   }
 
 
 })();
-
-/*
-"object:18"
-_id
-:
-"5794795dcfcde402f20833f6"
-article_name
-:
-"dolore eu Lorem culpa consequat"
-as_renter
-:
-true
-author_name
-:
-"sylflo"
-comment
-:
-"WTF ????"
-date_issued
-:
-"2016-07-24T08:16:29.072"
-id_article
-:
-"5762ba8a574f43e5de201558"
-id_author
-:
-2
-id_demand
-:
-"57937731cfcde40ff523d742"
-id_target
-:
-1
-value
-:
-1
-  */
