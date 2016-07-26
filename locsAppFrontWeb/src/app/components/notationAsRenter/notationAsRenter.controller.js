@@ -38,6 +38,7 @@
       }
 
       vm.nb_items = data.nb_page * vm.page_size;
+      vm.nb_page = data.nb_page;
     };
 
     vm.getNotationAsRenterFailure = function (data) {
@@ -52,6 +53,7 @@
       .then(vm.GetNotationAsRenterSuccess, vm.getNotationAsRenterFailure);
 
     vm.prevPage = function (idPage) {
+      vm.current_page = idPage;
       HistoryService
         .getNotationsAsRenter
         .get({id_user: $stateParams.id_user, id_page: idPage})
@@ -60,6 +62,7 @@
     };
 
     vm.nextPage = function (idPage) {
+      vm.current_page = idPage;
       HistoryService
         .getNotationsAsRenter
         .get({id_user: $stateParams.id_user, id_page: idPage})
