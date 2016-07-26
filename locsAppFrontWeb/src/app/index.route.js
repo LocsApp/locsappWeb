@@ -334,13 +334,7 @@
         parent: 'main',
         templateUrl: 'app/templates/userProfile/notation_as_renter.html',
         controller: 'NotationAsRenterController',
-        controllerAs: 'notationAsRenter',
-        data: {
-          permissions: {
-            only: ['user', 'guest'],
-            redirectTo: 'main.homepage'
-          }
-        }
+        controllerAs: 'notationAsRenter'
       })
 
        .state('main.notation_as_client/:username', {
@@ -348,13 +342,7 @@
         parent: 'main',
         templateUrl: 'app/templates/userProfile/notation_as_client.html',
         controller: 'NotationAsClientController',
-        controllerAs: 'notationAsClient',
-        data: {
-          permissions: {
-            only: ['user', 'guest'],
-            redirectTo: 'main.homepage'
-          }
-        }
+        controllerAs: 'notationAsClient'
       })
 
 
