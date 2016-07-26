@@ -1,3 +1,4 @@
+import math
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from pymongo import MongoClient, ASCENDING, DESCENDING
@@ -29,28 +30,51 @@ def getFirstFourNotationOwnedByUser(request, user_pk):
         return JsonResponse({"Error": "Method not allowed"}, status=405)
 
 
-# Route for show all all articles owend by an user
-# We print 10 item by page
 @csrf_exempt
-def getAllNotationTypeOwnedByUser(request, user_pk, id_page):
+def getAllNotationAsClientByUser(request, user_pk, id_page):
     if request.method == "GET":
         id_page = int(id_page)
-        nb_item = db_locsapp["articles"].count({"id_author": int(user_pk), "available": True})
+        nb_item = db_locsapp["notations"].count({"id_target": int(user_pk), "as_renter": False})
         item_on_a_page = 10
-        nb_page = nb_item / item_on_a_page
-        articles = []
+        nb_page = math.ceil(nb_item / item_on_a_page)
+        notations_as_client = []
 
         # W
         if (id_page - 1) * 10 > nb_item:
             id_page = nb_page
+        print("id_page = ", id_page)
 
-        for article in db_locsapp["articles"].find({"id_author": int(user_pk), "available": True}).sort("creation_date", DESCENDING).skip((id_page - 1) * item_on_a_page).limit(item_on_a_page):
-            article['_id'] = str(article['_id'])
-            articles.append(article)
+        for notation_as_client in db_locsapp["notations"].find({"id_target": int(user_pk), "as_renter": False}).sort("date_issued", DESCENDING).skip((id_page - 1) * item_on_a_page).limit(item_on_a_page):
+            notation_as_client['_id'] = str(notation_as_client['_id'])
+            notations_as_client.append(notation_as_client)
 
-        return JsonResponse({"nb_page": nb_page, "articles": articles})
+        return JsonResponse({"nb_page": nb_page, "notation_as_client": notations_as_client})
     else:
         return JsonResponse({"Error": "Method not allowed"}, status=405)
+
+
+@csrf_exempt
+def getAllNotationAsRentertByUser(request, user_pk, id_page):
+    if request.method == "GET":
+        id_page = int(id_page)
+        nb_item = db_locsapp["notations"].count({"id_target": int(user_pk), "as_renter": True})
+        item_on_a_page = 10
+        nb_page = math.ceil(nb_item / item_on_a_page)
+        notations_as_renter = []
+
+        # W
+        if (id_page - 1) * 10 > nb_item:
+            id_page = nb_page
+        print("id_page = ", id_page)
+
+        for notation_as_renter in db_locsapp["notations"].find({"id_target": int(user_pk), "as_renter": True}).sort("date_issued", DESCENDING).skip((id_page - 1) * item_on_a_page).limit(item_on_a_page):
+            notation_as_renter['_id'] = str(notation_as_renter['_id'])
+            notations_as_renter.append(notation_as_renter)
+
+        return JsonResponse({"nb_page": nb_page, "notation_as_client": notations_as_renter})
+    else:
+        return JsonResponse({"Error": "Method not allowed"}, status=405)
+
 
 """
 We send an email to the adminstrator that tell us who user send a report for which article
