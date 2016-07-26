@@ -57,6 +57,8 @@ history_patterns = [
     url(r'^notations-as-client/$', articles.getNotationsAsClient),
     url(r'^notations-profile/(?P<user_pk>[0-9]+)/$', notations.getFirstFourNotationOwnedByUser),
     url(r'^notations-as-client-pagination/(?P<user_pk>[0-9]+)/(?P<id_page>[0-9]+)/$', notations.getAllNotationAsClientByUser),
+    url(r'^notations-as-renter-pagination/(?P<user_pk>[0-9]+)/(?P<id_page>[0-9]+)/$',
+        notations.getAllNotationAsRentertByUser),
 
 ]
 
