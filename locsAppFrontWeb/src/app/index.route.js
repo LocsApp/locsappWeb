@@ -329,6 +329,34 @@
         }
       })
 
+      .state('main.notation_as_renter', {
+        url: 'notation-as-renter/',
+        parent: 'main',
+        templateUrl: 'app/templates/userProfile/notation-as-renter.html',
+        controller: 'NotationAsRenterController',
+        controllerAs: 'notationAsRenter',
+        data: {
+          permissions: {
+            only: ['user', 'guest'],
+            redirectTo: 'main.homepage'
+          }
+        }
+      })
+
+       .state('main.notation_as_client', {
+        url: 'notation-as-client/',
+        parent: 'main',
+        templateUrl: 'app/templates/userProfile/notation-as-client.html',
+        controller: 'NotationAsClientController',
+        controllerAs: 'notationAsClient',
+        data: {
+          permissions: {
+            only: ['user', 'guest'],
+            redirectTo: 'main.homepage'
+          }
+        }
+      })
+
 
     ;
 
