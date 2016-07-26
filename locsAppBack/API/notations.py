@@ -49,7 +49,7 @@ def getAllNotationAsClientByUser(request, user_pk, id_page):
             notation_as_client['_id'] = str(notation_as_client['_id'])
             notations_as_client.append(notation_as_client)
 
-        return JsonResponse({"nb_page": nb_page, "notation_as_client": notations_as_client})
+        return JsonResponse({"nb_page": nb_page, "notations_as_client": notations_as_client})
     else:
         return JsonResponse({"Error": "Method not allowed"}, status=405)
 
@@ -74,7 +74,7 @@ def getAllNotationAsRentertByUser(request, user_pk, id_page):
             notation_as_renter['_id'] = str(notation_as_renter['_id'])
             notations_as_renter.append(notation_as_renter)
 
-        return JsonResponse({"nb_page": nb_page, "notation_as_client": notations_as_renter})
+        return JsonResponse({"nb_page": nb_page, "notations_as_renter": notations_as_renter})
     else:
         return JsonResponse({"Error": "Method not allowed"}, status=405)
 
