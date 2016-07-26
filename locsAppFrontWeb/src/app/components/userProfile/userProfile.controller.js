@@ -12,6 +12,8 @@
     /*vars initilization*/
     vm.user = {};
     vm.url_api = URL_API;
+    var i;
+
 
     vm.GetFirstFourNotationSuccess = function(data) {
       $log.log("GetFirstFourNotationSuccess = ", data);
@@ -22,31 +24,31 @@
         vm.nb_notation_client = data.nb_notation_client;
 
 
-        for (var i = 0; i < vm.renter_notation.length; i++) {
-            var score = Math.round(vm.renter_notation[i].value);
-            var score_array = [];
+        for (i = 0; i < vm.renter_notation.length; i++) {
+            var score_renter = Math.round(vm.renter_notation[i].value);
+            var score_array_renter = [];
 
             for (var j = 0; j < 5; j++) {
-              if (j < score)
-                score_array.push(true);
+              if (j < score_renter)
+                score_array_renter.push(true);
               else
-                score_array.push(false);
+                score_array_renter.push(false);
             }
-            vm.renter_notation[i].score = score_array;
+            vm.renter_notation[i].score = score_array_renter;
 
         }
 
-        for (var i = 0; i < vm.client_notation.length; i++) {
-            var score = Math.round(vm.client_notation[i].value);
-            var score_array = [];
+        for (i = 0; i < vm.client_notation.length; i++) {
+            var score_client = Math.round(vm.client_notation[i].value);
+            var score_array_client = [];
 
-            for (var j = 0; j < 5; j++) {
-              if (j < score)
-                score_array.push(true);
+            for (j = 0; j < 5; j++) {
+              if (j < score_client)
+                score_array_client.push(true);
               else
-                score_array.push(false);
+                score_array_client.push(false);
             }
-            vm.client_notation[i].score = score_array;
+            vm.client_notation[i].score = score_array_client;
 
         }
 
@@ -71,7 +73,7 @@
           vm.user.first_part_article[i] = data.articles[i];
       }
       var j = 0;
-      for (var i = 2; i < 4; i++) {
+      for (i = 2; i < 4; i++) {
         if (data.articles[i] != undefined)
           vm.user.second_part_article[j] = data.articles[i];
           j++;
