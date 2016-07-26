@@ -39,12 +39,13 @@ def getAllNotationAsClientByUser(request, user_pk, id_page):
         nb_page = math.ceil(nb_item / item_on_a_page)
         notations_as_client = []
 
-        # W
         if (id_page - 1) * 10 > nb_item:
             id_page = nb_page
-        print("id_page = ", id_page)
 
-        for notation_as_client in db_locsapp["notations"].find({"id_target": int(user_pk), "as_renter": False}).sort("date_issued", DESCENDING).skip((id_page - 1) * item_on_a_page).limit(item_on_a_page):
+        skip_page = id_page - 1
+        if skip_page < 0:
+            skip_page = 0
+        for notation_as_client in db_locsapp["notations"].find({"id_target": int(user_pk), "as_renter": False}).sort("date_issued", DESCENDING).skip((skip_page) * item_on_a_page).limit(item_on_a_page):
             notation_as_client['_id'] = str(notation_as_client['_id'])
             notations_as_client.append(notation_as_client)
 
@@ -62,12 +63,14 @@ def getAllNotationAsRentertByUser(request, user_pk, id_page):
         nb_page = math.ceil(nb_item / item_on_a_page)
         notations_as_renter = []
 
-        # W
         if (id_page - 1) * 10 > nb_item:
             id_page = nb_page
-        print("id_page = ", id_page)
 
-        for notation_as_renter in db_locsapp["notations"].find({"id_target": int(user_pk), "as_renter": True}).sort("date_issued", DESCENDING).skip((id_page - 1) * item_on_a_page).limit(item_on_a_page):
+        skip_page = id_page - 1
+        if skip_page < 0:
+            skip_page = 0
+
+        for notation_as_renter in db_locsapp["notations"].find({"id_target": int(user_pk), "as_renter": True}).sort("date_issued", DESCENDING).skip((skip_page) * item_on_a_page).limit(item_on_a_page):
             notation_as_renter['_id'] = str(notation_as_renter['_id'])
             notations_as_renter.append(notation_as_renter)
 
