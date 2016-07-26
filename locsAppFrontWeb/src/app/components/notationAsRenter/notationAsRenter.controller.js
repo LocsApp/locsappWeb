@@ -7,7 +7,7 @@
     .controller('NotationAsRenterController', NotationAsRenterController);
 
   /** @ngInject */
-  function NotationAsRenterController(HistoryService, $stateParams, $log, $state) {
+  function NotationAsRenterController(HistoryService, $stateParams, $log) {
 
     var vm = this;
     var i;
@@ -21,6 +21,7 @@
 
     vm.GetNotationAsRenterSuccess = function (data) {
       $log.log("GetNotationAsRenterSuccess", data);
+       vm.animatePagination='';
       vm.notations = data.notations_as_renter;
 
       for (i = 0; i < vm.notations.length; i++) {
@@ -71,6 +72,8 @@
     };
 
     vm.goToPage = function (currentPage) {
+
+      vm.animatePagination='animate-pagination';
 
       HistoryService
         .getNotationsAsRenter
