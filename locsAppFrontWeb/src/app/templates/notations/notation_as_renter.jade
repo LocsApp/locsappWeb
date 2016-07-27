@@ -11,6 +11,14 @@ div(style="margin-top: 10px;" ng-cloak)
       ng-md-icon(icon="keyboard_arrow_right" ng-click='notationAsRenter.nextPage(notationAsRenter.current_page + 1)' ng-if="notationAsRenter.current_page != notationAsRenter.nb_page").arrow-next-page
   md-divider.flex
 
+
+  h1(flex-offset="10") As a renter
+    span(ng-repeat="value in profile.renter_score_array track by $index"
+    ng-if="profile.renter_notation.length != 0")
+      ng-md-icon(ng-if="value" icon="star" size="22")
+      ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
+    span(ng-if="profile.renter_notation.length != 0") ({{profile.nb_rotation_renter}})
+
   div.notation-as-renter(ng-class="notationAsRenter.animatePagination" ng-cloak)
     div.delimiter
     div.delimiter
@@ -32,7 +40,7 @@ div(style="margin-top: 10px;" ng-cloak)
                     p {{ notation.comment | limitTo: 30 }} {{notation.comment.length > 30 ? '...' : ''}}
             md-grid-tile-footer
               div(layout-fill layout="row" layout-align="center start" ng-if="notation.comment.length > 30 || notation.article_name.length > 10")
-                md-button.special-button.md-raised(ng-click="notationAsRenter.showNotationDialog($event);") Show more
+                md-button.special-button.md-raised(ng-click="notationAsRenter.showNotationDialog($event, notation);") Show more
   md-divider.flex
   div.search-article-toolbar
     md-toolbar(style="background-color:none" layout="row")

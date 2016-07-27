@@ -1,1 +1,13 @@
-<h1> Notation plpop lop </h1>
+<md-card layout-fill="layout-fill">
+  <md-card-content>
+    <md-list-item class="md-3-line"><img style="height:70px; width:auto;" ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg" alt="{{item.who}}" class="md-avatar"/>
+      <div layout="column" class="md-list-item-text">
+        <h4>{{ showNotation.notation.article_name }} </h4>
+        <div><span ng-repeat="value in showNotation.notation.score track by $index">
+            <ng-md-icon ng-if="value" icon="star" size="22"></ng-md-icon>
+            <ng-md-icon ng-if="!value" icon="star" style="fill:'grey'" size="22" class="grey"></ng-md-icon></span></div>
+        <p>{{ showNotation.notation.comment }}</p>
+      </div>
+    </md-list-item>
+  </md-card-content>
+</md-card>

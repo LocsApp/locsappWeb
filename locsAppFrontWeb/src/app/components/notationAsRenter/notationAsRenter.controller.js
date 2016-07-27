@@ -15,8 +15,11 @@
     vm.page_size = 10;
     vm.id_user = $stateParams.id_user;
 
+    //Average mark;
 
-    //$log.log("current_page = ", vm.current_page);
+    //On doit faire un get du profile utilisateur pour etre sur d'avoir le nombre d'etoile
+
+
 
 
     vm.GetNotationAsRenterSuccess = function (data) {
@@ -54,6 +57,7 @@
       .then(vm.GetNotationAsRenterSuccess, vm.getNotationAsRenterFailure);
 
     vm.prevPage = function (idPage) {
+      vm.animatePagination='animate-pagination';
       vm.current_page = idPage;
       HistoryService
         .getNotationsAsRenter
@@ -63,6 +67,7 @@
     };
 
     vm.nextPage = function (idPage) {
+      vm.animatePagination='animate-pagination';
       vm.current_page = idPage;
       HistoryService
         .getNotationsAsRenter
@@ -83,13 +88,13 @@
     };
 
       /** @ngInject */
-    vm.showNotationDialog = function (event) {
+    vm.showNotationDialog = function (event, notation) {
       $mdDialog.show({
         controller: vm.showNotationController,
         controllerAs: 'showNotation',
         templateUrl: 'app/templates/dialogTemplates/showOneNotation.tmpl.html',
         locals: {
-
+          notation: notation
         },
         bindToController: true,
         parent: angular.element($document.body),
@@ -99,8 +104,8 @@
     };
 
     /* ShowNotation controller */
-    vm.showNotationController = function($mdDialog) {
-
+    vm.showNotationController = function($mdDialog, notation) {
+        $log.log("notation = ", notation);
     }
 
   }
