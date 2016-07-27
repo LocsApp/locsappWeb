@@ -5,7 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from .serializers import UserDetailsSerializer
+from .serializers import UserPublicDetailsSerializer
 
 
 class getUserByUsername(APIView):
@@ -14,7 +14,7 @@ class getUserByUsername(APIView):
         try:
             User = get_user_model()
             current_user = User.objects.get(username=username)
-            serializer = UserDetailsSerializer(current_user)
+            serializer = UserPublicDetailsSerializer(current_user)
             dataSerialized = serializer.data
             return Response(dataSerialized)
         except ObjectDoesNotExist:

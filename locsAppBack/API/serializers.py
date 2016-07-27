@@ -28,6 +28,18 @@ class UserDetailsSerializer(serializers.ModelSerializer):
                             'last_activity_date', 'logo_url', 'is_active')
 
 
+class UserPublicDetailsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = get_user_model()
+
+        fields = (
+            'id', 'username', 'gender', 'birthdate', 'registered_date', 'last_activity_date', 'logo_url',
+            "is_active", "role", 'tenant_score', 'renter_score')
+        read_only_fields = ('id', 'username', 'gender', 'birthdate', 'registered_date', 'last_activity_date',
+                            'logo_url', "is_active", "role", 'tenant_score', 'renter_score')
+
+
 class PasswordChangeSerializer(serializers.Serializer):
     old_password = serializers.CharField(max_length=128)
     new_password1 = serializers.CharField(max_length=128)
