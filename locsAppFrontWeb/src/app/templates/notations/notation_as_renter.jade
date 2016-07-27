@@ -12,12 +12,13 @@ div(style="margin-top: 10px;" ng-cloak)
   md-divider.flex
 
 
-  h1(flex-offset="10") As a renter
-    span(ng-repeat="value in profile.renter_score_array track by $index"
-    ng-if="profile.renter_notation.length != 0")
-      ng-md-icon(ng-if="value" icon="star" size="22")
-      ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
-    span(ng-if="profile.renter_notation.length != 0") ({{profile.nb_rotation_renter}})
+  div(layout="row"  layout-align="center start")
+    h1(flex-offset="10") As a renter
+      span(ng-repeat="value in notationAsRenter.renter_score_array track by $index"
+      ng-if="notationAsRenter.renter_score_array != undefined")
+        ng-md-icon(ng-if="value" icon="star" size="22")
+        ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
+      span(ng-if="profile.renter_notation.length != 0") ({{notationAsRenter.username}}: {{notationAsRenter.nb_items}})
 
   div.notation-as-renter(ng-class="notationAsRenter.animatePagination" ng-cloak)
     div.delimiter

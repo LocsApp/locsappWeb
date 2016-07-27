@@ -13,11 +13,12 @@
     var i;
     vm.current_page = 1;
     vm.page_size = 10;
-    vm.id_user = $stateParams.id_user;
+    vm.username = $stateParams.id_user;
 
     //Average mark;
 
     //On doit faire un get du profile utilisateur pour etre sur d'avoir le nombre d'etoile
+
 
 
 
@@ -27,6 +28,22 @@
        vm.animatePagination='';
       vm.notations = data.notations_as_renter;
 
+
+      //We transform the average mark in bool array;
+        vm.renter_score_array = undefined;
+      if (data.average_mark != -1) {
+        var renter_score = Math.round(data.average_mark);
+        vm.renter_score_array = [];
+        for (i = 0; i < 5; i++) {
+          if (i < renter_score)
+            vm.renter_score_array.push(true);
+          else
+            vm.renter_score_array.push(false);
+        }
+      }
+      $log.log("vm score = ", vm.renter_score_array);
+
+    // We transfrom each mark in a bool array
       for (i = 0; i < vm.notations.length; i++) {
         var score_renter = Math.round(vm.notations[i].value);
         var score_array_renter = [];
