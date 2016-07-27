@@ -7,7 +7,7 @@
     .controller('NotationAsRenterController', NotationAsRenterController);
 
   /** @ngInject */
-  function NotationAsRenterController(HistoryService, $stateParams, $log) {
+  function NotationAsRenterController(HistoryService, $stateParams, $log, $mdDialog, $document) {
 
     var vm = this;
     var i;
@@ -80,6 +80,27 @@
         .get({id_user: $stateParams.id_user, id_page: currentPage})
         .$promise
         .then(vm.GetNotationAsRenterSuccess, vm.getNotationAsRenterFailure);
+    };
+
+      /** @ngInject */
+    vm.showNotationDialog = function (event) {
+      $mdDialog.show({
+        controller: vm.showNotationController,
+        controllerAs: 'showNotation',
+        templateUrl: 'app/templates/dialogTemplates/showOneNotation.tmpl.html',
+        locals: {
+
+        },
+        bindToController: true,
+        parent: angular.element($document.body),
+        targetEvent: event,
+        clickOutsideToClose: true
+      })
+    };
+
+    /* ShowNotation controller */
+    vm.showNotationController = function($mdDialog) {
+
     }
 
   }

@@ -1,0 +1,47 @@
+.notation-as-renter {
+
+  //display: none;
+
+  md-grid-tile-footer {
+    background: white;
+  }
+
+  figcaption {
+    width: 100%;
+  }
+
+
+}
+
+
+.notation-as-renter.ng-enter {
+   display: none;
+}
+
+.notation-as-renter.ng-enter.ng-enter-active {
+ display: none;
+}
+
+
+ .active-page {
+    	color: $onNumber;
+
+  }
+
+
+ .animate-pagination-add, .animate-pagination-remove {
+  transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+}
+
+.animate-pagination,
+.animate-pagination-add.animate-pagination-add-active {
+  -webkit-animation: fadeOut 1s 1;
+  -moz-animation:    fadeOut 1s 1;
+  animation:         fadeOut 1s 1;
+}
+
+.animate-pagination-remove.animate-pagination-remove-active {
+  -webkit-animation: fadeIn 1s 1;
+  -moz-animation:    fadeIn 1s 1;
+  animation:         fadeIn 1s 1;
+}
