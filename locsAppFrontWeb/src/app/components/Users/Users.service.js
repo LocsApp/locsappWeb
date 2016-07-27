@@ -29,6 +29,7 @@
       facebook_login: $resource(URL_API + 'api/v1/auth/facebook-login/'),
       articleFromUserProfile: $resource(URL_API + 'api/v1/articles/user-profile/:id/', {id: "id"}),
       firstFourNotation: $resource(URL_API + 'api/v1/history/notations-profile/:id/', {id: "id"}),
+      getPublicUser: $resource(URL_API + 'api/v1/user/:username/', {username: "username"}),
       uploadPicture: uploadPicture,
       is_authenticated: is_authenticated
     };

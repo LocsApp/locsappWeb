@@ -92,11 +92,11 @@
         }
       })
       .state('main.public_user_profile', {
-        url: 'public_profile',
+        url: 'profile/:username/',
         parent: 'main',
         controller: 'PublicProfileController',
         controllerAs: 'publicProfile',
-        templateUrl: 'app/templates/userProfile/public_user_profile.html',
+        templateUrl: 'app/templates/publicUserProfile/public_user_profile.html',
         data: {
           permissions: {
             only: ['guest', 'user'],

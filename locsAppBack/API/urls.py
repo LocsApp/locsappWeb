@@ -9,6 +9,7 @@ from social_network import views as social_network_views
 from . import favorites
 from . import questions
 from . import notations
+from . import users
 
 """
 @apiDefine UserObjectRegisterDefine
@@ -101,6 +102,7 @@ user_patterns = [
     url(r'^image-upload-avatar/$',
         views.ImageAvatarUploadView.as_view(),
         name='image-upload-avatar'),
+    url(r'^(?P<username>\w+)/$', users.getUserByUsername.as_view()),
 ]
 
 # Static collections urls
