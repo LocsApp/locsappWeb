@@ -330,7 +330,7 @@
       })
 
       .state('main.notation_as_renter', {
-        url: 'notation-as-renter/:id_user/',
+        url: 'notation-as-renter/:username/',
         parent: 'main',
         templateUrl: 'app/templates/notations/notation_as_renter.html',
         controller: 'NotationAsRenterController',
@@ -338,7 +338,7 @@
       })
 
        .state('main.notation_as_client', {
-        url: 'notation-as-client/:id_user/',
+        url: 'notation-as-client/:username/',
         parent: 'main',
         templateUrl: 'app/templates/notations/notation_as_client.html',
         controller: 'NotationAsClientController',

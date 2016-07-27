@@ -13,7 +13,7 @@
     var i;
     vm.current_page = 1;
     vm.page_size = 10;
-    vm.username = $stateParams.id_user;
+    vm.username = $stateParams.username;
 
     //Average mark;
 
@@ -69,7 +69,7 @@
 
     HistoryService
       .getNotationsAsRenter
-      .get({id_user: $stateParams.id_user, id_page: vm.current_page})
+      .get({id_user: $stateParams.username, id_page: vm.current_page})
       .$promise
       .then(vm.GetNotationAsRenterSuccess, vm.getNotationAsRenterFailure);
 
@@ -78,7 +78,7 @@
       vm.current_page = idPage;
       HistoryService
         .getNotationsAsRenter
-        .get({id_user: $stateParams.id_user, id_page: idPage})
+        .get({id_user: $stateParams.username, id_page: idPage})
         .$promise
         .then(vm.GetNotationAsRenterSuccess, vm.getNotationAsRenterFailure);
     };
@@ -88,7 +88,7 @@
       vm.current_page = idPage;
       HistoryService
         .getNotationsAsRenter
-        .get({id_user: $stateParams.id_user, id_page: idPage})
+        .get({id_user: $stateParams.username, id_page: idPage})
         .$promise
         .then(vm.GetNotationAsRenterSuccess, vm.getNotationAsRenterFailure);
     };
@@ -99,7 +99,7 @@
 
       HistoryService
         .getNotationsAsRenter
-        .get({id_user: $stateParams.id_user, id_page: currentPage})
+        .get({id_user: $stateParams.username, id_page: currentPage})
         .$promise
         .then(vm.GetNotationAsRenterSuccess, vm.getNotationAsRenterFailure);
     };
