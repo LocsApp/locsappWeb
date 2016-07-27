@@ -1,7 +1,7 @@
 div(style="margin-top: 10px;" ng-cloak)
 
   md-divider.flex
-  div.search-article-toolbar
+  div.search-article-toolbar(ng-if="notationAsRenter.renter_score_array != undefined")
     md-toolbar(style="background-color:none" layout="row")
       span.flex
       ng-md-icon(icon="keyboard_arrow_left" ng-click='notationAsRenter.prevPage(notationAsRenter.current_page - 1)' ng-if="notationAsRenter.current_page != 1").arrow-previous-page
@@ -12,13 +12,17 @@ div(style="margin-top: 10px;" ng-cloak)
   md-divider.flex
 
 
-  div(layout="row"  layout-align="center start")
+  div(layout="row"  layout-align="center start" ng-if="notationAsRenter.renter_score_array != undefined")
     h1(flex-offset="10") As a renter
       span(ng-repeat="value in notationAsRenter.renter_score_array track by $index"
-      ng-if="notationAsRenter.renter_score_array != undefined")
+      )
         ng-md-icon(ng-if="value" icon="star" size="22")
         ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
-      span(ng-if="profile.renter_notation.length != 0") ({{notationAsRenter.username}}: {{notationAsRenter.nb_items}})
+      span ({{notationAsRenter.username}}: {{notationAsRenter.nb_items}})
+
+  div(layout="row"  layout-align="center start")
+    div(ng-if="notationAsRenter.renter_score_array == undefined")
+      h1 {{notationAsRenter.username}} has no notation as a renter
 
   div.notation-as-renter(ng-class="notationAsRenter.animatePagination" ng-cloak)
     div.delimiter
@@ -42,8 +46,8 @@ div(style="margin-top: 10px;" ng-cloak)
             md-grid-tile-footer
               div(layout-fill layout="row" layout-align="center start" ng-if="notation.comment.length > 30 || notation.article_name.length > 10")
                 md-button.special-button.md-raised(ng-click="notationAsRenter.showNotationDialog($event, notation);") Show more
-  md-divider.flex
-  div.search-article-toolbar
+  md-divider.flex()
+  div.search-article-toolbar(ng-if="notationAsRenter.renter_score_array != undefined")
     md-toolbar(style="background-color:none" layout="row")
       span.flex
       ng-md-icon(icon="keyboard_arrow_left" ng-click='notationAsRenter.prevPage(notationAsRenter.current_page - 1)' ng-if="notationAsRenter.current_page != 1").arrow-previous-page
