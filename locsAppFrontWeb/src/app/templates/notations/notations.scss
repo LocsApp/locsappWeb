@@ -1,4 +1,4 @@
-.notation-as-renter {
+.notation-as-renter, .notation-as-client{
 
   //display: none;
 
@@ -11,15 +11,6 @@
   }
 
 
-}
-
-
-.notation-as-renter.ng-enter {
-   display: none;
-}
-
-.notation-as-renter.ng-enter.ng-enter-active {
- display: none;
 }
 
 

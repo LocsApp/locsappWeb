@@ -338,7 +338,7 @@
       })
 
        .state('main.notation_as_client', {
-        url: 'notation-as-client/:id_user/:id_page/',
+        url: 'notation-as-client/:id_user/',
         parent: 'main',
         templateUrl: 'app/templates/notations/notation_as_client.html',
         controller: 'NotationAsClientController',
