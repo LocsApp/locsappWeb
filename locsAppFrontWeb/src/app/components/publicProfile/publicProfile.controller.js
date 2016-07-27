@@ -6,7 +6,8 @@
     .controller('PublicProfileController', PublicProfileController);
 
   /** @ngInject */
-  function PublicProfileController($scope, $log, UsersService, ScopesService, $state, toastr) {
+  function PublicProfileController($scope, $log, UsersService, ScopesService, $state, toastr,
+  $stateParams) {
     var vm = this;
 
     /*vars initilization*/
@@ -37,8 +38,8 @@
 
     /*vm.user initializer*/
     UsersService
-      .profile_check
-      .get({})
+      .getPublicUser
+      .get({username: $stateParams.username})
       .$promise
       .then(vm.GetInfosUserSuccess, vm.GetInfosUserFailure);
   }
