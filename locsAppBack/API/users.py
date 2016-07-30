@@ -54,9 +54,6 @@ class getUserByUsername(APIView):
                 {"message": "username does not exist"}, status=404)
 
 
-
-
-@permission_classes((IsAuthenticated,))
 class getUserByUsernameLongLat(APIView):
     def get(self, request, username, lat, long):
         try:
@@ -68,7 +65,7 @@ class getUserByUsernameLongLat(APIView):
             distance = ""
             gmaps = googlemaps.Client(key='AIzaSyDuJ5jMvOb0ZqIlksGC4VKSrJMi1OJXQLA')
             # We get the long lat from the the current user (it's for the web)
-            if request.user.is_anonymous() or consulting_user.living_address is None \
+            if consulting_user.living_address is None \
                     or consulting_user.living_address is not None and len(consulting_user.living_address) == 0:
                 distance = "Unknown"
             else:
