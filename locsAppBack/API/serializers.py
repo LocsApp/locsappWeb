@@ -29,15 +29,16 @@ class UserDetailsSerializer(serializers.ModelSerializer):
 
 
 class UserPublicDetailsSerializer(serializers.ModelSerializer):
+    distance = serializers.ReadOnlyField()
 
     class Meta:
         model = get_user_model()
 
         fields = (
             'id', 'username', 'gender', 'birthdate', 'registered_date', 'last_activity_date', 'logo_url',
-            "is_active", "role", 'tenant_score', 'renter_score')
+            "is_active", "role", 'tenant_score', 'renter_score', 'distance')
         read_only_fields = ('id', 'username', 'gender', 'birthdate', 'registered_date', 'last_activity_date',
-                            'logo_url', "is_active", "role", 'tenant_score', 'renter_score')
+                            'logo_url', "is_active", "role", 'tenant_score', 'renter_score', 'distance')
 
 
 class PasswordChangeSerializer(serializers.Serializer):

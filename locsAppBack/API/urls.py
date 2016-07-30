@@ -103,6 +103,8 @@ user_patterns = [
         views.ImageAvatarUploadView.as_view(),
         name='image-upload-avatar'),
     url(r'^(?P<username>\w+)/$', users.getUserByUsername.as_view()),
+    url(r'^(?P<username>\w+)/(?P<lat>-?\d+\.\d+)/(?P<long>-?\d+\.\d+)/$', users.getUserByUsernameLongLat.as_view()),
+
 ]
 
 # Static collections urls
