@@ -17,7 +17,7 @@ div(style="margin-top: 10px;" ng-cloak)
       span(ng-repeat="value in notationAsClient.client_score_array track by $index"
       )
         ng-md-icon(ng-if="value" icon="star" size="22")
-        ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
+        ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
       span ({{notationAsClient.username}}: {{notationAsClient.nb_items}})
 
   div(layout="row"  layout-align="center start")
@@ -41,7 +41,7 @@ div(style="margin-top: 10px;" ng-cloak)
                     div
                       span(ng-repeat="value in notation.score track by $index")
                         ng-md-icon(ng-if="value" icon="star" size="22")
-                        ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
+                        ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
                     p {{ notation.comment | limitTo: 30 }} {{notation.comment.length > 30 ? '...' : ''}}
             md-grid-tile-footer
               div(layout-fill layout="row" layout-align="center start" ng-if="notation.comment.length > 30 || notation.article_name.length > 10")
