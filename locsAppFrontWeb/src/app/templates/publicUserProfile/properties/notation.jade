@@ -9,7 +9,7 @@ md-card
       span(ng-repeat="value in publicProfile.public_user.renter_score_array track by $index"
       ng-if="publicProfile.public_user.renter_notation.length != 0")
         ng-md-icon(ng-if="value" icon="star" size="22")
-        ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
+        ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
       span(ng-if="publicProfile.public_user.renter_notation.length != 0") ({{publicProfile.public_user.nb_rotation_renter}})
     p.t-center(ng-if="publicProfile.public_user.renter_notation.length == 0").
       {{publicProfile.public_user.username}} has no notation as a renter
@@ -22,7 +22,7 @@ md-card
           div
             span(ng-repeat="value in notation.score track by $index")
               ng-md-icon(ng-if="value" icon="star" size="22")
-              ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
+              ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
           p {{ notation.comment | limitTo: 30 }} {{notation.comment.length > 30 ? '...' : ''}}
     md-divider(flex-offset="10" flex="80" ng-show="publicProfile.public_user.nb_rotation_renter <= 2")
     md-list.my-layout-xs(flex-offset="10" layout="row")
@@ -34,7 +34,7 @@ md-card
           div
             span(ng-repeat="value in notation.score track by $index")
               ng-md-icon(ng-if="value" icon="star" size="22")
-              ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
+              ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
           p {{ notation.comment | limitTo: 30 }} {{notation.description.comment > 30 ? '...' : ''}}
 
     div(flex-offset="10" ng-if="publicProfile.public_user.nb_rotation_renter > 2")
@@ -45,7 +45,7 @@ md-card
       span(ng-repeat="value in publicProfile.public_user.client_score_array track by $index"
       ng-if="publicProfile.public_user.client_notation.length != 0")
         ng-md-icon(ng-if="value" icon="star" size="22")
-        ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
+        ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
       span(ng-if="publicProfile.public_user.client_notation.length != 0") ({{publicProfile.public_user.nb_notation_client}})
     p.t-center(ng-if="publicProfile.public_user.client_notation.length == 0") {{publicProfile.public_user.username}} has no notation as a client
     md-list.my-layout-xs(flex-offset="10" layout="row")
@@ -57,7 +57,7 @@ md-card
           div
             span(ng-repeat="value in notation.score track by $index")
               ng-md-icon(ng-if="value" icon="star" size="22")
-              ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
+              ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
           p {{ notation.comment | limitTo: 30 }} {{notation.comment.length > 30 ? '...' : ''}}
     md-list.my-layout-xs(flex-offset="10" layout="row")
       md-list-item.md-3-line(ng-repeat="notation in publicProfile.public_user.client_notation track by $index"
@@ -68,7 +68,7 @@ md-card
           div
             span(ng-repeat="value in notation.score track by $index")
               ng-md-icon(ng-if="value" icon="star" size="22")
-              ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
+              ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
           p {{ notation.comment | limitTo: 30 }} {{notation.comment.length > 30 ? '...' : ''}}
 
 
