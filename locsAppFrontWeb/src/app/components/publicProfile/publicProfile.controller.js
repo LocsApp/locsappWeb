@@ -7,33 +7,13 @@
 
   /** @ngInject */
   function PublicProfileController($scope, $log, UsersService, ScopesService, $state, toastr, URL_API,
-                                   $stateParams, $http) {
+                                   $stateParams) {
     var vm = this;
 
     /*vars initilization*/
     vm.public_user = {};
     vm.url_api = URL_API;
     var i;
-
-
-
-    function onPositionUpdate(position) {
-      var lat = position.coords.latitude;
-      var lng = position.coords.longitude;
-
-      $log.log("lat = ", lat);
-      $log.log("long = ", lng);
-
-      /*    $http.get(url)
-        .then(function(result) {
-            var address = result.data.results[2].formatted_address;
-            $scope.address = address;
-        });*/
-    }
-
-        if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
-
-
 
     vm.firstFourNotationSuccess = function (data) {
       $log.log("firstFourNotationSuccess ", data);
