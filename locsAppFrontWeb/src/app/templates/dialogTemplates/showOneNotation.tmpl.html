@@ -5,7 +5,7 @@
         <h4>{{ showNotation.notation.article_name }} </h4>
         <div><span ng-repeat="value in showNotation.notation.score track by $index">
             <ng-md-icon ng-if="value" icon="star" size="22"></ng-md-icon>
-            <ng-md-icon ng-if="!value" icon="star" style="fill:grey" size="22" class="grey"></ng-md-icon></span></div>
+            <ng-md-icon ng-if="!value" icon="star" style="fill:'grey'" size="22" class="grey"></ng-md-icon></span></div>
         <p>{{ showNotation.notation.comment }}</p>
       </div>
     </md-list-item>
