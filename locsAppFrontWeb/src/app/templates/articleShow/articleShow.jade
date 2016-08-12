@@ -104,18 +104,16 @@ div.article-show(layout="row" layout-align="center")
                 span
                   ng-md-icon(icon="facebook"
                   href="#" socialshare socialshare-provider="facebook"
-                  socialshare-url="{{articleShow.url_api}}article/{{aticleShow._id}}"
+                  socialshare-url="{{articleShow.url_api}}article/{{articleShow.article._id}}"
                   socialshare-text="LocsApp - {{articleShow.article.title}}"
                   socialshare-description="{{articleShow.article.description}}"
                   socialshare-media="{{articleShow.url_api}}{{articleShow.url_thumbnail}}"
-                  socialshare-type="feed" socialshare-via="dialog"
+                  socialshare-type="feed" socialshare-via="locsapp"
                   socialshare-display="popup")
                   ng-md-icon(icon="twitter" href="#" socialshare socialshare-provider="twitter"
-                  socialshare-url="http://localhost:3000/article/572c5c64fbbe6158bf447728"
+                  socialshare-url="{{articleShow.url_api}}article/{{articleShow.article._id}}"
                   socialshare-text="Look what I found on LocsApp"
-                  socialshare-popup-height="800"
-                  socialshare-popup-width="800"
-                  socialshare-via="dialog"
+                  socialshare-via="locsapp"
                   socialshare-display="popup")
 
             div.details
