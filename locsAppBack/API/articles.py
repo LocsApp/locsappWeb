@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMessage
 from django.conf import settings
+from .utility import Utility
 
 
 from dateutil.parser import parse
@@ -699,11 +700,12 @@ def getArticle(request, article_pk):
         article = APIrequests.parseObjectIdToStr(article)
         global_mark_as_renter = get_user_model().objects.get(pk=article["id_author"]).renter_score
         nb_mark_as_renter = db_locsapp["notations"].count({"id_target": int(article["id_author"]), "as_renter": True})
+
         is_in_favorite = False
-        print(" anonymous ", request.user.is_anonymous(), request.user)
-        if request.user.is_authenticated(): #and db_locsapp["favorite_article"].find_one({"id_user": request.user.pk}):
-            print("user is authenticated")
+        user = Utility.checkUserAuthenticated(request)
+        if user is not False and db_locsapp["favorite_article"].find_one({"id_user": user.pk, "id_article": article_pk}):
             is_in_favorite = True
+
         return JsonResponse({"article": article, "global_mark_as_renter": global_mark_as_renter,
                              "nb_mark_as_renter": nb_mark_as_renter, "is_in_favorite": is_in_favorite})
         # return APIrequests.GET('articles', id=article_pk)
