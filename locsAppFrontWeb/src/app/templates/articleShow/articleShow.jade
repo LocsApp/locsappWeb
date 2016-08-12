@@ -102,13 +102,19 @@ div.article-show(layout="row" layout-align="center")
                 ng-md-icon(icon="share")
                 span.bottom-right-md-card Share it
                 span
-                  a(href="#" socialshare socialshare-provider="facebook"
+                  ng-md-icon(icon="facebook"
+                  href="#" socialshare socialshare-provider="facebook"
                   socialshare-url="http://localhost:3000/article/572c5c64fbbe6158bf447728"
-                  socialshare-text="headlines" socialshare-description="description"
+                  socialshare-text="LocsApp" socialshare-description="description"
                   socialshare-media="http://127.0.0.1:8000/media/articles/c6a1d210906944e294a81519cd67e6f0"
-                  socialshare-type="feed" socialshare-via="1011661268854723")  SHARE ME
-                  ng-md-icon(icon="facebook")
-                  ng-md-icon(icon="twitter")
+                  socialshare-type="feed" socialshare-via="1011661268854723"
+                  socialshare-display="popup")
+                  ng-md-icon(icon="twitter" href="#" socialshare socialshare-provider="twitter"
+                  socialshare-url="http://localhost:3000/article/572c5c64fbbe6158bf447728"
+                  socialshare-text="Look what I found on LocsApp"
+                  socialshare-popup-height="800"
+                  socialshare-popup-width="800"
+                  socialshare-display="popup")
 
             div.details
               span
