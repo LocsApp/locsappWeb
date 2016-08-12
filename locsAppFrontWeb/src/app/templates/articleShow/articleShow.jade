@@ -6,7 +6,7 @@ div.article-show(layout="row" layout-align="center")
         h1 {{articleShow.article.title}}
         br
         div.subtitle(layout="row")
-          h2 By <a href="/profile/{{articleShow.username_author}}/"> {{articleShow.username_author}} </a>
+          h2 By <a href="/profile/{{articleShow.article.username_author}}/"> {{articleShow.article.username_author}} </a>
           span
             ng-md-icon(icon="star" size="22")
             ng-md-icon(icon="star" size="22")

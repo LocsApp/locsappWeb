@@ -43,10 +43,13 @@
       vm.global_mark = data.global_mark_as_renter;
       vm.nb_mark = data.nb_mark_as_renter;
       $log.log("GetInfoArticleSuccess = ", data);
-      $log.log("get infoi = ", data.article.username);
+      //$log.log("get infoi = ", data.article.username_author);
 
       /* For Debug since the username is mising in the fixtures */
-
+      if (vm.article.username_author == undefined) {
+        vm.article.username_author = 'debug username';
+      }
+      $log.log("get infoi = ", vm.article.username_author);
 
       /* find the name using the id fixtures */
       vm.name_gender = vm.genders[vm.genders.map(function (x) {
