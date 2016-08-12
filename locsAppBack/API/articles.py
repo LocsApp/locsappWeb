@@ -689,7 +689,14 @@ def articleAlone(request, article_pk):
 @csrf_exempt
 def getArticle(request, article_pk):
     if request.method == "GET":
-        return APIrequests.GET('articles', id=article_pk)
+        # We also need to send the global mark of the user and the nb of notation as a renter
+        article = db_locsapp["articles"].find_one({"_id": ObjectId(article_pk)})
+        article = APIrequests.parseObjectIdToStr(article)
+        global_mark_as_renter = get_user_model().objects.get(pk=article["id_author"]).renter_score
+        nb_mark_as_renter = db_locsapp["notations"].count({"id_target": int(article["id_author"]), "as_renter": True})
+        return JsonResponse({"article": article, "global_mark_as_renter": global_mark_as_renter,
+                             "nb_mark_as_renter": nb_mark_as_renter})
+        # return APIrequests.GET('articles', id=article_pk)
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
