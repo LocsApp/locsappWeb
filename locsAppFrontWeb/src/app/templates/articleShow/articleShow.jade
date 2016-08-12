@@ -3,7 +3,7 @@ div.article-show(layout="row" layout-align="center")
 
     div(layout="row" layout-align="center")
       div
-        h1 {{articleShow.data.title}}
+        h1 {{articleShow.article.title}}
         br
         div.subtitle(layout="row")
           h2 By <a href="/profile/{{articleShow.username_author}}/"> {{articleShow.username_author}} </a>
@@ -34,7 +34,7 @@ div.article-show(layout="row" layout-align="center")
 
           div.block-properties(layout="row")
             div.name-properties(flex="50") Price
-            div.t-right(flex="50") {{articleShow.data.price}}$/day
+            div.t-right(flex="50") {{articleShow.article.price}}$/day
           md-divider
           div.block-properties(layout="row")
             div.name-properties(flex="50") Payment
@@ -96,7 +96,7 @@ div.article-show(layout="row" layout-align="center")
             div.details
               span
                 a(href='#')
-                  ng-md-icon(icon="favorite" ng-click="articleShow.addArticleToFavorite(articleShow.data._id)")
+                  ng-md-icon(icon="favorite" ng-click="articleShow.addArticleToFavorite(articleShow.article._id)")
                   span.bottom-right-md-card Add to your favorites
             div.details
               span
@@ -131,7 +131,7 @@ div.article-show(layout="row" layout-align="center")
     div(layout="row" layout-align="center")
       md-card(flex="100")
         md-card-content
-          div.description(ng-bind-html='articleShow.data.description')
+          div.description(ng-bind-html='articleShow.article.description')
 
 
 
