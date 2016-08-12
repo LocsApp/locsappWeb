@@ -42,6 +42,7 @@
       vm.article = data.article;
       vm.global_mark = data.global_mark_as_renter;
       vm.nb_mark = data.nb_mark_as_renter;
+      vm.is_in_favorite = data.is_in_favorite;
       $log.log("GetInfoArticleSuccess = ", data);
       //$log.log("get infoi = ", data.article.username_author);
 
