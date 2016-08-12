@@ -395,8 +395,10 @@
 
     vm.addArticleToFavoriteSuccess = function (data) {
       toastr.success("This article has been added to your favorite", "Success!");
-      $state.go($state.$current, null, {reload: true});
+      //$state.go($state.$current, null, {reload: true});
+
       $log.log("addArticleToFavoriteSuccess = ", data);
+      vm.is_in_favorite = !vm.is_in_favorite;
     };
 
     vm.addArticleToFavoriteError = function (data) {
@@ -417,6 +419,7 @@
      vm.deleteArticleFavoriteSuccess = function (data) {
       $log.log("deleteArticleFavoriteSuccess", data);
       toastr.success("This article has been deleted from your favorite", "Success!");
+       vm.is_in_favorite = !vm.is_in_favorite;
     };
 
     vm.deleteArticleFavoriteError = function (data) {

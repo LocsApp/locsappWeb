@@ -93,9 +93,10 @@ div.article-show(layout="row" layout-align="center")
             div.details
               span
                 a(href='#')
-                  ng-md-icon(icon="favorite_border" ng-if='!articleShow.is_in_favorite' ng-click="articleShow.addArticleToFavorite(articleShow.article._id)")
-                  ng-md-icon(icon="favorite" ng-if='articleShow.is_in_favorite' ng-click="articleShow.deleteArticleFavorite (articleShow.article._id)")
-                  span(ng-click="articleShow.addArticleToFavorite(articleShow.article._id)").bottom-right-md-card Add to your favorites
+                  ng-md-icon(icon="favorite_border" ng-hide='articleShow.is_in_favorite' ng-click="articleShow.addArticleToFavorite(articleShow.article._id)")
+                  ng-md-icon(icon="favorite" ng-hide='!articleShow.is_in_favorite' ng-click="articleShow.deleteArticleFavorite (articleShow.article._id)")
+                  span(ng-hide='articleShow.is_in_favorite' ng-click="articleShow.addArticleToFavorite(articleShow.article._id)").bottom-right-md-card Add to your favorites
+                  span(ng-hide='!articleShow.is_in_favorite' ng-click="articleShow.deleteArticleFavorite (articleShow.article._id)").bottom-right-md-card Delete from your favorites
             div.details
               span
                 ng-md-icon(icon="share")
