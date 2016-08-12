@@ -7,13 +7,14 @@ div.article-show(layout="row" layout-align="center")
         br
         div.subtitle(layout="row")
           h2 By <a href="/profile/{{articleShow.article.username_author}}/"> {{articleShow.article.username_author}} </a>
-          span
-            ng-md-icon(icon="star" size="22")
-            ng-md-icon(icon="star" size="22")
-            ng-md-icon(icon="star" size="22")
-            ng-md-icon(icon="star" size="22")
-            ng-md-icon(icon="star" size="22")
-            span ({{articleShow.nb_mark}})
+          span(ng-repeat='star in articleShow.global_mark_array track by $index')
+            ng-md-icon(ng-if="star" icon="star" size="22")
+            ng-md-icon(ng-if="!star" icon="star" size="22" style="fill:grey")
+            //ng-md-icon(icon="star" size="22")
+            //ng-md-icon(icon="star" size="22")
+            //ng-md-icon(icon="star" size="22")
+            //ng-md-icon(icon="star" size="22")
+          span ({{articleShow.nb_mark}})
 
 
 

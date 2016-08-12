@@ -49,7 +49,19 @@
       if (vm.article.username_author == undefined) {
         vm.article.username_author = 'debug username';
       }
-      $log.log("get infoi = ", vm.article.username_author);
+      //$log.log("get infoi = ", vm.article.username_author);
+
+      /* For the global notation */
+      var global_mark = Math.round(vm.global_mark);
+      var global_mark_array = [];
+      for (i = 0; i < 5; i++) {
+        if (i < global_mark)
+          global_mark_array.push(true);
+        else
+          global_mark_array.push(false);
+      }
+      vm.global_mark_array = global_mark_array;
+      $log.log("global mark array ", vm.global_mark_array);
 
       /* find the name using the id fixtures */
       vm.name_gender = vm.genders[vm.genders.map(function (x) {
