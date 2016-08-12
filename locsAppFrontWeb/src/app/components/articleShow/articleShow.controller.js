@@ -40,7 +40,13 @@
 
     vm.GetInfoArticleSuccess = function (data) {
       vm.article = data.article;
+      vm.global_mark = data.global_mark_as_renter;
+      vm.nb_mark = data.nb_mark_as_renter;
       $log.log("GetInfoArticleSuccess = ", data);
+      $log.log("get infoi = ", data.article.username);
+
+      /* For Debug since the username is mising in the fixtures */
+
 
       /* find the name using the id fixtures */
       vm.name_gender = vm.genders[vm.genders.map(function (x) {

@@ -518,6 +518,11 @@ def postNewArticle(request):
             "_default": request.user.pk,
             "_protected": True
         },
+        "username_author": {
+            "_type": str,
+            "_default": request.user.username,
+            "_protected": True
+        },
         "url_thumbnail": {
             "_type": str,
             "_default": "media/articles/default.jpg",
