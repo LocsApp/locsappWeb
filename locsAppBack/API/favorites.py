@@ -33,8 +33,8 @@ def deleteFavoriteArticle(request):
 
 		# We get the article from the db
 
-		favorite_article = db_locsapp["favorite_article"].find_one({"_id": ObjectId(body[
-			                                                                       'id_favorite_article']), "id_user": request.user.pk})
+		favorite_article = db_locsapp["favorite_article"].find_one({"id_article": body[
+			                                                                       'id_favorite_article'], "id_user": request.user.pk})
 		if favorite_article:
 			db_locsapp["favorite_article"].delete_one({'_id': ObjectId(favorite_article[
 				                                                           '_id'])})

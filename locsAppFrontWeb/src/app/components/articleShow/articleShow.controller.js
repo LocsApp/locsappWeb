@@ -412,7 +412,30 @@
         })
         .$promise
         .then(vm.addArticleToFavoriteSuccess, vm.addArticleToFavoriteError)
-    }
+    };
+
+     vm.deleteArticleFavoriteSuccess = function (data) {
+      $log.log("deleteArticleFavoriteSuccess", data);
+      toastr.success("This article has been deleted from your favorite", "Success!");
+    };
+
+    vm.deleteArticleFavoriteError = function (data) {
+      $log.error("deleteArticleFavoriteError", data);
+      toastr.error("There was a problem deleted this article", "Error!");
+    };
+
+    vm.deleteArticleFavorite = function (idArticle) {
+
+      $log.log("idFavoriteArticle = ", idArticle);
+
+      ArticleService
+        .deleteArticlesFavorite
+        .save({
+          "id_favorite_article": idArticle
+        })
+        .$promise
+        .then(vm.deleteArticleFavoriteSuccess, vm.deleteArticleFavoriteError)
+    };
 
 
   }
