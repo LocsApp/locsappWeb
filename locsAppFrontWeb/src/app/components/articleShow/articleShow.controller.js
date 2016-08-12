@@ -39,7 +39,7 @@
 
 
     vm.GetInfoArticleSuccess = function (data) {
-      vm.data = data;
+      vm.data = data.article;
       $log.log("GetInfoArticleSuccess = ", data);
 
       /* find the name using the id fixtures */
