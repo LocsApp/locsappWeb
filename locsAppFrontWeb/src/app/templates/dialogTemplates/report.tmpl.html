@@ -16,7 +16,7 @@
       <form name="reportForm" novalidate="novalidate" ng-submit="reportDialog.$valid && reportDialog.submit()"
             flex-xs="100" flex-sm="80" flex-md="60" flex="50">
 
-        <md-input-container style="margin-right: 10px;">
+        <md-input-container style="margin-right: 10px;" flex="100">
           <label>Size</label>
           <md-select ng-model="size">
             <md-option ng-repeat="size in reportDialog.sizes" value="{{size}}">{{size}}</md-option>
@@ -25,7 +25,7 @@
 
         <md-input-container class="md-icon-float md-block">
           <input placeholder="First Name" required="required" name="first_name" ng-model="reportDialog.first_name" maxlength="20"
-                 minlength="3"/>
+                 minlength="3">
           <div ng-messages="reportForm.first_name.$error" ng-if="!reportForm.first_name.$pristine">
             <div ng-message="required">This is required.</div>
             <div ng-message="minlength">The first name must be longer than 3 characters.</div>
@@ -43,9 +43,11 @@
           </div>
         </md-input-container>
 
+        <!-- Just put the email in disable if already logged in cos we are sure this one is present -->
         <md-input-container class="md-icon-float md-block">
           <input placeholder="Email" type="email" minlength="8" maxlength="100" required="required" name="email"
-                 ng-model="reportDialog.email" ng-pattern="/^.+@.+..+$/" class="body-register-container-md"/>
+                 ng-model="reportDialog.email" ng-pattern="/^.+@.+..+$/" class="body-register-container-md"
+            ng-disabled="reportDialog.user_logged_in">
           <div ng-messages="reportForm.email.$error" ng-if="!reportForm.email.$pristine">
             <div ng-message="required">This is required.</div>
             <div ng-message="minlength">The email must be longer than 8 characters.</div>

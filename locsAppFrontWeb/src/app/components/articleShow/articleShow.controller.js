@@ -470,6 +470,18 @@
     vm.reportDialogController = function($mdDialog) {
 
       var vm = this;
+      vm.user_logged_in = false;
+      var current_user = ScopesService.get("current_user");
+
+      if (current_user) {
+        vm.first_name = current_user.first_name;
+        vm.last_name = current_user.last_name;
+        vm.email = current_user.email;
+        vm.user_logged_in = true;
+        // We also need to block the edition of these three fields
+      }
+
+        /* We need to use static collection for this */
         vm.sizes = [
           "small (12-inch)",
           "medium (14-inch)",
