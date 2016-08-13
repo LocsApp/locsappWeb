@@ -8,11 +8,13 @@
 
   /** @ngInject */
   function LoginDialogController($log, UsersService, $scope, $localStorage, $sessionStorage, $state, toastr,
-  ScopesService, message, redirect_url, $mdDialog) {
+  ScopesService, message, name_state_to_redirect, params_value_state, params_key_state, $mdDialog) {
 
     var vm = this;
     vm.message = message;
-    vm.redirect_url = redirect_url;
+    vm.name_state_to_redirect = name_state_to_redirect;
+    vm.params_value_state = params_value_state;
+    vm.params_key_state = params_key_state;
 
      /*Log in the user*/
     vm.submit = function () {
@@ -29,10 +31,16 @@
         $localStorage.id = data["id"];
       else
         $sessionStorage.id = data["id"];
-      $state.go("main.homepage");
+
+      var obj = {};
+      obj[vm.params_key_state] = vm.params_value_state;
+      $state.go(vm.name_state_to_redirect, obj);
+
       $localStorage.current_user = data;
       $log.log($localStorage);
       ScopesService.set("current_user", data);
+
+      toastr.success("You are logged into LocsApp", "Success");
       $mdDialog.hide();
     };
 

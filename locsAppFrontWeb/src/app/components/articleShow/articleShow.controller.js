@@ -456,7 +456,9 @@
         controllerAs: 'loginDialog',
         templateUrl: 'app/templates/dialogTemplates/login.tmpl.html',
         locals: {
-          redirect_url: "http://locsapp.sylflo.fr/",
+          name_state_to_redirect: "main.articleShow",
+          params_value_state: $stateParams.id,
+          params_key_state: "id",
           message: "You need to log in to add an article to your favorites"
         },
         bindToController: true,
