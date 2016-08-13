@@ -456,7 +456,8 @@
         controllerAs: 'loginDialog',
         templateUrl: 'app/templates/dialogTemplates/login.tmpl.html',
         locals: {
-          redirect_url: "http://locsapp.sylflo.fr/"
+          redirect_url: "http://locsapp.sylflo.fr/",
+          message: "You need to log in to add an article to your favorites"
         },
         bindToController: true,
         parent: angular.element($document.body),

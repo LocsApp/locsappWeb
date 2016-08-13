@@ -2,9 +2,19 @@
 <div layout="column" layout-align="center" class="login login-modal">
       <div layout="row" layout-align="center">
         <h1>Login</h1>
+
       </div>
+
+      <div layout="row" layout-align="center">
+        <p>
+          {{loginDialog.message}} <br>
+          <span class="register">Don't have an account ? Click <a href="" ng-click="loginDialog.goToRegister()"> here</a> to register</span>
+        </p>
+      </div>
+
+
       <div layout="row" layout-align="center" class="login-body">
-        <form name="loginForm" novalidate="novalidate" ng-submit="loginForm.$valid &amp;&amp; login.submit()" flex-xs="100" flex-sm="80" flex-md="60" flex="50">
+        <form name="loginForm" novalidate="novalidate" ng-submit="loginForm.$valid && loginDialog.submit()" flex-xs="100" flex-sm="80" flex-md="60" flex="50">
           <md-input-container class="md-icon-float md-block">
             <md-icon md-svg-src="../assets/icons/register-login/ic_mood_black_24px.svg" class="name"></md-icon>
             <input placeholder="Username" required="required" name="username" ng-model="username" maxlength="20" minlength="3" class="body-register-container-md"/>

@@ -8,9 +8,11 @@
 
   /** @ngInject */
   function LoginDialogController($log, UsersService, $scope, $localStorage, $sessionStorage, $state, toastr,
-  ScopesService) {
+  ScopesService, message, redirect_url, $mdDialog) {
 
     var vm = this;
+    vm.message = message;
+    vm.redirect_url = redirect_url;
 
      /*Log in the user*/
     vm.submit = function () {
@@ -31,6 +33,7 @@
       $localStorage.current_user = data;
       $log.log($localStorage);
       ScopesService.set("current_user", data);
+      $mdDialog.hide();
     };
 
     vm.userProfileGetFailure = function () {
@@ -65,6 +68,11 @@
       else
         toastr.error("The server isn't answering...", "Woops...");
     };
+
+    vm.goToRegister = function() {
+       $mdDialog.hide();
+        $state.go("main.register");
+    }
 
   }
 
