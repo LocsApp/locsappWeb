@@ -178,27 +178,6 @@
       .then(vm.GetInfoArticleSuccess, vm.getInfoArticleFailure);
 
 
-    vm.sendReportSuccess = function () {
-      toastr.success("Report sent", "Success!");
-    };
-
-    vm.sendReportError = function (data) {
-      toastr.error("An error occurred", "Error");
-      $log.log("sendReport Error", data);
-    };
-
-    vm.sendReport = function () {
-
-      $log.log("Send report = id", $stateParams.id);
-
-      ArticleService
-        .sendReport
-        .save({"article_id": $stateParams.id})
-        .$promise
-        .then(vm.sendReportSuccess, vm.sendReportError);
-
-    };
-
     vm.reply = function () {
       //Show the new input
 
