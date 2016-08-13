@@ -17,9 +17,9 @@
             flex-xs="100" flex-sm="80" flex-md="60" flex="50">
 
         <md-input-container style="margin-right: 10px;" flex="100">
-          <label>Size</label>
-          <md-select ng-model="size">
-            <md-option ng-repeat="size in reportDialog.sizes" value="{{size}}">{{size}}</md-option>
+          <label>Report</label>
+          <md-select ng-model="report_type">
+            <md-option ng-repeat="report_type in reportDialog.report_types" value="{{report_type._id}}">{{report_type.name}}</md-option>
           </md-select>
         </md-input-container>
 

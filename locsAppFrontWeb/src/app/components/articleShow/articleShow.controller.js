@@ -468,7 +468,7 @@
     };
 
     /** @ngInject */
-    vm.reportDialogController = function($mdDialog) {
+    vm.reportDialogController = function($mdDialog, ScopesService) {
 
       var vm = this;
       vm.user_logged_in = false;
@@ -482,13 +482,16 @@
         // We also need to block the edition of these three fields
       }
 
+      vm.report_types = ScopesService.get("static_collections").report_types;
+      $log.log("report types = ", vm.report_types);
+
         /* We need to use static collection for this */
-        vm.sizes = [
+        /*vm.sizes = [
           "small (12-inch)",
           "medium (14-inch)",
           "large (16-inch)",
           "insane (42-inch)"
-      ];
+      ];*/
 
     }
 
