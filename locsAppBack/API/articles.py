@@ -763,46 +763,44 @@ def sendReport(request):
     if request.method == "POST":
         if request.body:
             answer = json.loads(request.body.decode('utf8'))
-            print(answer['article_id'])
-            article = ""
-            list_email = ""
-            report_type = ""
+            print("answer = ", answer)
+            #NEED TO CHECK FOR THE ERRORS that article and id report exist and the email
 
-            # We have to check the article id exists and we will send the email of the author in the database
+            article = db_locsapp["articles"].find_one({"_id": ObjectId(answer["id_article"])})
+            # print("article", article)
+            report_type = db_locsapp["report_types"].find_one({"_id": ObjectId(answer["id_report_type"])})
 
-            # We need the article id, the email, the last_name and first_name, the author of the article, and the id and username
-            # of the user reporting the question if is connected
             current_user_pk = -1
             current_user_username = "anonymous"
             current_user = Utility.checkUserAuthenticated(request)
-
-            if current_user is True:
+            if current_user is not False:
                 current_user_pk = current_user.pk
                 current_user_username = current_user.username
 
             model = {
                 "id_article": {
-                    "_type": ObjectId,
+                    "_type": ObjectId(),
+                    "_required": True
                 },
 
                 "id_owner_article": {
                     "_type": int,
                     "_protected": True,
-                    "_default": article.user_id
+                    "_default": article['id_author']
                 },
                 "username_owner_article": {
                     "_type": str,
                     "_protected": True,
-                    "_default": article.username_author
+                    "_default": article['username_author']
                 },
 
-                "report_type_id": {
-                  "_type": ObjectId,
+                "id_report_type": {
+                  "_type": ObjectId(),
                 },
 
                 "report_type_str": {
                     "_type": str,
-                    "_default": report_type.name
+                    "_default": report_type['name']
                 },
 
                 "id_author": {
@@ -821,7 +819,8 @@ def sendReport(request):
                 },
                 "first_name": {
                     "_type": str,
-                    "_length": 50
+                    "_length": 50,
+                    #"_required": True
                 },
                 "last_name": {
                     "_type": str,
@@ -829,21 +828,28 @@ def sendReport(request):
                 },
                 "message": {
                     "_type": str,
-                    "_length": 1000
+                    "_length": 1000,
+                    "_required": False
                 }
 
             }
 
+            report = db_locsapp['reports'].find_one({"email": answer['email'], "id_article": answer['id_article']})
+            print("report = ", report)
+            if report:
+                return JsonResponse({"Error": "Your already reported this article"}, status=405)
+            else:
+                return APIrequests.POST(
+                    request, model, "reports", "The report has been successfully sent!")
 
-
-
-
+            """
             message = 'The user ' + request.user.username + ' sent a report about this article' + \
                 ' <a href="' + settings.URL_FRONT + 'article/' + str(article['_id']) + '">' + \
                 article['title'] + '</a>'
             email = EmailMessage('Report for article ' + article['title'], message,
                                  to=list_email)
             email.send()
+            """
             return JsonResponse(
                 {"Success": "Report sent to the administrators."}, status=200)
         else:

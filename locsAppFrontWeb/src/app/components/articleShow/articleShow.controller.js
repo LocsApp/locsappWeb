@@ -34,9 +34,9 @@
 
 
     //vm.showChildComment = false;
-   // vm.test_test = ['un', 'deux', 'trois'];
+    // vm.test_test = ['un', 'deux', 'trois'];
     //vm.items = ['../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg',
-     // '../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg'];
+    // '../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg'];
 
 
     vm.GetInfoArticleSuccess = function (data) {
@@ -451,7 +451,7 @@
 
 
     /* Dialog Report */
-      /** @ngInject */
+    /** @ngInject */
     vm.reportDialog = function (event) {
       $mdDialog.show({
         controller: vm.reportDialogController,
@@ -468,7 +468,7 @@
     };
 
     /** @ngInject */
-    vm.reportDialogController = function($mdDialog, ScopesService) {
+    vm.reportDialogController = function ($mdDialog, ScopesService) {
 
       var vm = this;
       vm.user_logged_in = false;
@@ -485,7 +485,7 @@
       vm.report_types = ScopesService.get("static_collections").report_types;
       $log.log("report types = ", vm.report_types);
 
-      vm.successSendReportArticle = function(data) {
+      vm.successSendReportArticle = function (data) {
         $log.log("successSendReportArticle", data);
       };
 
@@ -494,18 +494,20 @@
       };
 
       /* Send a report */
-      vm.submitReport = function() {
+      vm.submitReport = function () {
 
 
+        $log.log("id report = ", vm.report_type._id);
 
         ArticleService
           .sendReportArticle
           .save({
-            //"id_report": vm.
+            "id_article": $stateParams.id,
             "first_name": vm.first_name,
             "last_name": vm.last_name,
             "email": vm.email,
-            "message": vm.message
+            "message": vm.message,
+            "id_report_type": vm.report_type._id
           })
           .$promise
           .then(vm.successSendReportArticle, vm.errorSendReportArticle)

@@ -7,7 +7,7 @@ class Utility:
     @staticmethod
     def checkUserAuthenticated(request):
         if 'HTTP_AUTHORIZATION' in request.META:
-            # print(request.META['HTTP_AUTHORIZATION'])
+            print("checkUserAuthenticated 2", request.META['HTTP_AUTHORIZATION'])
             token = request.META['HTTP_AUTHORIZATION'].split()[1]
             try:
                 # We check if the token is in the database and we update the user model

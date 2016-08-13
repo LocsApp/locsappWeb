@@ -8,18 +8,21 @@
 
 
     <div layout="row" layout-align="center" class="report-body">
-      <form name="reportForm" novalidate="novalidate" ng-submit="reportDialog.$valid && reportDialog.submit()"
+      <form name="reportForm" novalidate="novalidate" ng-submit="reportForm.$valid && reportDialog.submitReport()"
             flex-xs="100" flex-sm="80" flex-md="60" flex="50">
 
-        <md-input-container style="margin-right: 10px;" flex="100">
-          <label>Report</label>
-          <md-select ng-model="report_type">
-            <md-option ng-repeat="report_type in reportDialog.report_types" ng-model="reportDialog.report_type" value="{{report_type._id}}">{{report_type.name}}</md-option>
+        <md-input-container>
+          <md-select ng-model="reportDialog.report_type" name="report_type" required="required">
+            <md-option ng-value="opt" ng-repeat="opt in reportDialog.report_types">{{ opt.name }}</md-option>
           </md-select>
+          <div ng-messages="reportForm.report_type.$error" ng-if="!reportForm.report_type.$pristine">
+            <div ng-message="required">This is required.</div>
+          </div>
         </md-input-container>
 
         <md-input-container class="md-icon-float md-block">
-          <input placeholder="First Name" required="required" name="first_name" ng-model="reportDialog.first_name" maxlength="20"
+          <input placeholder="First Name" required="required" name="first_name" ng-model="reportDialog.first_name"
+                 maxlength="20"
                  minlength="3">
           <div ng-messages="reportForm.first_name.$error" ng-if="!reportForm.first_name.$pristine">
             <div ng-message="required">This is required.</div>
@@ -29,7 +32,8 @@
         </md-input-container>
 
         <md-input-container class="md-icon-float md-block">
-          <input placeholder="Last Name" required="required" name="last_name" ng-model="reportDialog.last_name" maxlength="20"
+          <input placeholder="Last Name" required="required" name="last_name" ng-model="reportDialog.last_name"
+                 maxlength="20"
                  minlength="3"/>
           <div ng-messages="reportForm.last_name.$error" ng-if="!reportForm.last_name.$pristine">
             <div ng-message="required">This is required.</div>
@@ -42,7 +46,7 @@
         <md-input-container class="md-icon-float md-block">
           <input placeholder="Email" type="email" minlength="8" maxlength="100" required="required" name="email"
                  ng-model="reportDialog.email" ng-pattern="/^.+@.+..+$/" class="body-register-container-md"
-            ng-disabled="reportDialog.user_logged_in">
+                 ng-disabled="reportDialog.user_logged_in">
           <div ng-messages="reportForm.email.$error" ng-if="!reportForm.email.$pristine">
             <div ng-message="required">This is required.</div>
             <div ng-message="minlength">The email must be longer than 8 characters.</div>
@@ -51,16 +55,18 @@
           </div>
         </md-input-container>
 
-         <md-input-container class="md-block">
+        <md-input-container class="md-block">
           <label>Your message</label>
-          <textarea ng-model="reportDialog.message" md-maxlength="500"  maxlength="500" minlength="10" name="message"
-                    rows="5" md-select-on-focus >
+          <textarea ng-model="reportDialog.message" md-maxlength="500" maxlength="500" minlength="10" name="message"
+                    rows="5" md-select-on-focus>
           </textarea>
-           <div ng-messages="reportForm.message.$error" ng-if="!reportForm.message.$pristine">
+          <div ng-messages="reportForm.message.$error" ng-if="!reportForm.message.$pristine">
             <div ng-message="minlength">The message must be longer than 10 characters.</div>
             <div ng-message="maxlength">The email must be shorter than 500 characters.</div>
           </div>
         </md-input-container>
+
+        <md-button type="submit" class="md-raised">Send report</md-button>
 
       </form>
     </div>
