@@ -463,9 +463,7 @@
         clickOutsideToClose: true
       }).then(function () {
 
-        $log.log("scopescervices", ScopesService.get("current_user"));
-
-        /*if (vm.user) {
+        if (ScopesService.get("current_user")) {
           $state.go("main.articleShow", {"id": $stateParams.id});
 
           ArticleService
@@ -473,9 +471,7 @@
             .get({id: $stateParams.id})
             .$promise
             .then(vm.GetInfoArticleSuccess, vm.getInfoArticleFailure);
-        }*/
-
-
+        }
       });
     };
 
