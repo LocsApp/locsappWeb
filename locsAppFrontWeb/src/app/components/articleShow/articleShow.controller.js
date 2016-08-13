@@ -403,7 +403,13 @@
 
     vm.addArticleToFavoriteError = function (data) {
       $log.error("addArticleToFavoriteError", data);
-      toastr.error(data.article.error, "Error!");
+      if (data.status === 401) {
+        $log.log("login modal")
+
+      }
+      else {
+        toastr.error(data.article.error, "Error!");
+      }
     };
 
     vm.addArticleToFavorite = function (idArticle) {
@@ -440,6 +446,25 @@
         .then(vm.deleteArticleFavoriteSuccess, vm.deleteArticleFavoriteError)
     };
 
+    // Login Controller it would be better to separate it so we can use it easily for other purposes
+
+     /** @ngInject */
+    vm.loginDialog = function (event, type) {
+      $mdDialog.show({
+        controller: vm.loginDialogController,
+        controllerAs: 'loginDialog',
+        templateUrl: 'app/templates/dialogTemplates/login.tmpl.html',
+        locals: {
+          redirect_url: "http://locsapp.sylflo.fr/"
+        },
+        bindToController: true,
+        parent: angular.element($document.body),
+        targetEvent: event,
+        clickOutsideToClose: true
+      }).then(function (data) {
+        vm.user = data
+      });
+    };
 
   }
 
