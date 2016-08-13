@@ -32,8 +32,6 @@
     vm.payment_methods = ScopesService.get("static_collections").payment_methods;
     vm.report_types = ScopesService.get("static_collections").report_types;
 
-    $log.log("reportTYPEs = ", vm.report_types);
-
 
     //vm.showChildComment = false;
     vm.test_test = ['un', 'deux', 'trois'];
