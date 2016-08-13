@@ -1,0 +1,68 @@
+<md-dialog flex="50">
+
+  <div layout="column" layout-align="center">
+
+    <div layout="row" layout-align="center">
+      <h1>Report</h1>
+    </div>
+
+
+    <!-- If connected we don't ask for any email -->
+    <!-- If not connected we ask for an email -->
+
+    <!-- In both case we ask for first and last name -->
+
+    <div layout="row" layout-align="center" class="report-body">
+      <form name="reportForm" novalidate="novalidate" ng-submit="reportDialog.$valid && reportDialog.submit()"
+            flex-xs="100" flex-sm="80" flex-md="60" flex="50">
+
+        <md-input-container style="margin-right: 10px;">
+          <label>Size</label>
+          <md-select ng-model="size">
+            <md-option ng-repeat="size in reportDialog.sizes" value="{{size}}">{{size}}</md-option>
+          </md-select>
+        </md-input-container>
+
+        <md-input-container class="md-icon-float md-block">
+          <input placeholder="First Name" required="required" name="first_name" ng-model="reportDialog.first_name" maxlength="20"
+                 minlength="3"/>
+          <div ng-messages="reportForm.first_name.$error" ng-if="!reportForm.first_name.$pristine">
+            <div ng-message="required">This is required.</div>
+            <div ng-message="minlength">The first name must be longer than 3 characters.</div>
+            <div ng-message="md-maxlength">The first name must be shorter than 20 characters.</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-icon-float md-block">
+          <input placeholder="Last Name" required="required" name="last_name" ng-model="reportDialog.last_name" maxlength="20"
+                 minlength="3"/>
+          <div ng-messages="reportForm.last_name.$error" ng-if="!reportForm.last_name.$pristine">
+            <div ng-message="required">This is required.</div>
+            <div ng-message="minlength">The last name must be longer than 3 characters.</div>
+            <div ng-message="md-maxlength">The last name must be shorter than 20 characters.</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-icon-float md-block">
+          <input placeholder="Email" type="email" minlength="8" maxlength="100" required="required" name="email"
+                 ng-model="reportDialog.email" ng-pattern="/^.+@.+..+$/" class="body-register-container-md"/>
+          <div ng-messages="reportForm.email.$error" ng-if="!reportForm.email.$pristine">
+            <div ng-message="required">This is required.</div>
+            <div ng-message="minlength">The email must be longer than 8 characters.</div>
+            <div ng-message="maxlength">The email must be shorter than 100 characters.</div>
+            <div ng-message="pattern">The field must be an email.</div>
+          </div>
+        </md-input-container>
+
+         <md-input-container class="md-block">
+          <label>Your message</label>
+          <textarea ng-model="reportForm.message" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+        </md-input-container>
+
+      </form>
+    </div>
+
+
+  </div>
+
+</md-dialog>
