@@ -126,7 +126,7 @@ div.article-show(layout="row" layout-align="center")
                 //a(facebook class="facebookShare" data-url='http://google.com'data-shares='shares') {{ shares }}
                 a(href='#')
                   ng-md-icon(icon="warning")
-                  span.bottom-right-md-card(ng-click='articleShow.sendReport()') Send a report
+                  span.bottom-right-md-card(ng-click="articleShow.reportDialog($event)") Send a report
 
 
 

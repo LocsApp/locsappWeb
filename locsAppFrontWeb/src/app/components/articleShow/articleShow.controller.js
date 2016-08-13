@@ -178,12 +178,6 @@
       .then(vm.GetInfoArticleSuccess, vm.getInfoArticleFailure);
 
 
-    vm.reply = function () {
-      //Show the new input
-
-    };
-
-
     vm.submitComment = function (comment) {
       // SI on a clique sur shit on veut revenir a ligne
       //SINON on envoie le commentaire direcment1
@@ -346,14 +340,14 @@
         .then(vm.upVoteSuccess, vm.upVoteError);
     };
 
-    /* Report */
-    vm.reportSuccess = function (data) {
+    /* Report Question */
+    vm.reportQuestionSuccess = function (data) {
       toastr.success("Your report has been sent", "Success!");
       $state.go($state.$current, null, {reload: true});
       $log.log("reportSuccess = ", data);
     };
 
-    vm.reportError = function (data) {
+    vm.reportQuestionError = function (data) {
       $log.error("reportError", data);
       if (data.status == 403)
         toastr.error(data.article.Error, "Error!");
@@ -368,7 +362,7 @@
           "id_question": idQuestion
         })
         .$promise
-        .then(vm.reportSuccess, vm.reportError);
+        .then(vm.reportQuestionSuccess, vm.reportQuestionError);
     };
 
     vm.addArticleToFavoriteSuccess = function (data) {
