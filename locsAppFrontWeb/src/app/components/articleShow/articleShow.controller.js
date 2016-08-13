@@ -450,7 +450,7 @@
     // Login Controller it would be better to separate it so we can use it easily for other purposes
 
      /** @ngInject */
-    vm.loginDialog = function (event, type) {
+    vm.loginDialog = function (event) {
       $mdDialog.show({
         controller: 'LoginDialogController',
         controllerAs: 'loginDialog',
