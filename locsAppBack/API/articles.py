@@ -759,33 +759,83 @@ We send an email to the adminstrator that tell us who user send a report for whi
 
 @csrf_exempt
 @api_view(['POST'])
-@permission_classes((IsAuthenticated,))
 def sendReport(request):
     if request.method == "POST":
         if request.body:
             answer = json.loads(request.body.decode('utf8'))
-            print("Object id = ", answer)
-            try:
-                answer['article_id']
-            except KeyError:
-                return JsonResponse(
-                    {"Error": "Please send the article id"}, status=404)
+            article = ""
+            list_email = ""
+            report_type = ""
 
-            if not ObjectId.is_valid(answer['article_id']):
-                return JsonResponse(
-                    {"Error": "Please send a correct article id"}, status=401)
-            list_reporter = get_user_model().objects.filter(is_admin=True)
-            list_email = ['locsapp.eip@gmail.com']
-            for reporter in list_reporter:
-                list_email.append(reporter.email)
-            article = db_locsapp["articles"].find_one(
-                {"_id": ObjectId(answer['article_id'])})
-            if article is None:
-                return JsonResponse(
-                    {"Error": "This article does not exist"}, status=404)
+            # We have to check the article id exists and we will send the email of the author in the database
 
-            # We insert a new report in this article and if there is more than 5 users we create a
-            #  new collection report associated to the id of this article
+            # We need the article id, the email, the last_name and first_name, the author of the article, and the id and username
+            # of the user reporting the question if is connected
+            current_user_pk = -1
+            current_user_username = "anonymous"
+            current_user = Utility.checkUserAuthenticated(request)
+
+            if current_user is True:
+                current_user_pk = current_user.pk
+                current_user_username = current_user.username
+
+            model = {
+                "id_article": {
+                    "_type": ObjectId,
+                },
+
+                "id_owner_article": {
+                    "_type": int,
+                    "_protected": True,
+                    "_default": article.user_id
+                },
+                "username_owner_article": {
+                    "_type": str,
+                    "_protected": True,
+                    "_default": article.username_author
+                },
+
+                "report_type_id": {
+                  "_type": ObjectId,
+                },
+
+                "report_type_str": {
+                    "_type": str,
+                    "_default": report_type.name
+                },
+
+                "id_author": {
+                    "_type": int,
+                    "_protected": True,
+                    "_default": current_user_pk
+                },
+                "username_author": {
+                    "_type": str,
+                    "_protected": True,
+                    "_default": current_user_username
+                },
+                "email": {
+                    "_type": str,
+                    "_length": 50
+                },
+                "first_name": {
+                    "_type": str,
+                    "_length": 50
+                },
+                "last_name": {
+                    "_type": str,
+                    "_length": 50
+                },
+                "message": {
+                    "_type": str,
+                    "_length": 1000
+                }
+
+            }
+
+
+
+
 
             message = 'The user ' + request.user.username + ' sent a report about this article' + \
                 ' <a href="' + settings.URL_FRONT + 'article/' + str(article['_id']) + '">' + \

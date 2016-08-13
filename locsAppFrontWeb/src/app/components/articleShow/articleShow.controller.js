@@ -34,9 +34,9 @@
 
 
     //vm.showChildComment = false;
-    vm.test_test = ['un', 'deux', 'trois'];
-    vm.items = ['../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg',
-      '../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg'];
+   // vm.test_test = ['un', 'deux', 'trois'];
+    //vm.items = ['../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg',
+     // '../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg'];
 
 
     vm.GetInfoArticleSuccess = function (data) {
@@ -485,13 +485,6 @@
       vm.report_types = ScopesService.get("static_collections").report_types;
       $log.log("report types = ", vm.report_types);
 
-        /* We need to use static collection for this */
-        /*vm.sizes = [
-          "small (12-inch)",
-          "medium (14-inch)",
-          "large (16-inch)",
-          "insane (42-inch)"
-      ];*/
 
     }
 
