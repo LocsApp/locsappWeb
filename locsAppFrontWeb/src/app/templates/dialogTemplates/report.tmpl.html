@@ -14,7 +14,7 @@
         <md-input-container style="margin-right: 10px;" flex="100">
           <label>Report</label>
           <md-select ng-model="report_type">
-            <md-option ng-repeat="report_type in reportDialog.report_types" value="{{report_type._id}}">{{report_type.name}}</md-option>
+            <md-option ng-repeat="report_type in reportDialog.report_types" ng-model="reportDialog.report_type" value="{{report_type._id}}">{{report_type.name}}</md-option>
           </md-select>
         </md-input-container>
 
@@ -53,7 +53,13 @@
 
          <md-input-container class="md-block">
           <label>Your message</label>
-          <textarea ng-model="reportForm.message" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+          <textarea ng-model="reportDialog.message" md-maxlength="500"  maxlength="500" minlength="10" name="message"
+                    rows="5" md-select-on-focus >
+          </textarea>
+           <div ng-messages="reportForm.message.$error" ng-if="!reportForm.message.$pristine">
+            <div ng-message="minlength">The message must be longer than 10 characters.</div>
+            <div ng-message="maxlength">The email must be shorter than 500 characters.</div>
+          </div>
         </md-input-container>
 
       </form>

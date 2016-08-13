@@ -485,7 +485,32 @@
       vm.report_types = ScopesService.get("static_collections").report_types;
       $log.log("report types = ", vm.report_types);
 
+      vm.successSendReportArticle = function(data) {
+        $log.log("successSendReportArticle", data);
+      };
 
+      vm.errorSendReportArticle = function (data) {
+        $log.error("errorSendReportArticle", data)
+      };
+
+      /* Send a report */
+      vm.submitReport = function() {
+
+
+
+        ArticleService
+          .sendReportArticle
+          .save({
+            //"id_report": vm.
+            "first_name": vm.first_name,
+            "last_name": vm.last_name,
+            "email": vm.email,
+            "message": vm.message
+          })
+          .$promise
+          .then(vm.successSendReportArticle, vm.errorSendReportArticle)
+
+      }
     }
 
   }

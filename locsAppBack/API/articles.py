@@ -763,6 +763,7 @@ def sendReport(request):
     if request.method == "POST":
         if request.body:
             answer = json.loads(request.body.decode('utf8'))
+            print(answer['article_id'])
             article = ""
             list_email = ""
             report_type = ""

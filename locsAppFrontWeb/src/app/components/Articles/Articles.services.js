@@ -26,7 +26,7 @@
       createArticle: $resource(URL_API + 'api/v1/articles/create/'),
       searchArticles: $resource(URL_API + 'api/v1/search/articles/'),
       getSeller: $resource(URL_API + 'api/v1/articles/seller/:id/', {id: "@user_id"}),
-      sendReport: $resource(URL_API + 'api/v1/articles/report/'),
+      sendReportArticle: $resource(URL_API + 'api/v1/articles/report/'),
       demands: $resource(URL_API + 'api/v1/articles/demands/'),
       demandsAsRenting: $resource(URL_API + 'api/v1/articles/demands-as-renting/'),
       refuseDemand: $resource(URL_API + 'api/v1/articles/refuse-demand/'),
