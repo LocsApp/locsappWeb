@@ -453,8 +453,8 @@
       /** @ngInject */
     vm.reportDialog = function (event) {
       $mdDialog.show({
-        //controller: 'ReportDialogController',
-        //controllerAs: 'reportDialog',
+        controller: vm.reportDialogController,
+        controllerAs: 'reportDialog',
         templateUrl: 'app/templates/dialogTemplates/report.tmpl.html',
         bindToController: true,
         parent: angular.element($document.body),
@@ -465,6 +465,19 @@
 
       });
     };
+
+    /** @ngInject */
+    vm.reportDialogController = function($mdDialog) {
+
+      var vm = this;
+        vm.sizes = [
+          "small (12-inch)",
+          "medium (14-inch)",
+          "large (16-inch)",
+          "insane (42-inch)"
+      ];
+
+    }
 
   }
 
