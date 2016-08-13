@@ -404,7 +404,8 @@
     vm.addArticleToFavoriteError = function (data) {
       $log.error("addArticleToFavoriteError", data);
       if (data.status === 401) {
-        $log.log("login modal")
+        $log.log("login modal");
+        vm.loginDialog();
 
       }
       else {
@@ -451,7 +452,7 @@
      /** @ngInject */
     vm.loginDialog = function (event, type) {
       $mdDialog.show({
-        controller: vm.loginDialogController,
+        controller: 'LoginDialogController',
         controllerAs: 'loginDialog',
         templateUrl: 'app/templates/dialogTemplates/login.tmpl.html',
         locals: {
