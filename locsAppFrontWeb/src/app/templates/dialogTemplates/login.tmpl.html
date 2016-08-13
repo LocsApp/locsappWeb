@@ -1,1 +1,43 @@
-<h1>Login pojpojpoj</h1>
+<md-dialog flex="50">
+<div layout="column" layout-align="center" class="login-dialog">
+      <div layout="row" layout-align="center">
+        <h1>Login</h1>
+      </div>
+      <div layout="row" layout-align="center" class="login-dialog-body">
+        <form name="loginForm" novalidate="novalidate" ng-submit="loginForm.$valid &amp;&amp; login.submit()" flex-xs="100" flex-sm="80" flex-md="60" flex="50">
+          <md-input-container class="md-icon-float md-block">
+            <md-icon md-svg-src="../assets/icons/register-login/ic_mood_black_24px.svg" class="name"></md-icon>
+            <input placeholder="Username" required="required" name="username" ng-model="username" maxlength="20" minlength="3" class="body-register-container-md"/>
+            <div ng-messages="loginForm.username.$error" ng-if="!loginForm.username.$pristine">
+              <div ng-message="required">This is required.</div>
+              <div ng-message="minlength">The username must be longer than 3 characters.</div>
+              <div ng-message="md-maxlength">The username must be shorter than 20 characters.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-icon-float md-block">
+            <md-icon md-svg-src="../assets/icons/register-login/ic_vpn_key_black_24px.svg" class="name"></md-icon>
+            <input placeholder="Password" type="password" name="password" required="required" ng-model="password" maxlength="30" minlength="6" class="body-register-container-md"/>
+            <div ng-messages="loginForm.password.$error" ng-if="loginForm.password.$dirty">
+              <div ng-message="required">This is required.</div>
+              <div ng-message="minlength">The password must be longer than 6 characters.</div>
+              <div ng-message="maxlength">The password must be shorter than 20 characters.</div>
+            </div>
+          </md-input-container>
+          <div layout="column" layout-align="start center">
+            <md-checkbox ng-model="remember_me">Remember me</md-checkbox><span ng-click="login.forgotPasswordDialog($event)" class="login-forgot-password">Forgot your password ?</span>
+          </div>
+          <div class="submit-buttons">
+            <md-button flex-offset="10" type="submit" style="width:90%" class="md-raised margin-button-top">Login</md-button>
+            <section layout="row" layout-align="center" class="margin-button separate-button margin-button-top">
+              <md-divider flex-offset="5" flex="45" class="line"></md-divider>
+              <div class="middle-word">or</div>
+              <md-divider flex="45" class="line"></md-divider>
+            </section>
+            <div ng-controller="FacebookLoginController as FB" flex="90" flex-offset="10" class="margin-button-top">
+              <md-button layout-fill="layout-fill" ng-click="FB.login()" class="md-raised facebook margin-button">Login with Facebook</md-button>
+            </div>
+          </div>
+        </form>
+      </div>
+</div>
+</md-dialog>
