@@ -448,6 +448,24 @@
       });
     };
 
+
+    /* Dialog Report */
+      /** @ngInject */
+    vm.reportDialog = function (event) {
+      $mdDialog.show({
+        //controller: 'ReportDialogController',
+        //controllerAs: 'reportDialog',
+        templateUrl: 'app/templates/dialogTemplates/report.tmpl.html',
+        bindToController: true,
+        parent: angular.element($document.body),
+        targetEvent: event,
+        clickOutsideToClose: true
+      }).then(function () {
+
+
+      });
+    };
+
   }
 
 })();
