@@ -8,13 +8,10 @@
 
   /** @ngInject */
   function LoginDialogController($log, UsersService, $scope, $localStorage, $sessionStorage, $state, toastr,
-  ScopesService, message, name_state_to_redirect, params_value_state, params_key_state, $mdDialog) {
+  ScopesService, message, $mdDialog) {
 
     var vm = this;
     vm.message = message;
-    vm.name_state_to_redirect = name_state_to_redirect;
-    vm.params_value_state = params_value_state;
-    vm.params_key_state = params_key_state;
 
      /*Log in the user*/
     vm.submit = function () {
@@ -32,9 +29,6 @@
       else
         $sessionStorage.id = data["id"];
 
-      var obj = {};
-      obj[vm.params_key_state] = vm.params_value_state;
-      $state.go(vm.name_state_to_redirect, obj);
 
       $localStorage.current_user = data;
       $log.log($localStorage);
@@ -80,7 +74,61 @@
     vm.goToRegister = function() {
        $mdDialog.hide();
         $state.go("main.register");
-    }
+    };
+
+
+      /*Creates a dialog to ask for a password reset*/
+    /** @ngInject */
+    vm.forgotPasswordDialog = function (event) {
+      $mdDialog.hide();
+      $mdDialog.show({
+        controller: vm.forgotPasswordController,
+        controllerAs: 'forgotPassword',
+        templateUrl: 'app/templates/dialogTemplates/forgotPassword.tmpl.html',
+        parent: angular.element($document.body),
+        targetEvent: event,
+        clickOutsideToClose: true
+      });
+    };
+
+    /*Controller for forgotPasswordDialog*/
+    /** @ngInject */
+    vm.forgotPasswordController = function ($mdDialog) {
+      var vm = this;
+
+      /*vars init*/
+      vm.loader = false;
+
+      /*password_reset success callback*/
+      vm.resetPasswordSuccess = function (data) {
+        toastr.success(data.success, "Success!");
+        vm.loader = false;
+        vm.hide();
+      };
+
+      /*password_reset success callback*/
+      vm.resetPasswordFailure = function (data) {
+        $log.log(data);
+        toastr.error(data.data.email[0], "Woops...");
+        vm.loader = false;
+        vm.hide();
+      };
+
+      /*Submits the email to the password change endpoint*/
+      vm.submit = function () {
+        $log.log("innit");
+        vm.loader = true;
+        UsersService
+          .password_reset
+          .save({"email": vm.email})
+          .$promise
+          .then(vm.resetPasswordSuccess, vm.resetPasswordFailure);
+      };
+
+      vm.hide = function () {
+        $mdDialog.hide();
+      };
+    };
 
   }
 

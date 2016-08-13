@@ -122,10 +122,10 @@
       $log.log("id_author = ", vm.article.id_author);
       //$log.log("ScopesServiece = ",  ScopesService.get("current_user").id);
 
-        if (ScopesService.get("current_user") && ScopesService.get("current_user").id
-          &&
-          (vm.article.id_author == ScopesService.get("current_user").id))
-          vm.ownArticle = true;
+      if (ScopesService.get("current_user") && ScopesService.get("current_user").id
+        &&
+        (vm.article.id_author == ScopesService.get("current_user").id))
+        vm.ownArticle = true;
 
 
       /* Init array questions */
@@ -144,7 +144,6 @@
         //$log.log("url API = ", vm.url_api);
         vm.carousel.push(vm.url_api + vm.article.url_pictures[i]);
       }
-
 
 
       //Nom de la ville si pas connecte ou pas d'addresse dans son compte
@@ -423,10 +422,10 @@
         .then(vm.addArticleToFavoriteSuccess, vm.addArticleToFavoriteError)
     };
 
-     vm.deleteArticleFavoriteSuccess = function (data) {
+    vm.deleteArticleFavoriteSuccess = function (data) {
       $log.log("deleteArticleFavoriteSuccess", data);
       toastr.success("This article has been deleted from your favorite", "Success!");
-       vm.is_in_favorite = !vm.is_in_favorite;
+      vm.is_in_favorite = !vm.is_in_favorite;
     };
 
     vm.deleteArticleFavoriteError = function (data) {
@@ -449,24 +448,34 @@
 
     // Login Controller it would be better to separate it so we can use it easily for other purposes
 
-     /** @ngInject */
+    /** @ngInject */
     vm.loginDialog = function (event) {
       $mdDialog.show({
         controller: 'LoginDialogController',
         controllerAs: 'loginDialog',
         templateUrl: 'app/templates/dialogTemplates/login.tmpl.html',
         locals: {
-          name_state_to_redirect: "main.articleShow",
-          params_value_state: $stateParams.id,
-          params_key_state: "id",
           message: "You need to log in to add an article to your favorites"
         },
         bindToController: true,
         parent: angular.element($document.body),
         targetEvent: event,
         clickOutsideToClose: true
-      }).then(function (data) {
-        vm.user = data
+      }).then(function () {
+
+        $log.log("scopescervices", ScopesService.get("current_user"));
+
+        /*if (vm.user) {
+          $state.go("main.articleShow", {"id": $stateParams.id});
+
+          ArticleService
+            .getArticle
+            .get({id: $stateParams.id})
+            .$promise
+            .then(vm.GetInfoArticleSuccess, vm.getInfoArticleFailure);
+        }*/
+
+
       });
     };
 
