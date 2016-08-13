@@ -30,6 +30,9 @@
     vm.clothe_states = ScopesService.get("static_collections").clothe_states;
     vm.brands = [{_id: "56cb3ef2b2bc57ab2908e6b2", name: "Home made"}];
     vm.payment_methods = ScopesService.get("static_collections").payment_methods;
+    vm.report_types = ScopesService.get("static_collections").report_types;
+
+    $log.log("reportTYPEs = ", vm.report_types);
 
 
     //vm.showChildComment = false;

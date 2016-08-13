@@ -115,7 +115,8 @@ static_collections_patterns = [
     url(r'^sizes/$', static_collections.staticSizes),
     url(r'^clothe-colors/$', static_collections.staticClotheColors),
     url(r'^clothe-states/$', static_collections.staticClotheStates),
-    url(r'^payment-methods/$', static_collections.staticPaymentMethods)
+    url(r'^payment-methods/$', static_collections.staticPaymentMethods),
+    url(r'^reports-types/$', static_collections.staticReportTypes),
 ]
 
 # Cache urls
