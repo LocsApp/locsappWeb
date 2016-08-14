@@ -697,6 +697,8 @@ def getArticle(request, article_pk):
     if request.method == "GET":
         # We also need to send the global mark of the user and the nb of notation as a renter
         article = db_locsapp["articles"].find_one({"_id": ObjectId(article_pk)})
+        if article is None:
+            return JsonResponse({"Error": "Article not found"}, status=404)
         article = APIrequests.parseObjectIdToStr(article)
         global_mark_as_renter = get_user_model().objects.get(pk=article["id_author"]).renter_score
         nb_mark_as_renter = db_locsapp["notations"].count({"id_target": int(article["id_author"]), "as_renter": True})
@@ -710,9 +712,27 @@ def getArticle(request, article_pk):
         if user is not False and db_locsapp['reports'].find_one({"id_author": user.pk, "id_article": article["_id"]}):
             is_reported = True
 
+        """
+        We look for article in the same:
+         range of price + or - 10 euros
+         same category
+         and near same km range IMPORTANT
+         same subcategory (maybe)
+        """
+        articles_recommend = []
+        price_range = 1000
+        article_recommend_mongo = db_locsapp["articles"].find({"price": {"$gt": article["price"] - price_range, "$lt": article["price"] + price_range}}
+                                                        ).limit(10)
+        # print("article recooment = ", article_recommend)
+        for article_recommend in article_recommend_mongo:
+            print("article = ", article_recommend)
+            if article_recommend["_id"] != ObjectId(article_pk):
+                article_recommend = APIrequests.parseObjectIdToStr(article_recommend)
+                articles_recommend.append(article_recommend)
+
         return JsonResponse({"article": article, "global_mark_as_renter": global_mark_as_renter,
                              "nb_mark_as_renter": nb_mark_as_renter, "is_in_favorite": is_in_favorite,
-                             "is_reported": is_reported})
+                             "is_reported": is_reported, "article_recommend": articles_recommend})
         # return APIrequests.GET('articles', id=article_pk)
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
