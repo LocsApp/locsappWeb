@@ -199,4 +199,4 @@ div.article-show(layout="row" layout-align="center")
         .item(owl-carousel-item='', ng-repeat='article_recommend in articleShow.articles_recommend track by $index')
           img(src="{{articleShow.url_api}}{{article_recommend.url_thumbnail}}" style='width:200px; height:auto;')
           div(layout-align="center" layout="row")
-            span.bold 12$
+            span.bold {{article_recommend.price}} €
