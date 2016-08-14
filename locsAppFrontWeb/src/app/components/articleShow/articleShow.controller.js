@@ -464,7 +464,15 @@
         clickOutsideToClose: true
       }).then(function () {
 
+           if (ScopesService.get("current_user")) {
+          $state.go("main.articleShow", {"id": $stateParams.id});
 
+          ArticleService
+            .getArticle
+            .get({id: $stateParams.id})
+            .$promise
+            .then(vm.GetInfoArticleSuccess, vm.getInfoArticleFailure);
+        }
       });
     };
 
