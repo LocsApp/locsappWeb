@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMessage
 from django.conf import settings
+from .utility import Utility
 
 
 from dateutil.parser import parse
@@ -25,6 +26,7 @@ from django.http import HttpResponse
 from django.contrib.auth import get_user_model
 
 from pymongo import MongoClient
+from pymongo import ASCENDING, DESCENDING
 
 # Connects to the db and creates a MongoClient instance
 mongodb_client = MongoClient('localhost', 27017)
@@ -517,6 +519,11 @@ def postNewArticle(request):
             "_default": request.user.pk,
             "_protected": True
         },
+        "username_author": {
+            "_type": str,
+            "_default": request.user.username,
+            "_protected": True
+        },
         "url_thumbnail": {
             "_type": str,
             "_default": "media/articles/default.jpg",
@@ -688,10 +695,62 @@ def articleAlone(request, article_pk):
 @csrf_exempt
 def getArticle(request, article_pk):
     if request.method == "GET":
-        return APIrequests.GET('articles', id=article_pk)
+        # We also need to send the global mark of the user and the nb of notation as a renter
+        article = db_locsapp["articles"].find_one({"_id": ObjectId(article_pk)})
+        article = APIrequests.parseObjectIdToStr(article)
+        global_mark_as_renter = get_user_model().objects.get(pk=article["id_author"]).renter_score
+        nb_mark_as_renter = db_locsapp["notations"].count({"id_target": int(article["id_author"]), "as_renter": True})
+
+        is_in_favorite = False
+        user = Utility.checkUserAuthenticated(request)
+        if user is not False and db_locsapp["favorite_article"].find_one({"id_user": user.pk, "id_article": article_pk}):
+            is_in_favorite = True
+
+        return JsonResponse({"article": article, "global_mark_as_renter": global_mark_as_renter,
+                             "nb_mark_as_renter": nb_mark_as_renter, "is_in_favorite": is_in_favorite})
+        # return APIrequests.GET('articles', id=article_pk)
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
+
+# Route for show articles in user profile
+@csrf_exempt
+def getFirstFourArticleOwnedByUser(request, user_pk):
+    if request.method == "GET":
+        articles = []
+        total_article = db_locsapp["articles"].count({"id_author": int(user_pk), "available": True})
+
+        for article in db_locsapp["articles"].find({"id_author": int(user_pk), "available": True}).sort("creation_date", DESCENDING).limit(4):
+            article['_id'] = str(article['_id'])
+            articles.append(article)
+
+        return JsonResponse({"nb_total_articles": total_article, "articles": articles})
+    else:
+        return JsonResponse({"Error": "Method not allowed"}, status=405)
+
+
+# Route for show all all articles owend by an user
+# We print 10 item by page
+@csrf_exempt
+def getAllArticleOwnedByUser(request, user_pk, id_page):
+    if request.method == "GET":
+        id_page = int(id_page)
+        nb_item = db_locsapp["articles"].count({"id_author": int(user_pk), "available": True})
+        item_on_a_page = 10
+        nb_page = nb_item / item_on_a_page
+        articles = []
+
+        # W
+        if (id_page - 1) * 10 > nb_item:
+            id_page = nb_page
+
+        for article in db_locsapp["articles"].find({"id_author": int(user_pk), "available": True}).sort("creation_date", DESCENDING).skip((id_page - 1) * item_on_a_page).limit(item_on_a_page):
+            article['_id'] = str(article['_id'])
+            articles.append(article)
+
+        return JsonResponse({"nb_page": nb_page, "articles": articles})
+    else:
+        return JsonResponse({"Error": "Method not allowed"}, status=405)
 
 """
 We send an email to the adminstrator that tell us who user send a report for which article

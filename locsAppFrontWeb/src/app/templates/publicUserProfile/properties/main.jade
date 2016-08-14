@@ -1,4 +1,4 @@
-md-card(flex-xs="100" flex-sm='100' flex-md="75" flex="50")
+md-card()
   md-card-content
     div.my-layout-xs(layout="row"  layout-align="space-around start")
 
@@ -6,34 +6,34 @@ md-card(flex-xs="100" flex-sm='100' flex-md="75" flex="50")
 
       div(layout="column")
         h1
-          md-icon(ng-if="!publicProfile.user.gender" md-svg-src="../assets/icons/gender-male-female" +
+          md-icon(ng-if="!publicProfile.public_user.gender" md-svg-src="../assets/icons/gender-male-female" +
           ".svg"
           aria-label="gender-male-female")
-          md-icon(ng-if="publicProfile.user.gender.indexOf('female') > -1" md-svg-src="../assets/icons/gender-female.svg"
+          md-icon(ng-if="publicProfile.public_user.gender.indexOf('female') > -1" md-svg-src="../assets/icons/gender-female.svg"
           aria-label="gender-female")
-          md-icon(ng-if="publicProfile.user.gender.indexOf('male') > -1" md-svg-src="../assets/icons/gender-male.svg"
+          md-icon(ng-if="publicProfile.public_user.gender.indexOf('male') > -1" md-svg-src="../assets/icons/gender-male.svg"
           aria-label="gender-male")
-          | {{publicProfile.user.username}}
+          | {{publicProfile.public_user.username}}
 
         div.properties-user
           div
             ng-md-icon(icon="cake" size="28")
-            span(ng-if="!publicProfile.user.birthdate") Birthdate: Not specified
-            span(ng-if="publicProfile.user.birthdate") Birthdate {{publicProfile.user.birthdate}}
+            span(ng-if="!publicProfile.public_user.birthdate") Birthdate: Not specified
+            span(ng-if="publicProfile.public_user.birthdate") Birthdate {{publicProfile.public_user.birthdate}}
 
           div
             ng-md-icon(icon="location_on" size="28")
-            span(ng-if="!publicProfile.user.within") Within: Unknown
-            span(ng-if="publicProfile.user.within") Within {{publicProfile.user.within}} km
+            span(ng-if="!publicProfile.public_user.within") Within: Unknown
+            span(ng-if="publicProfile.public_user.within") Within {{publicProfile.public_user.within}} km
 
           div
             ng-md-icon(icon="whatshot" size="28")
-            span(ng-if="!publicProfile.user.last_activity_date") Last activity: Unknown
-            span(ng-if="publicProfile.user.last_activity_date") Last activity {{publicProfile.user.last_activity_date}}
+            span(ng-if="!publicProfile.public_user.last_activity_date") Last activity: Unknown
+            span(ng-if="publicProfile.public_user.last_activity_date") Last activity {{publicProfile.public_user.last_activity_date}}
 
           div
             ng-md-icon(icon="insert_emoticon" size="28")
-            span Subscribed {{publicProfile.user.registered_date}}
+            span Subscribed {{publicProfile.public_user.registered_date}}
 
 
 

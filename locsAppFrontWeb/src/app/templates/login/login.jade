@@ -6,10 +6,10 @@ div.login(layout="row" layout-align="center")
       .login-body(layout="row" layout-align="center")
         form(name="loginForm" novalidate ng-submit="loginForm.$valid && login.submit()"
         flex-xs="100" flex-sm="80" flex-md="60" flex="50")
-          section(layout="column", layout-align="start center")
 
 
-            md-input-container.md-icon-float.md-block(layout-fill)
+
+            md-input-container.md-icon-float.md-block()
               md-icon(md-svg-src="../assets/icons/register-login/ic_mood_black_24px.svg" class="name")
               input(placeholder="Username" required name="username" ng-model="username" maxlength="20" minlength="3").body-register-container-md
               div(ng-messages="loginForm.username.$error" ng-if='!loginForm.username.$pristine')
@@ -17,17 +17,18 @@ div.login(layout="row" layout-align="center")
                 div(ng-message="minlength") The username must be longer than 3 characters.
                 div(ng-message="md-maxlength") The username must be shorter than 20 characters.
 
-            md-input-container.md-icon-float.md-block(layout-fill)
+            md-input-container.md-icon-float.md-block()
               md-icon(md-svg-src="../assets/icons/register-login/ic_vpn_key_black_24px.svg" class="name")
               input(placeholder="Password" type="password" name="password" required ng-model="password" maxlength="30" minlength="6").body-register-container-md
               div(ng-messages="loginForm.password.$error" ng-if="loginForm.password.$dirty")
                 div(ng-message="required") This is required.
                 div(ng-message="minlength") The password must be longer than 6 characters.
                 div(ng-message="maxlength") The password must be shorter than 20 characters.
-            md-checkbox(ng-model="remember_me") Remember me
-            span(ng-click="login.forgotPasswordDialog($event)").login-forgot-password Forgot your password ?
+            div(layout="column"       layout-align="start center")
+              md-checkbox(ng-model="remember_me") Remember me
+              span(ng-click="login.forgotPasswordDialog($event)").login-forgot-password Forgot your password ?
 
-            div.submit-buttons(layout-fill)
+            div.submit-buttons()
               md-button.md-raised.margin-button-top(flex-offset="10" type="submit"
               style="width:90%") Login
               section.margin-button.separate-button.margin-button-top(layout="row" layout-align="center")

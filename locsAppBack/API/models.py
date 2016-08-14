@@ -29,11 +29,16 @@ def validate_phone(phone_number):
 
 def validate_birthdate(date_text):
     try:
-        datetime.datetime.strptime(date_text, '%d/%m/%Y')
+        datetime.datetime.strptime(date_text, '%Y/%m/%d')
     except ValueError:
         raise ValidationError(
-            _('%(phone_number) should be this format DD/MM/YYYY'),
+            _('%(phone_number) should be this format YYYY/MM/DD'),
             params={'value': date_text},)
+
+
+def my_min_length(value):
+    if len(value) < 5:
+        raise ValidationError('This input should have at least 5 characters')
 
 
 class AccountManager(BaseUserManager):
@@ -66,8 +71,8 @@ class Account(AbstractBaseUser):
     secondary_emails = ArrayField(ArrayField(models.TextField(null=True, default=None),
                                              null=True, size=2), null=True, size=5)
 
-    first_name = models.CharField(max_length=30, default=None, null=True)
-    last_name = models.CharField(max_length=30, default=None, null=True)
+    first_name = models.CharField(max_length=30, default=None, null=True, validators=[my_min_length])
+    last_name = models.CharField(max_length=30, default=None, null=True, validators=[my_min_length])
     birthdate = models.CharField(max_length=30, null=True, validators=[validate_birthdate])
     gender = models.CharField(max_length=30, null=True)
 

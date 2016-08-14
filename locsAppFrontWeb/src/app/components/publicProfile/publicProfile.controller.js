@@ -6,71 +6,129 @@
     .controller('PublicProfileController', PublicProfileController);
 
   /** @ngInject */
-  function PublicProfileController($scope, $log, UsersService, ScopesService, $state, toastr) {
+  function PublicProfileController($scope, $log, UsersService, ScopesService, $state, toastr, URL_API,
+                                   $stateParams) {
     var vm = this;
 
     /*vars initilization*/
-    vm.user = {};
+    vm.public_user = {};
+    vm.url_api = URL_API;
+    var i;
+
+    vm.firstFourNotationSuccess = function (data) {
+      $log.log("firstFourNotationSuccess ", data);
+
+      vm.public_user.renter_notation = data.renter_notation;
+      vm.public_user.client_notation = data.client_notation;
+      vm.public_user.nb_rotation_renter = data.nb_notation_renter;
+      vm.public_user.nb_notation_client = data.nb_notation_client;
+
+
+      for (i = 0; i < vm.public_user.renter_notation.length; i++) {
+        var score_renter = Math.round(vm.public_user.renter_notation[i].value);
+        var score_array_renter = [];
+
+        for (var j = 0; j < 5; j++) {
+          if (j < score_renter)
+            score_array_renter.push(true);
+          else
+            score_array_renter.push(false);
+        }
+        vm.public_user.renter_notation[i].score = score_array_renter;
+
+      }
+
+      for (i = 0; i < vm.public_user.client_notation.length; i++) {
+        var score_client = Math.round(vm.public_user.client_notation[i].value);
+        var score_array_client = [];
+
+        for (j = 0; j < 5; j++) {
+          if (j < score_client)
+            score_array_client.push(true);
+          else
+            score_array_client.push(false);
+        }
+        vm.public_user.client_notation[i].score = score_array_client;
+
+
+      }
+
+    };
+
+    vm.firstFourNotationFailure = function (data) {
+      $log.error("firstFourNotationFailure ", data);
+    };
+
+    vm.GetArticleFromUserProfileSuccess = function (data) {
+      //$log.log("GetArticleFromUserProfileSuccess ", data);
+      vm.public_user.nb_total_articles = data.nb_total_articles;
+      vm.public_user.articles = data.articles;
+
+      UsersService
+        .firstFourNotation
+        .get({id: vm.public_user.id})
+        .$promise
+        .then(vm.firstFourNotationSuccess, vm.firstFourNotationSuccess)
+
+    };
+
+    vm.GetArticleFromUserProfileFailure = function (data) {
+      $log.error("GetArticlefromUserProfileFailure ", data);
+    };
 
     /*Success callback of profile_check*/
-    vm.GetInfosUserSuccess = function (data) {
-      $log.log(data);
-      vm.user = data;
-      vm.user.registered_date = vm.user.registered_date.substring(0, 10);
+    vm.GetPublicUserSuccess = function (data) {
+      vm.public_user = data;
+      vm.public_user.registered_date = vm.public_user.registered_date.substring(0, 10).replace(/-/g, '/');
+      vm.public_user.last_activity_date = vm.public_user.last_activity_date.split('T')[0].replace(/-/g, '/');
 
-      //On affichaga de la plus recente a pla plus ancienne ca sera envoye par le backend
-      vm.user.nb_mark_as_renter = 50;
-      vm.user.nb_mark_as_seller = 40;
-      vm.user.global_notation_renter = [true, true, true, true, false];
-      vm.user.global_notation_seller = 5;
-      vm.user.notation_renter = [
-        {
-          "author_id": "dgdsgdshfs8787",
-          "author_username": "toto",
-          "title_article": "Veste rouge taille 42",
-          "id_article": "56cb41c0421aa91298799892",
-          "mark": [true, true, true, true, true],
-          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        },
+      vm.public_user.renter_score_array = undefined;
+      if (vm.public_user.renter_score != -1) {
+        var renter_score = Math.round(vm.public_user.renter_score);
+        vm.public_user.renter_score_array = [];
+        for (i = 0; i < 5; i++) {
+          if (i < renter_score)
+            vm.public_user.renter_score_array.push(true);
+          else
+            vm.public_user.renter_score_array.push(false);
+        }
+      }
 
-        {
-          "author_id": "dgdsgdshfs8787",
-          "author_username": "toto",
-          "title_article": "Veste rouge taille 42",
-          "id_article": "56cb41c0421aa91298799892",
-          "mark": [true, true, true, false, false],
-          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        }//,
+      vm.public_user.client_score_array = undefined;
+      if (vm.public_user.tenant_score != -1) {
+        var client_score = Math.round(vm.public_user.tenant_score);
+        vm.public_user.client_score_array = [];
+        for (i = 0; i < 5; i++) {
+          if (i < client_score)
+            vm.public_user.client_score_array.push(true);
+          else
+            vm.public_user.client_score_array.push(false);
+        }
+      }
 
-     /*   {
-          "author_id": "dgdsgdshfs8787",
-          "author_username": "toto",
-          "title_article": "Veste rouge taille 42",
-          "id_article": "56cb41c0421aa91298799892",
-          "mark": [true, true, true, true, false],
-          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        }*/
-      ]
+      // We call the routes to get articles of the current user
+      UsersService
+        .articleFromUserProfile
+        .get({id: vm.public_user.id})
+        .$promise
+        .then(vm.GetArticleFromUserProfileSuccess, vm.GetArticleFromUserProfileFailure)
+
     };
 
     /*Failure callback of profile_check*/
-    vm.GetInfosUserFailure = function (data) {
+    vm.GetPublicUserFailure = function (data) {
       $log.log(data);
       toastr.error("This is odd...", "Woops...");
+
+
     };
 
-    /*Adds a new scope to share, and goes to profile_management*/
-    vm.goToParameters = function () {
-      ScopesService
-        .set("user_infos", vm.user);
-      $state.go("main.profile_management")
-    };
 
-    /*vm.user initializer*/
+    /*vm.public_user initializer*/
     UsersService
-      .profile_check
-      .get({})
+      .getPublicUser
+      .get({username: $stateParams.username})
       .$promise
-      .then(vm.GetInfosUserSuccess, vm.GetInfosUserFailure);
+      .then(vm.GetPublicUserSuccess, vm.GetPublicUserFailure);
   }
 })();

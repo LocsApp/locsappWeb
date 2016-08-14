@@ -3,17 +3,14 @@ div.article-show(layout="row" layout-align="center")
 
     div(layout="row" layout-align="center")
       div
-        h1 {{articleShow.data.title}}
+        h1 {{articleShow.article.title}}
         br
         div.subtitle(layout="row")
-          h2 By <a href="/profile/{{articleShow.username_author}}"> {{articleShow.username_author}} </a>
-          span
-            ng-md-icon(icon="star" size="22")
-            ng-md-icon(icon="star" size="22")
-            ng-md-icon(icon="star" size="22")
-            ng-md-icon(icon="star" size="22")
-            ng-md-icon(icon="star" size="22")
-            span ({{articleShow.nb_renter_notation}})
+          h2 By <a href="/profile/{{articleShow.article.username_author}}/"> {{articleShow.article.username_author}} </a>
+          span(ng-repeat='star in articleShow.global_mark_array track by $index')
+            ng-md-icon(ng-if="star" icon="star" size="22")
+            ng-md-icon(ng-if="!star" icon="star" size="22" style="fill:grey")
+          span ({{articleShow.nb_mark}})
 
 
 
@@ -34,7 +31,7 @@ div.article-show(layout="row" layout-align="center")
 
           div.block-properties(layout="row")
             div.name-properties(flex="50") Price
-            div.t-right(flex="50") {{articleShow.data.price}}$/day
+            div.t-right(flex="50") {{articleShow.article.price}}$/day
           md-divider
           div.block-properties(layout="row")
             div.name-properties(flex="50") Payment
@@ -96,20 +93,33 @@ div.article-show(layout="row" layout-align="center")
             div.details
               span
                 a(href='#')
-                  ng-md-icon(icon="favorite" ng-click="articleShow.addArticleToFavorite(articleShow.data._id)")
-                  span.bottom-right-md-card Add to your favorites
+                  ng-md-icon(icon="favorite_border" ng-hide='articleShow.is_in_favorite' ng-click="articleShow.addArticleToFavorite(articleShow.article._id)")
+                  ng-md-icon(icon="favorite" ng-hide='!articleShow.is_in_favorite' ng-click="articleShow.deleteArticleFavorite (articleShow.article._id)")
+                  span(ng-hide='articleShow.is_in_favorite' ng-click="articleShow.addArticleToFavorite(articleShow.article._id)").bottom-right-md-card Add to your favorites
+                  span(ng-hide='!articleShow.is_in_favorite' ng-click="articleShow.deleteArticleFavorite (articleShow.article._id)").bottom-right-md-card Delete from your favorites
             div.details
               span
-                ng-md-icon(icon="share")
+                ng-md-icon(icon="share" style="cursor:default")
                 span.bottom-right-md-card Share it
                 span
-                  a(href="#" socialshare socialshare-provider="facebook"
-                  socialshare-url="http://localhost:3000/article/572c5c64fbbe6158bf447728"
-                  socialshare-text="headlines" socialshare-description="description"
-                  socialshare-media="http://127.0.0.1:8000/media/articles/c6a1d210906944e294a81519cd67e6f0"
-                  socialshare-type="feed" socialshare-via="1011661268854723")  SHARE ME
-                  ng-md-icon(icon="facebook")
-                  ng-md-icon(icon="twitter")
+                  ng-md-icon(icon="facebook"
+                  href="#" socialshare socialshare-provider="facebook"
+                  socialshare-url="{{articleShow.url_api}}article/{{articleShow.article._id}}"
+                  socialshare-text="LocsApp - {{articleShow.article.title}}"
+                  socialshare-description="{{articleShow.article.description}}"
+                  socialshare-media="{{articleShow.url_api}}{{articleShow.url_thumbnail}}"
+                  socialshare-type="feed"
+                  socialshare-via="1011661268854723"
+                  socialshare-from="locsapp"
+                  socialshare-display="popup"
+                  socialshare-source="{{articleShow.url_api}}article/{{articleShow.article._id}}"
+                  socialshare-caption="LocsApp - {{articleShow.article.title}}"
+                  socialshare-redirect-uri="")
+                  ng-md-icon(icon="twitter" href="#" socialshare socialshare-provider="twitter"
+                  socialshare-url="{{articleShow.url_api}}article/{{articleShow.article._id}}"
+                  socialshare-text="Look what I found on LocsApp"
+                  socialshare-via="locsapp"
+                  socialshare-display="popup")
 
             div.details
               span
@@ -131,7 +141,7 @@ div.article-show(layout="row" layout-align="center")
     div(layout="row" layout-align="center")
       md-card(flex="100")
         md-card-content
-          div.description(ng-bind-html='articleShow.data.description')
+          div.description(ng-bind-html='articleShow.article.description')
 
 
 

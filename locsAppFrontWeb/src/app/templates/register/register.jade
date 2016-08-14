@@ -6,10 +6,10 @@
       div(layout="row" layout-align="center")
         form(name="registerForm" novalidate ng-submit="registerForm.$valid && register.submit()"
         flex-xs="100" flex-sm="80" flex-md="60" flex="50")
-          section(layout="column", layout-align="start center", layout-margin)
 
 
-            md-input-container.md-icon-float.md-block(layout-fill)
+
+            md-input-container.md-icon-float.md-block
               md-icon(md-svg-src="../assets/icons/register-login/ic_mood_black_24px.svg" class="name")
               input(placeholder="Username" required name="username" ng-model="username" md-maxlength="20" minlength="3").body-register-container-md
               div(ng-messages="registerForm.username.$error" ng-if='!registerForm.username.$pristine')
@@ -18,7 +18,7 @@
                 div(ng-message="md-maxlength") The username must be shorter than 20 characters.
 
 
-            md-input-container.md-icon-float.md-block(layout-fill)
+            md-input-container.md-icon-float.md-block
               md-icon(md-svg-src="../assets/icons/register-login/ic_email_black_24px.svg"
               class="name")
               input(placeholder="Email" type="email" minlength="8" maxlength="100" required name="email" ng-model="email" ng-pattern="/^.+@.+\..+$/").body-register-container-md
@@ -27,7 +27,7 @@
                 div(ng-message="minlength") The email must be longer than 8 characters.
                 div(ng-message="maxlength") The email must be shorter than 100 characters.
                 div(ng-message="pattern") The field must be an email.
-            md-input-container.md-icon-float.md-block(layout-fill)
+            md-input-container.md-icon-float.md-block
               md-icon(md-svg-src="../assets/icons/register-login/ic_repeat_black_24px.svg" class="name")
               input(placeholder="Repeat Email" type="email" minlength="8" maxlength="100" required name="email_repeat" ng-model="email_repeat" ng-pattern="/^.+@.+\..+$/" match="email").body-register-container-md
               div(ng-messages="registerForm.email_repeat.$error" ng-if='!registerForm.email_repeat.$pristine')
@@ -36,7 +36,7 @@
                 div(ng-message="maxlength") The email must be shorter than 100 characters.
                 div(ng-message="pattern") The field must be an email.
                 div(ng-message="match") Emails must match.
-            md-input-container.md-icon-float.md-block(layout-fill)
+            md-input-container.md-icon-float.md-block
               md-icon(md-svg-src="../assets/icons/register-login/ic_vpn_key_black_24px.svg" class="name")
               input(placeholder="Password" type="password" name="password" required ng-model="password" maxlength="30" minlength="6").body-register-container-md
               div(ng-messages="registerForm.password.$error" ng-if="registerForm.password.$dirty")

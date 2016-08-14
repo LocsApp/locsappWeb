@@ -5,7 +5,7 @@
 		.controller('LogoutController', LogoutController);
 
 	/** @ngInject */
-	function LogoutController($state, $sessionStorage, $localStorage, $log, toastr, UsersService)
+	function LogoutController($state, $sessionStorage, $localStorage, $log, toastr, UsersService, ScopesService)
 	{
 		var vm = this;
 
@@ -14,6 +14,7 @@
 			$localStorage.$reset();
 			$sessionStorage.$reset();
 			$localStorage.temp_static_collections = temp_static_collections;
+      ScopesService.remove("current_user");
 			toastr.success("You logged out securely.", "Successful Log Out");
 			$state.go("main.homepage");
 		};

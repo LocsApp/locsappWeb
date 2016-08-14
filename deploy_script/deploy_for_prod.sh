@@ -16,5 +16,5 @@ npm install
 bower install
 gulp config-hostname --env="production"
 gulp build
-sudo /etc/init.d/nginx  restart
 
+ssh locsapp@sylflo.fr /home/locsapp/scritps/locsapp.sylflo.fr/updateWebSite.sh

@@ -10,13 +10,18 @@
   function HistoryService($log, $resource, URL_API) {
 
     var service = {
-        getMarksForClients: $resource(URL_API + 'api/v1/history/notations-as-client/'),
-        getMarksForRenters: $resource(URL_API + 'api/v1/history/notations-as-renter/'),
-        getArticlesForClients: $resource(URL_API + 'api/v1/history/articles-as-client/'),
-        getArticlesForRenters: $resource(URL_API + 'api/v1/history/articles-as-renter/')
+      getMarksForClients: $resource(URL_API + 'api/v1/history/notations-as-client/'),
+      getMarksForRenters: $resource(URL_API + 'api/v1/history/notations-as-renter/'),
+      getArticlesForClients: $resource(URL_API + 'api/v1/history/articles-as-client/'),
+      getArticlesForRenters: $resource(URL_API + 'api/v1/history/articles-as-renter/'),
+
+      getNotationsAsClient: $resource(URL_API + 'api/v1/history/notations-as-client-pagination/:id_user/:id_page/',
+        {id_user: "id_user", id_page: "id_page"}),
+      getNotationsAsRenter: $resource(URL_API + 'api/v1/history/notations-as-renter-pagination/:id_user/:id_page/',
+        {id_user: "id_user", id_page: "id_page"})
     };
 
     return service;
 
   }
-  })();
+})();

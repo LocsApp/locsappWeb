@@ -7,6 +7,7 @@ class UpdateLastActivityMiddleware(object):
 	def process_view(self, request, view_func, view_args, view_kwargs):
 
 		if 'HTTP_AUTHORIZATION' in request.META:
+			#print(request.META['HTTP_AUTHORIZATION'])
 			token = request.META['HTTP_AUTHORIZATION'].split()[1]
 			try:
 				# We check if the token is in the database and we update the user model

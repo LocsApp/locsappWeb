@@ -92,11 +92,11 @@
         }
       })
       .state('main.public_user_profile', {
-        url: 'public_profile',
+        url: 'profile/:username/',
         parent: 'main',
         controller: 'PublicProfileController',
         controllerAs: 'publicProfile',
-        templateUrl: 'app/templates/userProfile/public_user_profile.html',
+        templateUrl: 'app/templates/publicUserProfile/public_user_profile.html',
         data: {
           permissions: {
             only: ['guest', 'user'],
@@ -327,6 +327,22 @@
             redirectTo: 'main.homepage'
           }
         }
+      })
+
+      .state('main.notation_as_renter', {
+        url: 'notation-as-renter/:username/',
+        parent: 'main',
+        templateUrl: 'app/templates/notations/notation_as_renter.html',
+        controller: 'NotationAsRenterController',
+        controllerAs: 'notationAsRenter'
+      })
+
+       .state('main.notation_as_client', {
+        url: 'notation-as-client/:username/',
+        parent: 'main',
+        templateUrl: 'app/templates/notations/notation_as_client.html',
+        controller: 'NotationAsClientController',
+        controllerAs: 'notationAsClient'
       })
 
 

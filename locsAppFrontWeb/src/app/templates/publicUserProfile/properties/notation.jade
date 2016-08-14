@@ -1,4 +1,4 @@
-md-card(flex-xs="100" flex-sm='100' flex-md="50" flex="50" ng-if="publicProfile.user.nb_mark_as_renter")
+md-card
   md-card-content
     div(layout="row" layout-align="center")
       md-divider.separator-h2(flex="30" hide-sm)
@@ -6,75 +6,72 @@ md-card(flex-xs="100" flex-sm='100' flex-md="50" flex="50" ng-if="publicProfile.
       md-divider.separator-h2(flex="30" hide-sm)
 
     h3(flex-offset="10") As a renter
-      span(ng-repeat="value in publicProfile.user.global_notation_renter track by $index"
-      ng-if="!publicProfile.user.notation_renter")
+      span(ng-repeat="value in publicProfile.public_user.renter_score_array track by $index"
+      ng-if="publicProfile.public_user.renter_notation.length != 0")
         ng-md-icon(ng-if="value" icon="star" size="22")
-        ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
-      span(ng-if="publicpublicProfile.user.notation_renter") ({{publicpublicProfile.user.nb_mark_as_renter}})
-    p.t-center(ng-if="!publicpublicProfile.user.notation_renter").
-      {{publicpublicProfile.user.username}} has no notation as a renter
+        ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
+      span(ng-if="publicProfile.public_user.renter_notation.length != 0") ({{publicProfile.public_user.nb_rotation_renter}})
+    p.t-center(ng-if="publicProfile.public_user.renter_notation.length == 0").
+      {{publicProfile.public_user.username}} has no notation as a renter
     md-list.my-layout-xs(flex-offset="10" layout="row")
-      md-list-item.md-3-line(ng-repeat="notation in publicpublicProfile.user.notation_renter track by $index "
+      md-list-item.md-3-line(ng-repeat="notation in publicProfile.public_user.renter_notation track by $index "
       ng-if="$index <= 1")
         img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg" class="md-avatar" alt="{{item.who}}")
         div.md-list-item-text(layout="column")
-          h4 {{ notation.title_article }}
+          h4 {{ notation.article_name | limitTo: 10 }} {{notation.article_name.length > 10 ? '...' : ''}}
           div
-            span(ng-repeat="value in notation.mark track by $index")
+            span(ng-repeat="value in notation.score track by $index")
               ng-md-icon(ng-if="value" icon="star" size="22")
-              ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
-          p {{ notation.description | limitTo: 30 }} {{notation.description.length > 30 ? '...' : ''}}
-    md-divider(flex-offset="10" flex="80")
+              ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
+          p {{ notation.comment | limitTo: 30 }} {{notation.comment.length > 30 ? '...' : ''}}
+    md-divider(flex-offset="10" flex="80" ng-show="publicProfile.public_user.nb_rotation_renter <= 2")
     md-list.my-layout-xs(flex-offset="10" layout="row")
-      md-list-item.md-3-line(ng-repeat="notation in publicpublicProfile.user.notation_renter track by $index"
+      md-list-item.md-3-line(ng-repeat="notation in publicProfile.public_user.renter_notation track by $index"
       ng-if="$index > 1")
-        img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3" +
-        ".jpg" class="md-avatar" alt="{{item.who}}")
+        img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg" class="md-avatar" alt="{{item.who}}")
         div.md-list-item-text(layout="column")
-          h4 {{ notation.title_article }}
+          h4 {{ notation.article_name | limitTo: 10 }} {{notation.article_name.length > 10 ? '...' : ''}}
           div
-            span(ng-repeat="value in notation.mark track by $index")
+            span(ng-repeat="value in notation.score track by $index")
               ng-md-icon(ng-if="value" icon="star" size="22")
-              ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
-          p {{ notation.description | limitTo: 30 }} {{notation.description.length > 30 ? '...' : ''}}
+              ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
+          p {{ notation.comment | limitTo: 30 }} {{notation.description.comment > 30 ? '...' : ''}}
 
-    div(flex-offset="10" ng-if="publicpublicProfile.user.notation_renter.length > 4")
-      md-button.special-button.md-raised(layout-fill flex="90" ) Show more
+    div(flex-offset="10" ng-if="publicProfile.public_user.nb_rotation_renter > 2")
+      md-button.special-button.md-raised(ui-sref="main.notation_as_renter({username: publicProfile.public_user.username})" layout-fill flex="90" ) Show more
 
 
     h3( flex-offset="10") As a client
-      span(ng-repeat="value in publicpublicProfile.user.global_notation_client track by $index"
-      ng-if="!publicpublicProfile.user.notation_client")
+      span(ng-repeat="value in publicProfile.public_user.client_score_array track by $index"
+      ng-if="publicProfile.public_user.client_notation.length != 0")
         ng-md-icon(ng-if="value" icon="star" size="22")
-        ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
-      span(ng-if="publicpublicProfile.user.notation_client") ({{publicpublicProfile.user.nb_mark_as_client}})
-    p.t-center(ng-if="!publicpublicProfile.user.notation_client") {{publicpublicProfile.user.username}} has no notation as a client
+        ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
+      span(ng-if="publicProfile.public_user.client_notation.length != 0") ({{publicProfile.public_user.nb_notation_client}})
+    p.t-center(ng-if="publicProfile.public_user.client_notation.length == 0") {{publicProfile.public_user.username}} has no notation as a client
     md-list.my-layout-xs(flex-offset="10" layout="row")
-      md-list-item.md-3-line(ng-repeat="notation in publicpublicProfile.user.notation_client track by $index"
+      md-list-item.md-3-line(ng-repeat="notation in publicProfile.public_user.client_notation track by $index"
       ng-if="$index <= 1")
         img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg" class="md-avatar" alt="{{item.who}}")
         div.md-list-item-text(layout="column")
-          h4 {{ notation.title_article }}
+          h4 {{ notation.article_name | limitTo: 10 }} {{notation.article_name.length > 10 ? '...' : ''}}
           div
-            span(ng-repeat="value in notation.mark track by $index")
+            span(ng-repeat="value in notation.score track by $index")
               ng-md-icon(ng-if="value" icon="star" size="22")
-              ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
-          p {{ notation.description | limitTo: 30 }} {{notation.description.length > 30 ? '...' : ''}}
-    md-divider(flex-offset="10" flex="80")
+              ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
+          p {{ notation.comment | limitTo: 30 }} {{notation.comment.length > 30 ? '...' : ''}}
     md-list.my-layout-xs(flex-offset="10" layout="row")
-      md-list-item.md-3-line(ng-repeat="notation in publicpublicProfile.user.notation_client track by $index"
+      md-list-item.md-3-line(ng-repeat="notation in publicProfile.public_user.client_notation track by $index"
       ng-if="$index > 1")
-        img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3" +
-        ".jpg" class="md-avatar" alt="{{item.who}}")
+        img(ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg" class="md-avatar" alt="{{item.who}}")
         div.md-list-item-text(layout="column")
-          h4 {{ notation.title_article }}
+          h4 {{ notation.article_name | limitTo: 10 }} {{notation.article_name.length > 10 ? '...' : ''}}
           div
-            span(ng-repeat="value in notation.mark track by $index")
+            span(ng-repeat="value in notation.score track by $index")
               ng-md-icon(ng-if="value" icon="star" size="22")
-              ng-md-icon.grey(ng-if="!value" icon="star" style="fill:'grey'" size="22")
-          p {{ notation.description | limitTo: 30 }} {{notation.description.length > 30 ? '...' : ''}}
+              ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
+          p {{ notation.comment | limitTo: 30 }} {{notation.comment.length > 30 ? '...' : ''}}
 
 
-    div(flex-offset="10" ng-if="publicpublicProfile.user.notation_client.length > 4")
-      md-button.special-button.md-raised(layout-fill flex="90") Show more
+    div(flex-offset="10" ng-if="publicProfile.public_user.nb_notation_client > 2")
+      md-button.special-button.md-raised(ui-sref="main.notation_as_client({username: publicProfile.public_user.username})" layout-fill flex="90") Show more
 

@@ -1,0 +1,60 @@
+div(style="margin-top: 10px;" ng-cloak)
+
+  md-divider.flex
+  div.search-article-toolbar(ng-if="notationAsClient.client_score_array != undefined")
+    md-toolbar(style="background-color:none" layout="row")
+      span.flex
+      ng-md-icon(icon="keyboard_arrow_left" ng-click='notationAsClient.prevPage(notationAsClient.current_page - 1)' ng-if="notationAsClient.current_page != 1").arrow-previous-page
+      span.pagination-toolbar-search-article
+        span(paging paging-action="notationAsClient.goToPage(page)"  page="notationAsClient.current_page" page-size="notationAsClient.page_size" total="notationAsClient.nb_items" active-class="current-page-selected-search-article")
+      //span(style="margin-right: 20px;" ng-if="articleSearch.search._pagination.page_number >= articleSearch.totalItems / articleSearch.search._pagination.items_per_page")
+      ng-md-icon(icon="keyboard_arrow_right" ng-click='notationAsClient.nextPage(notationAsClient.current_page + 1)' ng-if="notationAsClient.current_page != notationAsClient.nb_page").arrow-next-page
+  md-divider.flex
+
+
+  div(layout="row"  layout-align="center start" ng-if="notationAsClient.client_score_array != undefined")
+    h1(flex-offset="10") As a client
+      span(ng-repeat="value in notationAsClient.client_score_array track by $index"
+      )
+        ng-md-icon(ng-if="value" icon="star" size="22")
+        ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
+      span ({{notationAsClient.username}}: {{notationAsClient.nb_items}})
+
+  div(layout="row"  layout-align="center start")
+    div(ng-if="notationAsClient.client_score_array == undefined")
+      h1 {{notationAsClient.username}} has no notation as a client
+
+  div.notation-as-client(ng-class="notationAsClient.animatePagination" ng-cloak)
+    div.delimiter
+    div.delimiter
+    section(layout="row", layout-align="start start")
+      div(layout-margin style="margin-top: 0px;").flex
+        md-grid-list(md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-row-height="70px" md-cols-gt-md="4" md-gutter="20px")
+          md-grid-tile(style="background: yellow;" md-colspan="1" md-rowspan="2" ng-repeat="notation in notationAsClient.notations")
+            //h1 {{notation}}
+            md-card(layout-fill)
+              md-card-content()
+                md-list-item.md-3-line
+                  img(style='height:70px; width:auto;' ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg" class="md-avatar" alt="{{item.who}}")
+                  div.md-list-item-text(layout="column")
+                    h4 {{ notation.article_name | limitTo: 10 }} {{notation.article_name.length > 10 ? '...' : ''}}
+                    div
+                      span(ng-repeat="value in notation.score track by $index")
+                        ng-md-icon(ng-if="value" icon="star" size="22")
+                        ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
+                    p {{ notation.comment | limitTo: 30 }} {{notation.comment.length > 30 ? '...' : ''}}
+            md-grid-tile-footer
+              div(layout-fill layout="row" layout-align="center start" ng-if="notation.comment.length > 30 || notation.article_name.length > 10")
+                md-button.special-button.md-raised(ng-click="notationAsClient.showNotationDialog($event, notation);") Show more
+  md-divider.flex()
+  div.search-article-toolbar(ng-if="notationAsClient.client_score_array != undefined")
+    md-toolbar(style="background-color:none" layout="row")
+      span.flex
+      ng-md-icon(icon="keyboard_arrow_left" ng-click='notationAsClient.prevPage(notationAsClient.current_page - 1)' ng-if="notationAsClient.current_page != 1").arrow-previous-page
+      span.pagination-toolbar-search-article
+        span(paging paging-action="notationAsClient.goToPage(page)"  page="notationAsClient.current_page" page-size="notationAsClient.page_size" total="notationAsClient.nb_items" active-class="current-page-selected-search-article")
+      //span(style="margin-right: 20px;" ng-if="articleSearch.search._pagination.page_number >= articleSearch.totalItems / articleSearch.search._pagination.items_per_page")
+      ng-md-icon(icon="keyboard_arrow_right" ng-click='notationAsClient.nextPage(notationAsClient.current_page + 1)' ng-if="notationAsClient.current_page != notationAsClient.nb_page").arrow-next-page
+  md-divider.flex
+  div(style="margin-bottom:10px;")
+

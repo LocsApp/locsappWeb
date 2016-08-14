@@ -8,6 +8,8 @@ from allauth.account.views import confirm_email
 from social_network import views as social_network_views
 from . import favorites
 from . import questions
+from . import notations
+from . import users
 
 """
 @apiDefine UserObjectRegisterDefine
@@ -43,6 +45,10 @@ article_patterns = [
     url(r'^report-question/$', questions.report),
     url(r'^articles-with-question-to-answer/$', questions.articleWithQuestionToAnswer),
     url(r'^articles-with-question-asked/$', questions.articleWithQuestionUserAsked),
+    url(r'^user-profile/(?P<user_pk>[0-9]+)/$',
+        articles.getFirstFourArticleOwnedByUser),
+    url(r'^all/(?P<user_pk>[0-9]+)/(?P<id_page>[0-9]+)/$',
+        articles.getAllArticleOwnedByUser),
 ]
 
 history_patterns = [
@@ -50,6 +56,11 @@ history_patterns = [
     url(r'^articles-as-renter/$', articles.getArticleHistoryAsRenter),
     url(r'^notations-as-renter/$', articles.getNotationsAsRenter),
     url(r'^notations-as-client/$', articles.getNotationsAsClient),
+    url(r'^notations-profile/(?P<user_pk>[0-9]+)/$', notations.getFirstFourNotationOwnedByUser),
+    url(r'^notations-as-client-pagination/(?P<username>\w+)/(?P<id_page>[0-9]+)/$', notations.getAllNotationAsClientByUser),
+    url(r'^notations-as-renter-pagination/(?P<username>\w+)/(?P<id_page>[0-9]+)/$',
+        notations.getAllNotationAsRentertByUser),
+
 ]
 
 favorite_patterns = [
@@ -91,6 +102,9 @@ user_patterns = [
     url(r'^image-upload-avatar/$',
         views.ImageAvatarUploadView.as_view(),
         name='image-upload-avatar'),
+    url(r'^(?P<username>\w+)/$', users.getUserByUsername.as_view()),
+    url(r'^(?P<username>\w+)/(?P<lat>-?\d+\.\d+)/(?P<long>-?\d+\.\d+)/$', users.getUserByUsernameLongLat.as_view()),
+
 ]
 
 # Static collections urls
