@@ -487,10 +487,12 @@
 
       vm.successSendReportArticle = function (data) {
         $log.log("successSendReportArticle", data);
+        toastr.success(data.message, "Success");
       };
 
       vm.errorSendReportArticle = function (data) {
-        $log.error("errorSendReportArticle", data)
+        $log.error("errorSendReportArticle", data);
+        toastr.error(data.data.Error, "Error");
       };
 
       /* Send a report */
@@ -498,6 +500,7 @@
 
 
         $log.log("id report = ", vm.report_type._id);
+
 
         ArticleService
           .sendReportArticle
@@ -511,7 +514,6 @@
           })
           .$promise
           .then(vm.successSendReportArticle, vm.errorSendReportArticle)
-
       }
     }
 

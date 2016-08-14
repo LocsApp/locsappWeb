@@ -764,7 +764,7 @@ def sendReport(request):
         if request.body:
             answer = json.loads(request.body.decode('utf8'))
             print("answer = ", answer)
-            #NEED TO CHECK FOR THE ERRORS that article and id report exist and the email
+
             if 'id_article' not in answer or 'id_report_type' not in answer or 'email' not in answer:
                 return JsonResponse({"Error": "Your forget to add fields"}, status=405)
             if not ObjectId.is_valid(answer['id_article']) or not ObjectId.is_valid(answer['id_report_type']):
@@ -826,7 +826,6 @@ def sendReport(request):
                 "first_name": {
                     "_type": str,
                     "_length": 50,
-                    #"_required": True
                 },
                 "last_name": {
                     "_type": str,
