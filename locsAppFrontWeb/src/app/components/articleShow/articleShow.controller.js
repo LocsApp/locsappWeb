@@ -44,6 +44,7 @@
       vm.global_mark = data.global_mark_as_renter;
       vm.nb_mark = data.nb_mark_as_renter;
       vm.is_in_favorite = data.is_in_favorite;
+      vm.is_reported = data.is_reported;
       $log.log("GetInfoArticleSuccess = ", data);
       //$log.log("get infoi = ", data.article.username_author);
 
@@ -484,8 +485,8 @@
       vm.report_types = ScopesService.get("static_collections").report_types;
 
       vm.successSendReportArticle = function (data) {
-        //$log.log("successSendReportArticle", data);
         toastr.success(data.message, "Success");
+        $mdDialog.hide();
       };
 
       vm.errorSendReportArticle = function (data) {

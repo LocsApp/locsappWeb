@@ -706,8 +706,13 @@ def getArticle(request, article_pk):
         if user is not False and db_locsapp["favorite_article"].find_one({"id_user": user.pk, "id_article": article_pk}):
             is_in_favorite = True
 
+        is_reported = False
+        if user is not False and db_locsapp['reports'].find_one({"id_author": user.pk, "id_article": article["_id"]}):
+            is_reported = True
+
         return JsonResponse({"article": article, "global_mark_as_renter": global_mark_as_renter,
-                             "nb_mark_as_renter": nb_mark_as_renter, "is_in_favorite": is_in_favorite})
+                             "nb_mark_as_renter": nb_mark_as_renter, "is_in_favorite": is_in_favorite,
+                             "is_reported": is_reported})
         # return APIrequests.GET('articles', id=article_pk)
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
@@ -839,8 +844,10 @@ def sendReport(request):
 
             }
 
-            report = db_locsapp['reports'].find_one({"email": answer['email'], "id_article": answer['id_article']})
-            print("report = ", report)
+            if current_user_pk == -1:
+                report = db_locsapp['reports'].find_one({"email": answer['email'], "id_article": answer['id_article']})
+            else:
+                    report = db_locsapp['reports'].find_one({"id_author": current_user_pk, "id_article": answer['id_article']})
             if report:
                 return JsonResponse({"Error": "Your already reported this article"}, status=405)
             else:
