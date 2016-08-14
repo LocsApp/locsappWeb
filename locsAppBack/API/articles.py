@@ -774,7 +774,7 @@ def sendReport(request):
             report_type = db_locsapp["report_types"].find_one({"_id": ObjectId(answer["id_report_type"])})
 
             if article is None or report_type is None:
-                return JsonResponse({"Error": "Add an existiong article and report_type"}, status=405)
+                return JsonResponse({"Error": "Add an existing article and report_type"}, status=405)
 
             current_user_pk = -1
             current_user_username = "anonymous"
