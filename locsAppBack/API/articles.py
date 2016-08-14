@@ -808,6 +808,9 @@ def sendReport(request):
                 current_user_pk = current_user.pk
                 current_user_username = current_user.username
 
+            if article["id_author"] == current_user_pk and current_user_pk != -1:
+                return JsonResponse({"Error": "You are the owner of this article"}, status=403)
+
             model = {
                 "id_article": {
                     "_type": ObjectId(),

@@ -124,7 +124,7 @@ div.article-show(layout="row" layout-align="center")
             div.details
               span
                 //a(facebook class="facebookShare" data-url='http://google.com'data-shares='shares') {{ shares }}
-                a(href='#' ng-if="!articleShow.is_reported")
+                a(href='#' ng-if="!articleShow.is_reported" ng-show="!articleShow.ownArticle")
                   ng-md-icon(icon="warning")
                   span.bottom-right-md-card( ng-click="articleShow.reportDialog($event)") Send a report
 
