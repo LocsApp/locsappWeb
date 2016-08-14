@@ -246,6 +246,17 @@ class livingAddressUser(APIView):
                 status=401)
         return Response({"message": "Nice"})
 
+    def put(self, request, user_pk):
+        User = get_user_model()
+        if self.request.user.pk:
+            if int(user_pk) != int(self.request.user.pk):
+                return Response(
+                    {"Unauthorized": "You have no access to this data."}, status=403)
+        else:
+            return Response(
+                {"Unauthorized": "You need to be connected."}, status=403)
+
+
     def get(self, request, user_pk):
         User = get_user_model()
         if self.request.user.pk:
