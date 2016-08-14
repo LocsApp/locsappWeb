@@ -127,7 +127,7 @@ div.article-show(layout="row" layout-align="center")
                 a(href='#' ng-if="!articleShow.is_reported" ng-show="!articleShow.ownArticle")
                   ng-md-icon(icon="warning")
                   span.bottom-right-md-card( ng-click="articleShow.reportDialog($event)") Send a report
-              ng-md-icon(icon="warning" style="cursor:default")
+              ng-md-icon(ng-if='articleShow.is_reported' icon="warning" style="cursor:default")
               span.bottom-right-md-card.report-sent( ng-if='articleShow.is_reported'
               style='text-decoration:none;') Report already sent
 
