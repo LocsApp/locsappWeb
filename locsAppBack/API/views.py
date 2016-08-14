@@ -96,6 +96,31 @@ class addEmailUser(APIView):
             return Response(
                 {"Error": "There must be a field 'new_email' present in the document."},
                 status=401)
+
+        try:
+            validate_email(request.data["new_email"])
+        except:
+            return Response(
+                {"Error": "Please provide a correct email address."}, status=401)
+        if request.data["new_email"] == request.user.email:
+            return Response(
+                {"Error": "This is already your email."}, status=401)
+        answer = request.user.add_email_address(
+            request, request.data["new_email"], False)
+        if "Error" in answer:
+            return Response(answer, status=401)
+        return Response(answer)
+
+"""
+@permission_classes((IsAuthenticated,))
+class addEmailUser(APIView):
+
+    def post(self, request):
+        if ("new_email" not in request.data or len(
+                request.data["new_email"]) == 0):
+            return Response(
+                {"Error": "There must be a field 'new_email' present in the document."},
+                status=401)
         try:
             validate_email(request.data["new_email"])
         except:
@@ -119,7 +144,7 @@ class addEmailUser(APIView):
         if "Error" in answer:
             return Response(answer, status=401)
         return Response(answer)
-
+"""
 
 @permission_classes((IsAuthenticated,))
 class setEmailAsPrimary(APIView):

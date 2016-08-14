@@ -15,6 +15,7 @@
       profile_check: $resource(URL_API + 'api/v1/rest-auth/user/', null, {'update': {method: 'PUT'}}),
       modify_profile: $resource(URL_API + 'api/v1/rest-auth/user/', null, {'update': {method: 'PUT'}}),
       change_password: $resource(URL_API + 'api/v1/rest-auth/password/change/'),
+      change_email : $resource(URL_API + 'api/v1/user/change-email/'),
       living_addresses: $resource(URL_API + 'api/v1/user/:id/living_addresses/', {id: "@user_id"}),
       living_addresses_delete: $resource(URL_API + 'api/v1/user/:id/living_addresses/delete/', {id: "@user_id"}),
       billing_addresses: $resource(URL_API + 'api/v1/user/:id/billing_addresses/', {id: "@user_id"}),

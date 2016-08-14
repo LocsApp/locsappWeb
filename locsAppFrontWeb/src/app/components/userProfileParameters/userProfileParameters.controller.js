@@ -149,12 +149,12 @@
     };
 
     vm.ChangeEmailSuccess = function (data) {
-      toastr.success("Please check your email", "Success...");
-      $log.log("Succes = ", data);
+      toastr.success(data.message, "Success...");
+      $log.log("Success = ", data);
     };
 
     vm.ChangeEmailFailure = function (data) {
-      toastr.error("Error changing your email", "Error...");
+      toastr.error(data.Error, "Error...");
       $log.log("err = ", data);
     };
 
@@ -163,13 +163,13 @@
 
       $log.log("email = ", vm.user.email);
       if (vm.current_user_email == vm.user.email) {
-        toastr.error("You already using this email address", "Error...");
+        toastr.error("This is already your email address", "Error...");
       }
 
       UsersService
-        .set_primary_email
+        .change_email
         .save({
-          email: vm.user.email
+          new_email: vm.user.email
         })
         .$promise
         .then(vm.ChangeEmailSuccess, vm.ChangeEmailFailure)
