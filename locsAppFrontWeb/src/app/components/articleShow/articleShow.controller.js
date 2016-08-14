@@ -45,6 +45,7 @@
       vm.nb_mark = data.nb_mark_as_renter;
       vm.is_in_favorite = data.is_in_favorite;
       vm.is_reported = data.is_reported;
+      vm.articles_recommend = data.articles_recommend;
       $log.log("GetInfoArticleSuccess = ", data);
       //$log.log("get infoi = ", data.article.username_author);
 

@@ -189,10 +189,6 @@ div.article-show(layout="row" layout-align="center")
 
 
 
-
-
-
-
     div(layout="row" layout-align="center")
       md-divider.separator-h2(flex="40")
       h2.t-center(flex="20") We Recommend
@@ -200,7 +196,7 @@ div.article-show(layout="row" layout-align="center")
     div(layout='row' layout-align='center')
       data-owl-carousel.owl-carousel(data-options='{navigation: false, pagination: true, ' +
       'rewindNav : false, loop: true, autoWidth: true, autoplay:true, autoplayTimeout:1000}')
-        .item(owl-carousel-item='', ng-repeat='url_picture in articleShow.url_pictures track by $index')
-          img(src="{{url_picture}}" style='width:200px; height:auto;')
+        .item(owl-carousel-item='', ng-repeat='article_recommend in articleShow.articles_recommend track by $index')
+          img(src="{{articleShow.url_api}}{{article_recommend.url_thumbnail}}" style='width:200px; height:auto;')
           div(layout-align="center" layout="row")
             span.bold 12$

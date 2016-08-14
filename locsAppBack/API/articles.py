@@ -732,7 +732,7 @@ def getArticle(request, article_pk):
 
         return JsonResponse({"article": article, "global_mark_as_renter": global_mark_as_renter,
                              "nb_mark_as_renter": nb_mark_as_renter, "is_in_favorite": is_in_favorite,
-                             "is_reported": is_reported, "article_recommend": articles_recommend})
+                             "is_reported": is_reported, "articles_recommend": articles_recommend})
         # return APIrequests.GET('articles', id=article_pk)
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
