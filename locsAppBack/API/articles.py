@@ -765,10 +765,16 @@ def sendReport(request):
             answer = json.loads(request.body.decode('utf8'))
             print("answer = ", answer)
             #NEED TO CHECK FOR THE ERRORS that article and id report exist and the email
+            if 'id_article' not in answer or 'id_report_type' not in answer or 'email' not in answer:
+                return JsonResponse({"Error": "Your forget to add fields"}, status=405)
+            if not ObjectId.is_valid(answer['id_article']) or not ObjectId.is_valid(answer['id_report_type']):
+                return JsonResponse({"Error": "Please add a correct Object id fields"}, status=405)
 
             article = db_locsapp["articles"].find_one({"_id": ObjectId(answer["id_article"])})
-            # print("article", article)
             report_type = db_locsapp["report_types"].find_one({"_id": ObjectId(answer["id_report_type"])})
+
+            if article is None or report_type is None:
+                return JsonResponse({"Error": "Add an existiong article and report_type"}, status=405)
 
             current_user_pk = -1
             current_user_username = "anonymous"
