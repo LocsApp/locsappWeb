@@ -481,12 +481,10 @@
         vm.user_logged_in = true;
         // We also need to block the edition of these three fields
       }
-
       vm.report_types = ScopesService.get("static_collections").report_types;
-      $log.log("report types = ", vm.report_types);
 
       vm.successSendReportArticle = function (data) {
-        $log.log("successSendReportArticle", data);
+        //$log.log("successSendReportArticle", data);
         toastr.success(data.message, "Success");
       };
 
