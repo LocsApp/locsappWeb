@@ -29,7 +29,7 @@ def deleteFavoriteArticle(request):
         # We get the article from the db
         if not ObjectId.is_valid(body['id_favorite_article']):
             return JsonResponse(
-                {"Error": "Please send a correct favorite article id"}, status=401)
+                {"Error": "Please send a correct favorite article id"}, status=400)
 
         # We get the article from the db
 
@@ -60,11 +60,13 @@ def addFavoriteArticle(request):
         # We get the article from the db
         if not ObjectId.is_valid(body['id_article']):
             return JsonResponse(
-                {"Error": "Please send a correct article id"}, status=401)
+                {"Error": "Please send a correct article id"}, status=400)
 
         # We get the article from the db
 
         article = db_locsapp["articles"].find_one({"_id": ObjectId(body['id_article'])})
+        if article["id_author"] == request.user.pk:
+            return JsonResponse({"Error": "You are the owner of this article"}, status=403)
         if article:
 
             model = {

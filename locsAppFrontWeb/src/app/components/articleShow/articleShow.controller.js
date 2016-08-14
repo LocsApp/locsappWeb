@@ -21,6 +21,7 @@
     /* Pagination */
     var pagesShown = 1;
     var pageSize = 1;
+    vm.ownArticle = false;
     /* Fixtures */
     vm.categories = ScopesService.get("static_collections").base_categories;
     vm.subCategories = ScopesService.get("static_collections").sub_categories;
@@ -167,6 +168,8 @@
       vm.showMoreItems = function () {
         pagesShown = pagesShown + 1;
       };
+
+      $log.log("ARTICLE OWN BOOL == ", vm.ownArticle, vm.is_in_favorite)
 
     };
 
@@ -390,7 +393,7 @@
         vm.loginDialog("addArticleToFavorite");
       }
       else {
-        toastr.error(data.article.Error, "Error!");
+        toastr.error(data.data.Error, "Error!");
       }
     };
 
