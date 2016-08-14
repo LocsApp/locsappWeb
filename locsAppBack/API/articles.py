@@ -840,7 +840,12 @@ def sendReport(request):
                     "_type": str,
                     "_length": 1000,
                     "_required": False
-                }
+                },
+                "creation_date": {
+                    "_type": str,
+                    "_protected": True,
+                    "_default": datetime.now(pytz.utc)
+                },
 
             }
 

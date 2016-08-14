@@ -267,7 +267,14 @@
 
     vm.sendQuestionError = function (data) {
       $log.error("sendQuestionError= ", data);
-      toastr.error("Something went wrong", "Error!");
+      //toastr.error("Something went wrong", "Error!");
+      if (data.status === 401) {
+        $log.log("login modal");
+        vm.loginDialog("sendQuestion");
+      }
+      else {
+        toastr.error(data.article.error, "Error!");
+      }
     };
 
     vm.sendQuestion = function () {
@@ -379,11 +386,10 @@
       $log.error("addArticleToFavoriteError", data);
       if (data.status === 401) {
         $log.log("login modal");
-        vm.loginDialog();
-
+        vm.loginDialog("addArticleToFavorite");
       }
       else {
-        toastr.error(data.article.error, "Error!");
+        toastr.error(data.article.Error, "Error!");
       }
     };
 
@@ -424,7 +430,7 @@
     // Login Controller it would be better to separate it so we can use it easily for other purposes
 
     /** @ngInject */
-    vm.loginDialog = function (event) {
+    vm.loginDialog = function (action) {
       $mdDialog.show({
         controller: 'LoginDialogController',
         controllerAs: 'loginDialog',
@@ -434,13 +440,22 @@
         },
         bindToController: true,
         parent: angular.element($document.body),
-        targetEvent: event,
+        //targetEvent: event,
         clickOutsideToClose: true
       }).then(function () {
 
         if (ScopesService.get("current_user")) {
           $state.go("main.articleShow", {"id": $stateParams.id});
 
+          if (action == "sendQuestion") {
+            $log.log("sendQuestion");
+
+
+          }
+          else if (action == "addArticleToFavorite") {
+            $log.log("addArticleToFavorite");
+            addFavoriteDialog();
+          }
           ArticleService
             .getArticle
             .get({id: $stateParams.id})
@@ -464,14 +479,9 @@
         clickOutsideToClose: true
       }).then(function () {
 
-           if (ScopesService.get("current_user")) {
+        if (ScopesService.get("current_user")) {
           $state.go("main.articleShow", {"id": $stateParams.id});
-
-          ArticleService
-            .getArticle
-            .get({id: $stateParams.id})
-            .$promise
-            .then(vm.GetInfoArticleSuccess, vm.getInfoArticleFailure);
+          getArticleFunction();
         }
       });
     };
@@ -505,9 +515,7 @@
       /* Send a report */
       vm.submitReport = function () {
 
-
         $log.log("id report = ", vm.report_type._id);
-
 
         ArticleService
           .sendReportArticle
@@ -522,7 +530,38 @@
           .$promise
           .then(vm.successSendReportArticle, vm.errorSendReportArticle)
       }
-    }
+    };
+
+    var addFavoriteDialog = function () {
+
+      vm.addArticleToFavoriteDialogSuccess = function () {
+        toastr.success("This article has been added to your favorite", "Success!");
+        getArticleFunction();
+      };
+
+      vm.addArticleToFavoriteDialogError = function (data) {
+        $log.error("addArticleToFavoriteError", data);
+        toastr.error(data.data.Error, "Error");
+        getArticleFunction();
+      };
+
+      ArticleService
+        .articlesFavorite
+        .save({
+          "id_article": $stateParams.id
+        })
+        .$promise
+        .then(vm.addArticleToFavoriteDialogSuccess, vm.addArticleToFavoriteDialogError);
+
+    };
+
+    var getArticleFunction = function () {
+      ArticleService
+        .getArticle
+        .get({id: $stateParams.id})
+        .$promise
+        .then(vm.GetInfoArticleSuccess, vm.getInfoArticleFailure);
+    };
 
   }
 
