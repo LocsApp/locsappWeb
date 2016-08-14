@@ -130,6 +130,28 @@ class Account(AbstractBaseUser):
             email = EmailAddress.objects.get(email=new_email)
         except:
             email = EmailAddress.objects.add_email(
+            request, self, new_email, confirm=True)
+            """
+            if self.secondary_emails is None:
+                self.secondary_emails = [[email.email, "false"]]
+            else:
+                self.secondary_emails.append([email.email, "false"])
+            self.save(update_fields=['secondary_emails'])
+            """
+            return {"message": "Confirmation email sent!"}
+        if (email.user_id != self.pk):
+            return {"Error": "This email is already used by another user."}
+        EmailAddress.objects.get(email=new_email).delete()
+        email = EmailAddress.objects.add_email(
+            request, self, new_email, confirm=True)
+        return {"message": "Reconfirmation email sent!"}
+
+    """
+    def add_email_address(self, request, new_email, reconfirm):
+        try:
+            email = EmailAddress.objects.get(email=new_email)
+        except:
+            email = EmailAddress.objects.add_email(
                 request, self, new_email, confirm=True)
             if self.secondary_emails is None:
                 self.secondary_emails = [[email.email, "false"]]
@@ -143,6 +165,7 @@ class Account(AbstractBaseUser):
         email = EmailAddress.objects.add_email(
             request, self, new_email, confirm=True)
         return {"message": "Reconfirmation email sent!"}
+    """
 
     def delete_email_address(self, request, email_data):
         try:
@@ -164,6 +187,10 @@ class Account(AbstractBaseUser):
 def update_user_email(sender, request, email_address, **kwargs):
     User = get_user_model()
     user = User.object.get(pk=email_address.user_id)
+    user.email = email_address.email
+    print("In the confimation")
+    user.save()
+    """
     if user.secondary_emails is None:
         return
     for email_obj in user.secondary_emails:
@@ -171,6 +198,7 @@ def update_user_email(sender, request, email_address, **kwargs):
             email_obj[1] = "true"
             user.save()
             break
+    """
 
 
 @receiver(email_confirmation_sent)

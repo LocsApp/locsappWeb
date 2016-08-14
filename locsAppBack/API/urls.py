@@ -86,7 +86,7 @@ notifications_patterns = [
 
 user_patterns = [
     url(r'^preview-article/$', views.GetNotationPreviewArticle.as_view()),
-    url(r'^add-email/$', views.addEmailUser.as_view()),
+    url(r'^change-email/$', views.addEmailUser.as_view()),
     url(r'^delete-email/$', views.deleteEmailUser.as_view()),
     url(r'^set-primary-email/$', views.setEmailAsPrimary.as_view()),
     url(r'^(?P<user_pk>[0-9]+)/living_addresses/$',

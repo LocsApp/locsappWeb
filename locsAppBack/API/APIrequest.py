@@ -30,7 +30,7 @@ class APIRequestMongo:
 
     """
     This method is intern to the class and should not be invoked outside it.
-    It checks a key looking at its pattern describe in the model.
+    It checks a key looking at its pattern described in the model.
     """
 
     def _fieldModelValidation(
