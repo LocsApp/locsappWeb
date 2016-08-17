@@ -453,18 +453,14 @@
 
           if (action == "sendQuestion") {
             $log.log("sendQuestion");
-
+            // We sent the question;
+            sendQuestionDialog();
 
           }
           else if (action == "addArticleToFavorite") {
             $log.log("addArticleToFavorite");
             addFavoriteDialog();
           }
-          ArticleService
-            .getArticle
-            .get({id: $stateParams.id})
-            .$promise
-            .then(vm.GetInfoArticleSuccess, vm.getInfoArticleFailure);
         }
       });
     };
@@ -533,6 +529,34 @@
           })
           .$promise
           .then(vm.successSendReportArticle, vm.errorSendReportArticle)
+      }
+    };
+
+    vm.sendQuestionDialogSuccess = function(data) {
+      $log.log("sendQuestionDialogSuccess", data);
+      getArticleFunction();
+    };
+
+    vm.sendQuestionDialogError = function(data) {
+      $log.error("sendQuestionDialogError", data);
+      getArticleFunction();
+    };
+
+    var sendQuestionDialog = function () {
+      if (vm.askQuestion != undefined) {
+
+        ArticleService
+          .questions
+          .save({
+            "content": vm.askQuestion,
+            "id_article": $stateParams.id
+          })
+          .$promise
+          .then(vm.sendQuestionDialogSuccess, vm.sendDialogQuestionError)
+
+      }
+      else {
+        toastr.error("Your question can't be empty", "Error!");
       }
     };
 

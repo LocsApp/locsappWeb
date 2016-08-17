@@ -154,8 +154,8 @@ div.article-show(layout="row" layout-align="center")
       h2.t-center(flex="15") Questions
       md-divider.separator-h2(flex="45")
 
-    span test = {{articleShow.questions}}
-    hr
+    //span test = {{articleShow.questions}}
+    //hr
 
 
     div.question(layout="row" layout-align="center" ng-repeat="question in articleShow.questions track by $index | limitTo: articleShow.paginationLimit()" ng-if="question.visible")
