@@ -338,7 +338,7 @@
     vm.upVoteError = function (data) {
       $log.error("upVoteError", data);
       if (data.status == 403)
-        toastr.error(data.article.Error, "Error!");
+        toastr.error(data.data.Error, "Error!");
       else
         toastr.error("Something went wrong", "Error!");
     };
