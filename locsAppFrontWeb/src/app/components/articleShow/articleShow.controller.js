@@ -534,12 +534,15 @@
 
     vm.sendQuestionDialogSuccess = function(data) {
       $log.log("sendQuestionDialogSuccess", data);
+      vm.askQuestion = "";
       getArticleFunction();
+      toastr.success("Your question has been sent", "Success");
     };
 
     vm.sendQuestionDialogError = function(data) {
       $log.error("sendQuestionDialogError", data);
       getArticleFunction();
+      toastr.error(data.data.Error, "Error");
     };
 
     var sendQuestionDialog = function () {
@@ -552,7 +555,7 @@
             "id_article": $stateParams.id
           })
           .$promise
-          .then(vm.sendQuestionDialogSuccess, vm.sendDialogQuestionError)
+          .then(vm.sendQuestionDialogSuccess, vm.sendQuestionDialogError)
 
       }
       else {
