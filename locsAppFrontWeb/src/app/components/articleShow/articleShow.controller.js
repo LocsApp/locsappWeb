@@ -309,7 +309,7 @@
 
       toastr.success("Your answer has been sent", "Success!");
       // $log.log("sendQuestiopnSuccess = ", data);
-      $state.go($state.$current, null, {reload: true});
+      getArticleFunction();
     };
 
     vm.sendAnswer = function (idQuestion, answer) {
