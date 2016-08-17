@@ -259,8 +259,8 @@ def report(request):
         question = db_locsapp["questions"].find_one({"id": body['id_question']})
         if question is None:
             return JsonResponse({"Error": "Enter a valid question id!"}, status=404)
-        if request.user.pk == question['id_owner_article']:
-            return JsonResponse({"Error": "You are the owner of the article!"}, status=403)
+        if request.user.pk == question['id_author']:
+            return JsonResponse({"Error": "You are the person who asked the question!"}, status=403)
         if request.user.pk in question['report']:
             return JsonResponse({"Error": "You already report this question!"}, status=403)
 
