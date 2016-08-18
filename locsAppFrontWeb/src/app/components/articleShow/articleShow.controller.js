@@ -137,7 +137,12 @@
       if (vm.article.questions == undefined)
         vm.questions = "";
       else {
-        vm.questions = vm.article.questions;
+
+        vm.questions = [];
+        for (i = 0; i < vm.article.questions.length; i++) {
+          vm.questions.push(vm.article.questions[i]);
+        }
+        //vm.questions = vm.article.questions;
         vm.answers = new Array(vm.questions.length);
       }
 
@@ -261,10 +266,15 @@
     //On affiche le show more si il reste des false dans le tableau
     //Et le show more est affiche on derner true du tableau
 
-    vm.sendQuestionSuccess = function () {
+    vm.sendQuestionSuccess = function (data) {
 
       toastr.success("Your questions has been sent", "Success!");
-      // $log.log("sendQuestiopnSuccess = ", data);
+      $log.log("sendQuestiopnSuccess = ", data);
+      $log.log("sendQuestiopnSuccess = ", data.questions[0]);
+      $log.log("sendQuestiopnSuccess TYPE = ", typeof(vm.questions));
+      vm.questions.push(data.questions[0]);
+      //getArticleFunction();
+
       $state.go($state.$current, null, {reload: true});
 
     };
@@ -332,6 +342,7 @@
     vm.upVoteSuccess = function (data) {
       toastr.success("Your upvote has been sent", "Success!");
       $state.go($state.$current, null, {reload: true});
+      getArticleFunction();
       $log.log("upVoteSuccess = ", data);
     };
 
@@ -532,14 +543,14 @@
       }
     };
 
-    vm.sendQuestionDialogSuccess = function(data) {
+    vm.sendQuestionDialogSuccess = function (data) {
       $log.log("sendQuestionDialogSuccess", data);
       vm.askQuestion = "";
       getArticleFunction();
       toastr.success("Your question has been sent", "Success");
     };
 
-    vm.sendQuestionDialogError = function(data) {
+    vm.sendQuestionDialogError = function (data) {
       $log.error("sendQuestionDialogError", data);
       getArticleFunction();
       toastr.error(data.data.Error, "Error");

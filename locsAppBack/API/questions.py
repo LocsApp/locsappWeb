@@ -49,6 +49,7 @@ def sendQuestion(request):
 
         if article:
             print("body = ", body)
+            id_question = ObjectId()
             #print(body['content'])
 
             # print("ARTICLE = ", article)
@@ -60,7 +61,7 @@ def sendQuestion(request):
 
                 "id": {
                     "_type": str,
-                    "_default": str(ObjectId()),
+                    "_default": str(id_question),
                     "_protected": True
                 },
 
@@ -117,9 +118,12 @@ def sendQuestion(request):
                 },
                 # Check title article and image article exsits
             }
-
-            return APIrequests.POST(request, model, "questions", "The question has been sent!",
-                                    addQuestionInArticle)
+            # Send the result of the get after updating the model
+            if APIrequests.POST(request, model, "questions", "The question has been sent!",
+                                    addQuestionInArticle):
+                return APIrequests.GET("questions", special_field={"id": str(id_question)})
+            else:
+                return JsonResponse("Error:" "problem when updating the document")
         else:
             return JsonResponse({"Error": "We need a valid id article"}, status=403)
 
