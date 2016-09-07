@@ -15,8 +15,10 @@
       getMarksForRenters: $resource(URL_API + 'api/v1/history/notations-as-renter/:id_page/',
         {id_page: "id_page"}),
 
-      getArticlesForClients: $resource(URL_API + 'api/v1/history/articles-as-client/'),
-      getArticlesForRenters: $resource(URL_API + 'api/v1/history/articles-as-renter/'),
+      getArticlesForClients: $resource(URL_API + 'api/v1/history/articles-as-client/:id_page/',
+        {id_page: "id_page"}),
+      getArticlesForRenters: $resource(URL_API + 'api/v1/history/articles-as-renter/:id_page/',
+        {id_page: "id_page"}),
 
       getNotationsAsClient: $resource(URL_API + 'api/v1/history/notations-as-client-pagination/:id_user/:id_page/',
         {id_user: "id_user", id_page: "id_page"}),
