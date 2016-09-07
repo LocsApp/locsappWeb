@@ -11,7 +11,7 @@
     var vm = this;
 
     vm.current_page = 1;
-    vm.page_size = 10;
+    vm.page_size_client = 10;
 
     vm.notationsClient = true;
     vm.notationsRenter = true;
