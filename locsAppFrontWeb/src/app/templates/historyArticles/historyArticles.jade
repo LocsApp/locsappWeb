@@ -1,15 +1,30 @@
 div(layout="row", layout-align="center center")
   h2 History Articles
 div(style="margin-top:40px;")
+
 div(layout="row")
   span.flex
-  div(flex="70").article-requests-body
+  div(flex="100").article-requests-body
     div(layout="row" layout-align="center start")
       span(flex="25").special-divider
         md-divider
       h3.title-request-category.flex Article History as Renter
       span(flex="25").special-divider
         md-divider
+
+    // renter Pagination
+    div.search-article-toolbar(ng-if="historyArticles.articlesRenter.length > 1")
+      md-toolbar(style="background-color:none" layout="row")
+        span.flex
+        ng-md-icon(icon="keyboard_arrow_left" ng-click='historyArticles.prevOrNextPageClient(historyArticles.current_page_renter - 1)' ng-if="historyArticles.current_page_renter != 1").arrow-previous-page
+        span.pagination-toolbar-search-article
+          span(paging paging-action="historyArticles.goToPageClient(page)"  page="historyArticles.current_page_renter" page-size="historyArticles.page_size" total="historyArticles.nb_items_renter" active-class="current-page-selected-search-article")
+        //span(style="margin-right: 20px;" ng-if="articleSearch.search._pagination.page_number >= articleSearch.totalItems / articleSearch.search._pagination.items_per_page")
+        ng-md-icon(icon="keyboard_arrow_right" ng-click='historyArticles.prevOrNextPageClient(historyArticles.current_page_renter + 1)' ng-if="historyArticles.current_page_renter != historyArticles.nb_page_renter").arrow-next-page
+    md-divider.flex
+        // End Pagination Client
+
+
     div(style="margin-top:20px;")
     div(ng-if="historyArticles.articlesRenter.length < 1 && historyArticles.articlesRenter != true")
       p(style="text-align: center;") There are no article history as Renter.
