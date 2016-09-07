@@ -22,7 +22,53 @@ div(layout="row")
         //span(style="margin-right: 20px;" ng-if="articleSearch.search._pagination.page_number >= articleSearch.totalItems / articleSearch.search._pagination.items_per_page")
         ng-md-icon(icon="keyboard_arrow_right" ng-click='historyArticles.prevOrNextPageClient(historyArticles.current_page_renter + 1)' ng-if="historyArticles.current_page_renter != historyArticles.nb_page_renter").arrow-next-page
     md-divider.flex
-        // End Pagination Client
+        // End Pagination Renter
+
+
+    // Grid article history renter
+    div.article-history-as-renter(ng-class="notationAsRenter.animatePagination" ng-cloak)
+      div.delimiter
+      div.delimiter
+      section(layout="row", layout-align="start start")
+        div(layout-margin style="margin-top: 0px;").flex
+          div(ng-if="historyArticles.articlesRenter.length < 1 && historyArticles.articlesRenter != true")
+            p(style="text-align: center;") There are no article history as Renter.
+          md-grid-list(md-cols-xs="1" md-cols-sm="1" md-cols-md="2" md-row-height="70px" md-cols-gt-md="3" md-gutter="20px")
+            md-grid-tile(style="background: yellow;" md-colspan="1" md-rowspan="2" ng-repeat="demand in historyArticles.articlesRenter track by $index")
+              // My notation
+              md-card(layout-fill)
+                div(layout="row")
+                  img.img-icon-demand-article(ng-src="{{ historyArticles.url_api + demand.article_thumbnail_url}}")
+                  div.flex.information-demand
+                    p.title-article {{ demand.article_name }}
+                    div.asked-by Asked By {{ demand.author_name }}
+
+                    div(style="margin-top:30px;")
+                      span Started :
+                      strong {{ }} {{ demand.availibility_start | date : medium }}
+                    div
+                      span Finished :
+                      strong {{ }} {{ demand.availibility_end | date : medium }}
+                  div(flex="none")
+                    div(ng-if="demand.status == 'pending'").circle-blue-history
+                    div(ng-if="demand.status == 'finished'").circle-green-pale-history
+                    div(ng-if="demand.status == 'completed'").circle-green-history
+                    div(ng-if="demand.status == 'refused'").circle-red-history
+                    div(ng-if="demand.status == 'retracted'").circle-grey-history
+                          // End grid article history renter
+
+
+    // renter Pagination
+    div.search-article-toolbar(ng-if="historyArticles.articlesRenter.length > 1")
+      md-toolbar(style="background-color:none" layout="row")
+        span.flex
+        ng-md-icon(icon="keyboard_arrow_left" ng-click='historyArticles.prevOrNextPageClient(historyArticles.current_page_renter - 1)' ng-if="historyArticles.current_page_renter != 1").arrow-previous-page
+        span.pagination-toolbar-search-article
+          span(paging paging-action="historyArticles.goToPageClient(page)"  page="historyArticles.current_page_renter" page-size="historyArticles.page_size" total="historyArticles.nb_items_renter" active-class="current-page-selected-search-article")
+        //span(style="margin-right: 20px;" ng-if="articleSearch.search._pagination.page_number >= articleSearch.totalItems / articleSearch.search._pagination.items_per_page")
+        ng-md-icon(icon="keyboard_arrow_right" ng-click='historyArticles.prevOrNextPageClient(historyArticles.current_page_renter + 1)' ng-if="historyArticles.current_page_renter != historyArticles.nb_page_renter").arrow-next-page
+    md-divider.flex
+        // End Pagination Renter
 
 
     div(style="margin-top:20px;")
