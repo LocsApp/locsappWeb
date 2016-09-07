@@ -52,7 +52,7 @@ div(layout="row" layout-align="center start")
                       p {{ demand.comment | limitTo: 30 }} {{demand.comment.length > 30 ? '...' : ''}}
               md-grid-tile-footer
                 div(layout-fill layout="row" layout-align="center start" ng-if="demand.comment.length > 30 || demand.article_name.length > 10")
-                  md-button.special-button.md-raised(ng-click="historyNotation.showNotationDialog($event, notation);") Show more
+                  md-button.special-button.md-raised(ng-click="historyNotation.showNotationDialog($event, demand);") Show more
 
 
       // Client Pagination

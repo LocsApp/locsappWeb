@@ -121,6 +121,8 @@
     /* ShowNotation controller */
     vm.showNotationController = function($mdDialog, notation) {
         $log.log("notation = ", notation);
+      notation.score = notation.nb_stars;
+
     };
 
     /* End dialog to show one notation */
