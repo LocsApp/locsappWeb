@@ -45,10 +45,10 @@ div(layout="row" layout-align="center start")
                       h4 {{ demand.article_name | limitTo: 10 }} {{demand.article_name.length > 10 ? '...' : ''}}
                       div {{ demand.date_issued | date:'medium' }}
                       div
-                        span(ng-repeat="value in demand.nb_stars track by $index")
-                          ng-md-icon(ng-if="value" icon="star" size="22")
-                          ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
-                          ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
+                        span(ng-repeat="number in demand.nb_stars track by $index")
+                          ng-md-icon(ng-if="number == 1"  icon="star" size="22" style="fill:black")
+                          ng-md-icon.grey(ng-if="number == 0"  icon="star" style="fill:grey" size="22")
+
                       p {{ demand.comment | limitTo: 30 }} {{demand.comment.length > 30 ? '...' : ''}}
               md-grid-tile-footer
                 div(layout-fill layout="row" layout-align="center start" ng-if="demand.comment.length > 30 || demand.article_name.length > 10")
