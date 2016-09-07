@@ -410,7 +410,7 @@
 
     vm.addArticleToFavorite = function (idArticle) {
       ArticleService
-        .articlesFavorite
+        .addArticlesFavorite
         .save({
           "id_article": idArticle
         })
@@ -588,7 +588,7 @@
       };
 
       ArticleService
-        .articlesFavorite
+        .addArticlesFavorite
         .save({
           "id_article": $stateParams.id
         })

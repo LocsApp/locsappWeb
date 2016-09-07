@@ -119,6 +119,7 @@ def addFavoriteArticle(request):
             return JsonResponse({"Error": "We need a valid id article"}, status=403)
 
     elif request.method == 'GET':
+
         return APIrequests.GET("favorite_article",
                                special_field={"id_user": request.user.pk})
 

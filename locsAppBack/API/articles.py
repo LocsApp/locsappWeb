@@ -261,7 +261,6 @@ def getArticleHistoryAsClient(request, id_page):
         return JsonResponse(
             {"nb_page": nb_page, "articles_as_client": articles_as_client})
 
-
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
