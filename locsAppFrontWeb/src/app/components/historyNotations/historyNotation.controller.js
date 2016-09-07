@@ -42,7 +42,7 @@
 
     vm.GetNotationsRenterSuccess = function (data) {
       $log.log("GetNotationsRenterSuccess", data);
-      vm.notationsRenter = data.notations;
+      vm.notationsRenter = data.notations_as_renter;
       for (var i = 0; i < vm.notationsRenter.length; i++) {
         vm.notationsRenter[i].nb_stars = [0, 0, 0, 0, 0];
         for (vm.iterator = 0; vm.iterator < vm.notationsRenter[i].nb_stars.length; vm.iterator++) {
@@ -94,7 +94,7 @@
 
     HistoryService
       .getMarksForRenters
-      .get()
+      .get(({id_page: vm.current_page}))
       .$promise
       .then(vm.GetNotationsRenterSuccess, vm.GetNotationFailure);
 
