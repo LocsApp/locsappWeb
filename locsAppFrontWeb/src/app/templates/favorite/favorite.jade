@@ -39,9 +39,9 @@
               md-card(layout-fill)
                 md-card-content
                   div(layout='row')
-                    img(ng-src="{{ favorite.url_api + article.url_thumbnail }}")
+                    img(ng-src="{{ favorite.url_api + article.url_thumbnail }}" ng-click='favorite.goToArticlePage(article.id_article)')
                     div.right(layout='column')
-                      h3 {{article.title | limitTo:favorite.limitTitle}}
+                      h3.title(ng-click='favorite.goToArticlePage(article.id_article)') {{article.title | limitTo:favorite.limitTitle}}
                       span {{article.price}} $
                       p {{article.description | limitTo:favorite.limitDescription}} <span ng-if='article.description.length > favorite.limitDescription'>...</span>
                       div(layout="column" layout-align="end end")
