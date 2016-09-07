@@ -4,7 +4,7 @@ div.search-article-toolbar(ng-if="historyNotation.notationsClient.length > 1")
     span.flex
     ng-md-icon(icon="keyboard_arrow_left" ng-click='historyNotation.prevPage(historyNotation.current_page - 1)' ng-if="historyNotation.current_page != 1").arrow-previous-page
     span.pagination-toolbar-search-article
-      span(paging paging-action="historyNotation.goToPage(page)"  page="historyNotation.current_page" page-size="historyNotation.page_size_client" total="historyNotation.nb_items" active-class="current-page-selected-search-article")
+      span(paging paging-action="historyNotation.goToPage(page)"  page="historyNotation.current_page" page-size="historyNotation.page_size_client" total="historyNotation.nb_items_client" active-class="current-page-selected-search-article")
     //span(style="margin-right: 20px;" ng-if="articleSearch.search._pagination.page_number >= articleSearch.totalItems / articleSearch.search._pagination.items_per_page")
     ng-md-icon(icon="keyboard_arrow_right" ng-click='historyNotation.nextPage(historyNotation.current_page + 1)' ng-if="historyNotation.current_page != historyNotation.nb_page").arrow-next-page
 md-divider.flex
