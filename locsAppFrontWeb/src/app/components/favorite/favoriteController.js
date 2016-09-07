@@ -13,6 +13,7 @@
     vm.page_size = 10;
     vm.url_api = URL_API;
     vm.limitDescription = 50;
+    vm.limitTitle = 20;
 
     vm.getArticleFavoriteSuccess = function (data) {
       $log.log("getArticleFavoriteSuccess = ", data);
