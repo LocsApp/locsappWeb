@@ -18,11 +18,11 @@ div(layout="row" layout-align="center start")
     div.search-article-toolbar(ng-if="historyNotation.notationsClient.length > 1")
       md-toolbar(style="background-color:none" layout="row")
         span.flex
-        ng-md-icon(icon="keyboard_arrow_left" ng-click='historyNotation.prevOrNextPageClient(historyNotation.current_page - 1)' ng-if="historyNotation.current_page != 1").arrow-previous-page
+        ng-md-icon(icon="keyboard_arrow_left" ng-click='historyNotation.prevOrNextPageClient(historyNotation.current_page_client - 1)' ng-if="historyNotation.current_page_client != 1").arrow-previous-page
         span.pagination-toolbar-search-article
-          span(paging paging-action="historyNotation.goToPageClient(page)"  page="historyNotation.current_page" page-size="historyNotation.page_size" total="historyNotation.nb_items_client" active-class="current-page-selected-search-article")
+          span(paging paging-action="historyNotation.goToPageClient(page)"  page="historyNotation.current_page_client" page-size="historyNotation.page_size" total="historyNotation.nb_items_client" active-class="current-page-selected-search-article")
         //span(style="margin-right: 20px;" ng-if="articleSearch.search._pagination.page_number >= articleSearch.totalItems / articleSearch.search._pagination.items_per_page")
-        ng-md-icon(icon="keyboard_arrow_right" ng-click='historyNotation.prevOrNextPageClient(historyNotation.current_page + 1)' ng-if="historyNotation.current_page != historyNotation.nb_page_client").arrow-next-page
+        ng-md-icon(icon="keyboard_arrow_right" ng-click='historyNotation.prevOrNextPageClient(historyNotation.current_page_client + 1)' ng-if="historyNotation.current_page_client != historyNotation.nb_page_client").arrow-next-page
     md-divider.flex
     // End Pagination Client
 
@@ -59,11 +59,11 @@ div(layout="row" layout-align="center start")
       div.search-article-toolbar(ng-if="historyNotation.notationsClient.length > 1")
         md-toolbar(style="background-color:none" layout="row")
           span.flex
-          ng-md-icon(icon="keyboard_arrow_left" ng-click='historyNotation.prevOrNextPageClient(historyNotation.current_page - 1)' ng-if="historyNotation.current_page != 1").arrow-previous-page
+          ng-md-icon(icon="keyboard_arrow_left" ng-click='historyNotation.prevOrNextPageClient(historyNotation.current_page_client - 1)' ng-if="historyNotation.current_page_client != 1").arrow-previous-page
           span.pagination-toolbar-search-article
-            span(paging paging-action="historyNotation.goToPageClient(page)"  page="historyNotation.current_page" page-size="historyNotation.page_size" total="historyNotation.nb_items_client" active-class="current-page-selected-search-article")
+            span(paging paging-action="historyNotation.goToPageClient(page)"  page="historyNotation.current_page_client" page-size="historyNotation.page_size" total="historyNotation.nb_items_client" active-class="current-page-selected-search-article")
           //span(style="margin-right: 20px;" ng-if="articleSearch.search._pagination.page_number >= articleSearch.totalItems / articleSearch.search._pagination.items_per_page")
-          ng-md-icon(icon="keyboard_arrow_right" ng-click='historyNotation.prevOrNextPageClient(historyNotation.current_page + 1)' ng-if="historyNotation.current_page != historyNotation.nb_page_client").arrow-next-page
+          ng-md-icon(icon="keyboard_arrow_right" ng-click='historyNotation.prevOrNextPageClient(historyNotation.current_page_client + 1)' ng-if="historyNotation.current_page_client != historyNotation.nb_page_client").arrow-next-page
       md-divider.flex
           // End Pagination Client
 

@@ -10,7 +10,7 @@
   function HistoryNotationController($log, HistoryService, URL_API, $mdDialog, $document) {
     var vm = this;
 
-    vm.current_page = 1;
+    vm.current_page_client = 1;
     vm.page_size = 10; // We use the same variable for the both
 
     vm.notationsClient = true;
@@ -61,7 +61,7 @@
 
     HistoryService
       .getMarksForClients
-      .get(({id_page: vm.current_page}))
+      .get(({id_page: vm.current_page_client}))
       .$promise
       .then(vm.GetNotationsClientSuccess, vm.GetNotationFailure);
 
@@ -81,7 +81,7 @@
     vm.prevOrNextPageClient = function(idPage) {
 
       vm.animatePagination='animate-pagination';
-      vm.current_page = idPage;
+      vm.current_page_client = idPage;
       HistoryService
         .getMarksForClients
         .get({id_page: idPage})
@@ -94,7 +94,7 @@
 
     HistoryService
       .getMarksForRenters
-      .get(({id_page: vm.current_page}))
+      .get(({id_page: vm.current_page_client}))
       .$promise
       .then(vm.GetNotationsRenterSuccess, vm.GetNotationFailure);
 
