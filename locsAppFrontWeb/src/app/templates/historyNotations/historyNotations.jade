@@ -48,14 +48,12 @@ div(layout="row" layout-align="center start")
                         span(ng-repeat="value in demand.nb_stars track by $index")
                           ng-md-icon(ng-if="value" icon="star" size="22")
                           ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
+                          ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
                       p {{ demand.comment | limitTo: 30 }} {{demand.comment.length > 30 ? '...' : ''}}
               md-grid-tile-footer
-                div(layout-fill layout="row" layout-align="center start" ng-if="notation.comment.length > 30 || notation.article_name.length > 10")
-                  md-button.special-button.md-raised(ng-click="notationAsClient.showNotationDialog($event, notation);") Show more
+                div(layout-fill layout="row" layout-align="center start" ng-if="demand.comment.length > 30 || demand.article_name.length > 10")
+                  md-button.special-button.md-raised(ng-click="historyNotation.showNotationDialog($event, notation);") Show more
 
-              md-grid-tile-footer
-                div(layout-fill layout="row" layout-align="center start" ng-if="notation.comment.length > 30 || notation.article_name.length > 10")
-                  md-button.special-button.md-raised(ng-click="notationAsClient.showNotationDialog($event, notation);") Show more
 
       // Client Pagination
       div.search-article-toolbar(ng-if="historyNotation.notationsClient.length > 1")

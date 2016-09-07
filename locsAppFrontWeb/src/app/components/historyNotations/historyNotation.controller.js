@@ -7,7 +7,7 @@
     .controller('HistoryNotationController', HistoryNotationController);
 
   /** @ngInject */
-  function HistoryNotationController($log, HistoryService, URL_API) {
+  function HistoryNotationController($log, HistoryService, URL_API, $mdDialog, $document) {
     var vm = this;
 
     vm.current_page = 1;
@@ -97,6 +97,33 @@
       .get()
       .$promise
       .then(vm.GetNotationsRenterSuccess, vm.GetNotationFailure);
+
+
+
+    /* Dialog to show one notation */
+
+        /** @ngInject */
+    vm.showNotationDialog = function (event, notation) {
+      $mdDialog.show({
+        controller: vm.showNotationController,
+        controllerAs: 'showNotation',
+        templateUrl: 'app/templates/dialogTemplates/showOneNotation.tmpl.html',
+        locals: {
+          notation: notation
+        },
+        bindToController: true,
+        parent: angular.element($document.body),
+        targetEvent: event,
+        clickOutsideToClose: true
+      })
+    };
+
+    /* ShowNotation controller */
+    vm.showNotationController = function($mdDialog, notation) {
+        $log.log("notation = ", notation);
+    };
+
+    /* End dialog to show one notation */
 
   }
 
