@@ -9,9 +9,9 @@ md-card()
           md-icon(ng-if="!publicProfile.public_user.gender" md-svg-src="../assets/icons/gender-male-female" +
           ".svg"
           aria-label="gender-male-female")
-          md-icon(ng-if="publicProfile.public_user.gender.indexOf('female') > -1" md-svg-src="../assets/icons/gender-female.svg"
+          md-icon(ng-if="publicProfile.public_user.gender.indexOf('Woman') > -1" md-svg-src="../assets/icons/gender-female.svg"
           aria-label="gender-female")
-          md-icon(ng-if="publicProfile.public_user.gender.indexOf('male') > -1" md-svg-src="../assets/icons/gender-male.svg"
+          md-icon(ng-if="publicProfile.public_user.gender.indexOf('Man') > -1" md-svg-src="../assets/icons/gender-male.svg"
           aria-label="gender-male")
           | {{publicProfile.public_user.username}}
 
