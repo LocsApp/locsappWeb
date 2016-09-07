@@ -10,9 +10,9 @@
   function HistoryService($log, $resource, URL_API) {
 
     var service = {
-      getMarksForClients: $resource(URL_API + 'api/v1/history/notations-as-client:id_page/',
+      getMarksForClients: $resource(URL_API + 'api/v1/history/notations-as-client/:id_page/',
         {id_page: "id_page"}),
-      getMarksForRenters: $resource(URL_API + 'api/v1/history/notations-as-renter/',
+      getMarksForRenters: $resource(URL_API + 'api/v1/history/notations-as-renter/:id_page/',
         {id_page: "id_page"}),
 
       getArticlesForClients: $resource(URL_API + 'api/v1/history/articles-as-client/'),
