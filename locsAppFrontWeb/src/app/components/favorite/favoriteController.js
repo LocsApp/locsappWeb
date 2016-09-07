@@ -8,6 +8,7 @@
 
   function FavoriteController($log, ArticleService, $state, toastr, URL_API) {
     var vm = this;
+    vm.current_page_favorite = 1;
     vm.url_api = URL_API;
     vm.limitDescription = 50;
 
@@ -22,7 +23,7 @@
 
     ArticleService
       .getArticlesFavorite
-      .get({})
+      .get({"id_page": vm.current_page_favorite})
       .$promise
       .then(vm.getArticleFavoriteSuccess, vm.getArticleFavoriteError);
 
