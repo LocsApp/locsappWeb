@@ -11,6 +11,7 @@
     var vm = this;
 
     vm.current_page_client = 1;
+    vm.current_page_renter = 1;
     vm.page_size = 10; // We use the same variable for the both
 
     vm.notationsClient = true;
@@ -43,6 +44,8 @@
     vm.GetNotationsRenterSuccess = function (data) {
       $log.log("GetNotationsRenterSuccess", data);
       vm.notationsRenter = data.notations_as_renter;
+      vm.nb_items_renter = data.nb_page * vm.page_size;
+      vm.nb_page_renter = data.nb_page;
       for (var i = 0; i < vm.notationsRenter.length; i++) {
         vm.notationsRenter[i].nb_stars = [0, 0, 0, 0, 0];
         for (vm.iterator = 0; vm.iterator < vm.notationsRenter[i].nb_stars.length; vm.iterator++) {
@@ -78,9 +81,9 @@
         .then(vm.GetNotationsClientSuccess, vm.GetNotationFailure);
     };
 
-    vm.prevOrNextPageClient = function(idPage) {
+    vm.prevOrNextPageClient = function (idPage) {
 
-      vm.animatePagination='animate-pagination';
+      vm.animatePagination = 'animate-pagination';
       vm.current_page_client = idPage;
       HistoryService
         .getMarksForClients
@@ -94,15 +97,40 @@
 
     HistoryService
       .getMarksForRenters
-      .get(({id_page: vm.current_page_client}))
+      .get(({id_page: vm.current_page_renter}))
       .$promise
       .then(vm.GetNotationsRenterSuccess, vm.GetNotationFailure);
 
 
+    /* Action Pagination Renter */
+     vm.goToPageRenter = function (currentPage) {
+
+      vm.animatePagination = 'animate-pagination';
+      //$log.log("currentPage = ", currentPage);
+      HistoryService
+        .getMarksForRenters
+        .get({id_page: currentPage})
+        .$promise
+        .then(vm.GetNotationsRenterSuccess, vm.GetNotationFailure);
+    };
+
+    vm.prevOrNextPageClient = function (idPage) {
+
+      vm.animatePagination = 'animate-pagination';
+      vm.current_page_renter = idPage;
+      HistoryService
+        .getMarksForRenters
+        .get({id_page: idPage})
+        .$promise
+        .then(vm.GetNotationsRenterSuccess, vm.GetNotationFailure);
+
+    };
+
+    /* End Action Pagination Renter */
 
     /* Dialog to show one notation */
 
-        /** @ngInject */
+    /** @ngInject */
     vm.showNotationDialog = function (event, notation) {
       $mdDialog.show({
         controller: vm.showNotationController,
@@ -119,8 +147,8 @@
     };
 
     /* ShowNotation controller */
-    vm.showNotationController = function($mdDialog, notation) {
-        $log.log("notation = ", notation);
+    vm.showNotationController = function ($mdDialog, notation) {
+      $log.log("notation = ", notation);
       notation.score = notation.nb_stars;
 
     };
