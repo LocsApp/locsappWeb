@@ -1,8 +1,31 @@
+div.search-article-toolbar(ng-if="historyNotation.notationsClient.length > 1")
+  p totto
+  md-toolbar(style="background-color:none" layout="row")
+    span.flex
+    ng-md-icon(icon="keyboard_arrow_left" ng-click='historyNotation.prevPage(historyNotation.current_page - 1)' ng-if="historyNotation.current_page != 1").arrow-previous-page
+    span.pagination-toolbar-search-article
+      span(paging paging-action="historyNotation.goToPage(page)"  page="historyNotation.current_page" page-size="historyNotation.page_size" total="historyNotation.nb_items" active-class="current-page-selected-search-article")
+    //span(style="margin-right: 20px;" ng-if="articleSearch.search._pagination.page_number >= articleSearch.totalItems / articleSearch.search._pagination.items_per_page")
+    ng-md-icon(icon="keyboard_arrow_right" ng-click='historyNotation.nextPage(historyNotation.current_page + 1)' ng-if="historyNotation.current_page != historyNotation.nb_page").arrow-next-page
+md-divider.flex
+
 div(layout="row", layout-align="center center")
   h2 History Notations
 div(style="margin-top:40px;")
+
 div(layout="row" layout-align="center start")
   div(flex="70").article-requests-body.article-notations-body
+    div(layout="row" layout-align="center start")
+      span(flex="25").special-divider
+        md-divider
+      h3.title-request-category.flex As Client
+      span(flex="25").special-divider
+        md-divider
+
+
+
+
+
     div(layout="row" layout-align="center start")
       span(flex="25").special-divider
         md-divider

@@ -11,6 +11,7 @@
     var vm = this;
 
     vm.current_page = 1;
+    vm.page_size = 10;
 
     vm.notationsClient = true;
     vm.notationsRenter = true;
@@ -26,6 +27,8 @@
     vm.GetNotationsClientSuccess = function (data) {
       $log.log("GetNotationsClientSuccess", data);
       vm.notationsClient = data.notations_as_client;
+      vm.nb_items = data.nb_page * vm.page_size;
+      vm.nb_page = data.nb_page;
       for (var i =0; i < vm.notationsClient.length; i++)
       {
         vm.notationsClient[i].nb_stars = [0, 0, 0, 0, 0];
