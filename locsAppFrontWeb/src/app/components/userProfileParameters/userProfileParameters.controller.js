@@ -73,7 +73,10 @@
     vm.GetInfosPutUserSuccess = function (data) {
       $log.log("it is workgin", data);
       vm.user = data;
-      vm.user.registered_date = vm.user.registered_date.substring(0, 10);
+      vm.user.last_activity_date = vm.user.last_activity_date.split('T')[0].replace(/-/g, '/');
+      vm.user.registered_date = vm.user.registered_date.substring(0, 10).replace(/-/g, '/');
+
+      //vm.user.registered_date = vm.user.registered_date.substring(0, 10);
       vm.user.email_repeat = vm.user.email;
       toastr.success("The profile has been successfully modified.", "Success");
       vm.parseAddressToJson();
