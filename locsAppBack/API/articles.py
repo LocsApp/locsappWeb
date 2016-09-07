@@ -10,6 +10,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMessage
 from django.conf import settings
 from .utility import Utility
+import math
 
 
 from dateutil.parser import parse
@@ -256,12 +257,44 @@ def getArticleHistoryAsRenter(request):
 @csrf_exempt
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
-def getNotationsAsClient(request):
+def getNotationsAsClient(request, id_page):
     if request.method == "GET":
+        id_page = 1
+        id_page = int(id_page)
+        try:
+            user = get_user_model().objects.get(username=request.user.username)
+            user_pk = user.pk
+            nb_item = db_locsapp["notations"].count({"id_target": int(user_pk), "as_renter": False})
+            item_on_a_page = 10
+            nb_page = math.ceil(nb_item / item_on_a_page)
+            notations_as_client = []
+
+            if (id_page - 1) * 10 > nb_item:
+                id_page = nb_page
+
+            skip_page = id_page - 1
+            if skip_page < 0:
+                skip_page = 0
+            for notation_as_client in db_locsapp["notations"].find({"id_target": int(user_pk), "as_renter": False}).sort("date_issued", DESCENDING).skip((skip_page) * item_on_a_page).limit(item_on_a_page):
+                notation_as_client['_id'] = str(notation_as_client['_id'])
+                notations_as_client.append(notation_as_client)
+
+            return JsonResponse({"nb_page": nb_page, "notations_as_client": notations_as_client, "average_mark": user.tenant_score})
+
+        except ObjectDoesNotExist:
+            return JsonResponse(
+                {"message": "username does not exist"}, status=404)
+    else:
+        return JsonResponse({"Error": "Method not allowed"}, status=405)
+    """"
+    if request.method == "GET":
+        print("getArtivleHistoriyRenter")
+
         return APIrequests.GET(
             "notations", special_field={"id_target": request.user.pk, "as_renter": False})
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
+    """
 
 @csrf_exempt
 @api_view(['GET'])

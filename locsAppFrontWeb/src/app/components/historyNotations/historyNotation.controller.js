@@ -10,23 +10,25 @@
   function HistoryNotationController($log, HistoryService, URL_API) {
     var vm = this;
 
+    vm.current_page = 1;
+
     vm.notationsClient = true;
     vm.notationsRenter = true;
 
     vm.url_api = URL_API;
 
-    vm.dummyArray = [0, 0, 0, 0, 0]
+    vm.dummyArray = [0, 0, 0, 0, 0];
     vm.iterator = 0;
 
     vm.lastDemand = -1;
     vm.lastMode = false;
 
     vm.GetNotationsClientSuccess = function (data) {
-      $log.log(data);
-      vm.notationsClient = data.notations;
+      $log.log("GetNotationsClientSuccess", data);
+      vm.notationsClient = data.notations_as_client;
       for (var i =0; i < vm.notationsClient.length; i++)
       {
-        vm.notationsClient[i].nb_stars = [0, 0, 0, 0, 0]
+        vm.notationsClient[i].nb_stars = [0, 0, 0, 0, 0];
         for (vm.iterator=0; vm.iterator < vm.notationsClient[i].nb_stars.length; vm.iterator++)
         {
           if (vm.iterator < vm.notationsClient[i].value)
@@ -42,7 +44,7 @@
       vm.notationsRenter = data.notations;
       for (var i =0; i < vm.notationsRenter.length; i++)
       {
-        vm.notationsRenter[i].nb_stars = [0, 0, 0, 0, 0]
+        vm.notationsRenter[i].nb_stars = [0, 0, 0, 0, 0];
         for (vm.iterator=0; vm.iterator < vm.notationsRenter[i].nb_stars.length; vm.iterator++)
         {
           if (vm.iterator < vm.notationsRenter[i].value)
@@ -60,7 +62,7 @@
 
     HistoryService
     .getMarksForClients
-    .get()
+    .get(({id_page: vm.current_page}))
     .$promise
     .then(vm.GetNotationsClientSuccess,  vm.GetNotationFailure);
 
