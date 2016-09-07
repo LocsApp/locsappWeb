@@ -72,7 +72,7 @@
         .then(vm.getArticleFavoriteSuccess, vm.getArticleFavoriteError);
     };
 
-    vm.prevOrNextPageClient = function (idPage) {
+    vm.prevOrNextPageFavorite = function (idPage) {
 
       vm.animatePagination = 'animate-pagination';
       vm.current_page_client = idPage;
