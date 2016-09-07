@@ -41,7 +41,7 @@
     };
 
     vm.GetNotationsRenterSuccess = function (data) {
-      $log.log(data);
+      $log.log("GetNotationsRenterSuccess", data);
       vm.notationsRenter = data.notations;
       for (var i = 0; i < vm.notationsRenter.length; i++) {
         vm.notationsRenter[i].nb_stars = [0, 0, 0, 0, 0];

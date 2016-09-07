@@ -285,25 +285,47 @@ def getNotationsAsClient(request, id_page):
                 {"message": "username does not exist"}, status=404)
     else:
         return JsonResponse({"Error": "Method not allowed"}, status=405)
-    """"
-    if request.method == "GET":
-        print("getArtivleHistoriyRenter")
-
-        return APIrequests.GET(
-            "notations", special_field={"id_target": request.user.pk, "as_renter": False})
-    else:
-        return JsonResponse({"Error": "Method not allowed!"}, status=405)
-    """
 
 @csrf_exempt
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
-def getNotationsAsRenter(request):
+def getNotationsAsRenter(request, id_page):
+    if request.method == "GET":
+        id_page = int(id_page)
+        # On get la target
+        try:
+            user = get_user_model().objects.get(username=request.user.username)
+            user_pk = user.pk
+            nb_item = db_locsapp["notations"].count({"id_target": int(user_pk), "as_renter": True})
+            item_on_a_page = 10
+            nb_page = math.ceil(nb_item / item_on_a_page)
+            notations_as_renter = []
+
+            if (id_page - 1) * 10 > nb_item:
+                id_page = nb_page
+
+            skip_page = id_page - 1
+            if skip_page < 0:
+                skip_page = 0
+
+            for notation_as_renter in db_locsapp["notations"].find({"id_target": int(user_pk), "as_renter": True}).sort("date_issued", DESCENDING).skip((skip_page) * item_on_a_page).limit(item_on_a_page):
+                notation_as_renter['_id'] = str(notation_as_renter['_id'])
+                notations_as_renter.append(notation_as_renter)
+
+            return JsonResponse({"nb_page": nb_page, "notations_as_renter": notations_as_renter, "average_mark": user.renter_score})
+        except ObjectDoesNotExist:
+            return JsonResponse(
+                {"message": "username does not exist"}, status=404)
+
+    else:
+        return JsonResponse({"Error": "Method not allowed"}, status=405)
+    """"
     if request.method == "GET":
         return APIrequests.GET(
             "notations", special_field={"id_target": request.user.pk, "as_renter": True})
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
+    """
 
 @csrf_exempt
 @api_view(['POST'])
