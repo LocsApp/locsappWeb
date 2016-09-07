@@ -95,6 +95,39 @@ div(layout="row")
 
 
 
+    // Grid article history renter
+    div.article-history-as-renter(ng-class="notationAsRenter.animatePagination" ng-cloak)
+      div.delimiter
+      div.delimiter
+      section(layout="row", layout-align="start start")
+        div(layout-margin style="margin-top: 0px;").flex
+          div(ng-if="historyArticles.articlesClient.length < 1 && historyArticles.articlesClient != true")
+            p(style="text-align: center;") There are no article history as Client.
+          md-grid-list(md-cols-xs="1" md-cols-sm="1" md-cols-md="2" md-row-height="70px" md-cols-gt-md="3" md-gutter="20px")
+            md-grid-tile(style="background: yellow;" md-colspan="1" md-rowspan="2" ng-repeat="demand in historyArticles.articlesClient track by $index")
+              md-card(layout-fill)
+                div(layout="row")
+                  img.img-icon-demand-article(hide-xs ng-src="{{ historyArticles.url_api + demand.article_thumbnail_url}}")
+                  div.flex.information-demand
+                    p.title-article {{ demand.article_name }}
+                    div.asked-by Asked By {{ demand.author_name }}
+
+                    div(style="margin-top:30px;")
+                      span Started :
+                      strong {{ }} {{ demand.availibility_start | date : medium }}
+                    div
+                      span Finished :
+                      strong {{ }} {{ demand.availibility_end | date : medium }}
+                  div(flex="none")
+                    div(ng-if="demand.status == 'pending'").circle-blue-history
+                    div(ng-if="demand.status == 'finished'").circle-green-pale-history
+                    div(ng-if="demand.status == 'completed'").circle-green-history
+                    div(ng-if="demand.status == 'refused'").circle-red-history
+                    div(ng-if="demand.status == 'retracted'").circle-grey-history
+                          // End grid article history renter
+
+
+
     // client Pagination
     div.search-article-toolbar(ng-if="historyArticles.articlesClient.length > 1")
       md-toolbar(style="background-color:none" layout="row")
@@ -109,9 +142,9 @@ div(layout="row")
 
 
     div(style="margin-top:20px;")
-    div(ng-if="historyArticles.articlesClient.length < 1 && historyArticles.articlesClient != true")
+    //div(ng-if="historyArticles.articlesClient.length < 1 && historyArticles.articlesClient != true")
       p(style="text-align: center;") There are no article history as Client.
-    div(ng-repeat="demand in historyArticles.articlesClient track by $index")
+    //div(ng-repeat="demand in historyArticles.articlesClient track by $index")
       div(layout="row" layout-align="center")
         md-card.card-information-demand-big-screen(hide-md hide-sm hide-xs flex="60")
           div(layout="row")
