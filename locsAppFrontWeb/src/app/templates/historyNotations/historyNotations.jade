@@ -1,13 +1,4 @@
-div.search-article-toolbar(ng-if="historyNotation.notationsClient.length > 1")
-  md-toolbar(style="background-color:none" layout="row")
-    p toto
-    span.flex
-    ng-md-icon(icon="keyboard_arrow_left" ng-click='historyNotation.prevOrNextPageClient(historyNotation.current_page - 1)' ng-if="historyNotation.current_page != 1").arrow-previous-page
-    span.pagination-toolbar-search-article
-      span(paging paging-action="historyNotation.goToPageClient(page)"  page="historyNotation.current_page" page-size="historyNotation.page_size" total="historyNotation.nb_items_client" active-class="current-page-selected-search-article")
-    //span(style="margin-right: 20px;" ng-if="articleSearch.search._pagination.page_number >= articleSearch.totalItems / articleSearch.search._pagination.items_per_page")
-    ng-md-icon(icon="keyboard_arrow_right" ng-click='historyNotation.prevOrNextPageClient(historyNotation.current_page + 1)' ng-if="historyNotation.current_page != historyNotation.nb_page_client").arrow-next-page
-md-divider.flex
+
 
 div(layout="row", layout-align="center start")
   h2 History Notations
@@ -21,6 +12,19 @@ div(layout="row" layout-align="center start")
       h3.title-request-category.flex As Client
       span(flex="25").special-divider
         md-divider
+
+
+    // Client Pagination
+    div.search-article-toolbar(ng-if="historyNotation.notationsClient.length > 1")
+      md-toolbar(style="background-color:none" layout="row")
+        span.flex
+        ng-md-icon(icon="keyboard_arrow_left" ng-click='historyNotation.prevOrNextPageClient(historyNotation.current_page - 1)' ng-if="historyNotation.current_page != 1").arrow-previous-page
+        span.pagination-toolbar-search-article
+          span(paging paging-action="historyNotation.goToPageClient(page)"  page="historyNotation.current_page" page-size="historyNotation.page_size" total="historyNotation.nb_items_client" active-class="current-page-selected-search-article")
+        //span(style="margin-right: 20px;" ng-if="articleSearch.search._pagination.page_number >= articleSearch.totalItems / articleSearch.search._pagination.items_per_page")
+        ng-md-icon(icon="keyboard_arrow_right" ng-click='historyNotation.prevOrNextPageClient(historyNotation.current_page + 1)' ng-if="historyNotation.current_page != historyNotation.nb_page_client").arrow-next-page
+    md-divider.flex
+    // End Pagination Client
 
     // Grid notation client
     div.notation-as-client(ng-class="notationAsClient.animatePagination" ng-cloak)
@@ -48,40 +52,30 @@ div(layout="row" layout-align="center start")
               md-grid-tile-footer
                 div(layout-fill layout="row" layout-align="center start" ng-if="notation.comment.length > 30 || notation.article_name.length > 10")
                   md-button.special-button.md-raised(ng-click="notationAsClient.showNotationDialog($event, notation);") Show more
-              //h1 {{notation}}
-              //md-card(layout-fill)
-                //md-card-header
-                  md-card-avatar.img-icon-notation
-                    img(flex="none" src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg").img-rounded
-                  md-card-header-text.header-infos
-                    span(class="md-title") {{ demand.author_name }}
-                    span(class="md-subhead") {{ demand.article_name }}
-                    span(class="md-subhead") {{ demand.date_issued.$date | date:'medium' }}
-                md-card-content
-                  section(layout="row")
-                    div(ng-repeat="number in demand.nb_stars track by $index")
-                      ng-md-icon(icon="star_border" size="22" ng-if="number == 0" ng-click="historyNotation.starValue(number, demand)").icon-star
-                      ng-md-icon(icon="star" size="22" ng-if="number == 1" ng-click="historyNotation.starValue(number, demand)").icon-star-filled
-                  section(layout="row").section-height-limiter
-                    strong(style="margin-top: 10px;") Comment
-                  section(layout="row")
-                    div {{ demand.comment }}
+
               md-grid-tile-footer
                 div(layout-fill layout="row" layout-align="center start" ng-if="notation.comment.length > 30 || notation.article_name.length > 10")
                   md-button.special-button.md-raised(ng-click="notationAsClient.showNotationDialog($event, notation);") Show more
+
+      // Client Pagination
+      div.search-article-toolbar(ng-if="historyNotation.notationsClient.length > 1")
+        md-toolbar(style="background-color:none" layout="row")
+          span.flex
+          ng-md-icon(icon="keyboard_arrow_left" ng-click='historyNotation.prevOrNextPageClient(historyNotation.current_page - 1)' ng-if="historyNotation.current_page != 1").arrow-previous-page
+          span.pagination-toolbar-search-article
+            span(paging paging-action="historyNotation.goToPageClient(page)"  page="historyNotation.current_page" page-size="historyNotation.page_size" total="historyNotation.nb_items_client" active-class="current-page-selected-search-article")
+          //span(style="margin-right: 20px;" ng-if="articleSearch.search._pagination.page_number >= articleSearch.totalItems / articleSearch.search._pagination.items_per_page")
+          ng-md-icon(icon="keyboard_arrow_right" ng-click='historyNotation.prevOrNextPageClient(historyNotation.current_page + 1)' ng-if="historyNotation.current_page != historyNotation.nb_page_client").arrow-next-page
+      md-divider.flex
+          // End Pagination Client
+
+
     //End grid notation client
 
 
 
 
 
-    div(layout="row" layout-align="center start")
-      span(flex="25").special-divider
-        md-divider
-      h3.title-request-category.flex As Client
-      span(flex="25").special-divider
-        md-divider
-    div(style="margin-top:20px;")
 
     div(layout="row" layout-align="center start")
       span(flex="25").special-divider
