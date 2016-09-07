@@ -259,7 +259,6 @@ def getArticleHistoryAsRenter(request):
 @permission_classes((IsAuthenticated,))
 def getNotationsAsClient(request, id_page):
     if request.method == "GET":
-        id_page = 1
         id_page = int(id_page)
         try:
             user = get_user_model().objects.get(username=request.user.username)
