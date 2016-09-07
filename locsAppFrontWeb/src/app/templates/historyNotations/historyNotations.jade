@@ -9,12 +9,12 @@ div.search-article-toolbar(ng-if="historyNotation.notationsClient.length > 1")
     ng-md-icon(icon="keyboard_arrow_right" ng-click='historyNotation.prevOrNextPageClient(historyNotation.current_page + 1)' ng-if="historyNotation.current_page != historyNotation.nb_page_client").arrow-next-page
 md-divider.flex
 
-div(layout="row", layout-align="center center")
+div(layout="row", layout-align="center start")
   h2 History Notations
 div(style="margin-top:40px;")
 
 div(layout="row" layout-align="center start")
-  div(flex="70").article-requests-body.article-notations-body
+  div(flex="100").article-requests-body.article-notations-body
     div(layout="row" layout-align="center start")
       span(flex="25").special-divider
         md-divider
@@ -30,11 +30,27 @@ div(layout="row" layout-align="center start")
         div(layout-margin style="margin-top: 0px;").flex
           div(ng-if="historyNotation.notationsClient.length < 1 && historyNotation.notationsClient != true")
             p(style="text-align: center;") No marks as a client received.
-          md-grid-list(md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-row-height="100px" md-cols-gt-md="2" md-gutter="20px")
+          md-grid-list(md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-row-height="70px" md-cols-gt-md="4" md-gutter="20px")
             md-grid-tile(style="background: yellow;" md-colspan="1" md-rowspan="2" ng-repeat="demand in historyNotation.notationsClient track by $index")
-              //h1 {{notation}}
+              // My notation
               md-card(layout-fill)
-                md-card-header
+                md-card-content()
+                  md-list-item.md-3-line
+                    img(style='height:70px; width:auto;' ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg" class="md-avatar" alt="{{item.who}}")
+                    div.md-list-item-text(layout="column")
+                      h4 {{ demand.article_name | limitTo: 10 }} {{demand.article_name.length > 10 ? '...' : ''}}
+                      div {{ demand.date_issued | date:'medium' }}
+                      div
+                        span(ng-repeat="value in demand.nb_stars track by $index")
+                          ng-md-icon(ng-if="value" icon="star" size="22")
+                          ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
+                      p {{ demand.comment | limitTo: 30 }} {{demand.comment.length > 30 ? '...' : ''}}
+              md-grid-tile-footer
+                div(layout-fill layout="row" layout-align="center start" ng-if="notation.comment.length > 30 || notation.article_name.length > 10")
+                  md-button.special-button.md-raised(ng-click="notationAsClient.showNotationDialog($event, notation);") Show more
+              //h1 {{notation}}
+              //md-card(layout-fill)
+                //md-card-header
                   md-card-avatar.img-icon-notation
                     img(flex="none" src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg").img-rounded
                   md-card-header-text.header-infos
