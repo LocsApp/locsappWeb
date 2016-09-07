@@ -55,7 +55,7 @@
         .getMarksForClients
         .get({id_page: currentPage})
         .$promise
-        .then(vm.GetNotationsClientSuccess, vm.GetNotationFailure);
+        .then(vm.GetArticlesClientSuccess, vm.GetArticlesFailure);
     };
 
     vm.prevOrNextPageClient = function (idPage) {
@@ -66,7 +66,7 @@
         .getMarksForClients
         .get({id_page: idPage})
         .$promise
-        .then(vm.GetNotationsClientSuccess, vm.GetNotationFailure);
+        .then(vm.GetArticlesClientSuccess, vm.GetArticlesFailure);
 
     };
 
@@ -89,7 +89,7 @@
         .getMarksForRenters
         .get({id_page: currentPage})
         .$promise
-        .then(vm.GetNotationsRenterSuccess, vm.GetNotationFailure);
+        .then(vm.GetArticlesRenterSuccess, vm.GetArticlesFailure);
     };
 
     vm.prevOrNextPageRenter = function (idPage) {
@@ -100,7 +100,7 @@
         .getMarksForRenters
         .get({id_page: idPage})
         .$promise
-        .then(vm.GetNotationsRenterSuccess, vm.GetNotationFailure);
+        .then(vm.GetArticlesRenterSuccess, vm.GetArticlesFailure);
 
     };
 

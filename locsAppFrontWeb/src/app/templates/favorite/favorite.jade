@@ -1,5 +1,5 @@
 .favorite(ng-controller="FavoriteController as favorite" layout="row" layout-align="center" )
-  div(flex-xs="100" flex-sm="100" flex-md="75" flex="50")
+  div(flex-xs="100" flex-sm="100" flex-md="100" flex="100")
 
     div(layout="row" layout-align="center")
       h1.t-center(flex="20") My favorites
@@ -9,6 +9,19 @@
       md-divider.separator-h2(flex="35" hide-sm)
       h2.t-center(flex="30") My articles
       md-divider.separator-h2(flex="35" hide-sm)
+
+
+    // favorite Pagination
+    div.search-article-toolbar(ng-if="favorite.favorite_articles.length > 1")
+      md-toolbar(style="background-color:none" layout="row")
+        span.flex
+        ng-md-icon(icon="keyboard_arrow_left" ng-click='favorite.prevOrNextFavorite(historyArticles.current_page_renter - 1)' ng-if="historyArticles.current_page_renter != 1").arrow-previous-page
+        span.pagination-toolbar-search-article
+          span(paging paging-action="historyArticles.goToPageClient(page)"  page="historyArticles.current_page_renter" page-size="historyArticles.page_size" total="historyArticles.nb_items_renter" active-class="current-page-selected-search-article")
+        //span(style="margin-right: 20px;" ng-if="articleSearch.search._pagination.page_number >= articleSearch.totalItems / articleSearch.search._pagination.items_per_page")
+        ng-md-icon(icon="keyboard_arrow_right" ng-click='historyArticles.prevOrNextPageFavorite(historyArticles.current_page_renter + 1)' ng-if="historyArticles.current_page_renter != historyArticles.nb_page_renter").arrow-next-page
+    md-divider.flex
+            // End Pagination favorite
 
     //p {{favorite.articlesWithQuestionUserAsked[0]}}
     div(ng-if='favorite.favorite_articles.length == 0')
