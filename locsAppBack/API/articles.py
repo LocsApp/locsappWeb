@@ -237,20 +237,43 @@ HISTORY
 @csrf_exempt
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
-def getArticleHistoryAsClient(request):
+def getArticleHistoryAsClient(request, id_page):
     if request.method == "GET":
-        return APIrequests.GET(
-            'article_demands', special_field={"id_author": request.user.pk, "visible": True})
+        id_page = int(id_page)
+        #return APIrequests.GET(
+        #    'article_demands', special_field={"id_author": request.user.pk, "visible": True})
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
 @csrf_exempt
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
-def getArticleHistoryAsRenter(request):
+def getArticleHistoryAsRenter(request, id_page):
     if request.method == "GET":
-        return APIrequests.GET(
-            'article_demands', special_field={"id_target": request.user.pk, "visible": True})
+        item_in_a_page = 10
+        id_page = int(id_page)
+        nb_item = db_locsapp["article_demands"].count({"id_target": request.user.pk, "visible": True})
+        nb_page = math.ceil(nb_item / item_in_a_page)
+        articles_as_renter = []
+
+        if (id_page - 1) * item_in_a_page > nb_item:
+            id_page = nb_page
+
+        skip_page = id_page - 1
+        if skip_page > 0:
+            skip_page = 0
+
+        for article_as_renter in db_locsapp["article_demands"].find(
+                {"id_target": request.user.pk, "visible": True}).sort("date_issued", DESCENDING).skip(
+                        (skip_page) * item_in_a_page).limit(item_in_a_page):
+            article_as_renter['_id'] = str(article_as_renter['_id'])
+            articles_as_renter.append(articles_as_renter)
+
+        return JsonResponse(
+            {"nb_page": nb_page, "articles_as_renter": articles_as_renter})
+
+            #return APIrequests.GET(
+        #    'article_demands', special_field={"id_target": request.user.pk, "visible": True})
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
