@@ -9,13 +9,13 @@ div(layout="row" layout-align="center start")
     div(layout="row" layout-align="center start")
       span(flex="25").special-divider
         md-divider
-      h3.title-request-category.flex As Client
+      h3.title-request-category.flex As renter
       span(flex="25").special-divider
         md-divider
 
 
-    // Client Pagination
-    div.search-article-toolbar(ng-if="historyNotation.notationsClient.length > 1")
+    // renter Pagination
+    div.search-article-toolbar(ng-if="historyNotation.notationsrenter.length > 1")
       md-toolbar(style="background-color:none" layout="row")
         span.flex
         ng-md-icon(icon="keyboard_arrow_left" ng-click='historyNotation.prevOrNextPageClient(historyNotation.current_page_client - 1)' ng-if="historyNotation.current_page_client != 1").arrow-previous-page
@@ -68,7 +68,6 @@ div(layout="row" layout-align="center start")
           // End Pagination Client
 
 
-    //End grid notation client
 
 
 
@@ -84,22 +83,61 @@ div(layout="row" layout-align="center start")
     div(style="margin-top:20px;")
     div(ng-if="historyNotation.notationsRenter.length < 1 && historyNotation.notationsRenter != true")
       p(style="text-align: center;") No marks as a renter received.
-    div(ng-repeat="demand in historyNotation.notationsRenter track by $index")
-      div(layout="row" layout-align="center")
-        md-card.card-notation(hide-md hide-sm hide-xs flex="60")
-          md-card-header
-            md-card-avatar.img-icon-notation
-              img(flex="none" src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg").img-rounded
-            md-card-header-text.header-infos
-              span(class="md-title") {{ demand.author_name }}
-              span(class="md-subhead") {{ demand.article_name }}
-              span(class="md-subhead") {{ demand.date_issued.$date | date:'medium' }}
-          md-card-content
-            section(layout="row")
-              div(ng-repeat="number in demand.nb_stars track by $index")
-                ng-md-icon(icon="star_border" size="48" ng-if="number == 0" ng-click="historyNotation.starValue(number, demand)").icon-star
-                ng-md-icon(icon="star" size="48" ng-if="number == 1" ng-click="historyNotation.starValue(number, demand)").icon-star-filled
-            section(layout="row").section-height-limiter
-              strong(style="margin-top: 10px;") Comment
-            section(layout="row")
-              div {{ demand.comment }}
+
+
+    // Renter Pagination
+    div.search-article-toolbar(ng-if="historyNotation.notationsRenter.length > 1")
+      md-toolbar(style="background-color:none" layout="row")
+        span.flex
+        ng-md-icon(icon="keyboard_arrow_left" ng-click='historyNotation.prevOrNextPageRenter(historyNotation.current_page_renter - 1)' ng-if="historyNotation.current_page_renter != 1").arrow-previous-page
+        span.pagination-toolbar-search-article
+          span(paging paging-action="historyNotation.goToPageRenter(page)"  page="historyNotation.current_page_renter" page-size="historyNotation.page_size" total="historyNotation.nb_items_renter" active-class="current-page-selected-search-article")
+        //span(style="margin-right: 20px;" ng-if="articleSearch.search._pagination.page_number >= articleSearch.totalItems / articleSearch.search._pagination.items_per_page")
+        ng-md-icon(icon="keyboard_arrow_right" ng-click='historyNotation.prevOrNextPageRenter(historyNotation.current_page_renter + 1)' ng-if="historyNotation.current_page_renter != historyNotation.nb_page_renter").arrow-next-page
+    md-divider.flex
+        // End Pagination Renter
+
+
+    // Grid notation renter
+    div.notation-as-renter(ng-class="notationAsRenter.animatePagination" ng-cloak)
+      div.delimiter
+      div.delimiter
+      section(layout="row", layout-align="start start")
+        div(layout-margin style="margin-top: 0px;").flex
+          div(ng-if="historyNotation.notationsRenter.length < 1 && historyNotation.notationsRenter != true")
+            p(style="text-align: center;") No marks as a renter received.
+          md-grid-list(md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-row-height="70px" md-cols-gt-md="4" md-gutter="20px")
+            md-grid-tile(style="background: yellow;" md-colspan="1" md-rowspan="2" ng-repeat="demand in historyNotation.notationsRenter track by $index")
+              // My notation
+              md-card(layout-fill)
+                md-card-content()
+                  md-list-item.md-3-line
+                    img(style='height:70px; width:auto;' ng-src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg" class="md-avatar" alt="{{item.who}}")
+                    div.md-list-item-text(layout="column")
+                      h4 {{ demand.article_name | limitTo: 10 }} {{demand.article_name.length > 10 ? '...' : ''}}
+                      div {{ demand.date_issued | date:'medium' }}
+                      div
+                        span(ng-repeat="number in demand.nb_stars track by $index")
+                          ng-md-icon(ng-if="number == 1"  icon="star" size="22" style="fill:black")
+                          ng-md-icon.grey(ng-if="number == 0"  icon="star" style="fill:grey" size="22")
+
+                      p {{ demand.comment | limitTo: 30 }} {{demand.comment.length > 30 ? '...' : ''}}
+              md-grid-tile-footer
+                div(layout-fill layout="row" layout-align="center start" ng-if="demand.comment.length > 30 || demand.article_name.length > 10")
+                  md-button.special-button.md-raised(ng-click="historyNotation.showNotationDialog($event, demand);") Show more
+              // End grid notation renter
+
+
+    // Renter Pagination
+    div.search-article-toolbar(ng-if="historyNotation.notationsRenter.length > 1")
+      md-toolbar(style="background-color:none" layout="row")
+        span.flex
+        ng-md-icon(icon="keyboard_arrow_left" ng-click='historyNotation.prevOrNextPageRenter(historyNotation.current_page_renter - 1)' ng-if="historyNotation.current_page_renter != 1").arrow-previous-page
+        span.pagination-toolbar-search-article
+          span(paging paging-action="historyNotation.goToPageRenter(page)"  page="historyNotation.current_page_renter" page-size="historyNotation.page_size" total="historyNotation.nb_items_renter" active-class="current-page-selected-search-article")
+        //span(style="margin-right: 20px;" ng-if="articleSearch.search._pagination.page_number >= articleSearch.totalItems / articleSearch.search._pagination.items_per_page")
+        ng-md-icon(icon="keyboard_arrow_right" ng-click='historyNotation.prevOrNextPageRenter(historyNotation.current_page_renter + 1)' ng-if="historyNotation.current_page_renter != historyNotation.nb_page_renter").arrow-next-page
+    md-divider.flex
+            // End Pagination Renter
+
+
