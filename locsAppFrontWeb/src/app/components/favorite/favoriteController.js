@@ -21,7 +21,7 @@
     };
 
     ArticleService
-      .articlesFavorite
+      .getArticlesFavorite
       .get({})
       .$promise
       .then(vm.getArticleFavoriteSuccess, vm.getArticleFavoriteError);

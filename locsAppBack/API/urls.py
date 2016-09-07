@@ -64,6 +64,7 @@ history_patterns = [
 ]
 
 favorite_patterns = [
+    url(r'^articles/$', favorites.getFavoriteArticle),
     url(r'^add-articles/$', favorites.addFavoriteArticle),
     url(r'^delete-articles/$', favorites.deleteFavoriteArticle),
 

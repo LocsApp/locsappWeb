@@ -42,6 +42,7 @@
       articleWithQuestionToAnswer: $resource(URL_API + 'api/v1/articles/articles-with-question-to-answer/'),
       articleWithQuestionUserAsked: $resource(URL_API + 'api/v1/articles/articles-with-question-asked/'),
 
+      getArticlesFavorite: $resource(URL_API + 'api/v1/favorites/articles/'),
       addArticlesFavorite: $resource(URL_API + 'api/v1/favorites/add-articles/'),
       deleteArticlesFavorite: $resource(URL_API + 'api/v1/favorites/delete-articles/'),
 

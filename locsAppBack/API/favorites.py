@@ -126,8 +126,12 @@ def addFavoriteArticle(request):
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
-
-
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def getFavoriteArticle(request):
+    return APIrequests.GET("favorite_article",
+                           special_field={"id_user": request.user.pk})
 
 
 @csrf_exempt
