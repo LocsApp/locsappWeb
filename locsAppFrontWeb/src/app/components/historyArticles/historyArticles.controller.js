@@ -23,11 +23,15 @@
     vm.GetArticlesClientSuccess = function (data) {
       $log.log("GetArticlesClientSuccess", data);
       vm.articlesClient = data.articles_as_client;
+      vm.nb_items_client = data.nb_page * vm.page_size;
+      vm.nb_page_client = data.nb_page;
     };
 
     vm.GetArticlesRenterSuccess = function (data) {
       $log.log("GetArticlesRenterSuccess", data);
       vm.articlesRenter = data.articles_as_renter;
+      vm.nb_items_renter = data.nb_page * vm.page_size;
+      vm.nb_page_renter = data.nb_page;
     };
 
     vm.GetArticlesFailure = function (data) {
@@ -41,11 +45,66 @@
       .$promise
       .then(vm.GetArticlesClientSuccess, vm.GetArticlesFailure);
 
+       /* Action Pagination Client */
+
+    vm.goToPageClient = function (currentPage) {
+
+      vm.animatePagination = 'animate-pagination';
+      //$log.log("currentPage = ", currentPage);
+      HistoryService
+        .getMarksForClients
+        .get({id_page: currentPage})
+        .$promise
+        .then(vm.GetNotationsClientSuccess, vm.GetNotationFailure);
+    };
+
+    vm.prevOrNextPageClient = function (idPage) {
+
+      vm.animatePagination = 'animate-pagination';
+      vm.current_page_client = idPage;
+      HistoryService
+        .getMarksForClients
+        .get({id_page: idPage})
+        .$promise
+        .then(vm.GetNotationsClientSuccess, vm.GetNotationFailure);
+
+    };
+
+    /* End Action Pagination Client */
+
+
     HistoryService
       .getArticlesForRenters
       .get(({id_page: vm.current_page_renter}))
       .$promise
       .then(vm.GetArticlesRenterSuccess, vm.GetArticlesFailure);
+
+
+      /* Action Pagination Renter */
+     vm.goToPageRenter = function (currentPage) {
+
+      vm.animatePagination = 'animate-pagination';
+      //$log.log("currentPage = ", currentPage);
+      HistoryService
+        .getMarksForRenters
+        .get({id_page: currentPage})
+        .$promise
+        .then(vm.GetNotationsRenterSuccess, vm.GetNotationFailure);
+    };
+
+    vm.prevOrNextPageRenter = function (idPage) {
+
+      vm.animatePagination = 'animate-pagination';
+      vm.current_page_renter = idPage;
+      HistoryService
+        .getMarksForRenters
+        .get({id_page: idPage})
+        .$promise
+        .then(vm.GetNotationsRenterSuccess, vm.GetNotationFailure);
+
+    };
+
+    /* End Action Pagination Renter */
   }
 
 })();

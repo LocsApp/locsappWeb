@@ -114,7 +114,7 @@
         .then(vm.GetNotationsRenterSuccess, vm.GetNotationFailure);
     };
 
-    vm.prevOrNextPageClient = function (idPage) {
+    vm.prevOrNextPageRenter = function (idPage) {
 
       vm.animatePagination = 'animate-pagination';
       vm.current_page_renter = idPage;
