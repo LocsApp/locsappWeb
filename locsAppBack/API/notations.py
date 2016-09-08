@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from pymongo import MongoClient, ASCENDING, DESCENDING
+from .APIrequest import paginationAPI
 
 # Connects to the db and creates a MongoClient instance
 mongodb_client = MongoClient('localhost', 27017)
@@ -71,7 +72,8 @@ def getAllNotationAsRentertByUser(request, username, id_page):
         # On get la target
         try:
             user = get_user_model().objects.get(username=username)
-            user_pk = user.pk
+            nb_page, notations_as_renter = paginationAPI(request, id_page, user, db_locsapp["notations"], '{"id_target": int(user_pk), "as_renter": True}')
+            """
             nb_item = db_locsapp["notations"].count({"id_target": int(user_pk), "as_renter": True})
             item_on_a_page = 10
             nb_page = math.ceil(nb_item / item_on_a_page)
@@ -87,7 +89,7 @@ def getAllNotationAsRentertByUser(request, username, id_page):
             for notation_as_renter in db_locsapp["notations"].find({"id_target": int(user_pk), "as_renter": True}).sort("date_issued", DESCENDING).skip((skip_page) * item_on_a_page).limit(item_on_a_page):
                 notation_as_renter['_id'] = str(notation_as_renter['_id'])
                 notations_as_renter.append(notation_as_renter)
-
+            """
             return JsonResponse({"nb_page": nb_page, "notations_as_renter": notations_as_renter, "average_mark": user.renter_score})
         except ObjectDoesNotExist:
             return JsonResponse(

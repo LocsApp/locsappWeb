@@ -10,9 +10,12 @@ from django.http import HttpResponse
 
 # Pymongo imports
 from bson.objectid import ObjectId
+from pymongo import DESCENDING
 
 import pytz
 from datetime import datetime
+
+import math
 
 
 class APIRequestMongo:
@@ -323,3 +326,25 @@ class APIRequestMongo:
             return HttpResponse("200 OK")
         else:
             return HttpResponse("401 Unauthorized")
+
+
+def paginationAPI(request, id_page, user, collection_name, field):
+    user_pk = user.pk
+    nb_item = collection_name.count({"id_target": int(user_pk), "as_renter": True})
+    item_on_a_page = 10
+    nb_page = math.ceil(nb_item / item_on_a_page)
+    notations_as_renter = []
+
+    if (id_page - 1) * 10 > nb_item:
+        id_page = nb_page
+
+    skip_page = id_page - 1
+    if skip_page < 0:
+        skip_page = 0
+
+    for notation_as_renter in collection_name.find({"id_target": int(user_pk), "as_renter": True}).sort(
+            "date_issued", DESCENDING).skip((skip_page) * item_on_a_page).limit(item_on_a_page):
+        notation_as_renter['_id'] = str(notation_as_renter['_id'])
+        notations_as_renter.append(notation_as_renter)
+    #if username != None
+    return nb_page, notations_as_renter
