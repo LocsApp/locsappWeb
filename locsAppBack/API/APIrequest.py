@@ -328,12 +328,15 @@ class APIRequestMongo:
             return HttpResponse("401 Unauthorized")
 
 
-def paginationAPI(request, id_page, collection_name, field):
+def paginationAPI(id_page, collection_name, field, request=None):
 
+    print("PAGINATION API")
+    print("field = ", field)
     nb_item = collection_name.count(field)
+    print("nb_items = ", nb_item)
     item_on_a_page = 10
     nb_page = math.ceil(nb_item / item_on_a_page)
-    notations_as_renter = []
+    items = []
 
     if (id_page - 1) * 10 > nb_item:
         id_page = nb_page
@@ -342,9 +345,10 @@ def paginationAPI(request, id_page, collection_name, field):
     if skip_page < 0:
         skip_page = 0
 
-    for notation_as_renter in collection_name.find(field).sort(
+    for item in collection_name.find(field).sort(
             "date_issued", DESCENDING).skip((skip_page) * item_on_a_page).limit(item_on_a_page):
-        notation_as_renter['_id'] = str(notation_as_renter['_id'])
-        notations_as_renter.append(notation_as_renter)
+        item['_id'] = str(item['_id'])
+        items.append(item)
+        print("item = ", item)
     #if username != None
-    return nb_page, notations_as_renter
+    return nb_page, items

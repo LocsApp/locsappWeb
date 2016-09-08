@@ -239,6 +239,8 @@ HISTORY
 @permission_classes((IsAuthenticated,))
 def getArticleHistoryAsClient(request, id_page):
     if request.method == "GET":
+        id_page = int(id_page)
+        """
         item_in_a_page = 10
         id_page = int(id_page)
         nb_item = db_locsapp["article_demands"].count({"id_author": request.user.pk, "visible": True})
@@ -257,7 +259,11 @@ def getArticleHistoryAsClient(request, id_page):
                     (skip_page) * item_in_a_page).limit(item_in_a_page):
             article_as_client['_id'] = str(article_as_client['_id'])
             articles_as_client.append(article_as_client)
+        """
 
+        field = {"id_author": request.user.pk, "visible": True}
+        print("ARRTICLE CLIENT", field)
+        nb_page, articles_as_client = APIrequests.paginationAPI(id_page, db_locsapp["article_demands"], field)
         return JsonResponse(
             {"nb_page": nb_page, "articles_as_client": articles_as_client})
 
