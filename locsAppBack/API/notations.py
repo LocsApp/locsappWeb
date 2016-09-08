@@ -40,6 +40,10 @@ def getAllNotationAsClientByUser(request, username, id_page):
         id_page = int(id_page)
         try:
             user = get_user_model().objects.get(username=username)
+            field = {"id_target": int(user.pk), "as_renter": False}
+            nb_page, notations_as_client = paginationAPI(request, id_page, user, db_locsapp["notations"], field)
+
+            """
             user_pk = user.pk
             nb_item = db_locsapp["notations"].count({"id_target": int(user_pk), "as_renter": False})
             item_on_a_page = 10
@@ -55,7 +59,7 @@ def getAllNotationAsClientByUser(request, username, id_page):
             for notation_as_client in db_locsapp["notations"].find({"id_target": int(user_pk), "as_renter": False}).sort("date_issued", DESCENDING).skip((skip_page) * item_on_a_page).limit(item_on_a_page):
                 notation_as_client['_id'] = str(notation_as_client['_id'])
                 notations_as_client.append(notation_as_client)
-
+            """
             return JsonResponse({"nb_page": nb_page, "notations_as_client": notations_as_client, "average_mark": user.tenant_score})
 
         except ObjectDoesNotExist:
@@ -72,7 +76,8 @@ def getAllNotationAsRentertByUser(request, username, id_page):
         # On get la target
         try:
             user = get_user_model().objects.get(username=username)
-            nb_page, notations_as_renter = paginationAPI(request, id_page, user, db_locsapp["notations"], '{"id_target": int(user_pk), "as_renter": True}')
+            field = {"id_target": int(user.pk), "as_renter": True}
+            nb_page, notations_as_renter = paginationAPI(request, id_page, user, db_locsapp["notations"], field)
             """
             nb_item = db_locsapp["notations"].count({"id_target": int(user_pk), "as_renter": True})
             item_on_a_page = 10

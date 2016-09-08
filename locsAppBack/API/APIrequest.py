@@ -329,8 +329,9 @@ class APIRequestMongo:
 
 
 def paginationAPI(request, id_page, user, collection_name, field):
+
     user_pk = user.pk
-    nb_item = collection_name.count({"id_target": int(user_pk), "as_renter": True})
+    nb_item = collection_name.count(field)
     item_on_a_page = 10
     nb_page = math.ceil(nb_item / item_on_a_page)
     notations_as_renter = []
@@ -342,7 +343,7 @@ def paginationAPI(request, id_page, user, collection_name, field):
     if skip_page < 0:
         skip_page = 0
 
-    for notation_as_renter in collection_name.find({"id_target": int(user_pk), "as_renter": True}).sort(
+    for notation_as_renter in collection_name.find(field).sort(
             "date_issued", DESCENDING).skip((skip_page) * item_on_a_page).limit(item_on_a_page):
         notation_as_renter['_id'] = str(notation_as_renter['_id'])
         notations_as_renter.append(notation_as_renter)
