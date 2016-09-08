@@ -41,7 +41,7 @@ def getAllNotationAsClientByUser(request, username, id_page):
         try:
             user = get_user_model().objects.get(username=username)
             field = {"id_target": int(user.pk), "as_renter": False}
-            nb_page, notations_as_client = paginationAPI(request, id_page, user, db_locsapp["notations"], field)
+            nb_page, notations_as_client = paginationAPI(request, id_page, db_locsapp["notations"], field)
 
             """
             user_pk = user.pk
@@ -77,7 +77,7 @@ def getAllNotationAsRentertByUser(request, username, id_page):
         try:
             user = get_user_model().objects.get(username=username)
             field = {"id_target": int(user.pk), "as_renter": True}
-            nb_page, notations_as_renter = paginationAPI(request, id_page, user, db_locsapp["notations"], field)
+            nb_page, notations_as_renter = paginationAPI(request, id_page, db_locsapp["notations"], field)
             """
             nb_item = db_locsapp["notations"].count({"id_target": int(user_pk), "as_renter": True})
             item_on_a_page = 10
