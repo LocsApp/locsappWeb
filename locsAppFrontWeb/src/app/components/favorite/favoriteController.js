@@ -10,8 +10,7 @@
   function FavoriteController($log, ArticleService, $state, toastr, URL_API, $document,
                               $mdDialog) {
     var vm = this;
-    vm.current_page_favorite = 1;
-    vm.current_page_search = 1;
+    vm.current_page_favorite_article = 1;
     vm.page_size = 10;
     vm.url_api = URL_API;
     vm.limitDescription = 50;
@@ -20,8 +19,8 @@
     vm.getArticleFavoriteSuccess = function (data) {
       $log.log("getArticleFavoriteSuccess = ", data);
       vm.favorite_articles = data.favorite_article;
-      vm.nb_items_favorite = data.nb_page * vm.page_size;
-      vm.nb_page_favorite = data.nb_page;
+      vm.nb_items_favorite_article = data.nb_page * vm.page_size;
+      vm.nb_page_favorite_article = data.nb_page;
     };
 
     vm.getArticleFavoriteError = function (data) {
@@ -95,8 +94,27 @@
 
         vm.deleteArticleFavoriteSuccess = function (data) {
           $log.log("deleteArticleFavoriteSuccess", data);
+
           toastr.success("This article has been deleted from your favorite", "Success!");
           vm.hide();
+
+          vm.getArticleFavoriteSuccess = function (data) {
+            $log.log("getArticleFavoriteSuccess = ", data);
+            vm.favorite_articles = data.favorite_article;
+            vm.nb_items_favorite = data.nb_page * vm.page_size;
+            vm.nb_page_favorite = data.nb_page;
+          };
+
+          vm.getArticleFavoriteError = function (data) {
+            $log.error("getArticleFavoriteError", data);
+          };
+
+          ArticleService
+            .getArticlesFavorite
+            .get({"id_page": vm.current_page_favorite})
+            .$promise
+            .then(vm.getArticleFavoriteSuccess, vm.getArticleFavoriteError);
+
         };
 
         vm.deleteArticleFavoriteError = function (data) {
