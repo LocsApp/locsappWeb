@@ -16,22 +16,27 @@
     vm.limitDescription = 50;
     vm.limitTitle = 5;
 
-    vm.getArticleFavoriteSuccess = function (data) {
-      $log.log("getArticleFavoriteSuccess = ", data);
-      vm.favorite_articles = data.favorite_article;
-      vm.nb_items_favorite_article = data.nb_page * vm.page_size;
-      vm.nb_page_favorite_article = data.nb_page;
+     vm.getArticleFavorite = function () {
+      vm.getArticleFavoriteSuccess = function (data) {
+        $log.log("getArticleFavoriteSuccess = ", data);
+        vm.favorite_articles = data.favorite_article;
+        vm.nb_items_favorite_article = data.nb_page * vm.page_size;
+        vm.nb_page_favorite_article = data.nb_page;
+      };
+
+      vm.getArticleFavoriteError = function (data) {
+        $log.error("getArticleFavoriteError", data);
+      };
+
+      ArticleService
+        .getArticlesFavorite
+        .get({"id_page": vm.current_page_favorite_article})
+        .$promise
+        .then(vm.getArticleFavoriteSuccess, vm.getArticleFavoriteError);
+
     };
 
-    vm.getArticleFavoriteError = function (data) {
-      $log.error("getArticleFavoriteError", data);
-    };
-
-    ArticleService
-      .getArticlesFavorite
-      .get({"id_page": vm.current_page_favorite})
-      .$promise
-      .then(vm.getArticleFavoriteSuccess, vm.getArticleFavoriteError);
+    vm.getArticleFavorite();
 
     vm.goToArticlePage = function (id) {
       $state.go("main.articleShow", {"id": id});
@@ -68,26 +73,30 @@
 
     /* Start dialog confirm delete favorite article */
     /** @ngInject */
-    vm.deleteFavoriteArticleDialog = function (event, id_article_favorite) {
+    vm.deleteFavoriteArticleDialog = function (event, id_article_favorite, current_page) {
       $mdDialog.show({
         controller: vm.deleteFavoriteArticleController,
         controllerAs: 'deleteFavoriteArticle',
         templateUrl: 'app/templates/dialogTemplates/confirmDeleteFavoriteArticle.tmpl.html',
-        locals: {id_article_favorite: id_article_favorite},
+        locals: {id_article_favorite: id_article_favorite, current_page: current_page},
         bindToController: true,
         parent: angular.element($document.body),
         targetEvent: event,
         clickOutsideToClose: true
-      })
+      }).then(function () {
+
+       vm.getArticleFavorite();
+      });
     };
     /* End dialog confirm delete favorite article */
 
 
     /* Start deleteFavoriteArticleController Controller*/
     /** @ngInject */
-    vm.deleteFavoriteArticleController = function ($mdDialog, id_article_favorite) {
+    vm.deleteFavoriteArticleController = function ($mdDialog, id_article_favorite, current_page) {
       var vm = this;
-      vm.id_article_favorite = id_article_favorite
+      vm.id_article_favorite = id_article_favorite;
+      vm.current_page = current_page;
 
       /* Call delete function favorite */
       vm.accepted = function () {
@@ -97,24 +106,6 @@
 
           toastr.success("This article has been deleted from your favorite", "Success!");
           vm.hide();
-
-          vm.getArticleFavoriteSuccess = function (data) {
-            $log.log("getArticleFavoriteSuccess = ", data);
-            vm.favorite_articles = data.favorite_article;
-            vm.nb_items_favorite = data.nb_page * vm.page_size;
-            vm.nb_page_favorite = data.nb_page;
-          };
-
-          vm.getArticleFavoriteError = function (data) {
-            $log.error("getArticleFavoriteError", data);
-          };
-
-          ArticleService
-            .getArticlesFavorite
-            .get({"id_page": vm.current_page_favorite})
-            .$promise
-            .then(vm.getArticleFavoriteSuccess, vm.getArticleFavoriteError);
-
         };
 
         vm.deleteArticleFavoriteError = function (data) {
@@ -142,6 +133,9 @@
       };
     };
     /* End deleteFavoriteArticleController Controller*/
+
+
+
   }
 
 })();
