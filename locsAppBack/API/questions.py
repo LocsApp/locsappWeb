@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from .views import APIrequests
 from datetime import datetime
 import pytz
+from .APIrequest import paginationAPI
 
 # Connects to the db and creates a MongoClient instance
 mongodb_client = MongoClient('localhost', 27017)
@@ -303,10 +304,10 @@ def report(request):
 def articleWithQuestionToAnswer(request, id_page=1):
     if request.method == "GET":
         id_page = int(id_page)
-
-        return APIrequests.GET("articles",
-                               special_field={"id_author": request.user.pk,
-                                              "questions.response": None})
+        field = {"id_author": request.user.pk, "questions.response": None}
+        nb_page, questions_to_answer = paginationAPI(id_page, db_locsapp["articles"], field)
+        return JsonResponse(
+            {"nb_page": nb_page, "articles": questions_to_answer})
 
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
@@ -318,9 +319,10 @@ def articleWithQuestionToAnswer(request, id_page=1):
 def articleWithQuestionUserAsked(request, id_page=1):
     if request.method == "GET":
         id_page = int(id_page)
-        return APIrequests.GET("articles",
-                               special_field={"questions.author_name": request.user.username,
-                                              "questions.response": None})
+        field = {"questions.author_name": request.user.username, "questions.response": None}
+        nb_page, questions_user_asked = paginationAPI(id_page, db_locsapp["articles"], field)
+        return JsonResponse(
+            {"nb_page": nb_page, "articles": questions_user_asked})
 
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)

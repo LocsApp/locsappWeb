@@ -12,6 +12,9 @@
 
 
     // Questions user asked Pagination
+    h1 Length  {{questions.articlesWithQuestionUserAsked.length}}
+    h1 current page {{questions.current_page_questions_user_asked}}
+    h1 nb_page {{questions.nb_page_questions_user_asked}}
     div.search-article-toolbar(ng-if='questions.articlesWithQuestionUserAsked.length == 0')
       md-toolbar(style="background-color:none" layout="row")
         span.flex
