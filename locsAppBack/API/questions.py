@@ -300,8 +300,10 @@ def report(request):
 @csrf_exempt
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
-def articleWithQuestionToAnswer(request):
+def articleWithQuestionToAnswer(request, id_page=1):
     if request.method == "GET":
+        id_page = int(id_page)
+
         return APIrequests.GET("articles",
                                special_field={"id_author": request.user.pk,
                                               "questions.response": None})
@@ -313,8 +315,9 @@ def articleWithQuestionToAnswer(request):
 @csrf_exempt
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
-def articleWithQuestionUserAsked(request):
+def articleWithQuestionUserAsked(request, id_page=1):
     if request.method == "GET":
+        id_page = int(id_page)
         return APIrequests.GET("articles",
                                special_field={"questions.author_name": request.user.username,
                                               "questions.response": None})

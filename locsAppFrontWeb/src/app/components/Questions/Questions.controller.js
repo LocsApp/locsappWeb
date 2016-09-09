@@ -24,7 +24,7 @@
 
     ArticleService
       .articleWithQuestionToAnswer
-      .get({})
+      .get({"id_page": 1})
       .$promise
       .then(vm.GetArticleWitQuestionToAnswerSuccess, vm.GetArticleWitQuestionToAnswerFailure);
 
@@ -43,7 +43,7 @@
 
     ArticleService
       .articleWithQuestionUserAsked
-      .get({})
+      .get({"id_page": 1})
       .$promise
       .then(vm.GetArticleWithQuestionUserAskedSuccess, vm.GetArticleWithQuestionUserAskedFailure)
 

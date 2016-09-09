@@ -39,8 +39,10 @@
       answers: $resource(URL_API + 'api/v1/articles/answers/'),
       upVote: $resource(URL_API + 'api/v1/articles/upvote/'),
       reportQuestion: $resource(URL_API + 'api/v1/articles/report-question/'),
-      articleWithQuestionToAnswer: $resource(URL_API + 'api/v1/articles/articles-with-question-to-answer/'),
-      articleWithQuestionUserAsked: $resource(URL_API + 'api/v1/articles/articles-with-question-asked/'),
+      articleWithQuestionToAnswer: $resource(URL_API + 'api/v1/articles/articles-with-question-to-answer/:id_page/',
+        {id_page: "id_page"}),
+      articleWithQuestionUserAsked: $resource(URL_API + 'api/v1/articles/articles-with-question-asked/:id_page/',
+        {id_page: "id_page"}),
 
       getArticlesFavorite: $resource(URL_API + 'api/v1/favorites/articles/:id_page/',
         {id_page: "id_page"}),
