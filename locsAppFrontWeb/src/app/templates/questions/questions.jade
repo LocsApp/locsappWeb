@@ -12,10 +12,7 @@
 
 
     // Questions user asked Pagination
-    h1 Length  {{questions.articlesWithQuestionUserAsked.length}}
-    h1 current page {{questions.current_page_questions_user_asked}}
-    h1 nb_page {{questions.nb_page_questions_user_asked}}
-    div.search-article-toolbar(ng-if='questions.articlesWithQuestionUserAsked.length == 0')
+    div.search-article-toolbar(ng-if='questions.articlesWithQuestionUserAsked.length >= 1')
       md-toolbar(style="background-color:none" layout="row")
         span.flex
         ng-md-icon(icon="keyboard_arrow_left" ng-click='questions.prevOrNextPageQuestionsUserAsked(questions.current_page_questions_user_asked - 1)' ng-if="questions.current_page_questions_user_asked != 1").arrow-previous-page
@@ -27,11 +24,11 @@
                 // End Pagination Questions user asked
 
     //p {{questions.articlesWithQuestionUserAsked[0]}}
-    div(ng-if='questions.articlesWithQuestionUserAsked.length == 0')
+    //div(ng-if='questions.articlesWithQuestionUserAsked.length == 0')
       div(layout='row' layout-align='center')
         p You did not ask a question about any article
 
-    div(ng-if='questions.articlesWithQuestionUserAsked.length > 0' ng-repeat='article in questions.articlesWithQuestionUserAsked track by $index')
+    //div(ng-if='questions.articlesWithQuestionUserAsked.length > 0' ng-repeat='article in questions.articlesWithQuestionUserAsked track by $index')
       div(layout='row' layout-align='center')
           md-card(flex='50' ng-click='questions.goToArticlePage(article._id)')
             md-card-content
