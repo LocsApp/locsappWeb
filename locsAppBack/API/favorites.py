@@ -133,35 +133,11 @@ def addFavoriteArticle(request):
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
 def getFavoriteArticle(request, id_page):
-    """"
-    item_in_a_page = 10
-    id_page = int(id_page)
-    nb_item = db_locsapp["favorite_article"].count({"id_user": request.user.pk})
-    nb_page = math.ceil(nb_item / item_in_a_page)
-    favorites_articles = []
-
-    if (id_page - 1) * item_in_a_page > nb_item:
-        id_page = nb_page
-
-    skip_page = id_page - 1
-    if skip_page > 0:
-        skip_page = 0
-
-    for favorite_article in db_locsapp["favorite_article"].find(
-            {"id_user": request.user.pk}).sort("date_issued", DESCENDING).skip(
-                (skip_page) * item_in_a_page).limit(item_in_a_page):
-        favorite_article['_id'] = str(favorite_article['_id'])
-        favorites_articles.append(favorite_article)
-    """
     id_page = int(id_page)
     field = {"id_user": request.user.pk}
     nb_page, favorites_articles = paginationAPI(id_page, db_locsapp["favorite_article"], field)
     return JsonResponse(
         {"nb_page": nb_page, "favorite_article": favorites_articles})
-
-    #return APIrequests.GET("favorite_article",
-    #                       special_field={"id_user": request.user.pk})
-
 
 @csrf_exempt
 @api_view(['POST', 'GET'])

@@ -328,7 +328,7 @@ class APIRequestMongo:
             return HttpResponse("401 Unauthorized")
 
 
-def paginationAPI(id_page, collection_name, field, request=None):
+def paginationAPI(id_page, collection_name, field):
 
     print("PAGINATION API")
 
