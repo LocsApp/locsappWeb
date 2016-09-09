@@ -301,7 +301,6 @@ def getArticleHistoryAsRenter(request, id_page):
         return JsonResponse(
             {"nb_page": nb_page, "articles_as_renter": articles_as_renter})
 
-
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 

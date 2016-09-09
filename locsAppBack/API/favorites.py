@@ -103,7 +103,7 @@ def addFavoriteArticle(request):
                     "_default": request.user.pk,
                     "_protected": True
                 },
-                "creation_date": {
+                "date_issued": {
                     "_type": str,
                     "_protected": True,
                     "_default": datetime.now(pytz.utc)
