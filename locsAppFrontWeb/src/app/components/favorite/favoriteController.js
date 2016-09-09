@@ -38,29 +38,6 @@
       $state.go("main.articleShow", {"id": id});
     };
 
-    vm.deleteArticleFavoriteSuccess = function (data) {
-      $log.log("deleteArticleFavoriteSuccess", data);
-      toastr.success("This article has been deleted from your favorite", "Success!");
-    };
-
-    vm.deleteArticleFavoriteError = function (data) {
-      $log.error("deleteArticleFavoriteError", data);
-      toastr.error("There was a problem deleted this article", "Error!");
-    };
-
-    vm.deleteArticleFavorite = function (idFavoriteArticle) {
-
-      $log.log("idFavoriteArticle = ", idFavoriteArticle);
-
-      ArticleService
-        .deleteArticlesFavorite
-        .save({
-          "id_favorite_article": idFavoriteArticle
-        })
-        .$promise
-        .then(vm.deleteArticleFavoriteSuccess, vm.deleteArticleFavoriteError)
-    };
-
 
     /* Action Pagination Favorite Article */
 
@@ -92,7 +69,7 @@
 
     /* Start dialog confirm delete favorite article */
     /** @ngInject */
-    vm.deleteFavoriteArticleDialog = function (event, id_article_favorite, type) {
+    vm.deleteFavoriteArticleDialog = function (event, id_article_favorite) {
       $mdDialog.show({
         controller: vm.deleteFavoriteArticleController,
         controllerAs: 'deleteFavoriteArticle',
@@ -109,8 +86,40 @@
 
     /* Start deleteFavoriteArticleController Controller*/
     /** @ngInject */
-    vm.deleteFavoriteArticleController = function ($mdDialog) {
+    vm.deleteFavoriteArticleController = function ($mdDialog, id_article_favorite) {
       var vm = this;
+      vm.id_article_favorite = id_article_favorite
+
+      /* Call delete function favorite */
+      vm.accepted = function () {
+
+        vm.deleteArticleFavoriteSuccess = function (data) {
+          $log.log("deleteArticleFavoriteSuccess", data);
+          toastr.success("This article has been deleted from your favorite", "Success!");
+        };
+
+        vm.deleteArticleFavoriteError = function (data) {
+          $log.error("deleteArticleFavoriteError", data);
+          toastr.error("There was a problem deleted this article", "Error!");
+        };
+
+
+        $log.log("idFavoriteArticle = ", vm.id_article_favorite);
+
+        ArticleService
+          .deleteArticlesFavorite
+          .save({
+            "id_favorite_article": vm.id_article_favorite
+          })
+          .$promise
+          .then(vm.deleteArticleFavoriteSuccess, vm.deleteArticleFavoriteError)
+      };
+
+      /*Hide callback for $mdDialog*/
+      vm.hide = function () {
+
+        $mdDialog.hide(vm.user);
+      };
     };
     /* End deleteFavoriteArticleController Controller*/
   }
