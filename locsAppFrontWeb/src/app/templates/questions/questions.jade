@@ -30,23 +30,21 @@
       div.delimiter
       section(layout="row", layout-align="start start")
         div(layout-margin style="margin-top: 0px;").flex
-          div(ng-if='favorite.favorite_articles.length == 0')
+          div(ng-if='questions.articlesWithQuestionUserAsked.length == 0')
             div(layout='row' layout-align='center')
-              p You don't have any favorite articles
+              p You did not ask a question about any article
           md-grid-list(md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-row-height="100px" md-cols-gt-md="4" md-gutter="20px")
-            md-grid-tile(style="background: yellow;" md-colspan="1" md-rowspan="2" ng-repeat='article in favorite.favorite_articles track by $index')
-              // My notation
+            md-grid-tile(style="background: yellow;" md-colspan="1" md-rowspan="2"
+            ng-if='questions.articlesWithQuestionUserAsked.length > 0'
+            ng-repeat='article in questions.articlesWithQuestionUserAsked track by $index')
               md-card(layout-fill)
                 md-card-content
                   div(layout='row')
-                    img(ng-src="{{ favorite.url_api + article.url_thumbnail }}" ng-click='favorite.goToArticlePage(article.id_article)')
-                    div.right(layout='column')
-                      h3.title(ng-click='favorite.goToArticlePage(article.id_article)') {{article.title | limitTo:favorite.limitTitle}} <span ng-if='article.title.length > favorite.limitTitle'>...</span>
-                      span {{article.price}} $
-                      p {{article.description | limitTo:favorite.limitDescription}} <span ng-if='article.description.length > favorite.limitDescription'>...</span>
-                      div(layout="column" layout-align="end end")
-                        ng-md-icon(icon="delete" ng-click='favorite.deleteArticleFavorite(article._id)')
-                        // End grid questions user asked
+                    img(ng-src="{{ questions.url_api + article.url_thumbnail }}")
+                    div(layout='column')
+                      h3 {{article.title}}
+                      p {{article.description | limitTo:questions.limitDescription}} <span ng-if='article.description.length > questions.limitDescription'>...</span>
+                // End grid questions user asked
 
 
     //p {{questions.articlesWithQuestionUserAsked[0]}}

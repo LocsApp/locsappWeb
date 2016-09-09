@@ -13,5 +13,10 @@
 
   md-card {
     cursor: pointer;
+
+    img {
+      height: 70px;
+      width: auto;
+    }
   }
 }
