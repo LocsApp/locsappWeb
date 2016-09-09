@@ -6,7 +6,9 @@
     .module('LocsappControllers')
     .controller('FavoriteController', FavoriteController);
 
-  function FavoriteController($log, ArticleService, $state, toastr, URL_API) {
+  /** @ngInject */
+  function FavoriteController($log, ArticleService, $state, toastr, URL_API, $document,
+                              $mdDialog) {
     var vm = this;
     vm.current_page_favorite = 1;
     vm.current_page_search = 1;
@@ -60,7 +62,7 @@
     };
 
 
-        /* Action Pagination Favorite Article */
+    /* Action Pagination Favorite Article */
 
     vm.goToPageArticleFavorite = function (currentPage) {
 
@@ -86,6 +88,31 @@
     };
 
     /* End Action Pagination Favorite Article */
+
+
+    /* Start dialog confirm delete favorite article */
+    /** @ngInject */
+    vm.deleteFavoriteArticleDialog = function (event, id_article_favorite, type) {
+      $mdDialog.show({
+        controller: vm.deleteFavoriteArticleController,
+        controllerAs: 'deleteFavoriteArticle',
+        templateUrl: 'app/templates/dialogTemplates/confirmDeleteFavoriteArticle.tmpl.html',
+        locals: {id_article_favorite: id_article_favorite},
+        bindToController: true,
+        parent: angular.element($document.body),
+        targetEvent: event,
+        clickOutsideToClose: true
+      })
+    };
+    /* End dialog confirm delete favorite article */
+
+
+    /* Start deleteFavoriteArticleController Controller*/
+    /** @ngInject */
+    vm.deleteFavoriteArticleController = function ($mdDialog) {
+      var vm = this;
+    };
+    /* End deleteFavoriteArticleController Controller*/
   }
 
 })();

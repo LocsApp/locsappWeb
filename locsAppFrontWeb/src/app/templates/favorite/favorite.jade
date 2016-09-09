@@ -45,7 +45,8 @@
                       span {{article.price}} $
                       p {{article.description | limitTo:favorite.limitDescription}} <span ng-if='article.description.length > favorite.limitDescription'>...</span>
                       div(layout="column" layout-align="end end")
-                        ng-md-icon(icon="delete" ng-click='favorite.deleteArticleFavorite(article._id)')
+                        ng-md-icon(icon="delete"
+                        ng-click="favorite.deleteFavoriteArticleDialog($event, article._id);")
 
 
     div(layout="row" layout-align="center")
