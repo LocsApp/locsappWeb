@@ -96,11 +96,13 @@
         vm.deleteArticleFavoriteSuccess = function (data) {
           $log.log("deleteArticleFavoriteSuccess", data);
           toastr.success("This article has been deleted from your favorite", "Success!");
+          vm.hide();
         };
 
         vm.deleteArticleFavoriteError = function (data) {
           $log.error("deleteArticleFavoriteError", data);
           toastr.error("There was a problem deleted this article", "Error!");
+          vm.hide();
         };
 
 
