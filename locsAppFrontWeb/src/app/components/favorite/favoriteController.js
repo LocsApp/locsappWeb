@@ -62,7 +62,7 @@
 
         /* Action Pagination Favorite Article */
 
-    vm.goToPageFavorite = function (currentPage) {
+    vm.goToPageArticleFavorite = function (currentPage) {
 
       vm.animatePagination = 'animate-pagination';
       //$log.log("currentPage = ", currentPage);
@@ -73,7 +73,7 @@
         .then(vm.getArticleFavoriteSuccess, vm.getArticleFavoriteError);
     };
 
-    vm.prevOrNextPageFavorite = function (idPage) {
+    vm.prevOrNextPageArticleFavorite = function (idPage) {
 
       vm.animatePagination = 'animate-pagination';
       vm.current_page_client = idPage;
