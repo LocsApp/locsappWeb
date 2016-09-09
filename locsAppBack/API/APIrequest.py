@@ -329,9 +329,6 @@ class APIRequestMongo:
 
 
 def paginationAPI(id_page, collection_name, field):
-
-    print("PAGINATION API")
-
     print("field = ", field)
     nb_item = collection_name.count(field)
     print("nb_items = ", nb_item)
@@ -339,7 +336,7 @@ def paginationAPI(id_page, collection_name, field):
     nb_page = math.ceil(nb_item / item_on_a_page)
     items = []
 
-    if (id_page - 1) * 10 > nb_item:
+    if (id_page - 1) * item_on_a_page > nb_item:
         id_page = nb_page
 
     skip_page = id_page - 1
@@ -350,5 +347,4 @@ def paginationAPI(id_page, collection_name, field):
             "date_issued", DESCENDING).skip((skip_page) * item_on_a_page).limit(item_on_a_page):
         item['_id'] = str(item['_id'])
         items.append(item)
-    #if username != None
     return nb_page, items
