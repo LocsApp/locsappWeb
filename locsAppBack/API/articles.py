@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .views import db_locsapp
 from .views import APIrequests
+from .APIrequest import paginationAPI
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 from django.contrib.auth import get_user_model
@@ -262,8 +263,7 @@ def getArticleHistoryAsClient(request, id_page):
         """
 
         field = {"id_author": request.user.pk, "visible": True}
-        print("ARRTICLE CLIENT", field)
-        nb_page, articles_as_client = APIrequests.paginationAPI(id_page, db_locsapp["article_demands"], field)
+        nb_page, articles_as_client = paginationAPI(id_page, db_locsapp["article_demands"], field)
         return JsonResponse(
             {"nb_page": nb_page, "articles_as_client": articles_as_client})
 
@@ -275,6 +275,8 @@ def getArticleHistoryAsClient(request, id_page):
 @permission_classes((IsAuthenticated,))
 def getArticleHistoryAsRenter(request, id_page):
     if request.method == "GET":
+        id_page = int(id_page)
+        """
         item_in_a_page = 10
         id_page = int(id_page)
         nb_item = db_locsapp["article_demands"].count({"id_target": request.user.pk, "visible": True})
@@ -293,7 +295,9 @@ def getArticleHistoryAsRenter(request, id_page):
                         (skip_page) * item_in_a_page).limit(item_in_a_page):
             article_as_renter['_id'] = str(article_as_renter['_id'])
             articles_as_renter.append(article_as_renter)
-
+         """
+        field = {"id_target": request.user.pk, "visible": True}
+        nb_page, articles_as_renter = paginationAPI(id_page, db_locsapp["article_demands"], field)
         return JsonResponse(
             {"nb_page": nb_page, "articles_as_renter": articles_as_renter})
 
