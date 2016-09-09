@@ -483,11 +483,6 @@ def postNewMark(request):
 @permission_classes((IsAuthenticated,))
 def getMarkForClient(request, id_page):
     if request.method == "GET":
-        id_page = int(id_page)
-        field = {"id_target": request.user.pk, "visible": True, "status": "finished"}
-        nb_page, docs = paginationAPI(id_page, db_locsapp["article_demands"], field)
-
-
         docs = APIrequests.GET(
             'article_demands', special_field={"id_target": request.user.pk, "visible": True, "status": "finished"}, raw=True)
         for idx, document in enumerate(docs["article_demands"]):
