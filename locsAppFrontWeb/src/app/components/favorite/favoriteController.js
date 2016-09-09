@@ -60,7 +60,7 @@
     };
 
 
-        /* Action Pagination Favorite */
+        /* Action Pagination Favorite Article */
 
     vm.goToPageFavorite = function (currentPage) {
 
@@ -85,7 +85,7 @@
 
     };
 
-    /* End Action Pagination Favorite */
+    /* End Action Pagination Favorite Article */
   }
 
 })();
