@@ -481,8 +481,13 @@ def postNewMark(request):
 @csrf_exempt
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
-def getMarkForClient(request):
+def getMarkForClient(request, id_page):
     if request.method == "GET":
+        id_page = int(id_page)
+        field = {"id_target": request.user.pk, "visible": True, "status": "finished"}
+        nb_page, docs = paginationAPI(id_page, db_locsapp["article_demands"], field)
+
+
         docs = APIrequests.GET(
             'article_demands', special_field={"id_target": request.user.pk, "visible": True, "status": "finished"}, raw=True)
         for idx, document in enumerate(docs["article_demands"]):
@@ -498,7 +503,7 @@ def getMarkForClient(request):
 @csrf_exempt
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
-def getMarkForRenter(request):
+def getMarkForRenter(request, id_page):
     if request.method == "GET":
         docs = APIrequests.GET(
             'article_demands', special_field={"id_author": request.user.pk, "visible": True, "status": "finished"}, raw=True)

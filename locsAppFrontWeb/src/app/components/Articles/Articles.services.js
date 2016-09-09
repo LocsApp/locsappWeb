@@ -51,8 +51,10 @@
 
 
       giveMark: $resource(URL_API + 'api/v1/articles/give-mark/'),
-      getPendingMarksForClients: $resource(URL_API + 'api/v1/articles/get-pending-marks-for-clients/'),
-      getPendingMarksForRenters: $resource(URL_API + 'api/v1/articles/get-pending-marks-for-renters/'),
+      getPendingMarksForClients: $resource(URL_API + 'api/v1/articles/get-pending-marks-for-clients/:id_page/',
+        {id_page: "id_page"}),
+      getPendingMarksForRenters: $resource(URL_API + 'api/v1/articles/get-pending-marks-for-renters/:id_page/',
+        {id_page: "id_page"}),
       uploadPicture: uploadPicture,
       is_authenticated: is_authenticated
     };
