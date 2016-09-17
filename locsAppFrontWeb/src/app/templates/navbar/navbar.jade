@@ -8,22 +8,12 @@ div(ng-controller="NavBarController as navbar" style="height: 500px;")
 
     md-sidenav.md-sidenav-left(md-component-id='left', md-whiteframe='4' style="height: 500px;")
       md-toolbar.md-theme-indigo
-        h1.md-toolbar-tools Disabled Backdrop
+        h1.md-toolbar-tools LocsApp
       md-content(layout-margin='')
         p
           | This sidenav is not showing any backdrop, where users can click on it, to close the sidenav.
         md-button.md-accent(ng-click='navbar.toggleLeft()')
           | Close this Sidenav
-    //md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id='right')
-      md-toolbar.md-theme-light
-        h1.md-toolbar-tools Sidenav Right
-      md-content(layout-padding='')
-        form
-          md-input-container
-            label(for='testInput') Test input
-            input#testInput(type='text', ng-model='data', md-autofocus='')
-        md-button.md-primary(ng-click='close()')
-          | Close Sidenav Right
 
 
   //Navbar for big screen
