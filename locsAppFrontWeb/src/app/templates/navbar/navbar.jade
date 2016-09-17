@@ -1,5 +1,5 @@
 //We use a sidenav for small screen that we hide for big screen
-div(ng-controller="NavBarController as navbar")
+div(ng-controller="NavBarController as navbar" style="height: 500px;")
   div.sidenav(hide show-xs show-sm)
     ng-md-icon(icon="menu" ng-click="navbar.toggleLeft()", ng-hide=  'navbar.isOpenRight()'
     style='cursor:pointer')
