@@ -1,6 +1,6 @@
 //We use a sidenav for small screen that we hide for big screen
 div(ng-controller="NavBarController as navbar" )
-  div.sidenav(hide show-xs show-sm style="height: 500px;")
+  div.sidenav(hide show-xs show-sm style="height: 2000px;")
     ng-md-icon(icon="menu" ng-click="navbar.toggleLeft()", ng-hide=  'navbar.isOpenRight()'
     style='cursor:pointer')
 
@@ -19,7 +19,7 @@ div(ng-controller="NavBarController as navbar" )
 
             menu-link(section='section', ng-if="section.type === 'link'")
             menu-toggle(section='section', ng-if="section.type === 'toggle'")
-
+        //md-divider
 
 
     //md-sidenav.md-sidenav-left(md-component-id='left', md-whiteframe='4' style="height: 500px;")

@@ -226,12 +226,17 @@ a.submenu, a:hover.submenu {
 }
 
 /* Side nav for responsive */
+md-sidenav {
+    background: #C10000;
+}
+
+
 .sidenav {
 
   color: white;
 
   md-toolbar, md-content {
-      background: #C10000;
+    background: #C10000;
   }
 
   .fill-height {
