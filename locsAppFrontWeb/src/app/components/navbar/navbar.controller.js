@@ -3,21 +3,21 @@
 
   angular
     .module('LocsappControllers')
-    .controller('NavBarController', NavBarController)
+    .controller('NavBarController', NavBarController);
 
   /** @ngInject */
   function NavBarController(NotificationsService, $state, $log, $scope, $mdSidenav) {
     var vm = this;
 
     /* Side Nav Menu */
-    vm.icon = 'menu';
+  /*  vm.icon = 'menu';
 
     vm.close = function () {
       $mdSidenav('right').close()
         .then(function () {
           $log.debug("close RIGHT is done");
         });
-    };
+    };*/
 
     /* End side nav menu
 
@@ -91,10 +91,10 @@
 
 
     /* Test Sidenav */
-    vm.toggleRight = buildToggler('right');
+    /*vm.toggleRight = buildToggler('right');
     vm.isOpenRight = function () {
-      return $mdSidenav('right').isOpen();
-    };
+     return $mdSidenav('right').isOpen();
+    };*/
 
 
     /**
@@ -102,7 +102,7 @@
      * report completion in console
      */
 
-    function buildToggler(navID) {
+    /*function buildToggler(navID) {
       return function () {
         $mdSidenav(navID)
           .toggle()
@@ -110,7 +110,7 @@
             $log.debug("toggle " + navID + " is done");
           });
       }
-    }
+    }*/
 
 
     /* End test Sidenav */
