@@ -227,13 +227,10 @@ a.submenu, a:hover.submenu {
 
 /* Side nav for responsive */
 md-sidenav {
-    background: #C10000;
+  background: #C10000;
 }
 
-
 .sidenav {
-
-  color: white;
 
   md-toolbar, md-content {
     background: #C10000;
@@ -261,7 +258,7 @@ md-sidenav {
   }
 
   .side-menu .md-button.active {
-    color: deeppink;
+    color: black;
   }
 
   .side-menu .menu-toggle-list a.md-button {
@@ -307,7 +304,6 @@ md-sidenav {
     border-radius: 0;
     color: inherit;
     cursor: pointer;
-    font-weight: 400;
     line-height: 40px;
     margin: 0;
     max-height: 40px;
@@ -317,6 +313,7 @@ md-sidenav {
     text-decoration: none;
     white-space: normal;
     width: 100%;
+    font-weight: bold;
   }
 
   .menu-toggle-list {
