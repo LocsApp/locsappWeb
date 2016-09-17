@@ -13,7 +13,7 @@ div(ng-controller="NavBarController as navbar" style="height: 500px;")
 
       md-content(flex='', role='navigation')
         ul.side-menu
-          li.parent-list-item(ng-repeat='section in navbar.sections', ng-class="{'parentActive' : navbar.isSectionSelected(section)}")
+          li.parent-list-item(ng-repeat='section in navbar.menu.sections', ng-class="{'parentActive' : navbar.isSectionSelected(section)}")
             h2.menu-heading(ng-if="section.type === 'heading'", id='heading_{{ section.name  }}')
               | {{section}}
 

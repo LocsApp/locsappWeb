@@ -7,7 +7,7 @@
 
   /** @ngInject */
   function NavBarController(NotificationsService, $state, $log, $scope, $mdSidenav,
-                            $rootScope, $timeout, $location, Menu) {
+                            $rootScope, $timeout, $location, MenuService) {
 
     var vm = this;
 
@@ -15,7 +15,7 @@
         vm.isOpen = isOpen;
         vm.toggleOpen = toggleOpen;
         vm.autoFocusContent = false;
-        vm.menu = Menu;
+        vm.menu = MenuService;
 
         vm.status = {
           isFirstOpen: true,
@@ -24,11 +24,11 @@
 
 
         function isOpen(section) {
-          return Menu.isSectionSelected(section);
+          return MenuService.isSectionSelected(section);
         }
 
         function toggleOpen(section) {
-          Menu.toggleSelectSection(section);
+          MenuService.toggleSelectSection(section);
         }
 
     /* Side Nav Menu */
