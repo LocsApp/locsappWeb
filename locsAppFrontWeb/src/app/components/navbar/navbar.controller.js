@@ -10,6 +10,18 @@
     var vm = this;
 
     /* Side Nav Menu */
+
+    vm.toggleLeft = buildToggler('left');
+    vm.toggleRight = buildToggler('right');
+
+    function buildToggler(componentId) {
+      return function() {
+        $log.log("bonjour");
+
+        $mdSidenav(componentId).toggle();
+      }
+    }
+
   /*  vm.icon = 'menu';
 
     vm.close = function () {
