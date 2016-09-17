@@ -1,13 +1,15 @@
-(function() {
+(function () {
   'use strict';
 
   angular
     .module('LocsappDirectives')
     .directive('menuLink', menuLink);
 
-  function menuLink() {
+  function menuLink($log) {
 
-    return {
+    $log.log("in directive menuLink");
+
+     return {
         scope: {
           section: '='
         },
@@ -23,5 +25,8 @@
         }
       };
 
+
+
   }
-});
+
+})();

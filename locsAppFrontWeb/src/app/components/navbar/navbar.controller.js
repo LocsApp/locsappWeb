@@ -6,30 +6,30 @@
     .controller('NavBarController', NavBarController);
 
   /** @ngInject */
-  function NavBarController(NotificationsService, $state, $log, $scope, $mdSidenav) {
+  function NavBarController(NotificationsService, $state, $log, $scope, $mdSidenav,
+                            $rootScope, $timeout, $location, Menu) {
+
     var vm = this;
-    vm.sections = [];
-     vm.sections.push({
-          name: 'Beers',
-          type: 'toggle',
-          pages: [{
-            name: 'IPAs',
-            type: 'link',
-            state: 'beers.ipas',
-            icon: 'fa fa-group'
-          }, {
-            name: 'Porters',
-            state: 'home.toollist',
-            type: 'link',
-            icon: 'fa fa-map-marker'
-          },
-          {
-            name: 'Wheat',
-            state: 'home.createTool',
-            type: 'link',
-            icon: 'fa fa-plus'
-          }]
-        });
+
+     //functions for menu-link and menu-toggle
+        vm.isOpen = isOpen;
+        vm.toggleOpen = toggleOpen;
+        vm.autoFocusContent = false;
+        vm.menu = Menu;
+
+        vm.status = {
+          isFirstOpen: true,
+          isFirstDisabled: false
+        };
+
+
+        function isOpen(section) {
+          return Menu.isSectionSelected(section);
+        }
+
+        function toggleOpen(section) {
+          Menu.toggleSelectSection(section);
+        }
 
     /* Side Nav Menu */
 
@@ -37,25 +37,25 @@
     vm.toggleRight = buildToggler('right');
 
     function buildToggler(componentId) {
-      return function() {
+      return function () {
         $log.log("buildToggler + ", componentId);
 
         $mdSidenav(componentId).toggle();
       }
     }
 
-  /*  vm.icon = 'menu';
+    /*  vm.icon = 'menu';
 
-    vm.close = function () {
-      $mdSidenav('right').close()
-        .then(function () {
-          $log.debug("close RIGHT is done");
-        });
-    };*/
+     vm.close = function () {
+     $mdSidenav('right').close()
+     .then(function () {
+     $log.debug("close RIGHT is done");
+     });
+     };*/
 
     /* End side nav menu
 
-    /* DropDownMenu */
+     /* DropDownMenu */
 
     vm.openMenuArticle = function ($mdOpenMenu, ev) {
       $mdOpenMenu(ev);
@@ -87,7 +87,6 @@
     vm.openNotificationsMenu = function ($mdOpenMenu, event) {
       $mdOpenMenu(event);
     };
-
 
 
     /*Goes to the state parameter*/
@@ -126,9 +125,9 @@
 
     /* Test Sidenav */
     /*vm.toggleRight = buildToggler('right');
-    vm.isOpenRight = function () {
+     vm.isOpenRight = function () {
      return $mdSidenav('right').isOpen();
-    };*/
+     };*/
 
 
     /**
@@ -137,14 +136,14 @@
      */
 
     /*function buildToggler(navID) {
-      return function () {
-        $mdSidenav(navID)
-          .toggle()
-          .then(function () {
-            $log.debug("toggle " + navID + " is done");
-          });
-      }
-    }*/
+     return function () {
+     $mdSidenav(navID)
+     .toggle()
+     .then(function () {
+     $log.debug("toggle " + navID + " is done");
+     });
+     }
+     }*/
 
 
     /* End test Sidenav */

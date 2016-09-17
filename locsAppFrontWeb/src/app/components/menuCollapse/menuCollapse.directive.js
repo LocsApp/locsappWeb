@@ -20,7 +20,7 @@
 			scope.changeCollapse = function () {
 				scope.isCollapsed = !scope.isCollapsed;
 			};
-		}
+		};
 
 		directive.scope = {
 			title: "@title",
