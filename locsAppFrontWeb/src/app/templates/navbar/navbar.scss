@@ -227,6 +227,13 @@ a.submenu, a:hover.submenu {
 
 /* Side nav for responsive */
 .sidenav {
+
+  color: white;
+
+  md-toolbar, md-content {
+      background: #C10000;
+  }
+
   .fill-height {
     display: flex;
     flex: 1;
@@ -258,6 +265,7 @@ a.submenu, a:hover.submenu {
     text-transform: none;
     text-rendering: optimizeLegibility;
     font-weight: 500;
+    background: #C10000;
   }
 
   .side-menu .menu-toggle-list .md-button {
@@ -268,6 +276,7 @@ a.submenu, a:hover.submenu {
 
   .side-menu > li {
     border-top: 1px solid rgba(0, 0, 0, 0.12);
+    color: white;
   }
 
   .md-button-toggle .md-toggle-icon.toggled {
