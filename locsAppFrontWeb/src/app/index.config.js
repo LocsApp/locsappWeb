@@ -95,6 +95,8 @@
       'EDIT_PROFILE': 'Edit my profile',
       'HISTORY_NOTATION': 'History notation',
       'HISTORY_ARTICLE': 'History article',
+
+      'LOGOUT': 'Log out'
     });
 
     /* French translation */
@@ -121,6 +123,9 @@
       'EDIT_PROFILE': 'Editer mon profile',
       'HISTORY_NOTATION': 'Historique des notations',
       'HISTORY_ARTICLE': 'Historique des articles',
+
+      'LOGOUT': 'Déconnexion'
+
     });
 
     /* Default translation */
