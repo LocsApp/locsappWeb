@@ -101,7 +101,9 @@
       'EMAIL_MUST_MATCH': ' Emails must match',
       'EMAIL_TOO_SHORT': 'The email must be longer than 8 characters',
       'EMAIL_TOO_LONG': 'The email must be shorter than 100 characters',
-
+      'PASSWORD_TOO_SHORT': 'The password must be longer than 6 characters',
+      'PASSWORD_TOO_LONG': 'The password must be shorter than 30 characters',
+      'PASSWORDS_MUST_MATCH': 'Passwords must match',
 
       /* The navbar */
       'SEARCH': 'Search',
@@ -178,7 +180,9 @@
       'EMAIL_MUST_MATCH': 'Emails différents',
       'EMAIL_TOO_SHORT': 'L\'email doit être plus long que 8 caractères',
       'EMAIL_TOO_LONG': 'L\'email doit être plus court que 100 caractères',
-
+      'PASSWORD_TOO_SHORT': 'Le mot de passe doit être plus long que 6 caractères',
+      'PASSWORD_TOO_LONG': 'Le mot de passe doit être plus court que 30 caractères',
+      'PASSWORDS_MUST_MATCH': 'Mot de passes différent',
 
       /* The navbar */
       'SEARCH': 'Recherche',
