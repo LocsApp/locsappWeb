@@ -31,7 +31,7 @@ import os
 import datetime
 import hashlib
 import shutil
-
+from dateutil.parser import parse
 
 # Connects to the db and creates a MongoClient instance
 mongodb_client = MongoClient('localhost', 27017)
@@ -652,6 +652,208 @@ class billingAddressUserDelete(APIView):
 
 
 @csrf_exempt
+def basePagination(request, page, number_items, name_collection, special_fields, hook=None):
+            notifications_user = db_locsapp[
+                                     name_collection].find(special_fields).sort(
+                "date", -1)[((page - 1) * number_items):((page - 1) * number_items) + number_items]
+            print(notifications_user)
+            notifications = {
+                name_collection: []}
+            for notification in notifications_user:
+                print(notification)
+                notification = APIrequests.parseObjectIdToStr(notification)
+                notifications[name_collection].append(notification)
+            print("kek")
+            if hook:
+                hook(notifications)
+            notifications_metadata = {"total": db_locsapp[
+                name_collection].find(special_fields).count()}
+            notifications["metadata"] = notifications_metadata
+            return JsonResponse(notifications, safe=True)
+
+def verifTimelines(docs):
+    for idx, document in enumerate(docs["article_demands"]):
+        if (datetime.now(pytz.utc) > parse(docs)):
+            db_locsapp["article_demands"].update({"_id": ObjectId(document['_id'])}, {
+                "$set": {"status": "finished"}})
+            docs["article_demands"].pop(idx)
+
+@csrf_exempt
+def paginationTimelineAsRenting(request):
+    """
+    if (request.user.pk):
+        if (int(user_pk) != int(request.user.pk)):
+            return JsonResponse(
+                {"Unauthorized": "You have no access to this data."}, status=403)
+    else:
+        return JsonResponse(
+            {"Unauthorized": "You need to be connected."}, status=403)
+    """
+
+    if request.method == "POST":
+        if request.method == "POST":
+            JSONdoc = json.loads(request.body.decode('utf8'))
+            if ("page" in JSONdoc and
+                        "number_items" in JSONdoc):
+                if (not isinstance(JSONdoc["page"], type(1)) or not
+                isinstance(JSONdoc["number_items"], type(1))):
+                    return (JsonResponse(
+                        {"Error": "'page' and 'number_items' must be numbers."}, status=401))
+                page = JSONdoc["page"]
+                number_items = JSONdoc["number_items"]
+                return basePagination(request, page, number_items, "article_demands", {"id_author": request.user.pk, "visible": True, "status": "accepted"}, verifTimelines)
+            else:
+                return (JsonResponse(
+                    {"Error": "There must be a key 'page' and 'number_items' present in the"
+                              " JSON document."}, status=401))
+
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+@csrf_exempt
+def paginationNotationsAsRenter(request):
+    if request.method == "POST":
+        if request.method == "POST":
+            JSONdoc = json.loads(request.body.decode('utf8'))
+            if ("page" in JSONdoc and
+                        "number_items" in JSONdoc):
+                if (not isinstance(JSONdoc["page"], type(1)) or not
+                isinstance(JSONdoc["number_items"], type(1))):
+                    return (JsonResponse(
+                        {"Error": "'page' and 'number_items' must be numbers."}, status=401))
+                page = JSONdoc["page"]
+                number_items = JSONdoc["number_items"]
+                return basePagination(request, page, number_items, "notations", {"id_target": request.user.pk, "as_renter": True})
+            else:
+                return (JsonResponse(
+                    {"Error": "There must be a key 'page' and 'number_items' present in the"
+                              " JSON document."}, status=401))
+
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+@csrf_exempt
+def paginationNotationsAsClient(request):
+    if request.method == "POST":
+        if request.method == "POST":
+            JSONdoc = json.loads(request.body.decode('utf8'))
+            if ("page" in JSONdoc and
+                        "number_items" in JSONdoc):
+                if (not isinstance(JSONdoc["page"], type(1)) or not
+                isinstance(JSONdoc["number_items"], type(1))):
+                    return (JsonResponse(
+                        {"Error": "'page' and 'number_items' must be numbers."}, status=401))
+                page = JSONdoc["page"]
+                number_items = JSONdoc["number_items"]
+                return basePagination(request, page, number_items, "notations", {"id_target": request.user.pk, "as_renter": False})
+            else:
+                return (JsonResponse(
+                    {"Error": "There must be a key 'page' and 'number_items' present in the"
+                              " JSON document."}, status=401))
+
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+@csrf_exempt
+def paginationDemandsAsRenting(request):
+    """
+    if (request.user.pk):
+        if (int(user_pk) != int(request.user.pk)):
+            return JsonResponse(
+                {"Unauthorized": "You have no access to this data."}, status=403)
+    else:
+        return JsonResponse(
+            {"Unauthorized": "You need to be connected."}, status=403)
+    """
+
+    if request.method == "POST":
+        if request.method == "POST":
+            JSONdoc = json.loads(request.body.decode('utf8'))
+            if ("page" in JSONdoc and
+                        "number_items" in JSONdoc):
+                if (not isinstance(JSONdoc["page"], type(1)) or not
+                isinstance(JSONdoc["number_items"], type(1))):
+                    return (JsonResponse(
+                        {"Error": "'page' and 'number_items' must be numbers."}, status=401))
+                page = JSONdoc["page"]
+                number_items = JSONdoc["number_items"]
+                return basePagination(request, page, number_items, "article_demands", {"id_author": request.user.pk, "visible": True, "status": "pending"})
+            else:
+                return (JsonResponse(
+                    {"Error": "There must be a key 'page' and 'number_items' present in the"
+                              " JSON document."}, status=401))
+
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+@csrf_exempt
+def paginationDemandsAsRenter(request):
+    """
+    if (request.user.pk):
+        if (int(user_pk) != int(request.user.pk)):
+            return JsonResponse(
+                {"Unauthorized": "You have no access to this data."}, status=403)
+    else:
+        return JsonResponse(
+            {"Unauthorized": "You need to be connected."}, status=403)
+    """
+
+    if request.method == "POST":
+        if request.method == "POST":
+            JSONdoc = json.loads(request.body.decode('utf8'))
+            if ("page" in JSONdoc and
+                        "number_items" in JSONdoc):
+                if (not isinstance(JSONdoc["page"], type(1)) or not
+                isinstance(JSONdoc["number_items"], type(1))):
+                    return (JsonResponse(
+                        {"Error": "'page' and 'number_items' must be numbers."}, status=401))
+                page = JSONdoc["page"]
+                number_items = JSONdoc["number_items"]
+                return basePagination(request, page, number_items, "article_demands", {"id_target": request.user.pk, "visible": True, "status": "pending"})
+            else:
+                return (JsonResponse(
+                    {"Error": "There must be a key 'page' and 'number_items' present in the"
+                              " JSON document."}, status=401))
+
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+@csrf_exempt
+def paginationTimelineAsRenter(request):
+    """
+    if (request.user.pk):
+        if (int(user_pk) != int(request.user.pk)):
+            return JsonResponse(
+                {"Unauthorized": "You have no access to this data."}, status=403)
+    else:
+        return JsonResponse(
+            {"Unauthorized": "You need to be connected."}, status=403)
+    """
+
+    if request.method == "POST":
+        if request.method == "POST":
+            JSONdoc = json.loads(request.body.decode('utf8'))
+            if ("page" in JSONdoc and
+                        "number_items" in JSONdoc):
+                if (not isinstance(JSONdoc["page"], type(1)) or not
+                isinstance(JSONdoc["number_items"], type(1))):
+                    return (JsonResponse(
+                        {"Error": "'page' and 'number_items' must be numbers."}, status=401))
+                page = JSONdoc["page"]
+                number_items = JSONdoc["number_items"]
+                return basePagination(request, page, number_items, "article_demands", {"id_target": request.user.pk, "visible": True, "status": "accepted"}, verifTimelines)
+            else:
+                return (JsonResponse(
+                    {"Error": "There must be a key 'page' and 'number_items' present in the"
+                              " JSON document."}, status=401))
+
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+
+@csrf_exempt
 def searchNotificationsUser(request, user_pk):
     """
     if (request.user.pk):
@@ -664,15 +866,16 @@ def searchNotificationsUser(request, user_pk):
     """
 
     if request.method == "POST":
-        JSONdoc = json.loads(request.body.decode('utf8'))
-        if ("page" in JSONdoc and
-                "number_items" in JSONdoc):
-            if (not isinstance(JSONdoc["page"], type(1)) or not
-                    isinstance(JSONdoc["number_items"], type(1))):
-                return (JsonResponse(
-                    {"Error": "'page' and 'number_items' must be numbers."}, status=401))
-            page = JSONdoc["page"]
-            number_items = JSONdoc["number_items"]
+        if request.method == "POST":
+            JSONdoc = json.loads(request.body.decode('utf8'))
+            if ("page" in JSONdoc and
+                        "number_items" in JSONdoc):
+                if (not isinstance(JSONdoc["page"], type(1)) or not
+                isinstance(JSONdoc["number_items"], type(1))):
+                    return (JsonResponse(
+                        {"Error": "'page' and 'number_items' must be numbers."}, status=401))
+                page = JSONdoc["page"]
+                number_items = JSONdoc["number_items"]
             notifications_user = db_locsapp[
                 "notifications_users"].find({"user_id": int(user_pk),
                                              "visible": True}).sort(
