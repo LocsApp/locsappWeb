@@ -80,6 +80,23 @@
       'NOT_SPECIFIED': 'Not specified',
       'UNKNOWN': 'unknown',
       'ARTICLES': 'Articles',
+      'SEND': 'send',
+      'MAN': 'man',
+      'WOMAN': 'woman',
+      'FIRST_NAME': 'First name',
+      'LAST_NAME': 'Last name',
+      'PHONE_NUMBER': 'Phone number',
+      'EMAIL': 'email',
+      'REPEAT_EMAIL': 'Repeat email',
+      'THE_MASCULINE': 'Le',
+      'THE_FEMININE': 'La',
+
+      /* Error form */
+      'THIS_IS_REQUIRED': 'Champ obligatoire',
+      'MUST_BE_LONGER_THAN_FIVE': 'must be longer than 5 characters',
+      'MUST_BE_SHORTER_THAN_TWENTY': 'must be shorter than 20 characters',
+      'INCORRECT_PHONE_NUMBER': 'Phone number is incorrect',
+      'BIRTHDATE_SHOULD_BE': 'Birthdate should be yyyy/mm/dd',
 
 
       /* The navbar */
@@ -113,7 +130,17 @@
       'SUBSCRIBED': 'Subscribed',
       'AS_A_RENTER': 'As a renter',
       'AS_A_TENANT': 'As a tenant',
-      'HAS_NO_ARTICLE_FOR_THE_MOMENT': 'has no articles available for the moment'
+      'HAS_NO_ARTICLE_FOR_THE_MOMENT': 'has no articles available for the moment',
+      'BASIC_INFORMATION': 'Basic informations',
+      'CHANGE_EMAIL': 'Change Email',
+      'CHANGE_PASSWORD': 'Change password',
+      'OLD_PASSWORD': 'Old password',
+      'NEW_PASSWORD': 'New password',
+      'CONFIRM_NEW_PASSWORD': 'Confirm new password',
+      'YOUR_ADDRESSES': 'Your addresses',
+      'LIVING_ADDRESSES': 'Living addresses',
+      'BILLING_ADDRESSES': 'Billing addresses',
+
 
     });
 
@@ -126,6 +153,24 @@
       'NOT_SPECIFIED': 'non spécifié',
       'UNKNOWN': 'inconnu',
       'ARTICLES': 'Articles',
+      'SEND': 'Envoyer',
+      'MAN': 'Homme',
+      'WOMAN': 'Femme',
+      'FIRST_NAME': 'Prénom',
+      'LAST_NAME': 'Nom',
+      'PHONE_NUMBER': 'Numéro de téléphone',
+      'EMAIL': 'email',
+      'REPEAT_EMAIL': 'Répétez email',
+      'THE_MASCULINE': 'Le',
+      'THE_FEMININE': 'La',
+
+      /* Error form */
+      'THIS_IS_REQUIRED': 'Champ obligatoire',
+      'MUST_BE_LONGER_THAN_FIVE': 'doit être plus long que 5 caractères',
+      'MUST_BE_SHORTER_THAN_TWENTY': 'doit être plus court que 20 caractères',
+      'INCORRECT_PHONE_NUMBER': 'Le numéro de téléphone est invalide',
+      'BIRTHDATE_SHOULD_BE': 'Année de naissance invalide aaaa/mm/jj',
+
 
       /* The navbar */
       'SEARCH': 'Recherche',
@@ -158,7 +203,16 @@
       'SUBSCRIBED': 'Enregistré',
       'AS_A_RENTER': 'En tant que loueur',
       'AS_A_TENANT': 'En tant que locataire',
-      'HAS_NO_ARTICLE_FOR_THE_MOMENT': 'n\'a pas d\'articles disponibles pour le moment'
+      'HAS_NO_ARTICLE_FOR_THE_MOMENT': 'n\'a pas d\'articles disponibles pour le moment',
+      'BASIC_INFORMATION': 'Informations basiques',
+      'CHANGE_EMAIL': 'Changer votre email',
+      'CHANGE_PASSWORD': 'Change votre mot de passe',
+      'OLD_PASSWORD': 'Ancien mot de passe',
+      'NEW_PASSWORD': 'Nouveau mot de passe',
+      'CONFIRM_NEW_PASSWORD': 'Confirmer le nouveau mot de passe',
+      'YOUR_ADDRESSES': 'Vos adresses',
+      'LIVING_ADDRESSES': 'Adresses de livraisons',
+      'BILLING_ADDRESSES': 'Adresses de facturations',
 
     });
 

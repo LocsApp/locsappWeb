@@ -2,7 +2,7 @@ md-card()
   md-card-content
 
     div(layout="row" layout-align="center")
-      h1 Edit my profile
+      h1 {{'EDIT_PROFILE' | translate}}
 
     div.my-layout-xs(layout="row" layout-sm="column" layout-align="space-around start")
       //img(src="../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg")
@@ -24,12 +24,12 @@ md-card()
         div.properties-user
           div
             ng-md-icon(icon="whatshot" size="28")
-            span(ng-if="!profileParams.user.last_activity_date") Last activity: Unknown
-            span(ng-if="profileParams.user.last_activity_date") Last activity {{profileParams.user.last_activity_date}}
+            span(ng-if="!profileParams.user.last_activity_date") {{'LAST_ACTIVITY' | translate}}: {{'UNKNOWN' | translate}}
+            span(ng-if="profileParams.user.last_activity_date") {{'LAST_ACTIVITY' | translate}} {{profileParams.user.last_activity_date}}
 
           div
             ng-md-icon(icon="insert_emoticon" size="28")
-            span Subscribed {{profileParams.user.registered_date}}
+            span {{'SUBSCRIBED' | translate}} {{profileParams.user.registered_date}}
 
 
 
