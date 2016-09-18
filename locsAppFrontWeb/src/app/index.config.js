@@ -97,6 +97,10 @@
       'MUST_BE_SHORTER_THAN_TWENTY': 'must be shorter than 20 characters',
       'INCORRECT_PHONE_NUMBER': 'Phone number is incorrect',
       'BIRTHDATE_SHOULD_BE': 'Birthdate should be yyyy/mm/dd',
+       'MUST_BE_AN_EMAIL': 'The field must be an email',
+      'EMAIL_MUST_MATCH': ' Emails must match',
+      'EMAIL_TOO_SHORT': 'The email must be longer than 8 characters',
+      'EMAIL_TOO_LONG': 'The email must be shorter than 100 characters',
 
 
       /* The navbar */
@@ -170,6 +174,10 @@
       'MUST_BE_SHORTER_THAN_TWENTY': 'doit être plus court que 20 caractères',
       'INCORRECT_PHONE_NUMBER': 'Le numéro de téléphone est invalide',
       'BIRTHDATE_SHOULD_BE': 'Année de naissance invalide aaaa/mm/jj',
+      'MUST_BE_AN_EMAIL': 'Email non valide',
+      'EMAIL_MUST_MATCH': 'Emails différents',
+      'EMAIL_TOO_SHORT': 'L\'email doit être plus long que 8 caractères',
+      'EMAIL_TOO_LONG': 'L\'email doit être plus court que 100 caractères',
 
 
       /* The navbar */

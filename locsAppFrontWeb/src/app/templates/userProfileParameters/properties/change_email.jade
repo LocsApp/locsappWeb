@@ -2,7 +2,7 @@ md-card()
   md-card-content
     div.div-separator(layout="row" layout-align="center")
       md-divider.separator-h2(flex="30" hide-sm)
-      h2.t-center(flex="30") Change email
+      h2.t-center(flex="30") {{'CHANGE_EMAIL' | translate}}
       md-divider.separator-h2(flex="30" hide-sm)
 
 
@@ -14,31 +14,31 @@ md-card()
 
           md-input-container.md-icon-float.md-block
             md-icon(md-svg-src="../assets/icons/register-login/ic_email_black_24px.svg")
-            input(placeholder="Email" type="email" minlength="8" maxlength="100" required
+            input(placeholder="{{'EMAIL' | translate}}" type="email" minlength="8" maxlength="100" required
             name="email" ng-model="profileParams.user.email" ng-pattern="/^.+@.+\..+$/")
             .body-register-container-md
             div(ng-messages="modifyProfilFormEmail.email.$error" ng-if='!modifyProfilFormEmail.email.$pristine')
-              div(ng-message="required") This is required.
-              div(ng-message="minlength") The email must be longer than 8 characters.
-              div(ng-message="maxlength") The email must be shorter than 100 characters.
-              div(ng-message="pattern") The field must be an email.
+              div(ng-message="required") {{'THIS_IS_REQUIRED' | translate}}
+              div(ng-message="minlength") {{'EMAIL_TOO_SHORT' | translate}}.
+              div(ng-message="maxlength") {{'EMAIL_TOO_LONG' | translate}}.
+              div(ng-message="pattern") {{'MUST_BE_AN_EMAIL' | translate}}.
 
           md-input-container.md-icon-float.md-block
             md-icon(md-svg-src="../assets/icons/register-login/ic_repeat_black_24px.svg")
-            input(placeholder="Repeat Email" type="email" minlength="8" maxlength="100" required
+            input(placeholder="{{'REPEAT_EMAIL' | translate}} " type="email" minlength="8" maxlength="100" required
             name="email_repeat" ng-model="profileParams.user.email_repeat"
             ng-pattern="/^.+@.+\..+$/"
             match="profileParams.user.email").body-register-container-md
             div(ng-messages="modifyProfilFormEmail.email_repeat.$error" ng-if='!modifyProfilFormEmail.email_repeat.$pristine')
-              div(ng-message="required") This is required.
-              div(ng-message="minlength") The email must be longer than 8 characters.
-              div(ng-message="maxlength") The email must be shorter than 100 characters.
-              div(ng-message="pattern") The field must be an email.
-              div(ng-message="match") Emails must match.
+              div(ng-message="required") {{'THIS_IS_REQUIRED' | translate}}
+              div(ng-message="minlength") {{'EMAIL_TOO_SHORT' | translate}}.
+              div(ng-message="maxlength") {{'EMAIL_TOO_LONG' | translate}}.
+              div(ng-message="pattern") {{'MUST_BE_AN_EMAIL' | translate}}.
+              div(ng-message="match") {{'EMAIL_MUST_MATCH' | translate}}.
 
 
           div.submit-buttons
             md-button.special-button.md-raised.margin-button-top(type="submit"
-            style="width:100%") Send
+            style="width:100%") {{'SEND' | translate}}
 
 
