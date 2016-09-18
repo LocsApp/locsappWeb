@@ -5,14 +5,14 @@ md-card
       h2.t-center(flex="20") Notations
       md-divider.separator-h2(flex="30" hide-sm)
 
-    h3(flex-offset="10") As a renter
+    h3(flex-offset="10") {{'AS_A_RENTER' | translate}}
       span(ng-repeat="value in profile.renter_score_array track by $index"
       ng-if="profile.renter_notation.length != 0")
         ng-md-icon(ng-if="value" icon="star" size="22")
         ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
       span(ng-if="profile.renter_notation.length != 0") ({{profile.nb_rotation_renter}})
     p.t-center(ng-if="profile.renter_notation.length == 0").
-      {{profile.user.username}} has no notation as a renter
+      {{profile.user.username}} {{'HAS_NO_NOTATION' | translate}} {{'AS_A_RENTER' | translate}}
     md-list.my-layout-xs(flex-offset="10" layout="row")
       md-list-item.md-3-line(ng-repeat="notation in profile.renter_notation track by $index "
       ng-if="$index <= 1")
@@ -38,16 +38,16 @@ md-card
           p {{ notation.comment | limitTo: 30 }} {{notation.description.comment > 30 ? '...' : ''}}
 
     div(flex-offset="10" ng-if="profile.nb_rotation_renter > 2")
-      md-button.special-button.md-raised(ui-sref="main.notation_as_renter({username: profile.user.username})" layout-fill flex="90" ) Show more
+      md-button.special-button.md-raised(ui-sref="main.notation_as_renter({username: profile.user.username})" layout-fill flex="90" ) {{'SHOW_MORE' | translate}}
 
 
-    h3( flex-offset="10") As a client
+    h3( flex-offset="10") {{'AS_A_TENANT' | translate}}
       span(ng-repeat="value in profile.client_score_array track by $index"
       ng-if="profile.client_notation.length != 0")
         ng-md-icon(ng-if="value" icon="star" size="22")
         ng-md-icon.grey(ng-if="!value" icon="star" style="fill:grey" size="22")
       span(ng-if="profile.client_notation.length != 0") ({{profile.nb_notation_client}})
-    p.t-center(ng-if="profile.client_notation.length == 0") {{profile.user.username}} has no notation as a client
+    p.t-center(ng-if="profile.client_notation.length == 0") {{profile.user.username}} {{'HAS_NO_NOTATION' | translate}} {{'AS_A_TENANT' | translate}}
     md-list.my-layout-xs(flex-offset="10" layout="row")
       md-list-item.md-3-line(ng-repeat="notation in profile.client_notation track by $index"
       ng-if="$index <= 1")
@@ -73,5 +73,5 @@ md-card
 
 
     div(flex-offset="10" ng-if="profile.nb_notation_client > 2")
-      md-button.special-button.md-raised(ui-sref="main.notation_as_client({username: profile.user.username})" layout-fill flex="90") Show more
+      md-button.special-button.md-raised(ui-sref="main.notation_as_client({username: profile.user.username})" layout-fill flex="90") {{'SHOW_MORE' | translate}}
 

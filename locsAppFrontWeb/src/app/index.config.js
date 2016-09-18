@@ -76,9 +76,10 @@
 
       /* Genereal */
       'SHOW_MORE': 'Show more',
-      'HAS NO NOTATION': 'has no notation',
+      'HAS_NO_NOTATION': 'has no notation',
       'NOT_SPECIFIED': 'Not specified',
       'UNKNOWN': 'unknown',
+      'ARTICLES': 'Articles',
 
 
       /* The navbar */
@@ -111,7 +112,9 @@
       'LAST_ACTIVITY': 'Last activity',
       'SUBSCRIBED': 'Subscribed',
       'AS_A_RENTER': 'As a renter',
-      'AS_A_TENANT': 'As a tenant'
+      'AS_A_TENANT': 'As a tenant',
+      'HAS_NO_ARTICLE_FOR_THE_MOMENT': 'has no articles available for the moment'
+
     });
 
     /* French translation */
@@ -119,9 +122,10 @@
 
       /* Genereal */
       'SHOW_MORE': 'Voir plus',
-      'HAS NO NOTATION': 'n\'a pas de notations',
+      'HAS_NO_NOTATION': 'n\'a pas de notations',
       'NOT_SPECIFIED': 'non spécifié',
       'UNKNOWN': 'inconnu',
+      'ARTICLES': 'Articles',
 
       /* The navbar */
       'SEARCH': 'Recherche',
@@ -153,7 +157,8 @@
       'LAST_ACTIVITY': 'Dernière activité',
       'SUBSCRIBED': 'Enregistré',
       'AS_A_RENTER': 'En tant que loueur',
-      'AS_A_TENANT': 'En tant que locataire'
+      'AS_A_TENANT': 'En tant que locataire',
+      'HAS_NO_ARTICLE_FOR_THE_MOMENT': 'n\'a pas d\'articles disponibles pour le moment'
 
     });
 
