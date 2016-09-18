@@ -29,7 +29,7 @@
 
   /** @ngInject */
   function config($logProvider, toastrConfig, $locationProvider, $httpProvider, $resourceProvider,
-                  cfpLoadingBarProvider, ezfbProvider) {
+                  cfpLoadingBarProvider, ezfbProvider, $translateProvider) {
     // Enable log
     $logProvider.debugEnabled(true);
 
@@ -72,22 +72,19 @@
 
 
     /* English translation */
-   /* $translateProvider.translations('en', {
-      'TITLE': 'Hello',
+    $translateProvider.translations('en', {
+      'SEARCH': 'Search',
       'FOO': 'This is a paragraph'
-    });*/
+    });
 
     /* French translation */
-    /*$translateProvider.translations('fr', {
-      'TITLE': 'Hallo',
+    $translateProvider.translations('fr', {
+      'SEARCH': 'Recherche',
       'FOO': 'Dies ist ein Absatz'
-    });*/
+    });
 
     /* Default translation */
-    //$translateProvider.preferredLanguage('fr');
-
-
-
+    $translateProvider.preferredLanguage('fr');
 
   }
 
