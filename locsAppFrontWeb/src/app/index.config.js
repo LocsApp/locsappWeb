@@ -77,6 +77,9 @@
       /* Genereal */
       'SHOW_MORE': 'Show more',
       'HAS NO NOTATION': 'has no notation',
+      'NOT_SPECIFIED': 'Not specified',
+      'UNKNOWN': 'unknown',
+
 
       /* The navbar */
       'SEARCH': 'Search',
@@ -113,6 +116,13 @@
 
     /* French translation */
     $translateProvider.translations('fr', {
+
+      /* Genereal */
+      'SHOW_MORE': 'Voir plus',
+      'HAS NO NOTATION': 'n\'a pas de notations',
+      'NOT_SPECIFIED': 'non spécifié',
+      'UNKNOWN': 'inconnu',
+
       /* The navbar */
       'SEARCH': 'Recherche',
       'CREATE_ARTICLE': 'Créer un article',
@@ -136,13 +146,19 @@
       'HISTORY_NOTATION': 'Historique des notations',
       'HISTORY_ARTICLE': 'Historique des articles',
 
-      'LOGOUT': 'Déconnexion'
+      'LOGOUT': 'Déconnexion',
+
+      /* Profile */
+      'BIRTHDATE': 'Anniversaire',
+      'LAST_ACTIVITY': 'Dernière activité',
+      'SUBSCRIBED': 'Enregistré',
+      'AS_A_RENTER': 'En tant que loueur',
+      'AS_A_TENANT': 'En tant que locataire'
 
     });
 
     /* Default translation */
     $translateProvider.preferredLanguage('fr');
-
   }
 
 })();
