@@ -26,7 +26,7 @@
       createArticle: $resource(URL_API + 'api/v1/articles/create/'),
       searchArticles: $resource(URL_API + 'api/v1/search/articles/'),
       getSeller: $resource(URL_API + 'api/v1/articles/seller/:id/', {id: "@user_id"}),
-      sendReport: $resource(URL_API + 'api/v1/articles/report/'),
+      sendReportArticle: $resource(URL_API + 'api/v1/articles/report/'),
       demands: $resource(URL_API + 'api/v1/articles/demands/'),
       demandsAsRenting: $resource(URL_API + 'api/v1/articles/demands-as-renting/'),
       refuseDemand: $resource(URL_API + 'api/v1/articles/refuse-demand/'),
@@ -39,16 +39,22 @@
       answers: $resource(URL_API + 'api/v1/articles/answers/'),
       upVote: $resource(URL_API + 'api/v1/articles/upvote/'),
       reportQuestion: $resource(URL_API + 'api/v1/articles/report-question/'),
-      articleWithQuestionToAnswer: $resource(URL_API + 'api/v1/articles/articles-with-question-to-answer/'),
-      articleWithQuestionUserAsked: $resource(URL_API + 'api/v1/articles/articles-with-question-asked/'),
+      articleWithQuestionToAnswer: $resource(URL_API + 'api/v1/articles/articles-with-question-to-answer/:id_page/',
+        {id_page: "id_page"}),
+      articleWithQuestionUserAsked: $resource(URL_API + 'api/v1/articles/articles-with-question-asked/:id_page/',
+        {id_page: "id_page"}),
 
-      articlesFavorite: $resource(URL_API + 'api/v1/favorites/articles/'),
+      getArticlesFavorite: $resource(URL_API + 'api/v1/favorites/articles/:id_page/',
+        {id_page: "id_page"}),
+      addArticlesFavorite: $resource(URL_API + 'api/v1/favorites/add-articles/'),
       deleteArticlesFavorite: $resource(URL_API + 'api/v1/favorites/delete-articles/'),
 
 
       giveMark: $resource(URL_API + 'api/v1/articles/give-mark/'),
-      getPendingMarksForClients: $resource(URL_API + 'api/v1/articles/get-pending-marks-for-clients/'),
-      getPendingMarksForRenters: $resource(URL_API + 'api/v1/articles/get-pending-marks-for-renters/'),
+      getPendingMarksForClients: $resource(URL_API + 'api/v1/articles/get-pending-marks-for-clients/:id_page/',
+        {id_page: "id_page"}),
+      getPendingMarksForRenters: $resource(URL_API + 'api/v1/articles/get-pending-marks-for-renters/:id_page/',
+        {id_page: "id_page"}),
       uploadPicture: uploadPicture,
       is_authenticated: is_authenticated
     };

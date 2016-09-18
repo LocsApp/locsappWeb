@@ -93,10 +93,10 @@ div.article-show(layout="row" layout-align="center")
             div.details
               span
                 a(href='#')
-                  ng-md-icon(icon="favorite_border" ng-hide='articleShow.is_in_favorite' ng-click="articleShow.addArticleToFavorite(articleShow.article._id)")
-                  ng-md-icon(icon="favorite" ng-hide='!articleShow.is_in_favorite' ng-click="articleShow.deleteArticleFavorite (articleShow.article._id)")
-                  span(ng-hide='articleShow.is_in_favorite' ng-click="articleShow.addArticleToFavorite(articleShow.article._id)").bottom-right-md-card Add to your favorites
-                  span(ng-hide='!articleShow.is_in_favorite' ng-click="articleShow.deleteArticleFavorite (articleShow.article._id)").bottom-right-md-card Delete from your favorites
+                  ng-md-icon(icon="favorite_border" ng-if='!articleShow.ownArticle' ng-hide='articleShow.is_in_favorite' ng-click="articleShow.addArticleToFavorite(articleShow.article._id)")
+                  ng-md-icon(icon="favorite" ng-if='!articleShow.ownArticle' ng-hide='!articleShow.is_in_favorite' ng-click="articleShow.deleteArticleFavorite (articleShow.article._id)")
+                  span(ng-if='!articleShow.ownArticle' ng-hide='articleShow.is_in_favorite' ng-click="articleShow.addArticleToFavorite(articleShow.article._id)").bottom-right-md-card Add to your favorites
+                  span(ng-if='!articleShow.ownArticle' ng-hide='!articleShow.is_in_favorite' ng-click="articleShow.deleteArticleFavorite (articleShow.article._id)").bottom-right-md-card Delete from your favorites
             div.details
               span
                 ng-md-icon(icon="share" style="cursor:default")
@@ -124,9 +124,12 @@ div.article-show(layout="row" layout-align="center")
             div.details
               span
                 //a(facebook class="facebookShare" data-url='http://google.com'data-shares='shares') {{ shares }}
-                a(href='#')
+                a(href='#' ng-if="!articleShow.is_reported" ng-show="!articleShow.ownArticle")
                   ng-md-icon(icon="warning")
-                  span.bottom-right-md-card(ng-click='articleShow.sendReport()') Send a report
+                  span.bottom-right-md-card( ng-click="articleShow.reportDialog($event)") Send a report
+              ng-md-icon(ng-if='articleShow.is_reported' icon="warning" style="cursor:default")
+              span.bottom-right-md-card.report-sent( ng-if='articleShow.is_reported'
+              style='text-decoration:none;') Report already sent
 
 
 
@@ -151,8 +154,8 @@ div.article-show(layout="row" layout-align="center")
       h2.t-center(flex="15") Questions
       md-divider.separator-h2(flex="45")
 
-    span test = {{articleShow.questions}}
-    hr
+    //span test = {{articleShow.questions}}
+    //hr
 
 
     div.question(layout="row" layout-align="center" ng-repeat="question in articleShow.questions track by $index | limitTo: articleShow.paginationLimit()" ng-if="question.visible")
@@ -189,18 +192,17 @@ div.article-show(layout="row" layout-align="center")
 
 
 
-
-
-
-
     div(layout="row" layout-align="center")
       md-divider.separator-h2(flex="40")
       h2.t-center(flex="20") We Recommend
       md-divider.separator-h2(flex="40")
-    div(layout='row' layout-align='center')
+    div(layout='row' layout-align='center' ng-show='articleShow.articles_recommend.length')
       data-owl-carousel.owl-carousel(data-options='{navigation: false, pagination: true, ' +
       'rewindNav : false, loop: true, autoWidth: true, autoplay:true, autoplayTimeout:1000}')
-        .item(owl-carousel-item='', ng-repeat='url_picture in articleShow.url_pictures track by $index')
-          img(src="{{url_picture}}" style='width:200px; height:auto;')
+        .item(owl-carousel-item='', ng-repeat='article_recommend in articleShow.articles_recommend track by $index')
+          img(src="{{articleShow.url_api}}{{article_recommend.url_thumbnail}}" style='width:200px; height:auto;')
           div(layout-align="center" layout="row")
-            span.bold 12$
+            span.bold {{article_recommend.price}} €
+
+    div(layout='row' layout-align='center' ng-hide='articleShow.articles_recommend.length')
+      p.recommend-articles-not-available We don't have any articles to recommend

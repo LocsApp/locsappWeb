@@ -3,25 +3,59 @@
 
   angular
     .module('LocsappControllers')
-    .controller('NavBarController', NavBarController)
+    .controller('NavBarController', NavBarController);
 
   /** @ngInject */
-  function NavBarController(NotificationsService, $state, $log, $scope, $mdSidenav) {
+  function NavBarController(NotificationsService, $state, $log, $scope, $mdSidenav,
+                            $rootScope, $timeout, $location, MenuService) {
+
     var vm = this;
 
-    /* Side Nav Menu */
-    vm.icon = 'menu';
+     //functions for menu-link and menu-toggle
+        vm.isOpen = isOpen;
+        vm.toggleOpen = toggleOpen;
+        vm.autoFocusContent = false;
+        vm.menu = MenuService;
 
-    vm.close = function () {
-      $mdSidenav('right').close()
-        .then(function () {
-          $log.debug("close RIGHT is done");
-        });
-    };
+        vm.status = {
+          isFirstOpen: true,
+          isFirstDisabled: false
+        };
+
+
+        function isOpen(section) {
+          return MenuService.isSectionSelected(section);
+        }
+
+        function toggleOpen(section) {
+          MenuService.toggleSelectSection(section);
+        }
+
+    /* Side Nav Menu */
+
+    vm.toggleLeft = buildToggler('left');
+    vm.toggleRight = buildToggler('right');
+
+    function buildToggler(componentId) {
+      return function () {
+        $log.log("buildToggler + ", componentId);
+
+        $mdSidenav(componentId).toggle();
+      }
+    }
+
+    /*  vm.icon = 'menu';
+
+     vm.close = function () {
+     $mdSidenav('right').close()
+     .then(function () {
+     $log.debug("close RIGHT is done");
+     });
+     };*/
 
     /* End side nav menu
 
-    /* DropDownMenu */
+     /* DropDownMenu */
 
     vm.openMenuArticle = function ($mdOpenMenu, ev) {
       $mdOpenMenu(ev);
@@ -53,7 +87,6 @@
     vm.openNotificationsMenu = function ($mdOpenMenu, event) {
       $mdOpenMenu(event);
     };
-
 
 
     /*Goes to the state parameter*/
@@ -91,10 +124,10 @@
 
 
     /* Test Sidenav */
-    vm.toggleRight = buildToggler('right');
-    vm.isOpenRight = function () {
-      return $mdSidenav('right').isOpen();
-    };
+    /*vm.toggleRight = buildToggler('right');
+     vm.isOpenRight = function () {
+     return $mdSidenav('right').isOpen();
+     };*/
 
 
     /**
@@ -102,15 +135,15 @@
      * report completion in console
      */
 
-    function buildToggler(navID) {
-      return function () {
-        $mdSidenav(navID)
-          .toggle()
-          .then(function () {
-            $log.debug("toggle " + navID + " is done");
-          });
-      }
-    }
+    /*function buildToggler(navID) {
+     return function () {
+     $mdSidenav(navID)
+     .toggle()
+     .then(function () {
+     $log.debug("toggle " + navID + " is done");
+     });
+     }
+     }*/
 
 
     /* End test Sidenav */

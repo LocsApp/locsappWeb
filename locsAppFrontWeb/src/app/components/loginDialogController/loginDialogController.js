@@ -8,7 +8,7 @@
 
   /** @ngInject */
   function LoginDialogController($log, UsersService, $scope, $localStorage, $sessionStorage, $state, toastr,
-  ScopesService, message, $mdDialog) {
+  ScopesService, message, $mdDialog, $document) {
 
     var vm = this;
     vm.message = message;

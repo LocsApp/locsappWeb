@@ -37,14 +37,14 @@ article_patterns = [
     url(r'^current-timelines/$', articles.currentTimelines),
     url(r'^current-timelines-as-renting/$', articles.currentTimelinesAsRenting),
     url(r'^give-mark/$', articles.postNewMark),
-    url(r'^get-pending-marks-for-clients/$', articles.getMarkForClient),
-    url(r'^get-pending-marks-for-renters/$', articles.getMarkForRenter),
+    url(r'^get-pending-marks-for-clients/(?P<id_page>[0-9]+)/$', articles.getMarkForClient),
+    url(r'^get-pending-marks-for-renters/(?P<id_page>[0-9]+)/$', articles.getMarkForRenter),
     url(r'^questions/$', questions.sendQuestion),
     url(r'^answers/$', questions.answerQuestion),
     url(r'^upvote/$', questions.thumbsUp),
     url(r'^report-question/$', questions.report),
-    url(r'^articles-with-question-to-answer/$', questions.articleWithQuestionToAnswer),
-    url(r'^articles-with-question-asked/$', questions.articleWithQuestionUserAsked),
+    url(r'^articles-with-question-to-answer/(?P<id_page>[0-9]+)/$', questions.articleWithQuestionToAnswer),
+    url(r'^articles-with-question-asked/(?P<id_page>[0-9]+)/$', questions.articleWithQuestionUserAsked),
     url(r'^user-profile/(?P<user_pk>[0-9]+)/$',
         articles.getFirstFourArticleOwnedByUser),
     url(r'^all/(?P<user_pk>[0-9]+)/(?P<id_page>[0-9]+)/$',
@@ -52,10 +52,10 @@ article_patterns = [
 ]
 
 history_patterns = [
-    url(r'^articles-as-client/$', articles.getArticleHistoryAsClient),
-    url(r'^articles-as-renter/$', articles.getArticleHistoryAsRenter),
-    url(r'^notations-as-renter/$', articles.getNotationsAsRenter),
-    url(r'^notations-as-client/$', articles.getNotationsAsClient),
+    url(r'^articles-as-client/(?P<id_page>[0-9]+)/$', articles.getArticleHistoryAsClient),
+    url(r'^articles-as-renter/(?P<id_page>[0-9]+)/$', articles.getArticleHistoryAsRenter),
+    url(r'^notations-as-renter/(?P<id_page>[0-9]+)/$', articles.getNotationsAsRenter),
+    url(r'^notations-as-client/(?P<id_page>[0-9]+)/$', articles.getNotationsAsClient),
     url(r'^notations-profile/(?P<user_pk>[0-9]+)/$', notations.getFirstFourNotationOwnedByUser),
     url(r'^notations-as-client-pagination/(?P<username>\w+)/(?P<id_page>[0-9]+)/$', notations.getAllNotationAsClientByUser),
     url(r'^notations-as-renter-pagination/(?P<username>\w+)/(?P<id_page>[0-9]+)/$',
@@ -64,7 +64,8 @@ history_patterns = [
 ]
 
 favorite_patterns = [
-    url(r'^articles/$', favorites.addFavoriteArticle),
+    url(r'^articles/(?P<id_page>[0-9]+)/$', favorites.getFavoriteArticle),
+    url(r'^add-articles/$', favorites.addFavoriteArticle),
     url(r'^delete-articles/$', favorites.deleteFavoriteArticle),
 
 ]
@@ -122,7 +123,8 @@ static_collections_patterns = [
     url(r'^sizes/$', static_collections.staticSizes),
     url(r'^clothe-colors/$', static_collections.staticClotheColors),
     url(r'^clothe-states/$', static_collections.staticClotheStates),
-    url(r'^payment-methods/$', static_collections.staticPaymentMethods)
+    url(r'^payment-methods/$', static_collections.staticPaymentMethods),
+    url(r'^reports-types/$', static_collections.staticReportTypes),
 ]
 
 # Cache urls

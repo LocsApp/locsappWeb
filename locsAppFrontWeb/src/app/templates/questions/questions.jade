@@ -1,5 +1,5 @@
 .questions(ng-controller="QuestionsController as questions" layout="row" layout-align="center" )
-  div(flex-xs="100" flex-sm="100" flex-md="75" flex="50")
+  div(flex-xs="100" flex-sm="100" flex-md="100" flex="100")
 
     div(layout="row" layout-align="center")
       h1.t-center(flex="20") My questions
@@ -10,37 +10,54 @@
       h2.t-center(flex="30") Questions I have asked
       md-divider.separator-h2(flex="35" hide-sm)
 
-    //p {{questions.articlesWithQuestionUserAsked[0]}}
-    div(ng-if='questions.articlesWithQuestionUserAsked.length == 0')
-      div(layout='row' layout-align='center')
-        p You did not ask a question about any article
 
-    div(ng-if='questions.articlesWithQuestionUserAsked.length > 0' ng-repeat='article in questions.articlesWithQuestionUserAsked track by $index')
-      div(layout='row' layout-align='center')
-          md-card(flex='50' ng-click='questions.goToArticlePage(article._id)')
-            md-card-content
-              div(layout='row')
-                img(ng-src="{{ questions.url_api + article.url_thumbnail }}")
-                div(layout='column')
-                  h3 {{article.title}}
-                  p {{article.description | limitTo:questions.limitDescription}} <span ng-if='article.description.length > questions.limitDescription'>...</span>
+    // Questions user asked Pagination
+    div.search-article-toolbar(ng-if='questions.articlesWithQuestionUserAsked.length >= 1')
+      md-toolbar(style="background-color:none" layout="row")
+        span.flex
+        ng-md-icon(icon="keyboard_arrow_left" ng-click='questions.prevOrNextPageQuestionsUserAsked(questions.current_page_questions_user_asked - 1)' ng-if="questions.current_page_questions_user_asked != 1").arrow-previous-page
+        span.pagination-toolbar-search-article
+          span(paging paging-action="questions.goToPageQuestionsUserAsked(page)"  page="questions.current_page_questions_user_asked" page-size="questions.page_size" total="questions.nb_items_questions_user_asked" active-class="current-page-selected-search-article")
+        //span(style="margin-right: 20px;" ng-if="articleSearch.search._pagination.page_number >= articleSearch.totalItems / articleSearch.search._pagination.items_per_page")
+        ng-md-icon(icon="keyboard_arrow_right" ng-click='questions.prevOrNextPageQuestionsUserAsked(questions.current_page_questions_user_asked + 1)' ng-if="questions.current_page_questions_user_asked != questions.nb_page_questions_user_asked").arrow-next-page
+    md-divider.flex
+                // End Pagination Questions user asked
 
-          md-card(ng-if='$index < questions.articlesWithQuestionUserAsked.length - 1' flex='50'
-          ng-click='questions.goToArticlePage(questions.articlesWithQuestionUserAsked[$index + 1]._id)')
-            md-card-content
-              div(layout='row')
-                img(ng-src="{{ questions.url_api + questions.articlesWithQuestionUserAsked[$index + 1].url_thumbnail }}")
-                div(layout='column')
-                  h3 {{questions.articlesWithQuestionUserAsked[$index + 1].title}}
-                  p {{questions.articlesWithQuestionUserAsked[$index + 1].description | limitTo:questions.limitDescription}} <span ng-if='questions.articlesWithQuestionUserAsked[$index + 1].description.length > questions.limitDescription'>...</span>
 
-          //div Deux {{questions.articlesWithQuestionUserAsked[$index + 1]._id}}
-          span(ng-if="$index < questions.articlesWithQuestionUserAsked.length - 1")
-            //h2 IN IF
-            span(ng-bind="$index  + 1" style='display:none;')
-      //div(layout='row' layout-align='center')
-        div un
-        div deux
+    // Grid article question user asked
+    div.article-history-as-renter(ng-class="notationAsRenter.animatePagination" ng-cloak)
+      div.delimiter
+      div.delimiter
+      section(layout="row", layout-align="start start")
+        div(layout-margin style="margin-top: 0px;").flex
+          div(ng-if='questions.articlesWithQuestionUserAsked.length == 0')
+            div(layout='row' layout-align='center')
+              p You did not ask a question about any article
+          md-grid-list(md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-row-height="100px" md-cols-gt-md="4" md-gutter="20px")
+            md-grid-tile(style="background: yellow;" md-colspan="1" md-rowspan="2"
+            ng-if='questions.articlesWithQuestionUserAsked.length > 0'
+            ng-repeat='article in questions.articlesWithQuestionUserAsked track by $index')
+              md-card(layout-fill ng-click='questions.goToArticlePage(article._id)')
+                md-card-content
+                  div(layout='row')
+                    img(ng-src="{{ questions.url_api + article.url_thumbnail }}")
+                    div(layout='column')
+                      h3 {{article.title}}
+                      p {{article.description | limitTo:questions.limitDescription}} <span ng-if='article.description.length > questions.limitDescription'>...</span>
+                // End grid questions user asked
+
+
+    // Questions user asked Pagination
+    div.search-article-toolbar(ng-if='questions.articlesWithQuestionUserAsked.length >= 1')
+      md-toolbar(style="background-color:none" layout="row")
+        span.flex
+        ng-md-icon(icon="keyboard_arrow_left" ng-click='questions.prevOrNextPageQuestionsUserAsked(questions.current_page_questions_user_asked - 1)' ng-if="questions.current_page_questions_user_asked != 1").arrow-previous-page
+        span.pagination-toolbar-search-article
+          span(paging paging-action="questions.goToPageQuestionsUserAsked(page)"  page="questions.current_page_questions_user_asked" page-size="questions.page_size" total="questions.nb_items_questions_user_asked" active-class="current-page-selected-search-article")
+        //span(style="margin-right: 20px;" ng-if="articleSearch.search._pagination.page_number >= articleSearch.totalItems / articleSearch.search._pagination.items_per_page")
+        ng-md-icon(icon="keyboard_arrow_right" ng-click='questions.prevOrNextPageQuestionsUserAsked(questions.current_page_questions_user_asked + 1)' ng-if="questions.current_page_questions_user_asked != questions.nb_page_questions_user_asked").arrow-next-page
+    md-divider.flex
+                // End Pagination Questions user asked
 
 
     div(layout="row" layout-align="center")
@@ -48,33 +65,51 @@
       h2.t-center(flex="30") Questions to answer
       md-divider.separator-h2(flex="35" hide-sm)
 
-    div(ng-if='questions.articlesWithQuestionsToAnswer.length == 0')
-      div(layout='row' layout-align='center')
-        p You don't have any question to answer about an article
-
-    div(ng-if='questions.articlesWithQuestionsToAnswer.length > 0' ng-repeat='article in questions.articlesWithQuestionsToAnswer track by $index')
-      div(layout='row' layout-align='center')
-        md-card(flex='50' ng-click='questions.goToArticlePage(article._id)')
-          md-card-content
-            div(layout='row')
-              img(ng-src="{{ questions.url_api + article.url_thumbnail }}")
-              div(layout='column')
-                h3 {{article.title}}
-                p {{article.description | limitTo:questions.limitDescription}} <span ng-if='article.description.length > questions.limitDescription'>...</span>
-
-        md-card(ng-if='$index < questions.articlesWithQuestionsToAnswer.length - 1' flex='50'
-        ng-click='questions.goToArticlePage(questions.articlesWithQuestionsToAnswer[$index + 1]._id)')
-          md-card-content
-            div(layout='row')
-              img(ng-src="{{ questions.url_api + questions.articlesWithQuestionsToAnswer[$index + 1].url_thumbnail }}")
-              div(layout='column')
-                h3 {{questions.articlesWithQuestionsToAnswer[$index + 1].title}}
-                p {{questions.articlesWithQuestionsToAnswer[$index + 1].description | limitTo:questions.limitDescription}} <span ng-if='questions.articlesWithQuestionsToAnswer[$index + 1].description.length > questions.limitDescription'>...</span>
-
-        span(ng-if="$index < questions.articlesWithQuestionsToAnswer.length - 1")
-          //h2 IN IF
-          span(ng-bind="$index  + 1" style='display:none;')
 
 
+    // Questions user has to answer Pagination
+    div.search-article-toolbar(ng-if='questions.articlesWithQuestionsToAnswer.length >= 1')
+      md-toolbar(style="background-color:none" layout="row")
+        span.flex
+        ng-md-icon(icon="keyboard_arrow_left" ng-click='questions.prevOrNextPageQuestionsToAnswer(questions.current_page_questions_to_answer - 1)' ng-if="questions.current_page_questions_to_answer != 1").arrow-previous-page
+        span.pagination-toolbar-search-article
+          span(paging paging-action="questions.goToPageQuestionsToAnswer(page)"  page="questions.current_page_questions_to_answer" page-size="questions.page_size" total="questions.nb_items_questions_to_answer" active-class="current-page-selected-search-article")
+        //span(style="margin-right: 20px;" ng-if="articleSearch.search._pagination.page_number >= articleSearch.totalItems / articleSearch.search._pagination.items_per_page")
+        ng-md-icon(icon="keyboard_arrow_right" ng-click='questions.prevOrNextPageQuestionsToAnswer(questions.current_page_questions_to_answer + 1)' ng-if="questions.current_page_questions_to_answer != questions.nb_page_questions_to_answer").arrow-next-page
+    md-divider.flex
+                  // End Pagination Questions user has to answer
 
 
+    // Grid article question user has to answer
+    div.article-history-as-renter(ng-class="notationAsRenter.animatePagination" ng-cloak)
+      div.delimiter
+      div.delimiter
+      section(layout="row", layout-align="start start")
+        div(layout-margin style="margin-top: 0px;").flex
+          div(ng-if='questions.articlesWithQuestionsToAnswer.length == 0')
+            div(layout='row' layout-align='center')
+              p You don't have any question to answer about an article
+          md-grid-list(md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-row-height="100px" md-cols-gt-md="4" md-gutter="20px")
+            md-grid-tile(style="background: yellow;" md-colspan="1" md-rowspan="2"
+            ng-if='questions.articlesWithQuestionsToAnswer.length > 0'
+            ng-repeat='article in questions.articlesWithQuestionsToAnswer track by $index')
+              md-card(layout-fill ng-click='questions.goToArticlePage(article._id)')
+                md-card-content
+                  div(layout='row')
+                    img(ng-src="{{ questions.url_api + article.url_thumbnail }}")
+                    div(layout='column')
+                      h3 {{article.title}}
+                      p {{article.description | limitTo:questions.limitDescription}} <span ng-if='article.description.length > questions.limitDescription'>...</span>
+                // End grid questions user has to answer
+
+    // Questions user has to answer Pagination
+    div.search-article-toolbar(ng-if='questions.articlesWithQuestionsToAnswer.length >= 1')
+      md-toolbar(style="background-color:none" layout="row")
+        span.flex
+        ng-md-icon(icon="keyboard_arrow_left" ng-click='questions.prevOrNextPageQuestionsToAnswer(questions.current_page_questions_to_answer - 1)' ng-if="questions.current_page_questions_to_answer != 1").arrow-previous-page
+        span.pagination-toolbar-search-article
+          span(paging paging-action="questions.goToPageQuestionsToAnswer(page)"  page="questions.current_page_questions_to_answer" page-size="questions.page_size" total="questions.nb_items_questions_to_answer" active-class="current-page-selected-search-article")
+        //span(style="margin-right: 20px;" ng-if="articleSearch.search._pagination.page_number >= articleSearch.totalItems / articleSearch.search._pagination.items_per_page")
+        ng-md-icon(icon="keyboard_arrow_right" ng-click='questions.prevOrNextPageQuestionsToAnswer(questions.current_page_questions_to_answer + 1)' ng-if="questions.current_page_questions_to_answer != questions.nb_page_questions_to_answer").arrow-next-page
+    md-divider.flex
+    // End Pagination Questions user has to answer

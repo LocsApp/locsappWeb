@@ -7,11 +7,21 @@
     height: 1px;
   }
 
-  h2 {
+  h2, h3 {
     margin-top: 0;
   }
 
   md-card {
-    cursor: pointer;
+    .right {
+      margin-left: 10px;
+    }
+    img {
+      height: 70px;
+      width: auto;
+    }
+
+    ng-md-icon, .title, img {
+      cursor: pointer;
+    }
   }
 }

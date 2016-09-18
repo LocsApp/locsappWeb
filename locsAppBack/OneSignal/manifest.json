@@ -1,0 +1,7 @@
+{
+  "name": “LocsApp”,
+  "short_name": “LocsApp”,
+  "start_url": "/",
+  "display": "standalone",
+  "gcm_sender_id": "876424282368"
+}

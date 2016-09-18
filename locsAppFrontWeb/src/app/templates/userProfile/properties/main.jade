@@ -10,17 +10,17 @@ md-card
               md-icon(ng-if="!profile.user.gender" md-svg-src="../assets/icons/gender-male-female" +
               ".svg"
               aria-label="gender-male-female")
-              md-icon(ng-if="profile.user.gender.indexOf('female') > -1" md-svg-src="../assets/icons/gender-female.svg"
+              md-icon(ng-if="profile.user.gender.indexOf('Woman') > -1" md-svg-src="../assets/icons/gender-female.svg"
               aria-label="gender-female")
-              md-icon(ng-if="profile.user.gender.indexOf('male') > -1" md-svg-src="../assets/icons/gender-male.svg"
+              md-icon(ng-if="profile.user.gender.indexOf('Man') > -1" md-svg-src="../assets/icons/gender-male.svg"
               aria-label="gender-male")
               | {{profile.user.username}}
 
             div.properties-user
               div
                 ng-md-icon(icon="cake" size="28")
-                span(ng-if="!profile.user.birthdate") Birthdate: Not specified
-                span(ng-if="profile.user.birthdate") Birthdate {{profile.user.birthdate}}
+                span(ng-if="!profile.user.birthdate") {{'BIRTHDATE' | translate}}: {{'NOT_SPECIFIED' | translate}}
+                span(ng-if="profile.user.birthdate") {{'BIRTHDATE' | translate}} {{profile.user.birthdate}}
 
               //We don't need the within because the user access is own profile
               //div
@@ -30,12 +30,12 @@ md-card
 
               div
                 ng-md-icon(icon="whatshot" size="28")
-                span(ng-if="!profile.user.last_activity_date") Last activity: Unknown
-                span(ng-if="profile.user.last_activity_date") Last activity {{profile.user.last_activity_date.split('T')[0]}}
+                span(ng-if="!profile.user.last_activity_date") {{'LAST_ACTIVITY' | translate}}: {{'UNKNOWN' | translate}}
+                span(ng-if="profile.user.last_activity_date") {{'LAST_ACTIVITY' | translate}} {{profile.user.last_activity_date.split('T')[0]}}
 
               div
                 ng-md-icon(icon="insert_emoticon" size="28")
-                span Subscribed {{profile.user.registered_date}}
+                span {{'SUBSCRIBED' | translate}} {{profile.user.registered_date}}
 
 
 

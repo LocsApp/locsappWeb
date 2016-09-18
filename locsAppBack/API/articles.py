@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .views import db_locsapp
 from .views import APIrequests
+from .APIrequest import paginationAPI
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 from django.contrib.auth import get_user_model
@@ -10,6 +11,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMessage
 from django.conf import settings
 from .utility import Utility
+import math
 
 
 from dateutil.parser import parse
@@ -236,42 +238,103 @@ HISTORY
 @csrf_exempt
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
-def getArticleHistoryAsClient(request):
+def getArticleHistoryAsClient(request, id_page):
     if request.method == "GET":
-        return APIrequests.GET(
-            'article_demands', special_field={"id_author": request.user.pk, "visible": True})
+        id_page = int(id_page)
+        field = {"id_author": request.user.pk, "visible": True}
+        nb_page, articles_as_client = paginationAPI(id_page, db_locsapp["article_demands"], field)
+        return JsonResponse(
+            {"nb_page": nb_page, "articles_as_client": articles_as_client})
+
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
 @csrf_exempt
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
-def getArticleHistoryAsRenter(request):
+def getArticleHistoryAsRenter(request, id_page):
     if request.method == "GET":
-        return APIrequests.GET(
-            'article_demands', special_field={"id_target": request.user.pk, "visible": True})
+        id_page = int(id_page)
+        field = {"id_target": request.user.pk, "visible": True}
+        nb_page, articles_as_renter = paginationAPI(id_page, db_locsapp["article_demands"], field)
+        return JsonResponse(
+            {"nb_page": nb_page, "articles_as_renter": articles_as_renter})
+
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
 
 @csrf_exempt
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
-def getNotationsAsClient(request):
+def getNotationsAsClient(request, id_page):
     if request.method == "GET":
-        return APIrequests.GET(
-            "notations", special_field={"id_target": request.user.pk, "as_renter": False})
+        id_page = int(id_page)
+        try:
+            user = get_user_model().objects.get(username=request.user.username)
+            user_pk = user.pk
+            nb_item = db_locsapp["notations"].count({"id_target": int(user_pk), "as_renter": False})
+            item_on_a_page = 10
+            nb_page = math.ceil(nb_item / item_on_a_page)
+            notations_as_client = []
+
+            if (id_page - 1) * 10 > nb_item:
+                id_page = nb_page
+
+            skip_page = id_page - 1
+            if skip_page < 0:
+                skip_page = 0
+            for notation_as_client in db_locsapp["notations"].find({"id_target": int(user_pk), "as_renter": False}).sort("date_issued", DESCENDING).skip((skip_page) * item_on_a_page).limit(item_on_a_page):
+                notation_as_client['_id'] = str(notation_as_client['_id'])
+                notations_as_client.append(notation_as_client)
+
+            return JsonResponse({"nb_page": nb_page, "notations_as_client": notations_as_client, "average_mark": user.tenant_score})
+
+        except ObjectDoesNotExist:
+            return JsonResponse(
+                {"message": "username does not exist"}, status=404)
     else:
-        return JsonResponse({"Error": "Method not allowed!"}, status=405)
+        return JsonResponse({"Error": "Method not allowed"}, status=405)
 
 @csrf_exempt
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
-def getNotationsAsRenter(request):
+def getNotationsAsRenter(request, id_page):
+    if request.method == "GET":
+        id_page = int(id_page)
+        # On get la target
+        try:
+            user = get_user_model().objects.get(username=request.user.username)
+            user_pk = user.pk
+            nb_item = db_locsapp["notations"].count({"id_target": int(user_pk), "as_renter": True})
+            item_on_a_page = 10
+            nb_page = math.ceil(nb_item / item_on_a_page)
+            notations_as_renter = []
+
+            if (id_page - 1) * 10 > nb_item:
+                id_page = nb_page
+
+            skip_page = id_page - 1
+            if skip_page < 0:
+                skip_page = 0
+
+            for notation_as_renter in db_locsapp["notations"].find({"id_target": int(user_pk), "as_renter": True}).sort("date_issued", DESCENDING).skip((skip_page) * item_on_a_page).limit(item_on_a_page):
+                notation_as_renter['_id'] = str(notation_as_renter['_id'])
+                notations_as_renter.append(notation_as_renter)
+
+            return JsonResponse({"nb_page": nb_page, "notations_as_renter": notations_as_renter, "average_mark": user.renter_score})
+        except ObjectDoesNotExist:
+            return JsonResponse(
+                {"message": "username does not exist"}, status=404)
+
+    else:
+        return JsonResponse({"Error": "Method not allowed"}, status=405)
+    """"
     if request.method == "GET":
         return APIrequests.GET(
             "notations", special_field={"id_target": request.user.pk, "as_renter": True})
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
+    """
 
 @csrf_exempt
 @api_view(['POST'])
@@ -418,7 +481,7 @@ def postNewMark(request):
 @csrf_exempt
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
-def getMarkForClient(request):
+def getMarkForClient(request, id_page):
     if request.method == "GET":
         docs = APIrequests.GET(
             'article_demands', special_field={"id_target": request.user.pk, "visible": True, "status": "finished"}, raw=True)
@@ -435,7 +498,7 @@ def getMarkForClient(request):
 @csrf_exempt
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
-def getMarkForRenter(request):
+def getMarkForRenter(request, id_page):
     if request.method == "GET":
         docs = APIrequests.GET(
             'article_demands', special_field={"id_author": request.user.pk, "visible": True, "status": "finished"}, raw=True)
@@ -697,6 +760,8 @@ def getArticle(request, article_pk):
     if request.method == "GET":
         # We also need to send the global mark of the user and the nb of notation as a renter
         article = db_locsapp["articles"].find_one({"_id": ObjectId(article_pk)})
+        if article is None:
+            return JsonResponse({"Error": "Article not found"}, status=404)
         article = APIrequests.parseObjectIdToStr(article)
         global_mark_as_renter = get_user_model().objects.get(pk=article["id_author"]).renter_score
         nb_mark_as_renter = db_locsapp["notations"].count({"id_target": int(article["id_author"]), "as_renter": True})
@@ -706,8 +771,31 @@ def getArticle(request, article_pk):
         if user is not False and db_locsapp["favorite_article"].find_one({"id_user": user.pk, "id_article": article_pk}):
             is_in_favorite = True
 
+        is_reported = False
+        if user is not False and db_locsapp['reports'].find_one({"id_author": user.pk, "id_article": article["_id"]}):
+            is_reported = True
+
+        """
+        We look for article in the same:
+         range of price + or - 10 euros
+         same category
+         and near same km range IMPORTANT
+         same subcategory (maybe)
+        """
+        articles_recommend = []
+        price_range = 1000
+        article_recommend_mongo = db_locsapp["articles"].find({"price": {"$gt": article["price"] - price_range, "$lt": article["price"] + price_range}}
+                                                        ).limit(10)
+        # print("article recooment = ", article_recommend)
+        for article_recommend in article_recommend_mongo:
+            print("article = ", article_recommend)
+            if article_recommend["_id"] != ObjectId(article_pk):
+                article_recommend = APIrequests.parseObjectIdToStr(article_recommend)
+                articles_recommend.append(article_recommend)
+
         return JsonResponse({"article": article, "global_mark_as_renter": global_mark_as_renter,
-                             "nb_mark_as_renter": nb_mark_as_renter, "is_in_favorite": is_in_favorite})
+                             "nb_mark_as_renter": nb_mark_as_renter, "is_in_favorite": is_in_favorite,
+                             "is_reported": is_reported, "articles_recommend": articles_recommend})
         # return APIrequests.GET('articles', id=article_pk)
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
@@ -759,40 +847,112 @@ We send an email to the adminstrator that tell us who user send a report for whi
 
 @csrf_exempt
 @api_view(['POST'])
-@permission_classes((IsAuthenticated,))
 def sendReport(request):
     if request.method == "POST":
         if request.body:
             answer = json.loads(request.body.decode('utf8'))
-            print("Object id = ", answer)
-            try:
-                answer['article_id']
-            except KeyError:
-                return JsonResponse(
-                    {"Error": "Please send the article id"}, status=404)
+            print("answer = ", answer)
 
-            if not ObjectId.is_valid(answer['article_id']):
-                return JsonResponse(
-                    {"Error": "Please send a correct article id"}, status=401)
-            list_reporter = get_user_model().objects.filter(is_admin=True)
-            list_email = ['locsapp.eip@gmail.com']
-            for reporter in list_reporter:
-                list_email.append(reporter.email)
-            article = db_locsapp["articles"].find_one(
-                {"_id": ObjectId(answer['article_id'])})
-            if article is None:
-                return JsonResponse(
-                    {"Error": "This article does not exist"}, status=404)
+            if 'id_article' not in answer or 'id_report_type' not in answer or 'email' not in answer:
+                return JsonResponse({"Error": "Your forget to add fields"}, status=405)
+            if not ObjectId.is_valid(answer['id_article']) or not ObjectId.is_valid(answer['id_report_type']):
+                return JsonResponse({"Error": "Please add a correct Object id fields"}, status=405)
 
-            # We insert a new report in this article and if there is more than 5 users we create a
-            #  new collection report associated to the id of this article
+            article = db_locsapp["articles"].find_one({"_id": ObjectId(answer["id_article"])})
+            report_type = db_locsapp["report_types"].find_one({"_id": ObjectId(answer["id_report_type"])})
 
+            if article is None or report_type is None:
+                return JsonResponse({"Error": "Add an existing article and report_type"}, status=405)
+
+            current_user_pk = -1
+            current_user_username = "anonymous"
+            current_user = Utility.checkUserAuthenticated(request)
+            if current_user is not False:
+                current_user_pk = current_user.pk
+                current_user_username = current_user.username
+
+            if article["id_author"] == current_user_pk and current_user_pk != -1:
+                return JsonResponse({"Error": "You are the owner of this article"}, status=403)
+
+            model = {
+                "id_article": {
+                    "_type": ObjectId(),
+                    "_required": True
+                },
+
+                "id_owner_article": {
+                    "_type": int,
+                    "_protected": True,
+                    "_default": article['id_author']
+                },
+                "username_owner_article": {
+                    "_type": str,
+                    "_protected": True,
+                    "_default": article['username_author']
+                },
+
+                "id_report_type": {
+                  "_type": ObjectId(),
+                },
+
+                "report_type_str": {
+                    "_type": str,
+                    "_default": report_type['name']
+                },
+
+                "id_author": {
+                    "_type": int,
+                    "_protected": True,
+                    "_default": current_user_pk
+                },
+                "username_author": {
+                    "_type": str,
+                    "_protected": True,
+                    "_default": current_user_username
+                },
+                "email": {
+                    "_type": str,
+                    "_length": 50
+                },
+                "first_name": {
+                    "_type": str,
+                    "_length": 50,
+                },
+                "last_name": {
+                    "_type": str,
+                    "_length": 50
+                },
+                "message": {
+                    "_type": str,
+                    "_length": 1000,
+                    "_required": False
+                },
+                "creation_date": {
+                    "_type": str,
+                    "_protected": True,
+                    "_default": datetime.now(pytz.utc)
+                },
+
+            }
+
+            if current_user_pk == -1:
+                report = db_locsapp['reports'].find_one({"email": answer['email'], "id_article": answer['id_article']})
+            else:
+                    report = db_locsapp['reports'].find_one({"id_author": current_user_pk, "id_article": answer['id_article']})
+            if report:
+                return JsonResponse({"Error": "Your already reported this article"}, status=405)
+            else:
+                return APIrequests.POST(
+                    request, model, "reports", "The report has been successfully sent!")
+
+            """
             message = 'The user ' + request.user.username + ' sent a report about this article' + \
                 ' <a href="' + settings.URL_FRONT + 'article/' + str(article['_id']) + '">' + \
                 article['title'] + '</a>'
             email = EmailMessage('Report for article ' + article['title'], message,
                                  to=list_email)
             email.send()
+            """
             return JsonResponse(
                 {"Success": "Report sent to the administrators."}, status=200)
         else:

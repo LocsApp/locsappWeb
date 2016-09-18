@@ -1,5 +1,5 @@
 .favorite(ng-controller="FavoriteController as favorite" layout="row" layout-align="center" )
-  div(flex-xs="100" flex-sm="100" flex-md="75" flex="50")
+  div(flex-xs="100" flex-sm="100" flex-md="100" flex="100")
 
     div(layout="row" layout-align="center")
       h1.t-center(flex="20") My favorites
@@ -10,49 +10,46 @@
       h2.t-center(flex="30") My articles
       md-divider.separator-h2(flex="35" hide-sm)
 
-    //p {{favorite.articlesWithQuestionUserAsked[0]}}
-    div(ng-if='favorite.favorite_articles.length == 0')
-      div(layout='row' layout-align='center')
-        p You don't have any favorite articles
 
-    div(ng-if='favorite.favorite_articles.length > 0' ng-repeat='article in favorite.favorite_articles track by $index')
-      div(layout='row' layout-align='center')
-          md-card(flex='50' ng-click='favorite.goToArticlePage(article.id_article)')
-            md-card-content
-              div(layout='row')
-                img(ng-src="{{ favorite.url_api + article.url_thumbnail }}")
-                div(layout='column')
-                  h3 {{article.title}}
-                  span {{article.price}}
-                  p {{article.description | limitTo:favorite.limitDescription}} <span ng-if='article.description.length > favorite.limitDescription'>...</span>
-                  div(layout="column" layout-align="end end")
-                    //p toto
-                    ng-md-icon(icon="delete" ng-click='favorite.deleteArticleFavorite(article._id)')
+    // favorite Pagination
+    div.search-article-toolbar(ng-if="favorite.favorite_articles.length > 1")
+      md-toolbar(style="background-color:none" layout="row")
+        span.flex
+        ng-md-icon(icon="keyboard_arrow_left" ng-click='favorite.prevOrNextPageArticleFavorite(favorite.current_page_favorite_article - 1)' ng-if="favorite.current_page_favorite_article != 1").arrow-previous-page
+        span.pagination-toolbar-search-article
+          span(paging paging-action="favorite.goToPageArticleFavorite(page)"  page="favorite.current_page_favorite_article" page-size="favorite.page_size" total="favorite.nb_items_favorite_article" active-class="current-page-selected-search-article")
+        //span(style="margin-right: 20px;" ng-if="articleSearch.search._pagination.page_number >= articleSearch.totalItems / articleSearch.search._pagination.items_per_page")
+        ng-md-icon(icon="keyboard_arrow_right" ng-click='favorite.prevOrNextPageArticleFavorite(favorite.current_page_favorite_article + 1)' ng-if="favorite.current_page_favorite_article != favorite.nb_page_favorite_article").arrow-next-page
+    md-divider.flex
+            // End Pagination favorite
 
-          md-card(ng-if='$index < favorite.favorite_articles.length - 1' flex='50'
-          ng-click='favorite.goToArticlePage(favorite.favorite_articles[$index + 1].id_article)')
-            md-card-content
-              div(layout='row')
-                img(ng-src="{{ favorite.url_api + favorite.favorite_articles[$index + 1].url_thumbnail }}")
-                div(layout='column')
-                  h3 {{favorite.favorite_articles[$index + 1].title}}
-                  p {{favorite.favorite_articles[$index + 1].description | limitTo:favorite.limitDescription}} <span ng-if='favorite.favorite_articles[$index + 1].description.length > favorite.limitDescription'>...</span>
 
-          //div Deux {{favorite.articlesWithQuestionUserAsked[$index + 1]._id}}
-          span(ng-if="$index < favorite.favorite_articles.length - 1")
-            //h2 IN IF
-            span(ng-bind="$index  + 1" style='display:none;')
-      //div(layout='row' layout-align='center')
-        div un
-        div deux
+    // Grid article favorite
+    div.article-history-as-renter(ng-class="notationAsRenter.animatePagination" ng-cloak)
+      div.delimiter
+      div.delimiter
+      section(layout="row", layout-align="start start")
+        div(layout-margin style="margin-top: 0px;").flex
+          div(ng-if='favorite.favorite_articles.length == 0')
+            div(layout='row' layout-align='center')
+              p You don't have any favorite articles
+          md-grid-list(md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-row-height="100px" md-cols-gt-md="4" md-gutter="20px")
+            md-grid-tile(style="background: yellow;" md-colspan="1" md-rowspan="2" ng-repeat='article in favorite.favorite_articles track by $index')
+              // My notation
+              md-card(layout-fill)
+                md-card-content
+                  div(layout='row')
+                    img(ng-src="{{ favorite.url_api + article.url_thumbnail }}" ng-click='favorite.goToArticlePage(article.id_article)')
+                    div.right(layout='column')
+                      h3.title(ng-click='favorite.goToArticlePage(article.id_article)') {{article.title | limitTo:favorite.limitTitle}} <span ng-if='article.title.length > favorite.limitTitle'>...</span>
+                      span {{article.price}} $
+                      p {{article.description | limitTo:favorite.limitDescription}} <span ng-if='article.description.length > favorite.limitDescription'>...</span>
+                      div(layout="column" layout-align="end end")
+                        ng-md-icon(icon="delete"
+                        ng-click="favorite.deleteFavoriteArticleDialog($event, article.id_article, favorite.current_page_favorite_article);")
 
 
     div(layout="row" layout-align="center")
       md-divider.separator-h2(flex="35" hide-sm)
-      h2.t-center(flex="30") My researches
+      h2.t-center(flex="30") My searches
       md-divider.separator-h2(flex="35" hide-sm)
-
-
-
-
-

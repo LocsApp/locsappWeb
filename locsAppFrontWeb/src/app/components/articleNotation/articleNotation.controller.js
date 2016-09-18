@@ -10,6 +10,9 @@
   function ArticleNotationController($log, ArticleService, toastr, ScopesService, URL_API) {
     var vm = this;
 
+    vm.current_page_pending_mark_client = 1;
+    vm.current_page_pending_mark_renter = 1;
+
     vm.notationsClient = true;
     vm.notationsRenter = true;
 
@@ -91,13 +94,13 @@
 
     ArticleService
     .getPendingMarksForClients
-    .get()
+    .get({"id_page": vm.current_page_pending_mark_client})
     .$promise
     .then(vm.GetNotationsClientSuccess,  vm.GetNotationFailure);
 
     ArticleService
     .getPendingMarksForRenters
-    .get()
+    .get({"id_page": vm.current_page_pending_mark_renter})
     .$promise
     .then(vm.GetNotationsRenterSuccess,  vm.GetNotationFailure);
   }

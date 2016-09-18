@@ -21,6 +21,7 @@
     /* Pagination */
     var pagesShown = 1;
     var pageSize = 1;
+    vm.ownArticle = false;
     /* Fixtures */
     vm.categories = ScopesService.get("static_collections").base_categories;
     vm.subCategories = ScopesService.get("static_collections").sub_categories;
@@ -30,12 +31,13 @@
     vm.clothe_states = ScopesService.get("static_collections").clothe_states;
     vm.brands = [{_id: "56cb3ef2b2bc57ab2908e6b2", name: "Home made"}];
     vm.payment_methods = ScopesService.get("static_collections").payment_methods;
+    vm.report_types = ScopesService.get("static_collections").report_types;
 
 
     //vm.showChildComment = false;
-    vm.test_test = ['un', 'deux', 'trois'];
-    vm.items = ['../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg',
-      '../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg'];
+    // vm.test_test = ['un', 'deux', 'trois'];
+    //vm.items = ['../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg',
+    // '../assets/images/users/profile_picture/160281_3_photo_781124_899A08_BD_3.jpg'];
 
 
     vm.GetInfoArticleSuccess = function (data) {
@@ -43,6 +45,8 @@
       vm.global_mark = data.global_mark_as_renter;
       vm.nb_mark = data.nb_mark_as_renter;
       vm.is_in_favorite = data.is_in_favorite;
+      vm.is_reported = data.is_reported;
+      vm.articles_recommend = data.articles_recommend;
       $log.log("GetInfoArticleSuccess = ", data);
       //$log.log("get infoi = ", data.article.username_author);
 
@@ -133,7 +137,12 @@
       if (vm.article.questions == undefined)
         vm.questions = "";
       else {
-        vm.questions = vm.article.questions;
+
+        vm.questions = [];
+        for (i = 0; i < vm.article.questions.length; i++) {
+          vm.questions.push(vm.article.questions[i]);
+        }
+        //vm.questions = vm.article.questions;
         vm.answers = new Array(vm.questions.length);
       }
 
@@ -165,6 +174,8 @@
         pagesShown = pagesShown + 1;
       };
 
+      $log.log("ARTICLE OWN BOOL == ", vm.ownArticle, vm.is_in_favorite)
+
     };
 
     vm.getInfoArticleFailure = function (data) {
@@ -176,33 +187,6 @@
       .get({id: $stateParams.id})
       .$promise
       .then(vm.GetInfoArticleSuccess, vm.getInfoArticleFailure);
-
-
-    vm.sendReportSuccess = function () {
-      toastr.success("Report sent", "Success!");
-    };
-
-    vm.sendReportError = function (data) {
-      toastr.error("An error occurred", "Error");
-      $log.log("sendReport Error", data);
-    };
-
-    vm.sendReport = function () {
-
-      $log.log("Send report = id", $stateParams.id);
-
-      ArticleService
-        .sendReport
-        .save({"article_id": $stateParams.id})
-        .$promise
-        .then(vm.sendReportSuccess, vm.sendReportError);
-
-    };
-
-    vm.reply = function () {
-      //Show the new input
-
-    };
 
 
     vm.submitComment = function (comment) {
@@ -282,17 +266,29 @@
     //On affiche le show more si il reste des false dans le tableau
     //Et le show more est affiche on derner true du tableau
 
-    vm.sendQuestionSuccess = function () {
+    vm.sendQuestionSuccess = function (data) {
 
       toastr.success("Your questions has been sent", "Success!");
-      // $log.log("sendQuestiopnSuccess = ", data);
+      $log.log("sendQuestiopnSuccess = ", data);
+      $log.log("sendQuestiopnSuccess = ", data.questions[0]);
+      $log.log("sendQuestiopnSuccess TYPE = ", typeof(vm.questions));
+      vm.questions.push(data.questions[0]);
+      //getArticleFunction();
+
       $state.go($state.$current, null, {reload: true});
 
     };
 
     vm.sendQuestionError = function (data) {
       $log.error("sendQuestionError= ", data);
-      toastr.error("Something went wrong", "Error!");
+      //toastr.error("Something went wrong", "Error!");
+      if (data.status === 401) {
+        $log.log("login modal");
+        vm.loginDialog("sendQuestion");
+      }
+      else {
+        toastr.error(data.article.error, "Error!");
+      }
     };
 
     vm.sendQuestion = function () {
@@ -323,7 +319,7 @@
 
       toastr.success("Your answer has been sent", "Success!");
       // $log.log("sendQuestiopnSuccess = ", data);
-      $state.go($state.$current, null, {reload: true});
+      getArticleFunction();
     };
 
     vm.sendAnswer = function (idQuestion, answer) {
@@ -346,13 +342,14 @@
     vm.upVoteSuccess = function (data) {
       toastr.success("Your upvote has been sent", "Success!");
       $state.go($state.$current, null, {reload: true});
+      getArticleFunction();
       $log.log("upVoteSuccess = ", data);
     };
 
     vm.upVoteError = function (data) {
       $log.error("upVoteError", data);
       if (data.status == 403)
-        toastr.error(data.article.Error, "Error!");
+        toastr.error(data.data.Error, "Error!");
       else
         toastr.error("Something went wrong", "Error!");
     };
@@ -367,17 +364,17 @@
         .then(vm.upVoteSuccess, vm.upVoteError);
     };
 
-    /* Report */
-    vm.reportSuccess = function (data) {
+    /* Report Question */
+    vm.reportQuestionSuccess = function (data) {
       toastr.success("Your report has been sent", "Success!");
       $state.go($state.$current, null, {reload: true});
       $log.log("reportSuccess = ", data);
     };
 
-    vm.reportError = function (data) {
+    vm.reportQuestionError = function (data) {
       $log.error("reportError", data);
       if (data.status == 403)
-        toastr.error(data.article.Error, "Error!");
+        toastr.error(data.data.Error, "Error!");
       else
         toastr.error("Something went wrong", "Error!");
     };
@@ -389,7 +386,7 @@
           "id_question": idQuestion
         })
         .$promise
-        .then(vm.reportSuccess, vm.reportError);
+        .then(vm.reportQuestionSuccess, vm.reportQuestionError);
     };
 
     vm.addArticleToFavoriteSuccess = function (data) {
@@ -404,17 +401,16 @@
       $log.error("addArticleToFavoriteError", data);
       if (data.status === 401) {
         $log.log("login modal");
-        vm.loginDialog();
-
+        vm.loginDialog("addArticleToFavorite");
       }
       else {
-        toastr.error(data.article.error, "Error!");
+        toastr.error(data.data.Error, "Error!");
       }
     };
 
     vm.addArticleToFavorite = function (idArticle) {
       ArticleService
-        .articlesFavorite
+        .addArticlesFavorite
         .save({
           "id_article": idArticle
         })
@@ -449,7 +445,7 @@
     // Login Controller it would be better to separate it so we can use it easily for other purposes
 
     /** @ngInject */
-    vm.loginDialog = function (event) {
+    vm.loginDialog = function (action) {
       $mdDialog.show({
         controller: 'LoginDialogController',
         controllerAs: 'loginDialog',
@@ -459,20 +455,154 @@
         },
         bindToController: true,
         parent: angular.element($document.body),
-        targetEvent: event,
+        //targetEvent: event,
         clickOutsideToClose: true
       }).then(function () {
 
         if (ScopesService.get("current_user")) {
           $state.go("main.articleShow", {"id": $stateParams.id});
 
-          ArticleService
-            .getArticle
-            .get({id: $stateParams.id})
-            .$promise
-            .then(vm.GetInfoArticleSuccess, vm.getInfoArticleFailure);
+          if (action == "sendQuestion") {
+            $log.log("sendQuestion");
+            // We sent the question;
+            sendQuestionDialog();
+
+          }
+          else if (action == "addArticleToFavorite") {
+            $log.log("addArticleToFavorite");
+            addFavoriteDialog();
+          }
         }
       });
+    };
+
+
+    /* Dialog Report */
+    /** @ngInject */
+    vm.reportDialog = function (event) {
+      $mdDialog.show({
+        controller: vm.reportDialogController,
+        controllerAs: 'reportDialog',
+        templateUrl: 'app/templates/dialogTemplates/report.tmpl.html',
+        bindToController: true,
+        parent: angular.element($document.body),
+        targetEvent: event,
+        clickOutsideToClose: true
+      }).then(function () {
+
+        if (ScopesService.get("current_user")) {
+          $state.go("main.articleShow", {"id": $stateParams.id});
+          getArticleFunction();
+        }
+      });
+    };
+
+    /** @ngInject */
+    vm.reportDialogController = function ($mdDialog, ScopesService) {
+
+      var vm = this;
+      vm.user_logged_in = false;
+      var current_user = ScopesService.get("current_user");
+
+      if (current_user) {
+        vm.first_name = current_user.first_name;
+        vm.last_name = current_user.last_name;
+        vm.email = current_user.email;
+        vm.user_logged_in = true;
+        // We also need to block the edition of these three fields
+      }
+      vm.report_types = ScopesService.get("static_collections").report_types;
+
+      vm.successSendReportArticle = function (data) {
+        toastr.success(data.message, "Success");
+        $mdDialog.hide();
+      };
+
+      vm.errorSendReportArticle = function (data) {
+        $log.error("errorSendReportArticle", data);
+        toastr.error(data.data.Error, "Error");
+      };
+
+      /* Send a report */
+      vm.submitReport = function () {
+
+        $log.log("id report = ", vm.report_type._id);
+
+        ArticleService
+          .sendReportArticle
+          .save({
+            "id_article": $stateParams.id,
+            "first_name": vm.first_name,
+            "last_name": vm.last_name,
+            "email": vm.email,
+            "message": vm.message,
+            "id_report_type": vm.report_type._id
+          })
+          .$promise
+          .then(vm.successSendReportArticle, vm.errorSendReportArticle)
+      }
+    };
+
+    vm.sendQuestionDialogSuccess = function (data) {
+      $log.log("sendQuestionDialogSuccess", data);
+      vm.askQuestion = "";
+      getArticleFunction();
+      toastr.success("Your question has been sent", "Success");
+    };
+
+    vm.sendQuestionDialogError = function (data) {
+      $log.error("sendQuestionDialogError", data);
+      getArticleFunction();
+      toastr.error(data.data.Error, "Error");
+    };
+
+    var sendQuestionDialog = function () {
+      if (vm.askQuestion != undefined) {
+
+        ArticleService
+          .questions
+          .save({
+            "content": vm.askQuestion,
+            "id_article": $stateParams.id
+          })
+          .$promise
+          .then(vm.sendQuestionDialogSuccess, vm.sendQuestionDialogError)
+
+      }
+      else {
+        toastr.error("Your question can't be empty", "Error!");
+      }
+    };
+
+    var addFavoriteDialog = function () {
+
+      vm.addArticleToFavoriteDialogSuccess = function () {
+        toastr.success("This article has been added to your favorite", "Success!");
+        getArticleFunction();
+      };
+
+      vm.addArticleToFavoriteDialogError = function (data) {
+        $log.error("addArticleToFavoriteError", data);
+        toastr.error(data.data.Error, "Error");
+        getArticleFunction();
+      };
+
+      ArticleService
+        .addArticlesFavorite
+        .save({
+          "id_article": $stateParams.id
+        })
+        .$promise
+        .then(vm.addArticleToFavoriteDialogSuccess, vm.addArticleToFavoriteDialogError);
+
+    };
+
+    var getArticleFunction = function () {
+      ArticleService
+        .getArticle
+        .get({id: $stateParams.id})
+        .$promise
+        .then(vm.GetInfoArticleSuccess, vm.getInfoArticleFailure);
     };
 
   }

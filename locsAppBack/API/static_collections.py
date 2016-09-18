@@ -57,3 +57,10 @@ def staticPaymentMethods(request):
         return APIrequests.GET("payment_methods")
     else:
         return JsonResponse({"Error": "Method not allowed!"}, status=405)
+
+@csrf_exempt
+def staticReportTypes(request):
+    if request.method == "GET":
+        return APIrequests.GET("report_types")
+    else:
+        return JsonResponse({"Error": "Method not allowed!"}, status=405)

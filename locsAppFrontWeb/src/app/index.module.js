@@ -35,6 +35,7 @@
 		'ngFileUpload',
 		'bw.paging',
     '720kb.socialshare',
+    'pascalprecht.translate',
 		'LocsappDirectives',
 		'LocsappServices',
 		'LocsappControllers']);

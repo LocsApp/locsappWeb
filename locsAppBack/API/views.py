@@ -578,6 +578,8 @@ class checkStaticCollectionVersion(APIView):
                 "payment_methods", raw=True))
             static_collections.update(APIrequests.GET(
                 "sizes", raw=True))
+            static_collections.update(APIrequests.GET(
+                "report_types", raw=True))
             return Response(
                 {"up_to_date": False, "static_collections": static_collections, "version": settings.STATIC_COLLECTION_VERSION})
         else:

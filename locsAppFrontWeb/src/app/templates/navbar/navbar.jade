@@ -1,22 +1,35 @@
 //We use a sidenav for small screen that we hide for big screen
-div(ng-controller="NavBarController as navbar")
-  div.sidenav(hide show-xs show-sm)
-    ng-md-icon(icon="menu" ng-click='navbar.toggleRight()', ng-hide='navbar.isOpenRight()'
+div(ng-controller="NavBarController as navbar" )
+  div.sidenav(hide show-xs show-sm style="height: 2000px;")
+    ng-md-icon(icon="menu" ng-click="navbar.toggleLeft()", ng-hide=  'navbar.isOpenRight()'
     style='cursor:pointer')
 
+    md-sidenav.md-sidenav-left.md-whiteframe-z1(md-component-id='left', md-is-locked-open="$mdMedia('gt-sm')")
+      md-toolbar(md-scroll-shrink='')
+        .md-toolbar-tools
+          h3
+            span LocsApp
 
 
+      md-content(flex='', role='navigation')
+        ul.side-menu
+          li.parent-list-item(ng-repeat='section in navbar.menu.sections', ng-class="{'parentActive' : navbar.isSectionSelected(section)}")
+            h2.menu-heading(ng-if="section.type === 'heading'", id='heading_{{ section.name  }}')
+              | {{section}}
 
-    md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id='right')
-      md-toolbar.md-theme-light
-        h1.md-toolbar-tools Sidenav Right
-      md-content(layout-padding='')
-        form
-          md-input-container
-            label(for='testInput') Test input
-            input#testInput(type='text', ng-model='data', md-autofocus='')
-        md-button.md-primary(ng-click='close()')
-          | Close Sidenav Right
+            menu-link(section='section', ng-if="section.type === 'link'")
+            menu-toggle(section='section', ng-if="section.type === 'toggle'")
+        //md-divider
+
+
+    //md-sidenav.md-sidenav-left(md-component-id='left', md-whiteframe='4' style="height: 500px;")
+      md-toolbar.md-theme-indigo
+        h1.md-toolbar-tools LocsApp
+      md-content(layout-margin='')
+        p
+          | This sidenav is not showing any backdrop, where users can click on it, to close the sidenav.
+        md-button.md-accent(ng-click='navbar.toggleLeft()')
+          | Close this Sidenav
 
 
   //Navbar for big screen
@@ -40,105 +53,104 @@ div(ng-controller="NavBarController as navbar")
       div
         span.icon-and-title
           a(href='#' ui-sref="main.homepage")
-            span.title Search
+            span.title {{ 'SEARCH' | translate }}
 
       div
         span.icon-and-title
           a(href='#' ui-sref="main.article_create")
-            span.title Create an article
+            span.title {{ 'CREATE_ARTICLE' | translate }}
 
 
       div.submenu
         span.icon-and-title
           md-menu
             a(href='#' ng-click='navbar.openMenuArticle($mdOpenMenu, $event)')
-              span.title My articles
+              span.title {{ 'MY_ARTICLES' | translate }}
             md-menu-content.submenu(width='4')
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.article_requests")
-                  span.submenu.subtitle Current requests
+                  span.submenu.subtitle {{ 'CURRENT_REQUESTS' | translate }}s
               md-divider
 
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.profile_management")
-                  span.submenu.subtitle Current articles
+                  span.submenu.subtitle {{ 'CURRENT_ARTICLES' | translate }}
               md-divider
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.article_timelines")
-                  span.submenu.subtitle Timeline
+                  span.submenu.subtitle {{ 'TIMELINE' | translate }}
               md-divider
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.article_notations")
-                  span.submenu.subtitle Notation
+                  span.submenu.subtitle {{ 'NOTATION' | translate }}
 
 
       div.submenu
         span.icon-and-title
           md-menu
             a(href='#' ng-click='navbar.openMenuQuestions($mdOpenMenu, $event)')
-              span.title My questions
+              span.title {{ 'MY_QUESTIONS' | translate }}
             md-menu-content.submenu(width='4')
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.questions")
-                  span.submenu.subtitle Questions I have asked
+                  span.submenu.subtitle {{ 'QUESTIONS_I_HAVE_ASKED' | translate }}
               md-divider
 
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.questions")
-                  ng-md-icon(icon="arrow_back" size="25")
-                  span.submenu.subtitle Questions to answer
+                  span.submenu.subtitle {{ 'QUESTIONS_TO_ANSWER' | translate }}
 
 
       div.submenu
         span.icon-and-title
           md-menu
             a(href='#' ng-click='navbar.openMenuFavorites($mdOpenMenu, $event)')
-              span.title My bookmarks
+              span.title {{ 'MY_BOOKMARKS' | translate }}
             md-menu-content.submenu(width='4')
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.favorites")
-                  span.submenu.subtitle My articles
+                  span.submenu.subtitle {{ 'MY_ARTICLES' | translate }}
               md-divider
 
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.profile_management")
-                  span.submenu.subtitle My searches
+                  span.submenu.subtitle {{ 'MY_SEARCHES' | translate }}
 
 
       div.submenu
         span.icon-and-title
           md-menu
             a(href='#' ng-click='navbar.openMenuAccount($mdOpenMenu, $event)')
-              span.title My account
+              span.title {{ 'MY_ACCOUNT' | translate }}
             md-menu-content.submenu(width='4')
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.user_profile")
-                  span.submenu.subtitle My informations
+                  span.submenu.subtitle {{ 'MY_INFORMATIONS' | translate }}
               md-divider
 
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.profile_management")
-                  span.submenu.subtitle Edit my profile
+                  span.submenu.subtitle {{ 'EDIT_PROFILE' | translate }}
               md-divider
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.history_notations")
-                  span.submenu.subtitle History Notation
+                  span.submenu.subtitle {{ 'HISTORY_NOTATION' | translate }}
               md-divider
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.history_articles")
-                  span.submenu.subtitle History Articles
+                  span.submenu.subtitle {{ 'HISTORY_ARTICLE' | translate }}
 
 
 
@@ -146,7 +158,7 @@ div(ng-controller="NavBarController as navbar")
       div
         span.icon-and-title
           a(href='#' ui-sref="main.logout")
-            span.title.hide-last Log out
+            span.title.hide-last {{ 'LOGOUT' | translate }}
 
 
       //ng-md-icon(icon="account_box", size="48", ui-sref="main.article_create").locsapp-navbar-last-icon-gt-sm
