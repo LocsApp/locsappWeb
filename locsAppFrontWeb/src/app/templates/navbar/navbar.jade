@@ -58,99 +58,99 @@ div(ng-controller="NavBarController as navbar" )
       div
         span.icon-and-title
           a(href='#' ui-sref="main.article_create")
-            span.title Create an article
+            span.title {{ 'CREATE_ARTICLE' | translate }}
 
 
       div.submenu
         span.icon-and-title
           md-menu
             a(href='#' ng-click='navbar.openMenuArticle($mdOpenMenu, $event)')
-              span.title My articles
+              span.title {{ 'MY_ARTICLES' | translate }}
             md-menu-content.submenu(width='4')
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.article_requests")
-                  span.submenu.subtitle Current requests
+                  span.submenu.subtitle {{ 'CURRENT_REQUESTS' | translate }}s
               md-divider
 
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.profile_management")
-                  span.submenu.subtitle Current articles
+                  span.submenu.subtitle {{ 'CURRENT_ARTICLES' | translate }}
               md-divider
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.article_timelines")
-                  span.submenu.subtitle Timeline
+                  span.submenu.subtitle {{ 'TIMELINE' | translate }}
               md-divider
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.article_notations")
-                  span.submenu.subtitle Notation
+                  span.submenu.subtitle {{ 'NOTATION' | translate }}
 
 
       div.submenu
         span.icon-and-title
           md-menu
             a(href='#' ng-click='navbar.openMenuQuestions($mdOpenMenu, $event)')
-              span.title My questions
+              span.title {{ 'MY_QUESTIONS' | translate }}
             md-menu-content.submenu(width='4')
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.questions")
-                  span.submenu.subtitle Questions I have asked
+                  span.submenu.subtitle {{ 'QUESTIONS_I_HAVE_ASKED' | translate }}
               md-divider
 
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.questions")
-                  span.submenu.subtitle Questions to answer
+                  span.submenu.subtitle {{ 'QUESTIONS_TO_ANSWER' | translate }}
 
 
       div.submenu
         span.icon-and-title
           md-menu
             a(href='#' ng-click='navbar.openMenuFavorites($mdOpenMenu, $event)')
-              span.title My bookmarks
+              span.title {{ 'MY_BOOKMARKS' | translate }}
             md-menu-content.submenu(width='4')
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.favorites")
-                  span.submenu.subtitle My articles
+                  span.submenu.subtitle {{ 'MY_ARTICLES' | translate }}
               md-divider
 
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.profile_management")
-                  span.submenu.subtitle My searches
+                  span.submenu.subtitle {{ 'MY_SEARCHES' | translate }}
 
 
       div.submenu
         span.icon-and-title
           md-menu
             a(href='#' ng-click='navbar.openMenuAccount($mdOpenMenu, $event)')
-              span.title My account
+              span.title {{ 'MY_ACCOUNT' | translate }}
             md-menu-content.submenu(width='4')
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.user_profile")
-                  span.submenu.subtitle My informations
+                  span.submenu.subtitle {{ 'MY_INFORMATIONS' | translate }}
               md-divider
 
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.profile_management")
-                  span.submenu.subtitle Edit my profile
+                  span.submenu.subtitle {{ 'EDIT_PROFILE' | translate }}
               md-divider
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.history_notations")
-                  span.submenu.subtitle History Notation
+                  span.submenu.subtitle {{ 'HISTORY_NOTATION' | translate }}
               md-divider
 
               md-menu-item
                 a.submenu(href='#' ui-sref="main.history_articles")
-                  span.submenu.subtitle History Articles
+                  span.submenu.subtitle {{ 'HISTORY_ARTICLE' | translate }}
 
 
 

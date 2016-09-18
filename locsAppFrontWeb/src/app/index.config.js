@@ -73,14 +73,54 @@
 
     /* English translation */
     $translateProvider.translations('en', {
+      /* The navbar */
       'SEARCH': 'Search',
-      'FOO': 'This is a paragraph'
+      'CREATE_ARTICLE': 'Create an article',
+
+      'MY_ARTICLES': 'My articles',
+      'CURRENT_REQUESTS': 'Current requests',
+      'CURRENT_ARTICLES': 'Current articles',
+      'TIMELINE': 'Timeline',
+      'NOTATION': 'Notation',
+
+      'MY_QUESTIONS': 'My questions',
+      'QUESTIONS_I_HAVE_ASEKD': 'Questions I have asked',
+      'QUESTIONS_TO_ANSWER': 'Questions to answer',
+
+      'MY_BOOKMARKS': 'My bookmarks',
+      'MY_SEARCHES': 'My searches',
+
+      'MY_ACCOUNT': 'My account',
+      'MY_INFORMATIONS': 'My informations',
+      'EDIT_PROFILE': 'Edit my profile',
+      'HISTORY_NOTATION': 'History notation',
+      'HISTORY_ARTICLE': 'History article',
     });
 
     /* French translation */
     $translateProvider.translations('fr', {
+      /* The navbar */
       'SEARCH': 'Recherche',
-      'FOO': 'Dies ist ein Absatz'
+      'CREATE_ARTICLE': 'Créer un article',
+
+      'MY_ARTICLES': 'Mes articles',
+      'CURRENT_REQUESTS': 'Requêtes en cours',
+      'CURRENT_ARTICLES': 'Article en cours',
+      'TIMELINE': 'Timeline',
+      'NOTATION': 'Notation',
+
+      'MY_QUESTIONS': 'Mes questions',
+      'QUESTIONS_I_HAVE_ASKED': 'Questions que j\'ai posées',
+      'QUESTIONS_TO_ANSWER': 'Questions à répondre',
+
+      'MY_BOOKMARKS': 'Mes favoris',
+      'MY_SEARCHES': 'Mes recherches',
+
+      'MY_ACCOUNT': 'Mon compte',
+      'MY_INFORMATIONS': 'Mes informations',
+      'EDIT_PROFILE': 'Editer mon profile',
+      'HISTORY_NOTATION': 'Historique des notations',
+      'HISTORY_ARTICLE': 'Historique des articles',
     });
 
     /* Default translation */
