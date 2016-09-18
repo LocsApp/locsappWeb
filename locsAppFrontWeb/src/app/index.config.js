@@ -73,6 +73,11 @@
 
     /* English translation */
     $translateProvider.translations('en', {
+
+      /* Genereal */
+      'SHOW_MORE': 'Show more',
+      'HAS NO NOTATION': 'has no notation',
+
       /* The navbar */
       'SEARCH': 'Search',
       'CREATE_ARTICLE': 'Create an article',
@@ -96,7 +101,14 @@
       'HISTORY_NOTATION': 'History notation',
       'HISTORY_ARTICLE': 'History article',
 
-      'LOGOUT': 'Log out'
+      'LOGOUT': 'Log out',
+
+      /* Profile */
+      'BIRTHDATE': 'Birthdate',
+      'LAST_ACTIVITY': 'Last activity',
+      'SUBSCRIBED': 'Subscribed',
+      'AS_A_RENTER': 'As a renter',
+      'AS_A_TENANT': 'As a tenant'
     });
 
     /* French translation */
