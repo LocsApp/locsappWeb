@@ -142,6 +142,8 @@
       'HISTORY_ARTICLE': 'History article',
 
       'LOGOUT': 'Log out',
+      'LOGIN': 'Log in',
+      'SIGN_IN': 'Sign in',
 
       /* Profile */
       'BIRTHDATE': 'Birthdate',
@@ -233,6 +235,10 @@
       'WITHIN': 'Within',
       'KM': 'km',
 
+      /* Article Create */
+      'WELCOME_CREATION_ARTICLE': 'Welcome to the article creation',
+      'DEFINE_YOUR_ARTICLE': 'Define your article'
+
     });
 
     /* French translation */
@@ -306,6 +312,8 @@
       'HISTORY_ARTICLE': 'Historique des articles',
 
       'LOGOUT': 'Déconnexion',
+      'LOGIN': 'Se connecter',
+      'SIGN_IN': 'S\'enregistrer',
 
       /* Profile */
       'BIRTHDATE': 'Anniversaire',
@@ -374,14 +382,14 @@
       'NO_AVAILABLE_TIMELINE': 'Il n\'y a pas de timeline en cours',
       'DAYS_LEFT': 'jour(s) restant',
 
-       /* Article notation */
+      /* Article notation */
       'TENANT': 'Locataire',
       'RENTER': 'Loueur',
       'NO_MARK_TO_GIVE_TO_CLIENT': 'Il n\'y a pas de locataire à qui donner une note',
       'NO_MARK_TO_GIVE_TO_RENTER': 'Il n\'y a pas de loueur à qui donner une note',
       'COMMENT': 'Laissez un message',
 
-       /* Search */
+      /* Search */
       'SORT_BY': 'Trier par',
       'YOUR_RESEARCH': 'Votre recherche',
       'YOUR_KEYWORD': 'Vos mot(s) clé',

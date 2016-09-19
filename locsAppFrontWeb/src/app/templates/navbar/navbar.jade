@@ -41,12 +41,12 @@ div(ng-controller="NavBarController as navbar" )
       div
         span.icon-and-title
           a(href='#' ui-sref="main.login")
-            span.title Log in
+            span.title {{ 'LOGIN' | translate }}
 
       div
         span.icon-and-title
           a(href='#' ui-sref="main.register")
-            span.title Sign in
+            span.title {{ 'SIGN_IN' | translate }}
     div(layout='row' ng-if="main.is_authenticated()")
       //include ./notifications.jade
 
