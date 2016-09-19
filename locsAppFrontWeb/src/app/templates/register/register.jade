@@ -2,7 +2,7 @@
   md-card(flex-xs="100" flex-sm="80" flex-md="60" flex="50")
     md-card-content
       div(layout="row" layout-align="center")
-        h1 Join the community !
+        h1 {{ 'JOIN_THE_COMMUNITY' | translate }}
       div(layout="row" layout-align="center")
         form(name="registerForm" novalidate ng-submit="registerForm.$valid && register.submit()"
         flex-xs="100" flex-sm="80" flex-md="60" flex="50")
@@ -11,46 +11,50 @@
 
             md-input-container.md-icon-float.md-block
               md-icon(md-svg-src="../assets/icons/register-login/ic_mood_black_24px.svg" class="name")
-              input(placeholder="Username" required name="username" ng-model="username" md-maxlength="20" minlength="3").body-register-container-md
+              label(translate) USERNAME
+              input(required name="username" ng-model="username" md-maxlength="20" minlength="3").body-register-container-md
               div(ng-messages="registerForm.username.$error" ng-if='!registerForm.username.$pristine')
-                div(ng-message="required") This is required.
-                div(ng-message="minlength") The username must be longer than 3 characters.
-                div(ng-message="md-maxlength") The username must be shorter than 20 characters.
+                div(ng-message="required") {{ 'THIS_IS_REQUIRED' | translate }}.
+                div(ng-message="minlength") {{ 'USERNAME_TOO_SHORT' | translate }}.
+                div(ng-message="md-maxlength") {{ 'USERNAME_TOO_LONG' | translate }}.
 
 
             md-input-container.md-icon-float.md-block
               md-icon(md-svg-src="../assets/icons/register-login/ic_email_black_24px.svg"
               class="name")
-              input(placeholder="Email" type="email" minlength="8" maxlength="100" required name="email" ng-model="email" ng-pattern="/^.+@.+\..+$/").body-register-container-md
+              label(translate) EMAIL
+              input( type="email" minlength="8" maxlength="100" required name="email" ng-model="email" ng-pattern="/^.+@.+\..+$/").body-register-container-md
               div(ng-messages="registerForm.email.$error" ng-if='!registerForm.email.$pristine')
-                div(ng-message="required") This is required.
-                div(ng-message="minlength") The email must be longer than 8 characters.
-                div(ng-message="maxlength") The email must be shorter than 100 characters.
-                div(ng-message="pattern") The field must be an email.
+                div(ng-message="required") {{ 'THIS_IS_REQUIRED' | translate }}.
+                div(ng-message="minlength") {{ 'EMAIL_TOO_SHORT' | translate }}.
+                div(ng-message="maxlength") {{ 'EMAIL_TOO_LONG' | translate }}.
+                div(ng-message="pattern") {{ 'MUST_BE_AN_EMAIL' | translate }}.
             md-input-container.md-icon-float.md-block
               md-icon(md-svg-src="../assets/icons/register-login/ic_repeat_black_24px.svg" class="name")
-              input(placeholder="Repeat Email" type="email" minlength="8" maxlength="100" required name="email_repeat" ng-model="email_repeat" ng-pattern="/^.+@.+\..+$/" match="email").body-register-container-md
+              label(translate) REPEAT_EMAIL
+              input(type="email" minlength="8" maxlength="100" required name="email_repeat" ng-model="email_repeat" ng-pattern="/^.+@.+\..+$/" match="email").body-register-container-md
               div(ng-messages="registerForm.email_repeat.$error" ng-if='!registerForm.email_repeat.$pristine')
-                div(ng-message="required") This is required.
-                div(ng-message="minlength") The email must be longer than 8 characters.
-                div(ng-message="maxlength") The email must be shorter than 100 characters.
-                div(ng-message="pattern") The field must be an email.
-                div(ng-message="match") Emails must match.
+                div(ng-message="required") {{ 'THIS_IS_REQUIRED' | translate }}.
+                div(ng-message="minlength") {{ 'EMAIL_TOO_SHORT' | translate }}.
+                div(ng-message="maxlength") {{ 'EMAIL_TOO_LONG' | translate }}.
+                div(ng-message="pattern") {{ 'MUST_BE_AN_EMAIL' | translate }}.
+                div(ng-message="match") {{ 'EMAIL_MUST_MATCH' | translate }}.
             md-input-container.md-icon-float.md-block
               md-icon(md-svg-src="../assets/icons/register-login/ic_vpn_key_black_24px.svg" class="name")
-              input(placeholder="Password" type="password" name="password" required ng-model="password" maxlength="30" minlength="6").body-register-container-md
+              label(translate) PASSWORD
+              input(type="password" name="password" required ng-model="password" maxlength="30" minlength="6").body-register-container-md
               div(ng-messages="registerForm.password.$error" ng-if="registerForm.password.$dirty")
-                div(ng-message="required") This is required.
-                div(ng-message="minlength") The password must be longer than 6 characters.
-                div(ng-message="maxlength") The password must be shorter than 20 characters.
+                div(ng-message="required") {{ 'THIS_IS_REQUIRED' | translate }}.
+                div(ng-message="minlength") {{ 'PASSWORD_TOO_SHORT' | translate }}.
+                div(ng-message="maxlength") {{ 'PASSWORD_TOO_LONG' | translate }}.
             div.submit-buttons(layout-fill)
-              md-button.md-raised(flex-offset="10" style="width:90%" type="submit") Register
+              md-button.md-raised(flex-offset="10" style="width:90%" type="submit") {{ 'SIGN_IN' | translate }}
               section.margin-button.separate-butto(layout="row" layout-align="center")
                 md-divider(flex-offset="10" flex="45").line
-                div().middle-word or
+                div().middle-word {{ 'OR' | translate }}
                 md-divider(flex="45").line
               div(ng-controller='FacebookRegisterController as FB' flex="90" flex-offset="10")
-                md-button.md-raised.facebook.margin-button(layout-fill ng-click='FB.register()') Register with Facebook
+                md-button.md-raised.facebook.margin-button(layout-fill ng-click='FB.register()') {{ 'SIGN_IN_WITH_FACEBOOK' | translate }}
 
 
 

@@ -247,7 +247,13 @@
       'PASSWORD': 'Password',
       'REMEMBER_ME': 'Remember me',
       'FORGET_YOUR_PASSWORD': 'Forgot your password ?',
-      'LOGIN_WITH_FACEBOOK': 'Login with Facebook'
+      'LOGIN_WITH_FACEBOOK': 'Login with Facebook',
+
+      'JOIN_THE_COMMUNITY': 'Join the community !',
+      'USERNAME': 'Username',
+      'SIGN_IN_WITH_FACEBOOK': 'Register with Facebook',
+      //'EMAIL': ''
+
 
     });
 
@@ -425,8 +431,11 @@
       'PASSWORD': 'Mot de passe',
       'REMEMBER_ME': 'Se souvenir de mot',
       'FORGET_YOUR_PASSWORD': 'Vous avez oublié votre mot de passe ?',
-      'LOGIN_WITH_FACEBOOK': 'Se connecter avec Facebook'
+      'LOGIN_WITH_FACEBOOK': 'Se connecter avec Facebook',
 
+      'JOIN_THE_COMMUNITY': 'Rejoignez la communauté !',
+      'USERNAME': 'Pseudo',
+      'SIGN_IN_WITH_FACEBOOK': 'Se connecter avec Facebook',
     });
 
     /* Default translation */
