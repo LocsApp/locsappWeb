@@ -180,7 +180,10 @@
       'HISTORY_ARTICLE_AS_TENANT': 'Article History as tenant',
       'ASKED_BY': 'Asked by',
       'STARTED': 'Started',
-      'FINISHED': 'Finished'
+      'FINISHED': 'Finished',
+
+      /* Favorites */
+      'NO_FAVORITE_ARTICLE': 'You don\'t have any favorite articles',
 
     });
 
@@ -293,7 +296,10 @@
       'HISTORY_ARTICLE_AS_TENANT': 'Historique d\'article en tant que locataire',
       'ASKED_BY': 'Demandé par',
       'STARTED': 'Début',
-      'FINISHED': 'Fin'
+      'FINISHED': 'Fin',
+
+       /* Favorites */
+      'NO_FAVORITE_ARTICLE': 'Vous n\'avez aucun article enregistré',
 
     });
 
