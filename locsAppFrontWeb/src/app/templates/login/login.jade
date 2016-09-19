@@ -2,7 +2,7 @@ div.login(layout="row" layout-align="center")
   md-card(flex-xs="100" flex-sm="80" flex-md="60" flex="50")
     md-card-content
       div(layout="row" layout-align="center")
-        h1 Login
+        h1 {{ 'LOGIN' | translate }}
       .login-body(layout="row" layout-align="center")
         form(name="loginForm" novalidate ng-submit="loginForm.$valid && login.submit()"
         flex-xs="100" flex-sm="80" flex-md="60" flex="50")
@@ -11,32 +11,34 @@ div.login(layout="row" layout-align="center")
 
             md-input-container.md-icon-float.md-block()
               md-icon(md-svg-src="../assets/icons/register-login/ic_mood_black_24px.svg" class="name")
-              input(placeholder="Username" required name="username" ng-model="username" maxlength="30" minlength="3").body-register-container-md
+              label(translate) USERNAME_OR_EMAIL
+              input(required name="username" ng-model="username" maxlength="30" minlength="3").body-register-container-md
               div(ng-messages="loginForm.username.$error" ng-if='!loginForm.username.$pristine')
-                div(ng-message="required") This is required.
-                div(ng-message="minlength") The username must be longer than 3 characters.
-                div(ng-message="md-maxlength") The username must be shorter than 30 characters.
+                div(ng-message="required") {{ 'THIS_IS_REQUIRED' | translate }}.
+                div(ng-message="minlength") {{ 'USERNAME_TOO_SHORT' | translate }}.
+                div(ng-message="md-maxlength") {{ 'USERNAME_TOO_LONG' | translate }}.
 
             md-input-container.md-icon-float.md-block()
               md-icon(md-svg-src="../assets/icons/register-login/ic_vpn_key_black_24px.svg" class="name")
-              input(placeholder="Password" type="password" name="password" required ng-model="password" maxlength="30" minlength="6").body-register-container-md
+              label(translate) PASSWORD
+              input(type="password" name="password" required ng-model="password" maxlength="30" minlength="6").body-register-container-md
               div(ng-messages="loginForm.password.$error" ng-if="loginForm.password.$dirty")
-                div(ng-message="required") This is required.
-                div(ng-message="minlength") The password must be longer than 6 characters.
-                div(ng-message="maxlength") The password must be shorter than 20 characters.
+                div(ng-message="required") {{ 'THIS_IS_REQUIRED' | translate }}.
+                div(ng-message="minlength") {{ 'PASSWORD_TOO_SHORT' | translate }}.
+                div(ng-message="maxlength") {{ 'PASSWORD_TOO_LONG' | translate }}.
             div(layout="column"       layout-align="start center")
-              md-checkbox(ng-model="remember_me") Remember me
-              span(ng-click="login.forgotPasswordDialog($event)").login-forgot-password Forgot your password ?
+              md-checkbox(ng-model="remember_me") {{ 'REMEMBER_ME' | translate }}
+              span(ng-click="login.forgotPasswordDialog($event)").login-forgot-password {{ 'FORGET_YOUR_PASSWORD' | translate }}
 
             div.submit-buttons()
               md-button.md-raised.margin-button-top(flex-offset="10" type="submit"
-              style="width:90%") Login
+              style="width:90%") {{ 'LOGIN' | translate }}
               section.margin-button.separate-button.margin-button-top(layout="row" layout-align="center")
                 md-divider(flex-offset="5" flex="45").line
-                div().middle-word or
+                div().middle-word {{ 'OR' | translate }}
                 md-divider(flex="45").line
               div.margin-button-top(ng-controller='FacebookLoginController as FB' flex="90"
               flex-offset="10")
-                md-button.md-raised.facebook.margin-button(layout-fill ng-click='FB.login()') Login with Facebook
+                md-button.md-raised.facebook.margin-button(layout-fill ng-click='FB.login()') {{ 'LOGIN_WITH_FACEBOOK' | translate }}
 
 

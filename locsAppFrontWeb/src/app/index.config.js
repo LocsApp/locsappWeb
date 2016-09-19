@@ -91,6 +91,7 @@
       'THE_MASCULINE': 'Le',
       'THE_FEMININE': 'La',
       'ADD': 'Ajout',
+      'OR': 'or',
 
       /* Error form */
       'THIS_IS_REQUIRED': 'Champ obligatoire',
@@ -117,6 +118,8 @@
       'POSTAL_CODE_TOO_LONG': 'The postal code must be shorter than 5 characters',
       'CITY_TOO_SHORT': 'The city must be longer than 1 characters',
       'CITY_TOO_LONG': 'The city must be shorter than 50 characters',
+      'USERNAME_TOO_SHORT': 'The username must be longer than 3 characters',
+      'USERNAME_TOO_LONG': 'The username must be shorter than 30 characters',
 
       /* The navbar */
       'SEARCH': 'Search',
@@ -237,7 +240,14 @@
 
       /* Article Create */
       'WELCOME_CREATION_ARTICLE': 'Welcome to the article creation',
-      'DEFINE_YOUR_ARTICLE': 'Define your article'
+      'DEFINE_YOUR_ARTICLE': 'Define your article',
+
+      /* Login and Sign in */
+      'USERNAME_OR_EMAIL': 'Username or Email',
+      'PASSWORD': 'Password',
+      'REMEMBER_ME': 'Remember me',
+      'FORGET_YOUR_PASSWORD': 'Forgot your password ?',
+      'LOGIN_WITH_FACEBOOK': 'Login with Facebook'
 
     });
 
@@ -261,6 +271,7 @@
       'THE_MASCULINE': 'Le',
       'THE_FEMININE': 'La',
       'ADD': 'Ajouter',
+      'OR': 'ou',
 
       /* Error form */
       'THIS_IS_REQUIRED': 'Champ obligatoire',
@@ -287,6 +298,9 @@
       'POSTAL_CODE_TOO_LONG': 'Le code postal doit être plus court 5 caractères',
       'CITY_TOO_SHORT': 'La ville doit être plus long que 1 caractères',
       'CITY_TOO_LONG': 'La ville doit être plus court 50 caractères',
+      'USERNAME_TOO_SHORT': 'Le pseudo doit être plus long que 3 caractères',
+      'USERNAME_TOO_LONG': 'Le pseudo doit être plus court que 30 caractères',
+
 
       /* The navbar */
       'SEARCH': 'Recherche',
@@ -404,6 +418,14 @@
       'CAUTION': 'Caution',
       'WITHIN': 'A environ',
       'KM': 'km',
+
+
+      /* Login and Sign in */
+      'USERNAME_OR_EMAIL': 'Pseudo or Email',
+      'PASSWORD': 'Mot de passe',
+      'REMEMBER_ME': 'Se souvenir de mot',
+      'FORGET_YOUR_PASSWORD': 'Vous avez oublié votre mot de passe ?',
+      'LOGIN_WITH_FACEBOOK': 'Se connecter avec Facebook'
 
     });
 
