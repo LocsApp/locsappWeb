@@ -11,11 +11,11 @@ div.login(layout="row" layout-align="center")
 
             md-input-container.md-icon-float.md-block()
               md-icon(md-svg-src="../assets/icons/register-login/ic_mood_black_24px.svg" class="name")
-              input(placeholder="Username" required name="username" ng-model="username" maxlength="20" minlength="3").body-register-container-md
+              input(placeholder="Username" required name="username" ng-model="username" maxlength="30" minlength="3").body-register-container-md
               div(ng-messages="loginForm.username.$error" ng-if='!loginForm.username.$pristine')
                 div(ng-message="required") This is required.
                 div(ng-message="minlength") The username must be longer than 3 characters.
-                div(ng-message="md-maxlength") The username must be shorter than 20 characters.
+                div(ng-message="md-maxlength") The username must be shorter than 30 characters.
 
             md-input-container.md-icon-float.md-block()
               md-icon(md-svg-src="../assets/icons/register-login/ic_vpn_key_black_24px.svg" class="name")

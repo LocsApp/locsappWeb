@@ -5,9 +5,21 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth.forms import PasswordResetForm
 from django.utils.translation import ugettext_lazy as _
+import rest_auth.serializers
 
 UserModel = get_user_model()
 
+class LoginSerializer(rest_auth.serializers.LoginSerializer):
+    def get_fields(self):
+        fields = super(LoginSerializer, self).get_fields()
+        fields['email'] = fields['username']
+        del fields['username']
+        return fields
+
+    def validate(self, attrs):
+        attrs['username'] = attrs['email']
+        del attrs['email']
+        return super(LoginSerializer, self).validate(attrs)
 
 class UserDetailsSerializer(serializers.ModelSerializer):
 
