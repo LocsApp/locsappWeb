@@ -2,7 +2,7 @@ div(style="margin-top: 10px;" ng-cloak)
 md-divider.flex
 div.search-article-toolbar
 	md-toolbar(style="background-color:none" layout="row")
-		span.main-sort-by SORT BY
+		span.main-sort-by {{'SORT_BY' | translate}}
 		md-input-container
 			md-select(ng-model="articleSearch.sortOption" md-container-class="article-search-sorting-select-container" multiple aria-label="sorting options")
 				md-optgroup(label="sorts")
@@ -16,7 +16,7 @@ div.search-article-toolbar
 md-divider.flex
 div.search-article-body(ng-cloak)
 	div.delimiter
-	md-button.md-raised.save-search(ng-click='articleSearch.saveResearch()') Save your search
+	//md-button.md-raised.save-search(ng-click='articleSearch.saveResearch()') Save your search
 	div.delimiter
 	section(layout="row", layout-align="start start")
 		div(flex="none")
@@ -24,40 +24,40 @@ div.search-article-body(ng-cloak)
 				md-card.card-containers
 					md-card-title(style="padding-bottom:0px;")
 						md-card-title-text
-							span.title-on-card Your research
+							span.title-on-card {{'YOUR_RESEARCH' | translate}}
 					md-card-content
 						md-input-container(style="margin-bottom:0px;")
-							label Your Keyword
+							label {{'YOUR_KEYWORD' | translate}}
 							input(name="searchKeywords" ng-model="articleSearch.titleKeywords")
 						section(layout="row", layout-align="center center")
 							md-button(ng-click="articleSearch.searchTitle(articleSearch.titleKeywords);" style="margin: 0 0 10 10").md-raised Search
 						section(layout="row", layout-align="start start")
-							span(flex="60") Search only in title
+							span(flex="60") {{'SEARCH_ONLY_IN_TITLE' | translate}}
 							span.flex
 							md-switch(ng-model="articleSearch.searchOnlyInTitle" aria-label="search only in title").search-only-in-title-switch
 				md-card.card-containers
 					md-card-title
 						md-card-title-text
-							span.title-on-card Your availability
+							span.title-on-card {{'YOUR_AVAILABILITY' | translate}}
 					md-card-content
 						menu-collapse(title="Position" layout-fill)
 							md-input-container(style="margin-bottom:0px;")
-								label Your position
+								label {{'YOUR_POSTIION' | translate}}
 								input(name="searchKeywords").flex
 							section(layout="row", layout-align="start start" style="margin-bottom:20px;")
 								ng-md-icon(icon="my_location" flex="15")
-								strong Near Me
+								strong {{'NEAR_ME' | translate}}
 								span.flex
 						div
 							menu-collapse(title="Date")
-								div Begin location
+								div {{'BEGIN_LOCATION' | translate}}
 								md-datepicker(name="beginDate" ng-model="articleSearch.beginDate" style="margin-left:-10px;")
-								div End location
+								div {{'END_LOCATION' | translate}}
 								md-datepicker(name="endDate" ng-model="articleSearch.endDate" style="margin-left:-10px;")
 				md-card.card-containers
 					md-card-title
 						md-card-title-text
-							span.title-on-card Clothes properties
+							span.title-on-card {{'CLOTHES_PROPERTIES' | translate}}
 					md-card-content
 						menu-collapse(title="Categories")
 							div(ng-repeat="category in articleSearch.categories")
@@ -89,14 +89,14 @@ div.search-article-body(ng-cloak)
 				md-card.card-containers
 					md-card-title
 						md-card-title-text
-							span.title-on-card Transaction Modalities
+							span.title-on-card {{'TRANSACTION_MODALITIES' | translate}}
 					md-card-content(style="padding-bottom:0px;")
 						menu-collapse(title="Payment Methods")
 							div(ng-repeat="method in articleSearch.payment_methods")
 								md-checkbox(ng-click="articleSearch.toggleFilter(7, method._id)").filters-checkboxes {{ method.name }}
 						md-divider(style="margin-top:10px;")
 						section(layout="row", layout-align="start start" style="margin-top: 10px;")
-							span Caution
+							span {{'CAUTION' | translate}}
 							span.flex
 							md-switch(ng-model="articleSearch.isCaution" aria-label="caution").search-only-in-title-switch
 		div(layout-margin style="margin-top: 0px;").flex
@@ -118,7 +118,7 @@ div.search-article-body(ng-cloak)
 
 
 					md-grid-tile-footer
-						span.distance-range Within 0 km
+						span.distance-range {{'WITHIN' | translate}} 0 {{'KM' | translate}}
 md-divider.flex
 div.search-article-toolbar
 	md-toolbar(style="background-color:none" layout="row")

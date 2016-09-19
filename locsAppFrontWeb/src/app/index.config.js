@@ -217,6 +217,22 @@
       'NO_MARK_TO_GIVE_TO_RENTER': 'There are no renters to give a mark to at the moment',
       'COMMENT': 'comment',
 
+      /* Search */
+      'SORT_BY': 'SORT_BY',
+      'YOUR_RESEARCH': 'Your research',
+      'YOUR_KEYWORD': 'Your Keyword',
+      'SEARCH_ONLY_IN_TITLE': 'Search only in title',
+      'YOUR_AVAILABILITY': 'Your availability',
+      'YOUR_POSITION': 'Your position',
+      'NEAR_ME': 'Near Me',
+      'BEGIN_LOCATION': 'Begin location',
+      'END_LOCATION': 'End location',
+      'CLOTHES_PROPERTIES': 'Clothes properties',
+      'TRANSACTION_MODALITIES': 'Transaction Modalities',
+      'CAUTION': 'Caution',
+      'WITHIN': 'Within',
+      'KM': 'km',
+
     });
 
     /* French translation */
@@ -364,6 +380,22 @@
       'NO_MARK_TO_GIVE_TO_CLIENT': 'Il n\'y a pas de locataire à qui donner une note',
       'NO_MARK_TO_GIVE_TO_RENTER': 'Il n\'y a pas de loueur à qui donner une note',
       'COMMENT': 'Laissez un message',
+
+       /* Search */
+      'SORT_BY': 'Trier par',
+      'YOUR_RESEARCH': 'Votre recherche',
+      'YOUR_KEYWORD': 'Vos mot(s) clé',
+      'SEARCH_ONLY_IN_TITLE': 'Chercher uniquement dans le titre',
+      'YOUR_AVAILABILITY': 'Vos disponibilités',
+      'YOUR_POSITION': 'Votre position',
+      'NEAR_ME': 'Près de moi',
+      'BEGIN_LOCATION': 'Date de début',
+      'END_LOCATION': 'Date de fin',
+      'CLOTHES_PROPERTIES': 'Propriété du vêtement',
+      'TRANSACTION_MODALITIES': 'Modalité de transaction',
+      'CAUTION': 'Caution',
+      'WITHIN': 'A environ',
+      'KM': 'km',
 
     });
 
