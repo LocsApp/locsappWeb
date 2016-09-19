@@ -129,7 +129,7 @@
       'NOTATION': 'Notation',
 
       'MY_QUESTIONS': 'My questions',
-      'QUESTIONS_I_HAVE_ASEKD': 'Questions I have asked',
+      'QUESTIONS_I_HAVE_ASKED': 'Questions I have asked',
       'QUESTIONS_TO_ANSWER': 'Questions to answer',
 
       'MY_BOOKMARKS': 'My bookmarks',
@@ -184,6 +184,10 @@
 
       /* Favorites */
       'NO_FAVORITE_ARTICLE': 'You don\'t have any favorite articles',
+
+      /* Questions */
+      'DID_NOT_ASK_QUESTIONS': 'You did not ask a question about any article',
+      'DONT_HAVE_QUESTIONS': 'You don\'t have any question to answer about an article',
 
     });
 
@@ -300,6 +304,10 @@
 
        /* Favorites */
       'NO_FAVORITE_ARTICLE': 'Vous n\'avez aucun article enregistré',
+
+       /* Questions */
+      'DID_NOT_ASK_QUESTIONS': 'Vous n\'avez posé aucune question',
+      'DONT_HAVE_QUESTIONS': 'Vous n\'avez aucune question à repondre',
 
     });
 
