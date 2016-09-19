@@ -1,5 +1,5 @@
 div(layout="row", layout-align="center start")
-  h2 History Notations
+  h2 {{'HISTORY_NOTATIONS' | translate}}
 div(style="margin-top:40px;")
 
 div(layout="row" layout-align="center start")
@@ -7,7 +7,7 @@ div(layout="row" layout-align="center start")
     div(layout="row" layout-align="center start")
       span(flex="25").special-divider
         md-divider
-      h3.title-request-category.flex As renter
+      h3.title-request-category.flex {{'AS_A_TENANT' | translate}}
       span(flex="25").special-divider
         md-divider
 
@@ -31,7 +31,7 @@ div(layout="row" layout-align="center start")
       section(layout="row", layout-align="start start")
         div(layout-margin style="margin-top: 0px;").flex
           div(ng-if="historyNotation.notationsClient.length < 1 && historyNotation.notationsClient != true")
-            p(style="text-align: center;") No marks as a client received.
+            p(style="text-align: center;") {{'NO_MARKS_AS_A_CLIENT' | translate}}.
           md-grid-list(md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-row-height="70px" md-cols-gt-md="4" md-gutter="20px")
             md-grid-tile(style="background: yellow;" md-colspan="1" md-rowspan="2" ng-repeat="demand in historyNotation.notationsClient track by $index")
               // My notation
@@ -50,7 +50,7 @@ div(layout="row" layout-align="center start")
                       p {{ demand.comment | limitTo: 30 }} {{demand.comment.length > 30 ? '...' : ''}}
               md-grid-tile-footer
                 div(layout-fill layout="row" layout-align="center start" ng-if="demand.comment.length > 30 || demand.article_name.length > 10")
-                  md-button.special-button.md-raised(ng-click="historyNotation.showNotationDialog($event, demand);") Show more
+                  md-button.special-button.md-raised(ng-click="historyNotation.showNotationDialog($event, demand);") {{'SHOW_MORE' | translate}}
 
 
       // Client Pagination
@@ -75,13 +75,9 @@ div(layout="row" layout-align="center start")
     div(layout="row" layout-align="center start")
       span(flex="25").special-divider
         md-divider
-      h3.title-request-category.flex As Renter
+      h3.title-request-category.flex {{'AS_A_RENTER' | translate}}
       span(flex="25").special-divider
         md-divider
-    div(style="margin-top:20px;")
-    div(ng-if="historyNotation.notationsRenter.length < 1 && historyNotation.notationsRenter != true")
-      p(style="text-align: center;") No marks as a renter received.
-
 
     // Renter Pagination
     div.search-article-toolbar(ng-if="historyNotation.notationsRenter.length > 1")
@@ -103,7 +99,7 @@ div(layout="row" layout-align="center start")
       section(layout="row", layout-align="start start")
         div(layout-margin style="margin-top: 0px;").flex
           div(ng-if="historyNotation.notationsRenter.length < 1 && historyNotation.notationsRenter != true")
-            p(style="text-align: center;") No marks as a renter received.
+            p(style="text-align: center;") {{'NO_MARKS_AS_A_RENTER' | translate}}.
           md-grid-list(md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-row-height="70px" md-cols-gt-md="4" md-gutter="20px")
             md-grid-tile(style="background: yellow;" md-colspan="1" md-rowspan="2" ng-repeat="demand in historyNotation.notationsRenter track by $index")
               // My notation
@@ -122,7 +118,7 @@ div(layout="row" layout-align="center start")
                       p {{ demand.comment | limitTo: 30 }} {{demand.comment.length > 30 ? '...' : ''}}
               md-grid-tile-footer
                 div(layout-fill layout="row" layout-align="center start" ng-if="demand.comment.length > 30 || demand.article_name.length > 10")
-                  md-button.special-button.md-raised(ng-click="historyNotation.showNotationDialog($event, demand);") Show more
+                  md-button.special-button.md-raised(ng-click="historyNotation.showNotationDialog($event, demand);") {{'SHOW_MORE' | translate}}
               // End grid notation renter
 
 

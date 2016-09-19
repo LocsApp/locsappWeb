@@ -165,9 +165,12 @@
       'POSTAL_CODE': 'Postal code',
       'CITY': 'City',
       'ADD_TO_BILLING_ADDRESS': 'Also add it to the billing addresses',
-      'ADD_TO_LIVING_ADDRESS': 'Also add it to the living addresses'
+      'ADD_TO_LIVING_ADDRESS': 'Also add it to the living addresses',
 
-
+      /* Historique de notations */
+      'HISTORY_NOTATIONS': 'History notations',
+      'NO_MARKS_AS_A_CLIENT': 'No marks as a tenant received',
+      'NO_MARKS_AS_A_RENTER': 'No marks as a renter received',
     });
 
     /* French translation */
@@ -204,7 +207,7 @@
       'PASSWORD_TOO_SHORT': 'Le mot de passe doit être plus long que 6 caractères',
       'PASSWORD_TOO_LONG': 'Le mot de passe doit être plus court que 30 caractères',
       'PASSWORDS_MUST_MATCH': 'Mot de passes différent',
-     'ALIAS_TOO_SHORT': 'L\'alias doit être plus long que 3 caractères',
+      'ALIAS_TOO_SHORT': 'L\'alias doit être plus long que 3 caractères',
       'ALIAS_TOO_LONG': 'L\'alias doit être plus court que 20 caractères',
       'FIRST_NAME_TOO_SHORT': 'Le prénom doit être plus long que 1 caractères',
       'FIRST_NAME_TOO_LONG': 'Le prénom name doit être plus court 50 caractères',
@@ -264,7 +267,12 @@
       'POSTAL_CODE': 'Code postal',
       'CITY': 'Ville',
       'ADD_TO_BILLING_ADDRESS': 'Ajout aussi aux adresses de facturations',
-      'ADD_TO_LIVING_ADDRESS': 'Ajouter aussi aux adresses de livraisons'
+      'ADD_TO_LIVING_ADDRESS': 'Ajouter aussi aux adresses de livraisons',
+
+      /* History notation */
+      'HISTORY_NOTATIONS': 'Historique des notations',
+      'NO_MARKS_AS_A_CLIENT': 'Pas de notations en tant que locataire',
+      'NO_MARKS_AS_A_RENTER': 'Pas de notations en tant que loueur',
 
     });
 
