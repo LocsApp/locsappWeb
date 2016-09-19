@@ -56,7 +56,7 @@ div(layout="row")
 				md-divider
 		div(style="margin-top:20px;")
 		div(ng-if="articleTimeline.demandsAsRenting.length < 1 && articleTimeline.demandsAsRenting != true")
-			p(style="text-align: center;") You are not renting anything at the moment.
+			p(style="text-align: center;") {{'NO_AVAILABLE_TIMELINE' | translate}}.
 		div(ng-repeat="demand in articleTimeline.demandsAsRenting track by $index")
 			div(layout="row" layout-align="center")
 				md-card.card-information-demand-big-screen(hide-md hide-sm hide-xs flex="60")
