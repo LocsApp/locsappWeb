@@ -90,6 +90,7 @@
       'REPEAT_EMAIL': 'Repeat email',
       'THE_MASCULINE': 'Le',
       'THE_FEMININE': 'La',
+      'ADD': 'Ajout',
 
       /* Error form */
       'THIS_IS_REQUIRED': 'Champ obligatoire',
@@ -97,13 +98,25 @@
       'MUST_BE_SHORTER_THAN_TWENTY': 'must be shorter than 20 characters',
       'INCORRECT_PHONE_NUMBER': 'Phone number is incorrect',
       'BIRTHDATE_SHOULD_BE': 'Birthdate should be yyyy/mm/dd',
-       'MUST_BE_AN_EMAIL': 'The field must be an email',
+      'MUST_BE_AN_EMAIL': 'The field must be an email',
       'EMAIL_MUST_MATCH': ' Emails must match',
       'EMAIL_TOO_SHORT': 'The email must be longer than 8 characters',
       'EMAIL_TOO_LONG': 'The email must be shorter than 100 characters',
       'PASSWORD_TOO_SHORT': 'The password must be longer than 6 characters',
       'PASSWORD_TOO_LONG': 'The password must be shorter than 30 characters',
       'PASSWORDS_MUST_MATCH': 'Passwords must match',
+      'ALIAS_TOO_SHORT': 'The alias must be longer than 3 characters',
+      'ALIAS_TOO_LONG': 'The alias must be shorter than 20 characters',
+      'FIRST_NAME_TOO_SHORT': 'The first name must be longer than 1 characters',
+      'FIRST_NAME_TOO_LONG': 'The first name must be shorter than 50 characters',
+      'LAST_NAME_TOO_SHORT': 'The last name must be longer than 1 characters',
+      'LAST_NAME_TOO_LONG': 'The last name must be shorter than 50 characters',
+      'ADDRESS_TOO_SHORT': 'The address must be longer than 5 characters',
+      'ADDRESS_TOO_LONG': 'The address must be shorter than 500 characters',
+      'POSTAL_CODE_TOO_SHORT': 'The postal code must be bigger than 0',
+      'POSTAL_CODE_TOO_LONG': 'The postal code must be shorter than 5 characters',
+      'CITY_TOO_SHORT': 'The city must be longer than 1 characters',
+      'CITY_TOO_LONG': 'The city must be shorter than 50 characters',
 
       /* The navbar */
       'SEARCH': 'Search',
@@ -146,6 +159,13 @@
       'YOUR_ADDRESSES': 'Your addresses',
       'LIVING_ADDRESSES': 'Living addresses',
       'BILLING_ADDRESSES': 'Billing addresses',
+      'ADD_ADDRESS': 'Add an address',
+      'ALIAS': 'Alias',
+      'ADDRESS': 'Address',
+      'POSTAL_CODE': 'Postal code',
+      'CITY': 'City',
+      'ADD_TO_BILLING_ADDRESS': 'Also add it to the billing addresses',
+      'ADD_TO_LIVING_ADDRESS': 'Also add it to the living addresses'
 
 
     });
@@ -169,6 +189,7 @@
       'REPEAT_EMAIL': 'Répétez email',
       'THE_MASCULINE': 'Le',
       'THE_FEMININE': 'La',
+      'ADD': 'Ajouter',
 
       /* Error form */
       'THIS_IS_REQUIRED': 'Champ obligatoire',
@@ -183,6 +204,18 @@
       'PASSWORD_TOO_SHORT': 'Le mot de passe doit être plus long que 6 caractères',
       'PASSWORD_TOO_LONG': 'Le mot de passe doit être plus court que 30 caractères',
       'PASSWORDS_MUST_MATCH': 'Mot de passes différent',
+     'ALIAS_TOO_SHORT': 'L\'alias doit être plus long que 3 caractères',
+      'ALIAS_TOO_LONG': 'L\'alias doit être plus court que 20 caractères',
+      'FIRST_NAME_TOO_SHORT': 'Le prénom doit être plus long que 1 caractères',
+      'FIRST_NAME_TOO_LONG': 'Le prénom name doit être plus court 50 caractères',
+      'LAST_NAME_TOO_SHORT': 'Le nom de famille doit être plus long que 1 caractères',
+      'LAST_NAME_TOO_LONG': 'Le nome de famille doit être plus court 50 caractères',
+      'ADDRESS_TOO_SHORT': 'L\'adresse doit être plus long que 5 caractères',
+      'ADDRESS_TOO_LONG': 'L\'adresse doit être plus court 500 caractères',
+      'POSTAL_CODE_TOO_SHORT': 'Le code postal doit être plus long que 0 caractères',
+      'POSTAL_CODE_TOO_LONG': 'Le code postal doit être plus court 5 caractères',
+      'CITY_TOO_SHORT': 'La ville doit être plus long que 1 caractères',
+      'CITY_TOO_LONG': 'La ville doit être plus court 50 caractères',
 
       /* The navbar */
       'SEARCH': 'Recherche',
@@ -225,6 +258,13 @@
       'YOUR_ADDRESSES': 'Vos adresses',
       'LIVING_ADDRESSES': 'Adresses de livraisons',
       'BILLING_ADDRESSES': 'Adresses de facturations',
+      'ADD_ADDRESS': 'Ajout d\'une adresse',
+      'ALIAS': 'Alias',
+      'ADDRESS': 'Adresse',
+      'POSTAL_CODE': 'Code postal',
+      'CITY': 'Ville',
+      'ADD_TO_BILLING_ADDRESS': 'Ajout aussi aux adresses de facturations',
+      'ADD_TO_LIVING_ADDRESS': 'Ajouter aussi aux adresses de livraisons'
 
     });
 

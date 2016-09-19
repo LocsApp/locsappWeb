@@ -1,72 +1,72 @@
 <md-content class="user_profile_parameters_address_add_dialogs">
 	<md-toolbar>
-		<span class="user_profile_parameters_address_add_dialogs_header">Add an address</span>
+		<span class="user_profile_parameters_address_add_dialogs_header">{{'ADD_ADDRESS' | translate}}</span>
 	</md-toolbar>
 	<md-content>
 		<form name="addAddressForm" ng-submit="addAddressForm.$valid && addAddress.submit()">
 			<md-input-container class="full-width">
-				<label>Alias</label>
-				<input ng-model="addAddress.alias" name="alias" required md-maxlength="20" minlength="3"></input>
+				<label translate>ALIAS</label>
+				<input ng-model="addAddress.alias" name="alias" required md-maxlength="20" minlength="3">
 				<div ng-messages="addAddressForm.alias.$error" ng-if='!addAddressForm.alias.$pristine'>
-					<div ng-message="required"> This is required. </div>
-					<div ng-message="minlength"> The alias must be longer than 3 characters.</div>
-					<div ng-message="md-maxlength"> The alias must be shorter than 20 characters. </div>
+					<div ng-message="required"> {{'THIS_IS_REQUIRED' | translate}}. </div>
+					<div ng-message="minlength"> {{'ALIAS_TOO_SHORT' | translate}}.</div>
+					<div ng-message="md-maxlength"> {{'ALIAS_TOO_LONG' | translate}}. </div>
 				</div>
 			</md-input-container>
 			<section layout="row", layout-align="center center">
 				<md-input-container>
-					<label>First name</label>
+					<label translate>FIRST_NAME</label>
 					<input ng-model="addAddress.first_name" name="first_name" required md-maxlength="50" minlength="1"></input>
 					<div ng-messages="addAddressForm.first_name.$error" ng-if='!addAddressForm.first_name.$pristine'>
-						<div ng-message="required"> This is required. </div>
-						<div ng-message="minlength"> The first name must be longer than 1 characters.</div>
-						<div ng-message="md-maxlength"> The first name must be shorter than 50 characters. </div>
+						<div ng-message="required"> {{'THIS_IS_REQUIRED' | translate}}.. </div>
+						<div ng-message="minlength"> {{'FIRST_NAME_TOO_SHORT' | translate}}.</div>
+						<div ng-message="md-maxlength"> {{'FIRST_NAME_TOO_LONG' | translate}}. </div>
 					</div>
 				</md-input-container>
 				<md-input-container>
-					<label>Last name</label>
+					<label translate>LAST_NAME</label>
 					<input ng-model="addAddress.last_name" name="last_name" required md-maxlength="50" minlength="1"></input>
 					<div ng-messages="addAddressForm.last_name.$error" ng-if='!addAddressForm.last_name.$pristine'>
-						<div ng-message="required"> This is required. </div>
-						<div ng-message="minlength"> The last name must be longer than 1 characters.</div>
-						<div ng-message="md-maxlength"> The last name must be shorter than 50 characters. </div>
+						<div ng-message="required"> {{'THIS_IS_REQUIRED' | translate}}. </div>
+						<div ng-message="minlength"> {{'LAST_NAME_TOO_SHORT' | translate}}.</div>
+						<div ng-message="md-maxlength"> {{'LAST_NAME_TOO_LONG' | translate}}. </div>
 					</div>
 				</md-input-container>
 			</section>
 			<md-input-container class="full-width">
-				<label>Address</label>
+				<label translate>ADDRESS</label>
 				<textarea ng-model="addAddress.address" name="address" required md-maxlength="500" minlength="5"></textarea>
 				<div ng-messages="addAddressForm.address.$error" ng-if='!addAddressForm.address.$pristine'>
-					<div ng-message="required"> This is required. </div>
-					<div ng-message="minlength"> The address must be longer than 5 characters.</div>
-					<div ng-message="md-maxlength"> The address must be shorter than 500 characters. </div>
+					<div ng-message="required"> {{'THIS_IS_REQUIRED' | translate}}.. </div>
+					<div ng-message="minlength"> {{'ADDRESS_TOO_SHORT' | translate}}.</div>
+					<div ng-message="md-maxlength"> {{'ADDRESS_TOO_LONG' | translate}}. </div>
 				</div>
 			</md-input-container>
 			<section layout="row", layout-align="center center">
 				<md-input-container>
-					<label>Postal Code</label>
+					<label translate>POSTAL_CODE</label>
 					<input ng-model="addAddress.postal_code" name="postal_code" type="number" required maxlength="5" min="0" max="99999"></input>
 					<div ng-messages="addAddressForm.postal_code.$error" ng-if='!addAddressForm.postal_code.$pristine'>
-						<div ng-message="required"> This is required. </div>
-						<div ng-message="min"> The postal code must be bigger than 0.</div>
-						<div ng-message="maxlength"> The postal code must be shorter than 5 characters. </div>
+						<div ng-message="required"> {{'THIS_IS_REQUIRED' | translate}}.. </div>
+						<div ng-message="min"> {{'POSTAL_CODE_TOO_SHORT' | translate}}.</div>
+						<div ng-message="maxlength"> {{'POSTAL_CODE_TOO_LONG' | translate}}. </div>
 					</div>
 				</md-input-container>
 				<md-input-container>
-					<label>City</label>
+					<label translate>CITY</label>
 					<input ng-model="addAddress.city" name="city" required md-maxlength="50" minlength="1">
 					<div ng-messages="addAddressForm.city.$error" ng-if='!addAddressForm.city.$pristine'>
-						<div ng-message="required"> This is required. </div>
-						<div ng-message="minlength"> The city must be longer than 1 characters.</div>
-						<div ng-message="md-maxlength"> The city must be shorter than 50 characters. </div>
+						<div ng-message="required"> {{'THIS_IS_REQUIRED' | translate}}. </div>
+						<div ng-message="minlength"> {{'CITY_TOO_SHORT' | translate}}.</div>
+						<div ng-message="md-maxlength"> {{'CITY_TOO_LONG' | translate}}. </div>
 					</div>
 				</md-input-container>
 			</section>
 			<section layout="row", layout-align="center center">
 				<span ng-if="addAddress.type == 0">
-					<md-checkbox ng-model="addAddress.add_to_other" > Also add it to the billing addresses </md-checkbox>
+					<md-checkbox ng-model="addAddress.add_to_other" > {{'ADD_TO_BILLING_ADDRESS' | translate}} </md-checkbox>
 				</span>
-				<md-checkbox ng-model="addAddress.add_to_other" ng-if="addAddress.type == 1"> Also add it to the living addresses </md-checkbox>
+				<md-checkbox ng-model="addAddress.add_to_other" ng-if="addAddress.type == 1"> {{'ADD_TO_LIVING_ADDRESS' | translate}} </md-checkbox>
 			</section>
 			<section layout="row", layout-align="center center">
 				<md-button class="md-raised" type="submit"> Add </md-button>
