@@ -1,5 +1,5 @@
 div(layout="row", layout-align="center center")
-  h2 History Articles
+  h2 {{'HISTORY_ARTICLES' | translate}}
 div(style="margin-top:40px;")
 
 div(layout="row")
@@ -8,7 +8,7 @@ div(layout="row")
     div(layout="row" layout-align="center start")
       span(flex="25").special-divider
         md-divider
-      h3.title-request-category.flex Article History as Renter
+      h3.title-request-category.flex {{'HISTORY_ARTICLE_AS_RENTER' | translate}}
       span(flex="25").special-divider
         md-divider
 
@@ -32,7 +32,7 @@ div(layout="row")
       section(layout="row", layout-align="start start")
         div(layout-margin style="margin-top: 0px;").flex
           div(ng-if="historyArticles.articlesRenter.length < 1 && historyArticles.articlesRenter != true")
-            p(style="text-align: center;") There are no article history as Renter.
+            p(style="text-align: center;") {{'NO_HISTORY_ARTICLE_AS_RENTER' | translate}}.
           md-grid-list(md-cols-xs="1" md-cols-sm="1" md-cols-md="2" md-row-height="70px" md-cols-gt-md="3" md-gutter="20px")
             md-grid-tile(style="background: yellow;" md-colspan="1" md-rowspan="2" ng-repeat="demand in historyArticles.articlesRenter track by $index")
               // My notation
@@ -41,13 +41,13 @@ div(layout="row")
                   img.img-icon-demand-article(hide-xs ng-src="{{ historyArticles.url_api + demand.article_thumbnail_url}}")
                   div.flex.information-demand
                     p.title-article {{ demand.article_name }}
-                    div.asked-by Asked By {{ demand.author_name }}
+                    div.asked-by {{'ASKED_BY' | translate}} {{ demand.author_name }}
 
                     div(style="margin-top:30px;")
-                      span Started :
+                      span {{'STARTED' | translate}} :
                       strong {{ }} {{ demand.availibility_start | date : medium }}
                     div
-                      span Finished :
+                      span {{'FINISHED' | translate}} :
                       strong {{ }} {{ demand.availibility_end | date : medium }}
                   div(flex="none")
                     div(ng-if="demand.status == 'pending'").circle-blue-history
@@ -77,7 +77,7 @@ div(layout="row")
     div(layout="row" layout-align="center start")
       span(flex="25").special-divider
         md-divider
-      h3.title-request-category.flex Article History as Client
+      h3.title-request-category.flex {{'HISTORY_ARTICLE_AS_TENANT' | translate}}
       span(flex="25").special-divider
         md-divider
 
@@ -102,7 +102,7 @@ div(layout="row")
       section(layout="row", layout-align="start start")
         div(layout-margin style="margin-top: 0px;").flex
           div(ng-if="historyArticles.articlesClient.length < 1 && historyArticles.articlesClient != true")
-            p(style="text-align: center;") There are no article history as Client.
+            p(style="text-align: center;") {{'NO_HISTORY_ARTICLE_AS_TENANT' | translate}} {{ demand.author_name }}.
           md-grid-list(md-cols-xs="1" md-cols-sm="1" md-cols-md="2" md-row-height="70px" md-cols-gt-md="3" md-gutter="20px")
             md-grid-tile(style="background: yellow;" md-colspan="1" md-rowspan="2" ng-repeat="demand in historyArticles.articlesClient track by $index")
               md-card(layout-fill)
@@ -110,13 +110,13 @@ div(layout="row")
                   img.img-icon-demand-article(hide-xs ng-src="{{ historyArticles.url_api + demand.article_thumbnail_url}}")
                   div.flex.information-demand
                     p.title-article {{ demand.article_name }}
-                    div.asked-by Asked By {{ demand.author_name }}
+                    div.asked-by {{'ASKED_BY' | translate}} {{ demand.author_name }}
 
                     div(style="margin-top:30px;")
-                      span Started :
+                      span {{'STARTED' | translate}} :
                       strong {{ }} {{ demand.availibility_start | date : medium }}
                     div
-                      span Finished :
+                      span {{'FINISHED' | translate}} :
                       strong {{ }} {{ demand.availibility_end | date : medium }}
                   div(flex="none")
                     div(ng-if="demand.status == 'pending'").circle-blue-history
@@ -142,46 +142,5 @@ div(layout="row")
 
 
     div(style="margin-top:20px;")
-    //div(ng-if="historyArticles.articlesClient.length < 1 && historyArticles.articlesClient != true")
-      p(style="text-align: center;") There are no article history as Client.
-    //div(ng-repeat="demand in historyArticles.articlesClient track by $index")
-      div(layout="row" layout-align="center")
-        md-card.card-information-demand-big-screen(hide-md hide-sm hide-xs flex="60")
-          div(layout="row")
-            img.img-icon-demand-article(ng-src="{{ historyArticles.url_api + demand.article_thumbnail_url}}")
-            div.flex.information-demand
-              p.title-article {{ demand.article_name }}
-              div.asked-by Asked To {{ demand.name_target }}
-
-              div(style="margin-top:30px;")
-                span Started :
-                strong {{ }} {{ demand.availibility_start | date : medium }}
-              div
-                span Finished :
-                strong {{ }} {{ demand.availibility_end | date : medium }}
-            div(flex="none")
-              div(ng-if="demand.status == 'pending'").circle-blue-history
-              div(ng-if="demand.status == 'completed'").circle-green-history
-              div(ng-if="demand.status == 'refused'").circle-red-history
-              div(ng-if="demand.status == 'retracted'").circle-grey-history
-      div(layout="row" hide-gt-md)
-        md-card.card-information-demand.flex
-          div(layout="row")
-            img.img-icon-demand-article(ng-src="{{ historyArticles.url_api + demand.article_thumbnail_url}}")
-            div.flex.information-demand
-              p.title-article {{ demand.article_name }}
-              div.asked-by Asked To {{ demand.target_name }}
-
-              div(style="margin-top:30px;")
-                span Started :
-                strong {{ }} {{ demand.availibility_start | date : medium }}
-              div
-                span Finished :
-                strong {{ }} {{ demand.availibility_end | date : medium }}
-            div(flex="none")
-              div(ng-if="demand.status == 'pending'").circle-blue-history
-              div(ng-if="demand.status == 'completed'").circle-green-history
-              div(ng-if="demand.status == 'refused'").circle-red-history
-              div(ng-if="demand.status == 'retracted'").circle-grey-history
 
   span.flex

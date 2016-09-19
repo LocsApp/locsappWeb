@@ -171,6 +171,17 @@
       'HISTORY_NOTATIONS': 'History notations',
       'NO_MARKS_AS_A_CLIENT': 'No marks as a tenant received',
       'NO_MARKS_AS_A_RENTER': 'No marks as a renter received',
+
+      /* History articles */
+      'HISTORY_ARTICLES': 'History article',
+      'NO_HISTORY_ARTICLE_AS_RENTER': 'There are no article history as renter',
+      'NO_HISTORY_ARTICLE_AS_TENANT': 'There are no article history as tenant',
+      'HISTORY_ARTICLE_AS_RENTER': 'Article History as renter',
+      'HISTORY_ARTICLE_AS_TENANT': 'Article History as tenant',
+      'ASKED_BY': 'Asked by',
+      'STARTED': 'Started',
+      'FINISHED': 'Finished'
+
     });
 
     /* French translation */
@@ -273,6 +284,16 @@
       'HISTORY_NOTATIONS': 'Historique des notations',
       'NO_MARKS_AS_A_CLIENT': 'Pas de notations en tant que locataire',
       'NO_MARKS_AS_A_RENTER': 'Pas de notations en tant que loueur',
+
+      /* History articles */
+      'HISTORY_ARTICLES': 'Historique d\'article',
+      'NO_HISTORY_ARTICLE_AS_RENTER': 'Il n\'y a pas d\'articles en tant que loueur',
+      'NO_HISTORY_ARTICLE_AS_TENANT': 'Il n\'y a pas d\'articles en tant que locataire',
+      'HISTORY_ARTICLE_AS_RENTER': 'Historique d\'article en tant que loueur',
+      'HISTORY_ARTICLE_AS_TENANT': 'Historique d\'article en tant que locataire',
+      'ASKED_BY': 'Demandé par',
+      'STARTED': 'Début',
+      'FINISHED': 'Fin'
 
     });
 
