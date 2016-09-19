@@ -3,10 +3,10 @@ md-card
 
     div(layout="row" layout-align="center")
       md-divider.separator-h2(flex="30" hide-sm)
-      h2.t-center(flex="30") Your Addresses
+      h2.t-center(flex="30") {{'YOUR_ADDRESSES' | translate}}
       md-divider.separator-h2(flex="30" hide-sm)
 
-    h3(flex-offset="10") Living addresses
+    h3(flex-offset="10") {{'LIVING_ADDRESSES' | translate}}
       span(ng-if="!profileParams.user.living_address.length")  (0 / {{ profileParams.limitAdress }})
       span(ng-if="profileParams.user.living_address.length")  ({{profileParams.user.living_address.length }} /{{ profileParams.limitAdress }})
     md-list.my-layout-xs(flex-offset="10" layout="row")
@@ -45,7 +45,7 @@ md-card
 
 
 
-    h3(flex-offset="10") billing addresses
+    h3(flex-offset="10") {{'BILLING_ADDRESSES' | translate}}
       span(ng-if="!profileParams.user.billing_address.length")  (0 / {{ profileParams.limitAdress }})
       span(ng-if="profileParams.user.billing_address.length")  ({{profileParams.user.billing_address.length }} / {{ profileParams.limitAdress }})
     md-list.my-layout-xs(flex-offset="10" layout="row")

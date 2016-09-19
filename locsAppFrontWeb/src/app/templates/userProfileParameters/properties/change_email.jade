@@ -14,7 +14,8 @@ md-card()
 
           md-input-container.md-icon-float.md-block
             md-icon(md-svg-src="../assets/icons/register-login/ic_email_black_24px.svg")
-            input(placeholder="{{'EMAIL' | translate}}" type="email" minlength="8" maxlength="100" required
+            label(translate) EMAIL
+            input(type="email" minlength="8" maxlength="100" required
             name="email" ng-model="profileParams.user.email" ng-pattern="/^.+@.+\..+$/")
             .body-register-container-md
             div(ng-messages="modifyProfilFormEmail.email.$error" ng-if='!modifyProfilFormEmail.email.$pristine')
@@ -25,7 +26,8 @@ md-card()
 
           md-input-container.md-icon-float.md-block
             md-icon(md-svg-src="../assets/icons/register-login/ic_repeat_black_24px.svg")
-            input(placeholder="{{'REPEAT_EMAIL' | translate}} " type="email" minlength="8" maxlength="100" required
+            label(translate) REPEAT_EMAIL
+            input(type="email" minlength="8" maxlength="100" required
             name="email_repeat" ng-model="profileParams.user.email_repeat"
             ng-pattern="/^.+@.+\..+$/"
             match="profileParams.user.email").body-register-container-md
