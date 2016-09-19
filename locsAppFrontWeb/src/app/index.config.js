@@ -189,6 +189,20 @@
       'DID_NOT_ASK_QUESTIONS': 'You did not ask a question about any article',
       'DONT_HAVE_QUESTIONS': 'You don\'t have any question to answer about an article',
 
+      /* Request */
+      'MY_REQUEST_AS_RENTER': 'My Requests As Renter',
+      'MY_REQUEST_AS_TENANT': 'My Requests As Tenant',
+      'DEMAND_AS_RENTER': 'There are no demands available at the moment',
+      'DEMAND_AS_TENANT': 'You issued no requests yet',
+      'USER_HAS_NO_NOTATION': 'This user has no notation yet',
+      'FROM': 'from',
+      'TO': 'to',
+      'ACCEPT': 'ACCEPT',
+      'REFUSE': 'REFUSE',
+      'ASKED_TO': 'Asked to',
+      'ON': 'on',
+      'RETRACT': 'RETRACT',
+
     });
 
     /* French translation */
@@ -302,12 +316,26 @@
       'STARTED': 'Début',
       'FINISHED': 'Fin',
 
-       /* Favorites */
+      /* Favorites */
       'NO_FAVORITE_ARTICLE': 'Vous n\'avez aucun article enregistré',
 
-       /* Questions */
+      /* Questions */
       'DID_NOT_ASK_QUESTIONS': 'Vous n\'avez posé aucune question',
       'DONT_HAVE_QUESTIONS': 'Vous n\'avez aucune question à repondre',
+
+      /* Request */
+      'MY_REQUEST_AS_RENTER': 'Mes requêtes en tant que loueur',
+      'MY_REQUEST_AS_TENANT': 'Mes requêtes en tant que locataire',
+      'DEMAND_AS_RENTER': 'Vous n\'avez aucune demande',
+      'DEMAND_AS_TENANT': 'Vous n\'avez aucunde demande en attente',
+      'USER_HAS_NO_NOTATION': 'Cette utilisateur n\'a pas de notations',
+      'FROM': 'de',
+      'TO': 'à',
+      'ACCEPT': 'ACCEPTER',
+      'REFUSE': 'REFUSER',
+      'ASKED_TO': 'Asked to',
+      'ON': 'le',
+      'RETRACT': 'SE RETRACTER',
 
     });
 

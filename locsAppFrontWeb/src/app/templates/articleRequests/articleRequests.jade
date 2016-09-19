@@ -1,5 +1,5 @@
 div(layout="row", layout-align="center center")
-	h2 Current Requests
+	h2 {{'CURRENT_REQUESTS' | translate}}
 div(style="margin-top:40px;")
 div(layout="row")
 	span.flex
@@ -7,7 +7,7 @@ div(layout="row")
 		div(layout="row" layout-align="center start")
 			span(flex="25").special-divider
 				md-divider
-			h3.title-request-category.flex My Requests As Renter
+			h3.title-request-category.flex {{'MY_REQUEST_AS_RENTER' | translate}}
 			span(flex="25").special-divider
 				md-divider
 		div(style="margin-top:20px;")
@@ -21,17 +21,17 @@ div(layout="row")
 						div.flex.information-demand
 							p.title-article {{ demand.article_name }}
 							div.asked-by Asked By {{ demand.author_name }}
-							div(ng-if="demand.author_notation == -1" style="padding-top: 10px;") This user has no notation yet
+							div(ng-if="demand.author_notation == -1" style="padding-top: 10px;") {{'USER_HAS_NO_NOTATION' | translate}}
 							div
-								span From :
+								span {{'FROM' | translate}} :
 								strong {{ }} {{ demand.availibility_start | date : medium }}
 							div
-								span To :
+								span {{'TO' | translate}} :
 								strong {{ }} {{ demand.availibility_end | date : medium }}
 							div(layout="row" style="margin-top: 10px;")
-								md-button(class="md-primary" ng-click="articleRequests.acceptDemand($index)").md-raised ACCEPT
+								md-button(class="md-primary" ng-click="articleRequests.acceptDemand($index)").md-raised {{'ACCEPT' | translate}}
 								span.flex
-								md-button(ng-click="articleRequests.refuseDemand($index)").not-accept.md-raised REFUSE
+								md-button(ng-click="articleRequests.refuseDemand($index)").not-accept.md-raised {{'REFUSE' | translate}}
 						div(flex="none")
 							div(ng-if="demand.status == 'pending'").circle-blue
 			div(layout="column" hide-gt-md)
@@ -43,26 +43,26 @@ div(layout="row")
 							div.asked-by Asked By {{ demand.author_name }} on {{ demand.date_issued.$date | date : medium }}
 							div(ng-if="demand.author_notation == -1" style="padding-top: 5px; font-size:small; padding-bottom: 5px;") This user has no notation yet
 							div
-								span From :
+								span {{'FROM' | translate}} :
 								strong {{ }} {{ demand.availibility_start | date : medium }}
 							div
-								span To :
+								span {{'TO' | translate}} :
 								strong {{ }} {{ demand.availibility_end | date : medium }}
 							div(layout="row" style="margin-top: 30px;")
-								md-button(class="md-primary" ng-click="articleRequests.acceptDemand($index)").md-raised ACCEPT
+								md-button(class="md-primary" ng-click="articleRequests.acceptDemand($index)").md-raised {{'ACCEPT' | translate}}
 								span.flex
-								md-button(ng-click="articleRequests.refuseDemand($index)").not-accept.md-raised REFUSE
+								md-button(ng-click="articleRequests.refuseDemand($index)").not-accept.md-raised {{'REFUSE' | translate}}
 						div(flex="none")
 							div(ng-if="demand.status == 'pending'").circle-blue
 		div(layout="row" layout-align="center start")
 			span(flex="25").special-divider
 				md-divider
-			h3.title-request-category.flex My Requests As Client
+			h3.title-request-category.flex {{'MY_REQUEST_AS_TENANT' | translate}}
 			span(flex="25").special-divider
 				md-divider
 		div(style="margin-top:20px;")
 		div(ng-if="articleRequests.demandsAsRenting.length < 1 && articleRequests.demandsAsRenting != true")
-			p(style="text-align: center;") You issued no requests yet.
+			p(style="text-align: center;") {{'DEMAND_AS_TENANT' | translate}}.
 		div(ng-repeat="demand in articleRequests.demandsAsRenting track by $index")
 			div(layout="row" layout-align="center")
 				md-card.card-information-demand-big-screen(hide-md hide-sm hide-xs flex="60")
@@ -72,10 +72,10 @@ div(layout="row")
 							p.title-article {{ demand.article_name }}
 							div.asked-by Asked To {{ demand.name_target }} on {{ demand.date_issued.$date | date : medium }}
 							div(style="margin-top:20px;")
-								span From :
+								span {{'FROM' | translate}} :
 								strong {{ }} {{ demand.availibility_start | date : medium }}
 							div
-								span To :
+								span {{'TO' | translate}} :
 								strong {{ }} {{ demand.availibility_end | date : medium }}
 							div(layout="row" style="margin-top: 30px;")
 								span.flex
@@ -89,16 +89,16 @@ div(layout="row")
 						img.img-icon-demand-article(ng-src="{{ articleRequests.url_api + demand.article_thumbnail_url}}")
 						div.flex.information-demand
 							p.title-article {{ demand.article_name }}
-							div.asked-by Asked To {{ demand.name_target }} on {{ demand.date_issued.$date | date : medium }}
+							div.asked-by {{'ASKED_TO' | translate}} {{ demand.name_target }} {{'ON' | translate}} {{ demand.date_issued.$date | date : medium }}
 							div(style="margin-top:20px;")
-								span From :
+								span {{'FROM' | translate}} :
 								strong {{ }} {{ demand.availibility_start | date : medium }}
 							div
-								span To :
+								span {{'TO' | translate}} :
 								strong {{ }} {{ demand.availibility_end | date : medium }}
 							div(layout="row" style="margin-top: 30px;")
 								span.flex
-								md-button(ng-click="articleRequests.retractDemand($index)").not-accept.md-raised RETRACT
+								md-button(ng-click="articleRequests.retractDemand($index)").not-accept.md-raised {{'RETRACT' | translate}}
 								span.flex
 						div(flex="none")
 							div(ng-if="demand.status == 'pending'").circle-blue
