@@ -18,7 +18,7 @@
 					<label translate>FIRST_NAME</label>
 					<input ng-model="addAddress.first_name" name="first_name" required md-maxlength="50" minlength="1"></input>
 					<div ng-messages="addAddressForm.first_name.$error" ng-if='!addAddressForm.first_name.$pristine'>
-						<div ng-message="required"> {{'THIS_IS_REQUIRED' | translate}}.. </div>
+						<div ng-message="required"> {{'THIS_IS_REQUIRED' | translate}}. </div>
 						<div ng-message="minlength"> {{'FIRST_NAME_TOO_SHORT' | translate}}.</div>
 						<div ng-message="md-maxlength"> {{'FIRST_NAME_TOO_LONG' | translate}}. </div>
 					</div>
@@ -37,7 +37,7 @@
 				<label translate>ADDRESS</label>
 				<textarea ng-model="addAddress.address" name="address" required md-maxlength="500" minlength="5"></textarea>
 				<div ng-messages="addAddressForm.address.$error" ng-if='!addAddressForm.address.$pristine'>
-					<div ng-message="required"> {{'THIS_IS_REQUIRED' | translate}}.. </div>
+					<div ng-message="required"> {{'THIS_IS_REQUIRED' | translate}}. </div>
 					<div ng-message="minlength"> {{'ADDRESS_TOO_SHORT' | translate}}.</div>
 					<div ng-message="md-maxlength"> {{'ADDRESS_TOO_LONG' | translate}}. </div>
 				</div>
@@ -69,7 +69,7 @@
 				<md-checkbox ng-model="addAddress.add_to_other" ng-if="addAddress.type == 1"> {{'ADD_TO_LIVING_ADDRESS' | translate}} </md-checkbox>
 			</section>
 			<section layout="row", layout-align="center center">
-				<md-button class="md-raised" type="submit"> Add </md-button>
+				<md-button class="md-raised" type="submit"> {{'ADD' | translate}} </md-button>
 			</section>
 		</form>
 	</md-content>
