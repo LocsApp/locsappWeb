@@ -25,7 +25,8 @@ md-card()
 
         md-input-container.md-icon-float.md-block
           md-icon(md-svg-src="../assets/icons/profil/account.svg")
-          input(placeholder="{{'FIRST_NAME' | translate}}" type='text' name="first_name"
+          label(translate) FIRST_NAME
+          input( type='text' name="first_name"
           ng-model="profileParams.user.first_name" required maxlength="30" minlength="5"
           ).body-register-container-md
           div(ng-messages="modifyProfilForm.first_name.$error" ng-if='!modifyProfilForm.first_name.$pristine')
