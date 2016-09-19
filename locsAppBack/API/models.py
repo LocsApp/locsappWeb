@@ -99,8 +99,8 @@ class Account(AbstractBaseUser):
     objects = AccountManager()
     object = AccountManager()
 
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email', 'birthdate', 'phone', 'living_address']
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username', 'birthdate', 'phone', 'living_address']
 
     def __unicode__(self):
         return self.email
