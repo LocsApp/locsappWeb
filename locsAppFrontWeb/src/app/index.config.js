@@ -203,6 +203,13 @@
       'ON': 'on',
       'RETRACT': 'RETRACT',
 
+      /* Timeline */
+      'CURRENT_TIMELINES': 'Current Timelines',
+      'TIMELINE_AS_RENTER': 'My Timelines As Renter',
+      'TIMELINE_AS_TENANT': 'My Timelines As tenant',
+      'NO_AVAILABLE_TIMELINE': 'There are no timelines available at the moment',
+      'DAYS_LEFT': 'day(s) left'
+
     });
 
     /* French translation */
@@ -336,6 +343,13 @@
       'ASKED_TO': 'Asked to',
       'ON': 'le',
       'RETRACT': 'SE RETRACTER',
+
+      /* Timeline */
+      'CURRENT_TIMELINES': 'Timelines en cours',
+      'TIMELINE_AS_RENTER': 'Timelines en tant que loueur',
+      'TIMELINE_AS_TENANT': 'Timelines en tant que locataire',
+      'NO_AVAILABLE_TIMELINE': 'Il n\'y a pas de timeline en cours',
+      'DAYS_LEFT': 'jour(s) restant'
 
     });
 

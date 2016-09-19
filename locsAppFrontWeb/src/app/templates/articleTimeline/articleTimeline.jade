@@ -1,5 +1,5 @@
 div(layout="row", layout-align="center center")
-	h2 Current Timelines
+	h2 {{'CURRENT_TIMELINES' | translate}}
 div(style="margin-top:40px;")
 div(layout="row")
 	span.flex
@@ -7,12 +7,12 @@ div(layout="row")
 		div(layout="row" layout-align="center start")
 			span(flex="25").special-divider
 				md-divider
-			h3.title-request-category.flex My Timelines As Renter
+			h3.title-request-category.flex {{'TIMELINE_AS_RENTER' | translate}}
 			span(flex="25").special-divider
 				md-divider
 		div(style="margin-top:20px;")
 		div(ng-if="articleTimeline.demands.length < 1 && articleTimeline.demands != true")
-			p(style="text-align: center;") There are no timelines available at the moment.
+			p(style="text-align: center;") {{'NO_AVAILABLE_TIMELINE' | translate}}.
 		div(ng-repeat="demand in articleTimeline.demands track by $index")
 			div(layout="row" layout-align="center")
 				md-card.card-information-demand-big-screen(hide-md hide-sm hide-xs flex="60")
@@ -21,37 +21,37 @@ div(layout="row")
 						div.flex.information-demand
 							p.title-article {{ demand.article_name }}
 							div.asked-by Asked By {{ demand.author_name }}
-							div(ng-if="demand.author_notation == -1" style="padding-top: 10px;") This user has no notation yet
+							div(ng-if="demand.author_notation == -1" style="padding-top: 10px;") {{'HAS_NO_NOTATION' | translate}}
 							div
-								span From :
+								span {{'FROM' | translate}} :
 								strong {{ }} {{ demand.availibility_start | date : medium }}
 							div
-								span To :
+								span {{'TO' | translate}} :
 								strong {{ }} {{ demand.availibility_end | date : medium }}
 							div(layout="row" layout-align="start center")
 								md-progress-linear(style="margin-top:20px;" md-mode="determinate" value="{{articleTimeline.daysLeftCalculate(demand)}}" flex="60")
-								span(style="padding-top:10px; padding-left:10px;") {{ articleTimeline.howManyDaysLeft(demand) }} day(s) left
+								span(style="padding-top:10px; padding-left:10px;") {{ articleTimeline.howManyDaysLeft(demand) }} {{'DAYS_LEFT' | translate}}
 			div(layout="column" hide-gt-md)
 				md-card.card-information-demand.flex
 					div(layout="row")
 						img.img-icon-demand-article(ng-src="{{ articleTimeline.url_api + demand.article_thumbnail_url}}")
 						div.flex.information-demand
 							p.title-article {{ demand.article_name }}
-							div.asked-by Asked By {{ demand.author_name }} on {{ demand.date_issued.$date | date : medium }}
-							div(ng-if="demand.author_notation == -1" style="padding-top: 5px; font-size:small; padding-bottom: 5px;") This user has no notation yet
+							div.asked-by {{'ASKED_BY' | translate}} {{ demand.author_name }} {{'ON' | translate}} {{ demand.date_issued.$date | date : medium }}
+							div(ng-if="demand.author_notation == -1" style="padding-top: 5px; font-size:small; padding-bottom: 5px;") {{'HAS_NO_NOTATION' | translate}}
 							div
-								span From :
+								span {{'FROM' | translate}} :
 								strong {{ }} {{ demand.availibility_start | date : medium }}
 							div
-								span To :
+								span {{'TO' | translate}} :
 								strong {{ }} {{ demand.availibility_end | date : medium }}
 							div(layout="row" layout-align="start center")
 								md-progress-linear(style="margin-top:10px;" md-mode="determinate" value="{{articleTimeline.daysLeftCalculate(demand)}}" flex="60")
-								span(style="padding-top:10px; padding-left:10px;") {{ articleTimeline.howManyDaysLeft(demand) }} day(s) left
+								span(style="padding-top:10px; padding-left:10px;") {{ articleTimeline.howManyDaysLeft(demand) }} {{'DAYS_LEFT' | translate}}
 		div(layout="row" layout-align="center start")
 			span(flex="25").special-divider
 				md-divider
-			h3.title-request-category.flex My Timelines As Renting
+			h3.title-request-category.flex {'TIMELINE_AS_TENANT' | translate}}
 			span(flex="25").special-divider
 				md-divider
 		div(style="margin-top:20px;")
@@ -64,17 +64,17 @@ div(layout="row")
 						img.img-icon-demand-article(ng-src="{{ articleTimeline.url_api + demand.article_thumbnail_url}}")
 						div.flex.information-demand
 							p.title-article {{ demand.article_name }}
-							div.asked-by Asked By {{ demand.author_name }}
-							div(ng-if="demand.author_notation == -1" style="padding-top: 10px;") This user has no notation yet
+							div.asked-by {'ASKED_BY' | translate}} {{ demand.author_name }}
+							div(ng-if="demand.author_notation == -1" style="padding-top: 10px;") {'HAS_NO_NOTATION' | translate}}
 							div
-								span From :
+								span {'FROM' | translate}} :
 								strong {{ }} {{ demand.availibility_start | date : medium }}
 							div
-								span To :
+								span {'TO' | translate}} :
 								strong {{ }} {{ demand.availibility_end | date : medium }}
 							div(layout="row" layout-align="start center")
 								md-progress-linear(style="margin-top:20px;" md-mode="determinate" value="{{articleTimeline.daysLeftCalculate(demand)}}" flex="60")
-								span(style="padding-top:10px; padding-left:10px;") {{ articleTimeline.howManyDaysLeft(demand) }} day(s) left
+								span(style="padding-top:10px; padding-left:10px;") {{ articleTimeline.howManyDaysLeft(demand) }} {'DAYS_LEFT' | translate}}
 			div(layout="column" hide-gt-md)
 				md-card.card-information-demand.flex
 					div(layout="row")
@@ -82,15 +82,15 @@ div(layout="row")
 						div.flex.information-demand
 							p.title-article {{ demand.article_name }}
 							div.asked-by Asked By {{ demand.author_name }} on {{ demand.date_issued.$date | date : medium }}
-							div(ng-if="demand.author_notation == -1" style="padding-top: 5px; font-size:small; padding-bottom: 5px;") This user has no notation yet
+							div(ng-if="demand.author_notation == -1" style="padding-top: 5px; font-size:small; padding-bottom: 5px;") {'HAS_NO_NOTATION' | translate}}
 							div
-								span From :
+								span {'FROM' | translate}} :
 								strong {{ }} {{ demand.availibility_start | date : medium }}
 							div
-								span To :
+								span {'TO' | translate}} :
 								strong {{ }} {{ demand.availibility_end | date : medium }}
 							div(layout="row" layout-align="start center")
 								md-progress-linear(style="margin-top:10px;" md-mode="determinate" value="{{articleTimeline.daysLeftCalculate(demand)}}" flex="60")
-								span(style="padding-top:10px; padding-left:10px;") {{ articleTimeline.howManyDaysLeft(demand) }} day(s) left
+								span(style="padding-top:10px; padding-left:10px;") {{ articleTimeline.howManyDaysLeft(demand) }} {'DAYS_LEFT' | translate}}
 
 	span.flex
