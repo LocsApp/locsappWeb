@@ -208,7 +208,14 @@
       'TIMELINE_AS_RENTER': 'My Timelines As Renter',
       'TIMELINE_AS_TENANT': 'My Timelines As tenant',
       'NO_AVAILABLE_TIMELINE': 'There are no timelines available at the moment',
-      'DAYS_LEFT': 'day(s) left'
+      'DAYS_LEFT': 'day(s) left',
+
+      /* Article notation */
+      'TENANT': 'Tenant',
+      'RENTER': 'Renter',
+      'NO_MARK_TO_GIVE_TO_CLIENT': 'There are no clients to give a mark to at the moment',
+      'NO_MARK_TO_GIVE_TO_RENTER': 'There are no renters to give a mark to at the moment',
+      'COMMENT': 'comment',
 
     });
 
@@ -349,7 +356,14 @@
       'TIMELINE_AS_RENTER': 'Timelines en tant que loueur',
       'TIMELINE_AS_TENANT': 'Timelines en tant que locataire',
       'NO_AVAILABLE_TIMELINE': 'Il n\'y a pas de timeline en cours',
-      'DAYS_LEFT': 'jour(s) restant'
+      'DAYS_LEFT': 'jour(s) restant',
+
+       /* Article notation */
+      'TENANT': 'Locataire',
+      'RENTER': 'Loueur',
+      'NO_MARK_TO_GIVE_TO_CLIENT': 'Il n\'y a pas de locataire à qui donner une note',
+      'NO_MARK_TO_GIVE_TO_RENTER': 'Il n\'y a pas de loueur à qui donner une note',
+      'COMMENT': 'Laissez un message',
 
     });
 

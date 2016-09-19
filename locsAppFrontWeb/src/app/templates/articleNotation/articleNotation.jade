@@ -1,17 +1,17 @@
 div(layout="row", layout-align="center center")
-	h2 Notations
+	h2 {{'NOTATIONS' | translate}}
 div(style="margin-top:40px;")
 div(layout="row" layout-align="center start")
 	div(flex="70").article-requests-body.article-notations-body
 		div(layout="row" layout-align="center start")
 			span(flex="25").special-divider
 				md-divider
-			h3.title-request-category.flex Clients
+			h3.title-request-category.flex {{'TENANT' | translate}}
 			span(flex="25").special-divider
 				md-divider
 		div(style="margin-top:20px;")
 		div(ng-if="articleNotation.notationsClient.length < 1 && articleNotation.notationsClient != true")
-			p(style="text-align: center;") There are no clients to give a mark to at the moment.
+			p(style="text-align: center;") {{'NO_MARK_TO_GIVE_TO_CLIENT' | translate}}.
 		div(ng-repeat="demand in articleNotation.notationsClient track by $index")
 			div(layout="row" layout-align="center")
 				md-card.card-notation(hide-md hide-sm hide-xs flex="60")
@@ -28,19 +28,19 @@ div(layout="row" layout-align="center start")
 								ng-md-icon(icon="star" size="48" ng-if="demand.value && demand.value >= number" ng-click="articleNotation.starValue(number, demand)").icon-star-filled
 						section(layout="row").section-height-limiter
 							md-input-container.comment-container.flex
-								label Comment
+								label {{'COMMENT' | translate}}
 								input(name="comment" ng-model="demand.comment" md-maxlength="90" minlength="5")
 						section(layout="row")
-							md-button(ng-click="articleNotation.sendNotation($index, demand, false)").accept-button.flex SEND
+							md-button(ng-click="articleNotation.sendNotation($index, demand, false)").accept-button.flex {{'SEND' | translate}}
 		div(layout="row" layout-align="center start")
 			span(flex="25").special-divider
 				md-divider
-			h3.title-request-category.flex Renters
+			h3.title-request-category.flex {{'RENTER' | translate}}
 			span(flex="25").special-divider
 				md-divider
 		div(style="margin-top:20px;")
 		div(ng-if="articleNotation.notationsRenter.length < 1 && articleNotation.notationsRenter != true")
-			p(style="text-align: center;") There are no renters to give a mark to at the moment.
+			p(style="text-align: center;") {{'NO_MARK_TO_GIVE_TO_RENTER' | translate}}
 		div(ng-repeat="demand in articleNotation.notationsRenter track by $index")
 			div(layout="row" layout-align="center")
 				md-card.card-notation(hide-md hide-sm hide-xs flex="60")
@@ -57,7 +57,7 @@ div(layout="row" layout-align="center start")
 								ng-md-icon(icon="star" size="48" ng-if="demand.value && demand.value >= number" ng-click="articleNotation.starValue(number, demand)").icon-star-filled
 						section(layout="row").section-height-limiter
 							md-input-container.comment-container.flex
-								label Comment
+								label {{'COMMENT' | translate}}
 								input(name="comment" ng-model="demand.comment" md-maxlength="90" minlength="5")
 						section(layout="row")
-							md-button(ng-click="articleNotation.sendNotation($index, demand, true)").accept-button.flex SEND
+							md-button(ng-click="articleNotation.sendNotation($index, demand, true)").accept-button.flex {{'SEND' | translate}}
