@@ -122,6 +122,8 @@
       'USERNAME_TOO_LONG': 'The username must be shorter than 30 characters',
       'TITLE_TOO_SHORT': 'The title must be longer than 3 characters',
       'TITLE_TOO_LONG': 'The title must be shorter than 50 characters',
+      'DESCRIPTION_TOO_SHORT': 'The description must be longer than 3 characters',
+      'DESCRIPTION_TOO_LONG': 'The description must be shorter than 5000 characters',
 
       /* The navbar */
       'SEARCH': 'Search',
@@ -277,6 +279,14 @@
       'BRAND': 'The Brand',
       'TOOLTIP_BRAND': 'This is the brand of your clothe (you can put homemade if you made it yourself)',
 
+      'ARTICLE_DESCRIPTION': 'Description of your article',
+      'THE_ARTICLE_DESCRIPTION': 'The description of your article',
+      'TOOLTIP_DESCRIPTION': 'This will be the description of your article, keep in mind that it will represent your article',
+      'YOUR_DESCRIPTION': 'Your description',
+      /*'': '',
+       '': '',
+       '': '',*/
+
 
     });
 
@@ -331,6 +341,8 @@
       'USERNAME_TOO_LONG': 'Le pseudo doit être plus court que 30 caractères',
       'TITLE_TOO_SHORT': 'Le titre doit être plus long 3 caractères',
       'TITLE_TOO_LONG': 'Le titre doit être plus court que 50 caractères',
+      'DESCRIPTION_TOO_SHORT': 'La description doit être plus longue que 3 caractères',
+      'DESCRIPTION_TOO_LONG': 'La description doit être plus courte que 5000 caractères',
 
 
       /* The navbar */
@@ -485,6 +497,12 @@
       'TOOLTIP_STATE': 'Indique dans quel état est votre article',
       'BRAND': 'La marque',
       'TOOLTIP_BRAND': 'La marque de votre vêtement (vous pouvez mettre fait main si vous l\'avez effectué vous même)',
+      'ARTICLE_DESCRIPTION': 'Description de votre article',
+      'THE_ARTICLE_DESCRIPTION': 'La description de votre article',
+      'TOOLTIP_DESCRIPTION': 'Ce sera la description de votre article, cela représentera votre article',
+      'YOUR_DESCRIPTION': 'Votre description',
+
+
     });
 
     /* Default translation */
