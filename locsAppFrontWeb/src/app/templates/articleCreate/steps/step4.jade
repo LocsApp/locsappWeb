@@ -1,22 +1,22 @@
 md-card(layout-fill)
 	md-card-title(layout="row", layout-align="center center").body-title-step
 		md-card-title-text
-			h3 The pictures of your article
+			h3 {{ 'PICTURE_OF_YOUR_ARTICLE' | translate }}
 	md-card-content(layout="column", layout-align="center center")
 		form(name="articleFormStep4" novalidate ng-submit="articleFormStep4.$valid && articleCreate.nextStep(4)", layout="column", layout-align="center center")
 			p
-				md-title The thumbnail picture
+				md-title {{ 'THUMBNAIL_PICTURE' | translate }}
 				span
 					ng-md-icon(icon="help", size="20")
-						md-tooltip(md-direction="right") It is the main picture for your article. it will be displayed in the search and in the top of your article.
+						md-tooltip(md-direction="right") {{ 'TOOLTIP_THUMBNAIL' | translate }}
 			img(ngf-src="articleCreate.files[0] || 'http://localhost:3000/assets/images/articles/default.jpg'" ngf-select ng-model="articleCreate.files[0]" name="logo" ngf-pattern="'image/*'"
 				accept="image/*" ngf-max-size="2MB" ngf-min-height="100"
 				ngf-resize="{width: 300, height: 300}" style="cursor: pointer;").logo-picture
 			p
-				md-title The article pictures
+				md-title {{ 'ARTICLE_PICTURE' | translate }}
 				span
 					ng-md-icon(icon="help", size="20")
-						md-tooltip(md-direction="right") These are your the pictures of your article. It will be displayed in the main body of your article's page.
+						md-tooltip(md-direction="right") {{ 'TOOLTIP_PICTURE' | translate }}
 			section.my-layout-xs(layout="row", layout-align="space-between")
 				img(ngf-src="articleCreate.files[1] || 'http://localhost:3000/assets/images/articles/default.jpg'" ngf-select ng-model="articleCreate.files[1]" name="picture1" ngf-pattern="'image/*'"
 					accept="image/*" ngf-max-size="2MB" ngf-min-height="100"
@@ -25,4 +25,4 @@ md-card(layout-fill)
 					accept="image/*" ngf-max-size="2MB" ngf-min-height="100"
 					ngf-resize="{width: 300, height: 300}" style="cursor: pointer; margin-left: 30px").logo-picture
 
-			md-button.md-raised(type="submit") Next Step
+			md-button.md-raised(type="submit") {{ 'NEXT_STEP' | translate }}

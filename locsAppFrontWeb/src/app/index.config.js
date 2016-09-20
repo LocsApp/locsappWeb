@@ -92,6 +92,7 @@
       'THE_FEMININE': 'La',
       'ADD': 'Ajout',
       'OR': 'or',
+      'CURRENCY': '$',
 
       /* Error form */
       'THIS_IS_REQUIRED': 'Champ obligatoire',
@@ -124,6 +125,8 @@
       'TITLE_TOO_LONG': 'The title must be shorter than 50 characters',
       'DESCRIPTION_TOO_SHORT': 'The description must be longer than 3 characters',
       'DESCRIPTION_TOO_LONG': 'The description must be shorter than 5000 characters',
+      'PRICE_TOO_SHORT': 'The price must be higher than 5',
+      'PRICE_TOO_LONG': 'The price must be lower than 500',
 
       /* The navbar */
       'SEARCH': 'Search',
@@ -283,10 +286,28 @@
       'THE_ARTICLE_DESCRIPTION': 'The description of your article',
       'TOOLTIP_DESCRIPTION': 'This will be the description of your article, keep in mind that it will represent your article',
       'YOUR_DESCRIPTION': 'Your description',
-      /*'': '',
-       '': '',
-       '': '',*/
 
+      'PICTURE_OF_YOUR_ARTICLE': 'The pictures of your article',
+      'THUMBNAIL_PICTURE': 'The thumbnail picture',
+      'TOOLTIP_THUMBNAIL': 'It is the main picture for your article. it will be displayed in the search and in the top of your article.',
+      'ARTICLE_PICTURE': 'The article pictures',
+      'TOOLTIP_PICTURE': 'These are your the pictures of your article. It will be displayed in the main body of your article\'s page.',
+
+      'RENTER_MODALITIES': 'The modalities for the tenant',
+      'AVAILIBILITY_DATE': 'The availibility date',
+      'TOOLTIP_AVAILIBILITY_START': 'This indicates when the clothe will be available',
+      'END_AVAILIBILITY_DATE': 'End of availibility date',
+      'TOOLTIP_AVAILIBILITY_END': 'This indicates when the clothe will not be available anymore',
+      'PAYMENT_METHOD': 'Payment methods',
+      'SELECT_PAYMENT_METHOD': 'You can select which payment method the user can choose to pay for the renting',
+      'REMOVE_ONE': 'Un-',
+      'SELECT_ALL': 'Select All',
+      'ARTICLE_PRICE': 'The price of your article',
+      'TOOLTIP_PRICE': 'This will be the price of your article by day. It will be displayed in the search. The minimum price is 5$ and the max price is 500$',
+      'PRICE': 'price',
+
+      'PREVIEW_ARTICLE': 'Preview of your article',
+      'CONGRATULATION': 'Congratulation ! There will be a preview here.',
 
     });
 
@@ -311,6 +332,7 @@
       'THE_FEMININE': 'La',
       'ADD': 'Ajouter',
       'OR': 'ou',
+      'CURRENCY': '€',
 
       /* Error form */
       'THIS_IS_REQUIRED': 'Champ obligatoire',
@@ -343,7 +365,8 @@
       'TITLE_TOO_LONG': 'Le titre doit être plus court que 50 caractères',
       'DESCRIPTION_TOO_SHORT': 'La description doit être plus longue que 3 caractères',
       'DESCRIPTION_TOO_LONG': 'La description doit être plus courte que 5000 caractères',
-
+      'PRICE_TOO_SHORT': 'Le prix doit être supérieur à  5',
+      'PRICE_TOO_LONG': 'Le prix doit être inférieur à 500',
 
       /* The navbar */
       'SEARCH': 'Recherche',
@@ -501,7 +524,27 @@
       'THE_ARTICLE_DESCRIPTION': 'La description de votre article',
       'TOOLTIP_DESCRIPTION': 'Ce sera la description de votre article, cela représentera votre article',
       'YOUR_DESCRIPTION': 'Votre description',
+      'PICTURE_OF_YOUR_ARTICLE': 'Les images de votre article',
+      'THUMBNAIL_PICTURE': 'L\'image principale de votre article',
+      'TOOLTIP_THUMBNAIL': 'Ceci est l\'image principale de votre article. Elle sera affiché lors d\'une recherche et en haut de la page de votre article.',
+      'ARTICLE_PICTURE': 'Les images de votre article',
+      'TOOLTIP_PICTURE': 'Ce sont les images de votre article. Elle seront affichées en haut de votre page d\'article.',
 
+      'RENTER_MODALITIES': 'Modalités pour le locataire',
+      'AVAILIBILITY_DATE': 'La de disponiblité',
+      'TOOLTIP_AVAILIBILITY_START': 'Ceci indique quand votre vêtement sera disponible',
+      'END_AVAILIBILITY_DATE': 'La fin de la date d\'avibilité',
+      'TOOLTIP_AVAILIBILITY_END': 'Cela indique quand le vêtement ne sera plus disponible',
+      'PAYMENT_METHOD': 'Méthodes de paiments',
+      'SELECT_PAYMENT_METHOD': 'Vous pouvez choisir les méthodes de paiment que vous acceptez',
+      'REMOVE_ONE': 'Un-',
+      'SELECT_ALL': 'Tout sélectionner',
+      'ARTICLE_PRICE': 'Le prix de l\'article',
+      'TOOLTIP_PRICE': 'Ce sera le prix de la location de votre article par jour. Ce sera affiché dans la recherche.',
+      'PRICE': 'prix',
+
+      'PREVIEW_ARTICLE': 'Prévisualiser votre article',
+      'CONGRATULATION': 'Félicitations ! Vous allez avoir une prévisualisation de votre article.',
 
     });
 

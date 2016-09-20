@@ -1,52 +1,53 @@
 md-card(layout-fill)
   md-card-title(layout="row", layout-align="center center").body-title-step
     md-card-title-text
-      h3 The modalities for the renter
+      h3 {{ 'RENTER_MODALITIES' | translate }}
   md-card-content(layout="column", layout-align="center center")
     form(name="articleFormStep5" novalidate ng-submit="articleFormStep5.$valid && articleCreate.nextStep(5)", layout="column", layout-align="center center")
       p
-        md-title The availibility date
+        md-title {{ 'AVAILIBILITY_DATE' | translate }}
         span
           ng-md-icon(icon="help", size="20")
-            md-tooltip(md-direction="right") This indicates when the clothe will be available
+            md-tooltip(md-direction="right") {{ 'TOOLTIP_AVAILIBILITY_START' | translate }}
       p
         md-datepicker(ng-model="articleCreate.date_start", md-min-date="articleCreate.min_date")
 
       p
-        md-title End of availibility date
+        md-title {{ 'END_AVAILIBILITY_DATE' | translate }}
         span
           ng-md-icon(icon="help", size="20")
-            md-tooltip(md-direction="right") This indicates when the clothe will not be available anymore
+            md-tooltip(md-direction="right") {{ 'TOOLTIP_AVAILIBILITY_END' | translate }}
       p
         md-datepicker(ng-model="articleCreate.date_end", md-min-date="articleCreate.date_start")
       p
-        md-title Payment methods
+        md-title {{ 'PAYMENT_METHOD' | translate }}
         span
           ng-md-icon(icon="help", size="20")
-            md-tooltip(md-direction="right") You can select which payment method the user can choose to pay for the renting
+            md-tooltip(md-direction="right") {{ 'SELECT_PAYMENT_METHOD' | translate }}
 
       p
         md-checkbox(aria-label="Select All" ng-checked="articleCreate.isChecked()"
         md-indeterminate="articleCreate.isIndeterminate()" ng-click="articleCreate.toggleAll()")
 
-        span(ng-if="articleCreate.isChecked()") Un-
-        span Select All
+        //span(ng-if="articleCreate.isChecked()") {{ 'REMOVE_ONE' | translate }}
+        span {{ 'SELECT_ALL' | translate }}
         div(class="demo-select-all-checkboxes" flex="100" ng-repeat="item in articleCreate.items_payment_methods")
           md-checkbox(ng-checked="articleCreate.exists(item, articleCreate.selected)" ng-click="articleCreate.toggle(item, articleCreate.selected)")
             div {{ item.name }}
 
       ng-md-icon(icon="cash", style="cursor: pointer;")
       p
-        md-title The price of your article
+        md-title {{ 'ARTICLE_PRICE' | translate }}
         span
           ng-md-icon(icon="help", size="20")
-            md-tooltip(md-direction="right") This will be the price of your article by day. It will be displayed in the search. The minimum price is 5$ and the max price is 500$.
+            md-tooltip(md-direction="right") {{ 'TOOLTIP_PRICE' | translate }}
       md-input-container.input-centered
-        input(placeholder="Price" required name="price" type="number"
+        label(translate) PRICE
+        input(required name="price" type="number"
         ng-model="articleCreate.price"
         max="500" min="5").input-price
         div(ng-messages="articleFormStep5.price.$error" ng-if='!articleFormStep5.price.$pristine')
-          div(ng-message="required") This is required.
-          div(ng-message="min") The price must be higher than 5$.
-          div(ng-message="max") The price must be lower than 500$.
-      md-button.md-raised(type="submit") Next Step
+          div(ng-message="required") {{ 'THIS_IS_REQUIRED' | translate }}
+          div(ng-message="min") {{ 'PRICE_TOO_SHORT' | translate }}{{ 'CURRENCY' | translate }}.
+          div(ng-message="max") {{ 'PRICE_TOO_LONG' | translate }}{{ 'CURRENCY' | translate }}.
+      md-button.md-raised(type="submit") {{ 'NEXT_STEP' | translate }}
