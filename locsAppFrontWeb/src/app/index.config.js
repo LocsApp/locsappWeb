@@ -97,6 +97,7 @@
       'RETRIEVING_DATA': 'An error occured while retrieving your data...',
       'SERVER_NOT_ANSWERING': 'The server isn\'t answering...',
       'SUCCESS': 'Success!',
+      'ERROR_OCCURRED': 'An error occurred',
 
 
       /* Error form */
@@ -314,11 +315,18 @@
       'PREVIEW_ARTICLE': 'Preview of your article',
       'CONGRATULATION': 'Congratulation ! There will be a preview here.',
 
+
+      /* Forget password */
+      'ENTER_YOUR_EMAIL': 'Enter your email',
+      'RESET': 'Reset',
+
+
       /* Toaster */
 
       /* Login */
       'LOGIN_ERROR_CREDENTIALS': 'We couldn\'t log you in with these infos...',
       'ERROR_VERIFY_YOUR_EMAIL': 'Please verify your email.',
+      'SUCCESS_PASSWORD_RESET': 'Password reset e-mail has been sent.',
       /* EndLogin */
 
       /* End Toaster */
@@ -352,6 +360,7 @@
       'RETRIEVING_DATA': 'Erreur inconnue...',
       'SERVER_NOT_ANSWERING': 'Le serveur ne répond pas',
       'SUCCESS': 'Succès!',
+      'ERROR_OCCURRED': 'Une erreur est survenue',
 
 
       /* Error form */
@@ -507,7 +516,7 @@
 
 
       /* Login and Sign in */
-      'USERNAME_OR_EMAIL': 'Pseudo or Email',
+      'USERNAME_OR_EMAIL': 'Pseudo ou Email',
       'PASSWORD': 'Mot de passe',
       'REMEMBER_ME': 'Se souvenir de moi',
       'FORGET_YOUR_PASSWORD': 'Vous avez oublié votre mot de passe ?',
@@ -566,11 +575,16 @@
       'PREVIEW_ARTICLE': 'Prévisualiser votre article',
       'CONGRATULATION': 'Félicitations ! Vous allez avoir une prévisualisation de votre article.',
 
+      /* Forget password */
+      'ENTER_YOUR_EMAIL': 'Entrer votre email',
+      'RESET': 'Reset',
+
       /* Toaster */
 
       /* Login */
       'LOGIN_ERROR_CREDENTIALS': 'Nous ne pouvons pas vous connecter avec ces informations...',
       'ERROR_VERIFY_YOUR_EMAIL': 'S\'il vous plaît vérifier votre email.',
+      'SUCCESS_PASSWORD_RESET': 'Un email vous a était envoyé',
 
       /* EndLogin */
 

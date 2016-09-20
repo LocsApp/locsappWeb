@@ -88,15 +88,23 @@
 
     /*Controller for forgotPasswordDialog*/
     /** @ngInject */
-    vm.forgotPasswordController = function ($mdDialog) {
+    vm.forgotPasswordController = function ($mdDialog, $filter) {
       var vm = this;
+      var $translate = $filter('translate');
+
+      vm.errorOccurred = $translate('ERROR_OCCURRED');
+      vm.successPasswordReset = $translate('SUCCESS_PASSWORD_RESET');
+      vm.wops = $translate('WOPS');
+      vm.successTranslate = $translate('SUCCESS');
 
       /*vars init*/
       vm.loader = false;
 
       /*password_reset success callback*/
       vm.resetPasswordSuccess = function (data) {
-        toastr.success(data.success, vm.successTranslate);
+        $log.log("test = ", vm.successPasswordReset);
+        toastr.success(
+          vm.successPasswordReset, vm.successTranslate);
         vm.loader = false;
         vm.hide();
       };
@@ -104,7 +112,8 @@
       /*password_reset success callback*/
       vm.resetPasswordFailure = function (data) {
         $log.log(data);
-        toastr.error(data.data.email[0], vm.wops);
+        $log.log("test = ", vm.errorOccurred);
+        toastr.error(vm.errorOccurred, vm.wops);
         vm.loader = false;
         vm.hide();
       };
