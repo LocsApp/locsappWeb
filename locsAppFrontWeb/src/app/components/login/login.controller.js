@@ -7,8 +7,17 @@
 
 
   /** @ngInject */
-  function LoginController($scope, UsersService, toastr, $sessionStorage, $localStorage, $state, $log, $mdDialog, $document, ScopesService) {
+  function LoginController($scope, UsersService, toastr, $sessionStorage, $localStorage, $state, $log, $mdDialog,
+                           $document, ScopesService, $filter) {
     var vm = this;
+
+    var $translate = $filter('translate');
+    vm.loginErrorCredentials = $translate('LOGIN_ERROR_CREDENTIALS');
+    vm.wops = $translate('WOPS');
+    vm.errorRetrievingData = $translate('RETRIEVING_DATA');
+    vm.verifyYourEmail = $translate('ERROR_VERIFY_YOUR_EMAIL');
+    vm.serverNotAnswering = $translate('SERVER_NOT_ANSWERING');
+    vm.successTranslate = $translate('SUCCESS');
 
     /*Log in the user*/
     vm.submit = function () {
@@ -32,7 +41,7 @@
     };
 
     vm.userProfileGetFailure = function () {
-      toastr.error("An error occured while retrieving your data...", "Woops...")
+      toastr.error(vm.errorRetrievingData, vm.wops);
     };
 
     /*Success callback for login*/
@@ -55,13 +64,13 @@
       if (data.data) {
         if (data.data.non_field_errors) {
           if (data.data.non_field_errors[0].indexOf("not verified") > -1)
-            toastr.error("Please verify your email.", 'Woops...');
+            toastr.error(vm.verifyYourEmail, vm.wops);
           else
-            toastr.error("We couldn't log you in with these infos...", 'Woops...');
+            toastr.error(vm.loginErrorCredentials, vm.wops);
         }
       }
       else
-        toastr.error("The server isn't answering...", "Woops...");
+        toastr.error(vm.serverNotAnswering, vm.wops);
     };
 
     /*Creates a dialog to ask for a password reset*/
@@ -87,7 +96,7 @@
 
       /*password_reset success callback*/
       vm.resetPasswordSuccess = function (data) {
-        toastr.success(data.success, "Success!");
+        toastr.success(data.success, vm.successTranslate);
         vm.loader = false;
         vm.hide();
       };
@@ -95,7 +104,7 @@
       /*password_reset success callback*/
       vm.resetPasswordFailure = function (data) {
         $log.log(data);
-        toastr.error(data.data.email[0], "Woops...");
+        toastr.error(data.data.email[0], vm.wops);
         vm.loader = false;
         vm.hide();
       };

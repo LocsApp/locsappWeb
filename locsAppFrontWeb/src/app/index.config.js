@@ -93,6 +93,11 @@
       'ADD': 'Ajout',
       'OR': 'or',
       'CURRENCY': '$',
+      'WOPS': 'Woops...',
+      'RETRIEVING_DATA': 'An error occured while retrieving your data...',
+      'SERVER_NOT_ANSWERING': 'The server isn\'t answering...',
+      'SUCCESS': 'Success!',
+
 
       /* Error form */
       'THIS_IS_REQUIRED': 'Champ obligatoire',
@@ -309,7 +314,17 @@
       'PREVIEW_ARTICLE': 'Preview of your article',
       'CONGRATULATION': 'Congratulation ! There will be a preview here.',
 
-    });
+      /* Toaster */
+
+      /* Login */
+      'LOGIN_ERROR_CREDENTIALS': 'We couldn\'t log you in with these infos...',
+      'ERROR_VERIFY_YOUR_EMAIL': 'Please verify your email.',
+      /* EndLogin */
+
+      /* End Toaster */
+
+    })
+    ;
 
     /* French translation */
     $translateProvider.translations('fr', {
@@ -333,6 +348,11 @@
       'ADD': 'Ajouter',
       'OR': 'ou',
       'CURRENCY': '€',
+      'WOPS': 'Woops...',
+      'RETRIEVING_DATA': 'Erreur inconnue...',
+      'SERVER_NOT_ANSWERING': 'Le serveur ne répond pas',
+      'SUCCESS': 'Succès!',
+
 
       /* Error form */
       'THIS_IS_REQUIRED': 'Champ obligatoire',
@@ -489,7 +509,7 @@
       /* Login and Sign in */
       'USERNAME_OR_EMAIL': 'Pseudo or Email',
       'PASSWORD': 'Mot de passe',
-      'REMEMBER_ME': 'Se souvenir de mot',
+      'REMEMBER_ME': 'Se souvenir de moi',
       'FORGET_YOUR_PASSWORD': 'Vous avez oublié votre mot de passe ?',
       'LOGIN_WITH_FACEBOOK': 'Se connecter avec Facebook',
 
@@ -545,6 +565,16 @@
 
       'PREVIEW_ARTICLE': 'Prévisualiser votre article',
       'CONGRATULATION': 'Félicitations ! Vous allez avoir une prévisualisation de votre article.',
+
+      /* Toaster */
+
+      /* Login */
+      'LOGIN_ERROR_CREDENTIALS': 'Nous ne pouvons pas vous connecter avec ces informations...',
+      'ERROR_VERIFY_YOUR_EMAIL': 'S\'il vous plaît vérifier votre email.',
+
+      /* EndLogin */
+
+      /* End Toaster */
 
     });
 
