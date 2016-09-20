@@ -1,38 +1,39 @@
 md-card(layout-fill)
-	md-card-title(layout="row", layout-align="center center").body-title-step
-		md-card-title-text
-			h3 Define your article
-	md-card-content(layout="column", layout-align="center center")
-		form(name="articleFormStep1" novalidate ng-submit="articleFormStep1.$valid && articleCreate.nextStep(1)", layout="column", layout-align="center center")
-			p
-				md-title The title of your article
-				span
-					ng-md-icon(icon="help", size="20")
-						md-tooltip(md-direction="right") This will be the title of your article. It will be displayed in the search, and will appear as the main sentence on top of your article's page
-			md-input-container.input-centered
-				input(placeholder="Title" required name="title" ng-model="articleCreate.title" maxlength="50" minlength="3").input-title
-				div(ng-messages="articleFormStep1.title.$error" ng-if='!articleFormStep1.title.$pristine')
-					div(ng-message="required") This is required.
-					div(ng-message="minlength") The title must be longer than 3 characters.
-					div(ng-message="md-maxlength") The title must be shorter than 50 characters.
-			p
-				md-title The category
-				span
-					ng-md-icon(icon"help", size="20")
-						md-tooltip(md-direction="right") It will categorize your article to be found in one of the 3 main themes
-			md-input-container
-				md-select(ng-model="articleCreate.article.base_category", name="baseCategory", placeholder="Category", required)
-					md-option(ng-value="opt", ng-repeat="opt in articleCreate.categories") {{ opt.name }}
-				div(ng-messages="articleFormStep1.baseCategory.$error" ng-if='articleFormStep1.baseCategory.$dirty')
-					div(ng-message="required") This is required.
-			p
-				md-title The sub-category
-				span
-					ng-md-icon(icon"help", size="20")
-						md-tooltip(md-direction="right") It will help to precise the scope of your article
-			md-input-container
-				md-select(ng-model="articleCreate.article.sub_category", name="sub_category", placeholder="Sub Category", required)
-					md-option(ng-value="opt", ng-repeat="opt in articleCreate.subCategories") {{ opt.name }}
-				div(ng-messages="articleFormStep1.sub_category.$error" ng-if='!articleFormStep1.sub_category.$pristine')
-					div(ng-message="required") This is required.
-			md-button.md-raised(type="submit") Next Step
+  md-card-title(layout="row", layout-align="center center").body-title-step
+    md-card-title-text
+      h3 {{ 'DEFINE_YOUR_ARTICLE' | translate }}
+  md-card-content(layout="column", layout-align="center center")
+    form(name="articleFormStep1" novalidate ng-submit="articleFormStep1.$valid && articleCreate.nextStep(1)", layout="column", layout-align="center center")
+      p
+        md-title {{ 'TITLE_OF_YOUR_ARTICLE' | translate }}
+        span
+          ng-md-icon(icon="help", size="20")
+            md-tooltip(md-direction="right") {{ 'TOOLTIP_TITLE_ARTICLE' | translate }}
+      md-input-container.input-centered
+        input(required name="title" ng-model="articleCreate.title" maxlength="50" minlength="3").input-title
+        label(translate) TITLE
+        div(ng-messages="articleFormStep1.title.$error" ng-if='!articleFormStep1.title.$pristine')
+          div(ng-message="required") {{ 'THIS_IS_REQUIRED' | translate }}.
+          div(ng-message="minlength") {{ 'TITLE_TOO_SHORT' | translate }}.
+          div(ng-message="md-maxlength") {{ 'TITLE_TOO_LONG' | translate }}.
+      p
+        md-title {{ 'CATEGORY' | translate }}
+        span
+          ng-md-icon(icon"help", size="20")
+            md-tooltip(md-direction="right") {{ 'TOOLTIP_CATEGORY' | translate }}
+      md-input-container
+        md-select(ng-model="articleCreate.article.base_category", name="baseCategory", placeholder="{{ 'CATEGORY' | translate }}", required)
+          md-option(ng-value="opt", ng-repeat="opt in articleCreate.categories") {{ opt.name }}
+        div(ng-messages="articleFormStep1.baseCategory.$error" ng-if='articleFormStep1.baseCategory.$dirty')
+          div(ng-message="required") {{ 'THIS_IS_REQUIRED' | translate }}.
+      p
+        md-title {{ 'SUBCATEGORY' | translate }}
+        span
+          ng-md-icon(icon"help", size="20")
+            md-tooltip(md-direction="right") {{ 'TOOLTIP_SUBCATEGORY' | translate }}
+      md-input-container
+        md-select(ng-model="articleCreate.article.sub_category", name="sub_category", placeholder="{{ 'SUBCATEGORY' | translate }}", required)
+          md-option(ng-value="opt", ng-repeat="opt in articleCreate.subCategories") {{ opt.name }}
+        div(ng-messages="articleFormStep1.sub_category.$error" ng-if='!articleFormStep1.sub_category.$pristine')
+          div(ng-message="required") {{ 'THIS_IS_REQUIRED' | translate }}.
+      md-button.md-raised(type="submit") {{ 'NEXT_STEP' | translate }}

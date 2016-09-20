@@ -120,6 +120,8 @@
       'CITY_TOO_LONG': 'The city must be shorter than 50 characters',
       'USERNAME_TOO_SHORT': 'The username must be longer than 3 characters',
       'USERNAME_TOO_LONG': 'The username must be shorter than 30 characters',
+      'TITLE_TOO_SHORT': 'The title must be longer than 3 characters',
+      'TITLE_TOO_LONG': 'The title must be shorter than 50 characters',
 
       /* The navbar */
       'SEARCH': 'Search',
@@ -238,9 +240,6 @@
       'WITHIN': 'Within',
       'KM': 'km',
 
-      /* Article Create */
-      'WELCOME_CREATION_ARTICLE': 'Welcome to the article creation',
-      'DEFINE_YOUR_ARTICLE': 'Define your article',
 
       /* Login and Sign in */
       'USERNAME_OR_EMAIL': 'Username or Email',
@@ -254,6 +253,17 @@
       'SIGN_IN_WITH_FACEBOOK': 'Register with Facebook',
       //'EMAIL': ''
 
+      /* Create article */
+      'NEXT_STEP': 'Next Step',
+      'WELCOME_CREATION_ARTICLE': 'Welcome to the article creation',
+      'DEFINE_YOUR_ARTICLE': 'Define your article',
+      'TITLE': 'Title',
+      'TITLE_OF_YOUR_ARTICLE': 'The title of your article',
+      'TOOLTIP_TITLE_ARTICLE': 'This will be the title of your article. It will be displayed in the search, and will appear as the main sentence on top of your article\'s page',
+      'CATEGORY': 'The category',
+      'TOOLTIP_CATEGORY': 'It will categorize your article to be found in one of the 3 main themes',
+      'SUBCATEGORY': 'The sub-category',
+      'TOOLTIP_SUBCATEGORY': 'It will help to precise the scope of your article',
 
     });
 
@@ -306,6 +316,8 @@
       'CITY_TOO_LONG': 'La ville doit être plus court 50 caractères',
       'USERNAME_TOO_SHORT': 'Le pseudo doit être plus long que 3 caractères',
       'USERNAME_TOO_LONG': 'Le pseudo doit être plus court que 30 caractères',
+      'TITLE_TOO_SHORT': 'Le titre doit être plus long 3 caractères',
+      'TITLE_TOO_LONG': 'Le titre doit être plus court que 50 caractères',
 
 
       /* The navbar */
@@ -436,6 +448,18 @@
       'JOIN_THE_COMMUNITY': 'Rejoignez la communauté !',
       'USERNAME': 'Pseudo',
       'SIGN_IN_WITH_FACEBOOK': 'Se connecter avec Facebook',
+
+      /* Create article */
+      'NEXT_STEP': 'Etape suivante',
+      'WELCOME_CREATION_ARTICLE': 'Bienvenue à la création d\'article',
+      'DEFINE_YOUR_ARTICLE': 'Défénissez votre article',
+      'TITLE': 'Titre',
+      'TITLE_OF_YOUR_ARTICLE': 'Le titre de votre article',
+      'TOOLTIP_TITLE_ARTICLE': 'Ce sera le titre de votre article. Il sera affiché lors d\'une recherche et apparaîtra en haut de la page de votre article',
+      'CATEGORY': 'La catégorie',
+      'TOOLTIP_CATEGORY': 'Cela va catégoriser votre article pour être trouvé dans une des 3 grandes catégories',
+      'SUBCATEGORY': 'La sous-catégorie',
+      'TOOLTIP_SUBCATEGORY': 'Cela permet de définir un peu plus précisiément votre article',
     });
 
     /* Default translation */
