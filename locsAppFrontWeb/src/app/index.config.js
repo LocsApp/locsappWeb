@@ -265,6 +265,19 @@
       'SUBCATEGORY': 'The sub-category',
       'TOOLTIP_SUBCATEGORY': 'It will help to precise the scope of your article',
 
+      'ARTICLE_CHARACTERISTIC': 'Characteristic of your article',
+      'GENDER': 'The gender',
+      'TOOLTIP_GENDER': 'It defines for which gender the clothe is meant to be for',
+      'SIZE': 'The size',
+      'TOOLTIP_SIZE': 'This is the size of your clothe',
+      'COLOR': 'Color',
+      'TOOLTIP_COLOR': 'Choose the main color of your clothe',
+      'STATE': 'The state',
+      'TOOLTIP_STATE': 'Indicate in which state your clothe is',
+      'BRAND': 'The Brand',
+      'TOOLTIP_BRAND': 'This is the brand of your clothe (you can put homemade if you made it yourself)',
+
+
     });
 
     /* French translation */
@@ -460,6 +473,18 @@
       'TOOLTIP_CATEGORY': 'Cela va catégoriser votre article pour être trouvé dans une des 3 grandes catégories',
       'SUBCATEGORY': 'La sous-catégorie',
       'TOOLTIP_SUBCATEGORY': 'Cela permet de définir un peu plus précisiément votre article',
+
+      'ARTICLE_CHARACTERISTIC': 'Les caractéristiques de votre article',
+      'GENDER': 'Le sexe',
+      'TOOLTIP_GENDER': 'Cela défine pour quel sexe est votre vêtement',
+      'SIZE': 'La taille',
+      'TOOLTIP_SIZE': 'La taille de votre vêtement',
+      'COLOR': 'Couleur',
+      'TOOLTIP_COLOR': 'Choisir la couleur principale de votre article',
+      'STATE': 'L\'état',
+      'TOOLTIP_STATE': 'Indique dans quel état est votre article',
+      'BRAND': 'La marque',
+      'TOOLTIP_BRAND': 'La marque de votre vêtement (vous pouvez mettre fait main si vous l\'avez effectué vous même)',
     });
 
     /* Default translation */
