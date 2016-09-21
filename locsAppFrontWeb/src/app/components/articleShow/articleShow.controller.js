@@ -202,7 +202,7 @@
         .demands
         .save({
           "id_target": vm.article.id_author,
-          "name_target": vm.username_author,
+          "name_target": vm.article.username_author,
           "id_article": vm.article._id,
           "availibility_start": vm.AskBeginLocation,
           "availibility_end": vm.AskEndLocation,
@@ -216,6 +216,7 @@
             toastr.success("Your demand has been sent!", "Success !");
           },
           function (data) {
+            $log.error("error Demand", data);
             if (data.article.error)
               toastr.error(data.article.error, "Woops...");
             else
