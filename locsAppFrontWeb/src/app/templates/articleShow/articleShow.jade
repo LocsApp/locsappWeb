@@ -6,7 +6,7 @@ div.article-show(layout="row" layout-align="center")
         h1 {{articleShow.article.title}}
         br
         div.subtitle(layout="row")
-          h2 By <a href="/profile/{{articleShow.article.username_author}}/"> {{articleShow.article.username_author}} </a>
+          h2 {{ 'BY' | translate }} <a href="/profile/{{articleShow.article.username_author}}/"> {{articleShow.article.username_author}} </a>
           span(ng-repeat='star in articleShow.global_mark_array track by $index')
             ng-md-icon(ng-if="star" icon="star" size="22")
             ng-md-icon(ng-if="!star" icon="star" size="22" style="fill:grey")
@@ -30,8 +30,8 @@ div.article-show(layout="row" layout-align="center")
         md-card-content
 
           div.block-properties(layout="row")
-            div.name-properties(flex="50") Price
-            div.t-right(flex="50") {{articleShow.article.price}}$/day
+            div.name-properties(flex="50") {{ 'PRICE' | translate }}
+            div.t-right(flex="50") {{articleShow.article.price}}{{ 'CURRENCY' | translate }}/{{ 'DAY' | translate }}
           md-divider
           div.block-properties(layout="row")
             div.name-properties(flex="50") Payment
@@ -40,35 +40,35 @@ div.article-show(layout="row" layout-align="center")
 
           md-divider
           div.block-properties(layout="row")
-            div.name-properties(flex="50") Within
+            div.name-properties(flex="50") {{ 'WITHIN' | translate }}
             div.t-right(flex="50") {{articleShow.within}} km
           md-divider
           div.block-properties(layout="row")
-            div.name-properties(flex="50") Main Category
+            div.name-properties(flex="50") {{ 'CATEGORY' | translate }}
             div.t-right(flex="50") {{articleShow.name_category}}
           md-divider
           div.block-properties(layout="row")
-            div.name-properties(flex="50") Sub Category
+            div.name-properties(flex="50") {{ 'SUBCATEGORY' | translate }}
             div.t-right(flex="50") {{articleShow.name_subCategory}}
           md-divider
           div.block-properties(layout="row")
-            div.name-properties(flex="50") Gender
+            div.name-properties(flex="50") {{ 'GENDER' | translate }}
             div.t-right(flex="50") {{articleShow.name_gender}}
           md-divider
           div.block-properties(layout="row")
-            div.name-properties(flex="50") Size
+            div.name-properties(flex="50") {{ 'SIZE' | translate }}
             div.t-right(flex="50") {{articleShow.name_size}}
           md-divider
           div.block-properties(layout="row")
-            div.name-properties(flex="50") Color
+            div.name-properties(flex="50") {{ 'COLOR' | translate }}
             div.t-right(flex="50") {{articleShow.name_clothe_colors}}
           md-divider
           div.block-properties(layout="row")
-            div.name-properties(flex="50") State
+            div.name-properties(flex="50") {{ 'STATE' | translate }}
             div.t-right(flex="50") {{articleShow.name_clothe_states}}
           md-divider
           div.block-properties(layout="row")
-            div.name-properties(flex="50") Brand
+            div.name-properties(flex="50") {{ 'BRAND' | translate }}
             div.t-right(flex="50") {{articleShow.name_brand}}
           md-divider
 
@@ -83,11 +83,11 @@ div.article-show(layout="row" layout-align="center")
 
 
           div.rent(layout="column" flex="flex" layout-align="start" ng-click="articleShow.askForRent()" ng-if="!articleShow.articleNotAvailable && !articleShow.ownArticle")
-            md-button.md-raised Ask for rent
+            md-button.md-raised {{ 'ASK_FOR_RENT' | translate }}
 
           div(layout="row" layout-align="center center" ng-if="articleShow.articleNotAvailable || articleShow.ownArticle")
-            div(class="article-not-available" ng-if="!articleShow.ownArticle").flex This article is not available at this moment.
-            div(class="article-not-available" ng-if="articleShow.ownArticle").flex You can't book your own article.
+            div(class="article-not-available" ng-if="!articleShow.ownArticle").flex {{'ARTICLE_NOT_AVAILABLE' | translate}}
+            div(class="article-not-available" ng-if="articleShow.ownArticle").flex {{'CAN_NOT_BOOK_OWN_ARTICLE' | translate}}
 
           div.favorite-share(layout="column" flex="flex" layout-align="end" )
             div.details
@@ -95,12 +95,12 @@ div.article-show(layout="row" layout-align="center")
                 a(href='#')
                   ng-md-icon(icon="favorite_border" ng-if='!articleShow.ownArticle' ng-hide='articleShow.is_in_favorite' ng-click="articleShow.addArticleToFavorite(articleShow.article._id)")
                   ng-md-icon(icon="favorite" ng-if='!articleShow.ownArticle' ng-hide='!articleShow.is_in_favorite' ng-click="articleShow.deleteArticleFavorite (articleShow.article._id)")
-                  span(ng-if='!articleShow.ownArticle' ng-hide='articleShow.is_in_favorite' ng-click="articleShow.addArticleToFavorite(articleShow.article._id)").bottom-right-md-card Add to your favorites
-                  span(ng-if='!articleShow.ownArticle' ng-hide='!articleShow.is_in_favorite' ng-click="articleShow.deleteArticleFavorite (articleShow.article._id)").bottom-right-md-card Delete from your favorites
+                  span(ng-if='!articleShow.ownArticle' ng-hide='articleShow.is_in_favorite' ng-click="articleShow.addArticleToFavorite(articleShow.article._id)").bottom-right-md-card {{'ADD_TO_FAVORITE' | translate}}
+                  span(ng-if='!articleShow.ownArticle' ng-hide='!articleShow.is_in_favorite' ng-click="articleShow.deleteArticleFavorite (articleShow.article._id)").bottom-right-md-card {{'DELETE_FROM_FAVORITE' | translate}}
             div.details
               span
                 ng-md-icon(icon="share" style="cursor:default")
-                span.bottom-right-md-card Share it
+                span.bottom-right-md-card {{'SHARE_IT' | translate}}
                 span
                   ng-md-icon(icon="facebook"
                   href="#" socialshare socialshare-provider="facebook"
@@ -117,7 +117,7 @@ div.article-show(layout="row" layout-align="center")
                   socialshare-redirect-uri="")
                   ng-md-icon(icon="twitter" href="#" socialshare socialshare-provider="twitter"
                   socialshare-url="{{articleShow.url_api}}article/{{articleShow.article._id}}"
-                  socialshare-text="Look what I found on LocsApp"
+                  socialshare-text="{{'SHARE_LOOK' | translate}}"
                   socialshare-via="locsapp"
                   socialshare-display="popup")
 
@@ -126,10 +126,10 @@ div.article-show(layout="row" layout-align="center")
                 //a(facebook class="facebookShare" data-url='http://google.com'data-shares='shares') {{ shares }}
                 a(href='#' ng-if="!articleShow.is_reported" ng-show="!articleShow.ownArticle")
                   ng-md-icon(icon="warning")
-                  span.bottom-right-md-card( ng-click="articleShow.reportDialog($event)") Send a report
+                  span.bottom-right-md-card( ng-click="articleShow.reportDialog($event)") {{'SEND_REPORT' | translate}}
               ng-md-icon(ng-if='articleShow.is_reported' icon="warning" style="cursor:default")
               span.bottom-right-md-card.report-sent( ng-if='articleShow.is_reported'
-              style='text-decoration:none;') Report already sent
+              style='text-decoration:none;') {{'REPORT_ALREADY_SENT' | translate}}
 
 
 
@@ -167,36 +167,36 @@ div.article-show(layout="row" layout-align="center")
           span +{{question.thumbs_up.length}}
         div(flex-offset="10") {{question.response}}
         md-input-container.md-block(ng-if="articleShow.ownArticle && question.response == undefined")
-          label You can answer the question here
+          label {{'CAN_ANSWER_QUESTION' | translate}}
           textarea(ng-model="articleShow.answers[$index]" md-maxlength="150" rows="5"
           md-select-on-focus)
-          md-button.md-raised(ng-click='articleShow.sendAnswer(question.id, articleShow.answers[$index])') Answer the question
+          md-button.md-raised(ng-click='articleShow.sendAnswer(question.id, articleShow.answers[$index])') {{'ANSWER_QUESTION' | translate}}
 
 
 
 
     div(layout="row" layout-align="center" class="question-not-available" ng-if="articleShow.ownArticle")
       div(layout="column")
-        div.flex You can't ask question on your own article
+        div.flex {{'CAN_NOT_ASK_QUESTION_OWN_ARTICLE' | translate}}
 
     div(layout="row" layout-align="center" ng-if="!articleShow.ownArticle")
       div(layout="column")
         md-input-container.md-block
-          label(ng-if="articleShow.questions.length === 0") Be the first one to ask something
-          label(ng-if="articleShow.questions.length != 0") Please ask your question
+          label(ng-if="articleShow.questions.length === 0") {{'FIRST_ONE' | translate}}
+          label(ng-if="articleShow.questions.length != 0") {{'ASK_QUESTION' | translate}}
           textarea(ng-model="articleShow.askQuestion" md-maxlength="150" rows="5" md-select-on-focus)
-          md-button.md-raised(ng-click='articleShow.sendQuestion()') Send question
+          md-button.md-raised(ng-click='articleShow.sendQuestion()') {{'SEND_QUESTION' | translate}}
 
     div.t-center.submit(ng-show="articleShow.hasMoreItemsToShow()" ng-click="articleShow.showMoreItems()")
-      md-button.md-raised Show more
+      md-button.md-raised {{'SHOW_MORE' | translate}}
 
 
 
-    div(layout="row" layout-align="center")
+    //div(layout="row" layout-align="center")
       md-divider.separator-h2(flex="40")
       h2.t-center(flex="20") We Recommend
       md-divider.separator-h2(flex="40")
-    div(layout='row' layout-align='center' ng-show='articleShow.articles_recommend.length')
+    //div(layout='row' layout-align='center' ng-show='articleShow.articles_recommend.length')
       data-owl-carousel.owl-carousel(data-options='{navigation: false, pagination: true, ' +
       'rewindNav : false, loop: true, autoWidth: true, autoplay:true, autoplayTimeout:1000}')
         .item(owl-carousel-item='', ng-repeat='article_recommend in articleShow.articles_recommend track by $index')

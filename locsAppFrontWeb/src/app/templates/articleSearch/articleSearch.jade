@@ -30,7 +30,7 @@ div.search-article-body(ng-cloak)
 							label {{'YOUR_KEYWORD' | translate}}
 							input(name="searchKeywords" ng-model="articleSearch.titleKeywords")
 						section(layout="row", layout-align="center center")
-							md-button(ng-click="articleSearch.searchTitle(articleSearch.titleKeywords);" style="margin: 0 0 10 10").md-raised Search
+							md-button(ng-click="articleSearch.searchTitle(articleSearch.titleKeywords);" style="margin: 0 0 10 10").md-raised {{'SEARCH' | translate}}
 						section(layout="row", layout-align="start start")
 							span(flex="60") {{'SEARCH_ONLY_IN_TITLE' | translate}}
 							span.flex
@@ -42,7 +42,7 @@ div.search-article-body(ng-cloak)
 					md-card-content
 						menu-collapse(title="Position" layout-fill)
 							md-input-container(style="margin-bottom:0px;")
-								label {{'YOUR_POSTIION' | translate}}
+								label {{'YOUR_POSITION' | translate}}
 								input(name="searchKeywords").flex
 							section(layout="row", layout-align="start start" style="margin-bottom:20px;")
 								ng-md-icon(icon="my_location" flex="15")
@@ -59,31 +59,31 @@ div.search-article-body(ng-cloak)
 						md-card-title-text
 							span.title-on-card {{'CLOTHES_PROPERTIES' | translate}}
 					md-card-content
-						menu-collapse(title="Categories")
+						menu-collapse(title="{{'CATEGORIES' | translate}}")
 							div(ng-repeat="category in articleSearch.categories")
 								md-checkbox(ng-click="articleSearch.toggleFilter(0, category._id)").filters-checkboxes {{ category.name }}
 						md-divider
-						menu-collapse(title="Sub-Categories")
+						menu-collapse(title="{{'SUBCATEGORIES' | translate}}")
 							div(ng-repeat="subCategory in articleSearch.subCategories")
 								md-checkbox(ng-click="articleSearch.toggleFilter(1, subCategory._id)").filters-checkboxes {{ subCategory.name }}
 						md-divider
-						menu-collapse(title="Brands")
+						menu-collapse(title="{{'BRANDS' | translate}}")
 							div(ng-repeat="brand in articleSearch.brands")
 								md-checkbox(ng-click="articleSearch.toggleFilter(2, brand._id)").filters-checkboxes {{ brand.name }}
 						md-divider
-						menu-collapse(title="Genders")
+						menu-collapse(title="{{'GENDERS' | translate}}")
 							div(ng-repeat="gender in articleSearch.genders")
 								md-checkbox(ng-click="articleSearch.toggleFilter(3, gender._id)").filters-checkboxes {{ gender.name }}
 						md-divider
-						menu-collapse(title="Sizes")
+						menu-collapse(title="{{'SIZES' | translate}}")
 							div(ng-repeat="size in articleSearch.sizes")
 								md-checkbox(ng-click="articleSearch.toggleFilter(4, size._id)").filters-checkboxes {{ size.name }}
 						md-divider
-						menu-collapse(title="Colors")
+						menu-collapse(title="{{'COLORS' | translate}}")
 							div(ng-repeat="color in articleSearch.clothe_colors")
 								md-checkbox(ng-click="articleSearch.toggleFilter(5, color._id)").filters-checkboxes {{ color.name }}
 						md-divider
-						menu-collapse(title="States")
+						menu-collapse(title="{{'STATES' | translate}}")
 							div(ng-repeat="state in articleSearch.clothe_states")
 								md-checkbox(ng-click="articleSearch.toggleFilter(6, state._id)").filters-checkboxes {{ state.name }}
 				md-card.card-containers

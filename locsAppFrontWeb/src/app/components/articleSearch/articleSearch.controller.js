@@ -13,6 +13,22 @@
     var vm = this;
     vm.translateTitle = $translate('TITLE');
     vm.tranpricePrice = $translate('PRICE');
+
+    /*vm.translateCategories = $translate('CATEGORIES');
+    vm.translateSubCategories = $translate('SUBCATEGORIES');
+    vm.translateBrands = $translate();
+    vm.translateGenders = $translate();
+    vm.translateSizes = $translate();
+    vm.translateColors = $translate();
+    vm.translateStates = $translate();
+    'CATEGORIES': 'categories',
+      'SUBCATEGORIES': 'Sub-Categories',
+      'BRANDS': 'brands',
+      'GENDERS': 'genders',
+      'SIZES': 'sizes',
+      'COLORS': 'colors',
+      'STATES': 'states',*/
+
     vm.limitDescription = 75;
     vm.limitTitle = 30;
 

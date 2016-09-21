@@ -98,6 +98,8 @@
       'SERVER_NOT_ANSWERING': 'The server isn\'t answering...',
       'SUCCESS': 'Success!',
       'ERROR_OCCURRED': 'An error occurred',
+      'BY': 'By',
+      'DAY': 'day',
 
 
       /* Error form */
@@ -251,6 +253,13 @@
       'WITHIN': 'Within',
       'KM': 'km',
 
+      'CATEGORIES': 'categories',
+      'SUBCATEGORIES': 'Sub-Categories',
+      'BRANDS': 'brands',
+      'GENDERS': 'genders',
+      'SIZES': 'sizes',
+      'COLORS': 'colors',
+      'STATES': 'states',
 
 
       /* Login and Sign in */
@@ -321,6 +330,25 @@
       'ENTER_YOUR_EMAIL': 'Enter your email',
       'RESET': 'Reset',
 
+      /* Article show */
+      'ASK_FOR_RENT': 'Ask for rent',
+      'ARTICLE_NOT_AVAILABLE': 'This article is not available at this moment.',
+      'CAN_NOT_BOOK_OWN_ARTICLE': 'You can\'t book your own article.',
+      'ADD_TO_FAVORITE': 'Add to your favorites',
+      'DELETE_FROM_FAVORITE': 'Delete from your favorites',
+      'SHARE_IT': 'Share it',
+      'SHARE_LOOK': 'Look what I found on LocsApp',
+      'SEND_REPORT': 'Send a report',
+      'REPORT_ALREADY_SENT': 'Report already sent',
+
+      'CAN_ANSWER_QUESTION': 'You can answer the question here',
+      'ANSWER_QUESTION': 'Answer the question',
+
+      'CAN_NOT_ASK_QUESTION_OWN_ARTICLE': 'You can\'t ask question on your own article',
+      'FIRST_ONE': 'Be the first one to ask something',
+      'ASK_YOUR_QUESTION': ' Please ask your question',
+      'SEND_QUESTION': 'Send your question',
+
 
       /* Toaster */
 
@@ -378,6 +406,8 @@
       'SERVER_NOT_ANSWERING': 'Le serveur ne répond pas',
       'SUCCESS': 'Succès!',
       'ERROR_OCCURRED': 'Une erreur est survenue',
+      'BY': 'Par',
+      'DAY': 'jour',
 
 
       /* Error form */
@@ -531,6 +561,13 @@
       'WITHIN': 'A environ',
       'KM': 'km',
 
+      'CATEGORIES': 'Catégories',
+      'SUBCATEGORIES': 'Sous catégories',
+      'BRANDS': 'Marques',
+      'GENDERS': 'Sexes',
+      'SIZES': 'Tailles',
+      'COLORS': 'Couleurs',
+      'STATES': 'Etats',
 
       /* Login and Sign in */
       'USERNAME_OR_EMAIL': 'Pseudo ou Email',
@@ -587,7 +624,7 @@
       'SELECT_ALL': 'Tout sélectionner',
       'ARTICLE_PRICE': 'Le prix de l\'article',
       'TOOLTIP_PRICE': 'Ce sera le prix de la location de votre article par jour. Ce sera affiché dans la recherche.',
-      'PRICE': 'prix',
+      'PRICE': 'Prix',
 
       'PREVIEW_ARTICLE': 'Prévisualiser votre article',
       'CONGRATULATION': 'Félicitations ! Vous allez avoir une prévisualisation de votre article.',
