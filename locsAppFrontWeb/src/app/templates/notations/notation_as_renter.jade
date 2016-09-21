@@ -45,7 +45,7 @@ div(style="margin-top: 10px;" ng-cloak)
                     p {{ notation.comment | limitTo: 30 }} {{notation.comment.length > 30 ? '...' : ''}}
             md-grid-tile-footer
               div(layout-fill layout="row" layout-align="center start" ng-if="notation.comment.length > 30 || notation.article_name.length > 10")
-                md-button.special-button.md-raised(ng-click="notationAsRenter.showNotationDialog($event, notation);") Show more
+                md-button.special-button.md-raised(ng-click="notationAsRenter.showNotationDialog($event, notation);") {{'SHOW_MORE' | translate}}
   md-divider.flex()
   div.search-article-toolbar(ng-if="notationAsRenter.renter_score_array != undefined")
     md-toolbar(style="background-color:none" layout="row")
