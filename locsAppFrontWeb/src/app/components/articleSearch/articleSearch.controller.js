@@ -6,9 +6,13 @@
     .controller('ArticleSearchController', ArticleSearchController);
 
   /** @ngInject */
-  function ArticleSearchController(ArticleService, $log, toastr, URL_API, $state, ScopesService) {
+  function ArticleSearchController(ArticleService, $log, toastr, URL_API, $state, ScopesService, $filter) {
     $log.log(URL_API);
+    var $translate = $filter('translate');
+
     var vm = this;
+    vm.translateTitle = $translate('TITLE');
+    vm.tranpricePrice = $translate('PRICE');
     vm.limitDescription = 75;
     vm.limitTitle = 30;
 
@@ -25,7 +29,7 @@
 
     /*Option vars*/
     vm.url_api = URL_API;
-    vm.sortingOptions = ["title", "price"];
+    vm.sortingOptions = [vm.translateTitle, vm.tranpricePrice];
     vm.sortOption = "";
     vm.searchOnlyInTitle = true;
     vm.filtersTable = ["base_category", "sub_category", "brand", "gender", "size", "color", "article_state", "payment_methods"];
@@ -50,10 +54,10 @@
       if (number != 42)
         vm.search._pagination.page_number += number;
       ArticleService
-      .searchArticles
-      .save(vm.search)
-      .$promise
-      .then(vm.getArticles, vm.failedGetArticles);
+        .searchArticles
+        .save(vm.search)
+        .$promise
+        .then(vm.getArticles, vm.failedGetArticles);
     }
 
     /*Articles functions*/
