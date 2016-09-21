@@ -15,7 +15,9 @@
                                    $document, $filter) {
 
 
+    var vm = this;
     var $translate = $filter('translate');
+
     vm.wops = $translate('WOPS');
     vm.errorOccurred = $translate('ERROR_OCCURRED');
     vm.errorRetrievingData = $translate('RETRIEVING_DATA');
@@ -26,12 +28,8 @@
     vm.successAvatarChanged = $translate('AVATAR_CHANGED');
     vm.errorAvatar = $translate('AVATAR_ERROR');
     vm.alreadyEmailAddress = $translate('ALREADY_EMAIL_ADDRESS');
-    vm.newAddressesAdd = $translate('NEW_ADDRESSES_ADD');
-    vm.modifyLivingAddress = $translate('MODIFY_LIVING_ADDRESS_ADD');
-    vm.newBillingAddressAdd = $translate('NEW_BILLING_ADDRESS_ADD');
-    vm.successDeleteAddress = $translate('SUCCESS_DELETE');
 
-    var vm = this;
+
     vm.limitAdress = 5;
     vm.genderError = false;
     var init_logo_url = "";
@@ -200,7 +198,7 @@
     vm.ChangePasswordSuccess = function (data) {
       $log.log("Success changin password");
       $log.log(data);
-      toastr.success(data.success, "Success");
+      toastr.success(vm.successChangePasword, "Success");
       /* vm.old_password = "";
        vm.new_password = "";
        vm.confirm_new_password = "";*/
@@ -216,7 +214,7 @@
         error = data.data.new_password1;
       else if (data.data.new_password2)
         error = data.data.new_password2;
-      toastr.error(error, vm.wops);
+      toastr.error(vm.errorOccurred + "\n" + error, vm.wops);
     };
 
     vm.submitPassword = function () {
@@ -292,8 +290,18 @@
 
     /*addAddressDialog Controller*/
     /** @ngInject */
-    vm.editAddressController = function ($mdDialog) {
+    vm.editAddressController = function ($mdDialog, $filter) {
       var vm = this;
+
+      var $translate = $filter('translate');
+
+      vm.newAddressesAdd = $translate('NEW_ADDRESSES_ADD');
+      vm.modifyLivingAddress = $translate('MODIFY_LIVING_ADDRESS_ADD');
+      vm.modifyBillingAddress = $translate('MODIFY_BILLING_ADDRESS_ADD');
+      vm.successDeleteAddress = $translate('SUCCESS_DELETE');
+      vm.successChangePasword = $translate('SUCCESS_CHANGE_PASSWORD');
+      vm.newBillingAddress = $translate('NEW_BILLING_ADDRESS');
+      vm.newLivingAddress = $translate('NEW_LIVING_ADDRESS');
 
       /*initialize vars*/
       vm.add_to_other = false;
@@ -324,11 +332,11 @@
         vm.parseAddressToJson();
         $log.log(vm.user);
         if (vm.add_to_other && vm.count == 1)
-          toastr.success("The new addresses have been successfully added.", vm.successTranslate);
+          toastr.success(vm.newAddressesAdd, vm.successTranslate);
         else if (vm.type == 0 && vm.count == 0)
-          toastr.success("The new living address has been successfully modified.", vm.successTranslate);
+          toastr.success(vm.modifyLivingAddress, vm.successTranslate);
         else if (vm.type == 1 && vm.count == 0)
-          toastr.success("The new billing address has been successfully modified.", vm.successTranslate);
+          toastr.success(vm.modifyBillingAddress, vm.successTranslate);
         if (!vm.add_to_other)
           vm.hide();
         else {
@@ -384,8 +392,18 @@
 
     /*addAddressDialog Controller*/
     /** @ngInject */
-    vm.addAddressController = function ($mdDialog) {
+    vm.addAddressController = function ($mdDialog, $filter) {
       var vm = this;
+
+      var $translate = $filter('translate');
+
+      vm.newAddressesAdd = $translate('NEW_ADDRESSES_ADD');
+      vm.modifyLivingAddress = $translate('MODIFY_LIVING_ADDRESS_ADD');
+      vm.modifyBillingAddress = $translate('MODIFY_BILLING_ADDRESS_ADD');
+      vm.successDeleteAddress = $translate('SUCCESS_DELETE');
+      vm.successChangePasword = $translate('SUCCESS_CHANGE_PASSWORD');
+     vm.newBillingAddress = $translate('NEW_BILLING_ADDRESS');
+      vm.newLivingAddress = $translate('NEW_LIVING_ADDRESS');
 
       /*initialize vars*/
       vm.add_to_other = false;
@@ -416,11 +434,11 @@
         vm.parseAddressToJson();
         $log.log(vm.user);
         if (vm.add_to_other && vm.count == 1)
-          toastr.success("The new addresses have been successfully added.", vm.successTranslate);
+          toastr.success(vm.newAddressesAdd, vm.successTranslate);
         else if (vm.type == 0 && vm.count == 0)
-          toastr.success("The new living address has been successfully added.", vm.successTranslate);
+          toastr.success(vm.newLivingAddress, vm.successTranslate);
         else if (vm.type == 1 && vm.count == 0)
-          toastr.success("The new billing address has been successfully added.", vm.successTranslate);
+          toastr.success(vm.newBillingAddress, vm.successTranslate);
         if (!vm.add_to_other)
           vm.hide();
         else {
@@ -454,7 +472,7 @@
       /*Failure callback of the ressource callback*/
       vm.GetAddressUserFailure = function (data) {
         $log.log(data);
-        toastr.error(data.data.Error, vm.wops);
+        toastr.error(vm.errorOccurred, vm.wops);
         if (vm.count == 1)
           vm.hide();
       };
@@ -503,8 +521,18 @@
 
     /*deleteAddressDialog Controller*/
     /** @ngInject */
-    vm.deleteAddressController = function ($mdDialog) {
+    vm.deleteAddressController = function ($mdDialog, $filter) {
       var vm = this;
+
+      var $translate = $filter('translate');
+
+      vm.newAddressesAdd = $translate('NEW_ADDRESSES_ADD');
+      vm.modifyLivingAddress = $translate('MODIFY_LIVING_ADDRESS_ADD');
+      vm.modifyBillingAddress = $translate('MODIFY_BILLING_ADDRESS_ADD');
+      vm.successDeleteAddress = $translate('SUCCESS_DELETE');
+      vm.successChangePasword = $translate('SUCCESS_CHANGE_PASSWORD');
+     vm.newBillingAddress = $translate('NEW_BILLING_ADDRESS');
+      vm.newLivingAddress = $translate('NEW_LIVING_ADDRESS');
 
       /*init vars*/
       vm.not_accepted = true;
@@ -533,7 +561,7 @@
         $log.log(data);
         vm.user = data;
         vm.parseAddressToJson();
-        toastr.success("The address has been successfully deleted.", vm.successTranslate);
+        toastr.success(vm.successDeleteAddress, vm.successTranslate);
         vm.hide();
       };
 

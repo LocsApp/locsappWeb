@@ -5,7 +5,7 @@
     .module('LocsappDirectives')
     .directive('menuToggle', menuToggle);
 
-  function menuToggle($log) {
+  function menuToggle() {
 
     return {
       scope: {

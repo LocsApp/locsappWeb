@@ -101,7 +101,7 @@
       vm.loader = false;
 
       /*password_reset success callback*/
-      vm.resetPasswordSuccess = function (data) {
+      vm.resetPasswordSuccess = function () {
         $log.log("test = ", vm.successPasswordReset);
         toastr.success(
           vm.successPasswordReset, vm.successTranslate);

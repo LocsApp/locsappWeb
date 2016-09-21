@@ -336,10 +336,13 @@
       'ALREADY_EMAIL_ADDRESS': 'This is already your email address',
       'NEW_ADDRESSES_ADD': 'The new addresses have been successfully added.',
       'NEW_LIVING_ADDRESS_ADD': 'The new living address has been successfully modified.',
-      'NEW_BILLING_ADDRESS_ADD': 'The new billing address has been successfully modified.',
+      'MODIFY_BILLING_ADDRESS_ADD': 'The new billing address has been successfully modified.',
       'SUCCESS_DELETE': 'The address has been successfully deleted.',
+      'NEW_LIVING_ADDRESS': 'The new living address has been successfully added.',
+      'NEW_BILLING_ADDRESS': 'The new billing address has been successfully added.',
 
       'SUCCESS_CHANGE_EMAIL': 'The email has been changed',
+      'SUCCESS_CHANGE_PASSWORD': 'Your password has been changed'
       /* End Update profile */
 
       /* End Toaster */
@@ -608,10 +611,15 @@
       'ALREADY_EMAIL_ADDRESS': 'Vous utilisez déjà cette adresse',
       'NEW_ADDRESSES_ADD': 'Les nouvelles addresse ont été ajoutées.',
       'MODIFY_LIVING_ADDRESS_ADD': 'L\'adresse de livraison a été modifiée avec succès.',
-      'NEW_BILLING_ADDRESS_ADD': 'L\'adresse de facturation a été modifiée avec succès.',
+      'MODIFY_BILLING_ADDRESS_ADD': 'L\'adresse de facturation a été modifiée avec succès.',
       'SUCCESS_DELETE': 'L\'adresse a été supprimé avec succès.',
+      'NEW_LIVING_ADDRESS': 'L\'adresse de livraison a été ajoutée avec succès.',
+      'NEW_BILLING_ADDRESS': 'L\'adresse de facturation a été ajoutée avec succès.',
+
 
       'SUCCESS_CHANGE_EMAIL': 'L\'adresse email a été changée',
+      'SUCCESS_CHANGE_PASSWORD': 'Your password has been changed'
+
 
       /* End Update profile */
 
