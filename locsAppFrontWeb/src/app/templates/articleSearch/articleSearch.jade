@@ -110,7 +110,7 @@ div.search-article-body(ng-cloak)
 						md-card-content(layout="column", layout-align="start center")
 							div(style="position: relative;")
 								img(ng-src="{{articleSearch.url_api + article.url_thumbnail}}").thumbnail-pic
-								div.icon-favorite-disabled
+								div.icon-favorite-disabled(style='display:none')
 									ng-md-icon(icon="favorite" size="32")
 							h3.title-article {{ article.title | limitTo:articleSearch.limitTitle }} <span ng-if='article.title.length > articleSearch.limitTitle'>...</span>
 							h2.price-article {{ article.price }}€/day
