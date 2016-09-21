@@ -24,12 +24,12 @@
     vm.lastMode = false;
 
     vm.GetNotationsClientSuccess = function (data) {
-      $log.log(data);
+      $log.log("GetNotationsClientSuccess ", data);
       vm.notationsClient = data.article_demands;
     };
 
     vm.GetNotationsRenterSuccess = function (data) {
-      $log.log(data);
+      $log.log("GetNotationsRenterSuccess ",data);
       vm.notationsRenter = data.article_demands;
     };
 
@@ -90,19 +90,39 @@
         .$promise
         .then(vm.sendNotationSuccess, vm.sendNotationFailure);
       }
-    }
+    };
 
-    ArticleService
+   /* ArticleService
     .getPendingMarksForClients
     .get({"id_page": vm.current_page_pending_mark_client})
     .$promise
-    .then(vm.GetNotationsClientSuccess,  vm.GetNotationFailure);
+    .then(vm.GetNotationsClientSuccess,  vm.GetNotationFailure);*/
 
-    ArticleService
+    /*ArticleService
     .getPendingMarksForRenters
     .get({"id_page": vm.current_page_pending_mark_renter})
     .$promise
-    .then(vm.GetNotationsRenterSuccess,  vm.GetNotationFailure);
+    .then(vm.GetNotationsRenterSuccess,  vm.GetNotationFailure);*/
+
+    /* Avec la pagination ça fonctionne pas */
+    ArticleService
+      .getPendingMarksForClientsPagination
+      .save({
+        page: 1,
+        number_items: 10
+      })
+      .$promise
+      .then(vm.GetNotationsClientSuccess, vm.GetNotationFailure);
+
+     ArticleService
+      .getPendingMarksForRentersPagination
+      .save({
+        page: 1,
+        number_items: 10
+      })
+      .$promise
+      .then(vm.GetNotationsRenterSuccess, vm.GetNotationFailure);
+
   }
 
 })();

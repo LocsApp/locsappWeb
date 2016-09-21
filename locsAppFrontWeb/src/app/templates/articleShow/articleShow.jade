@@ -80,7 +80,7 @@ div.article-show(layout="row" layout-align="center")
             md-datepicker( ng-model="articleShow.AskBeginLocation"
             md-placeholder="Begin location"  md-min-date="articleShow.dateStart" md-max-date="articleShow.dateEnd")
             md-datepicker(ng-model="articleShow.AskEndLocation" md-placeholder="End location" md-min-date="articleShow.AskBeginLocation" md-max-date="articleShow.dateEnd")
-            //md-button.md-raised Ask for rent
+
 
           div.rent(layout="column" flex="flex" layout-align="start" ng-click="articleShow.askForRent()" ng-if="!articleShow.articleNotAvailable && !articleShow.ownArticle")
             md-button.md-raised Ask for rent

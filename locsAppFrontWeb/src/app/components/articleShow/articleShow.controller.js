@@ -66,7 +66,6 @@
           global_mark_array.push(false);
       }
       vm.global_mark_array = global_mark_array;
-      $log.log("global mark array ", vm.global_mark_array);
 
       /* find the name using the id fixtures */
       vm.name_gender = vm.genders[vm.genders.map(function (x) {
@@ -112,8 +111,8 @@
        vm.dateEnd = new Date(vm.dateEndParts[2], vm.dateEndParts[1] - 1, vm.dateEndParts[0]);
        vm.AskBeginLocation = new Date(vm.dateBeginParts[2], vm.dateBeginParts[1] - 1, vm.dateBeginParts[0]);
        vm.AskEndLocation = new Date(vm.dateEndParts[2], vm.dateEndParts[1] - 1, vm.dateEndParts[0]);*/
-      vm.dateStart = new Date(vm.article.availibility_start.$date);
-      vm.dateEnd = new Date(vm.article.availibility_end.$date);
+      vm.dateStart = new Date(vm.article.availibility_start);
+      vm.dateEnd = new Date(vm.article.availibility_end);
       if (vm.dateEnd < new Date())
         vm.articleNotAvailable = true;
       if (vm.dateStart < new Date()) {
@@ -123,7 +122,6 @@
       vm.AskBeginLocation = new Date(vm.dateStart);
       vm.AskEndLocation = new Date(vm.dateStart);
 
-      $log.log("id_author = ", vm.article.id_author);
       //$log.log("ScopesServiece = ",  ScopesService.get("current_user").id);
 
       if (ScopesService.get("current_user") && ScopesService.get("current_user").id
@@ -173,8 +171,6 @@
       vm.showMoreItems = function () {
         pagesShown = pagesShown + 1;
       };
-
-      $log.log("ARTICLE OWN BOOL == ", vm.ownArticle, vm.is_in_favorite)
 
     };
 

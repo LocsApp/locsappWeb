@@ -55,6 +55,12 @@
         {id_page: "id_page"}),
       getPendingMarksForRenters: $resource(URL_API + 'api/v1/articles/get-pending-marks-for-renters/:id_page/',
         {id_page: "id_page"}),
+
+
+
+      getPendingMarksForClientsPagination: $resource(URL_API + 'api/v1/search/notations-as-client/'),
+      getPendingMarksForRentersPagination: $resource(URL_API + 'api/v1/search/notations-as-renter/'),
+
       uploadPicture: uploadPicture,
       is_authenticated: is_authenticated
     };

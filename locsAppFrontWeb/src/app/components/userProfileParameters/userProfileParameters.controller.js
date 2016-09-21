@@ -298,10 +298,10 @@
       vm.newAddressesAdd = $translate('NEW_ADDRESSES_ADD');
       vm.modifyLivingAddress = $translate('MODIFY_LIVING_ADDRESS_ADD');
       vm.modifyBillingAddress = $translate('MODIFY_BILLING_ADDRESS_ADD');
-      vm.successDeleteAddress = $translate('SUCCESS_DELETE');
-      vm.successChangePasword = $translate('SUCCESS_CHANGE_PASSWORD');
-      vm.newBillingAddress = $translate('NEW_BILLING_ADDRESS');
-      vm.newLivingAddress = $translate('NEW_LIVING_ADDRESS');
+      vm.wops = $translate('WOPS');
+      vm.errorOccurred = $translate('ERROR_OCCURRED');
+      vm.successTranslate = $translate('SUCCESS');
+
 
       /*initialize vars*/
       vm.add_to_other = false;
@@ -398,12 +398,12 @@
       var $translate = $filter('translate');
 
       vm.newAddressesAdd = $translate('NEW_ADDRESSES_ADD');
-      vm.modifyLivingAddress = $translate('MODIFY_LIVING_ADDRESS_ADD');
-      vm.modifyBillingAddress = $translate('MODIFY_BILLING_ADDRESS_ADD');
-      vm.successDeleteAddress = $translate('SUCCESS_DELETE');
-      vm.successChangePasword = $translate('SUCCESS_CHANGE_PASSWORD');
-     vm.newBillingAddress = $translate('NEW_BILLING_ADDRESS');
+      vm.newBillingAddress = $translate('NEW_BILLING_ADDRESS');
       vm.newLivingAddress = $translate('NEW_LIVING_ADDRESS');
+      vm.wops = $translate('WOPS');
+      vm.errorOccurred = $translate('ERROR_OCCURRED');
+      vm.successTranslate = $translate('SUCCESS');
+
 
       /*initialize vars*/
       vm.add_to_other = false;
@@ -526,13 +526,11 @@
 
       var $translate = $filter('translate');
 
-      vm.newAddressesAdd = $translate('NEW_ADDRESSES_ADD');
-      vm.modifyLivingAddress = $translate('MODIFY_LIVING_ADDRESS_ADD');
-      vm.modifyBillingAddress = $translate('MODIFY_BILLING_ADDRESS_ADD');
       vm.successDeleteAddress = $translate('SUCCESS_DELETE');
-      vm.successChangePasword = $translate('SUCCESS_CHANGE_PASSWORD');
-     vm.newBillingAddress = $translate('NEW_BILLING_ADDRESS');
-      vm.newLivingAddress = $translate('NEW_LIVING_ADDRESS');
+      vm.wops = $translate('WOPS');
+      vm.errorOccurred = $translate('ERROR_OCCURRED');
+      vm.successTranslate = $translate('SUCCESS');
+
 
       /*init vars*/
       vm.not_accepted = true;
