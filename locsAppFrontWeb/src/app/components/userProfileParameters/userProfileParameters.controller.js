@@ -12,7 +12,24 @@
 
   /** @ngInject */
   function ProfileParamsController($scope, $log, ScopesService, toastr, UsersService, $mdDialog,
-                                   $document) {
+                                   $document, $filter) {
+
+
+    var $translate = $filter('translate');
+    vm.wops = $translate('WOPS');
+    vm.errorOccurred = $translate('ERROR_OCCURRED');
+    vm.errorRetrievingData = $translate('RETRIEVING_DATA');
+    vm.serverNotAnswering = $translate('SERVER_NOT_ANSWERING');
+    vm.successTranslate = $translate('SUCCESS');
+
+    vm.successModifiedProfile = $translate('SUCCESS_MODIFIED_PROFILE');
+    vm.successAvatarChanged = $translate('AVATAR_CHANGED');
+    vm.errorAvatar = $translate('AVATAR_ERROR');
+    vm.alreadyEmailAddress = $translate('ALREADY_EMAIL_ADDRESS');
+    vm.newAddressesAdd = $translate('NEW_ADDRESSES_ADD');
+    vm.modifyLivingAddress = $translate('MODIFY_LIVING_ADDRESS_ADD');
+    vm.newBillingAddressAdd = $translate('NEW_BILLING_ADDRESS_ADD');
+    vm.successDeleteAddress = $translate('SUCCESS_DELETE');
 
     var vm = this;
     vm.limitAdress = 5;
@@ -67,7 +84,6 @@
       $log.log(vm.user.billing_address);
 
 
-
     };
 
     vm.GetInfosPutUserSuccess = function (data) {
@@ -78,24 +94,24 @@
 
       //vm.user.registered_date = vm.user.registered_date.substring(0, 10);
       vm.user.email_repeat = vm.user.email;
-      toastr.success("The profile has been successfully modified.", "Success");
+      toastr.success(vm.successModifiedProfile, vm.successTranslate);
       vm.parseAddressToJson();
     };
 
     /*Failure callback of profile_check*/
     vm.GetInfosUserFailure = function (data) {
       $log.log(data);
-      toastr.error("This is odd...", "Woops...");
+      toastr.error(vm.errorOccurred, vm.wops);
     };
 
 
     vm.uploadImageSuccess = function (data) {
-      toastr.success("Success", "Your avatar has been changed");
+      toastr.success(vm.successAvatarChanged, vm.successTranslate);
       $log.log("uploadImageSuccess = ", data);
     };
 
     vm.uploadImageFailure = function (data) {
-      toastr.error(data.error, "Couldn't upload a picture");
+      toastr.error(vm.errorAvatar, vm.wops);
       $log.error("uploadImageFailure = ", data);
     };
 
@@ -152,12 +168,12 @@
     };
 
     vm.ChangeEmailSuccess = function (data) {
-      toastr.success(data.message, "Success...");
+      toastr.success(data.message, vm.successTranslate);
       $log.log("Success = ", data);
     };
 
     vm.ChangeEmailFailure = function (data) {
-      toastr.error(data.Error, "Error...");
+      toastr.error(vm.errorOccurred, vm.wops);
       $log.log("err = ", data);
     };
 
@@ -166,7 +182,7 @@
 
       $log.log("email = ", vm.user.email);
       if (vm.current_user_email == vm.user.email) {
-        toastr.error("This is already your email address", "Error...");
+        toastr.error(vm.alreadyEmailAddress, vm.wops);
       }
 
       UsersService
@@ -200,7 +216,7 @@
         error = data.data.new_password1;
       else if (data.data.new_password2)
         error = data.data.new_password2;
-      toastr.error(error, "Woops...");
+      toastr.error(error, vm.wops);
     };
 
     vm.submitPassword = function () {
@@ -308,11 +324,11 @@
         vm.parseAddressToJson();
         $log.log(vm.user);
         if (vm.add_to_other && vm.count == 1)
-          toastr.success("The new addresses have been successfully added.", "Success");
+          toastr.success("The new addresses have been successfully added.", vm.successTranslate);
         else if (vm.type == 0 && vm.count == 0)
-          toastr.success("The new living address has been successfully modified.", "Success");
+          toastr.success("The new living address has been successfully modified.", vm.successTranslate);
         else if (vm.type == 1 && vm.count == 0)
-          toastr.success("The new billing address has been successfully modified.", "Success");
+          toastr.success("The new billing address has been successfully modified.", vm.successTranslate);
         if (!vm.add_to_other)
           vm.hide();
         else {
@@ -400,11 +416,11 @@
         vm.parseAddressToJson();
         $log.log(vm.user);
         if (vm.add_to_other && vm.count == 1)
-          toastr.success("The new addresses have been successfully added.", "Success");
+          toastr.success("The new addresses have been successfully added.", vm.successTranslate);
         else if (vm.type == 0 && vm.count == 0)
-          toastr.success("The new living address has been successfully added.", "Success");
+          toastr.success("The new living address has been successfully added.", vm.successTranslate);
         else if (vm.type == 1 && vm.count == 0)
-          toastr.success("The new billing address has been successfully added.", "Success");
+          toastr.success("The new billing address has been successfully added.", vm.successTranslate);
         if (!vm.add_to_other)
           vm.hide();
         else {
@@ -438,7 +454,7 @@
       /*Failure callback of the ressource callback*/
       vm.GetAddressUserFailure = function (data) {
         $log.log(data);
-        toastr.error(data.data.Error, "Woops...");
+        toastr.error(data.data.Error, vm.wops);
         if (vm.count == 1)
           vm.hide();
       };
@@ -517,14 +533,14 @@
         $log.log(data);
         vm.user = data;
         vm.parseAddressToJson();
-        toastr.success("The address has been successfully deleted.", "Success");
+        toastr.success("The address has been successfully deleted.", vm.successTranslate);
         vm.hide();
       };
 
       /*Failure callback of the ressource callback*/
       vm.GetAddressUserFailure = function (data) {
         $log.log(data);
-        toastr.error("This is odd...", "Woops...");
+        toastr.error(vm.errorOccurred, vm.wops);
       };
 
       /*The user clicked on the Yes button*/
