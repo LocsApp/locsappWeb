@@ -224,9 +224,9 @@ URL_FRONT = 'http://127.0.0.1:3000/'
 URL_BACK = 'http://127.0.0.1:8000/'
 
 if socket.gethostname() == "sylflo.fr":
-    URL_FRONT = 'https://locsapp.sylflo.fr/'
+    URL_FRONT = 'https://locsapp.fr/'
     #URL_BACK = 'http://sylflo.fr:8010/'
-    URL_BACK = 'https://locsapp.sylflo.fr/'
+    URL_BACK = 'https://locsapp.fr/'
 
     DEBUG = TEMPLATE_DEBUG = True
 
@@ -242,10 +242,8 @@ if socket.gethostname() == "sylflo.fr":
     }
 
     ALLOWED_HOSTS = [
-        "https://locsapp.sylflo.fr",
-        "locsapp.sylflo.fr",
-        ".sylflo.fr",
-        "sylflo.fr",
+        "https://locsapp.fr",
+        "locsapp.fr",
         "5.135.163.38"]
     ADMINS = (
         ('Sylvain Chateau', 'dev.chateau@gmail.com'),
