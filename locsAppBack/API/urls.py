@@ -77,12 +77,12 @@ search_patterns = [
         views.notificationsUserAllRead),
     url(r'^articles/$',
         articles.searchArticles),
-    url(r'timeline-as-renting/$', views.paginationTimelineAsRenting),
-    url(r'timeline-as-renter/$', views.paginationTimelineAsRenter),
-    url(r'demands-as-renting/$', views.paginationDemandsAsRenting),
-    url(r'demands-as-renter/$', views.paginationDemandsAsRenter),
-    url(r'notations-as-client/$', views.paginationNotationsAsClient),
-    url(r'notations-as-renter/$', views.paginationNotationsAsRenter),
+   # url(r'timeline-as-renting/$', views.paginationTimelineAsRenting),
+   # url(r'timeline-as-renter/$', views.paginationTimelineAsRenter),
+   # url(r'demands-as-renting/$', views.paginationDemandsAsRenting),
+   # url(r'demands-as-renter/$', views.paginationDemandsAsRenter),
+   # url(r'notations-as-client/$', views.paginationNotationsAsClient),
+   # url(r'notations-as-renter/$', views.paginationNotationsAsRenter),
 
 ]
 

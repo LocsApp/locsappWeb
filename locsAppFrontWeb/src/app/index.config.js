@@ -101,7 +101,6 @@
       'BY': 'By',
       'DAY': 'day',
 
-
       /* Error form */
       'THIS_IS_REQUIRED': 'Champ obligatoire',
       'MUST_BE_LONGER_THAN_FIVE': 'must be longer than 5 characters',
