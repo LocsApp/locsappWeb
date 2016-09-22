@@ -784,14 +784,16 @@ def getArticle(request, article_pk):
         """
         articles_recommend = []
         price_range = 1000
-        article_recommend_mongo = db_locsapp["articles"].find({"price": {"$gt": article["price"] - price_range, "$lt": article["price"] + price_range}}
-                                                        ).limit(10)
+        #article_recommend_mongo = db_locsapp["articles"].find({"price": {"$gt": article["price"] - price_range, "$lt": article["price"] + price_range}}
+        #                                                ).limit(10)
         # print("article recooment = ", article_recommend)
+        """"
         for article_recommend in article_recommend_mongo:
             print("article = ", article_recommend)
             if article_recommend["_id"] != ObjectId(article_pk):
                 article_recommend = APIrequests.parseObjectIdToStr(article_recommend)
                 articles_recommend.append(article_recommend)
+         """
 
         return JsonResponse({"article": article, "global_mark_as_renter": global_mark_as_renter,
                              "nb_mark_as_renter": nb_mark_as_renter, "is_in_favorite": is_in_favorite,
