@@ -1,0 +1,29 @@
+[
+  {
+    "pk": 1,
+    "fields": {
+      "email": "locsapp.eip@gmail.com",
+      "password": "pbkdf2_sha256$20000$00FHyI05dW9Q$faqTxv84x7nKIXQcRWopZsRPf48+WWHfwMdxln9JkWQ=",
+      "registered_date": "2015-12-02T06:37:22.644Z",
+      "last_login": "2016-06-15T16:07:45.804Z",
+      "last_name": "LocsApp",
+      "username": "locsapp",
+      "billing_address": null,
+      "gender": "Man",
+      "created_at": "2015-12-02T06:37:22.661Z",
+      "last_activity_date": null,
+      "living_address": null,
+      "birthdate": "",
+      "secondary_emails": "[]",
+      "first_name": "LocsApp",
+      "is_active": true,
+      "logo_url": null,
+      "role": "user",
+      "is_admin": true,
+      "id_facebook": null,
+      "phone": "0786122659"
+    },
+    "model": "API.account"
+  }
+
+  ]
