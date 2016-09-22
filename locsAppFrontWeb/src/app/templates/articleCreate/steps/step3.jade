@@ -9,9 +9,8 @@ md-card(layout-fill)
 				span
 					ng-md-icon(icon="help", size="20")
 						md-tooltip(md-direction="right") {{ 'TOOLTIP_DESCRIPTION' | translate }}
-			text-angular(ta-toolbar-class="ta-toolbar", ta-text-editor-class="ta-editor", required ta-toolbar="articleCreate.toolbar" placeholder="{{ 'YOUR_DESCRIPTION' | translate }}" name="description" ng-model="articleCreate.description" taMaxText="5000")
+			text-angular(ta-toolbar-class="ta-toolbar", ta-text-editor-class="ta-editor", ta-toolbar="articleCreate.toolbar" placeholder="{{ 'YOUR_DESCRIPTION' | translate }}" name="description" ng-model="articleCreate.description" taMaxText="5000")
 			div(ng-messages="articleFormStep3.description.$error" ng-if='!articleFormStep3.description.$pristine')
-				div(ng-message="required") {{ 'THIS_IS_REQUIRED' | translate }}.
 				div(ng-message="minlength") {{ 'DESCRIPTION_TOO_SHORT' | translate }}.
 				div(ng-message="md-maxlength") {{ 'DESCRIPTION_TOO_LONG' | translate }.
 			md-button.md-raised(type="submit") {{ 'NEXT_STEP' | translate }}
