@@ -9,7 +9,7 @@ md-card(layout-fill)
 				span
 					ng-md-icon(icon="help", size="20")
 						md-tooltip(md-direction="right") {{ 'TOOLTIP_THUMBNAIL' | translate }}
-			img(ngf-src="articleCreate.files[0] || 'http://localhost:3000/assets/images/articles/default.jpg'" ngf-select ng-model="articleCreate.files[0]" name="logo" ngf-pattern="'image/*'"
+			img(ngf-src="articleCreate.files[0] || 'https://locsapp.fr/assets/images/articles/default.jpg'" ngf-select ng-model="articleCreate.files[0]" name="logo" ngf-pattern="'image/*'"
 				accept="image/*" ngf-max-size="2MB" ngf-min-height="100"
 				ngf-resize="{width: 300, height: 300}" style="cursor: pointer;").logo-picture
 			p
@@ -18,10 +18,10 @@ md-card(layout-fill)
 					ng-md-icon(icon="help", size="20")
 						md-tooltip(md-direction="right") {{ 'TOOLTIP_PICTURE' | translate }}
 			section.my-layout-xs(layout="row", layout-align="space-between")
-				img(ngf-src="articleCreate.files[1] || 'http://localhost:3000/assets/images/articles/default.jpg'" ngf-select ng-model="articleCreate.files[1]" name="picture1" ngf-pattern="'image/*'"
+				img(ngf-src="articleCreate.files[1] || 'https://locsapp.fr/assets/images/articles/default.jpg'" ngf-select ng-model="articleCreate.files[1]" name="picture1" ngf-pattern="'image/*'"
 					accept="image/*" ngf-max-size="2MB" ngf-min-height="100"
 					ngf-resize="{width: 300, height: 300}" style="cursor: pointer;").logo-picture
-				img(ngf-src="articleCreate.files[2] || 'http://localhost:3000/assets/images/articles/default.jpg'" ngf-select ng-model="articleCreate.files[2]" name="picture2" ngf-pattern="'image/*'"
+				img(ngf-src="articleCreate.files[2] || 'https://locsapp.fr/assets/images/articles/default.jpg'" ngf-select ng-model="articleCreate.files[2]" name="picture2" ngf-pattern="'image/*'"
 					accept="image/*" ngf-max-size="2MB" ngf-min-height="100"
 					ngf-resize="{width: 300, height: 300}" style="cursor: pointer; margin-left: 30px").logo-picture
 
