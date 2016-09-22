@@ -23,7 +23,7 @@ from API.urls import *
 urlpatterns = [
     url(r'^accounts-social-network/', include('allauth.socialaccount.urls')),
     url(r'^', include('django.contrib.auth.urls')),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^api/v1/admin/', include(admin.site.urls)),
     # Url including the API end-points
     url(r'^robots\.txt$', include('robots.urls')),
 
