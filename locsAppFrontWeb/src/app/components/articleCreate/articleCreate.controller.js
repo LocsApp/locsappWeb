@@ -84,8 +84,17 @@
 
     //Validates and changes to the next step
     vm.nextStep = function (focus) {
+
+      $log.log("nextStepx focus = ", focus);
+
       vm.stepsComplete[focus] = 1;
       vm.progressBars[focus - 1] = 100;
+
+      if (focus == 2) {
+        vm.stepsComplete[focus + 1] = 1;
+        vm.progressBars[focus] = 100;
+      }
+
       $timeout(function () {
         vm.stepFocus = focus;
       }, 100);
