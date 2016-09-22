@@ -11,6 +11,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMessage
 from django.conf import settings
 from .utility import Utility
+from .permissions import is_profile_full
 import math
 
 
@@ -172,6 +173,10 @@ def retractDemand(request):
 @api_view(['POST', 'GET'])
 @permission_classes((IsAuthenticated,))
 def demandsMain(request):
+
+    if is_profile_full(request) is False:
+        return JsonResponse({"error": "Fill all your profile (including billing and living addresses )!"}, status=401)
+
     model = {
         "id_author": {
             "_type": int,
