@@ -159,7 +159,7 @@
 
       vm.createArticleSuccess = function () {
         toastr.success("Article created", 'Success');
-        $state.go("main.article_search");
+        $state.go("main.homepage");
         $mdDialog.cancel();
         //$log.log("This is a success", data);
       };
@@ -176,6 +176,10 @@
 
       vm.createNewArticle = function () {
 
+        $log.log("description of articel is  ", vm.description);
+        if (vm.description === null) {
+          vm.description = "";
+        }
 
         vm.uploadImageFailure = function (data) {
           toastr.error(data.error, "Couldn't upload a picture");
