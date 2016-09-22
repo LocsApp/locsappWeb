@@ -4,5 +4,5 @@ You're receiving this e-mail because user {{ user_display }} at {{ site_domain }
 
 To confirm this is correct, go to {{ activate_url }}
 {% endblocktrans %}{% endautoescape %}
-{% blocktrans with site_name="LocsApp" site_domain="http://127.0.0.1:8080/" %}Thank you from {{ site_name }}!
+{% blocktrans with site_name="LocsApp" site_domain="https://locsapp.fr/" %}Thank you from {{ site_name }}!
 {{ site_domain }}{% endblocktrans %}
