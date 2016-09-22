@@ -1,4 +1,4 @@
-{% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}{% blocktrans with site_name="LocsApp" site_domain="https:/locsapp.fr/" %}Hello from LocsApp!
+{% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}{% blocktrans with site_name="LocsApp" site_domain="https://locsapp.fr/" %}Hello from LocsApp!
 
 You're receiving this e-mail because you registered with the username {{ user_display }} at {{ site_domain }}.
 
