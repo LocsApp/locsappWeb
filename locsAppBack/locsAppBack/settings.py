@@ -218,7 +218,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'locsapp.eip@gmail.com'
-EMAIL_HOST_PASSWORD = 'Totofaitdubateau'
+EMAIL_HOST_PASSWORD = 'w32=K3$"VAe#H\'KZ'
 
 URL_FRONT = 'http://127.0.0.1:3000/'
 URL_BACK = 'http://127.0.0.1:8000/'
