@@ -146,7 +146,7 @@
 
       /* We create an array for the carousel and the first picture is the thumbnail */
       vm.carousel = [];
-      vm.carousel.push(vm.url_api + vm.article.url_thumbnail);
+      //vm.carousel.push(vm.url_api + vm.article.url_thumbnail);
       for (i = 0; i < vm.article.url_pictures.length; i++) {
         //$log.log("url API = ", vm.url_api);
         vm.carousel.push(vm.url_api + vm.article.url_pictures[i]);
