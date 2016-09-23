@@ -374,6 +374,9 @@ def acceptDemand(request):
                 "$set": {"status": "accepted"}})
             db_locsapp["articles"].update({"_id": ObjectId(id_article)}, {
                                           "$set": {"available": False}})
+
+            # (Julian) Send contact of the renter to the tenant
+
             return JsonResponse(
                 {"message": "Request has been successfully accepted!"})
         else:
