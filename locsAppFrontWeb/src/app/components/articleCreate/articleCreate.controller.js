@@ -10,6 +10,8 @@
                                    ScopesService, $state) {
     var vm = this;
 
+    /* Check if the profile is completed */
+
     /* Get fixtures from cache */
     vm.categories = ScopesService.get("static_collections").base_categories;
     vm.subCategories = ScopesService.get("static_collections").sub_categories;

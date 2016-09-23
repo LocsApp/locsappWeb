@@ -577,6 +577,11 @@ def verifyIfNotAlreadyIssued(document):
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))
 def postNewArticle(request):
+
+    if is_profile_full(request) is False:
+        return JsonResponse({"error": "Fill all your profile (including billing and living addresses )!"}, status=401)
+
+
     model = {
         "title": {
             "_type": str,
