@@ -52,13 +52,13 @@
             vm.notationsRenter.splice(vm.lastDemand, 1);
        }
       $log.log(data);
-    }
+    };
 
     /* Stores the new mark in the given demand */
     vm.starValue = function(newValue, demand) {
       demand.value = newValue;
       $log.log(demand.value)
-    }
+    };
 
     /* Sends the notation */
     vm.sendNotation = function(index, demand, mode) {
@@ -92,20 +92,20 @@
       }
     };
 
-   /* ArticleService
+    ArticleService
     .getPendingMarksForClients
     .get({"id_page": vm.current_page_pending_mark_client})
     .$promise
-    .then(vm.GetNotationsClientSuccess,  vm.GetNotationFailure);*/
+    .then(vm.GetNotationsClientSuccess,  vm.GetNotationFailure);
 
-    /*ArticleService
+    ArticleService
     .getPendingMarksForRenters
     .get({"id_page": vm.current_page_pending_mark_renter})
     .$promise
-    .then(vm.GetNotationsRenterSuccess,  vm.GetNotationFailure);*/
+    .then(vm.GetNotationsRenterSuccess,  vm.GetNotationFailure);
 
     /* Avec la pagination ça fonctionne pas */
-    ArticleService
+   /* ArticleService
       .getPendingMarksForClientsPagination
       .save({
         page: 1,
@@ -121,7 +121,7 @@
         number_items: 10
       })
       .$promise
-      .then(vm.GetNotationsRenterSuccess, vm.GetNotationFailure);
+      .then(vm.GetNotationsRenterSuccess, vm.GetNotationFailure);*/
 
   }
 
