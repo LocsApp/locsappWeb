@@ -375,7 +375,7 @@ def acceptDemand(request):
             db_locsapp["articles"].update({"_id": ObjectId(id_article)}, {
                                           "$set": {"available": False}})
 
-            id_author = db_locsapp["article_demands"].find_one({"_id": ObjectId(id_article)})['id_author']
+            id_author = db_locsapp["article_demands"].find_one({"_id": ObjectId(answer['id_demand'])})['id_author']
 
             tenant = get_user_model().objects.get(pk=id_author)
             #renter =
