@@ -217,8 +217,8 @@
           },
           function (data) {
             $log.error("error Demand", data);
-            if (data.article.error)
-              toastr.error(data.article.error, "Woops...");
+            if (data.data.error)
+              toastr.error(data.data.error, "Woops...");
             else
               toastr.error("An error occured while sending the demand", "Woops...");
             $log.log(data);
