@@ -13,7 +13,7 @@ from django.conf import settings
 from .utility import Utility
 from .permissions import is_profile_full
 import math
-
+from django.core.mail import EmailMessage
 
 from dateutil.parser import parse
 
@@ -375,6 +375,13 @@ def acceptDemand(request):
             db_locsapp["articles"].update({"_id": ObjectId(id_article)}, {
                                           "$set": {"available": False}})
 
+            id_author = db_locsapp["article_demands"].find({"_id": ObjectId(id_article)})['id_author']
+            tenant = get_user_model().objects.get(pk=id_author)
+            #renter =
+            message = "Veuillez prendre contact avec le loueur par téléphone au numéro suivant " + request.user.phone
+            email = EmailMessage('[Locsapp] Votre demande a été accepté',
+                                 '', to=[tenant.email])
+            email.send()
             # (Julian) Send contact of the renter to the tenant
 
             return JsonResponse(
