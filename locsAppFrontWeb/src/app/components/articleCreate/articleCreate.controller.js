@@ -7,10 +7,28 @@
 
   /** @ngInject */
   function ArticleCreateController($log, ArticleService, toastr, $timeout, $mdDialog, $document,
-                                   ScopesService, $state) {
+                                   ScopesService, $state, UsersService) {
     var vm = this;
+    vm.profileIsFull = false;
 
     /* Check if the profile is completed */
+
+    vm.checkProfileIsFullFailure = function (data) {
+      $log.error("checkProfileIsFullFailure", data);
+      vm.profileIsFull = false
+    };
+
+    vm.checkProfileIsFullSuccess = function (data) {
+      $log.success("checkProfileIsFullSuccess", data);
+      vm.profileIsFull = true
+    };
+
+    UsersService
+      .checkProfileIsFull
+      .get({})
+      .$promise
+      .then(vm.checkProfileIsFullSuccess, vm.checkProfileIsFullFailure);
+
 
     /* Get fixtures from cache */
     vm.categories = ScopesService.get("static_collections").base_categories;
@@ -194,46 +212,46 @@
           $log.log("lenght files = ", vm.files.length);
 
           if (vm.pictures.length == vm.files.length) {
-         for (var i = 0; i < vm.payment_methods.length; i++) {
-            vm.payment_methods_id.push(vm.payment_methods[i]._id);
-          }
+            for (var i = 0; i < vm.payment_methods.length; i++) {
+              vm.payment_methods_id.push(vm.payment_methods[i]._id);
+            }
 
-          vm.new_start_availble = "";
-          if (vm.date_start.getDate() <= 9)
-            vm.new_start_availble = vm.new_start_availble.concat("0");
-          vm.new_start_availble = vm.new_start_availble.concat(vm.date_start.getDate().toString()).concat("/");
-          if (vm.date_start.getMonth() <= 8)
-            vm.new_start_availble = vm.new_start_availble.concat("0");
-          vm.new_start_availble = vm.new_start_availble.concat((vm.date_start.getMonth() + 1).toString()).concat("/").concat(vm.date_start.getFullYear().toString());
-
-
-          vm.new_end_availble = "";
-          if (vm.date_end.getDate() <= 9)
-            vm.new_end_availble = vm.new_end_availble.concat("0");
-          vm.new_end_availble = vm.new_end_availble.concat(vm.date_end.getDate().toString()).concat("/");
-          if (vm.date_end.getMonth() <= 8)
-            vm.new_end_availble = vm.new_end_availble.concat("0");
-          vm.new_end_availble = vm.new_end_availble.concat((vm.date_end.getMonth() + 1).toString()).concat("/").concat(vm.date_end.getFullYear().toString());
+            vm.new_start_availble = "";
+            if (vm.date_start.getDate() <= 9)
+              vm.new_start_availble = vm.new_start_availble.concat("0");
+            vm.new_start_availble = vm.new_start_availble.concat(vm.date_start.getDate().toString()).concat("/");
+            if (vm.date_start.getMonth() <= 8)
+              vm.new_start_availble = vm.new_start_availble.concat("0");
+            vm.new_start_availble = vm.new_start_availble.concat((vm.date_start.getMonth() + 1).toString()).concat("/").concat(vm.date_start.getFullYear().toString());
 
 
-          ArticleService
-            .createArticle
-            .save({
-              "title": vm.title, "base_category": vm.newArticle.base_category._id,
-              "sub_category": vm.newArticle.sub_category._id,
-              "gender": vm.newArticle.gender._id, "size": vm.newArticle.size._id,
-              "color": vm.newArticle.color._id,
-              "clothe_condition": vm.newArticle.clothe_condition._id,
-              "brand": vm.newArticle.brand._id, "description": vm.description,
-              "price": vm.price,
-              "payment_methods": vm.payment_methods_id,
-              "availibility_start": vm.new_start_availble,
-              "availibility_end": vm.new_end_availble,
-              "url_pictures": vm.pictures,
-              "url_thumbnail": vm.pictures[0]
-            })
-            .$promise
-            .then(vm.createArticleSuccess, vm.createArticleFailure);
+            vm.new_end_availble = "";
+            if (vm.date_end.getDate() <= 9)
+              vm.new_end_availble = vm.new_end_availble.concat("0");
+            vm.new_end_availble = vm.new_end_availble.concat(vm.date_end.getDate().toString()).concat("/");
+            if (vm.date_end.getMonth() <= 8)
+              vm.new_end_availble = vm.new_end_availble.concat("0");
+            vm.new_end_availble = vm.new_end_availble.concat((vm.date_end.getMonth() + 1).toString()).concat("/").concat(vm.date_end.getFullYear().toString());
+
+
+            ArticleService
+              .createArticle
+              .save({
+                "title": vm.title, "base_category": vm.newArticle.base_category._id,
+                "sub_category": vm.newArticle.sub_category._id,
+                "gender": vm.newArticle.gender._id, "size": vm.newArticle.size._id,
+                "color": vm.newArticle.color._id,
+                "clothe_condition": vm.newArticle.clothe_condition._id,
+                "brand": vm.newArticle.brand._id, "description": vm.description,
+                "price": vm.price,
+                "payment_methods": vm.payment_methods_id,
+                "availibility_start": vm.new_start_availble,
+                "availibility_end": vm.new_end_availble,
+                "url_pictures": vm.pictures,
+                "url_thumbnail": vm.pictures[0]
+              })
+              .$promise
+              .then(vm.createArticleSuccess, vm.createArticleFailure);
           }
 
         };
@@ -256,8 +274,6 @@
 
         //For upload the pictures
         vm.submitPictures();
-
-
 
 
       }
