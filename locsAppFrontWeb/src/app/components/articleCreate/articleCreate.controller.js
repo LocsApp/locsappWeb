@@ -9,7 +9,7 @@
   function ArticleCreateController($log, ArticleService, toastr, $timeout, $mdDialog, $document,
                                    ScopesService, $state, UsersService) {
     var vm = this;
-    vm.profileIsFull = false;
+    vm.profileIsFull = null;
 
     /* Check if the profile is completed */
 
@@ -19,10 +19,11 @@
     };
 
     vm.checkProfileIsFullSuccess = function (data) {
-      $log.success("checkProfileIsFullSuccess", data);
+      $log.log("checkProfileIsFullSuccess", data);
       vm.profileIsFull = true
     };
 
+    $log.log("Users before callign checkProfile is full");
     UsersService
       .checkProfileIsFull
       .get({})

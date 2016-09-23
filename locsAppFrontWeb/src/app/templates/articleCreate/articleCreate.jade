@@ -1,27 +1,32 @@
 div(layout="row", layout-align="center center", layout-margin)
-	h2 {{ 'WELCOME_CREATION_ARTICLE' | translate }}
+  h2 {{ 'WELCOME_CREATION_ARTICLE' | translate }}
 div(layout="row", layout-align="center center", layout-margin).article-create
-	div.ng-cloak.flex
-		md-content
-			md-tabs(md-center-tabs, md-selected="articleCreate.stepFocus").md-dynamic-height.md-border-bottom
-				div(ng-repeat="stepComplete in articleCreate.stepsComplete track by $index")
-					md-tab(ng-attr-ng-disabled="!stepComplete")
-						md-tab-label
-							div(layout="none", layout-align="start center")
-								div.flex
-									ng-md-icon(icon="{{articleCreate.stepsNames[$index]}}", size="64", ng-class="{'icon-progress-completed': stepComplete, 'icon-progress': !stepComplete}")
-								div(ng-if="!$last").flex
-									md-progress-linear(md-mode="determinate", ng-value="articleCreate.progressBars[$index]").icon-bar-progress
-						md-tab-body
-							md-content(ng-if="$index == 0", layout="column", layout-align="center center").body-steps
-								include ./steps/step1.jade
-							md-content(ng-if="$index == 1", layout="column", layout-align="center center").body-steps
-								include ./steps/step2.jade
-							md-content(ng-if="$index == 2", layout="column", layout-align="center center").body-steps
-								include ./steps/step3.jade
-							md-content(ng-if="$index == 3", layout="column", layout-align="center center").body-steps
-								include ./steps/step4.jade
-							md-content(ng-if="$index == 4", layout="column", layout-align="center center").body-steps
-								include ./steps/step5.jade
-							md-content(ng-if="$index == 5", layout="column", layout-align="center center").body-steps
-								include ./steps/step6.jade
+  div.ng-cloak.flex(ng-show="articleCreate.profileIsFull")
+    md-content
+      md-tabs(md-center-tabs, md-selected="articleCreate.stepFocus").md-dynamic-height.md-border-bottom
+        div(ng-repeat="stepComplete in articleCreate.stepsComplete track by $index")
+          md-tab(ng-attr-ng-disabled="!stepComplete")
+            md-tab-label
+              div(layout="none", layout-align="start center")
+                div.flex
+                  ng-md-icon(icon="{{articleCreate.stepsNames[$index]}}", size="64", ng-class="{'icon-progress-completed': stepComplete, 'icon-progress': !stepComplete}")
+                div(ng-if="!$last").flex
+                  md-progress-linear(md-mode="determinate", ng-value="articleCreate.progressBars[$index]").icon-bar-progress
+            md-tab-body
+              md-content(ng-if="$index == 0", layout="column", layout-align="center center").body-steps
+                include ./steps/step1.jade
+              md-content(ng-if="$index == 1", layout="column", layout-align="center center").body-steps
+                include ./steps/step2.jade
+              md-content(ng-if="$index == 2", layout="column", layout-align="center center").body-steps
+                include ./steps/step3.jade
+              md-content(ng-if="$index == 3", layout="column", layout-align="center center").body-steps
+                include ./steps/step4.jade
+              md-content(ng-if="$index == 4", layout="column", layout-align="center center").body-steps
+                include ./steps/step5.jade
+              md-content(ng-if="$index == 5", layout="column", layout-align="center center").body-steps
+                include ./steps/step6.jade
+  div.ng-cloak.flex(ng-hide="articleCreate.profileIsFull" ng-if="articleCreate.profileIsFull != null" style="text-align:center;")
+    p(style='color: #C10000') Please fill all your profile
+
+  div(ng-if="articleCreate.profileIsFull == null" style="text-align:center;")
+    p Please wait while the server is checking your profile
