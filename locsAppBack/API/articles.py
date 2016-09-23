@@ -381,7 +381,7 @@ def acceptDemand(request):
             #renter =
             message = "Veuillez prendre contact avec le loueur par téléphone au numéro suivant " + request.user.phone
             email = EmailMessage('[Locsapp] Votre demande a été accepté',
-                                 '', to=[tenant.email])
+                                 message, to=[tenant.email])
             email.send()
             # (Julian) Send contact of the renter to the tenant
 
