@@ -49,7 +49,7 @@ article_patterns = [
         articles.getFirstFourArticleOwnedByUser),
     url(r'^all/(?P<user_pk>[0-9]+)/(?P<id_page>[0-9]+)/$',
         articles.getAllArticleOwnedByUser),
-]
+    ]
 
 history_patterns = [
     url(r'^articles-as-client/(?P<id_page>[0-9]+)/$', articles.getArticleHistoryAsClient),
@@ -112,6 +112,7 @@ user_patterns = [
         name='image-upload-avatar'),
     url(r'^(?P<username>\w+)/$', users.getUserByUsername.as_view()),
     url(r'^(?P<username>\w+)/(?P<lat>-?\d+\.\d+)/(?P<long>-?\d+\.\d+)/$', users.getUserByUsernameLongLat.as_view()),
+    url(r'^verify-profile-full/$', views.verifyProfileFull.as_view()),
 
 ]
 

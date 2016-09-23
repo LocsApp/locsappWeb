@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from .models import Account
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import logout
+from .permissions import is_profile_full
 
 from django.conf import settings
 
@@ -1092,3 +1093,16 @@ def delete_Article(request):
     fields_definition = ["name", "id"]
     return APIrequests.forgeAPIrequestDelete(
         request, fields_definition, db_locsapp["articles"])
+
+
+@permission_classes((IsAuthenticated,))
+class verifyProfileFull(APIView):
+
+    def get(self, request):
+        if is_profile_full(request) is False:
+            return JsonResponse({"error": "Fill all your profile (including billing and living addresses )!"},
+                                status=401)
+        else:
+            return JsonResponse({"success": "The user profile is completed"},
+                                status=200)
+
