@@ -1,0 +1,4 @@
+{"_id":{"$oid":"56cb3dd6b2bc57ab2908e6aa"},"name":"Check"}
+{"_id":{"$oid":"56cb3ddbb2bc57ab2908e6ab"},"name":"Cash"}
+{"_id":{"$oid":"56cb3de5b2bc57ab2908e6ac"},"name":"Bank Card"}
+{"_id":{"$oid":"56cb3df0b2bc57ab2908e6ad"},"name":"Paypal"}

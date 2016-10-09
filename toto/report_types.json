@@ -1,0 +1,5 @@
+{"_id":{"$oid":"57af3c217f0643e9c9754dba"},"name":"Fraud"}
+{"_id":{"$oid":"57af3c3b7f0643e9c9754dbb"},"name":"Duplicate"}
+{"_id":{"$oid":"57af3c467f0643e9c9754dbc"},"name":"Wrong category"}
+{"_id":{"$oid":"57af3c507f0643e9c9754dbd"},"name":"Already sell"}
+{"_id":{"$oid":"57af3c657f0643e9c9754dbe"},"name":"Other report"}

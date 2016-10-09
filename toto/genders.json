@@ -1,0 +1,6 @@
+{"_id":{"$oid":"56cb39c4b2bc57ab2908e691"},"name":"Male"}
+{"_id":{"$oid":"56cb39c9b2bc57ab2908e692"},"name":"Female"}
+{"_id":{"$oid":"56cb39ceb2bc57ab2908e693"},"name":"Boy"}
+{"_id":{"$oid":"56cb39d2b2bc57ab2908e694"},"name":"Girl"}
+{"_id":{"$oid":"56cb39e2b2bc57ab2908e695"},"name":"Adult"}
+{"_id":{"$oid":"56cb3a0db2bc57ab2908e696"},"name":"Kid"}

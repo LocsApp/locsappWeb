@@ -1,0 +1,4 @@
+{"_id":{"$oid":"56cb3e69b2bc57ab2908e6ae"},"name":"Well-worn"}
+{"_id":{"$oid":"56cb3e86b2bc57ab2908e6af"},"name":"A little used"}
+{"_id":{"$oid":"56cb3e8cb2bc57ab2908e6b0"},"name":"Minimal wear"}
+{"_id":{"$oid":"56cb3e94b2bc57ab2908e6b1"},"name":"Factory new"}

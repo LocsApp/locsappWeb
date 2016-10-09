@@ -1,0 +1,7 @@
+{"_id":{"$oid":"56d065b69fa9594c687df424"},"name":"Head"}
+{"_id":{"$oid":"56d065ba9fa9594c687df425"},"name":"Top"}
+{"_id":{"$oid":"56d065be9fa9594c687df426"},"name":"Bottom"}
+{"_id":{"$oid":"56d065c39fa9594c687df427"},"name":"Shoes"}
+{"_id":{"$oid":"56d065c69fa9594c687df428"},"name":"Sets"}
+{"_id":{"$oid":"56d065ca9fa9594c687df429"},"name":"Accessories"}
+{"_id":{"$oid":"56d065ce9fa9594c687df42a"},"name":"Others"}

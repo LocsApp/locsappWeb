@@ -1,0 +1,5 @@
+{"_id":{"$oid":"56cb3ef2b2bc57ab2908e6b2"},"name":"Red","hex_code":"#FF0000"}
+{"_id":{"$oid":"56cb3efdb2bc57ab2908e6b3"},"name":"Green","hex_code":"#00FF00"}
+{"_id":{"$oid":"56cb3f0eb2bc57ab2908e6b4"},"name":"Blue","hex_code":"#0000FF"}
+{"_id":{"$oid":"56cb3f16b2bc57ab2908e6b5"},"name":"Black","hex_code":"#FFFFFF"}
+{"_id":{"$oid":"56cb3f21b2bc57ab2908e6b6"},"name":"White","hex_code":"#000000"}
