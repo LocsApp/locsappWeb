@@ -224,9 +224,9 @@ URL_FRONT = 'http://127.0.0.1:3000/'
 URL_BACK = 'http://127.0.0.1:8000/'
 
 if socket.gethostname() == "ns3011349.ip-37-187-17.eu":
-    URL_FRONT = 'https://locsapp.fr'
+    URL_FRONT = 'https://locsapp.fr/'
     #URL_BACK = 'http://sylflo.fr:8010/'
-    URL_BACK = 'ns3011349.ip-37-187-17.eu'
+    URL_BACK = 'ns3011349.ip-37-187-17.eu/'
 
     DEBUG = TEMPLATE_DEBUG = False
 
