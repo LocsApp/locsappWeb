@@ -151,7 +151,7 @@ WSGI_APPLICATION = 'locsAppBack.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-if socket.gethostname() != "sylflo.fr":
+if socket.gethostname() != "ns3011349.ip-37-187-17.eu":
     DATABASES = {
         # 'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
@@ -223,10 +223,10 @@ EMAIL_HOST_PASSWORD = 'w32=K3$"VAe#H\'KZ'
 URL_FRONT = 'http://127.0.0.1:3000/'
 URL_BACK = 'http://127.0.0.1:8000/'
 
-if socket.gethostname() == "sylflo.fr":
-    URL_FRONT = 'https://locsapp.fr/'
+if socket.gethostname() == "ns3011349.ip-37-187-17.eu":
+    URL_FRONT = 'https://locsapp.fr'
     #URL_BACK = 'http://sylflo.fr:8010/'
-    URL_BACK = 'https://locsapp.fr/'
+    URL_BACK = 'ns3011349.ip-37-187-17.eu'
 
     DEBUG = TEMPLATE_DEBUG = True
 
@@ -242,9 +242,9 @@ if socket.gethostname() == "sylflo.fr":
     }
 
     ALLOWED_HOSTS = [
-        "https://locsapp.fr",
-        "locsapp.fr",
-        "5.135.163.38"]
+        "ns3011349.ip-37-187-17.eu",
+        "https://ns3011349.ip-37-187-17.eu",
+        "37.187.17.54"]
     ADMINS = (
         ('Sylvain Chateau', 'dev.chateau@gmail.com'),
     )
