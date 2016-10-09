@@ -122,8 +122,9 @@ class FacebookRegister(APIView):
 				new_user.last_name = full_name[1]
 			if profile["gender"]:
 				new_user.gender = profile["gender"]
-			if profile["birthday"]:
-				new_user.birthdate = profile["birthday"]
+			#Comment for now cos we need to reverse it
+			#if profile["birthday"]:
+			#	new_user.birthdate = profile["birthday"]
 
 			# We set an unusable so the user can only login with Facebook
 			new_user.set_unusable_password()
