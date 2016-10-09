@@ -228,7 +228,7 @@ if socket.gethostname() == "ns3011349.ip-37-187-17.eu":
     #URL_BACK = 'http://sylflo.fr:8010/'
     URL_BACK = 'ns3011349.ip-37-187-17.eu'
 
-    DEBUG = TEMPLATE_DEBUG = True
+    DEBUG = TEMPLATE_DEBUG = False
 
     REST_FRAMEWORK = {
         # 'TEST_REQUEST_DEFAULT_FORMAT': 'json',
