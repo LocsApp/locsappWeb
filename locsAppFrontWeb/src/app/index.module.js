@@ -36,6 +36,7 @@
 		'bw.paging',
     '720kb.socialshare',
     'pascalprecht.translate',
+    'angular-google-analytics',
 		'LocsappDirectives',
 		'LocsappServices',
 		'LocsappControllers']);

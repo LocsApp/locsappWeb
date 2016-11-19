@@ -27,6 +27,13 @@
     .module('locsapp')
     .config(config);
 
+  angular
+    .module('locsapp').config(['AnalyticsProvider', function (AnalyticsProvider) {
+    // Add configuration code as desired
+    AnalyticsProvider.setAccount('UA-87695138-2');  //UU-XXXXXXX-X should be your tracking code
+  }]).run(['Analytics', function (Analytics) {
+  }]);
+
   /** @ngInject */
   function config($logProvider, toastrConfig, $locationProvider, $httpProvider, $resourceProvider,
                   cfpLoadingBarProvider, ezfbProvider, $translateProvider) {
@@ -632,7 +639,7 @@
       'ENTER_YOUR_EMAIL': 'Entrer votre email',
       'RESET': 'Reset',
 
-        /* Article show */
+      /* Article show */
       'ASK_FOR_RENT': 'Demande de location',
       'ARTICLE_NOT_AVAILABLE': 'Cette article n\'est pas disponible',
       'CAN_NOT_BOOK_OWN_ARTICLE': 'Vous ne pouvez pas louer votre article.',
@@ -646,11 +653,10 @@
       'CAN_ANSWER_QUESTION': 'Vous pouvez répondre à la question ici',
       'ANSWER_QUESTION': 'Répondre',
 
-         'CAN_NOT_ASK_QUESTION_OWN_ARTICLE': 'Vous ne pouvez pas poser des questions sur votre propre article',
+      'CAN_NOT_ASK_QUESTION_OWN_ARTICLE': 'Vous ne pouvez pas poser des questions sur votre propre article',
       'FIRST_ONE': 'Soyez le premier à poser une question',
       'ASK_YOUR_QUESTION': 'S\'il vous plaît, posez votre question',
       'SEND_QUESTION': 'Envoyer votre question',
-
 
 
       /* Toaster */
