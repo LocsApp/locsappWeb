@@ -15,6 +15,8 @@ import os
 import socket
 from os import path
 import datetime
+import raven
+
 
 PROJECT_ROOT = path.dirname(path.abspath(__file__))
 
@@ -48,7 +50,7 @@ SECRET_KEY = '0#bk$^5fieu@defbgkbxaadd*5y940w-k$jwf!-8=pg)hz085$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS =  []
+ALLOWED_HOSTS = []
 
 # Django allauth
 ACCOUNT_ADAPTER = 'API.adapter.DefaultAccountAdapterCustom'
@@ -100,7 +102,8 @@ INSTALLED_APPS = (
     'rest_framework_swagger',
     'tests',
     'social_network',
-    'API'
+    'API',
+    'raven.contrib.django.raven_compat',
 )
 
 SITE_ID = 42
@@ -147,6 +150,14 @@ AUTHENTICATION_BACKENDS = (
 )
 
 WSGI_APPLICATION = 'locsAppBack.wsgi.application'
+
+# Raven error management
+RAVEN_CONFIG = {
+    'dsn': 'https://6b8232b1da0049b38904e7ad56832952:d5778ab60449465cbd6cbe3dc6cceabf@sentry.io/115886',
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    #'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
+}
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
@@ -225,7 +236,7 @@ URL_BACK = 'http://127.0.0.1:8000/'
 
 if socket.gethostname() == "ns3011349.ip-37-187-17.eu":
     URL_FRONT = 'https://locsapp.fr/'
-    #URL_BACK = 'http://sylflo.fr:8010/'
+    # URL_BACK = 'http://sylflo.fr:8010/'
     URL_BACK = 'https://ns3011349.ip-37-187-17.eu/'
 
     DEBUG = TEMPLATE_DEBUG = False
