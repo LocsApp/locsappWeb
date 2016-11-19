@@ -7,7 +7,7 @@ div(ng-controller="NavBarController as navbar" )
     md-sidenav.md-sidenav-left.md-whiteframe-z1(md-component-id='left', md-is-locked-open="$mdMedia('gt-sm')")
       md-toolbar(md-scroll-shrink='')
         .md-toolbar-tools
-          h3
+          //h3
             span LocsApp
 
 
@@ -35,7 +35,8 @@ div(ng-controller="NavBarController as navbar" )
   //Navbar for big screen
   md-toolbar(layout="row", layout-align="space-between center" hide-xs hide-sm).locsapp-navbar-gt-sm
     span
-      span(ui-sref="main.homepage" style="cursor: pointer;").md-toolbar-tools Locsapp
+      span(ui-sref="main.homepage" style="cursor: pointer;").md-toolbar-tools
+        img#navbar-img(src="../assets/images/logo_colorful_500px.png")
     div(layout="row" ng-if="!main.is_authenticated()")
 
       div
