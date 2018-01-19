@@ -1,4 +1,4 @@
-contextlib2==0.5.4
+contextlib2==0.5.5
 coverage==3.6
 dateutils==0.6.6
 defusedxml==0.4.1
