@@ -171,7 +171,7 @@ if socket.gethostname() != "ns3011349.ip-37-187-17.eu":
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': u'locsapp',
-            'HOST': u'localhost',
+            'HOST': u'db',
             'USER': 'locsapp',
             'PASSWORD': 'locsapp',
             'PORT': ''

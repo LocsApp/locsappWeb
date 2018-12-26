@@ -1,0 +1,4 @@
+Dockerfile
+generateDoc.sh
+.dockerignore
+.git
