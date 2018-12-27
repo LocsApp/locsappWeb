@@ -1,6 +1,7 @@
 #!/bin/sh
 
 cd /app
+./manage.py collectstatic --noinput
 ./manage.py makemigrations 
 ./manage.py migrate
 ./manage.py loaddata API

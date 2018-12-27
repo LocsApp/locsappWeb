@@ -7,7 +7,7 @@ from pymongo import MongoClient, ASCENDING, DESCENDING
 from .APIrequest import paginationAPI
 
 # Connects to the db and creates a MongoClient instance
-mongodb_client = MongoClient('localhost', 27017)
+mongodb_client = MongoClient('mongo', 27017)
 db_locsapp = mongodb_client['locsapp']
 
 # Route for show articles in user profile

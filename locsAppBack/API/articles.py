@@ -32,7 +32,7 @@ from pymongo import MongoClient
 from pymongo import ASCENDING, DESCENDING
 
 # Connects to the db and creates a MongoClient instance
-mongodb_client = MongoClient('localhost', 27017)
+mongodb_client = MongoClient('mongo', 27017)
 db_locsapp = mongodb_client['locsapp']
 
 
